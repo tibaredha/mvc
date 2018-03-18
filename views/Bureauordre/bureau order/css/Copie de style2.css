@@ -1,0 +1,131 @@
+<--Feuille principale-->{}
+body
+{
+  background-image : ;
+  background-color: #FFFFE0;
+  font-family :  Comic Sans MS;
+  color : #000000;
+  font-weight:normal;
+  text-align: left;
+  scrollbar-base-color:white;
+  scrollbar-3dlight-color:grey;
+  scrollbar-arrow-color:black;
+  scrollbar-darkshadow-color:#000000;
+  scrollbar-face-color:white;
+  scrollbar-highlight-color:skyblue;
+  scrollbar-shadow-color:#000000;
+  scrollbar-track-color:black;
+}
+
+<--Titre page main-->{}
+h1
+{
+  font-family :  Comic Sans MS;
+  color : #0000FF;
+  font-weight:bold;
+  text-align: center;
+}
+
+<--Titre tableaux-->{}
+h2
+{
+  font-family :  Comic Sans MS;
+  color : #FFFFFF;
+  font-weight:bold;
+  text-align: center;
+}
+
+
+h3
+{
+  font-family :  Comic Sans MS;
+  color : #000000;
+  font-weight:bold;
+  text-align: center;
+}
+
+<--Message erreur ou de confirmation-->{}
+h4
+{
+  font-family :  Comic Sans MS;
+  color : #000000;
+  font-weight:bold;
+  text-align: center;
+}
+
+<--Texte des entetes du tableau-->{}
+.h41
+{
+  font-family :  Comic Sans MS;
+  color : #000000;
+  font-weight:normal;
+  text-align: center;
+}
+
+<--Texte des entetes du tableau pour formulaires-->{}
+.h42
+{
+  font-family :  Comic Sans MS;
+  color : #000000;
+  font-weight:normal;
+  text-align: left;
+}
+
+<--Texte des cellules du tableau-->{}
+h5
+{
+  font-family :  Comic Sans MS;
+  color : #000000;
+  font-weight:normal;
+  text-align: left;
+}
+
+<--Forme des boutons d'envoie pour formulaires-->{}
+.bouton
+{
+  background-color : #FFFFFF;
+  font-family :  Comic Sans MS;
+  color : #000000;
+  font-weight:bold;
+  width: 100;
+}
+
+<--Forme des zones de texte et des choix multiples-->{}
+.text, select
+{
+  background-color : #FFFFFF;
+  font-family :  Comic Sans MS;
+  color : #000000;
+}
+
+<--Forme des boutons normaux-->{}
+button
+{
+  background-color : #FFFFFF;
+  font-family :  Comic Sans MS;
+  color : #000000;
+  font-weight:bold;
+  text-align: center;
+  width: 100;
+}
+
+<--Liens-->{}
+A:link
+{
+  text-decoration: none;
+  color: blue;
+}
+
+<--Quand le liens a été visité-->{}
+A:visited
+{
+ text-decoration: none;
+ color: purple;
+}
+
+<--Quand on passe au dessus du lien-->{}
+A:hover
+{
+  text-decoration: underline;
+  color: skyblue;
+}

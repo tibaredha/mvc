@@ -1,0 +1,70 @@
+<html>
+
+<head>
+
+<title>Ajouter</title>
+<link href="css/style2.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+  <form action='scripts/ajout.php' method='post' name="ajouter" enctype="multipart/form-data">
+    <table  bgcolor="#a3a3a3" width=75% border=2 align=center>
+      <tr>
+        <td colspan=6 bgcolor="#f6000f"><h2>AJOUTER UN MESSAGE</td>
+      </tr>
+      <tr>
+        <td colspan=2><h4 class="h42">Numero</td>
+        <td colspan=4><h5><input class='text' type="text" name="NUMERO" size=5 maxlength=50></td>
+      </tr>
+      <tr>
+        <td colspan=2><h4 class="h42">Etat</td>
+        <td colspan=4><h5><input class='text' type="text" name="ETAT" size=10 maxlength=50></td>
+      </tr>
+      <tr>
+        <td colspan=2><h4 class="h42">Source</td>
+        <td colspan=2><h4>
+		<select name="SIYRCE" align="left">
+			
+			<option selected value="Rectorat">Rectorat
+			<option selected value="Minister">Ministre
+			<option selected value="Conventions">Conventions
+			<option selected value="Divers">Divers 
+			<option selected value="Fsac">Fsac
+		</select></td>
+		
+      </tr>
+    <tr>
+        <td colspan=2><h4 class="h42">Objet</td>
+		  <td colspan=2> <textarea name="OBJET" rows=8 cols=40 ></textarea> </td>
+	</tr>
+    <tr>       	
+		<td colspan=2><h4 class="h42">Destination</td>
+		<td colspan=2><h4>
+		<select name="DESTINATION" align="left">
+			
+			<option selected value="Minister">Minister
+			<option selected value="Conventions">Conventions
+			<option selected value="Divers">Divers 
+			<option selected value="Rectorat">Rectorat
+		</select></td>	
+     
+      </tr>
+      <tr>
+        <td colspan=2><h4 class="h42">Date</td>
+        <td align=center colspan=1><h5><input class='text' type="text" name="DATE" size=15 maxlength=12></td>
+        </tr>
+    </table>
+   <br>
+       <table width=50% align=center>
+      <tr>
+        <td align=center><input class="bouton" type="submit" name="Enregistrer" value="Enregistrer"></td>
+        <td align=center><input class="bouton" type="reset" name="Effacer" value="Effacer"></td>
+      </tr>
+    </table>
+  </form>
+
+</body>
+
+</html>

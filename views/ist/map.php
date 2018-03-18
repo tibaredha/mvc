@@ -1,0 +1,14 @@
+<?php 
+verifsession();	
+view::button('eva','');
+?>
+<h2>Map : ain oussera   </h2 >
+<hr /><br />
+<div   id="map"     >
+<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.fr/?ie=UTF8&amp;t=m&amp;ll=35.448784,2.929916&amp;spn=0.048944,0.073128&amp;z=13&amp;output=embed">
+</iframe>
+
+<small>
+<a href="https://maps.google.fr/?ie=UTF8&amp;t=m&amp;ll=35.448784,2.929916&amp;spn=0.048944,0.073128&amp;z=13&amp;source=embed" style="color:#0000FF;text-align:left">Agrandir le plan</a>
+</small>
+</div>

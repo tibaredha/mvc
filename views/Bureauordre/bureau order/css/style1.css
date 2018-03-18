@@ -1,0 +1,38 @@
+<--Feuille principale-->{}
+body
+{
+  background-image : ;
+  background-color: #F0FFff;
+  font-family :  Comic Sans MS;
+  color : #000000;
+  font-weight:normal;
+  text-align: left;
+  scrollbar-base-color:white;
+  scrollbar-3dlight-color:grey;
+  scrollbar-arrow-color:black;
+  scrollbar-darkshadow-color:#000000;
+  scrollbar-face-color:#fff0ff;
+  scrollbar-highlight-color:skyblue;
+  scrollbar-shadow-color:#000000;
+  scrollbar-track-color:black;
+}
+
+<--Titre principal-->{}
+h1
+{
+  font-family :  Comic Sans MS;
+  color : #FF0000;
+  font-weight:bold;
+  text-align: center;
+}
+
+<--Forme des boutons normaux-->{}
+button
+{
+  background-color : #fff0ff;
+  font-family :  Comic Sans MS;
+  color : #000000;
+  font-weight:bold;
+  text-align: center;
+  width: 100;
+}

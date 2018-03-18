@@ -1,0 +1,33 @@
+<html>
+
+<head>
+
+<title>Rechercher</title>
+<link href="css/style2.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+  <form action='scripts/recherche.php' target="rechbas" method='post' name="rechercher" enctype="multipart/form-data">
+    <table width=50% align=center>
+      <tr>
+        <td align=rigth><input class='text' type="text" name="recherche" size=50 maxlength=50></td>
+        <td align=left><input class="bouton" type="submit" name="Rechercher" value="Rechercher"></td>
+      </tr>
+    </table>
+    <table width=25% align=center>
+      <tr>
+        <td><input type="radio" name="choix" value="NUMERO" checked>NUMERO</td>
+		<td><input type="radio" name="choix" value="ETAT" checked>ETAT</td>
+        <td><input type="radio" name="choix" value="SOURCE">SOURCE</td>
+        <td><input type="radio" name="choix" value="DATE">DATE</td>
+        <td><input type="radio" name="choix" value="DESTINATION">DESTINATION</td>
+        <td><input type="radio" name="choix" value="OBJET">OBJET</td>
+      </tr>
+    </table>
+  </form>
+
+</body>
+
+</html>
