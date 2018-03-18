@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>JPEGCam Test Page</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Joseph Huckaby">
+	<!-- Date: 2008-03-15 -->
+</head>
+<body>
+	<table><tr><td valign=top>
+	<h1>JPEGCam Test Page</h1>
+	<h3>Demonstrates a very simple, one-click capture &amp; upload implementation</h3>
+	
+	<!-- First, include the JPEGCam JavaScript Library -->
+	<script type="text/javascript" src="webcam.js"></script>
+	
+	<!-- Configure a few settings -->
+	<script language="JavaScript">
+		webcam.set_api_url( "test.php?uc=220" );
+		webcam.set_quality( 90 );                        // JPEG quality (1 - 100)
+		webcam.set_shutter_sound( true,'shutter.mp3' ); // play shutter click sound
+	    webcam.set_swf_url( 'webcam.swf' );
+	   
+	
+	</script>
+	
+	<!-- Next, write the movie to the page at 320x240 -->
+	<script language="JavaScript">
+		document.write( webcam.get_html(320,240) );   //320x240 and 640x480
+	</script>
+	
+	<!-- Some buttons for controlling things -->
+	<br/><br/><form>
+		<input type=button value="Configure..." onClick="webcam.configure()">
+		&nbsp;&nbsp;
+		<input type=button value="Take Snapshot" onClick="take_snapshot()">
+	</form>
+	
+	<!-- Code to handle the server response (see test.php) -->
+	<script language="JavaScript">
+		webcam.set_hook( 'onComplete', 'my_completion_handler' );   //2 option my_completion_handler  my_callback_function
+		
+		function take_snapshot() {
+			// take snapshot and upload to server
+			document.getElementById('upload_results').innerHTML = '<h1>Uploading...</h1>';
+			webcam.snap();// webcam.snap(); 
+			/*
+			    This instructs the Flash movie to take a snapshot and upload the JPEG to the server.
+				Make sure you set the URL to your API script using webcam.set_api_url(), 
+				and have a callback function ready to receive the results from the server, using webcam.set_hook().	
+			*/	
+		}
+		
+		
+		// fonction  a la fin du trt 
+		function my_callback_function(response) {
+                alert("Success! PHP returned: " + response);
+        }
+		function my_completion_handler(msg) {
+			// extract URL out of PHP output
+			if (msg.match(/(http\:\/\/\S+)/)) {
+				var image_url = RegExp.$1;
+				// show JPEG image in page
+				document.getElementById('upload_results').innerHTML = 
+					'<h1>Upload Successful!ok</h1>' + 
+					'<h1>JPEG URL: ' + image_url + '</h1>' + 
+					'<img src="' + image_url + '">';
+				
+				// reset camera for another shot
+				webcam.reset();
+			}
+			else alert("PHP Error: " + msg);
+		}
+	</script>
+	
+	</td><td width=50>&nbsp;</td><td valign=top>
+		<div id="upload_results" style="background-color:#eee;"></div>
+	</td></tr></table>
+</body>
+</html>
