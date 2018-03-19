@@ -269,7 +269,17 @@ echo '<div id="cssmenu">';
 									echo '</li>';
 						  echo '</ul>';
 				  echo '</li>'; 
-			
+			echo '<li class="active has-sub"><a href="'.URL.'"><span>courier</span></a>';
+						  echo '<ul>';
+					               echo '<li class="active has-sub"><a href="'.URL.'"><span>courier</span></a>';
+											echo '<ul>'; 
+											        echo '<li><a href="'.URL.'cour/"><span>courier</span></a></li>';
+											         	
+											echo '</ul>';
+									echo '</li>';
+									
+						  echo '</ul>';
+				  echo '</li>'; 
 			echo '<li class="active has-sub"><a href="'.URL.'"><span>Bureau D\'ordre</span></a>';
 						  echo '<ul>';
 					               echo '<li class="active has-sub"><a href="'.URL.'"><span>Bureau D\'ordre</span></a>';

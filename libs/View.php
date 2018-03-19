@@ -791,6 +791,20 @@ class View {
 	echo '<a href="'.URL.'rds/ordonnacerec/1">Ordonnance</a>'; echo '&nbsp;';   
 	echo '<a href="'.URL.'rds/evaluation">Evaluation Rupture Produit</a>'; echo '&nbsp;';
 	}
+	
+	if ($btn=='cour') 
+	{
+	echo '<a href="'.URL.'cour/ncour">AR</a>';    echo '&nbsp;';
+	echo '<a href="'.URL.'cour/ncour1">DE</a>';    echo '&nbsp;';
+	// echo '<a href="'.URL.'rds/nrds/">Nouveau Rupture Produit</a>';    echo '&nbsp;';
+	// echo '<a href="'.URL.'cour/gestion">List Produit</a>'; echo '&nbsp;';
+	// echo '<a href="'.URL.'cour/nrtr/">Retrait Produit</a>';    echo '&nbsp;';
+	// echo '<a href="'.URL.'cour/ordonnacerec/1">Ordonnance</a>'; echo '&nbsp;';   
+	// echo '<a href="'.URL.'cour/evaluation">Evaluation Rupture Produit</a>'; echo '&nbsp;';
+	}
+	
+	
+	
 	$this->NAV();
 	echo'</div>';//
 	}
@@ -1228,6 +1242,30 @@ class View {
 			);
 			$this->smunuf($data);		
 		}
+		
+		if ($menu=='cour')
+		{
+			$data = array(
+			"c"   => 'cour',
+			"m"   => 'search',
+			"combo"   => array( 
+								"val0"=> 'id',
+								"val1"=> 'date',
+								"val2"=> '*',
+			                    "val3"=> '*',
+								"val4"=> '*',
+								"val5"=> '*',
+								"val6"=> '*'
+							  ),
+			"submitvalue" => 'Search_cour',
+			"cb1" => 'rds',"mb1" => 'ncour',       "tb1" => 'New_rds',      "vb1" => 'New_rds',   "icon1" => 'add.PNG',
+			"cb2" => 'rds',"mb2" => 'imp',        "tb2" => 'Print_rds',    "vb2" => 'Print_rds', "icon2" => 'print.PNG',
+			"cb3" => 'rds',"mb3" => '',           "tb3" => 'Graphe_rds',   "vb3" => 'graphe_rds',"icon3" => 'graph.PNG',
+			"cb4" => 'rds',"mb4" => '',           "tb4" => 'rds',          "vb4" => 'rds',       "icon4" => 'search.PNG'
+			);
+			$this->smunuf($data);		
+		}
+		
 		
 	echo "</table>" ;
 	}
