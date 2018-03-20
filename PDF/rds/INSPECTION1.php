@@ -227,11 +227,11 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(05,5); $this->cell(200,5,"REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE",0,0,'C',0,0);
     $this->SetXY(05,10);$this->cell(200,5,"MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE",0,0,'C',0,0);
     $this->SetXY(05,15);$this->cell(200,5,"DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA",0,0,'C',0,0);
-    $this->SetXY(05,30);$this->cell(100,5,html_entity_decode(utf8_decode("Service Des Structures Et De L'action Sanitaire ")),0,0,'L',0,0);$this->SetXY(155,30);$this->cell(50,5," Djelfa Le : ".date ('d-m-Y'),0,0,'R',0,0);
-    $this->SetXY(05,35);$this->cell(100,5,html_entity_decode(utf8_decode("Bureau De La Régulation Des Produits Pharmaceutiques")),0,0,'L',0,0);
+    $this->SetXY(05,30);$this->cell(100,5,"Service Des Structures Et De L'action Sanitaire ",0,0,'L',0,0);$this->SetXY(155,30);$this->cell(50,5," Djelfa Le : ".date ('d-m-Y'),0,0,'R',0,0);
+    $this->SetXY(05,35);$this->cell(100,5,"Bureau De La Régulation Des Produits Pharmaceutiques",0,0,'L',0,0);
 	$this->SetXY(05,40);$this->cell(100,5,"N: _ _ _ /DSP/SAS/BRPP/ ".date ('Y'),0,0,'L',0,0);
-	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,html_entity_decode(utf8_decode($titre)),0,0,'C',0,0);
-	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,html_entity_decode(utf8_decode('Etablissement de santé : '.$EPH1)),0,0,'C',0,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,$titre,0,0,'C',0,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,'Etablissement de santé : '.$EPH1,0,0,'C',0,0);
     $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
 	}
 	function entete2($datejour1,$datejour2,$titre,$EPH1)
@@ -241,11 +241,11 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(05,5); $this->cell(290,5,"REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE",0,0,'C',0,0);
     $this->SetXY(05,10);$this->cell(290,5,"MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE",0,0,'C',0,0);
     $this->SetXY(05,15);$this->cell(290,5,"DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA",0,0,'C',0,0);
-    $this->SetXY(05,30);$this->cell(100,5,html_entity_decode(utf8_decode("Service Des Structures Et De L'action Sanitaire ")),0,0,'L',0,0);$this->SetXY(240,30);$this->cell(50,5," Djelfa Le : ".date ('d-m-Y'),0,0,'R',0,0);
-    $this->SetXY(05,35);$this->cell(100,5,html_entity_decode(utf8_decode("Bureau De La Régulation Des Produits Pharmaceutiques")),0,0,'L',0,0);
+    $this->SetXY(05,30);$this->cell(100,5,"Service Des Structures Et De L'action Sanitaire ",0,0,'L',0,0);$this->SetXY(240,30);$this->cell(50,5," Djelfa Le : ".date ('d-m-Y'),0,0,'R',0,0);
+    $this->SetXY(05,35);$this->cell(100,5,"Bureau De La Régulation Des Produits Pharmaceutiques",0,0,'L',0,0);
 	$this->SetXY(05,40);$this->cell(100,5,"N: _ _ _ /DSP/SAS/BRPP/ ".date ('Y'),0,0,'L',0,0);
-	$this->SetXY(05,$this->GetY()+5);$this->cell(290,5,html_entity_decode(utf8_decode($titre)),0,0,'C',0,0);
-	$this->SetXY(05,$this->GetY()+5);$this->cell(290,5,html_entity_decode(utf8_decode('Etablissement de santé : '.$EPH1)),0,0,'C',0,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(290,5,$titre,0,0,'C',0,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(290,5,'Etablissement de santé : '.$EPH1,0,0,'C',0,0);
     $this->SetXY(05,$this->GetY()+5);$this->cell(290,5,'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
 	}
 	function entete1($datejour1,$datejour2,$titre,$EPH1)
@@ -255,20 +255,21 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(05,5); $this->cell(200,5,"REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE",0,0,'C',0,0);
     $this->SetXY(05,10);$this->cell(200,5,"MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE",0,0,'C',0,0);
     $this->SetXY(05,15);$this->cell(200,5,"DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA",0,0,'C',0,0);
-    $this->SetXY(05,30);$this->cell(100,5,html_entity_decode(utf8_decode("Service Des Structures Et De L'action Sanitaire ")),0,0,'L',0,0);$this->SetXY(155,30);$this->cell(50,5," Djelfa Le : ".date ('d-m-Y'),0,0,'R',0,0);
-    $this->SetXY(05,35);$this->cell(100,5,html_entity_decode(utf8_decode("Bureau De La Régulation Des Produits Pharmaceutiques")),0,0,'L',0,0);
+    $this->SetXY(05,30);$this->cell(100,5,"Service Des Structures Et De L'action Sanitaire ",0,0,'L',0,0);$this->SetXY(155,30);$this->cell(50,5," Djelfa Le : ".date ('d-m-Y'),0,0,'R',0,0);
+    $this->SetXY(05,35);$this->cell(100,5,"Bureau De La Régulation Des Produits Pharmaceutiques",0,0,'L',0,0);
 	$this->SetXY(05,40);$this->cell(100,5,"N: _ _ _ /DSP/SAS/BRPP/ ".date ('Y'),0,0,'L',0,0);
-	$this->SetXY(55,$this->GetY()+10);$this->cell(150,5,html_entity_decode(utf8_decode('Le Directeur De La Santé Et De La Population De La Wilaya De Djelfa')),0,1,'C',1,0);
+	$this->SetXY(55,$this->GetY()+10);$this->cell(150,5,'Le Directeur De La Santé Et De La Population De La Wilaya De Djelfa',0,1,'C',1,0);
 	$this->SetXY(55,$this->GetY()+2);$this->cell(150,5,'A Monsieur ',0,1,'C',1,0);
-	$this->SetXY(55,$this->GetY()+2);$this->cell(150,5,html_entity_decode(utf8_decode('Le Directeur Général De La Pharmacie Et Des Equipements De Santé')),0,1,'C',1,0);
-	$this->SetXY(55,$this->GetY()+2);$this->cell(150,5,html_entity_decode(utf8_decode('Ministere De La Santé De La Population Et De La Réforme Hospitalière')),0,1,'C',1,0);
-	$this->SetXY(05,$this->GetY()+18);$this->cell(200,5,html_entity_decode(utf8_decode('OBJET : A/S Etat Mensuel Des Ruptures Des Produits Pharmaceutiques ')),0,1,'L',1,0);
-	$this->SetXY(20,$this->GetY()+2);$this->cell(200,5,html_entity_decode(utf8_decode('Etablissement de santé : '.$EPH1)),0,1,'L',1,0);
+	$this->SetXY(55,$this->GetY()+2);$this->cell(150,5,'Le Directeur Général De La Pharmacie Et Des Equipements De Santé',0,1,'C',1,0);
+	$this->SetXY(55,$this->GetY()+2);$this->cell(150,5,'Ministere De La Santé De La Population Et De La Réforme Hospitalière',0,1,'C',1,0);
+	$this->SetXY(05,$this->GetY()+18);$this->cell(200,5,$titre,0,1,'L',1,0);
+	$this->SetXY(20,$this->GetY()+2);$this->cell(185,5,'Etablissement de santé : '.$EPH1,0,1,'L',1,0);
+	$this->SetXY(20,$this->GetY()+2);$this->cell(185,5,'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2),0,1,'L',1,0);
 	$this->SetXY(05,$this->GetY()+2);$this->cell(200,5,'REF : Feuille De Route ',0,1,'L',1,0);
 	$this->SetXY(05,$this->GetY()+2);$this->cell(200,5,'PJ : '.'( {nb} )'.' Pages',0,1,'L',1,0);// $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-	$this->SetXY(25,$this->GetY()+18);$this->cell(100,5,html_entity_decode(utf8_decode("Suite a vos orientations,j'ai l'honneur Monsieur le directeur général de vous transmettre l'état mensuel ")),0,0,'L',0,0);
+	$this->SetXY(25,$this->GetY()+18);$this->cell(100,5,"Suite a vos orientations,j'ai l'honneur Monsieur le directeur général de vous transmettre l'état mensuel ",0,0,'L',0,0);
 	$this->SetXY(10,$this->GetY()+8);$this->cell(100,5,"des ruptures des produits pharmaceutiques ".'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2).".",0,0,'L',0,0);
-	$this->SetXY(25,$this->GetY()+18);$this->cell(100,5,html_entity_decode(utf8_decode("Veuillez Agréer Monsieur Le Directeur Géneral ,L'éxpression De Ma Parfaite Considération.")),0,0,'L',0,0);
+	$this->SetXY(25,$this->GetY()+18);$this->cell(100,5,"Veuillez Agréer Monsieur Le Directeur Géneral ,L'éxpression De Ma Parfaite Considération.",0,0,'L',0,0);
 	}
 	function entetel($datejour1,$datejour2,$titre,$EPH1)
 	{
@@ -280,7 +281,7 @@ class INSPECTION1 extends PDF_Invoice
     $this->SetXY(05,20);$this->cell(100,5,'INSPECTION SANTE PUBLIQUE',0,0,'L',0,0);
 	$this->SetXY(230,20);$this->cell(60,5,"LE : ".date ('d-m-Y'),0,0,'C',0,0);
     $this->SetXY(05,25);$this->cell(100,5,"N               / ".date ('Y'),0,0,'L',0,0);
-	$this->SetXY(05,25);$this->cell(290,5,html_entity_decode(utf8_decode($titre.$EPH1)),0,0,'C',0,0);
+	$this->SetXY(05,25);$this->cell(290,5,$titre.$EPH1,0,0,'C',0,0);
     $this->SetXY(05,29);$this->cell(290,5,'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
 	}
 	function pied()
@@ -324,7 +325,7 @@ class INSPECTION1 extends PDF_Invoice
 	function produit($NATURE,$nature,$datejour1,$datejour2,$EPH)
     {
 		$this->mysqlconnect();
-		$query = "SELECT PRODUIT,sum(CMM) as sumcmm ,NATURE,DATE,STRUCTURE from rds WHERE NATURE =$NATURE and (DATE BETWEEN '$datejour1' AND '$datejour2') and STRUCTURE $EPH GROUP BY PRODUIT order by id "; //   
+		$query = "SELECT rds.PRODUIT,sum(rds.CMM) as sumcmm ,rds.NATURE,rds.DATE,rds.STRUCTURE,pha.mecicament from rds  INNER JOIN pha ON rds.PRODUIT = pha.id WHERE rds.NATURE =$NATURE and (rds.DATE BETWEEN '$datejour1' AND '$datejour2') and rds.STRUCTURE $EPH GROUP BY rds.PRODUIT order by pha.mecicament "; //   
 		$res=mysql_query($query);
 		$tot=mysql_num_rows($res);
 		$this->SetXY(5,70); $this->cell(66.5*3,10,"Produit Pharmaceutique : ".$nature,1,0,'C',1,0);
@@ -341,7 +342,7 @@ class INSPECTION1 extends PDF_Invoice
 			$this->cell(120,5,$this->nbrtostring('pha','id',$row->PRODUIT,'mecicament').' : '.$this->nbrtostring('pha','id',$row->PRODUIT,'pre'),1,0,'L',0);
 			$this->cell(25,5,"PCH ET IPA",1,0,'C',0);
 			$this->cell(20.5,5,$row->sumcmm,1,0,'C',0);
-			$this->cell(19+5,5,html_entity_decode(utf8_decode('Unité(s)')),1,0,'C',0);
+			$this->cell(19+5,5,'Unité(s)',1,0,'C',0);
 			$this->SetXY(5,$this->GetY()+5);  
 		}
 		$this->SetXY(5,$this->GetY());
@@ -362,7 +363,7 @@ class INSPECTION1 extends PDF_Invoice
 	function produit2($NATURE,$nature,$datejour1,$datejour2)
     {
 		$this->mysqlconnect();
-		$query = "SELECT PRODUIT,sum(CMM) as sumcmm ,NATURE,DATE,STRUCTURE,CMM from rds WHERE NATURE =$NATURE and (DATE BETWEEN '$datejour1' AND '$datejour2') GROUP BY PRODUIT  order by id "; //   
+		$query = "SELECT rds.PRODUIT,sum(rds.CMM) as sumcmm ,rds.NATURE,rds.DATE,rds.STRUCTURE,rds.CMM,pha.mecicament from rds INNER JOIN pha ON rds.PRODUIT = pha.id  WHERE rds.NATURE =$NATURE and (rds.DATE BETWEEN '$datejour1' AND '$datejour2') GROUP BY rds.PRODUIT  order by pha.mecicament "; //   
 		$res=mysql_query($query);
 		$tot=mysql_num_rows($res);
 		$this->SetXY(5,70); $this->cell(285,10,"CMM Produit Pharmaceutique : ".$nature,1,0,'C',1,0);
@@ -407,12 +408,14 @@ class INSPECTION1 extends PDF_Invoice
 	$produitetab=$row['sumcmm'];
 	return $produitetab;
 	}
+	// en cours de realisation 
 	function produit3($NATURE,$nature,$EPH)
     {
 		$datejour1=date('Y-m-d',mktime(12, 0, 0, date("m")-11,1, date("Y")));
 		$datejour2=date('Y-m-d',mktime(12, 0, 0, date("m")+1,1, date("Y")));
 		$this->mysqlconnect();
 		$query = "SELECT PRODUIT,sum(CMM) as sumcmm ,NATURE,DATE,STRUCTURE,CMM from rds WHERE NATURE =$NATURE and (DATE BETWEEN '$datejour1' AND '$datejour2') and STRUCTURE $EPH GROUP BY PRODUIT  order by id "; //   
+		//$query = "SELECT rds.PRODUIT,sum(rds.CMM) as sumcmm ,rds.NATURE,rds.DATE,rds.STRUCTURE,pha.mecicament from rds  INNER JOIN pha ON rds.PRODUIT = pha.id WHERE rds.NATURE =$NATURE and (rds.DATE BETWEEN '$datejour1' AND '$datejour2') and rds.STRUCTURE $EPH GROUP BY rds.PRODUIT order by pha.mecicament "; //   
 		$res=mysql_query($query);
 		$tot=mysql_num_rows($res);
 		$this->SetXY(5,70); $this->cell(285,10,"CMM/ Dernier 12-Mois Produit Pharmaceutique : ".$nature,1,0,'C',1,0);

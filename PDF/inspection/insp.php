@@ -21,8 +21,8 @@ $h=50;
 $pdf->SetFillColor(200);
 $pdf->SetXY(05,$h);
 $pdf->cell(40,10,"Date inspection ",1,0,1,'C',0);
-$pdf->cell(206,10,html_entity_decode(utf8_decode("Anomalies constatés")),1,0,'C',1,0);
-$pdf->cell(40,10,html_entity_decode(utf8_decode("Corrigées")),1,0,'C',1,0);
+$pdf->cell(206,10,"Anomalies constatés",1,0,'C',1,0);
+$pdf->cell(40,10,"Corrigées",1,0,'C',1,0);
 $pdf->SetXY(05,$h+15); 
 $pdf->mysqlconnect();
 $pdf->SetFont('Arial', '',9, '', true);
@@ -40,15 +40,15 @@ while($row=mysql_fetch_object($resultat))
 
 		$pdf->SetFillColor(250);
 		$pdf->cell(40,(5*$totalmbr11)+10,$pdf->dateUS2FR($row->DATE),1,0,'C',1,0);
-		$pdf->cell(206,5,html_entity_decode(utf8_decode("Anomalies")),1,0,1,'L',0);
-		$pdf->cell(40,5,html_entity_decode(utf8_decode("Corrigées")),1,0,1,'L',0);
+		$pdf->cell(206,5,"Anomalies",1,0,1,'L',0);
+		$pdf->cell(40,5,"Corrigées",1,0,1,'L',0);
 		
 		$pdf->SetXY(45,$pdf->GetY()+5); 
 		
 		while($row1=mysql_fetch_object($resultat1))
 		{
 		$pdf->SetFillColor(250);
-		$pdf->cell(206,5,html_entity_decode(utf8_decode($row1->ANOMALIE)),1,0,'L',0);
+		$pdf->cell(206,5,$row1->ANOMALIE,1,0,'L',0);
 		
 		if ($row1->ETAT==0) 
 		{

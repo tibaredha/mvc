@@ -8,6 +8,8 @@ $pdf->SetTextColor(0,0,0);//text noire
 $pdf->AddPage('p','A4');
 $pdf->entete('','','Retrait et Mise en Quarantaine : ','');
 $pdf->produitrtr('','','','','');
+// $pdf->AddPage('p','A4');
+
 
 
 

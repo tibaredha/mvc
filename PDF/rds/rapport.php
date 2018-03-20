@@ -29,7 +29,7 @@ $pdf->SetTextColor(0,0,0);//text noire
 if ($_POST['type']=='1')
 {
 $pdf->AddPage('p','A4');
-$pdf->entete1($datejour1,$datejour2,'Repartition Geographique : ',$EPH1);
+$pdf->entete1($datejour1,$datejour2,'A/S Etat Mensuel Des Ruptures Des Produits Pharmaceutiques',$EPH1);
 $pdf->pied();
 
 $pdf->AddPage('p','A4');
@@ -103,5 +103,8 @@ $pdf->AddPage('L','A4');
 $pdf->entete2($datejour1,$datejour2,'Etat De Rupture 12 Derniers Mois ',$EPH1);
 $pdf->produit3(5,"Consomables",$EPH);
 }
-$pdf->Output();
+// $path = "../../../../uploads/AAA.pdf";
+// $pdf->Output($path,'F');
+
+$pdf->Output($_POST['mois1'].'_'.'Etat De Rupture Mensuel.pdf','I');
 ?>

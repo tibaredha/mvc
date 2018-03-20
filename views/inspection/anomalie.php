@@ -19,21 +19,22 @@ $data = array(
 "DATE"      => '', 
 "ANOMALIEX" => array( 
 				""=>"",
-				"Plaque signaletique non conforme aux normes "=>"Plaque signaletique non conforme aux normes",
-				"Local fermé au public le jour de l'inspection"=>"Local fermé au public le jour de l'inspection",
-				"Local non conforme"=>"Local non conforme",
-				"Transfert du Local non autorisé par la DSP"=>"Transfert du Local non autorisé par la DSP",
-				"Obstruction a l'inspection"=>"Obstruction a l'inspection",	
 				"Absence non justifiée du titulaire de l'agrement"=>"Absence non justifiée du titulaire de l'agrement",
-				"Remplacement non autorisé par la DSP"=>"Remplacement non autorisé par la DSP",
-				"Présence d'un Stérilisateur a chaleur sèche Poupinel dont l'usage est désormais interdit"=>"Présence d'un Stérilisateur a chaleur sèche Poupinel dont l'usage est désormais interdit",
+				"Absence d'agrement au local indiqué"=>"Absence d'agrement au local indiqué",
+				"Absence de convention d'incinération"=>"Absence de convention d'incinération",
 				"Cabinet non équipé d'un autoclave fonctionnel"=>"Cabinet non équipé d'un autoclave fonctionnel",	  
+				"Local non conforme"=>"Local non conforme",
+				"Local inexistant  a l’adresse indiquée  le jour de l’inspection"=>"Local inexistant  a l’adresse indiquée  le jour de l’inspection",
+				"Local fermé au public le jour de l'inspection"=>"Local fermé au public le jour de l'inspection",
 				"Non respect des protocles d'hygienne"=>"Non respect des protocles d'hygienne",			 
-				"Absence de convention incinération"=>"Absence de convention incinération",
-				"Présence d'un appareil de radiologie sans autorisation préalable du centre de radio protection "=>"Présence d'un appareil de radiologie sans autorisation préalable du centre de radio protection"
-				
-				
-				
+				"Obstruction a l'inspection"=>"Obstruction a l'inspection",	
+				"Plaque signaletique non conforme aux normes "=>"Plaque signaletique non conforme aux normes",
+				"Présence d'un Stérilisateur a chaleur sèche Poupinel dont l'usage est désormais interdit"=>"Présence d'un Stérilisateur a chaleur sèche Poupinel dont l'usage est désormais interdit",
+				"Présence d'un appareil de radiologie sans autorisation préalable du centre de radio protection "=>"Présence d'un appareil de radiologie sans autorisation préalable du centre de radio protection",
+				"Présence d’un laboratoire non autorisé par la DSP en dehors du périmètre de la pharmacie "=>"Présence d’un laboratoire non autorisé par la DSP en dehors du périmètre de la pharmacie",
+				"Présence d’un échographe non autorisé par la DSP "=>"Présence d’un échographe non autorisé par la DSP",
+				"Remplacement non autorisé par la DSP"=>"Remplacement non autorisé par la DSP",
+				"Transfert du Local non autorisé par la DSP"=>"Transfert du Local non autorisé par la DSP"
 				),
 "ANOMALIE"  => ''  
 );

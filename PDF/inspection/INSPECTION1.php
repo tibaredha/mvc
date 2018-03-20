@@ -109,7 +109,7 @@ class INSPECTION1 extends PDF_Invoice
     $this->SetXY(05,15);$this->cell(200,5,"DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA",0,0,'C',0,0);
     $this->SetXY(05,20);$this->cell(100,5,'INSPECTION SANTE PUBLIQUE',0,0,'L',0,0);$this->cell(145,5," LE : ".date ('d-m-Y'),0,0,'R',0,0);
     $this->SetXY(05,25);$this->cell(100,5,"N               / ".date ('Y'),0,0,'L',0,0);
-	$this->SetXY(05,25); $this->cell(200,5,html_entity_decode(utf8_decode($titre.$EPH1)),0,0,'C',0,0);
+	$this->SetXY(05,25); $this->cell(200,5,$titre.$EPH1,0,0,'C',0,0);
     $this->SetXY(05,29); $this->cell(200,5,'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
 	}
 	function entetel($datejour1,$datejour2,$titre,$EPH1)
@@ -122,7 +122,7 @@ class INSPECTION1 extends PDF_Invoice
     $this->SetXY(05,20);$this->cell(100,5,'INSPECTION SANTE PUBLIQUE',0,0,'L',0,0);
 	$this->SetXY(230,20);$this->cell(60,5,"LE : ".date ('d-m-Y'),0,0,'C',0,0);
     $this->SetXY(05,25);$this->cell(100,5,"N               / ".date ('Y'),0,0,'L',0,0);
-	$this->SetXY(05,25);$this->cell(290,5,html_entity_decode(utf8_decode($titre.$EPH1)),0,0,'C',0,0);
+	$this->SetXY(05,25);$this->cell(290,5,$titre.$EPH1,0,0,'C',0,0);
     $this->SetXY(05,29);$this->cell(290,5,'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
 	}
 	function pied()
@@ -135,7 +135,7 @@ class INSPECTION1 extends PDF_Invoice
 	{
 	$h=35;
 	$this->SetXY(005,$h);
-	$this->cell(10,10,html_entity_decode(utf8_decode("N°")),1,0,'C',1,0);
+	$this->cell(10,10,"N°",1,0,'C',1,0);
 	$this->cell(20,10,"DATE",1,0,'C',1,0);
 	$this->cell(50,10,"NOM ET PRENOM",1,0,'C',1,0);
 	$this->cell(10,5,"SEXE",1,0,'C',1,0);
@@ -157,11 +157,11 @@ class INSPECTION1 extends PDF_Invoice
 	if (Trim($row->SEX)=='M'){$this->cell(5,5,'X',1,0,'L',0);$this->cell(5,5,'',1,0,'L',0);}
 	if (Trim($row->SEX)=='F'){$this->cell(5,5,'',1,0,'L',0);$this->cell(5,5,'X',1,0,'L',0);}
 	$this->cell(30,5,$this->nbrtostring('com','IDCOM',$row->COMMUNE,'COMMUNE'),1,0,'L',0,0);$this->SetFont('Arial','B',7);
-	$this->cell(80,5,html_entity_decode(utf8_decode($row->ADRESSE)),1,0,'L',0,0);$this->SetFont('Arial','B',9);
+	$this->cell(80,5,$row->ADRESSE,1,0,'L',0,0);$this->SetFont('Arial','B',9);
 
 	$this->SetXY(5,$this->GetY()+5);  
 	}
-	$this->cell(200,10,html_entity_decode(utf8_decode("TOTAL structure : ".$tot)),1,0,'C',1,0);
+	$this->cell(200,10,"TOTAL structure : ".$tot,1,0,'C',1,0);
 	}
 	function anomalies($EPH)
     {
@@ -179,8 +179,8 @@ class INSPECTION1 extends PDF_Invoice
 		$this->cell(10,5,'Sexe',1,0,'C',1,0);
 		$this->cell(59,5,'Adresse',1,0,'L',1,0);
 		$this->cell(18,5,'Date',1,0,'C',1,0);
-		$this->cell(27,5,html_entity_decode(utf8_decode('Constatés')),1,0,'C',1,0);
-		$this->cell(26,5,html_entity_decode(utf8_decode('Corrigeés')),1,0,'C',1,0);
+		$this->cell(27,5,'Constatés',1,0,'C',1,0);
+		$this->cell(26,5,'Corrigeés',1,0,'C',1,0);
 		
 		$query1 = "SELECT * from structure where  STRUCTURE $EPH  and COMMUNE=$row->IDCOM and ETAT=0 ORDER BY NOM"; 
 		$res1=mysql_query($query1);
@@ -192,7 +192,7 @@ class INSPECTION1 extends PDF_Invoice
 			$this->cell(30,5,$row1->NOM,1,0,'L',0);
 			$this->cell(30,5,$row1->PRENOM,1,0,'L',0);
 			$this->cell(10,5,$row1->SEX,1,0,'C',0);$this->SetFont('Arial','B',7);
-			$this->cell(59,5,html_entity_decode(utf8_decode($row1->ADRESSE)),1,0,'L',0);$this->SetFont('Arial','B',9);
+			$this->cell(59,5,$row1->ADRESSE,1,0,'L',0);$this->SetFont('Arial','B',9);
 			$this->cell(18,5,$this->dateUS2FR($row1->DATE),1,0,'C',0);
 			if ($this->NBRANNOMALIE($row1->id,0)>0) 
 			{
@@ -212,10 +212,10 @@ class INSPECTION1 extends PDF_Invoice
 			$this->SetXY(5,$this->GetY()+5);  
 			}
 		} else {
-		$this->cell(200,5,html_entity_decode(utf8_decode('Néant')),1,0,'C',0);
+		$this->cell(200,5,'Néant',1,0,'C',0);
 		$this->SetXY(5,$this->GetY()+5);
 		}   
-			$this->cell(179+21,5,html_entity_decode(utf8_decode("Total commune ".$row->COMMUNE." : ".$tot2)),1,0,'L',1,0);
+			$this->cell(179+21,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
 	$this->SetXY(5,$this->GetY()+10);  
 	}
 	}
@@ -249,7 +249,7 @@ class INSPECTION1 extends PDF_Invoice
 			$this->cell(30,5,$row1->NOM,1,0,'L',0);
 			$this->cell(30,5,$row1->PRENOM,1,0,'L',0);
 			$this->cell(10,5,$row1->SEX,1,0,'C',0);$this->SetFont('Arial','B',7);
-			$this->cell(59,5,html_entity_decode(utf8_decode($row1->ADRESSE)),1,0,'L',0);$this->SetFont('Arial','B',9);
+			$this->cell(59,5,$row1->ADRESSE,1,0,'L',0);$this->SetFont('Arial','B',9);
 			$this->cell(18,5,$this->dateUS2FR($row1->DATE),1,0,'C',0);
 			$this->cell(18,5,'',1,0,'C',0);
 			$this->cell(18,5,'',1,0,'C',0);
@@ -257,10 +257,10 @@ class INSPECTION1 extends PDF_Invoice
 			$this->SetXY(5,$this->GetY()+5);  
 			}
 		} else {
-		$this->cell(200,5,html_entity_decode(utf8_decode('Néant')),1,0,'C',0);
+		$this->cell(200,5,'Néant',1,0,'C',0);
 		$this->SetXY(5,$this->GetY()+5);
 		}   
-			$this->cell(179+21,5,html_entity_decode(utf8_decode("Total commune ".$row->COMMUNE." : ".$tot2)),1,0,'L',1,0);
+			$this->cell(179+21,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
 	$this->SetXY(5,$this->GetY()+10);  
 	}
     }
@@ -294,7 +294,7 @@ class INSPECTION1 extends PDF_Invoice
 			$this->cell(30,5,$row1->NOM,1,0,'L',0);
 			$this->cell(30,5,$row1->PRENOM,1,0,'L',0);
 			$this->cell(10,5,$row1->SEX,1,0,'C',0);$this->SetFont('Arial','B',7);
-			$this->cell(59,5,html_entity_decode(utf8_decode($row1->ADRESSE)),1,0,'L',0);$this->SetFont('Arial','B',9);
+			$this->cell(59,5,$row1->ADRESSE,1,0,'L',0);$this->SetFont('Arial','B',9);
 			$this->cell(18,5,$this->dateUS2FR($row1->DATE),1,0,'C',0);
 			$this->cell(18,5,'',1,0,'C',0);//Oui
 			$this->cell(18,5,'',1,0,'C',0);//Oui
@@ -302,10 +302,10 @@ class INSPECTION1 extends PDF_Invoice
 			$this->SetXY(5,$this->GetY()+5);  
 			}
 		} else {
-		$this->cell(200,5,html_entity_decode(utf8_decode('Néant')),1,0,'C',0);
+		$this->cell(200,5,'Néant',1,0,'C',0);
 		$this->SetXY(5,$this->GetY()+5);
 		}   
-			$this->cell(179+21,5,html_entity_decode(utf8_decode("Total commune ".$row->COMMUNE." : ".$tot2)),1,0,'L',1,0);
+			$this->cell(179+21,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
 	$this->SetXY(5,$this->GetY()+10);  
 	}
 	}
@@ -338,7 +338,7 @@ class INSPECTION1 extends PDF_Invoice
 			$this->cell(40,5,$row1->NOM,1,0,'L',0);
 			$this->cell(40,5,$row1->PRENOM,1,0,'L',0);
 			$this->cell(20,5,$row1->SEX,1,0,'C',0);
-			$this->cell(59,5,html_entity_decode(utf8_decode($row1->ADRESSE)),1,0,'L',0);
+			$this->cell(59,5,$row1->ADRESSE,1,0,'L',0);
 			$this->cell(20,5,$this->dateUS2FR($row1->DATE),1,0,'C',0);
 			$this->cell(7,5,$this->NBRVEHIABC('B',$row1->id,'0'),1,0,'C',0);
 			$this->cell(7,5,$this->NBRVEHIABC('C',$row1->id,'0'),1,0,'C',0);
@@ -347,10 +347,10 @@ class INSPECTION1 extends PDF_Invoice
 			$this->SetXY(5,$this->GetY()+5);  
 			}
 		} else {
-		$this->cell(200,5,html_entity_decode(utf8_decode('Néant')),1,0,'C',0);
+		$this->cell(200,5,'Néant',1,0,'C',0);
 		$this->SetXY(5,$this->GetY()+5);
 		}   
-			$this->cell(179,5,html_entity_decode(utf8_decode("Total commune ".$row->COMMUNE." : ".$tot2)),1,0,'L',1,0);
+			$this->cell(179,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
 			$this->cell(7,5,$this->NBRVEHIABCPC('B',$row->IDCOM,'0'),1,0,'C',1,0);
 			$this->cell(7,5,$this->NBRVEHIABCPC('C',$row->IDCOM,'0'),1,0,'C',1,0);
 			$this->cell(7,5,$this->NBRVEHIABCPC(TRIM('C'),TRIM($row->IDCOM),'0')+$this->NBRVEHIABCPC(TRIM('B'),TRIM($row->IDCOM),'0'),1,0,'C',1,0);
@@ -472,8 +472,8 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetFillColor(250);
 	$this->SetXY(05,$h);
 	$this->cell(40,10,"Date d'inspection ",1,0,'C',1,0);
-	$this->cell(206,10,html_entity_decode(utf8_decode("Anomalies constatés")),1,0,'C',1,0);
-	$this->cell(40,10,html_entity_decode(utf8_decode("Anomalies")),1,0,'C',1,0);
+	$this->cell(206,10,"Anomalies constatés",1,0,'C',1,0);
+	$this->cell(40,10,"Anomalies",1,0,'C',1,0);
 	$this->SetXY(05,$h+15); 
 	$this->mysqlconnect();
 	mysql_query("SET NAMES 'UTF8' ");
@@ -493,21 +493,21 @@ class INSPECTION1 extends PDF_Invoice
 		$this->SetFillColor(255, 255, 0);
 		$this->cell(96,5,$this->nbrtostring('structurebis','id',$this->nbrtostring('structure','id',$row->ids,'STRUCTURE'),'structure'),1,0,1,'L',0);
 		$this->SetFillColor(0 ,250, 154);
-		$this->cell(60,5,html_entity_decode(utf8_decode("Mesure prise : ".$this->mesureprise($row->MP))),1,0,'L',1,0);
-		$this->cell(40,5,html_entity_decode(utf8_decode("Anomalies")),1,0,'C',1,0);
+		$this->cell(60,5,"Mesure prise : ".$this->mesureprise($row->MP),1,0,'L',1,0);
+		$this->cell(40,5,"Anomalies",1,0,'C',1,0);
 		$this->SetXY(45,$this->GetY()+5);
 		while($row1=mysql_fetch_object($resultat1))
 		{
 		$this->SetFillColor(250);$this->SetFont( 'Arial', '', 9 );
-		$this->cell(206,5,html_entity_decode(utf8_decode($row1->ANOMALIE)),1,0,'L',0);
+		$this->cell(206,5,$row1->ANOMALIE,1,0,'L',0);
 		$this->SetFont( 'Arial', '', 10 );
 		if ($row1->ETAT==0) 
 			{
-			$this->cell(40,5,html_entity_decode(utf8_decode("Non Levée")),1,0,'C',0);
+			$this->cell(40,5,"Non Levée",1,0,'C',0);
 			}
 			else
 			{
-			$this->cell(40,5,html_entity_decode(utf8_decode("Levée")),1,0,'C',0);
+			$this->cell(40,5,"Levée",1,0,'C',0);
 			}
 		$this->SetXY(45,$this->GetY()+5); 
 		}
