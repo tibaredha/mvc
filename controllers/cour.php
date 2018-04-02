@@ -17,7 +17,7 @@ class cour extends Controller {
 	function search()
 	{
 	    $url1 = explode('/',$_GET['url']);	
-		$this->view->title = 'Search rds';
+		$this->view->title = 'Search cour';
 	    $this->view->userListviewo = $_GET['o']; //criter de choix
 	    $this->view->userListviewq = $_GET['q']; //key word  
 		$this->view->userListviewp =$url1[2]; // parametre 2 page                     limit 2,3
@@ -33,6 +33,42 @@ class cour extends Controller {
 	$this->view->title = 'ncour';
 	$this->view->render($this->route.'/ncour');    
 	}
+	public function createcour() 
+	{
+		$data = array();
+		$data['DATEAR']       = $_POST['DATEAR'];
+		$data['NAR']          = $_POST['NAR'];
+		$data['DATECR']       = $_POST['DATECR'];
+		$data['NCR']          = $_POST['NCR'];
+		$data['EXP']          = $_POST['EXP'];
+		$data['OBJ']          = $_POST['OBJ'];
+		$data['NA']           = $_POST['NA'];
+		//echo '<pre>';print_r ($data);echo '<pre>';  
+		$last_id=$this->model->createcour($data);
+		header('location: ' . URL .$this->route. '/ncour/'.$last_id);	
+	} 
+	
+	public function editcour($id) 
+	{
+        $this->view->title = 'Edit cour';
+		$this->view->user = $this->model->userSingleList($id);
+		$this->view->render($this->route.'/editcour'); 
+	}
+	public function editcourSave($id)
+	{
+		$data = array();
+		$data['DATEAR']       = $_POST['DATEAR'];
+		$data['NAR']          = $_POST['NAR'];
+		$data['DATECR']       = $_POST['DATECR'];
+		$data['NCR']          = $_POST['NCR'];
+		$data['EXP']          = $_POST['EXP'];
+		$data['OBJ']          = $_POST['OBJ'];
+		$data['NA']           = $_POST['NA'];
+		$data['id']           = $id;
+		//echo '<pre>';print_r ($data);echo '<pre>';
+		$this->model->editSave($data);
+		header('location: ' . URL .$this->route.'/editcour/'.$id);
+	}
 	
 	function ncour1() 
 	{
@@ -40,57 +76,56 @@ class cour extends Controller {
 	$this->view->render($this->route.'/ncour1');    
 	}
 	
-	
-	
-	// 
-	
-	public function createrds() 
+	public function createcour1() 
 	{
 		$data = array();
-		$data['DATE']         = $_POST['DATE'];
-		$data['STRUCTURE']    = $_POST['STRUCTURE'];
-		$data['NATURE']       = $_POST['NATURE'];
-		$data['PRODUIT']      = $_POST['PRODUIT'];
-		$data['CMM']          = $_POST['CMM'];
-		$data['RES']          = $_POST['RES'];
-		// echo '<pre>';print_r ($data);echo '<pre>';  
-		$last_id=$this->model->createrds($data);
-		header('location: ' . URL .$this->route. '/nrds/'.$last_id);	
-	} 
-	
-	public function deleterds($id)
-	{
-	$this->model->deleterds($id); 
-	header('location: ' . URL .$this->route. '/search/0/10?o=id&q=');
-	}
-	
-	
-	function nrtr() 
-	{
-	$this->view->title = 'nrtr';
-	$this->view->userListview = $this->model->Listrtr() ;
-	$this->view->render($this->route.'/nrtr');    
-	}
-	
-	public function creatertr() 
-	{
-		$data = array();
-		$data['DATE']         = $_POST['DATE'];
-		$data['NLOT']         = $_POST['NLOT'];
-		$data['DDP']          = $_POST['DDP'];
-		$data['PRODUIT']      = $_POST['PRODUIT'];
-		$data['MOTIF']        = $_POST['MOTIF'];
+		$data['DATEDP']       = $_POST['DATEDP'];
+		$data['NDP']          = $_POST['NDP'];
+		$data['NP']           = $_POST['NP'];
+		$data['DEST']         = $_POST['DEST'];
+		$data['OBJ']          = $_POST['OBJ'];
+		$data['NA']           = $_POST['NA'];
+		$data['OBS']          = $_POST['OBS'];
 		$data['REF']          = $_POST['REF'];
+		$data['EXP']          = $_POST['EXP'];
+		
 		echo '<pre>';print_r ($data);echo '<pre>';  
-		$last_id=$this->model->creatertr($data);
-		header('location: ' . URL .$this->route. '/nrtr/'.$last_id);	
+		$last_id=$this->model->createcour1($data);
+		header('location: ' . URL .$this->route. '/ncour1/'.$last_id);	
 	} 
-	public function deletertr($id)
+	
+	
+	function diffcour($id) 
 	{
-	$this->model->deletertr($id);  
-	header('location: ' . URL .$this->route.'/nrtr');
+	$this->view->title = 'diffcour';
+	$this->view->id =$id; 
+	$this->view->render($this->route.'/diffcour');    
 	}
 	
+	public function diffcour1() 
+	{
+	    $url1 = explode('/',$_GET['url']);	
+		$data = array();
+		$data['DATE'] = $_POST['DATE'];
+		if (isset($_POST['DSP'])){$data['DSP']='1';}else{$data['DSP']='0';}		
+		if (isset($_POST['INSP'])){$data['INSP']='1';}else{$data['INSP']='0';}		
+		if (isset($_POST['SAS'])){$data['SAS']='1';}else{$data['SAS']='0';}		
+		if (isset($_POST['PRV'])){$data['PRV']='1';}else{$data['PRV']='0';}		
+		if (isset($_POST['DRH'])){$data['DRH']='1';}else{$data['DRH']='0';}		
+		if (isset($_POST['PLF'])){$data['PLF']='1';}else{$data['PLF']='0';}		
+		$data['id'] = $_POST['id'];
+		echo '<pre>';print_r ($data);echo '<pre>';  
+		$last_id=$this->model->diffcour1($data);
+	    header('location: ' . URL .$this->route.'/search/0/10?o=id&q=');	
+	} 
+	
+	
+	
+	function odm() 
+	{
+	$this->view->title = 'odm';
+	$this->view->render($this->route.'/odm');    
+	}
 	
 	function evaluation() 
 	{
@@ -98,205 +133,6 @@ class cour extends Controller {
 	$this->view->render($this->route.'/evaluation');    
 	}
 	
-	function gestion() 
-	{
-	$this->view->title = 'Search pha';
-	$this->view->userListview = $this->model->Listproduit() ;
-	$this->view->render($this->route.'/gestion');     
-	}
 	
-	public function newpro() 
-	{
-		$this->view->title = 'newpro';
-		//$this->view->label(25,400,'DATE HEUREhhhhhhhhhhhhhhhhhS');  
-		$this->view->render($this->route.'/new'); 
-	}
-	
-	// 
-	
-	public function createnewpro() 
-	{
-		$data = array();
-		$data['mecicament']= $_POST['mecicament'];
-		$data['pre']       = $_POST['pre'];
-		$data['cmm']       = $_POST['cmm'];
-		$data['smin']      = $_POST['smin'];
-		$data['qts']       = $_POST['qts'];
-		$data['smax']      = $_POST['smax'];
-		$data['qte']       = $_POST['qte'];
-		$data['price']     = $_POST['price'];
-		//echo '<pre>';print_r ($data);echo '<pre>';
-		$last_id=$this->model->create($data);
-		header('location: ' . URL .$this->route.'/newpro');
-	}
-	
-	public function delete($id)
-	{
-	$this->model->deleteproducts($id);  
-	header('location: ' . URL .$this->route.'/gestion');
-	}
-	
-	
-	public function edit($id) 
-	{
-        $this->view->title = 'Edit produit';
-		$this->view->user = $this->model->userSingleList($id);
-		$this->view->render($this->route.'/edit'); 
-	}
-	public function editSave($id)
-	{
-		$data = array();
-		$data['id']        = $id;
-		$data['mecicament']= $_POST['mecicament'];
-		$data['pre']       = $_POST['pre'];
-		$data['cmm']       = $_POST['cmm'];
-		$data['smin']      = $_POST['smin'];
-		$data['qts']       = $_POST['qts'];
-		$data['smax']      = $_POST['smax'];
-		$data['qte']       = $_POST['qte'];
-		$data['price']     = $_POST['price'];
-		//echo '<pre>';print_r ($data);echo '<pre>';
-		$this->model->editSave($data);
-		header('location: ' . URL .$this->route.'/gestion');
-	}
-	
-	
-	//***ordonnace rec ***//
-	function ordonnacerec($id) 
-	{	
-	    $this->view->title = 'ordonnacerec';
-		// $this->view->user =$this->model->userSingleList($id);
-		$this->view->render($this->route.'/ordonnacerec');
-	}
-	//***************************************************************************************************************************//
-	function creationPanier(){
-	   if (!isset($_SESSION['ordonnace'])){
-		  $_SESSION['ordonnace']=array();
-		  $_SESSION['ordonnace']['libelleProduit']    = array();
-		  $_SESSION['ordonnace']['doseparprise']      = array();
-		  $_SESSION['ordonnace']['nbrdrfoisparjours'] = array();
-		  $_SESSION['ordonnace']['nbrdejours']        = array();
-		  $_SESSION['ordonnace']['totaltrt']          = array();
-		  $_SESSION['ordonnace']['qteProduit']        = array();
-		  $_SESSION['ordonnace']['prixProduit']       = array();
-		  $_SESSION['ordonnace']['verrou']            = false;
-	   }
-	   return true;
-	}
-	function isVerrouille(){
-	   if (isset($_SESSION['ordonnace']) && $_SESSION['ordonnace']['verrou'])
-	   return true;
-	   else
-	   return false;
-	}
-	function ajouterArticle()
-	{   
-	    $libelleProduit=$_POST['libelleProduit'];
-		$doseparprise=$_POST['doseparprise'];
-		$nbrdrfoisparjours=$_POST['nbrdrfoisparjours'];
-		$nbrdejours=$_POST['nbrdejours'];
-		$qteProduit=$_POST['qteProduit'];
-		$prixProduit=$_POST['prixProduit'];
-		$totaltrt=$doseparprise*$nbrdrfoisparjours*$nbrdejours; 	
-		session_start();
-		   if ($this->creationPanier() && !$this->isVerrouille())
-		   {
-		   $positionProduit = array_search($libelleProduit,$_SESSION['ordonnace']['libelleProduit']);
-			  if ($positionProduit !== false)
-			  {
-				 header('location:'.URL.$this->route.'/ordonnacerec/'.$_POST['id']);
-			  }
-			  else
-			  {
-				 array_push( $_SESSION['ordonnace']['libelleProduit'],$libelleProduit);
-				 array_push( $_SESSION['ordonnace']['doseparprise'],$doseparprise);
-				 array_push( $_SESSION['ordonnace']['nbrdrfoisparjours'],$nbrdrfoisparjours);
-				 array_push( $_SESSION['ordonnace']['nbrdejours'],$nbrdejours);
-				 array_push( $_SESSION['ordonnace']['qteProduit'],$qteProduit);
-				 array_push( $_SESSION['ordonnace']['prixProduit'],$prixProduit);
-				 array_push( $_SESSION['ordonnace']['totaltrt'],$totaltrt);
-			  }			      
-		   }
-	header('location:'.URL.$this->route.'/ordonnacerec/'.$_POST['id']);	  
-	}
-	function modifierQTeArticle($libelleProduit,$qteProduit)
-	{
-		session_start();
-		if ($this->creationPanier() && !$this->isVerrouille())
-		{
-			if ($qteProduit > 0)
-			{
-				$positionProduit = array_search($libelleProduit,  $_SESSION['panier']['libelleProduit']);
-				if ($positionProduit !== false)
-				{
-				$_SESSION['panier']['qteProduit'][$positionProduit] = $qteProduit ;
-				}
-				header('location: ' . URL .$this->route.'/pan');  
-			}
-			else
-			$this->supprimerArticle($libelleProduit);
-		}	
-	}
-	function supprimerArticle($libelleProduit)
-	{
-	$url1 = explode('/',$_GET['url']);	
-		session_start();
-		if ($this->creationPanier() && !$this->isVerrouille())
-		{
-			$tmp=array();
-			$tmp['libelleProduit']    = array();
-			$tmp['doseparprise']      = array();
-			$tmp['nbrdrfoisparjours'] = array();
-			$tmp['nbrdejours']        = array();
-			$tmp['totaltrt']          = array();
-			$tmp['qteProduit']        = array();
-			$tmp['prixProduit']       = array();
-			$tmp['verrou'] = $_SESSION['ordonnace']['verrou'];
-			for($i = 0; $i < count($_SESSION['ordonnace']['libelleProduit']); $i++)
-			{
-				if ($_SESSION['ordonnace']['libelleProduit'][$i] !== $libelleProduit)
-				{
-				array_push( $tmp['libelleProduit'],$_SESSION['ordonnace']['libelleProduit'][$i]);
-				array_push( $tmp['doseparprise'],$_SESSION['ordonnace']['doseparprise'][$i]);
-				array_push( $tmp['nbrdrfoisparjours'],$_SESSION['ordonnace']['nbrdrfoisparjours'][$i]);
-				array_push( $tmp['nbrdejours'],$_SESSION['ordonnace']['nbrdejours'][$i]);
-				array_push( $tmp['totaltrt'],$_SESSION['ordonnace']['totaltrt'][$i]);
-				array_push( $tmp['qteProduit'],$_SESSION['ordonnace']['qteProduit'][$i]);
-				array_push( $tmp['prixProduit'],$_SESSION['ordonnace']['prixProduit'][$i]);
-				}
-			}
-			$_SESSION['ordonnace'] =  $tmp;
-			unset($tmp);
-			header('location: ' . URL .$this->route.'/ordonnacerec/'.$url1[3]); 
-		}
-	}	
-	function supprimePanier(){
-	 $url1 = explode('/',$_GET['url']);	
-	 session_start();unset($_SESSION['ordonnace']);
-     header('location: ' . URL .$this->route.'/ordonnacerec/'.$url1[2]); 
-	}
-	function compterArticles()
-	{
-		if (isset($_SESSION['ordonnace']))
-		return count($_SESSION['ordonnace']['libelleProduit']);
-		else
-		return 0;
-	}
-	function MontantGlobal(){
-		$total=0;
-		for($i = 0; $i < count($_SESSION['ordonnace']['libelleProduit']); $i++)
-		{
-			$total += $_SESSION['ordonnace']['qteProduit'][$i] * $_SESSION['ordonnace']['prixProduit'][$i];
-		}
-		return $total;
-	}
-	function miseajour(){
-		session_start();
-		for ($i = 0 ; $i < count($_POST['q']) ; $i++)
-		{
-			$this->modifierQTeArticle($_SESSION['panier']['libelleProduit'][$i],$_POST['q'][$i]);
-		}    
-	}	
-	
-	
+		
 }

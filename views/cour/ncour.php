@@ -22,13 +22,25 @@ echo "<h2>Courrier Arrivé</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
+
+$url1 = explode('/',$_GET['url']);
+if (isset($url1[2]) and $url1[2]!=='' ) 
+{
+$NAR = view::nbrtostring('courar','id',$url1[2],'NAR');
+} 
+else 
+{
+$NAR=view::lastid("courar");
+}
+$NARCH=view::lastid("courarch");
 $this->label($x,$y+250,'Date Arrivé');       $this->txts($x+100,$y+240,'DATEAR',0,date('d-m-Y'),'dateus');  
-$this->label($x,$y+250+30,'N° Arrivé');      $this->txt($x+100,$y+240+30,'NAR',0,'','dateus');
-$this->label($x,$y+250+60,'Date Courrier');  $this->txts($x+100,$y+240+60,'DATECR',0,date('d-m-Y'),'dateus');  
-$this->label($x,$y+250+90,'N° Courrier');    $this->txt($x+100,$y+240+90,'NCR',0,'','dateus');
-$this->label($x,$y+250+120,'Expediteur');    $this->txt($x+100,$y+240+120,'EXP',0,'','date');
-$this->label($x,$y+250+150,'Objet');         $this->txt($x+100,$y+240+150,'OBJ',0,'','date');
-$this->submit($x+100,$y+250+180,$data['butun']);
+$this->label($x,$y+250+30,'N° Arrivé');      $this->txtron($x+100,$y+240+30,'NAR',0,$NAR+1,'dateus');
+$this->label($x,$y+250+60,'Date Courrier');  $this->txts($x+100,$y+240+60,'DATECR',0,date('d-m-Y'),'dateus1');  
+$this->label($x,$y+250+90,'N° Courrier');    $this->txt($x+100,$y+240+90,'NCR',0,'0','dateus');
+$this->label($x,$y+250+120,'Expediteur');    $this->txt($x+100,$y+240+120,'EXP',0,'x','date');
+$this->label($x,$y+250+150,'Objet');         $this->txt($x+100,$y+240+150,'OBJ',0,'x','date');
+$this->label($x,$y+250+180,'N° Archive');    $this->txtron($x+100,$y+240+180,'NA',0,$NARCH+1,'date');
+$this->submit($x+100,$y+250+180+30,$data['butun']);
 $this->f1();
 view::sautligne(12);
 ob_end_flush();

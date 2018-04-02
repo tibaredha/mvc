@@ -1,15 +1,24 @@
+@import url(./tiba.css);
+
+:root{
+--color:black;
+
+}
+
+
 html{
-    background: black;
+    background:var(--color);
 }
 body {
     background: green;
     font: 14px 'trebuchet ms', arial, sans-serif;
 }
 
+
 /** Structure background-image:url(header.jpg) ;
         background-position:right top;
-    z-index: +1;	*/
-	
+    z-index: +1;	
+https://scrimba.com/p/pWqLHa/cg92LA6	*/
 /* header */
 
 #ANOMALIE

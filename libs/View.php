@@ -16,6 +16,18 @@ class View {
 			require 'views/footer.php';	
 		}
 	}
+	
+	function lastid($tbl) 
+	{
+	mysqlconnect();
+	$sql = " select id from $tbl order by  id desc limit 1";
+	$requete = @mysql_query($sql) or die($sql."<br>".mysql_error());
+	$row = mysql_fetch_array($requete); 
+	$id=$row['id'];
+	mysql_free_result($requete);
+	return $id;
+	}
+	
 	function generateRandomString($length = 10) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
@@ -160,7 +172,19 @@ class View {
 		}
 	}
 	}
-	
+	function combocour($x,$y,$name,$tb_name,$value,$choisir,$class,$ve,$va) 
+	{
+		mysqlconnect(); 
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option   value=\"".$value."\" selected=\"selected\">".$choisir."</option>"."\n";
+		$result = mysql_query("SELECT * FROM $tb_name where NRP='0' order by id" );
+		while($data =  mysql_fetch_array($result))
+		{
+		echo '<option value="'.$data[$ve].'">'.$data['NCR'].'_'.$this->dateUS2FR($data['DATECR']).'_'.$data[$va].'</option>';
+		}
+		echo '</select>'."\n"; echo "</div>";
+	}
 	function combords($x,$y,$name,$tb_name,$value,$choisir,$class,$ve,$va) 
 	{
 		mysqlconnect(); 
@@ -288,6 +312,8 @@ class View {
 	} 
 	return $resultat2='??????';
 	}
+	
+	
 	function WILAYA($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
 	{
 	mysqlconnect();
@@ -384,7 +410,7 @@ class View {
 	mysqlconnect();	 
 	echo "<select size=1 class=\"ARS\" name=\"".$name."\">"."\n";
 	echo"<option value=\"1\" selected=\"selected\">Designation Produit</option>"."\n";
-	$result = mysql_query("SELECT * FROM $tb_name order by mecicament" );
+	$result = mysql_query("SELECT * FROM $tb_name order by mecicament  " );//limit 0,100
 	while($data =  mysql_fetch_array($result))
 	{
 	echo '<option value="'.$data['id'].'">'.$data['mecicament'].$data['pre'].'</option>';
@@ -414,18 +440,17 @@ class View {
 	function f0($url,$method){echo "<form class=\"form\" action=\"".$url."\" method=\"".$method."\" name=\"form1\" id=\"form1\">";}
 	function label($x,$y,$l){echo "<div class=\"label\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	echo $l;echo "</div>";}
 	function txt($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required  />";echo "</div>";}
+	function txtron($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" readonly  />";echo "</div>";}
 	function ANOMALIE($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" id=\"ANOMALIE\"  />";echo "</div>";}
-	
 	function txtjss($x,$y,$name,$size,$value,$cal){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"  onblur=\"$cal\"   />";echo "</div>";}
 	function txtar($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input style=\"text-align:right;\"    type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required  />";echo "</div>";}
-	
-	
 	function range($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"number\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"   max=\"50\" min=\"0\" step=\"5\"      required  />";echo "</div>";}
-	
 	function txt0($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" />";echo "</div>";}
 	function date($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input id=\"datejour\"type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required  />";echo "</div>";}
 	function txtautofocus($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required autofocus />";echo "</div>";}
 	function txts($x,$y,$name,$size,$value,$param){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input style=\"text-align:center;\"   type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"  id=\"".$param."\"   required />";echo "</div>";}
+	
+	
 	function hide($x,$y,$name,$size,$value){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	  echo " <input type=\"hidden\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" />";echo "</div>";}
 	function sautligne($x){for ($i=1; $i<=$x; $i++){echo "<br />";}}
 	function submit($x,$y,$value){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 echo " <input type=\"submit\" name=\"VALIDER\" id=\"VALIDER\" style=\"color: red\" value=\" ".$value."\" />";echo "</div>";}
@@ -435,10 +460,10 @@ class View {
 	function photosurl($x,$y,$nom){echo "<div style=\"position:absolute;left:".$x."px;top:".$y."px;\">";echo "<p><input type=\"button\" value=\"zoom (&ndash;)\" onClick=\"changeTaille(-5)\"><input type=\"button\" value=\"zoom (+)\" onClick=\"changeTaille(5)\"></p>";echo "<p>&nbsp;&nbsp;<img id=\"image\" src = \"".$nom."\" style=\"height:250px; width:250px\" alt=\"Photos\" ></p>";	 echo "</div>";}
 	function lab1 ($ques) {echo'<tr bgcolor="yellow"> <td colspan=5 >'.$ques.'</td></tr>';}
 	function ques1 ($nom,$ques,$yes,$no){echo'<tr>'; echo'<td>'.$ques.'</td>';echo'<td style="text-align:center;"><input type="radio" name="'.$nom.'" value="1" '.$yes.' /></td>';echo'<td style="text-align:center;"><input type="radio" name="'.$nom.'" value="0" '.$no.' /></td>';echo'</tr>';}
-	function chekbox($x,$y,$nom){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 echo " <input type=\"checkbox\" name=\"$nom\"  />";echo "</div>";}
-	function chekboxed($x,$y,$nom){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 echo " <input type=\"checkbox\" name=\"$nom\" checked=\"checked\" />";echo "</div>";}
-	function radio($x,$y,$nom,$val){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 echo " <input type=\"radio\" name=\"$nom\" value=\"$val\"  />";echo "</div>";}
-	function radioed($x,$y,$nom,$val){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 echo " <input type=\"radio\" name=\"$nom\" value=\"$val\" checked=\"checked\"    />";echo "</div>";}
+	function chekbox($x,$y,$nom){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	  echo " <input id=\"CHECK\"    type=\"checkbox\" name=\"$nom\"  />";echo "</div>";}
+	function chekboxed($x,$y,$nom){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">"; echo " <input id=\"CHECK\"    type=\"checkbox\" name=\"$nom\" checked=\"checked\" />";echo "</div>";}
+	function radio($x,$y,$nom,$val){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"radio\" name=\"$nom\" value=\"$val\"  />";echo "</div>";}
+	function radioed($x,$y,$nom,$val){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"radio\" name=\"$nom\" value=\"$val\" checked=\"checked\"    />";echo "</div>";}
 
 	function f1() {echo "</form> ";}
 	function url($x,$y,$url,$value,$h){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">"; echo "<h".$h." >"."<a href=\"".$url."\">".$value."</a>"."</h".$h.">"; echo "</div>";}
@@ -794,13 +819,14 @@ class View {
 	
 	if ($btn=='cour') 
 	{
-	echo '<a href="'.URL.'cour/ncour">AR</a>';    echo '&nbsp;';
-	echo '<a href="'.URL.'cour/ncour1">DE</a>';    echo '&nbsp;';
-	// echo '<a href="'.URL.'rds/nrds/">Nouveau Rupture Produit</a>';    echo '&nbsp;';
+	echo '<a href="'.URL.'cour/">Courrier</a>'; echo '&nbsp;';
+	echo '<a href="'.URL.'cour/ncour/">Courrier Arrivé</a>'; echo '&nbsp;';
+	echo '<a href="'.URL.'cour/ncour1/">Courrier Depart</a>';echo '&nbsp;';
+	echo '<a href="'.URL.'cour/odm/">Ordre de mission</a>'; echo '&nbsp;';
 	// echo '<a href="'.URL.'cour/gestion">List Produit</a>'; echo '&nbsp;';
 	// echo '<a href="'.URL.'cour/nrtr/">Retrait Produit</a>';    echo '&nbsp;';
 	// echo '<a href="'.URL.'cour/ordonnacerec/1">Ordonnance</a>'; echo '&nbsp;';   
-	// echo '<a href="'.URL.'cour/evaluation">Evaluation Rupture Produit</a>'; echo '&nbsp;';
+	echo '<a href="'.URL.'cour/evaluation">Evaluation Courrier </a>'; echo '&nbsp;';
 	}
 	
 	
@@ -1258,10 +1284,10 @@ class View {
 								"val6"=> '*'
 							  ),
 			"submitvalue" => 'Search_cour',
-			"cb1" => 'rds',"mb1" => 'ncour',       "tb1" => 'New_rds',      "vb1" => 'New_rds',   "icon1" => 'add.PNG',
-			"cb2" => 'rds',"mb2" => 'imp',        "tb2" => 'Print_rds',    "vb2" => 'Print_rds', "icon2" => 'print.PNG',
-			"cb3" => 'rds',"mb3" => '',           "tb3" => 'Graphe_rds',   "vb3" => 'graphe_rds',"icon3" => 'graph.PNG',
-			"cb4" => 'rds',"mb4" => '',           "tb4" => 'rds',          "vb4" => 'rds',       "icon4" => 'search.PNG'
+			"cb1" => 'cour',"mb1" => 'ncour',      "tb1" => 'New_cour',      "vb1" => 'New_cour',   "icon1" => 'add.PNG',
+			"cb2" => 'cour',"mb2" => 'imp',        "tb2" => 'Print_cour',    "vb2" => 'Print_cour', "icon2" => 'print.PNG',
+			"cb3" => 'cour',"mb3" => '',           "tb3" => 'Graphe_cour',   "vb3" => 'graphe_cour',"icon3" => 'graph.PNG',
+			"cb4" => 'cour1',"mb4" => '',          "tb4" => 'cour1',         "vb4" => 'cour',       "icon4" => 'search.PNG'
 			);
 			$this->smunuf($data);		
 		}
@@ -1527,19 +1553,6 @@ echo "</table>\n";
 	}	
 }		
 //*************************************************************************************************************************************//
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	function CATEGORIE() 
 	{
 	echo "<div id=\"smenug\">";
@@ -1828,26 +1841,16 @@ echo "</table>\n";
 	$this->COMMUNE($data['x']+430,$data['y']+80,'COMMUNER','COMMUNER',$data['COMMUNER1'],$data['COMMUNER2']);$this->label($data['x']+720,$data['y']+90,'Citée');$this->ADRESSE($data['x']+800,$data['y']+80,'ADRESSE','ADRESSE','mvc','adr',$data['ADRESSE1'],$data['ADRESSE2']);
 	$this->label($data['x'],$data['y']+120,'ABO');$this->combovsex($data['x']+60,$data['y']+110,'GRABO',array($data['GRABO'],"A","B","AB","O"));
 	$this->label($data['x']+165,$data['y']+120,'RH');$this->combovsex($data['x']+190,$data['y']+110,'GRRH',array($data['GRRH'],"Positif","negatif"));
-	
-	
 	$this->label($data['x']+350,$data['y']+120,'NEC');
 	$this->txt($data['x']+430,$data['y']+110,'NEC',0,$data['NEC']);
-	
 	$this->label($data['x']+720,$data['y']+120,'Date');
 	$this->txt($data['x']+800,$data['y']+110,'DATEINS',0,$data['DATEINS']);
-	
-	
-	
-	
 	$this->label($data['x'],$data['y']+150,'Wilaya');
 	$this->WILAYA($data['x']+60,$data['y']+140,'WILAYASS','countryss','mvc','wil',$data['WILAYASS1'],$data['WILAYASS2']);
-	
 	$this->label($data['x']+350,$data['y']+150,'Commune');
 	$this->COMMUNE($data['x']+430,$data['y']+140,'COMMUNESS','COMMUNESS',$data['COMMUNESS1'],$data['COMMUNESS2']);
-	
 	$this->label($data['x']+720,$data['y']+150,'Ecole');
     $this->COMMUNE($data['x']+800,$data['y']+140,'ETASS','ETASS',$data['ETASS1'],$data['ETASS2']);
-
 	$this->photosurl($data['x']+1070,$data['y']-20,URL.'public/webcam/ss/'.$data['photos']);	
 	$this->submit($data['x']+785+15,$data['y']+180+20+30,$data['butun']);
 	$this->f1();
@@ -1867,13 +1870,7 @@ echo "</table>\n";
 	$this->label($data['x'],$data['y']+90,'Objet');         $this->txt($data['x']+100,$data['y']+90,'Objet',0,$data['Objet']);
 	$this->label($data['x'],$data['y']+120,'Destination');  $this->combov($data['x']+100,$data['y']+120,'Destination',$data['Destination']);
 	$this->label($data['x'],$data['y']+150,'Date');         $this->txt($data['x']+100,$data['y']+150,'Date',0,$data['Date']);
-	
-	
 	$this->label($data['x']+500,$data['y'],'catégorie');
-	
-	
-	
-	
 	$this->photosurl($data['x']+1070,$data['y']-20,URL.'public/webcam/ss/'.$data['photos']);	
 	$this->submit($data['x'],$data['y']+180+20+30,$data['butun']);
 	$this->reset($data['x']+250,$data['y']+180+20+30,$data['butun1']);
@@ -2451,17 +2448,6 @@ echo "</table>\n";
     echo '</select>'."\n"; 
 	echo "</div>";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	function NOMUTILISATEUR($x,$y,$name) 
 	{
@@ -3325,14 +3311,5 @@ $nb_pages_total = ceil($nb_total/$nb_affichage_par_page);
 	$barre .= $lien;
 
 	return $barre;
-}   
-
-
-
-
-
-
-
-	
-	
+}   	
 }

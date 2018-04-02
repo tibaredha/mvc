@@ -1,5 +1,5 @@
 <?php
-require 'config.php';
+require './libs/config.php';
 
 // require 'libs/Auth.php';
 // require 'libs/Database.php';

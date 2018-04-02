@@ -16,7 +16,7 @@ class Authentification_Model extends Model {
 			':login' => $data['login']	
 		));
 		$data1 = $sth->fetch();
-		$count =  $sth->rowCount();
+		$count = $sth->rowCount();
 	    
 		$uLen = strlen($data['login']);
 		$pLen = strlen($data['password']);
@@ -71,7 +71,7 @@ class Authentification_Model extends Model {
 			Session::set('lang',$data['lang']);
 			Session::set('login',$data['login']);
 			Session::set('loggedIn', true);
-			header('location: ../deces/');
+			header('location: ../cour/');
 			// header('location: ../Bordereau/NBordereau/');
 			//header('location: ../dnr/');
 		} else {

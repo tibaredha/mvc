@@ -54,7 +54,7 @@ $data = array(
 view::button($data['btn'],'');
 echo "<h2>Visualiser Structure Sanitaire : ".$data['NOM'].'_'.$data['PRENOM']."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
-View::photosurl(1170,230,URL.$data['photos']);
+View::photosurl(1100,230,URL.$data['photos']);
 $x=50;$y=10;
 $this->label($x,$y+250,'Date');              $this->txts($x+100,$y+240,'DATE',0,$data['DATE'],'dateus');  
 $this->label($x+350,$y+250,'Type');          $this->combostructure($x+450,$y+240,'STRUCTURE','structurebis',$this->user[0]['STRUCTURE'],$this->user[0]['STRUCTURE'],'class','id','structure'); //$this->combov1($x+450,$y+240,'STRUCTURE',$data['STRUCTURE']);

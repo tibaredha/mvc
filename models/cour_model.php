@@ -16,99 +16,131 @@ class cour_Model extends Model {
 	
 	public function userSearch($o, $q, $p, $l) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select("SELECT * FROM rds where $o like '$q%' order by date limit $p,$l  ");
+		return $this->db->select("SELECT * FROM courar where $o like '$q%' order by DATEAR limit $p,$l  ");
     }
 
     public function userSearch1($o, $q) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select("SELECT * FROM rds where $o like '$q%' order by date ");
+		return $this->db->select("SELECT * FROM courar where $o like '$q%' order by DATEAR");
     }
-	
-	 public function createrds($data) {
-			
-			$this->db->exec('SET NAMES utf8');
-			$this->db->insert('rds', array(
-				'DATE'       => $this->dateFR2US($data['DATE']),
-				'STRUCTURE'  => $data['STRUCTURE'],
-				'NATURE'     => $data['NATURE'],
-				'CMM'        => $data['CMM'],
-				'RES'      => $data['RES'],
-				'PRODUIT'     => $data['PRODUIT'] 
-			));
-			// echo '<pre>';print_r ($data);echo '<pre>';
-			return $last_id = $this->db->lastInsertId();
-		}
-
-	 public function creatertr($data) {
-			
-			$this->db->exec('SET NAMES utf8');
-			$this->db->insert('rtr', array(
-				'DATE'       => $this->dateFR2US($data['DATE']),
-				'NLOT'       => $data['NLOT'],
-				'DDP'        => $this->dateFR2US($data['DDP']),
-				'PRODUIT'    => $data['PRODUIT'],
-				'MOTIF'      => $data['MOTIF'],
-				'REF'        => $data['REF'] 
-			));
-			// echo '<pre>';print_r ($data);echo '<pre>';
-			return $last_id = $this->db->lastInsertId();
-		}
-	 public function Listrtr() {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM rtr order by DATE ');
-    }
-	public function deletertr($id) {       
-        $this->db->delete('rtr', "id = '$id'");
-    }
-	
-	
-	public function deleterds($id) {       
-        $this->db->delete('rds', "id = '$id'");
-    }
-	
-	 public function Listproduit() {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM pha order by mecicament ');
-    }
-	
-	public function create($data) {
-        $this->db->insert('pha', array(
-			'mecicament' => $data['mecicament'],
-            'pre' => $data['pre'],
-			'cmm' => $data['cmm'],
-			'smin' => $data['smin'],
-			'qts' => $data['qts'],
-			'smax' => $data['smax'],
-			'qte' => $data['qte'],
-            'price' => $data['price']
-        ));
-        echo '<pre>';print_r ($data);echo '<pre>';
-        return $last_id = $this->db->lastInsertId();
-    }
-	
-	 public function deleteproducts($id) {
-        
-        $this->db->delete('pha', "id = '$id'");
-    }
-	
 	 public function userSingleList($id) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM pha WHERE id = :id', array(':id' => $id));
+		return $this->db->select('SELECT * FROM courar WHERE id = :id', array(':id' => $id));
     }
-	
+	 public function createcour($data) {
+			
+			$this->db->exec('SET NAMES utf8');
+			$this->db->insert('courar', array(
+				'DATEAR'    => $this->dateFR2US($data['DATEAR']),
+				'NAR'       => $data['NAR'],
+				'DATECR'    => $this->dateFR2US($data['DATECR']),
+				'NCR'       => $data['NCR'],
+				'EXP'       => $data['EXP'],
+				'OBJ'       => $data['OBJ'],
+				'NA'        => $data['NA']
+			));
+			$last_id = $this->db->lastInsertId();
+			
+			//2eme inser dans archive 
+			$this->db->insert('courarch', array(
+				'DATEARCH'    => $this->dateFR2US($data['DATEAR']),
+				'IDCOUR'      => $last_id , 
+				'CATCOUR'     => '1'
+			));
+			// echo '<pre>';print_r ($data);echo '<pre>';
+			return $last_id ;
+		}
+		
 	public function editSave($data) {
         $this->db->exec('SET NAMES utf8');
 		$postData = array(
-            'mecicament' => $data['mecicament'],
-            'pre' => $data['pre'],
-			'cmm' => $data['cmm'],
-			'smin' => $data['smin'],
-			'qts' => $data['qts'],
-			'smax' => $data['smax'],
-			'qte' => $data['qte'],
-            'price' => $data['price']
+                'DATEAR'    => $this->dateFR2US($data['DATEAR']),
+				'NAR'       => $data['NAR'],
+				'DATECR'    => $this->dateFR2US($data['DATECR']),
+				'NCR'       => $data['NCR'],
+				'EXP'       => $data['EXP'],
+				'OBJ'       => $data['OBJ'],
+				'NA'        => $data['NA']
         );		
-		//echo '<pre>';print_r ($postData);echo '<pre>';
-        $this->db->update('pha', $postData, "id =" . $data['id'] . "");
-    }	
+		echo '<pre>';print_r ($postData);echo '<pre>';
+        $this->db->update('courar', $postData, "id =" . $data['id'] . "");
+    }		
+		
+      
+	  public function createcour1($data) {
+			
+			$this->db->exec('SET NAMES utf8');
+			$this->db->insert('courdep', array(
+				'DATEDP'    => $this->dateFR2US($data['DATEDP']),
+				'NDP'       => $data['NDP'],
+				'NP'        => $data['NP'],
+				'DEST'      => $data['DEST'],
+				'OBJ'       => $data['OBJ'],
+				'NA'        => $data['NA'],
+				'OBS'       => $data['OBS'],
+				'REF'       => $data['REF'],
+				'EXP'       => $data['EXP']
+			));
+			$last_id = $this->db->lastInsertId();
+			//2eme inser dans archive  
+			$this->db->insert('courarch', array(
+				'DATEARCH'    => $this->dateFR2US($data['DATEDP']),
+				'IDCOUR'      => $last_id , 
+				'CATCOUR'     => '2',
+				'EXP'         => $data['EXP']
+			));
+			$postData = array(
+            'DATERP' => $this->dateFR2US($data['DATEDP']),
+            'NRP' => $data['NDP']
+        );		
+        $this->db->update('courar', $postData, "id =" . $data['REF'] . "");
+			// echo '<pre>';print_r ($data);echo '<pre>';
+		return $last_id;
+		}
+		
+		public function diffcour1($data) {
+        $this->db->exec('SET NAMES utf8');
+		$postData = array(
+            'DATERP' => $this->dateFR2US($data['DATE']),
+			'DSP' => $data['DSP'],
+            'INSP' => $data['INSP'],
+			'SAS' => $data['SAS'],
+			'PRV' => $data['PRV'],
+			'DRH' => $data['DRH'],
+			'PLF' => $data['PLF']	
+        );		
+		echo '<pre>';print_r ($postData);echo '<pre>';
+        //1ere mise ajour dans cour arrivé  
+		$this->db->update('courar', $postData, "id =" . $data['id'] . "");
+		//2eme mise ajour dans archive  
+		$postData = array(
+			'DSP' => $data['DSP'],
+            'INSP' => $data['INSP'],
+			'SAS' => $data['SAS'],
+			'PRV' => $data['PRV'],
+			'DRH' => $data['DRH'],
+			'PLF' => $data['PLF']	
+        );		
+		$this->db->update('courarch', $postData," IDCOUR =".$data['id']."" );//CATCOUR=1 and
+    }
+	
+
+	
+	// public function Listrtr() {
+        // $this->db->exec('SET NAMES utf8');
+		// return $this->db->select('SELECT * FROM rtr order by DATE ');
+    // }
+	// public function deletertr($id) {       
+        // $this->db->delete('rtr', "id = '$id'");
+    // }
+	// public function deleterds($id) {       
+        // $this->db->delete('rds', "id = '$id'");
+    // }
+	
+	 // public function Listproduit() {
+        // $this->db->exec('SET NAMES utf8');
+		// return $this->db->select('SELECT * FROM pha order by mecicament ');
+    // }
+	
+	
 }

@@ -49,5 +49,5 @@ To let us know about the  students who need help in continuing their education, 
 // $tblName = "pha";
 // accdb($dbName,$tblName);//
 ?>
-
+<a href="<?php echo URL.'export.php';?>">export</a>
 
