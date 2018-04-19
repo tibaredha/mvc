@@ -60,10 +60,13 @@ $data = array(
 "butun"     => 'Update Bordereau Numerique', 
 "photos"    => 'public/images/photos/pda.jpg',
 "action"    => 'Bordereau/editSave/'.$this->user[0]['id'],
+
 "WILAYAN1"  => $this->user[0]['WILAYAN'] ,
 "WILAYAN2"  => View::nbrtostring('wil','IDWIL',$this->user[0]['WILAYAN'],'WILAYAS'),
 "COMMUNEN1" => $this->user[0]['COMMUNEN'] ,
 "COMMUNEN2" => View::nbrtostring('com','IDCOM',$this->user[0]['COMMUNEN'],'COMMUNE'),
+
+
 "nm1" => $this->user[0]['nm1'],"nf1" => $this->user[0]['nf1'],
 "nm2" => $this->user[0]['nm2'],"nf2" => $this->user[0]['nf2'],
 "mnm1"=> $this->user[0]['mnm1'],"mnf1"=> $this->user[0]['mnf1'],

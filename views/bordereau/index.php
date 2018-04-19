@@ -36,11 +36,17 @@ echo "</tr>" ;
 			echo "<tr bgcolor=\"".$bgcolor_donate."\"  onmouseover=\"this.style.backgroundColor='#9FF781';\"   onmouseout=\"this.style.backgroundColor='".$bgcolor_donate."';\"  >" ;
 			echo'<td align="center" >'.$value['annee'].'</td>';
 			echo'<td align="center" >'.$value['mois'].'</td>';
+			
+			
 			echo'<td align="center" >'.view::nbrtostring('com','IDCOM',$value['COMMUNEN'],'COMMUNE').'</td>';
 			echo'<td align="center" >'.intval($value['nm1']+$value['nf1']+$value['nm2']+$value['nf2']).'</td>';
 			echo'<td align="center" >'.intval($value['mnm1']+$value['mnf1']).'</td>';
 			echo'<td align="center" >'.intval($value['m1']+$value['m2']).'</td>';
 			echo'<td align="center" >'.intval($value['dm1']+$value['dm2']+$value['dm3']+$value['dm4']+$value['dm5']+$value['dm6']+$value['dm7']+$value['dm8']+$value['dm9']+$value['dm10']+$value['dm11']+$value['dm12']+$value['dm13']+$value['dm14']+$value['dm15']+$value['dm16']+$value['dm17']+$value['dm18']+$value['dm19']+$value['df1']+$value['df2']+$value['df3']+$value['df4']+$value['df5']+$value['df6']+$value['df7']+$value['df8']+$value['df9']+$value['df10']+$value['df11']+$value['df12']+$value['df13']+$value['df14']+$value['df15']+$value['df16']+$value['df17']+$value['df18']+$value['df19']).'</td>';
+			
+			
+			
+			
 			echo '<td align="center"><a title="Editer '.trim($value['id']).', '.trim($value['id']).'"   href="'.URL.$c.'/edit/'.$value['id'].'"><img src="'.URL.'public/images/icons/edit.PNG" width="16" height="16" border="0" alt=""/></a></td>';
 			echo '<td align="center"><a  class="delete"  title="Supprimer '.trim($value['id']).', '.trim($value['id']).'"   href="'.URL.$c.'/delete/'.$value['id'].'"><img src="'.URL.'public/images/icons/delete.PNG" width="16" height="16" border="0" alt=""/></a></td>';
 			echo '<td align="center"><a title="bnm '.trim($value['id']).', '.trim($value['id']).'  "   href="'.URL.'pdf/bnm/fbnm.php?id='.$value['id'].'"><img src="'.URL.'public/images/icons/print.PNG" width="16" height="16" border="0" alt=""/></a></td>';

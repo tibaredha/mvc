@@ -29,7 +29,7 @@ $pdf->SetTextColor(0,0,0);//text noire
 if ($_POST['type']=='1')
 {
 $pdf->AddPage('p','A4');
-$pdf->entete1($datejour1,$datejour2,'A/S Etat Mensuel Des Ruptures Des Produits Pharmaceutiques',$EPH1);
+$pdf->entete1($datejour1,$datejour2,'Objet : A/S Etat Mensuel Des Ruptures Des Produits Pharmaceutiques',$EPH1);
 $pdf->pied();
 
 $pdf->AddPage('p','A4');

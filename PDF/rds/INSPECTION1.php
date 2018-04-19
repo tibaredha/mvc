@@ -267,7 +267,7 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(20,$this->GetY()+2);$this->cell(185,5,'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2),0,1,'L',1,0);
 	$this->SetXY(05,$this->GetY()+2);$this->cell(200,5,'REF : Feuille De Route ',0,1,'L',1,0);
 	$this->SetXY(05,$this->GetY()+2);$this->cell(200,5,'PJ : '.'( {nb} )'.' Pages',0,1,'L',1,0);// $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-	$this->SetXY(25,$this->GetY()+18);$this->cell(100,5,"Suite a vos orientations,j'ai l'honneur Monsieur le directeur général de vous transmettre l'état mensuel ",0,0,'L',0,0);
+	$this->SetXY(25,$this->GetY()+18);$this->cell(100,5,"Suite à vos orientations,j'ai l'honneur Monsieur le directeur général de vous transmettre l'état mensuel ",0,0,'L',0,0);
 	$this->SetXY(10,$this->GetY()+8);$this->cell(100,5,"des ruptures des produits pharmaceutiques ".'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2).".",0,0,'L',0,0);
 	$this->SetXY(25,$this->GetY()+18);$this->cell(100,5,"Veuillez Agréer Monsieur Le Directeur Géneral ,L'éxpression De Ma Parfaite Considération.",0,0,'L',0,0);
 	}

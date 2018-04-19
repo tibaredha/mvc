@@ -101,7 +101,7 @@ if ($_POST['PTS']=='SEM')
 	$pdf->SetTextColor(0,0,0);//text noire
 	$pdf->SetFont('Times', '', 10);
 	$t1=$datejour1;$t2=$datejour2;
-$pdf->entetepage1('ACTIVITE DU PTS  :   du  '.$t1."  au  ".$t2);
+    $pdf->entetepage1('ACTIVITE DU PTS  :   du  '.$t1."  au  ".$t2);
 //I  Repartition des dons par tranche d'age 05
 	$M1=$pdf->AGESEXE1(0,4,$t1,$t2,'M');  $F1=$pdf->AGESEXE1(0,4,$t1,$t2,'F');
 	$M2=$pdf->AGESEXE1(5,9,$t1,$t2,'M');  $F2=$pdf->AGESEXE1(5,9,$t1,$t2,'F');
