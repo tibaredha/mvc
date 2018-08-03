@@ -483,7 +483,7 @@ class View {
     }
 	function combov1($x,$y,$name,$Jour)  
 	{
-	 echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";
+	echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";
 	echo "<select name=\"".$name."\" >";
 	foreach ($Jour as $cle => $value) 
 	{
@@ -1845,12 +1845,11 @@ echo "</table>\n";
 	$this->txt($data['x']+430,$data['y']+110,'NEC',0,$data['NEC']);
 	$this->label($data['x']+720,$data['y']+120,'Date');
 	$this->txt($data['x']+800,$data['y']+110,'DATEINS',0,$data['DATEINS']);
-	$this->label($data['x'],$data['y']+150,'Wilaya');
-	$this->WILAYA($data['x']+60,$data['y']+140,'WILAYASS','countryss','mvc','wil',$data['WILAYASS1'],$data['WILAYASS2']);
-	$this->label($data['x']+350,$data['y']+150,'Commune');
-	$this->COMMUNE($data['x']+430,$data['y']+140,'COMMUNESS','COMMUNESS',$data['COMMUNESS1'],$data['COMMUNESS2']);
-	$this->label($data['x']+720,$data['y']+150,'Ecole');
-    $this->COMMUNE($data['x']+800,$data['y']+140,'ETASS','ETASS',$data['ETASS1'],$data['ETASS2']);
+	
+	$this->label($data['x'],$data['y']+150,'Wilaya');     $this->WILAYA($data['x']+60,$data['y']+140,'WILAYASS','countryss','mvc','wil',$data['WILAYASS1'],$data['WILAYASS2']);
+	$this->label($data['x']+350,$data['y']+150,'Commune');$this->COMMUNE($data['x']+430,$data['y']+140,'COMMUNESS','COMMUNESS',$data['COMMUNESS1'],$data['COMMUNESS2']);
+	$this->label($data['x']+720,$data['y']+150,'Ecole');  $this->COMMUNE($data['x']+800,$data['y']+140,'ETASS','ETASS',$data['ETASS1'],$data['ETASS2']);
+   
 	$this->photosurl($data['x']+1070,$data['y']-20,URL.'public/webcam/ss/'.$data['photos']);	
 	$this->submit($data['x']+785+15,$data['y']+180+20+30,$data['butun']);
 	$this->f1();

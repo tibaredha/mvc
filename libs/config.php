@@ -629,7 +629,7 @@ echo "<select name=\"type\">";
 echo"<option value=\"1\">Global</option>"."\n";
 echo"<option value=\"2\">Par Etablissemnt</option>"."\n";
 echo"<option value=\"3\">Par Mois</option>"."\n";
-
+echo"<option value=\"4\">Nouveau</option>"."\n";
 echo "</select>";
 echo "</p> ";
 $x=200;$y=140;    

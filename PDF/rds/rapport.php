@@ -26,6 +26,20 @@ $pdf = new INSPECTION1 ( 'L', 'mm', 'A4' );$pdf->AliasNbPages();//importatant po
 $date=date("d-m-y");
 $pdf->SetFillColor(250);//fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
 $pdf->SetTextColor(0,0,0);//text noire
+
+if ($_POST['type']=='4')
+{
+//nouveau rapport 
+
+$pdf->AddPage('L','A4');
+$pdf->entete($datejour1,$datejour2,'Etat De Rupture Mensuel ',$EPH1);
+$pdf->produitn(1,"Medicaments",$datejour1,$datejour2,$EPH);
+
+
+}
+
+
+
 if ($_POST['type']=='1')
 {
 $pdf->AddPage('p','A4');

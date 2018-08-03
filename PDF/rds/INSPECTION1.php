@@ -349,6 +349,40 @@ class INSPECTION1 extends PDF_Invoice
 		$this->cell(66.5*3,5,"Total Produit en Rupture de stock : ".$tot." Produit(s)",1,0,'L',1,0);
 	}
 	
+	function produitn($NATURE,$nature,$datejour1,$datejour2,$EPH)
+    {
+		$this->mysqlconnect();
+		$query = "SELECT rds.PRODUIT,sum(rds.CMM) as sumcmm ,rds.NATURE,rds.DATE,rds.STRUCTURE,pha.mecicament from rds  INNER JOIN pha ON rds.PRODUIT = pha.id WHERE rds.NATURE =$NATURE and (rds.DATE BETWEEN '$datejour1' AND '$datejour2') and rds.STRUCTURE $EPH GROUP BY rds.PRODUIT order by pha.mecicament "; //   
+		$res=mysql_query($query);
+		$tot=mysql_num_rows($res);
+		
+		
+		$this->SetXY(5,70); $this->cell(66.5*3,10,"Produit Pharmaceutique : ".$nature,1,0,'C',1,0);
+		$this->SetXY(5,$this->GetY()+10);
+		$this->cell(130,5,"Dci, Forme, Dosage",1,0,'C',1,0);
+		$this->cell(25,5,"Conditionnement",1,0,'C',1,0);
+		$this->cell(25,5,"Quantite en stock",1,0,'C',1,0);
+		$this->cell(25,5,"autonomie en mois",1,0,'C',1,0);
+		$this->cell(25,5,"commande passe  a la pch  an date du ",1,0,'C',1,0);
+		$this->cell(25,5,"observation",1,0,'C',1,0);
+		$this->cell(25,5,"structure sanitaire  ",1,0,'C',1,0);
+		
+		
+		$this->SetXY(5,$this->GetY()+5);
+		$x=0;
+		while($row=mysql_fetch_object($res))
+		{
+			$this->SetFont('Arial','B',9);
+			// $this->cell(10,5,$x=$x+1,1,0,'C',0);
+			$this->cell(120,5,$this->nbrtostring('pha','id',$row->PRODUIT,'mecicament').' : '.$this->nbrtostring('pha','id',$row->PRODUIT,'pre'),1,0,'L',0);
+			// $this->cell(25,5,"PCH ET IPA",1,0,'C',0);
+			$this->cell(20.5,5,$row->sumcmm,1,0,'C',0);
+			// $this->cell(19+5,5,'Unité(s)',1,0,'C',0);
+			$this->SetXY(5,$this->GetY()+5);  
+		}
+		$this->SetXY(5,$this->GetY());
+		$this->cell(66.5*3,5,"Total Produit en Rupture de stock : ".$tot." Produit(s)",1,0,'L',1,0);
+	}
 	function produitetab($NATURE,$nature,$datejour1,$datejour2,$EPH,$PRODUIT) 
 	{
 	$this->mysqlconnect();
