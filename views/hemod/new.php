@@ -1,5 +1,5 @@
 <?php
-lang(Session::get('lang'));
+view::lang(Session::get('lang'),'d:\mvc\views\hemod\langan.php');  
 ob_start();
 View::fieldset("hemo5","<strong>Identification du malade</strong>"); 
 View::fieldset("hemo6","<strong>Statut Immuno_Hematologique</strong>"); 

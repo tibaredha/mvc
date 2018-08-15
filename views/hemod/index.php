@@ -7,7 +7,7 @@ function PopupImage(img) {
 </script>
 <?php 
 verifsession();ob_start();
-view::lang(Session::get('lang'),'C:\wamp\www\mvc\views\hemod\langan.php');  
+view::lang(1,'d:\mvc\views\hemod\langan.php');  
 view::button('hemod','');
 view::munu('hemod'); 
 $colspan=14;
@@ -36,7 +36,7 @@ echo "<th style=\"width:50px;\">".Cert."</th>" ;
 echo "</tr>" ;	
 		foreach($this->userListview as $key => $value)
 		{
-			$fichier1 = "C:/wamp/www/mvc/public/webcam/".$dphotos."/".$value['id'].'.jpg' ;
+			$fichier1 = "d:/mvc/public/webcam/".$dphotos."/".$value['id'].'.jpg' ;
 			if (file_exists($fichier1)){$fichier = URL."public/webcam/".$dphotos."/".$value['id'].'.jpg' ;}else {if ($value['SEX']=='M') {$fichier = URL."public/webcam/".$dphotos."/m.jpg" ;} else {$fichier = URL."public/webcam/".$dphotos."/f.jpg" ;}}
 			if ($value['SORTI']!=='') {$disabled='disabled';$bgcolor_donate= '#A4A4A4' ;}else {$disabled='';$bgcolor_donate= '#EDF7FF' ;} 
 			echo "<tr bgcolor=\"".$bgcolor_donate."\"  onmouseover=\"this.style.backgroundColor='#9FF781';\"   onmouseout=\"this.style.backgroundColor='".$bgcolor_donate."';\"  >" ;

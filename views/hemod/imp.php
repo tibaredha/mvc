@@ -8,7 +8,7 @@ function PopupImage(img) {
 </script>
 <?php 
 verifsession();ob_start();
-view::lang(Session::get('lang'),'C:\wamp\www\mvc\views\hemod\langan.php');  
+view::lang(Session::get('lang'),'d:\mvc\views\hemod\langan.php');  
 view::button('hemod','');
 view::munu('hemod'); 
 view::photosurl(1070,220,URL.'public/webcam/hemo/hemodialyse.jpg');	

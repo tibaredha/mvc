@@ -16,7 +16,7 @@ $(document).ready(function(){
 <?php 
 verifsession();	
 view::button('hemod','');
-lang(Session::get('lang'));
+view::lang(Session::get('lang'),'d:\mvc\views\hemod\langan.php');  
 ob_start();
 $rouutex='hemod';
 View::url(950,160,URL.'views/'.$rouutex.'/hemod.pdf','Conforme au Décret exécutif n° 15-11 du 14/01/2015',3);
