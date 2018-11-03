@@ -111,7 +111,7 @@ echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_".$this->us
 		<th style="width:70px;">CTRL</th>
 		<th style="width:70px;">ETAT</th>
 		
-		
+		<th style="width:50px;">PVC </th>
 		<th style="width:50px;">Update </th>
 		<th style="width:50px;">Delete</th>
 		</tr>
@@ -123,19 +123,12 @@ echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_".$this->us
 						<td align="center"><?php echo View::nbrtostring('wil','IDWIL',$value['WILAYA'],'WILAYAS');?></td>
 						<td align="center"><?php echo View::nbrtostring('com','IDCOM',$value['COMMUNE'],'COMMUNE');?></td>
 						<td align="center"><?php echo $value['Categorie'];?></td>
-						
-						
-						
 						<td align="center"><?php echo $value['Type'];?></td>
 						<td align="center"><?php echo $value['Serie_Type'];?></td>
 						<td align="center"><?php echo $value['Marque'];?></td>
-						
 						<td align="center"><?php echo $value['Immatri'];?></td>
 						<td align="center"><?php echo $value['Precedent'];?></td>
 					    <td align="center"><?php echo $value['Annee'];?></td>
-						
-						
-						
 						<td align="center"><?php echo $value['AUNASS'];?></td>
 						<td align="center"><?php echo $value['AUCTRL'];?></td>
 						
@@ -151,7 +144,7 @@ echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_".$this->us
 						 <?php 
 		                }
 		                ?>
-						
+						<td align="center"><a title="PV de conformité" href="<?php echo URL.'tcpdf/inspection/pvconfv.php?uc='.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/document-pdf.png';?>' width='16' height='16' border='0' alt=''/></a></td>
 						<td align="center"><a title="editer" href="<?php echo URL.'inspection/editauto/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deleteauto/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
 						</tr>

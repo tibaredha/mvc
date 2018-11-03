@@ -58,13 +58,13 @@ View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
 $this->label($x,$y+220,'Date');              $this->txts($x+100,$y+210,'Date',0,$data['Date'],'dateus');  
 
-$this->label($x,$y+250,'Wilaya aff');            $this->WILAYA($x+100,$y+240,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
-$this->label($x+350,$y+250,'Commune aff');       $this->COMMUNE($x+100+350,$y+240,'COMMUNE','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);
+$this->label($x,$y+250,'Wilaya aff');        $this->WILAYA($x+100,$y+240,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
+$this->label($x+350,$y+250,'Commune aff');   $this->COMMUNE($x+100+350,$y+240,'COMMUNE','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);
 $this->label($x+700,$y+250,'Categorie');     $this->combov1($x+800,$y+240,'Categorie',$data['Categorie']);
 
-$this->label($x,$y+280,'Type');               $this->txt0($x+100,$y+270,'Type',20,$data['Type'],'date');
-$this->label($x+350,$y+280,'Serie_Type');     $this->txt0($x+450,$y+270,'Serie_Type',20,$data['Serie_Type'],'date');
-$this->label($x+700,$y+280,'Marque');         $this->combov1($x+800,$y+270,'Marque',$data['Marque']);
+$this->label($x,$y+280,'Type');              $this->txt0($x+100,$y+270,'Type',20,$data['Type'],'date');
+$this->label($x+350,$y+280,'Serie_Type');    $this->txt0($x+450,$y+270,'Serie_Type',20,$data['Serie_Type'],'date');
+$this->label($x+700,$y+280,'Marque');        $this->combov1($x+800,$y+270,'Marque',$data['Marque']);
 
 $this->label($x,$y+310,'Immatriculation');   $this->txts($x+100,$y+300,'Immatri',0,$data['Immatri'],'immat');
 $this->label($x+350,$y+310,'Precedent num'); $this->txts($x+450,$y+300,'Precedent',0,$data['Precedent'],'immat1');

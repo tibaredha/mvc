@@ -19,8 +19,24 @@ class inspection extends Controller {
 	$this->view->Listview = $this->model->Listview() ;
 	$this->view->render($this->route.'/inspecteur');    
 	}
-	
-	
+	public function editinspecteur($id) 
+	{
+        $this->view->title = 'editinspecteur';
+		$this->view->user = $this->model->userSingleinspecteur($id);
+		$this->view->render($this->route.'/editinspecteur');
+	}
+		public function editinspecteurx ($id)
+	{
+		$data = array();//$id
+		$data['id']        = $id;
+		$data['DATE']         = $_POST['DATE'];
+		$data['REF']          = $_POST['REF'];
+		$data['PJ']         = $_POST['PJ'];
+		$data['Commanditaire']         = $_POST['Commanditaire'];
+		//echo '<pre>';print_r ($data);echo '<pre>';
+		$this->model->editinspecteurx($data);
+		header('location: ' . URL . $this->route.'/inspecteur/');
+	}
 	
    //***searchdeces***/
 	function search()
@@ -166,6 +182,7 @@ class inspection extends Controller {
 		$data['REF']       = $_POST['REF'];
 		$data['PJ']        = $_POST['PJ'];
 		$data['STRUCTURE'] = $_POST['STRUCTURE'];
+		$data['Commanditaire'] = $_POST['Commanditaire'];
 		$data['id']        = $id;
 		// echo '<pre>';print_r ($data);echo '<pre>';  
 		$last_id=$this->model->createinsp($data);

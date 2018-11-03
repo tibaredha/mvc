@@ -7,12 +7,12 @@ class inspection_Model extends Model {
 	
 	public function userSearch($o, $q, $p, $l) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by NOM,PRENOM limit $p,$l  ");
+		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by COMMUNE limit $p,$l  ");
     }
 
     public function userSearch1($o, $q) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by NOM ");
+		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by COMMUNE ");
     }
 	
 	 public function createstructure($data) {
@@ -241,8 +241,35 @@ class inspection_Model extends Model {
 	//***inspection ***//
 	public function Listview() {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM insp order by DATE desc ');    
+		return $this->db->select('SELECT * FROM insp order by DATE asc ');    
     }
+	
+	public function userSingleinspecteur($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM insp WHERE id = :id', array(':id' => $id));
+    }
+	
+	public function editinspecteurx($data) {
+		$this->db->exec('SET NAMES utf8');
+		$postData = array(		
+			'DATE'        => dateFR2US($data['DATE']),
+			'REF'        => $data['REF'],
+			'PJ'        => $data['PJ'],
+		    'Commanditaire'       => $data['Commanditaire']   
+        );
+      // echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('insp', $postData, "id =" . $data['id'] . "");
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -262,7 +289,9 @@ class inspection_Model extends Model {
             'REF'        => $data['REF'],
 			'PJ'         => $data['PJ'],
 			'ids'        => $data['id'],
-			'STRUCTURE'  => $data['STRUCTURE'] 
+			'STRUCTURE'  => $data['STRUCTURE'],'Commanditaire'  => $data['Commanditaire']
+
+			
         ));
         echo '<pre>';print_r ($data);echo '<pre>';
 		return $last_id = $this->db->lastInsertId();

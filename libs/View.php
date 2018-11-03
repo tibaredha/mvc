@@ -1400,7 +1400,7 @@ class View {
 	echo "</div>";
 	}
 //********************************************************************agenda*****************************************************************//
-	//agenda
+	
 
 function nbre ($month,$d,$year)
 {
@@ -1432,7 +1432,8 @@ function nbrtomois ($def_mois)
 	
 function agenda ($controleur)
 {
-$this->sautligne(5);$this->photosurl(1195,200,URL.'public/images/photos/PYRAMIDE.jpg');
+$this->sautligne(5);
+$this->photosurl(1195,200,URL.'public/images/photos/PYRAMIDE.jpg');
 $this->f0(URL.$controleur.'/createrdv/','post');
 $x=35;$y=220+90;
 $this->label($x,230,'Titre RDV');       $this->txt($x+100,220,'TIRDV',0,'*','date');

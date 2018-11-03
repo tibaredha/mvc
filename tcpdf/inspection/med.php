@@ -63,10 +63,10 @@ $pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,"Conformément à la réglementati
 $pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,"de votre local .",0,1,'L');
 $pdf->SetXY(40,$pdf->GetY()+5);$pdf->Cell(100,5,"Veuillez agréer, Madame, Monsieur, l'expression de nos salutations distinguées.",0,1,'L');
 //***//
-$pdf->SetXY(140,$pdf->GetY()+5);$pdf->Cell(50,5,'A Djelfa le : '.$id2,0,1,'L');
-$pdf->SetXY(140,$pdf->GetY());$pdf->Cell(50,5," le Directeur  ",0,1,'C');
+$pdf->SetXY(140,$pdf->GetY()+5);$pdf->Cell(50,5,'A Djelfa le : ',0,1,'L');//.$id2
+$pdf->SetXY(140,$pdf->GetY()+5);$pdf->Cell(50,5," le Directeur  ",0,1,'C');
 $pdf->SetXY(10,$pdf->GetY()-15);$pdf->Cell(100,5,'CT :',0,1,'L');
 $pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,'- Archives',0,1,'L');
-$pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,'- Section ordinale régionale blida ',0,1,'L');
+// $pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,'- Section ordinale régionale blida ',0,1,'L');
 $pdf->Output($dateinsp.'_'.$nom.'_'.$prenom.'.PDF','I');
 ?>

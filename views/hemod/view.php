@@ -86,7 +86,7 @@ view::button('hemow',$this->user[0]['id']);
 		<td valign=top>		
 		
 	    
-	    <script type="text/javascript" src="<?php echo URL; ?>public/webcam/webcam.js"></script
+	    <script type="text/javascript" src="<?php echo URL; ?>public/webcam/webcam.js"></script>
 		<!-- First, include the JPEGCam JavaScript Library -->
 		<script language="JavaScript">
 		webcam.set_api_url( "<?php echo URL; ?>public/webcam/hemo/test.php?uc=<?php echo $this->user[0]['id'];?>" );
@@ -109,7 +109,7 @@ view::button('hemow',$this->user[0]['id']);
 		<input type=button value="Take Snapshot" onClick="take_snapshot()">
 	   </form>
 			<!-- Code to handle the server response (see test.php) -->
-	<script language="JavaScript">
+	   <script language="JavaScript">
 		webcam.set_hook( 'onComplete', 'my_completion_handler' );   //2 option my_completion_handler  my_callback_function
 		
 		function take_snapshot() {

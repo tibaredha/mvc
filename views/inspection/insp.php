@@ -26,9 +26,13 @@ echo "<h2>Inspection Structure Sanitaire : ".strtoupper($this->user[0]['NOM'])."
 $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
-$this->label($x,$y+220,'DATE :');              $this->txts($x+100,$y+210,'DATE',1000,$data['DATE'],'dateus');
-$this->label($x,$y+250,'REF :');               $this->txt($x+100,$y+240,'REF',1000,$data['REF'],'dateus');
-$this->label($x,$y+280,'PJ :');                $this->txt($x+100,$y+270,'PJ',1000,$data['PJ'],'dateus');	
+$this->label($x,$y+220,'DATE :');              $this->txts($x+120,$y+210,'DATE',1000,$data['DATE'],'dateus');
+$this->label($x,$y+250,'REF :');               $this->txt($x+120,$y+240,'REF',1000,$data['REF'],'dateus');
+$this->label($x,$y+280,'PJ :');                $this->txt($x+120,$y+270,'PJ',1000,$data['PJ'],'dateus');	
+
+$Jour=array("ISPG","WALI","DSP");
+$this->label($x,$y+310,'Commanditaire :');     $this->combov($x+120,$y+300,"Commanditaire",$Jour);
+
 View::hide(215,670,'STRUCTURE',0,$this->user[0]['STRUCTURE']);
 $this->submit($x+800,$y+340,$data['butun']);
 $this->f1();

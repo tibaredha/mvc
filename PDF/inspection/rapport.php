@@ -29,7 +29,7 @@ if ($_POST['EPH']=='20') {$EPH1='cabinet de soins ';$EPH="=20";}
 if ($_POST['EPH']=='21') {$EPH1='transport sanitairee ';$EPH="=21";}
 if ($_POST['EPH']=='22') {$EPH1='UDS';$EPH="=22";}
 if ($_POST['EPH']=='23') {$EPH1='OPTICIEN';$EPH="=23";}
-
+if ($_POST['EPH']=='25') {$EPH1='kinesitherapeute';$EPH="=25";}
 require('INSPECTION1.php');
 $pdf = new INSPECTION1 ( 'L', 'mm', 'A4' );$pdf->AliasNbPages();//importatant pour metre en fonction  le totale nombre de page avec "/{nb}" 
 $date=date("d-m-y");
@@ -37,24 +37,24 @@ $pdf->SetFillColor(230);//fond gris il faut ajouter au cell un autre parametre p
 $pdf->SetTextColor(0,0,0);//text noire
 $pdf->SetFont('Times', 'B', 10);
 
-$pdf->AddPage('p','A4');
-$pdf->entete($datejour1,$datejour2,'Repartition Geographique : ',$EPH1);
-$pdf->djelfa($pdf->datasig($datejour1,$datejour2,$EPH,33),20,128,3.7,'commune');//commune//dairas 
+// $pdf->AddPage('p','A4');
+// $pdf->entete($datejour1,$datejour2,'Repartition Geographique : ',$EPH1);
+// $pdf->djelfa($pdf->datasig($datejour1,$datejour2,$EPH,33),20,128,3.7,'commune');//commune//dairas 
 
 
-$pdf->AddPage('p','A4');
-$pdf->entete($datejour1,$datejour2,'Repartition par communes de residence : ',$EPH1);
-$pdf->tblparcommune('structure',$datejour1,$datejour2,$EPH) ;
+// $pdf->AddPage('p','A4');
+// $pdf->entete($datejour1,$datejour2,'Repartition par communes de residence : ',$EPH1);
+// $pdf->tblparcommune('structure',$datejour1,$datejour2,$EPH) ;
 
 
-$pdf->AddPage('p','A4');
-$pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
-$pdf->listenominative($EPH);
+// $pdf->AddPage('p','A4');
+// $pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
+// $pdf->listenominative($EPH);
 
 
-$pdf->AddPage('p','A4');
-$pdf->entete($datejour1,$datejour2,'Repartition par commune des anomalies : ',$EPH1);
-$pdf->anomalies($EPH);
+// $pdf->AddPage('p','A4');
+// $pdf->entete($datejour1,$datejour2,'Repartition par commune des anomalies : ',$EPH1);
+// $pdf->anomalies($EPH);
 
 //**********************************************en fonction de la structure *****************************************************************//
 if ($_POST['EPH']=='12') {//pharmacie 
@@ -82,20 +82,30 @@ $pdf->transport($EPH);
 $pdf->AddPage('L','A4');
 $pdf->entetel($datejour1,$datejour2,"Repartition par date d'inspection/anomalie constatée  : ",$EPH1);
 $pdf->repartanomx($datejour1,$datejour2,$EPH);
+}
+// if ($_POST['EPH']=='0') {//structure 
+// $pdf->AddPage('L','A4');
+// $pdf->entetel($datejour1,$datejour2,'Repartition par commune  : ',$EPH1);
+// $pdf->structure($EPH1);
+// }
+// if ($_POST['EPH']=='0') {//structure 
+// $pdf->AddPage('L','A4');
+// $pdf->entetel($datejour1,$datejour2,'Repartition par structure : ',$EPH1);
+// $pdf->repartanomx($datejour1,$datejour2,$EPH);
+// }
 
-}
+// $pdf->SetAutoPageBreak(true ,2);
 if ($_POST['EPH']=='0') {//structure 
 $pdf->AddPage('L','A4');
-$pdf->entetel($datejour1,$datejour2,'Repartition par laboratoire : ',$EPH1);
-$pdf->structure($EPH1);
-// $pdf->pied();
-}
-if ($_POST['EPH']=='0') {//structure 
+$pdf->enteteinspection($datejour1,$datejour2,'SYNTHESE DU BILAN DES INSPECTIONS EFFECTUÉES (ETABLISSEMENTS PUBLICS)',$EPH1);
+$pdf->bilaninspection($datejour1,$datejour2,$EPH,1);
+
+
 $pdf->AddPage('L','A4');
-$pdf->entetel($datejour1,$datejour2,'Repartition par laboratoire : ',$EPH1);
-$pdf->repartanomx($datejour1,$datejour2,$EPH);
-// $pdf->pied();
+$pdf->enteteinspection($datejour1,$datejour2,'SYNTHESE DU BILAN DES INSPECTIONS EFFECTUÉES (ETABLISSEMENTS PRIVES)',$EPH1);
+$pdf->bilaninspection($datejour1,$datejour2,$EPH,2);
 }
+
 //**********************************************en fonction de la structure *****************************************************************//	
 $pdf->pied();
 $pdf->Output();

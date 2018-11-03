@@ -47,10 +47,8 @@ view::graphemoisdeces(30,200,'structures inspectées Par Mois Arret Au  : ','','
 		<tr>
 		<th style="width:70px;">Date Inspection</th>
 		<th style="width:300px;">Nom_Prenom</th>
-		<th style="width:10px;">Ajout   Anomalie</th>
-		<th style="width:10px;">Rapport Inspection</th>
-		<th style="width:10px;">Mesure Prise</th>
-		<th style="width:10px;">Imp Mesure Prise</th>
+		<th style="width:30px;">Commanditaire</th>
+
 		<th style="width:10px;">Update Inspection</th>
 		<th style="width:10px;">Delete Inspection</th>
 		</tr>
@@ -59,20 +57,21 @@ foreach($this->Listview as $key => $value){ ?>
 						<tr bgcolor='WHITE' onmouseover="this.style.backgroundColor='#9FF781';" onmouseout="this.style.backgroundColor='WHITE';" >
 						<td align="center"><?php echo view::dateUS2FR($value['DATE']);?></td>
 						<td align="left"><?php echo view::nbrtostring('structure','id',$value['ids'],'NOM').'_'.view::nbrtostring('structure','id',$value['ids'],'PRENOM') ;?></td>
+						<td align="center"><?php echo $value['Commanditaire'];?></td>
 						<?php		
-						 echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Ajout anomalie\" href=\"".URL.'inspection/anomalie/'.$value['id'].'/'.$value['ids']."\" ><img  src=\"".URL.'public/images/icons/anom.PNG'."\"  width='35' height='16' border='0' alt='' ></a> [ ".view::nbranoinsp($value['id'])." ]</td>" ;		
-						 echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"rapport inspection\" href=\"".URL.'tcpdf/inspection/rapportinsp.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.PNG'."\"  width='16' height='16' border='0' alt='' ></a> </td>" ;		
+						 // echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Ajout anomalie\" href=\"".URL.'inspection/anomalie/'.$value['id'].'/'.$value['ids']."\" ><img  src=\"".URL.'public/images/icons/anom.PNG'."\"  width='35' height='16' border='0' alt='' ></a> [ ".view::nbranoinsp($value['id'])." ]</td>" ;		
+						 // echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"rapport inspection\" href=\"".URL.'tcpdf/inspection/rapportinsp.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.PNG'."\"  width='16' height='16' border='0' alt='' ></a> </td>" ;		
 						?>
-						<td align="center"><a title="Mesure Prise" href="<?php echo URL.'inspection/MesurePrise/'.$value['id'].'/'.$value['ids'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
+						
 						<?php		 
-						  if ($value['MP']==0) echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Ras\" href=\"".URL.'tcpdf/inspection/***.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='26' height='16' border='0' alt='' ></a> </td>" ;		
-						  if ($value['MP']==2) echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"questionnaire\" href=\"".URL.'tcpdf/inspection/qes.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='26' height='16' border='0' alt='' ></a> </td>" ;		
-						  if ($value['MP']==1) echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"convocation\" href=\"".URL.'tcpdf/inspection/cvc.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='26' height='16' border='0' alt='' ></a> </td>" ;		
-						  if ($value['MP']==3) echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Mise en Demeure\" href=\"".URL.'tcpdf/inspection/med.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='26' height='16' border='0' alt='' ></a> </td>" ;		
-                          if ($value['MP']==4) echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Rappel à l'ordre\" href=\"".URL.'tcpdf/inspection/rao.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='26' height='16' border='0' alt='' ></a> </td>" ;		
+						  // if ($value['MP']==0) echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Ras\" href=\"".URL.'tcpdf/inspection/***.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='26' height='16' border='0' alt='' ></a> </td>" ;		
+						  // if ($value['MP']==2) echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"questionnaire\" href=\"".URL.'tcpdf/inspection/qes.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='26' height='16' border='0' alt='' ></a> </td>" ;		
+						  // if ($value['MP']==1) echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"convocation\" href=\"".URL.'tcpdf/inspection/cvc.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='26' height='16' border='0' alt='' ></a> </td>" ;		
+						  // if ($value['MP']==3) echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Mise en Demeure\" href=\"".URL.'tcpdf/inspection/med.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='26' height='16' border='0' alt='' ></a> </td>" ;		
+                          // if ($value['MP']==4) echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Rappel à l'ordre\" href=\"".URL.'tcpdf/inspection/rao.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='26' height='16' border='0' alt='' ></a> </td>" ;		
 						?>
-						<td align="center"><a title="editer inspection" href="<?php echo URL.'inspection/editInspection/'.$value['id'].'/'.$value['ids'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
-						<td align="center"><a class="delete inspection" title="supprimer" href="<?php echo URL.'inspection/deleteInspection/'.$value['id'].'/'.$value['ids'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
+						<td align="center"><a title="editer inspection" href="<?php echo URL.'inspection/editinspecteur/'.$value['id'].'/'.$value['ids'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
+						<td align="center"><a class="delete inspection" title="supprimer" href="<?php echo URL.'inspection/deleteinspecteur/'.$value['id'].'/'.$value['ids'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
 						</tr>
 				<?php 
 				}

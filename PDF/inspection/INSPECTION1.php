@@ -127,8 +127,8 @@ class INSPECTION1 extends PDF_Invoice
 	}
 	function pied()
 	{
-	$this->SetXY(100,$this->GetY()+5);$this->cell(90,10,"LE PRATICIEN INSPECTEUR RESPONSABLE ",0,0,'L',0);
-    $this->SetXY(100,$this->GetY()+5);$this->cell(90,10,"DR R.TIBA ",0,0,'L',0);	
+	$this->SetXY(100,$this->GetY()+5);$this->cell(90,10,"Le Praticien Inspecteur  ",0,0,'L',0);
+    $this->SetXY(100,$this->GetY()+5);$this->cell(90,10,"Dr R.TIBA ",0,0,'L',0);	
 	}
 	
 	function listenominative($EPH)
@@ -428,8 +428,9 @@ class INSPECTION1 extends PDF_Invoice
 				$this->SetXY(5,$this->GetY()+4); 
 			}
 
-	$this->SetXY(5,$this->GetY());$this->cell(10,5,"idcom",1,0,'C',1,0);
-	$this->cell(30,5,"Commune",1,0,'C',1,0);//21
+	$this->SetXY(5,$this->GetY());
+	
+	$this->cell(40,5,"Total wilaya ",1,0,'C',1,0);//21
 	$this->cell(11,5,$this->strucomm1('=3'),1,0,'C',1,0);//21
 	$this->cell(11,5,$this->strucomm1('=4'),1,0,'C',1,0);//21
 	$this->cell(11,5,$this->strucomm1('=5'),1,0,'C',1,0);//21
@@ -530,9 +531,80 @@ class INSPECTION1 extends PDF_Invoice
 	}
 	//************************************************************//	
 	
+	function enteteinspection($datejour1,$datejour2,$titre,$EPH1)
+	{
+	$this->SetDisplayMode('fullpage','single');
+    $this->SetFont('Arial','B',9);
+	$this->SetXY(05,5); $this->cell(290,5,"REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE",0,0,'C',0,0);
+    $this->SetXY(05,10);$this->cell(290,5,"MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE",0,0,'C',0,0);
+    $this->SetXY(05,15);$this->cell(290,5,"DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA",0,0,'C',0,0);
+    $this->SetXY(05,20);$this->cell(100,5,'INSPECTION SANTE PUBLIQUE',0,0,'L',0,0);
+	$this->SetXY(250,20);$this->cell(60,5,"LE : ".date ('d-m-Y'),0,0,'C',0,0);
+    $this->SetXY(05,25);$this->cell(100,5,"N               / ".date ('Y'),0,0,'L',0,0);
+	$this->SetXY(05,25);$this->cell(290,5,$titre,0,0,'C',0,0);
+    $this->SetXY(05,29);$this->cell(290,5,'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
+	}
+	function bilaninspection($datejour1,$datejour2,$EPH,$nat)
+	{
+	$h=35;
+	$this->SetFont( 'Arial', '', 9 );
+	$this->SetFillColor(250);
+	$this->SetXY(05,$h);
+	$this->cell(5,10,"N°",1,0,'C',1,0);
+	$this->cell(90,10,"Type établissement et désignation",1,0,'C',1,0);
+	$this->cell(15,10,"Période",1,0,'C',1,0);
+	$this->cell(130,10,"Principales insuffissances et anomalies",1,0,'C',1,0);
+	$this->cell(25,10,"Mesures Prises",1,0,'C',1,0);
+	$this->cell(25,10,"Observation",1,0,'C',1,0);
+	$this->SetXY(05,$h+15); 
+	$this->SetFillColor(255);
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT DATE,ids,REF,PJ,MP,STRUCTURE,Commanditaire FROM insp where (DATE BETWEEN '$datejour1' AND '$datejour2') and STRUCTURE $EPH ORDER BY DATE";// where ids=$ids    where date betwen  
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	$x=0;
+	while($row=mysql_fetch_object($resultat))
+	{
+	$nature=$this->nbrtostring('structure','id',$row->ids,'NATURE');
+	if($nature==$nat){
+	    $this->SetFont( 'Arial', '', 7 );
+		mysql_query("SET NAMES 'UTF8' ");
+		$query1 = "SELECT * FROM inspection where DATE='$row->DATE' and ids ='$row->ids'  ORDER BY DATE"; 
+		$resultat1=mysql_query($query1);
+		$totalmbr11=mysql_num_rows($resultat1);
+		$this->cell(5,(5*$totalmbr11)+5,$x=$x+1,1,0,'C',1,0);
+		$this->SetFillColor(255, 255, 0);$this->cell(50,(5*$totalmbr11)+5,$this->nbrtostring('structurebis','id',$this->nbrtostring('structure','id',$row->ids,'STRUCTURE'),'structure'),1,0,'L',1,0);$this->SetFillColor(255 ,255, 255);
+		$this->SetFillColor(0 ,250, 154);$this->cell(40,(5*$totalmbr11)+5,$this->nbrtostring('structure','id',$row->ids,'NOM').'_'.$this->nbrtostring('structure','id',$row->ids,'PRENOM'),1,0,'L',1,0);$this->SetFillColor(255 ,255, 255);//$this->SetFillColor(255 ,255, 0);
+		$this->SetFillColor(240, 248, 255);$this->cell(15,(5*$totalmbr11)+5,$this->dateUS2FR($row->DATE),1,0,'C',1,0);$this->SetFillColor(255 ,255, 255);
+		$this->SetFont( 'Arial', '', 8 ); 
+		$this->SetXY(115,$this->GetY());
+		    if ($totalmbr11!==0) 
+			{
+				while($row1=mysql_fetch_object($resultat1))
+				{
+				$this->cell(130,5,$row1->ANOMALIE,1,0,'L',0);
+				$this->SetXY(115,$this->GetY()+5);
+				}
+				$this->SetXY(115+130,$this->GetY()-(5*$totalmbr11));$this->SetFillColor(0 ,250, 154);$this->cell(25,(5*$totalmbr11),$this->mesureprise($row->MP),1,0,'C',1,0);$this->SetFillColor(255 ,255, 255);$this->cell(25,(5*$totalmbr11),$row->Commanditaire,1,0,'C',1,0);		
+			    $this->SetFillColor(240, 248, 255);$this->SetXY(115,$this->GetY()+(5*$totalmbr11));$this->cell(180,05,"Total : ".$totalmbr11." anomalie(s)",1,1,1,'C',0);$this->SetFillColor(255, 255, 255);	
+			} 
+			else 
+			{
+				$this->cell(130,5,"Aucune anomalie constatée",1,0,'L',0);
+				$this->SetXY(115+130,$this->GetY()-(5*$totalmbr11));$this->SetFillColor(0 ,250, 154);$this->cell(25,5,$this->mesureprise($row->MP),1,0,'C',1,0);$this->SetFillColor(255 ,255, 255);$this->cell(25,5,$row->Commanditaire,1,0,'C',1,0);		
+			    //$this->SetFillColor(240, 248, 255);$this->SetXY(115,$this->GetY()+(5*$totalmbr11)+5);$this->cell(180,05,"total : ".$totalmbr11." anomalie(s)",1,1,1,'C',0);	$this->SetFillColor(255, 255, 255);
+			}
+	$this->SetXY(5,$this->GetY()+10);	
+	} 
+	}
+	$this->SetFillColor(250);  
+	$this->SetXY(5,$this->GetY());$this->cell(40,05,"TOTAL",1,0,1,'C',0);	  
+	$this->SetXY(45,$this->GetY());$this->cell(250,05,$x." Inspection(s)",1,1,1,'C',0);
+	}
 	
 	
-	
+	  
 	
 	
 	

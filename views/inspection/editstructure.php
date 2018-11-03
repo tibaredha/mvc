@@ -41,7 +41,9 @@ $data = array(
 "Mobile"    => $this->user[0]['Mobile'],
 "Fixe"      => $this->user[0]['Fixe'],
 "Email"     => $this->user[0]['Email'],
-
+"Consultation" => '',
+"salledesoins" => '',
+"salledattente"=> '',
 "REALISATION"  => view::dateUS2FR($this->user[0]['REALISATION']),
 "NREALISATION" => $this->user[0]['NREALISATION'],
 "OUVERTURE"    => view::dateUS2FR($this->user[0]['OUVERTURE']),
@@ -71,17 +73,20 @@ $this->label($x+700,$y+340,'E-mail');        $this->txt($x+100+350+350,$y+330,'E
 
 
 
-// $this->label($x,$y+340+30,'Date CDO');            $this->txt($x+100,$y+330+30,'Mobile',0,$data['Mobile'],'date');
-// $this->label($x+350,$y+340+30,'Fixe');          $this->txt($x+450,$y+330+30,'Fixe',0,$data['Fixe'],'date');
-// $this->label($x+700,$y+340+30,'E-mail');        $this->txt($x+100+350+350,$y+330+30,'E-mail',0,$data['E-mail'],'date');
 
 
 
-$x=50;$y=40;
+$x=50;$y=8;
 $this->label($x,$y+370,'__________________________________________________________________________________________________________________');
 $this->label($x,$y+400,'Propriétaire');           $this->txt($x+100,$y+390,'PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
 $this->label($x+350,$y+400,'Début contrat');      $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');
 $this->label($x+700,$y+400,'Fin contrat');        $this->txts($x+100+350+350,$y+390,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus2');
+
+$this->label($x,$y+430,'Consultation');           $this->txt($x+100,$y+390+30,'Consultation',0,$data['Consultation'],'');
+$this->label($x+350,$y+430,'Salle de soins ');    $this->txt($x+450,$y+390+30,'salledesoins',0,$data['salledesoins'],'');
+$this->label($x+700,$y+430,"Salle d'attente");    $this->txt($x+100+350+350,$y+390+30,'salledattente',0,$data['salledattente'],'');
+
+
 $x=50;$y=40;
 $this->label($x,$y+420,'__________________________________________________________________________________________________________________');
 $this->label($x,$y+430+20,'Realisation');           $this->txts($x+100,$y+390+30+20,'REALISATION',0,$data['REALISATION'],'dateus3');

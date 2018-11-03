@@ -42,10 +42,10 @@ echo "<th style=\"width:270px;\">Responssable</th>" ;
 echo "<th style=\"width:200px;\">Proprietaire</th>" ;
 echo "<th style=\"width:110px;\">Contrat Du </th>" ;
 echo "<th style=\"width:200px;\">Residence</th>" ;
-echo "<th style=\"width:400px;\">Structure</th>" ;
+echo "<th style=\"width:200px;\">Structure</th>" ;
 echo "<th style=\"width:70px;\">Pers</th>" ;
 echo "<th style=\"width:70px;\">Vehi</th>" ;
-
+echo "<th style=\"width:70px;\">PV</th>" ;
 echo "<th style=\"width:70px;\">Insp</th>" ;
 echo "<th style=\"width:10px;\">Déc1</th>" ;
 echo "<th style=\"width:10px;\">Déc2</th>" ;
@@ -110,9 +110,10 @@ echo "</tr>" ;
 		}
 		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer\"    href=\"".URL.'inspection/pers/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrpers($value['id'])." ] </td>" ;
 		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer\"    href=\"".URL.'inspection/auto/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/auto.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrveh($value['id'])." ] </td>" ;
-		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Insp\"      href=\"".URL.'inspection/insp/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['id'])." ]</td>" ;
-       // echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Inspection\"     href=\"".URL.'inspection/inspection/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['id'])." ]</td>" ;
+		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 
+		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Insp\"      href=\"".URL.'inspection/insp/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['id'])." ]</td>" ;
+       
 		switch ($value['STRUCTURE']) {
 		case 21://transport
 			echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/print.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
@@ -197,7 +198,7 @@ View::url(700,370,URL.'views/doc/deces/***f','23-OPTICIEN ',3);
 View::url(700,400,URL.'views/doc/deces/****',' ',3);
 View::url(700,460,URL.'views/doc/deces/***','7-Polyclinique',3);
 View::url(700,490,URL.'views/doc/deces/***','8-Salle de soins  ',3);
-View::url(700,490+30,URL.'views/doc/deces/***','C- ',3);
+View::url(700,490+30,URL.'views/doc/deces/***','3-EPH ',3);
 View::url(700,490+60,URL.'views/doc/deces/***','D-  ',3);
 View::url(700,490+90,URL.'views/doc/deces/***','E- ',3);
 view::sautligne(10);

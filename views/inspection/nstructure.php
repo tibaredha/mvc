@@ -43,7 +43,9 @@ $data = array(
 "Mobile"    => '(00) 00-00-00-00',
 "Fixe"      => '(000) 00-00-00',
 "Email"    => 'Email',
-
+"Consultation" => '',
+"salledesoins" => '',
+"salledattente"=> '',
 "REALISATION"  => '00-00-0000',
 "NREALISATION" => '0',
 "OUVERTURE"    => '00-00-0000',
@@ -74,11 +76,16 @@ $this->label($x,$y+340,'Mobile');            $this->txts($x+100,$y+330,'Mobile',
 $this->label($x+350,$y+340,'Fixe');          $this->txts($x+450,$y+330,'Fixe',0,$data['Fixe'],'phone');
 $this->label($x+700,$y+340,'E-mail');        $this->txt($x+100+350+350,$y+330,'Email',0,$data['Email'],'date');
 
-$x=50;$y=40;
+$x=50;$y=8;
 $this->label($x,$y+370,'__________________________________________________________________________________________________________________');
 $this->label($x,$y+400,'Propriétaire');           $this->txt($x+100,$y+390,'PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
 $this->label($x+350,$y+400,'Début contrat');      $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');
 $this->label($x+700,$y+400,'Fin contrat');        $this->txts($x+100+350+350,$y+390,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus2');
+
+$this->label($x,$y+430,'Consultation');           $this->txt($x+100,$y+390+30,'Consultation',0,$data['Consultation'],'');
+$this->label($x+350,$y+430,'Salle de soins ');    $this->txt($x+450,$y+390+30,'salledesoins',0,$data['salledesoins'],'');
+$this->label($x+700,$y+430,"Salle d'attente");    $this->txt($x+100+350+350,$y+390+30,'salledattente',0,$data['salledattente'],'');
+
 $x=50;$y=40;
 $this->label($x,$y+420,'__________________________________________________________________________________________________________________');
 $this->label($x,$y+430+20,'Realisation');           $this->txts($x+100,$y+390+30+20,'REALISATION',0,$data['REALISATION'],'dateus3');
