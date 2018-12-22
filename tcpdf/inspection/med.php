@@ -17,14 +17,7 @@ $id=$_GET["uc"];
 $id1=$_GET["uc1"];  
 $id2=$pdf->dateUS2FR($_GET["date"]); 
 // $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+2);$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+2);$pdf->Cell(200,5,$pdf->mspar,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+2);$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+2);$pdf->Cell(200,5,$pdf->dspar,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+2);$pdf->Cell(200,5,$pdf->dspfr,0,1,'C');
-$pdf->SetXY(90,$pdf->GetY()+10);$pdf->Cell(100,5,'Le directeur de la santé et de la population de la wilaya de Djelfa',0,1,'C');
-$pdf->SetXY(90,$pdf->GetY()+2.5);$pdf->Cell(100,5,'A',0,1,'C');
+$pdf->entete($id2);
 //***//
 $pdf-> mysqlconnect(); 
 $query_listey = "SELECT * FROM insp WHERE id  ='$id' ";
@@ -36,12 +29,25 @@ $nom=strtoupper($pdf->nbrtostring('mvc','structure','id',$rowy->ids,'NOM'));
 $prenom=ucfirst(strtolower($pdf->nbrtostring('mvc','structure','id',$rowy->ids,'PRENOM')));
 $sexe=trim($pdf->nbrtostring('mvc','structure','id',$rowy->ids,'SEX'));
 $dateinsp=substr($pdf->dateUS2FR($rowy->DATE), 0, 2);
+$NATURE=$pdf->nbrtostring('mvc','structure','id',$rowy->ids,'NATURE');
+if($NATURE==1)
+{
+$pdf->SetXY(90,$pdf->GetY());$pdf->Cell(100,5,' Monsieur le directeur de : '.$nom."_".$prenom,0,1,'L');
+$pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(100,5,'OBJET :  Mise en demeure ( avec accusé de réception )',0,1,'L');
+$pdf->SetXY(10,$pdf->GetY());$pdf->Cell(100,5,'REF : Inspection du '.$pdf->dateUS2FR($rowy->DATE).' : '.$nom."_".$prenom,0,1,'L');
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->Cell(100,5,'Monsieur, ',0,1,'L');
+$pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(100,5,"Nous constatons avec regret les anomalies suivantes lors de l'inspection du  ".$pdf->dateUS2FR($rowy->DATE),0,1,'L');
+$pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,'au niveau de votre  : '.$pdf->nbrtostring('mvc','structurebis','id',$pdf->nbrtostring('mvc','structure','id',$rowy->ids,'STRUCTURE'),'structure')." Commune de ".$pdf->nbrtostring('mvc','com','IDCOM',$pdf->nbrtostring('mvc','structure','id',$rowy->ids,'COMMUNE'),'COMMUNE'),0,1,'L');
+}
+else
+{
 $pdf->SetXY(90,$pdf->GetY());$pdf->Cell(100,5,' Madame / Monsieur : '.$nom."_".$prenom,0,1,'L');
-$pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(100,5,'OBJET : A/S  Mise en demeure ( avec accusé de réception )',0,1,'L');
+$pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(100,5,'OBJET :  Mise en demeure ( avec accusé de réception )',0,1,'L');
 $pdf->SetXY(10,$pdf->GetY());$pdf->Cell(100,5,'REF : Inspection du '.$pdf->dateUS2FR($rowy->DATE).' : local de Mme/Mr '.$nom."_".$prenom,0,1,'L');
 $pdf->SetXY(40,$pdf->GetY()+5);$pdf->Cell(100,5,'Madame, Monsieur, ',0,1,'L');
 $pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(100,5,"Nous constatons avec regret les anomalies suivantes lors de l'inspection du  ".$pdf->dateUS2FR($rowy->DATE),0,1,'L');
 $pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,'au niveau de votre local : '.$pdf->nbrtostring('mvc','structurebis','id',$pdf->nbrtostring('mvc','structure','id',$rowy->ids,'STRUCTURE'),'structure')." Commune de ".$pdf->nbrtostring('mvc','com','IDCOM',$pdf->nbrtostring('mvc','structure','id',$rowy->ids,'COMMUNE'),'COMMUNE'),0,1,'L');
+}
 }
 //***//
 $query_listex = "SELECT * FROM inspection  WHERE idinsp  ='$id'  LIMIT 0,11";//
@@ -63,10 +69,6 @@ $pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,"Conformément à la réglementati
 $pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,"de votre local .",0,1,'L');
 $pdf->SetXY(40,$pdf->GetY()+5);$pdf->Cell(100,5,"Veuillez agréer, Madame, Monsieur, l'expression de nos salutations distinguées.",0,1,'L');
 //***//
-$pdf->SetXY(140,$pdf->GetY()+5);$pdf->Cell(50,5,'A Djelfa le : ',0,1,'L');//.$id2
-$pdf->SetXY(140,$pdf->GetY()+5);$pdf->Cell(50,5," le Directeur  ",0,1,'C');
-$pdf->SetXY(10,$pdf->GetY()-15);$pdf->Cell(100,5,'CT :',0,1,'L');
-$pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,'- Archives',0,1,'L');
-// $pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,'- Section ordinale régionale blida ',0,1,'L');
+$pdf->pied();
 $pdf->Output($dateinsp.'_'.$nom.'_'.$prenom.'.PDF','I');
 ?>

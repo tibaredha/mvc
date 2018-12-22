@@ -12,11 +12,33 @@ class inspection extends TCPDF
 	
 	
 	public $mspar="وزارة الصحــــــــة و السكـــــــــان وإصلاح المستشــــــفيات";
-	public $mspfr="Ministère de la sante de la population et de la réforme hospitalière";
+	public $mspfr="Ministère de la santé de la population et de la réforme hospitalière";
 
-	public $dspfr="Direction de la sante et de la population de la wilaya de Djelfa";
+	public $dspfr="Direction de la santé et de la population de la wilaya de Djelfa";
 	public $dspar="مـديريــــــة الصحــــة و الســـــكان لولايـــــة الجلفــــــة";
 	
+	
+	function entete($id2)
+	{
+	$url1 = explode('-',$id2);	
+	$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,1,'C');
+	$this->SetXY(5,$this->GetY()+2);$this->Cell(200,5,$this->repfr,0,1,'C');
+	$this->SetXY(5,$this->GetY()+2);$this->Cell(200,5,$this->mspar,0,1,'C');
+	$this->SetXY(5,$this->GetY()+2);$this->Cell(200,5,$this->mspfr,0,1,'C');
+	$this->SetXY(5,$this->GetY()+2);$this->Cell(200,5,$this->dspar,0,1,'C');
+	$this->SetXY(5,$this->GetY()+2);$this->Cell(200,5,$this->dspfr,0,1,'C');
+	$this->SetXY(10,55);$this->Cell(40,5,'N° : ........../DSP/'.$url1[2],0,1,'C');
+	$this->SetXY(140,55);$this->Cell(50,5,'Djelfa le : '.$id2,0,1,'L');
+	$this->SetXY(90,$this->GetY()+5);$this->Cell(100,5,'Le directeur de la santé et de la population de la wilaya de Djelfa',0,1,'C');
+	$this->SetXY(70,$this->GetY()+2.5);$this->Cell(100,5,'A',0,1,'C');
+	}
+	function pied()
+	{
+	$this->SetXY(130,$this->GetY()+10);$this->Cell(50,5," Le Directeur de la santé ",0,1,'C');
+	$this->SetXY(10,$this->GetY()-5);$this->Cell(100,5,'CT :',0,1,'L');
+	$this->SetXY(20,$this->GetY());$this->Cell(100,5,'- Archives',0,1,'L');
+	$this->SetXY(20,$this->GetY());$this->Cell(100,5,'- Inspection (pour information)',0,1,'L');
+	}
 	
 	function mysqlconnect()
 	{
