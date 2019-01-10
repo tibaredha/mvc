@@ -95,7 +95,10 @@ $pdf->repartanomx($datejour1,$datejour2,$EPH);
 // }
 
 // $pdf->SetAutoPageBreak(true ,2);
-if ($_POST['EPH']=='0') {//structure 
+
+
+//bilan 2018 derniere verssion 2018
+if ($_POST['EPH']=='0') {  //structure 
 $pdf->AddPage('L','A4');
 $pdf->enteteinspection($datejour1,$datejour2,'SYNTHESE DU BILAN DES INSPECTIONS EFFECTUÉES (ETABLISSEMENTS PUBLICS)',$EPH1);
 $pdf->bilaninspection($datejour1,$datejour2,$EPH,1);
@@ -105,6 +108,19 @@ $pdf->AddPage('L','A4');
 $pdf->enteteinspection($datejour1,$datejour2,'SYNTHESE DU BILAN DES INSPECTIONS EFFECTUÉES (ETABLISSEMENTS PRIVES)',$EPH1);
 $pdf->bilaninspection($datejour1,$datejour2,$EPH,2);
 }
+
+//bilan 2018 derniere verssion 2019 
+if ($_POST['EPH']=='0') {  //structure 
+$pdf->AddPage('P','A4');
+$pdf->enteteinspectionp($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);
+}
+
+
+
+
+
+
+
 
 //**********************************************en fonction de la structure *****************************************************************//	
 $pdf->pied();

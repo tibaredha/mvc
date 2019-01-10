@@ -6,7 +6,7 @@ class Session
 	public static function init()
 	{
 	    $date=date('Y-m-d');
-		if ($date <= '2019-01-01' )
+		if ($date <= '2020-01-01' )
 		{
 		session_set_cookie_params(0);// kill session when browser closed
 		@session_start();

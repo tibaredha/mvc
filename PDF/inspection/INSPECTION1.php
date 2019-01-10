@@ -529,7 +529,137 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(45,$this->GetY());$this->cell(123,05,$totalmbr1." inspection(s)",1,1,1,'C',0);
 	$this->SetXY(45+123,$this->GetY()-5);$this->cell(123,05,$totalmbrx." anomalie(s)",1,1,1,'C',0);		
 	}
-	//************************************************************//	
+	//*************************verssion 2019***********************************//	
+	//$query_liste = "SELECT * FROM saillie INNER JOIN cheval WHERE saillie.idcheval = cheval.id  and cheval.Race=$Race and  cheval.secteur=$secteur  ";  //
+	function nbrjourspub($datejour1,$datejour2,$nat)
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT * FROM insp INNER JOIN structure where (insp.ids =  structure.id ) and (insp.DATE BETWEEN '$datejour1' AND '$datejour2') and (structure.NATURE=$nat) group by insp.DATE ";//  
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	return $totalmbr1;
+	}
+	
+	function MP($datejour1,$datejour2,$nat,$MP)
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT * FROM insp INNER JOIN structure where (insp.ids =  structure.id ) and (insp.DATE BETWEEN '$datejour1' AND '$datejour2') and (structure.NATURE=$nat) AND insp.MP=$MP ";
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	return $totalmbr1;
+	}
+	
+	function etainsp($datejour1,$datejour2,$eta)
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT DATE,STRUCTURE,ids FROM insp where (DATE BETWEEN '$datejour1' AND '$datejour2') AND STRUCTURE=$eta GROUP BY ids";
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	return $totalmbr1;
+	}
+	
+	function anomalieeta($datejour1,$datejour2,$nat)
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT count(inspection.ANOMALIE) AS total,inspection.DATE,inspection.ANOMALIE,inspection.ids FROM inspection INNER JOIN structure where (inspection.ids =  structure.id ) and (inspection.DATE BETWEEN '$datejour1' AND '$datejour2') and (structure.NATURE=$nat) group by inspection.ANOMALIE order by total desc limit 0,10 ";//     
+	$resultat=mysql_query($query);
+	// $totalmbr1=mysql_num_rows($resultat);
+	while($row=mysql_fetch_object($resultat))
+	{
+	// $this->SetXY(05,$this->GetY()+5);$this->cell(10,5,$row->total,0,0,'L',0,0);
+	// $this->SetXY(10,$this->GetY()+5);$this->cell(200,5,"- ".$row->ANOMALIE." ( ".$row->total." )",0,0,'L',0,0);
+	$this->SetXY(10,$this->GetY()+5);$this->cell(200,5,"- ".$row->ANOMALIE,0,0,'L',0,0);
+	}
+	}
+	
+	
+	
+	
+	function enteteinspectionp($datejour1,$datejour2,$titre,$EPH)
+	{
+	$this->SetDisplayMode('fullpage','single');
+    $this->SetFont('Arial','B',9);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE",0,0,'C',0,0);
+    $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE",0,0,'C',0,0);
+    $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA",0,0,'C',0,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(100,5,'INSPECTION SANTE PUBLIQUE',0,0,'L',0,0);$this->SetXY(150,$this->GetY());$this->cell(60,5,"LE : ".date ('d-m-Y'),0,0,'C',0,0);
+    $this->SetXY(05,$this->GetY()+5);$this->cell(100,5,"N               / ".date ('Y'),0,0,'L',0,0);
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,$titre,0,1,'C',1,0);
+    $this->SetXY(05,$this->GetY());$this->cell(200,5,'Du  '.$this->dateUS2FR($datejour1).'  Au  '.$this->dateUS2FR($datejour2),0,1,'C',1,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"> Wilaya : ",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(20,$this->GetY());$this->cell(200,5,"DJELFA ",0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> Nombre total de praticiens inspecteurs : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(71,$this->GetY());$this->cell(200,5,"1",0,0,'L',0,0);$this->SetTextColor(0,0,0);
+    $this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs en poste à la DSP : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(91,$this->GetY());$this->cell(200,5,"0",0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs ayant désistés du poste de praticien médical inspecteur de santé publique : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(164,$this->GetY());$this->cell(200,5,"0",0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs admis en cette qualité ,n'ayant pas signés de PV d'installation ,mais exercent en cette qualité : I__I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(205,$this->GetY());$this->cell(200,5,"1",0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	
+	
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> Nombre de visites (nombre de jours) effectuées au niveau des établissements publics : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(142,$this->GetY());$this->cell(200,5,$this->nbrjourspub($datejour1,$datejour2,1),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> Nombre d'établissements publics inspectés (à détailler) : ",0,0,'L',0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"EHU",0,0,'L',0,0);$this->SetXY(35,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);  $this->SetTextColor(225,0,0);$this->SetXY(39.5,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,1),0,0,'L',0,0);$this->SetTextColor(0,0,0);  
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"CHU",0,0,'L',0,0);$this->SetXY(35,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);  $this->SetTextColor(225,0,0);$this->SetXY(39.5,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,2),0,0,'L',0,0);$this->SetTextColor(0,0,0);  
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"EH",0,0,'L',0,0);$this->SetXY(35,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);   $this->SetTextColor(225,0,0);$this->SetXY(39.5,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,4),0,0,'L',0,0);$this->SetTextColor(0,0,0);  
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"EHS",0,0,'L',0,0);$this->SetXY(35,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);  $this->SetTextColor(225,0,0);$this->SetXY(39.5,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,5),0,0,'L',0,0);$this->SetTextColor(0,0,0);  
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"EPH",0,0,'L',0,0);$this->SetXY(35,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);  $this->SetTextColor(225,0,0);$this->SetXY(39.5,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,3),0,0,'L',0,0);$this->SetTextColor(0,0,0);  
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"POLY",0,0,'L',0,0);$this->SetXY(35,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(39.5,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,7),0,0,'L',0,0);$this->SetTextColor(0,0,0);  
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"SDS",0,0,'L',0,0);$this->SetXY(35,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(39.5,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,8),0,0,'L',0,0);$this->SetTextColor(0,0,0);  
+	
+	
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> les principales insufisances et dysfonctionnements constatés au niveau des établissements publics (à detailler) : ",0,0,'L',0,0);
+    
+	$this->anomalieeta($datejour1,$datejour2,1);
+
+	
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> les mesures et décisions prises (à detailler) : ",0,0,'L',0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre de Convocation",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(74,$this->GetY());$this->cell(200,5,$this->MP($datejour1,$datejour2,1,1),0,0,'L',0,0); $this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre de Questionnaire",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(74,$this->GetY());$this->cell(200,5,$this->MP($datejour1,$datejour2,1,2),0,0,'L',0,0);$this->SetTextColor(0,0,0); 
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre de Mise en Demeure",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(74,$this->GetY());$this->cell(200,5,$this->MP($datejour1,$datejour2,1,3),0,0,'L',0,0);$this->SetTextColor(0,0,0); 
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre de Rappel à l'ordre",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(74,$this->GetY());$this->cell(200,5,$this->MP($datejour1,$datejour2,1,4),0,0,'L',0,0);$this->SetTextColor(0,0,0); 
+	
+	$this->AddPage('P','A4');
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> Nombre de visites (nombre de jours) effectuées au niveau des établissements privés : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(140,$this->GetY());$this->cell(200,5,$this->nbrjourspub($datejour1,$datejour2,2),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> Nombre d'établissements privés inspectés (à détailler) : ",0,0,'L',0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"EHP",0,0,'L',0,0);                            $this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,9),0,0,'L',0,0); $this->SetTextColor(0,0,0); 
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Centre d'hémodialyse",0,0,'L',0,0);           $this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,10),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Centre de diagnostic ",0,0,'L',0,0);          $this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,11),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Officines pharmaceutiques ",0,0,'L',0,0);     $this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,12),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Grossisteries ",0,0,'L',0,0);                 $this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,"0",0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Laboratoires ",0,0,'L',0,0);                  $this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,13),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Cabinets médecins spécialistes ",0,0,'L',0,0);$this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,16),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Cabinets médecins généralistes ",0,0,'L',0,0);$this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,17),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Cabinets chirurgiens dentistes spécialistes",0,0,'L',0,0);$this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,14),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Cabinets chirurgiens dentistes généralistes",0,0,'L',0,0);$this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,15),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Cabinets de sages-femmes ",0,0,'L',0,0);$this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,18),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Cabinets de psychologues ",0,0,'L',0,0);$this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,19),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Cabinets de soins ",0,0,'L',0,0);$this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,20),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Transport sanitaire",0,0,'L',0,0);$this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,21),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Autres (à préciser)",0,0,'L',0,0);$this->SetXY(90,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0); $this->SetTextColor(225,0,0);$this->SetXY(94,$this->GetY());$this->cell(200,5,$this->etainsp($datejour1,$datejour2,9),0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> les principales insufisances et dysfonctionnements constatés au niveau des établissements privés (à detailler) : ",0,0,'L',0,0);
+	$this->anomalieeta($datejour1,$datejour2,2);
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> les mesures et décisions prises (à detailler) : ",0,0,'L',0,0);
+	
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre de Convocation",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(74,$this->GetY());$this->cell(200,5,$this->MP($datejour1,$datejour2,2,1),0,0,'L',0,0); $this->SetTextColor(0,0,0);
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre de Questionnaire",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(74,$this->GetY());$this->cell(200,5,$this->MP($datejour1,$datejour2,2,2),0,0,'L',0,0);$this->SetTextColor(0,0,0); 
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre de Mise en Demeure",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(74,$this->GetY());$this->cell(200,5,$this->MP($datejour1,$datejour2,2,3),0,0,'L',0,0);$this->SetTextColor(0,0,0); 
+	$this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre de Rappel à l'ordre",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(74,$this->GetY());$this->cell(200,5,$this->MP($datejour1,$datejour2,2,4),0,0,'L',0,0);$this->SetTextColor(0,0,0); 
+
+	// $this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre d'avertissements",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I__I",0,0,'L',0,0);
+	// $this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre de mises en demeure",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I__I",0,0,'L',0,0);
+	// $this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"Nombre de fermetures",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I__I",0,0,'L',0,0);
+	// $this->SetXY(25,$this->GetY()+5);$this->cell(200,5,"les autres  sanctions",0,0,'L',0,0);$this->SetXY(70,$this->GetY());$this->cell(200,5," : I__I",0,0,'L',0,0);
+	
+	}
+	
+	
+	
+	
+	
+	
+	//************************************************************//
 	
 	function enteteinspection($datejour1,$datejour2,$titre,$EPH1)
 	{
