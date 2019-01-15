@@ -576,11 +576,40 @@ class INSPECTION1 extends PDF_Invoice
 	}
 	}
 	
+	function enteterapport($datejour1,$datejour2,$titre,$EPH)
+	{
+	$this->AddPage('P','A4');
+	$this->SetDisplayMode('fullpage','single');
+    $this->SetFont('Arial','B',11);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE",0,0,'C',0,0);
+    $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE",0,0,'C',0,0);
+    $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA",0,0,'C',0,0);
+	
+	$this->SetXY(05,$this->GetY()+15);$this->cell(100,5,"N°: ......... /DSP/ ".date ('Y'),0,0,'L',0,0);$this->SetXY(150,$this->GetY());$this->cell(60,5,"DJELFA LE : ".date ('d-m-Y'),0,0,'C',0,0);
+	
+	
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"LE DIRECTEUR DE LA SANTE ET DE LA POPULATION ",0,0,'C',0,0);
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"A MONSIEUR ",0,0,'C',0,0);
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"L'INSPECTEUR GENERAL ",0,0,'C',0,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE ",0,0,'C',0,0);
+	
+	
+	$this->SetXY(05,$this->GetY()+15);$this->cell(200,5,"OBJET : A/S  INSPECTION DES ETABLISSEMENTS PUBLICS ET PRIVES",0,0,'L',0,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"REF : ENVOI DU 07/01/2019 ",0,0,'L',0,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"PJ : CANEVAS",0,0,'L',0,0);
+	
+	$this->SetXY(25,$this->GetY()+15);$this->cell(200,5,"Suite à votre envoi cité en référence, j'ai l'honneur de vous transmettre le bilan des inspections  ",0,0,'L',0,0);
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"des établissements de santé publics et privés ".'du  '.$this->dateUS2FR($datejour1).'  au  '.$this->dateUS2FR($datejour2).'.' ,0,0,'L',0,0);
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"Enfin mes services restent à votre disposition pour toutes informations utiles relatives à ce sujet. ",0,0,'L',0,0);
+	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"Veuillez agréer monsieur l'inspecteur général,l'éxpression de ma parfaite considération. ",0,0,'L',0,0);
+	$this->SetXY(140,$this->GetY()+20);$this->cell(50,5,"Le Directeur de la santé ",0,0,'C',0,0);
+	}
 	
 	
 	
 	function enteteinspectionp($datejour1,$datejour2,$titre,$EPH)
 	{
+	$this->AddPage('P','A4');
 	$this->SetDisplayMode('fullpage','single');
     $this->SetFont('Arial','B',9);
 	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE",0,0,'C',0,0);

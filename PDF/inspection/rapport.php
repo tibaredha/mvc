@@ -102,27 +102,26 @@ if ($_POST['EPH']=='0') {  //structure
 $pdf->AddPage('L','A4');
 $pdf->enteteinspection($datejour1,$datejour2,'SYNTHESE DU BILAN DES INSPECTIONS EFFECTUÉES (ETABLISSEMENTS PUBLICS)',$EPH1);
 $pdf->bilaninspection($datejour1,$datejour2,$EPH,1);
-
-
 $pdf->AddPage('L','A4');
 $pdf->enteteinspection($datejour1,$datejour2,'SYNTHESE DU BILAN DES INSPECTIONS EFFECTUÉES (ETABLISSEMENTS PRIVES)',$EPH1);
-$pdf->bilaninspection($datejour1,$datejour2,$EPH,2);
+$pdf->bilaninspection($datejour1,$datejour2,$EPH,2);$pdf->pied();
 }
 
 //bilan 2018 derniere verssion 2019 
 if ($_POST['EPH']=='0') {  //structure 
-$pdf->AddPage('P','A4');
-$pdf->enteteinspectionp($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);
+$pdf->enteteinspectionp($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);$pdf->pied();
 }
 
-
-
+//bilan 2018 letre d'accompagnement
+if ($_POST['EPH']=='0') {  //structure 
+$pdf->enteterapport($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);
+}
 
 
 
 
 
 //**********************************************en fonction de la structure *****************************************************************//	
-$pdf->pied();
+// 
 $pdf->Output();
 ?>
