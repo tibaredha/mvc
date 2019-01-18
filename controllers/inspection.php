@@ -389,6 +389,15 @@ class inspection extends Controller {
 		header('location: ' . URL . $this->route.'/auto/'.$data['idt'].'');
 	}
 	
+	/*pv de conformité*/
+	
+	function conformite($id) 
+	{
+	$this->view->title = 'conformite';
+	$this->view->user = $this->model->userSinglestructure($id);
+	// $this->view->userListview = $this->model->persSingleList($id);
+	$this->view->render($this->route.'/conformite');    
+	}
 	
 	
 	/*personnel*/	

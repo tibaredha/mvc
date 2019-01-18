@@ -21,7 +21,7 @@ while($rowx=mysql_fetch_object($requetex))
 {
 $pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE ',0,1,'C');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE ',0,1,'C');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'MINISTERE DE LA SANTE ET DE LA POPULATION ET DE LA REFORME HOSPITALIERE ',0,1,'C');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA',0,1,'C');
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'INSPECTION SANTE PUBLIQUE',0,1,'L');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"N ... /".date('Y'),0,1,'L');

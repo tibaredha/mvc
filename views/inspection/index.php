@@ -43,9 +43,10 @@ echo "<th style=\"width:390px;\">Responssable</th>" ;
 echo "<th style=\"width:100px;\">Contrat Du </th>" ;
 echo "<th style=\"width:200px;\">Residence</th>" ;
 echo "<th style=\"width:200px;\">Structure</th>" ;
+echo "<th style=\"width:70px;\">PV</th>" ;
 echo "<th style=\"width:70px;\">Pers</th>" ;
 echo "<th style=\"width:70px;\">Vehi</th>" ;
-echo "<th style=\"width:70px;\">PV</th>" ;
+
 echo "<th style=\"width:70px;\">Insp</th>" ;
 echo "<th style=\"width:10px;\">Déc1</th>" ;
 echo "<th style=\"width:10px;\">Déc2</th>" ;
@@ -62,7 +63,6 @@ echo "</tr>" ;
 		$fichier = photosmfx('str',$value['id'].'.jpg',$value['SEX']) ;
 		echo "<td align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl/".$value['id']."\" ><img  src=\"".URL."public/webcam/str/".$fichier."?t=".time()."\"  width='25' height='25' border='0'></td> " ;
 		echo "<td style=\"width:270px;\" align=\"left\" >".strtoupper($value['NOM']).'_'.strtolower ($value['PRENOM'])."</td>" ;
-		// echo "<td style=\"width:50px;\" align=\"left\" >".strtoupper($value['PROPRIETAIRE'])."</td>" ;
 		echo "<td"; 
 		if ($value['FINCONTRAT'] > date('Y-m-d')) { echo " bgcolor=\"#7BCCB5\" ";} else { echo " bgcolor=\"red\" ";}
 		echo " style=\"width:110px;\" align=\"center\" >".strtolower (view::dateUS2FR($value['FINCONTRAT']))."</td>" ;
@@ -71,37 +71,51 @@ echo "</tr>" ;
 		switch ($value['STRUCTURE']) {
 		case 21://transport
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SAMB.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 15://dentiste 		
 				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SDEN.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf15.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 17://generaliste 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 12://pharmacie 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/PHA.JPG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				//echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf12.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"PV de conformite\"    href=\"".URL.'inspection/conformite/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+				
+				
+				
 				break;
 		case 23://opticien 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SOPT.png'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 22://SANTE SCOLAIRE UDS 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SS.png'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
-		case 16://SANTE SCOLAIRE UDS 
+		case 16://SANTE  
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 13://LABO 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/lab1.jpg'."\"  width='30' height='25' border='0' alt='' ></td>" ;
 				break;
 		case 10://HEMODIALYSE 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/HEMOD.jpg'."\"  width='30' height='25' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 3://EPH 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/HOPI.png'."\"  width='30' height='25' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		
 		case 8://SALLE DE SOINS 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SS.jpg'."\"  width='30' height='25' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		
 		
@@ -110,8 +124,7 @@ echo "</tr>" ;
 		}
 		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer\"    href=\"".URL.'inspection/pers/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrpers($value['id'])." ] </td>" ;
 		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer\"    href=\"".URL.'inspection/auto/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/auto.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrveh($value['id'])." ] </td>" ;
-		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
-
+		
 		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Insp\"      href=\"".URL.'inspection/insp/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['id'])." ]</td>" ;
        
 		switch ($value['STRUCTURE']) {
@@ -142,19 +155,8 @@ echo "</tr>" ;
 	    }
 		
 		
-		                if ($value['ETAT']==0) {
-		                ?>
-						<td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetatstr/'.$value['id'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
-		                <?php 
-		                }
-		                if ($value['ETAT']==1) {
-		                ?>
-						<td align="center"><a  title="activé" href="<?php echo URL.'inspection/editetatstr/'.$value['id'].'/0';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
-						 <?php 
-		                }
-		             
-		
-		
+		if ($value['ETAT']==0) {?><td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetatstr/'.$value['id'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
+		if ($value['ETAT']==1) {?><td align="center"><a  title="activé" href="<?php echo URL.'inspection/editetatstr/'.$value['id'].'/0';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
 		echo "<td style=\"width:50px;\" align=\"center\" ><a title=\"editer\"    href=\"".URL.'inspection/editstructure/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/edit.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 		echo "<td style=\"width:50px;\" align=\"center\" ><a class=\"delete\" title=\"supprimer\"  href=\"".URL.'inspection/deletestructure/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/delete.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 		 

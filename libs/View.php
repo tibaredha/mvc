@@ -224,6 +224,22 @@ class View {
 		}
 		echo '</select>'."\n"; echo "</div>";
 	}
+	
+	
+	function combopharmacien($x,$y,$name,$value,$choisir,$class) 
+	{
+		mysqlconnect(); 
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option   value=\"".$value."\" selected=\"selected\">".$choisir."</option>"."\n";
+		$result = mysql_query("SELECT * FROM structure where STRUCTURE = 12  order by NOM" );
+		while($data =  mysql_fetch_array($result))
+		{
+		echo '<option value="'.$data["NOM"].'_'.$data["PRENOM"].'">'.$data["NOM"].'_'.$data["PRENOM"].'</option>';
+		}
+		echo '</select>'."\n"; echo "</div>";
+	}
+	
 	function combostructure($x,$y,$name,$tb_name,$value,$choisir,$class,$ve,$va) 
 	{
 		mysqlconnect(); 
