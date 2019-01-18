@@ -18,6 +18,31 @@ class inspection extends TCPDF
 	public $dspar="مـديريــــــة الصحــــة و الســـــكان لولايـــــة الجلفــــــة";
 	
 	
+	function ANNEEFR($DATEINS) {
+			$A      = substr($DATEINS,6,2); 
+			$ANNEE = array("treize","quatorze","quinze","seize","dix-sept","dix-huit ","dix-neuf","vingt","vingt et un ","vingt et deux","vingt -trois");
+			$ANNEE1 =  $ANNEE[ $A - 13] ;
+			$DATEPV=$ANNEE1;
+			return $DATEPV;
+		}
+	 function MOISFR($DATEINS) {             
+			$M      = substr($DATEINS,3,2);   
+			$MOIS = array("", "janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "october", "novombre", "decembre");
+			$MOIS1 =  $MOIS[ $M-0 ] ;
+			$DATEPV=$MOIS1;
+			return $DATEPV;
+		}		
+	function JOURFR($DATEINS) {
+			$J      = substr($DATEINS,0,2);                  
+			$JOURS = array("premier","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onz","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit ","dix-neuf ","vingt","vingt et un","vingt et deux","vingt -trois","vingt -quatre"," vingt -cinq ","vingt -six"," vingt -sept ","vingt -huit ","vingt -neuf"," trente "," trente et un ");
+			$JOURS1 = $JOURS[$J-1] ;
+			$DATEPV=$JOURS1;
+			return $DATEPV;
+		}	
+	
+	
+	
+	
 	function entete($id2)
 	{
 	$url1 = explode('-',$id2);	
