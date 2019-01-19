@@ -187,8 +187,8 @@ class inspection_Model extends Model {
 		    'PRENOMAR'   => $data['PRENOMAR'],
 			'Categorie'  => $data['Categorie'],
 			'CASNOS'       => $data['CASNOS'],
-			'DEBUTCONTRAT' => $data['DEBUTCONTRAT'],
-			'FINCONTRAT'   => $data['FINCONTRAT']
+			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
+			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT'])
 			));
 			// echo '<pre>';print_r ($data);echo '<pre>';
 			return $last_id = $this->db->lastInsertId();
@@ -202,8 +202,8 @@ class inspection_Model extends Model {
 		    'PRENOMAR'     => $data['PRENOMAR'],
 			'Categorie'    => $data['Categorie'],
 			'CASNOS'       => $data['CASNOS'],
-			'DEBUTCONTRAT' => $data['DEBUTCONTRAT'],
-			'FINCONTRAT'   => $data['FINCONTRAT']  
+			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
+			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT'])  
         );
        echo '<pre>';print_r ($postData);echo '<pre>';
 	   $this->db->update('pers', $postData, "id =" . $data['id'] . "");

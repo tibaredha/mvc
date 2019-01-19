@@ -226,13 +226,13 @@ class View {
 	}
 	
 	
-	function combopharmacien($x,$y,$name,$value,$choisir,$class) 
+	function combopharmacien($x,$y,$name,$value,$choisir,$class,$str) 
 	{
 		mysqlconnect(); 
 		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	
 		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
 		echo"<option   value=\"".$value."\" selected=\"selected\">".$choisir."</option>"."\n";
-		$result = mysql_query("SELECT * FROM structure where STRUCTURE = 12  order by NOM" );
+		$result = mysql_query("SELECT * FROM structure where STRUCTURE = $str  order by NOM" );
 		while($data =  mysql_fetch_array($result))
 		{
 		echo '<option value="'.$data["NOM"].'_'.$data["PRENOM"].'">'.$data["NOM"].'_'.$data["PRENOM"].'</option>';
@@ -460,6 +460,8 @@ class View {
 	function ANOMALIE($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" id=\"ANOMALIE\"  />";echo "</div>";}
 	function txtjss($x,$y,$name,$size,$value,$cal){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"  onblur=\"$cal\"   />";echo "</div>";}
 	function txtar($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input style=\"text-align:right;\"  id=\"tiba\"  type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required  />";echo "</div>";}
+	function txtarid($x,$y,$id,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input id=\"".$id."\"   style=\"text-align:right;\" type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required  />";echo "</div>";}
+	
 	function range($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"number\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"   max=\"50\" min=\"0\" step=\"5\"      required  />";echo "</div>";}
 	function txt0($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" />";echo "</div>";}
 	function date($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input id=\"datejour\"type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required  />";echo "</div>";}

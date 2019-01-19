@@ -125,7 +125,7 @@ class inspection extends Controller {
 		$data['Mobile']       = $_POST['Mobile'];
 		$data['Fixe']         = $_POST['Fixe'];
 		$data['Email']       = $_POST['Email'];
-		echo '<pre>';print_r ($data);echo '<pre>';
+		// echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavestructure($data);//search/0/10?o=STRUCTURE&q=$data['STRUCTURE']
 		header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$data['id']);
 	}
@@ -395,9 +395,35 @@ class inspection extends Controller {
 	{
 	$this->view->title = 'conformite';
 	$this->view->user = $this->model->userSinglestructure($id);
-	// $this->view->userListview = $this->model->persSingleList($id);
 	$this->view->render($this->route.'/conformite');    
 	}
+	function conformite15($id) 
+	{
+	$this->view->title = 'conformite chirurgien dentiste ';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/conformite15');    
+	}
+	function conformite16($id) 
+	{
+	$this->view->title = 'conformite medecin specialiste ';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/conformite16');    
+	}
+	function conformite17($id) 
+	{
+	$this->view->title = 'conformite medecin generaliste ';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/conformite17');    
+	}
+	
+	function conformite21($id) 
+	{
+	$this->view->title = 'conformite transport sanitaire ';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/conformite21');    
+	}
+	
+	
 	
 	
 	/*personnel*/	

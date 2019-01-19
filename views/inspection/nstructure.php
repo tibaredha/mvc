@@ -30,16 +30,16 @@ $data = array(
 					   "Feminin"=>"F"					   			   
 					  ),					  
 "NOM"  => 'x' ,
-"NOMAR"  => 'x' ,
-"PRENOM"  => 'x' ,
-"PRENOMAR"  => 'x' ,						  
+"NOMAR"  => '' ,
+"PRENOM"  => '' ,
+"PRENOMAR"  => '' ,						  
 "AGE"  => '0' ,
 "WILAYAN1"  => '17000' ,
 "WILAYAN2"  => 'DJELFA',
 "COMMUNEN1" => '924' ,
 "COMMUNEN2" => 'Ain-oussera',
-"ADRESSE"  => 'x',
-"ADRESSEAR"  => 'x',
+"ADRESSE"  => '',
+"ADRESSEAR"  => '',
 "Mobile"    => '(00) 00-00-00-00',
 "Fixe"      => '(000) 00-00-00',
 "Email"    => 'Email',
@@ -94,9 +94,9 @@ $this->label($x,$y+460+30,'Ouverture');             $this->txts($x+100,$y+390+60
 $this->label($x+350,$y+460+30,'N° Ouverture');      $this->txt($x+450,$y+390+60+30,'NOUVERTURE',0,$data['NOUVERTURE'],'date');
 $x=50;$y=50;
 $this->label($x,$y+470+30,'__________________________________________________________________________________________________________________');
-$this->label($x+990,$y+500+30,'اللقب');            $this->txtar($x+690,$y+490+30,'NOMAR',0,$data['NOMAR'],'date');
-$this->label($x+625,$y+500+30,'الاســـــــم');      $this->txtar($x+340,$y+490+30,'PRENOMAR',0,$data['PRENOMAR'],'date');
-$this->label($x+290,$y+500+30,'العنوان');          $this->txtar($x,$y+490+30,'ADRESSEAR',0,$data['ADRESSEAR'],'date');
+$this->label($x+990,$y+500+30,'اللقب');            $this->txtarid($x+690,$y+490+30,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
+$this->label($x+625,$y+500+30,'الاســـــــم');      $this->txtarid($x+340,$y+490+30,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date');
+$this->label($x+290,$y+500+30,'العنوان');          $this->txtarid($x,$y+490+30,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
 $x=50;$y=60;
 $this->submit($x+800,$y+430+30,$data['butun']);
 $this->f1();
@@ -117,10 +117,11 @@ ob_end_flush();
 
 ?>
 
-
 <script type="text/javascript">
   window.onload = function(){
-	        document.getElementById("tiba").onkeydown = function myFunction(e){var keyCode = window.event ? window.event.keyCode : e.which; switch (keyCode) {case 65:this.value += "ض";return false;break;case 90:this.value += "ص";return false;break;case 69:this.value += "ث";return false;break;case 82:this.value += "ق";return false;break;case 84:this.value += "ف";return false;break;case 89:this.value += "غ";return false;break;case 85:this.value += "ع";return false;break;case 73:this.value += "ه";return false;break;case 79:this.value += "خ";return false;break;case 80:this.value += "ح";return false;break;case 221:this.value += "ج";return false;break;case 186:this.value += "د";return false;break;case 81:this.value += "ش";return false;break;case 83:this.value += "س";return false;break;case 68:this.value += "ي";return false;break;case 70:this.value += "ب";return false;break;case 71:this.value += "ل";return false;break;case 72:this.value += "ا";return false;break;case 74:this.value += "ت";return false;break;case 75:this.value += "ن";return false;break;case 76:this.value += "م";return false;break;case 77:this.value += "ك";return false;break;case 192:this.value += "ط";return false;break;case 220:this.value += "ذ";return false;break;case 87:this.value += "ئ";return false;break;case 88:this.value += "ء";return false;break;case 67:this.value += "ؤ";return false;break;case 86:this.value += "ر";return false;break;case 66:this.value += "لا";return false;break;case 78:this.value += "ى";return false;break;case 188:this.value += "ة";return false;break;case 190:this.value += "و";return false;break;case 191:this.value += "ز";return false;break;case 223:this.value += "ظ";return false;break;}}
+	        document.getElementById("NOMAR").onkeydown = function myFunction(e){var keyCode = window.event ? window.event.keyCode : e.which; switch (keyCode) {case 65:this.value += "ض";return false;break;case 90:this.value += "ص";return false;break;case 69:this.value += "ث";return false;break;case 82:this.value += "ق";return false;break;case 84:this.value += "ف";return false;break;case 89:this.value += "غ";return false;break;case 85:this.value += "ع";return false;break;case 73:this.value += "ه";return false;break;case 79:this.value += "خ";return false;break;case 80:this.value += "ح";return false;break;case 221:this.value += "ج";return false;break;case 186:this.value += "د";return false;break;case 81:this.value += "ش";return false;break;case 83:this.value += "س";return false;break;case 68:this.value += "ي";return false;break;case 70:this.value += "ب";return false;break;case 71:this.value += "ل";return false;break;case 72:this.value += "ا";return false;break;case 74:this.value += "ت";return false;break;case 75:this.value += "ن";return false;break;case 76:this.value += "م";return false;break;case 77:this.value += "ك";return false;break;case 192:this.value += "ط";return false;break;case 220:this.value += "ذ";return false;break;case 87:this.value += "ئ";return false;break;case 88:this.value += "ء";return false;break;case 67:this.value += "ؤ";return false;break;case 86:this.value += "ر";return false;break;case 66:this.value += "لا";return false;break;case 78:this.value += "ى";return false;break;case 188:this.value += "ة";return false;break;case 190:this.value += "و";return false;break;case 191:this.value += "ز";return false;break;case 223:this.value += "ظ";return false;break;}}
+			document.getElementById("PRENOMAR").onkeydown = function myFunction(e){var keyCode = window.event ? window.event.keyCode : e.which; switch (keyCode) {case 65:this.value += "ض";return false;break;case 90:this.value += "ص";return false;break;case 69:this.value += "ث";return false;break;case 82:this.value += "ق";return false;break;case 84:this.value += "ف";return false;break;case 89:this.value += "غ";return false;break;case 85:this.value += "ع";return false;break;case 73:this.value += "ه";return false;break;case 79:this.value += "خ";return false;break;case 80:this.value += "ح";return false;break;case 221:this.value += "ج";return false;break;case 186:this.value += "د";return false;break;case 81:this.value += "ش";return false;break;case 83:this.value += "س";return false;break;case 68:this.value += "ي";return false;break;case 70:this.value += "ب";return false;break;case 71:this.value += "ل";return false;break;case 72:this.value += "ا";return false;break;case 74:this.value += "ت";return false;break;case 75:this.value += "ن";return false;break;case 76:this.value += "م";return false;break;case 77:this.value += "ك";return false;break;case 192:this.value += "ط";return false;break;case 220:this.value += "ذ";return false;break;case 87:this.value += "ئ";return false;break;case 88:this.value += "ء";return false;break;case 67:this.value += "ؤ";return false;break;case 86:this.value += "ر";return false;break;case 66:this.value += "لا";return false;break;case 78:this.value += "ى";return false;break;case 188:this.value += "ة";return false;break;case 190:this.value += "و";return false;break;case 191:this.value += "ز";return false;break;case 223:this.value += "ظ";return false;break;}}
+			document.getElementById("ADRESSEAR").onkeydown = function myFunction(e){var keyCode = window.event ? window.event.keyCode : e.which; switch (keyCode) {case 65:this.value += "ض";return false;break;case 90:this.value += "ص";return false;break;case 69:this.value += "ث";return false;break;case 82:this.value += "ق";return false;break;case 84:this.value += "ف";return false;break;case 89:this.value += "غ";return false;break;case 85:this.value += "ع";return false;break;case 73:this.value += "ه";return false;break;case 79:this.value += "خ";return false;break;case 80:this.value += "ح";return false;break;case 221:this.value += "ج";return false;break;case 186:this.value += "د";return false;break;case 81:this.value += "ش";return false;break;case 83:this.value += "س";return false;break;case 68:this.value += "ي";return false;break;case 70:this.value += "ب";return false;break;case 71:this.value += "ل";return false;break;case 72:this.value += "ا";return false;break;case 74:this.value += "ت";return false;break;case 75:this.value += "ن";return false;break;case 76:this.value += "م";return false;break;case 77:this.value += "ك";return false;break;case 192:this.value += "ط";return false;break;case 220:this.value += "ذ";return false;break;case 87:this.value += "ئ";return false;break;case 88:this.value += "ء";return false;break;case 67:this.value += "ؤ";return false;break;case 86:this.value += "ر";return false;break;case 66:this.value += "لا";return false;break;case 78:this.value += "ى";return false;break;case 188:this.value += "ة";return false;break;case 190:this.value += "و";return false;break;case 191:this.value += "ز";return false;break;case 223:this.value += "ظ";return false;break;}}
 			}
 </script>
 
