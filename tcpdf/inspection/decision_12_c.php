@@ -17,56 +17,43 @@ $pdf->SetLineWidth(0.4);
 $pdf-> mysqlconnect(); 
 $query_listex = "SELECT * FROM structure WHERE id  ='$id' ";//
 $requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
-
 while($rowx=mysql_fetch_object($requetex))
 {
-// $pdf->cell(40,06,$rowx->Marque,1,0,'C',0);
-$num=$rowx->NREALISATION;
-$date=$rowx->REALISATION;
-
-$num1=$rowx->NOUVERTURE;
-$date1=$rowx->OUVERTURE;
-
-$nomar=$rowx->NOMAR;
-$prenomar=$rowx->PRENOMAR;
-$adresse=$rowx->ADRESSEAR;
-$commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
-$wilaya=$rowx->WILAYA;
+$num=$rowx->NREALISATION;$date=$rowx->REALISATION;
+$num1=$rowx->NOUVERTURE;$date1=$rowx->OUVERTURE;
+$nomar=$rowx->NOMAR;$prenomar=$rowx->PRENOMAR;
+$adresse=$rowx->ADRESSEAR;$commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');$wilaya=$rowx->WILAYA;
 }
 $y=3;
 $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'الجمـهوريـــة الجزائرية الديمقراطية الشعبية',0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'وزارة الصحة و السكان وإصلاح المستشفيات',0,1,'C');$pdf->SetFont('aefurat', '', 14);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'ولايــــــــة الجلفـــــــــة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'مـديريــــــة الصحة و السكان',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'مصلحة الهياكل و النشاط الصحي',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->repar,0,1,'C');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetFont('aefurat', '', 14);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->wilayaar,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->dsparp,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->dssar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'رقم : '.$num1.' /م. ص. س / '.substr($date1,0,4),0,1,'R');$pdf->SetFont('aefurat', '', 16);
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'مقررة تتضمن تحويل صيدلــــــية',0,1,'C');$pdf->SetFont('aefurat', '', 16);
-$pdf->SetXY(100,$pdf->GetY()+$y);$pdf->Cell(100,5,'إن مدير الصحة و السكان لولاية الجلفة ',0,1,'C');$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بمقتضى القانون 05-85 المؤرخ في 1985/02/16 المتعلق بحماية الصحة و ترقيتها المعدل و المتمم .',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بمقتضى المرسوم رقم 261/97 المؤرخ في 1997/07/14 المحدد لقواعد الخاصة بتنضيم مديرية الصحة و السكان ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بمقتضى القرار رقم 52 المؤرخ في 1995/07/10 المحدد قائمة الادوية المرخصة بيعها في الصيدليات',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بمقتضى القرار رقم 58 المؤرخ في 1995/07/23 المحدد لقواعد الممارسة الحسنة للتحضير على مستوى الصيدليات',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بمقتضى القرار رقم 67 المؤرخ في 1996/07/09 المحدد لشروط الممارسة الذاتية لمهنة الصيدلي على مستوى الصيدلية',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بمقتضى القرار رقم 110 و. ص. س  المؤرخ في 1996/11/27 المحدد لشروط تنصيب فتح و تحويل صيدلية خاصة',0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على المنشور الوزاري رقم 03 م. ص المؤرخ قي 2005/11/05 المتعلق بامكانية فتح صيدليات على مستوى المناطق المعزولة',0,1,'R');$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على مقرر الفتح رفم  '.$num1.' المؤرخ ب  '.$date1.' الصادر عن م. ص. س  بالجلغة '.''.' تخص السيد (ة) '.$nomar.' '.$prenomar.'',0,1,'R');
+$pdf->SetXY(100,$pdf->GetY()+$y);$pdf->Cell(100,5,$pdf->ledspar,0,1,'C');$pdf->SetFont('aefurat', '', 13);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->loi85_05,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete52_95,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete58_95,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete67_96,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete110_96,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->cm03_05,0,1,'R');$pdf->SetFont('aefurat', '', 13);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على مقرر الفتح رفم  '.$num1.' المؤرخ ب  '.$date1.' الصادر عن م. ص. س  بالجلفة '.''.' تخص السيد (ة) '.$nomar.' '.$prenomar.'',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' صيدلي بتاريخ '.' __  __  _____ '.' المتعلق بتحويل صيدليته (ها)  الى  بلدية '.$commune,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على شهلدة التسجيل بمجلس اخلاقيات المهنة للصيدلة رقم '.' 000 '.' بتاريخ '.' 0000/00/00 '.' للمعنى ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء علي محضر المطابقة الخاص بالمحل  للصيدلية المؤرخ في '.'0000/00/00',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة للصيدلة رقم '.' 000 '.' بتاريخ '.' 0000/00/00 '.' للمعنى (ة) ',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء علي محضر المطابقة الخاص بالمحل  للصيدلية المؤرخ في '.'0000/00/00',0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 /*************************************************************************************************************************/
-$pdf->SetFont('aefurat', 'B', 16);
-$pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(200,5,'بإقتراح من السيد رئيس مصلحة الهياكل و النشاط الصحي  ',0,1,'C');
-$pdf->SetFont('aefurat', 'U', 16);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');
+$pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(200,5,'بإقتراح من السيد رئيس مصلحة الهياكل و النشاط الصحي  ',0,1,'C');$pdf->SetFont('aefurat', 'U', 16);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');$pdf->SetFont('aefurat', '', 13);
 /*************************************************************************************************************************/
-$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'المادة الأولى : يرخص للسيد(ة)  '.$nomar.' '.$prenomar.' صيدلي '.' بتحويل   صيدليته (ها)  الى العنوان التالي  ',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' صيدلي (ة) '.' بتحويل   صيدليته (ها)  الى العنوان التالي  ',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,' ب '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر صيدلية دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'المادة 03 :  يسري مفعول هذه المقررة ابتداء من تاريخ أمضائها',0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'المادة 04 : '.'يكلف كل من السادة مدير المؤسسة العمومية للصحة الجوارية  '.'و مدير صندوق الضمان الإجتماعي بتنفيذ هذه المقررة .',0,1,'R');
-$pdf->SetFont('aefurat', 'B', 14);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article2,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article3,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article4,0,1,'R');$pdf->SetFont('aefurat', 'B', 14);
 $pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(100,5,'الجلفة في : '.$date1,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
 $pdf->Output();

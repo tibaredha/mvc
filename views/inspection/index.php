@@ -19,7 +19,7 @@ view::button('inspection','');
 lang(Session::get('lang'));
 ob_start();
 view::munu('inspection'); 
-$colspan=17;				
+$colspan=18;				
 if (isset($this->userListview)) 
 {
 echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>" ;
@@ -39,15 +39,13 @@ echo "<tr>" ;
 echo "<th style=\"width:10px;\">view</th>" ;
 echo "<th style=\"width:10px;\">view</th>" ;
 echo "<th style=\"width:390px;\">Responssable</th>" ;
-// echo "<th style=\"width:150px;\">Proprietaire</th>" ;
 echo "<th style=\"width:100px;\">Contrat Du </th>" ;
 echo "<th style=\"width:200px;\">Residence</th>" ;
 echo "<th style=\"width:200px;\">Structure</th>" ;
-
 echo "<th style=\"width:10px;\">PV</th>" ;
+echo "<th style=\"width:10px;\">Ins</th>" ;
 echo "<th style=\"width:10px;\">Ouv</th>" ;
 echo "<th style=\"width:10px;\">Cha</th>" ;
-
 echo "<th style=\"width:70px;\">Pers</th>" ;
 echo "<th style=\"width:70px;\">Vehi</th>" ;
 echo "<th style=\"width:70px;\">Insp</th>" ;
@@ -73,96 +71,112 @@ echo "</tr>" ;
 		case 21://transport
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SAMB.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite21/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 			    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_modification\" href=\"".URL.'tcpdf/inspection/decisionm.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 14://dentiste specialiste		
 				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SDEN.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"pv conformite\"         href=\"".URL.'tcpdf/inspection/pvconf15.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision_15.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 			    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/decision_15_c.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 15://dentiste 		
 				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SDEN.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite15/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision_15.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 			    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/decision_15_c.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 16://medecin  specialiste 		
 				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite16/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision_15.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 			    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/decision_15_c.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 17://medecin generaliste 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite17/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision_17.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 			    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/decision_17_c.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 18://sage femme 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision_17.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 			    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/decision_17_c.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 19://psychologue
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision_17.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 			    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/decision_17_c.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 12://pharmacie 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/PHA.JPG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision_12.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 			    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/decision_12_c.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 23://opticien 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SOPT.png'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision_23.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 			    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/decision_23_c.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 22://SANTE SCOLAIRE UDS 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SS.png'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 16://SANTE  
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 13://LABO 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/lab1.jpg'."\"  width='30' height='25' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/lab1.jpg'."\"  width='30' height='25' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/lab1.jpg'."\"  width='30' height='25' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/lab1.jpg'."\"  width='30' height='25' border='0' alt='' ></td>" ;
 				break;
 		case 10://HEMODIALYSE 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/HEMOD.jpg'."\"  width='30' height='25' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 3://EPH 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/HOPI.png'."\"  width='30' height='25' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		case 8://SALLE DE SOINS 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SS.jpg'."\"  width='30' height='25' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				break;
 		default:
 		echo "<td style=\"width:50px;\" align=\"left\" >".view::stringtostring('structurebis','id',$value['STRUCTURE'],'structure') ."</td>" ;
 		echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision\"      href=\"".URL.'tcpdf/inspection/***.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/print.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+		echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 		echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Fiche\"         href=\"".URL.'tcpdf/inspection/***.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/print.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 		echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Fiche\"         href=\"".URL.'tcpdf/inspection/***.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/print.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 		}
