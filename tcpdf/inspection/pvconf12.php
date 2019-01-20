@@ -37,8 +37,8 @@ $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"En vertu de l'article 10 de l'a
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"D'installation d'ouverture et de transfert d'une officine de pharmacie modifié et complété",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Et sur ordre de MR le directeur de la santé et de la population de la wilaya de Djelfa ",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Avons effectué une visite de conformité du local situé à : ",0,1,'L');
-$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(65,5,"Adresse : ".$_POST["ADRESSE"],0,1,'L',1,1); 
-$pdf->SetXY(75,$pdf->GetY()-5.3); $pdf->Cell(60,5,"Commune : ".$pdf->nbrtostring('mvc','com','IDCOM',$_POST["COMMUNE"],'COMMUNE'),0,1,'L',1,1);
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(75,5,"Adresse : ".$_POST["ADRESSE"],0,1,'L',1,1); 
+$pdf->SetXY(85,$pdf->GetY()-5.3); $pdf->Cell(50,5,"Commune : ".$pdf->nbrtostring('mvc','com','IDCOM',$_POST["COMMUNE"],'COMMUNE'),0,1,'L',1,1);
 $pdf->SetXY(140,$pdf->GetY()-5.3); $pdf->Cell(60,5,"Wilaya de Djelfa",0,1,'L',1,1);
 $pdf->SetXY(5,$pdf->GetY()+5);
 if ($_POST["NAT"]==1) { $pdf->Cell(195,5,"Objet de la demande de transfert N°: ".$_POST["NUMD"]." du ".$_POST["DATED"],0,1,'L',1,1);}
@@ -103,8 +103,8 @@ $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Avons procédé au mesurage des
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Ainsi que la superficie du local situé à : ",0,1,'L');
 
 
-$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(65,5,"Adresse : ".$_POST["ADRESSE"],0,1,'L',1,1); 
-$pdf->SetXY(75,$pdf->GetY()-5.3); $pdf->Cell(60,5,"Commune : ".$pdf->nbrtostring('mvc','com','IDCOM',$_POST["COMMUNE"],'COMMUNE'),0,1,'L',1,1);
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(75,5,"Adresse : ".$_POST["ADRESSE"],0,1,'L',1,1); 
+$pdf->SetXY(85,$pdf->GetY()-5.3); $pdf->Cell(50,5,"Commune : ".$pdf->nbrtostring('mvc','com','IDCOM',$_POST["COMMUNE"],'COMMUNE'),0,1,'L',1,1);
 $pdf->SetXY(140,$pdf->GetY()-5.3); $pdf->Cell(60,5,"Wilaya de Djelfa",0,1,'L',1,1);
 $pdf->SetXY(5,$pdf->GetY()+5);
 if ($_POST["NAT"]==1) { $pdf->Cell(195,5,"Objet de la demande de transfert N°: ".$_POST["NUMD"]." du ".$_POST["DATED"],0,1,'L',1,1);}
