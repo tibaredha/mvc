@@ -31,8 +31,8 @@ $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetFo
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->wilayaar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->dsparp,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->dssar,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'رقم : '.$_POST["NUMDEC"].' /م. ص. س / '.substr($pdf->dateUS2FR($_POST["DATEDEC"]),0,4),0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'مقررة تتضمن تنصيب صيدلـــــية',0,1,'C');$pdf->SetFont('aefurat', '', 16);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'رقم : '.'_____'.' /م. ص. س / '.substr($pdf->dateUS2FR($_POST["DATEDEC"]),0,4),0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'مقــــرر تنصيب صيدلـــــية',0,1,'C');$pdf->SetFont('aefurat', '', 16);
 $pdf->SetXY(100,$pdf->GetY()+$y);$pdf->Cell(100,5,$pdf->ledspar,0,1,'C');$pdf->SetFont('aefurat', '', 13);
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->loi85_05,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->decret92_276,0,1,'R');
@@ -42,10 +42,10 @@ $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete58_95,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete67_96,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete110_96,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->cm03_05,0,1,'R');$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على شهادة النجاح في الصيدلة بتاريخ '.$pdf->dateUS2FR($_POST["DATED"]).' الصدرة عن جامعة '.$_POST["UNIV"].' تخص السيد (ة) '.$nomar.' '.$prenomar.'',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على شهلدة التسجيل بمجلس اخلاقيات المهنة للصيدلة رقم '.$_POST["NUMORDER"].' بتاريخ '.$pdf->dateUS2FR($_POST["DATEO"]).' للمعنى ',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->diplome.$pdf->dateUS2FR($_POST["DATED"]).' الصادرة عن جامعة '.$_POST["UNIV"].' تخص السيد (ة) '.$nomar.' '.$prenomar.'',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->ordre.$_POST["NUMORDER"].' بتاريخ '.$pdf->dateUS2FR($_POST["DATEO"]).' للمعنى (ة)  ',0,1,'R');
 /*************************************************************************************************************************/
-$pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(200,5,'بإقتراح من السيد رئيس مصلحة الهياكل و النشاط الصحي  ',0,1,'C');$pdf->SetFont('aefurat', 'U', 16);
+$pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(200,5,$pdf->proposition,0,1,'C');$pdf->SetFont('aefurat', 'U', 16);
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');$pdf->SetFont('aefurat', '', 13);
 /*************************************************************************************************************************/
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' صيدلي (ة) '.' بتنصيب  صيدليته (ها) الكائن مقرها ',0,1,'R');
