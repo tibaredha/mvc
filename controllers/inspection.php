@@ -423,6 +423,27 @@ class inspection extends Controller {
 	$this->view->render($this->route.'/conformite21');    
 	}
 	
+	/*pv de installation*/
+	function installation($id) 
+	{
+	$this->view->title = 'installation';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/installation');    
+	}
+	function ouverture($id) 
+	{
+	$this->view->title = 'ouverture';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/ouverture');    
+	}
+	
+	function changement($id) 
+	{
+	$this->view->title = 'changement';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/changement');    
+	}
+	
 	
 	
 	

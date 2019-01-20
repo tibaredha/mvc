@@ -31,7 +31,7 @@ $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetFo
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->wilayaar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->dsparp,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->dssar,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'رقم : '.$num1.' /م. ص. س / '.substr($date1,0,4),0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'رقم : '.$_POST["NUMDEC"].' /م. ص. س / '.substr($pdf->dateUS2FR($_POST["DATEDEC"]),0,4),0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'مقررة تتضمن تنصيب صيدلـــــية',0,1,'C');$pdf->SetFont('aefurat', '', 16);
 $pdf->SetXY(100,$pdf->GetY()+$y);$pdf->Cell(100,5,$pdf->ledspar,0,1,'C');$pdf->SetFont('aefurat', '', 13);
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->loi85_05,0,1,'R');
@@ -40,23 +40,20 @@ $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete52_95,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete58_95,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete67_96,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete110_96,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على شهادة النجاح في الصيدلة بتاريخ '.' 0000/00/00 '.' الصدرة عن جامعة '.'********'.' تخص السيد (ة) '.$nomar.' '.$prenomar.'',0,1,'R');
-//$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' صيدلي بتاريخ '.' __ __ ____ '.' المتعلق بفتح صيدلية ببلدية '.$commune,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على شهلدة التسجيل بمجلس اخلاقيات المهنة للصيدلة رقم '.' 000 '.' بتاريخ '.' 0000/00/00 '.' للمعنى ',0,1,'R');
-//$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء علي محضر المطابقة الخاص بالمحل  للصيدلية المؤرخ في '.'0000/00/00',0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete110_96,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->cm03_05,0,1,'R');$pdf->SetFont('aefurat', '', 13);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على شهادة النجاح في الصيدلة بتاريخ '.$pdf->dateUS2FR($_POST["DATED"]).' الصدرة عن جامعة '.$_POST["UNIV"].' تخص السيد (ة) '.$nomar.' '.$prenomar.'',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على شهلدة التسجيل بمجلس اخلاقيات المهنة للصيدلة رقم '.$_POST["NUMORDER"].' بتاريخ '.$pdf->dateUS2FR($_POST["DATEO"]).' للمعنى ',0,1,'R');
 /*************************************************************************************************************************/
 $pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(200,5,'بإقتراح من السيد رئيس مصلحة الهياكل و النشاط الصحي  ',0,1,'C');$pdf->SetFont('aefurat', 'U', 16);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');$pdf->SetFont('aefurat', '', 13);
 /*************************************************************************************************************************/
-$pdf->SetFont('aefurat', '', 13);
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' صيدلي (ة) '.' بتنصيب  صيدليته (ها) الكائن مقرها ',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,' ب '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article2bis,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article3,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article4,0,1,'R');
-$pdf->SetFont('aefurat', 'B', 14);
-$pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(100,5,'الجلفة في : '.$date1,0,1,'C');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article4,0,1,'R');$pdf->SetFont('aefurat', 'B', 14);
+$pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(100,5,'الجلفة في : '.$pdf->dateUS2FR($_POST["DATEDEC"]),0,1,'C');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
 $pdf->Output();
 ?>
