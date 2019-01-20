@@ -34,7 +34,7 @@ $data = array(
 "Fixe"         => '(000) 00-00-00',
 "Email"        => 'Email',
 "DIPLOME"      => '',
-"Universite"   => '',
+"UNIV"         => '',
 "numorder"     => '',
 "Dateorder"    => '00-00-0000',
 "REALISATION"  => '00-00-0000',
@@ -54,7 +54,7 @@ $this->label($x,$y+250,'Date');              $this->txts($x+100,$y+240,'DATE',0,
 $this->label($x,$y+280,'Nom');               $this->txt($x+100,$y+270,'NOM',0,$data['NOM'],'date');                                          $this->label($x+350,$y+280,'Prenom');                     $this->txt($x+450,$y+270,'PRENOM',0,$data['PRENOM'],'date');                                             $this->label($x+700,$y+280,'Sexe');          $this->combov1($x+800,$y+270,'SEXE',$data['SEXE']);
 $this->label($x,$y+310,'Wilaya');            $this->WILAYA($x+100,$y+300,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);$this->label($x+350,$y+310,'Commune');                    $this->COMMUNE($x+100+350,$y+300,'COMMUNE','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);            $this->label($x+700,$y+310,'Adresse');       $this->txt($x+100+350+350,$y+300,'ADRESSE',0,$data['ADRESSE'],'date');
 $this->label($x,$y+340,'Mobile');            $this->txts($x+100,$y+330,'Mobile',0,$data['Mobile'],'port');$this->label($x+350,$y+340,'Fixe');$this->txts($x+450,$y+330,'Fixe',0,$data['Fixe'],'phone');$this->label($x+700,$y+340,'E-mail');                                                                    $this->txt($x+100+350+350,$y+330,'Email',0,$data['Email'],'date');
-$this->label($x,$y+370,'Date diplome');      $this->txts($x+100,$y+360,'DIPLOME',0,	$data['DIPLOME'],'dateus44');$this->label($x+700,$y+370,'Universite'); $this->txt($x+800,$y+360,$data['Universite'],0,"",'date');
+$this->label($x,$y+370,'Date diplome');      $this->txts($x+100,$y+360,'DIPLOME',0,	$data['DIPLOME'],'dateus44');$this->label($x+700,$y+370,'Universite');  $this->UNIVERSITE($x+800,$y+360,'UNIV','country','mvc','wil',"الجزائر","الجزائر"); 
 $this->label($x,$y+400,'Order N ');          $this->txt($x+100,$y+390,'numorder',0,$data['numorder'],'date');$this->label($x+700,$y+400,'Date order');     $this->txt($x+800,$y+390,$data['Dateorder'],0,"",'date');
 $this->label($x,$y+407,'__________________________________________________________________________________________________________________');
 $this->label($x,$y+430,'Propriétaire');      $this->txt($x+100,$y+420,'PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');                        $this->label($x+350,$y+430,'Début contrat');              $this->txts($x+450,$y+420,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');                             $this->label($x+700,$y+430,'Fin contrat');    $this->txts($x+100+350+350,$y+420,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus2');

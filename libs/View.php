@@ -328,7 +328,21 @@ class View {
 	} 
 	return $resultat2='??????';
 	}
-	
+	function UNIVERSITE($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	{
+	mysqlconnect();
+	echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";		 
+	echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+	echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+	mysql_query("SET NAMES 'UTF8' ");
+	$result = mysql_query("SELECT * FROM $tb_name order by WILAYAS" );
+	while($data =  mysql_fetch_array($result))
+	{
+	echo '<option value="'.$data[2].'">'.$data[1].'</option>';
+	}
+	echo '</select>'."\n"; 
+	echo "</div>";
+	}
 	
 	function WILAYA($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
 	{

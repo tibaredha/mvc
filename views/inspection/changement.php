@@ -39,7 +39,7 @@ $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
 $this->label($x,$y+220,'Decision N ');              $this->txt($x+150,$y+210,'NUMDEC',0,"00");                      $this->label($x+400,$y+220,'Date Decision');   $this->txts($x+520,$y+210,'DATEDEC',0,date('j-m-Y'),'dateus1');
-$this->label($x,$y+260,'Date diplome ');            $this->txts($x+150,$y+250,'DATED',0,date('j-m-Y'),'dateus');    $this->label($x+400,$y+260,'Universite ');     $this->txtarid($x+520,$y+250,'UNIV','UNIV',0,$data['UNIV'],'date');
+$this->label($x,$y+260,'Date diplome ');            $this->txts($x+150,$y+250,'DATED',0,date('j-m-Y'),'dateus');    $this->label($x+400,$y+260,'Universite ');     $this->UNIVERSITE($x+520,$y+250,'UNIV','country','mvc','wil',"الجزائر","الجزائر"); 
 $this->label($x,$y+300,'Order N ');                 $this->txt($x+150,$y+290,'NUMORDER',0,"00");                    $this->label($x+400,$y+300,'Date order');      $this->txts($x+520,$y+290,'DATEO',0,date('j-m-Y'),'dateus2');
 $this->label($x,$y+340,'Ouverture N ');             $this->txt($x+150,$y+330,'NUMOUVERTURE',0,"00");                $this->label($x+400,$y+340,'Date ouverture');  $this->txts($x+520,$y+330,'DATEOUV',0,date('j-m-Y'),'dateus3');
 $this->label($x,$y+380,'Demande N ');               $this->txt($x+150,$y+370,'NUMORDEM',0,"00");                    $this->label($x+400,$y+380,'Date demande');    $this->txts($x+520,$y+370,'DATEDEM',0,date('j-m-Y'),'dateus4');

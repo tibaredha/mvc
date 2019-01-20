@@ -423,7 +423,7 @@ class inspection extends Controller {
 	$this->view->render($this->route.'/conformite21');    
 	}
 	
-	/*pv de installation*/
+	/*DECISION PHARMACIE */
 	function installation($id) 
 	{
 	$this->view->title = 'installation';
@@ -444,8 +444,47 @@ class inspection extends Controller {
 	$this->view->render($this->route.'/changement');    
 	}
 	
+	/*DECISION MEDECIN GENERALISTE */
+	function installation17($id) 
+	{
+	$this->view->title = 'installation';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/installation17');    
+	}
+	function ouverture17($id) 
+	{
+	$this->view->title = 'ouverture';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/ouverture17');    
+	}
 	
+	function changement17($id) 
+	{
+	$this->view->title = 'changement';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/changement17');    
+	}
 	
+	/*DECISION DENTIST GENERALISTE */
+	function installation15($id) 
+	{
+	$this->view->title = 'installation';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/installation15');    
+	}
+	function ouverture15($id) 
+	{
+	$this->view->title = 'ouverture';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/ouverture15');    
+	}
+	
+	function changement15($id) 
+	{
+	$this->view->title = 'changement';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/changement15');    
+	}
 	
 	/*personnel*/	
 	
