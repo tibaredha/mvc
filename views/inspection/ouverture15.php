@@ -25,10 +25,10 @@ $data = array(
 "ADRESSE"  => $this->user[0]['ADRESSE'],
 "UNIV"  => 'الجزائر',
 
-"NAT"        => array( 
-				"Transfert"=>"1",
-				"Instatllation"=>"2",
-				"Ouverture"=>"3"			 
+"ETA"        => array( 
+				"EPSP"=>"  المؤسسة العمومية للصحة الجوارية ",
+				"EPH"=>" المؤسسة العمومية الأستشفائية",
+				"EHS"=>" المؤسسة الأستشفائية المتخصصة"			 
 				),
 				
 				
@@ -46,9 +46,13 @@ $this->label($x,$y+220,'Decision N ');              $this->txt($x+150,$y+210,'NU
 $this->label($x,$y+260,'Date diplome ');            $this->txts($x+150,$y+250,'DATED',0,date('j-m-Y'),'dateus');    $this->label($x+400,$y+260,'Universite ');     $this->UNIVERSITE($x+520,$y+250,'UNIV','country','mvc','wil',"الجزائر","الجزائر"); 
 $this->label($x,$y+300,'Order N ');                 $this->txt($x+150,$y+290,'NUMORDER',0,"00");                    $this->label($x+400,$y+300,'Date order');      $this->txts($x+520,$y+290,'DATEO',0,date('j-m-Y'),'dateus2');
 
-$this->label($x,$y+340,'Démission N ');             $this->txt($x+150,$y+330,'NUMDÉMISSION',0,"00");                $this->label($x+400,$y+340,'Date Démission');  $this->txts($x+520,$y+330,'DATEDÉMISSION',0,date('j-m-Y'),'dateus3');
+$this->label($x,$y+340,'Démission N ');             $this->txt($x+150,$y+330,'NUMDÉMISSION',0,"00");                $this->label($x+400,$y+340,'Date Démission');  $this->txts($x+520,$y+330,'DATEDÉMISSION',0,date('j-m-Y'),'dateus3');   $this->label($x+780,$y+340,'Etablissement ');    $this->combov1($x+880,$y+330,'ETA',$data['ETA']); 
+
+
 $this->label($x,$y+380,'Demande N ');               $this->txt($x+150,$y+370,'NUMORDEM',0,"00");                    $this->label($x+400,$y+380,'Date demande');    $this->txts($x+520,$y+370,'DATEDEM',0,date('j-m-Y'),'dateus4');
 $this->label($x,$y+420,'Conformite N ');            $this->txt($x+150,$y+410,'NUMORCONF',0,"00");                   $this->label($x+400,$y+420,'Date conformite'); $this->txts($x+520,$y+410,'DATECONF',0,date('j-m-Y'),'dateus44');
+
+
 
 
 $this->submit($x+880,$y+540,$data['butun']);

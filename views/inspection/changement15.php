@@ -23,11 +23,11 @@ $data = array(
 "COMMUNEN2" => View::nbrtostring('com','IDCOM',$this->user[0]['COMMUNE'],'COMMUNE'),
 "ADRESSE"  => $this->user[0]['ADRESSE'],
 "UNIV"  => 'الجزائر',
-"NAT"        => array( 
-				"Transfert"=>"1",
-				"Instatllation"=>"2",
-				"Ouverture"=>"3"			 
-				),				
+"ETA"        => array( 
+				"EPSP"=>"  المؤسسة العمومية للصحة الجوارية ",
+				"EPH"=>" المؤسسة العمومية الأستشفائية",
+				"EHS"=>" المؤسسة الأستشفائية المتخصصة"			 
+				),	
 "PROPRIETAIRE"  => 'x',
 "DEBUTCONTRAT"  => '00-00-0000',
 "FINCONTRAT"    => '00-00-0000'				
