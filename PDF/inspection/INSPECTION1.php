@@ -8,6 +8,51 @@ class INSPECTION1 extends PDF_Invoice
      public $db_user="root";
      public $db_pass="";
 	 public $utf8 = "" ;
+	 public $repfr="République algérienne démocratique et populaire";
+	 public $mspfr="Ministère de la santé de la population et de la réforme hospitalière";
+	 public $dspfr="Direction de la santé et de la population de la wilaya de ";
+	
+	
+	function BORDEREAU($titre,$datejour1,$datejour2,$EPH1,$STRUCTURED) 
+	{
+	$this->SetXY(5,10);$this->cell(200,5,$this->repfr,0,0,'C',1,0);
+	$this->SetXY(5,20);$this->cell(200,5,$this->mspfr,0,0,'C',1,0);
+	$this->SetXY(5,30);$this->cell(200,5,$this->dspfr.'Djelfa',0,0,'C',1,0);
+
+	$this->SetXY(155,45);$this->cell(50,5,"Le : ".date('d-m-Y'),0,0,'L',0,0);
+	$this->SetXY(5,45);$this->cell(100,5,"N°............... / ".date('Y'),0,0,'L',0,0);
+	$this->SetXY(40,55);$this->cell(150,5,"A",0,0,'C',0,0);
+	$this->SetXY(40,65);$this->cell(150,5,"Monsieur le Directeur de la sante et de la population de la wilaya de ".$this->nbrtostring("wil","IDWIL",$this->nbrtostring("structure","id",$STRUCTURED,"idwil"),"WILAYAS"),0,0,'C',0,0);
+	$this->SetXY(5,85);$this->cell(200,10,$titre ,0,0,'C',1,0);
+	$this->RoundedRect(5,108, 15, 130, 2, $style = '');
+	$this->RoundedRect(20,108, 105, 130, 2, $style = '');
+	$this->RoundedRect(20+105,108, 15, 130, 2, $style = '');
+	$this->RoundedRect(20+105+15,108, 65, 130, 2, $style = '');
+	$this->SetXY(5,108);$this->cell(15,10,"N°" ,1,0,'C',1,0);
+	$this->SetXY(5+15,108);$this->cell(105,10,"DESIGNATION" ,1,0,'C',1,0);
+	$this->SetXY(5+15+105,108);$this->cell(15,10,"NBR" ,1,0,'C',1,0);
+	$this->SetXY(5+30+105,108);$this->cell(65,10,"OBSERVATION" ,1,0,'C',1,0);
+	$this->SetXY(5+15,128);$this->cell(105,10,"Veuillez trouver ci-joint" ,0,0,'C',0,0);
+	$this->SetXY(5,148);$this->cell(15,10,"1" ,0,0,'C',0,0);
+	$this->SetXY(5+15,148);$this->cell(105,10,"Repartition Geographique" ,0,0,'L',0,0);
+	// $this->SetXY(5+15+105,148);$this->cell(15,10,$this->valeurmois('deceshosp','DINS',$datejour1,$datejour2,$EPH1),0,0,'C',0,0);
+	// $this->SetXY(5+30+105,148);$this->cell(65,10,html_entity_decode(utf8_decode("" )),0,0,'C',0,0);
+	$this->SetXY(5,158);$this->cell(15,10,"2",0,0,'C',0,0);
+	$this->SetXY(5+15,158);$this->cell(105,10,"Repartition par communes de residence" ,0,0,'L',0,0);
+	$this->SetXY(5+15+105,158);$this->cell(15,10,html_entity_decode(utf8_decode("01" )),0,0,'C',0,0);
+	// $this->SetXY(5+30+105,158);$this->cell(65,10,html_entity_decode(utf8_decode("Rapport" )),0,0,'C',0,0);
+    $this->SetXY(5,168);$this->cell(15,10,"3" ,0,0,'C',0,0);
+	$this->SetXY(5+15,168);$this->cell(105,10,"liste nominative" ,0,0,'L',0,0);
+	$this->SetXY(5+15+105,168);$this->cell(15,10,"01" ,0,0,'C',0,0);
+	//$this->SetXY(5+30+105,168);$this->cell(65,10,"Repartition par commune ",0,0,'C',0,0);
+	$this->SetXY(5,178);$this->cell(15,10,"4",0,0,'C',0,0);
+	$this->SetXY(5+15,178);$this->cell(105,10,"Repartition par commune des anomalies" ,0,0,'L',0,0);
+	$this->SetXY(5+15+105,178);$this->cell(15,10,html_entity_decode(utf8_decode("01" )),0,0,'C',0,0);
+	$this->SetXY(5+30+105,178);$this->cell(65,10,html_entity_decode(utf8_decode("Du ".$this->dateUS2FR($datejour1)." Au ".$this->dateUS2FR($datejour2) )),0,0,'C',0,0);
+	$this->SetXY(5+30+105,250);$this->cell(40,10,html_entity_decode(utf8_decode("Le Directeur" )),0,0,'L',0,0);
+	}
+	
+	
 	
 //*************poure mettre le celle en verticale 	
 	var $angle=0;
@@ -148,9 +193,10 @@ class INSPECTION1 extends PDF_Invoice
 	$res=mysql_query($query);
 	$tot=mysql_num_rows($res);
 	$this->SetXY(5,45); 
+	$x=0;
 	while($row=mysql_fetch_object($res))
 	{
-	$this->cell(10,5,$row->id,1,0,'C',0);
+	$this->cell(10,5,$x=$x+1,1,0,'C',0);
 	$this->cell(20,5,$this->dateUS2FR($row->DATE),1,0,'C',0);
 	$this->cell(50,5,$row->NOM.'_'.$row->PRENOM,1,0,'L',0,0);
 
@@ -229,8 +275,8 @@ class INSPECTION1 extends PDF_Invoice
 	while($row=mysql_fetch_object($res))
 	{
 		$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
-		if ($row->POPULATION <= 4500){$nc=round($row->POPULATION/4500);} else{$nc=round($row->POPULATION/5000);} 
-	    $this->cell(53,5,"Population : ".$row->POPULATION.' NC = '.$nc,1,0,'L',1,0);
+		if ($row->p2018 <= 4500){$nc=round($row->p2018/4500);} else{$nc=round($row->p2018/5000);} 
+	    $this->cell(53,5,"Population : ".$row->p2018.' NC = '.$nc,1,0,'L',1,0);
 		$this->SetXY(5,$this->GetY()+5);
 		$this->cell(25,5,'Nom',1,0,'L',1,0);
 		$this->cell(35,5,'Prenom',1,0,'L',1,0);
@@ -266,16 +312,16 @@ class INSPECTION1 extends PDF_Invoice
 			$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
 	        if ($tot2>0) 
 			{
-			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )"." -- 01 Specialiste  pour  ".round($row->POPULATION/$tot2).' Hab',1,0,'L',1,0);
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )"." -- 01 Specialiste  pour  ".round($row->p2018/$tot2).' Hab',1,0,'L',1,0);
 			} 
 			else 
 			{
-			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )",1,0,'L',1,0);
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )",1,0,'L',1,0);
 			}
 			$DNC=$nc - $tot2;
 			if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
 			$this->cell(53,5," DNC = ".$DNC,1,0,'L',1,0);
-			$this->SetFillColor(230);
+			$this->SetFillColor(200);
 	$this->SetXY(5,$this->GetY()+10);  
 	}
     }
@@ -290,8 +336,8 @@ class INSPECTION1 extends PDF_Invoice
 	while($row=mysql_fetch_object($res))
 	{
 		$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
-		if ($row->POPULATION <= 4500){$nc=round($row->POPULATION/4500);} else{$nc=round($row->POPULATION/5000);} 
-	    $this->cell(53,5,"Population : ".$row->POPULATION.' NC = '.$nc,1,0,'L',1,0);
+		if ($row->p2018 <= 4500){$nc=round($row->p2018/4500);} else{$nc=round($row->p2018/5000);} 
+	    $this->cell(53,5,"Population : ".$row->p2018.' NC = '.$nc,1,0,'L',1,0);
 		$this->SetXY(5,$this->GetY()+5);
 		$this->cell(25,5,'Nom',1,0,'L',1,0);
 		$this->cell(35,5,'Prenom',1,0,'L',1,0);
@@ -327,16 +373,16 @@ class INSPECTION1 extends PDF_Invoice
 			$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
 	        if ($tot2>0) 
 			{
-			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )"." -- 01 Pharmacien  pour  ".round($row->POPULATION/$tot2).' Hab',1,0,'L',1,0);
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )"." -- 01 Pharmacien  pour  ".round($row->p2018/$tot2).' Hab',1,0,'L',1,0);
 			} 
 			else 
 			{
-			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )",1,0,'L',1,0);
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )",1,0,'L',1,0);
 			}
 			$DNC=$nc - $tot2;
 			if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
 			$this->cell(53,5," DNC = ".$DNC,1,0,'L',1,0);
-			$this->SetFillColor(230);
+			$this->SetFillColor(200);
 	$this->SetXY(5,$this->GetY()+10);  
 	}
     }
@@ -350,8 +396,8 @@ class INSPECTION1 extends PDF_Invoice
 	while($row=mysql_fetch_object($res))
 	{
 		$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
-		if ($row->POPULATION <= 4500){$nc=round($row->POPULATION/4500);} else{$nc=round($row->POPULATION/5000);} 
-	    $this->cell(53,5,"Population : ".$row->POPULATION.' NC = '.$nc,1,0,'L',1,0);
+		if ($row->p2018 <= 4500){$nc=round($row->p2018/4500);} else{$nc=round($row->p2018/5000);} 
+	    $this->cell(53,5,"Population : ".$row->p2018.' NC = '.$nc,1,0,'L',1,0);
 		$this->SetXY(5,$this->GetY()+5);
 		$this->cell(25,5,'Nom',1,0,'L',1,0);
 		$this->cell(35,5,'Prenom',1,0,'L',1,0);
@@ -387,11 +433,11 @@ class INSPECTION1 extends PDF_Invoice
 			$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
 	        if ($tot2>0) 
 			{
-			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )"." -- 01 Pharmacien  pour  ".round($row->POPULATION/$tot2).' Hab',1,0,'L',1,0);
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )"." -- 01 Pharmacien  pour  ".round($row->p2018/$tot2).' Hab',1,0,'L',1,0);
 			} 
 			else 
 			{
-			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )",1,0,'L',1,0);
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )",1,0,'L',1,0);
 			}
 			$DNC=$nc - $tot2;
 			if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
@@ -411,8 +457,8 @@ class INSPECTION1 extends PDF_Invoice
 	while($row=mysql_fetch_object($res))
 	{
 		$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
-		if ($row->POPULATION <= 4500){$nc=round($row->POPULATION/4500);} else{$nc=round($row->POPULATION/5000);} 
-	    $this->cell(53,5,"Population : ".$row->POPULATION.' NC = '.$nc,1,0,'L',1,0);
+		if ($row->p2018 <= 4500){$nc=round($row->p2018/4500);} else{$nc=round($row->p2018/5000);} 
+	    $this->cell(53,5,"Population : ".$row->p2018.' NC = '.$nc,1,0,'L',1,0);
 		$this->SetXY(5,$this->GetY()+5);
 		$this->cell(30,5,'Nom',1,0,'L',1,0);
 		$this->cell(30,5,'Prenom',1,0,'L',1,0);
@@ -446,11 +492,11 @@ class INSPECTION1 extends PDF_Invoice
 			$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
 	        if ($tot2>0) 
 			{
-			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )"." -- 01 Dentiste  pour  ".round($row->POPULATION/$tot2).' Hab',1,0,'L',1,0);
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )"." -- 01 Dentiste  pour  ".round($row->p2018/$tot2).' Hab',1,0,'L',1,0);
 			} 
 			else 
 			{
-			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )",1,0,'L',1,0);
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )",1,0,'L',1,0);
 			}
 			$DNC=$nc - $tot2;
 			if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
@@ -1359,12 +1405,12 @@ class INSPECTION1 extends PDF_Invoice
 	{    
 		$this->SetFont('Times', 'B', 10);
 		$h=35;
-		$this->SetXY(8,$h);$this->cell(15,5,"IDCOM",1,0,'C',1,0);
+		$this->SetXY(8,$h);$this->cell(15,5,"N°",1,0,'C',1,0);
 		$this->cell(90,5,"Commune",1,0,'C',1,0);
 	    $this->cell(20,5,"Superficie",1,0,'C',1,0);
-		$this->cell(30,5,"Population 2008",1,0,'C',1,0);
+		$this->cell(30,5,"Population 2018",1,0,'C',1,0);
 		$this->cell(20,5,$dnrdon,1,0,'C',1,0);
-		$this->cell(20,5,"Tx ",1,0,'C',1,0);
+		$this->cell(20,5,"Tx 10.000",1,0,'C',1,0);
 		$this->SetXY(8,$h+5);
 		$IDWIL=17000;
 		$ANNEE='2007';
@@ -1372,21 +1418,23 @@ class INSPECTION1 extends PDF_Invoice
 		$query="SELECT * FROM com where IDWIL='$IDWIL' and yes='1' order by COMMUNE "; //    % %will search form 0-9,a-z            
 		$resultat=mysql_query($query);
 		$totalmbr1=mysql_num_rows($resultat);
+		
+		$x=0;
 		while($row=mysql_fetch_object($resultat))
 		{
 			$this->SetFont('Times', '', 10);
-			$this->cell(15,4,trim($row->IDCOM),1,0,'C',0);
-			$this->cell(90,4,trim($row->COMMUNE),1,0,'L',0);
-			$this->cell(20,4,trim($row->SUPER),1,0,'L',0);
-			$this->cell(30,4,trim($row->POPULATION),1,0,'L',0);
-			$this->cell(20,4,$this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED),1,0,'L',0);
-			$this->cell(20,4,round(($this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED)*1000)/$row->POPULATION,3),1,0,'L',0);
-			$this->SetXY(8,$this->GetY()+4); 
+			$this->cell(15,5,trim($x=$x+1),1,0,'C',0);
+			$this->cell(90,5,trim($row->COMMUNE),1,0,'L',0);
+			$this->cell(20,5,trim($row->SUPER),1,0,'L',0);
+			$this->cell(30,5,trim($row->p2018),1,0,'L',0);
+			$this->cell(20,5,$this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED),1,0,'L',0);
+			$this->cell(20,5,round(($this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED)*10000)/$row->p2018,3),1,0,'L',0);
+			$this->SetXY(8,$this->GetY()+5); 
 		}
 		$req="SELECT SUM(SUPER) AS total FROM com WHERE IDWIL='$IDWIL' and yes='1'";
 		$query1 = mysql_query($req);   
 		$rs = mysql_fetch_assoc($query1);
-		$req1="SELECT SUM(POPULATION) AS total1 FROM com WHERE IDWIL='$IDWIL' and yes='1'";
+		$req1="SELECT SUM(p2018) AS total1 FROM com WHERE IDWIL='$IDWIL' and yes='1'";
 		$query11 = mysql_query($req1);   
 		$rs1 = mysql_fetch_assoc($query11);
 		$this->SetXY(8,$this->GetY());$this->cell(15,5,"Total",1,0,'C',1,0);	  
@@ -1394,7 +1442,7 @@ class INSPECTION1 extends PDF_Invoice
 		$this->cell(20,5,round($rs['total'],2),1,0,'C',1,0);	  
 	    $this->cell(30,5,round($rs1['total1'],2),1,0,'C',1,0);	  
 		$this->cell(20,5,$this->valeurmoisdecest('','structure','DATE','COMMUNE',$datejour1,$datejour2,'','',$STRUCTURED),1,0,'C',1,0);	  
-		$this->cell(20,5,round(($this->valeurmoisdecest('','structure','DATE','COMMUNE',$datejour1,$datejour2,'','',$STRUCTURED)*1000)/round($rs1['total1'],3),3),1,0,'C',1,0);	  
+		$this->cell(20,5,round(($this->valeurmoisdecest('','structure','DATE','COMMUNE',$datejour1,$datejour2,'','',$STRUCTURED)*10000)/round($rs1['total1'],3),3),1,0,'C',1,0);	  
 	}
 	function mdocomm($DATEJOUR1,$DATEJOUR2,$COMMUNER,$STRUCTURED,$MDO) 
 	{

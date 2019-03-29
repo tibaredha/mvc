@@ -33,28 +33,31 @@ if ($_POST['EPH']=='25') {$EPH1='kinesitherapeute';$EPH="=25";}
 require('INSPECTION1.php');
 $pdf = new INSPECTION1 ( 'L', 'mm', 'A4' );$pdf->AliasNbPages();//importatant pour metre en fonction  le totale nombre de page avec "/{nb}" 
 $date=date("d-m-y");
-$pdf->SetFillColor(230);//fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
+$pdf->SetFillColor(200);//fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
 $pdf->SetTextColor(0,0,0);//text noire
 $pdf->SetFont('Times', 'B', 10);
-
-// $pdf->AddPage('p','A4');
-// $pdf->entete($datejour1,$datejour2,'Repartition Geographique : ',$EPH1);
-// $pdf->djelfa($pdf->datasig($datejour1,$datejour2,$EPH,33),20,128,3.7,'commune');//commune//dairas 
+$pdf->AddPage('p','A4');
+$pdf->BORDEREAU("",$datejour1,$datejour2,$EPH1,"");
 
 
-// $pdf->AddPage('p','A4');
-// $pdf->entete($datejour1,$datejour2,'Repartition par communes de residence : ',$EPH1);
-// $pdf->tblparcommune('structure',$datejour1,$datejour2,$EPH) ;
+$pdf->AddPage('p','A4');
+$pdf->entete($datejour1,$datejour2,'Repartition Geographique : ',$EPH1);
+$pdf->djelfa($pdf->datasig($datejour1,$datejour2,$EPH,33),20,128,3.7,'commune');//commune//dairas 
 
 
-// $pdf->AddPage('p','A4');
-// $pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
-// $pdf->listenominative($EPH);
+$pdf->AddPage('p','A4');
+$pdf->entete($datejour1,$datejour2,'Repartition par communes de residence : ',$EPH1);
+$pdf->tblparcommune('Structure',$datejour1,$datejour2,$EPH) ;
 
 
-// $pdf->AddPage('p','A4');
-// $pdf->entete($datejour1,$datejour2,'Repartition par commune des anomalies : ',$EPH1);
-// $pdf->anomalies($EPH);
+$pdf->AddPage('p','A4');
+$pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
+$pdf->listenominative($EPH);
+
+
+$pdf->AddPage('p','A4');
+$pdf->entete($datejour1,$datejour2,'Repartition par commune des anomalies : ',$EPH1);
+$pdf->anomalies($EPH);
 
 //**********************************************en fonction de la structure *****************************************************************//
 if ($_POST['EPH']=='16') {//medecin specialiste 
