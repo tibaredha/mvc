@@ -219,7 +219,127 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(5,$this->GetY()+10);  
 	}
 	}
+	function medecinsp($EPH)
+	{
+	$this->mysqlconnect();
+	$query = "SELECT * from com where IDWIL='17000' and yes='1'  ORDER BY COMMUNE"; 
+	$res=mysql_query($query);
+	$tot=mysql_num_rows($res);
+	$this->SetXY(5,40); 
+	while($row=mysql_fetch_object($res))
+	{
+		$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
+		if ($row->POPULATION <= 4500){$nc=round($row->POPULATION/4500);} else{$nc=round($row->POPULATION/5000);} 
+	    $this->cell(53,5,"Population : ".$row->POPULATION.' NC = '.$nc,1,0,'L',1,0);
+		$this->SetXY(5,$this->GetY()+5);
+		$this->cell(25,5,'Nom',1,0,'L',1,0);
+		$this->cell(35,5,'Prenom',1,0,'L',1,0);
+		$this->cell(10,5,'Sexe',1,0,'C',1,0);
+		$this->cell(59,5,'Adresse',1,0,'L',1,0);
+		$this->cell(18,5,'Date',1,0,'C',1,0);
+		$this->cell(18,5,'Labo',1,0,'C',1,0);
+		$this->cell(18,5,'Fonc',1,0,'C',1,0);
+		$this->cell(17,5,'Deci',1,0,'C',1,0);
+		$query1 = "SELECT * from structure where  STRUCTURE $EPH  and COMMUNE=$row->IDCOM and ETAT=0 ORDER BY NOM"; 
+		$res1=mysql_query($query1);
+		$tot2=mysql_num_rows($res1);
+		$this->SetXY(5,$this->GetY()+5); 
+		if ($tot2 > 0) {
+		 while($row1=mysql_fetch_object($res1))
+			{
+			$this->cell(25,5,$row1->NOM,1,0,'L',0);
+			$this->cell(35,5,$row1->PRENOM,1,0,'L',0);
+			$this->cell(10,5,$row1->SEX,1,0,'C',0);$this->SetFont('Arial','B',7);
+			$this->cell(59,5,$row1->ADRESSE,1,0,'L',0);$this->SetFont('Arial','B',9);
+			$this->cell(18,5,$this->dateUS2FR($row1->DATE),1,0,'C',0);
+			$this->cell(18,5,'',1,0,'C',0);
+			$this->cell(18,5,'',1,0,'C',0);
+			$this->cell(17,5,'',1,0,'C',0);
+			$this->SetXY(5,$this->GetY()+5);  
+			}
+		} 
+		else 
+		{
+		$this->cell(200,5,'Néant',1,0,'C',0);
+		$this->SetXY(5,$this->GetY()+5);
+		}   
+			$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
+	        if ($tot2>0) 
+			{
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )"." -- 01 Specialiste  pour  ".round($row->POPULATION/$tot2).' Hab',1,0,'L',1,0);
+			} 
+			else 
+			{
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )",1,0,'L',1,0);
+			}
+			$DNC=$nc - $tot2;
+			if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
+			$this->cell(53,5," DNC = ".$DNC,1,0,'L',1,0);
+			$this->SetFillColor(230);
+	$this->SetXY(5,$this->GetY()+10);  
+	}
+    }
 	
+	function medecing($EPH)
+	{
+	$this->mysqlconnect();
+	$query = "SELECT * from com where IDWIL='17000' and yes='1'  ORDER BY COMMUNE"; 
+	$res=mysql_query($query);
+	$tot=mysql_num_rows($res);
+	$this->SetXY(5,40); 
+	while($row=mysql_fetch_object($res))
+	{
+		$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
+		if ($row->POPULATION <= 4500){$nc=round($row->POPULATION/4500);} else{$nc=round($row->POPULATION/5000);} 
+	    $this->cell(53,5,"Population : ".$row->POPULATION.' NC = '.$nc,1,0,'L',1,0);
+		$this->SetXY(5,$this->GetY()+5);
+		$this->cell(25,5,'Nom',1,0,'L',1,0);
+		$this->cell(35,5,'Prenom',1,0,'L',1,0);
+		$this->cell(10,5,'Sexe',1,0,'C',1,0);
+		$this->cell(59,5,'Adresse',1,0,'L',1,0);
+		$this->cell(18,5,'Date',1,0,'C',1,0);
+		$this->cell(18,5,'Labo',1,0,'C',1,0);
+		$this->cell(18,5,'Fonc',1,0,'C',1,0);
+		$this->cell(17,5,'Deci',1,0,'C',1,0);
+		$query1 = "SELECT * from structure where  STRUCTURE $EPH  and COMMUNE=$row->IDCOM and ETAT=0 ORDER BY NOM"; 
+		$res1=mysql_query($query1);
+		$tot2=mysql_num_rows($res1);
+		$this->SetXY(5,$this->GetY()+5); 
+		if ($tot2 > 0) {
+		 while($row1=mysql_fetch_object($res1))
+			{
+			$this->cell(25,5,$row1->NOM,1,0,'L',0);
+			$this->cell(35,5,$row1->PRENOM,1,0,'L',0);
+			$this->cell(10,5,$row1->SEX,1,0,'C',0);$this->SetFont('Arial','B',7);
+			$this->cell(59,5,$row1->ADRESSE,1,0,'L',0);$this->SetFont('Arial','B',9);
+			$this->cell(18,5,$this->dateUS2FR($row1->DATE),1,0,'C',0);
+			$this->cell(18,5,'',1,0,'C',0);
+			$this->cell(18,5,'',1,0,'C',0);
+			$this->cell(17,5,'',1,0,'C',0);
+			$this->SetXY(5,$this->GetY()+5);  
+			}
+		} 
+		else 
+		{
+		$this->cell(200,5,'Néant',1,0,'C',0);
+		$this->SetXY(5,$this->GetY()+5);
+		}   
+			$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
+	        if ($tot2>0) 
+			{
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )"." -- 01 Pharmacien  pour  ".round($row->POPULATION/$tot2).' Hab',1,0,'L',1,0);
+			} 
+			else 
+			{
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )",1,0,'L',1,0);
+			}
+			$DNC=$nc - $tot2;
+			if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
+			$this->cell(53,5," DNC = ".$DNC,1,0,'L',1,0);
+			$this->SetFillColor(230);
+	$this->SetXY(5,$this->GetY()+10);  
+	}
+    }
 	function pharmacie($EPH)
 	{
 	$this->mysqlconnect();
@@ -230,7 +350,6 @@ class INSPECTION1 extends PDF_Invoice
 	while($row=mysql_fetch_object($res))
 	{
 		$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
-		
 		if ($row->POPULATION <= 4500){$nc=round($row->POPULATION/4500);} else{$nc=round($row->POPULATION/5000);} 
 	    $this->cell(53,5,"Population : ".$row->POPULATION.' NC = '.$nc,1,0,'L',1,0);
 		$this->SetXY(5,$this->GetY()+5);
@@ -291,7 +410,9 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(5,40); 
 	while($row=mysql_fetch_object($res))
 	{
-		$this->cell(200,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
+		$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
+		if ($row->POPULATION <= 4500){$nc=round($row->POPULATION/4500);} else{$nc=round($row->POPULATION/5000);} 
+	    $this->cell(53,5,"Population : ".$row->POPULATION.' NC = '.$nc,1,0,'L',1,0);
 		$this->SetXY(5,$this->GetY()+5);
 		$this->cell(30,5,'Nom',1,0,'L',1,0);
 		$this->cell(30,5,'Prenom',1,0,'L',1,0);
@@ -322,7 +443,19 @@ class INSPECTION1 extends PDF_Invoice
 		$this->cell(200,5,'Néant',1,0,'C',0);
 		$this->SetXY(5,$this->GetY()+5);
 		}   
-			$this->cell(179+21,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
+			$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
+	        if ($tot2>0) 
+			{
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )"." -- 01 Dentiste  pour  ".round($row->POPULATION/$tot2).' Hab',1,0,'L',1,0);
+			} 
+			else 
+			{
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->POPULATION)." ( 10.000 Hab )",1,0,'L',1,0);
+			}
+			$DNC=$nc - $tot2;
+			if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
+			$this->cell(53,5," DNC = ".$DNC,1,0,'L',1,0);
+			$this->SetFillColor(230);
 	$this->SetXY(5,$this->GetY()+10);  
 	}
 	}

@@ -57,6 +57,22 @@ $pdf->SetFont('Times', 'B', 10);
 // $pdf->anomalies($EPH);
 
 //**********************************************en fonction de la structure *****************************************************************//
+if ($_POST['EPH']=='16') {//medecin specialiste 
+$pdf->AddPage('p','A4');
+$pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
+$pdf->medecinsp($EPH);
+$pdf->AddPage('L','A4');
+$pdf->entetel($datejour1,$datejour2,"Repartition par date d'inspection/anomalie constatée  : ",$EPH1);
+$pdf->repartanomx($datejour1,$datejour2,$EPH);
+}
+if ($_POST['EPH']=='17') {//medecin generaliste 
+$pdf->AddPage('p','A4');
+$pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
+$pdf->medecing($EPH);
+$pdf->AddPage('L','A4');
+$pdf->entetel($datejour1,$datejour2,"Repartition par date d'inspection/anomalie constatée  : ",$EPH1);
+$pdf->repartanomx($datejour1,$datejour2,$EPH);
+}
 if ($_POST['EPH']=='12') {//pharmacie 
 $pdf->AddPage('p','A4');
 $pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
@@ -64,7 +80,6 @@ $pdf->pharmacie($EPH);
 $pdf->AddPage('L','A4');
 $pdf->entetel($datejour1,$datejour2,"Repartition par date d'inspection/anomalie constatée  : ",$EPH1);
 $pdf->repartanomx($datejour1,$datejour2,$EPH);
-
 }
 if ($_POST['EPH']=='15') {//dentiste
 $pdf->AddPage('p','A4');
