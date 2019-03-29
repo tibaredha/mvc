@@ -59,7 +59,7 @@ $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
 $this->label($x,$y+250,'Date');              $this->txts($x+100,$y+240,'DATE',0,$data['DATE'],'dateus');  
-$this->label($x+350,$y+250,'Type');          $this->combostructure($x+450,$y+240,'STRUCTURE','structurebis',$this->user[0]['STRUCTURE'],$this->user[0]['STRUCTURE'],'class','id','structure');//$this->combov1($x+450,$y+240,'STRUCTURE',$data['STRUCTURE']);
+$this->label($x+350,$y+250,'Type');          $this->combostructure($x+450,$y+240,'STRUCTURE','structurebis',$this->user[0]['STRUCTURE'],View::nbrtostring('structurebis','id',$this->user[0]['STRUCTURE'],'structure'),'class','id','structure');//$this->combov1($x+450,$y+240,'STRUCTURE',$data['STRUCTURE']);
 $this->label($x+700,$y+250,'Nature');        $this->combov1($x+800,$y+240,'NATURE',$data['NATURE']);
 $this->label($x,$y+280,'Nom');               $this->txt($x+100,$y+270,'NOM',0,$data['NOM'],'date');
 $this->label($x+350,$y+280,'Prenom');        $this->txt($x+450,$y+270,'PRENOM',0,$data['PRENOM'],'date');
