@@ -59,7 +59,7 @@ $pdf->SetFont('Times', 'B', 10);
 //**********************************************en fonction de la structure *****************************************************************//
 if ($_POST['EPH']=='12') {//pharmacie 
 $pdf->AddPage('p','A4');
-$pdf->entete($datejour1,$datejour2,'Repartition par laboratoire : ',$EPH1);
+$pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
 $pdf->pharmacie($EPH);
 $pdf->AddPage('L','A4');
 $pdf->entetel($datejour1,$datejour2,"Repartition par date d'inspection/anomalie constatée  : ",$EPH1);
