@@ -325,7 +325,66 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(5,$this->GetY()+10);  
 	}
     }
-	
+	function sagefemme($EPH)
+	{
+	$this->mysqlconnect();
+	$query = "SELECT * from com where IDWIL='17000' and yes='1'  ORDER BY COMMUNE"; 
+	$res=mysql_query($query);
+	$tot=mysql_num_rows($res);
+	$this->SetXY(5,40); 
+	while($row=mysql_fetch_object($res))
+	{
+		$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
+		if ($row->p2018 <= 4500){$nc=round($row->p2018/4500);} else{$nc=round($row->p2018/5000);} 
+	    $this->cell(53,5,"Population : ".$row->p2018.' NC = '.$nc,1,0,'L',1,0);
+		$this->SetXY(5,$this->GetY()+5);
+		$this->cell(25,5,'Nom',1,0,'L',1,0);
+		$this->cell(35,5,'Prenom',1,0,'L',1,0);
+		$this->cell(10,5,'Sexe',1,0,'C',1,0);
+		$this->cell(59,5,'Adresse',1,0,'L',1,0);
+		$this->cell(18,5,'Date',1,0,'C',1,0);
+		$this->cell(18,5,'Labo',1,0,'C',1,0);
+		$this->cell(18,5,'Fonc',1,0,'C',1,0);
+		$this->cell(17,5,'Deci',1,0,'C',1,0);
+		$query1 = "SELECT * from structure where  STRUCTURE $EPH  and COMMUNE=$row->IDCOM and ETAT=0 ORDER BY NOM"; 
+		$res1=mysql_query($query1);
+		$tot2=mysql_num_rows($res1);
+		$this->SetXY(5,$this->GetY()+5); 
+		if ($tot2 > 0) {
+		 while($row1=mysql_fetch_object($res1))
+			{
+			$this->cell(25,5,$row1->NOM,1,0,'L',0);
+			$this->cell(35,5,$row1->PRENOM,1,0,'L',0);
+			$this->cell(10,5,$row1->SEX,1,0,'C',0);$this->SetFont('Arial','B',7);
+			$this->cell(59,5,$row1->ADRESSE,1,0,'L',0);$this->SetFont('Arial','B',9);
+			$this->cell(18,5,$this->dateUS2FR($row1->DATE),1,0,'C',0);
+			$this->cell(18,5,'',1,0,'C',0);
+			$this->cell(18,5,'',1,0,'C',0);
+			$this->cell(17,5,'',1,0,'C',0);
+			$this->SetXY(5,$this->GetY()+5);  
+			}
+		} 
+		else 
+		{
+		$this->cell(200,5,'Néant',1,0,'C',0);
+		$this->SetXY(5,$this->GetY()+5);
+		}   
+			$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
+	        if ($tot2>0) 
+			{
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )"." -- 01 Sage femme   pour  ".round($row->p2018/$tot2).' Hab',1,0,'L',1,0);
+			} 
+			else 
+			{
+			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )",1,0,'L',1,0);
+			}
+			$DNC=$nc - $tot2;
+			if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
+			$this->cell(53,5," DNC = ".$DNC,1,0,'L',1,0);
+			$this->SetFillColor(200);
+	$this->SetXY(5,$this->GetY()+10);  
+	}
+    }
 	function medecing($EPH)
 	{
 	$this->mysqlconnect();
@@ -1405,10 +1464,14 @@ class INSPECTION1 extends PDF_Invoice
 	{    
 		$this->SetFont('Times', 'B', 10);
 		$h=35;
-		$this->SetXY(8,$h);$this->cell(15,5,"N°",1,0,'C',1,0);
-		$this->cell(90,5,"Commune",1,0,'C',1,0);
+		$this->SetXY(8,$h);$this->cell(10,5,"N°",1,0,'C',1,0);
+		$this->cell(25,5,"Commune",1,0,'C',1,0);
 	    $this->cell(20,5,"Superficie",1,0,'C',1,0);
-		$this->cell(30,5,"Population 2018",1,0,'C',1,0);
+		$this->cell(20,5,"P2015",1,0,'C',1,0);
+		$this->cell(20,5,"P2016",1,0,'C',1,0);
+		$this->cell(20,5,"P2017",1,0,'C',1,0);
+		$this->cell(20,5,"P2018",1,0,'C',1,0);
+		$this->cell(20,5,"P2019",1,0,'C',1,0);
 		$this->cell(20,5,$dnrdon,1,0,'C',1,0);
 		$this->cell(20,5,"Tx 10.000",1,0,'C',1,0);
 		$this->SetXY(8,$h+5);
@@ -1423,24 +1486,35 @@ class INSPECTION1 extends PDF_Invoice
 		while($row=mysql_fetch_object($resultat))
 		{
 			$this->SetFont('Times', '', 10);
-			$this->cell(15,5,trim($x=$x+1),1,0,'C',0);
-			$this->cell(90,5,trim($row->COMMUNE),1,0,'L',0);
-			$this->cell(20,5,trim($row->SUPER),1,0,'L',0);
-			$this->cell(30,5,trim($row->p2018),1,0,'L',0);
-			$this->cell(20,5,$this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED),1,0,'L',0);
-			$this->cell(20,5,round(($this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED)*10000)/$row->p2018,3),1,0,'L',0);
+			$this->cell(10,5,trim($x=$x+1),1,0,'C',0);
+			$this->cell(25,5,trim($row->COMMUNE),1,0,'L',0);
+			$this->cell(20,5,trim($row->SUPER),1,0,'C',0);
+			$this->cell(20,5,trim($row->p2015),1,0,'C',0);
+			$this->cell(20,5,trim($row->p2016),1,0,'C',0);
+			$this->cell(20,5,trim($row->p2017),1,0,'C',0);
+			$this->cell(20,5,trim($row->p2018),1,0,'C',0);
+			$this->cell(20,5,trim($row->p2019),1,0,'C',0);
+			$this->cell(20,5,$this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED),1,0,'C',0);
+			$this->cell(20,5,round(($this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED)*10000)/$row->p2018,3),1,0,'C',0);
 			$this->SetXY(8,$this->GetY()+5); 
 		}
+		
+		$this->SetXY(8,$this->GetY());$this->cell(10,5,"Total",1,0,'C',1,0);	  
+		$this->cell(25,5,$totalmbr1."  Communes",1,0,'C',1,0);	  
+		//SUPERFICIE TOTAL
 		$req="SELECT SUM(SUPER) AS total FROM com WHERE IDWIL='$IDWIL' and yes='1'";
 		$query1 = mysql_query($req);   
 		$rs = mysql_fetch_assoc($query1);
+		$this->cell(20,5,round($rs['total'],2),1,0,'C',1,0);	  
+		$this->cell(20,5,"",1,0,'C',1,0);	
+		$this->cell(20,5,"",1,0,'C',1,0);	
+		$this->cell(20,5,"",1,0,'C',1,0);	
+		//POPULATION2018
 		$req1="SELECT SUM(p2018) AS total1 FROM com WHERE IDWIL='$IDWIL' and yes='1'";
 		$query11 = mysql_query($req1);   
 		$rs1 = mysql_fetch_assoc($query11);
-		$this->SetXY(8,$this->GetY());$this->cell(15,5,"Total",1,0,'C',1,0);	  
-		$this->cell(90,5,$totalmbr1."  Communes",1,0,'C',1,0);	  
-		$this->cell(20,5,round($rs['total'],2),1,0,'C',1,0);	  
-	    $this->cell(30,5,round($rs1['total1'],2),1,0,'C',1,0);	  
+		$this->cell(20,5,round($rs1['total1'],2),1,0,'C',1,0);	  
+		$this->cell(20,5,"",1,0,'C',1,0);	  
 		$this->cell(20,5,$this->valeurmoisdecest('','structure','DATE','COMMUNE',$datejour1,$datejour2,'','',$STRUCTURED),1,0,'C',1,0);	  
 		$this->cell(20,5,round(($this->valeurmoisdecest('','structure','DATE','COMMUNE',$datejour1,$datejour2,'','',$STRUCTURED)*10000)/round($rs1['total1'],3),3),1,0,'C',1,0);	  
 	}

@@ -36,7 +36,7 @@ $data = array(
 					    "DACIA"=>"DACIA",
 						"KIA"=>"KIA",
 						"NISSANE"=>"NISSANE",
-						"BALARUS"=>"BALARUS","JMC"=>"JMC","BOULARSANE"=>"BOULARSANE","CHEVROLET"=>"CHEVROLET",
+						"BALARUS"=>"BALARUS","JMC"=>"JMC","BOULARSANE"=>"BOULARSANE","CHEVROLET"=>"CHEVROLET","JINBEI"=>"JINBEI",
 						"HYUNDAI"=>"HYUNDAI"
 					  ),
 "Immatri"  => '0' ,

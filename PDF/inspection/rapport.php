@@ -29,6 +29,7 @@ if ($_POST['EPH']=='20') {$EPH1='cabinet de soins ';$EPH="=20";}
 if ($_POST['EPH']=='21') {$EPH1='transport sanitairee ';$EPH="=21";}
 if ($_POST['EPH']=='22') {$EPH1='UDS';$EPH="=22";}
 if ($_POST['EPH']=='23') {$EPH1='OPTICIEN';$EPH="=23";}
+if ($_POST['EPH']=='24') {$EPH1='sage femme';$EPH="=24";}
 if ($_POST['EPH']=='25') {$EPH1='kinesitherapeute';$EPH="=25";}
 require('INSPECTION1.php');
 $pdf = new INSPECTION1 ( 'L', 'mm', 'A4' );$pdf->AliasNbPages();//importatant pour metre en fonction  le totale nombre de page avec "/{nb}" 
@@ -91,7 +92,14 @@ $pdf->dentiste($EPH);
 $pdf->AddPage('L','A4');
 $pdf->entetel($datejour1,$datejour2,"Repartition par date d'inspection/anomalie constatée  : ",$EPH1);
 $pdf->repartanomx($datejour1,$datejour2,$EPH);
-
+}
+if ($_POST['EPH']=='24') {//sage femme
+$pdf->AddPage('p','A4');
+$pdf->entete($datejour1,$datejour2,'Repartition par autoclave : ',$EPH1);
+$pdf->sagefemme($EPH);
+$pdf->AddPage('L','A4');
+$pdf->entetel($datejour1,$datejour2,"Repartition par date d'inspection/anomalie constatée  : ",$EPH1);
+$pdf->repartanomx($datejour1,$datejour2,$EPH);
 }
 if ($_POST['EPH']=='21') {//transport
 $pdf->AddPage('p','A4');

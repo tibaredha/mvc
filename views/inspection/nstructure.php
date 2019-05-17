@@ -17,7 +17,7 @@ $data = array(
 "butun"        => 'Inser New Structure', 
 "photos"       => 'public/images/photos/msp.jpg',
 "action"       => 'inspection/createstructure/',
-"NATURE"       => array(  "PUBLIC"=>"1","PRIVEE"=>"2" ),     					 					  
+"NATURE"       => array( "PRIVEE"=>"2" ,"PUBLIC"=>"1" ),     					 					  
 "SEXE"         => array("Masculin"=>"M","Feminin"=>"F"),					  
 "NOM"          => 'x' ,
 "NOMAR"        => '' ,
