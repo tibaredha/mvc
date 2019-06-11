@@ -224,7 +224,19 @@ class View {
 		}
 		echo '</select>'."\n"; echo "</div>";
 	}
-	
+	function specialite($x,$y,$name,$value,$choisir,$class) 
+	{
+		mysqlconnect(); 
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option   value=\"".$value."\" selected=\"selected\">".$choisir."</option>"."\n";
+		$result = mysql_query("SELECT * FROM specialite  order by specialitefr" );
+		while($data =  mysql_fetch_array($result))
+		{
+		echo '<option value="'.$data["idspecialite"].'">'.$data["specialitefr"].'</option>';
+		}
+		echo '</select>'."\n"; echo "</div>";
+	}
 	
 	function combopharmacien($x,$y,$name,$value,$choisir,$class,$str) 
 	{
@@ -318,16 +330,31 @@ class View {
 	}
 	function nbrtostring($tb_name,$colonename,$colonevalue,$resultatstring) 
 	{
-	if (is_numeric($colonevalue) and $colonevalue!=='-1') 
-	{ 
-	mysqlconnect();
-	$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
-	$row=mysql_fetch_object($result);
-	$resultat=$row->$resultatstring;
-	return $resultat;
-	} 
+		if (is_numeric($colonevalue) and $colonevalue!=='-1') 
+		{ 
+		mysqlconnect();
+		$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
+		$row=mysql_fetch_object($result);
+		$resultat=$row->$resultatstring;
+		return $resultat;
+		} 
 	return $resultat2='??????';
 	}
+	
+	function nbrtostring1($tb_name,$colonename,$colonevalue,$resultatstring) 
+	{
+		if (is_numeric($colonevalue) and $colonevalue!=='0') 
+		{ 
+		mysqlconnect();
+		$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
+		$row=mysql_fetch_object($result);
+		$resultat=$row->$resultatstring;
+		return $resultat;
+		} 
+	return $resultat2='??????';
+	}
+	
+	
 	function UNIVERSITE($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
 	{
 	mysqlconnect();

@@ -9,6 +9,8 @@ $data = array(
 "butun"        => 'Inser New Structure', 
 "photos"       => 'public/images/photos/msp.jpg',
 "action"       => 'inspection/createstructure/',
+"specialite1"  => '0' ,
+"specialite2"  => 'Spécialite',
 "NATURE"       => array( "PRIVEE"=>"2" ,"PUBLIC"=>"1" ),     					 					  
 "SEXE"         => array("Masculin"=>"M","Feminin"=>"F"),					  
 "NOM"          => 'x' ,
@@ -43,10 +45,11 @@ $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;
 $y=10;
-$this->label($x,$y+250,'Date');              $this->txts($x+100,$y+240,'DATE',0,$data['DATE'],'dateus');                                     $this->label($x+350,$y+250,'Type');                       $this->combostructure($x+450,$y+240,'STRUCTURE','structurebis','1','Structure','class','id','structure');$this->label($x+700,$y+250,'Nature');        $this->combov1($x+800,$y+240,'NATURE',$data['NATURE']);
+$this->label($x,$y+220,'Nature');            $this->combov1($x+100,$y+210,'NATURE',$data['NATURE']);
+$this->label($x,$y+250,'Date');              $this->txts($x+100,$y+240,'DATE',0,$data['DATE'],'dateus');                                     $this->label($x+350,$y+250,'Type');                       $this->combostructure($x+450,$y+240,'STRUCTURE','structurebis','1','Structure','class','id','structure');$this->label($x+700,$y+250,'Spécialite');    $this->specialite($x+800,$y+240,'specialite',$data['specialite1'],$data['specialite2'],'classspecialite');
 $this->label($x,$y+280,'Nom');               $this->txt($x+100,$y+270,'NOM',0,$data['NOM'],'date');                                          $this->label($x+350,$y+280,'Prenom');                     $this->txt($x+450,$y+270,'PRENOM',0,$data['PRENOM'],'date');                                             $this->label($x+700,$y+280,'Sexe');          $this->combov1($x+800,$y+270,'SEXE',$data['SEXE']);
 $this->label($x,$y+310,'Wilaya');            $this->WILAYA($x+100,$y+300,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);$this->label($x+350,$y+310,'Commune');                    $this->COMMUNE($x+100+350,$y+300,'COMMUNE','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);            $this->label($x+700,$y+310,'Adresse');       $this->txt($x+100+350+350,$y+300,'ADRESSE',0,$data['ADRESSE'],'date');
-$this->label($x,$y+340,'Mobile');            $this->txts($x+100,$y+330,'Mobile',0,$data['Mobile'],'port');$this->label($x+350,$y+340,'Fixe');$this->txts($x+450,$y+330,'Fixe',0,$data['Fixe'],'phone');$this->label($x+700,$y+340,'E-mail');                                                                    $this->txt($x+100+350+350,$y+330,'Email',0,$data['Email'],'date');
+$this->label($x,$y+340,'Mobile');            $this->txts($x+100,$y+330,'Mobile',0,$data['Mobile'],'port');$this->label($x+350,$y+340,'Fixe');$this->txts($x+450,$y+330,'Fixe',0,$data['Fixe'],'phone');$this->label($x+700,$y+340,'E-mail');                                                                    $this->txt($x+100+350+350,$y+330,'Email',0,  $data['Email'],'date');
 $this->label($x,$y+370,'Date diplome');      $this->txts($x+100,$y+360,'DIPLOME',0,	$data['DIPLOME'],'dateus44');$this->label($x+700,$y+370,'Universite');  $this->UNIVERSITE($x+800,$y+360,'UNIV','country','mvc','wil',"الجزائر","الجزائر"); 
 $this->label($x,$y+400,'Order N ');          $this->txt($x+100,$y+390,'numorder',0,$data['numorder'],'date');
 $this->label($x+700,$y+400,'Date order');    $this->txt($x+800,$y+390,'Dateorder',0,$data['Dateorder'],'date');  
@@ -61,9 +64,6 @@ $this->submit($x+800,$y+570,$data['butun']);
 $this->f1();
 view::sautligne(19);
 ob_end_flush();
-
- 
-
 ?>
 <script type="text/javascript">
 

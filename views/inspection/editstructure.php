@@ -4,26 +4,28 @@ lang(Session::get('lang'));
 ob_start();
 $fichier = photosmfx('str',$this->user[0]['id'].'.jpg',$this->user[0]['SEX']) ;
 $data = array(
-"DATE"      => view::dateUS2FR($this->user[0]['DATE']),
-"btn"       => 'inspection', 
-"id"        => '', 
-"butun"     => 'Edite  Structure', 
-"photos"    => 'public/webcam/str/'.$fichier."?t=".time(),
-"action"    => 'inspection/editSavestructure/'.$this->user[0]['id'],
-"NATURE"  => array( $this->user[0]['NATURE']=>$this->user[0]['NATURE'],"PRIVEE"=>"2","PUBLIC"=>"1"),
-"SEXE"  => array( $this->user[0]['SEX']=>$this->user[0]['SEX'],"Masculin"=>"M","Feminin"=>"F"),
-"NOM"  => $this->user[0]['NOM'] ,
-"NOMAR"  => $this->user[0]['NOMAR'] ,
-"PRENOM"  => $this->user[0]['PRENOM'] ,	
-"PRENOMAR"  => $this->user[0]['PRENOMAR'] ,					  
-"AGE"  => '0' ,
-"WILAYAN1"  => $this->user[0]['WILAYA'] ,"WILAYAN2"  => View::nbrtostring('wil','IDWIL',$this->user[0]['WILAYA'],'WILAYAS'),
-"COMMUNEN1" => $this->user[0]['COMMUNE'] ,"COMMUNEN2" => View::nbrtostring('com','IDCOM',$this->user[0]['COMMUNE'],'COMMUNE'),
-"ADRESSE"   => $this->user[0]['ADRESSE'],
-"ADRESSEAR" => $this->user[0]['ADRESSEAR'],
-"Mobile"    => $this->user[0]['Mobile'],
-"Fixe"      => $this->user[0]['Fixe'],
-"Email"     => $this->user[0]['Email'],
+"DATE"         => view::dateUS2FR($this->user[0]['DATE']),
+"btn"          => 'inspection', 
+"id"           => '', 
+"butun"        => 'Edite  Structure', 
+"photos"       => 'public/webcam/str/'.$fichier."?t=".time(),
+"action"       => 'inspection/editSavestructure/'.$this->user[0]['id'],
+"specialite1"  => $this->user[0]['specialitex'] ,
+"specialite2"  => View::nbrtostring1('specialite','idspecialite',$this->user[0]['specialitex'],'specialitefr'),
+"NATURE"       => array( $this->user[0]['NATURE']=>$this->user[0]['NATURE'],"PRIVEE"=>"2","PUBLIC"=>"1"),
+"SEXE"         => array( $this->user[0]['SEX']=>$this->user[0]['SEX'],"Masculin"=>"M","Feminin"=>"F"),
+"NOM"          => $this->user[0]['NOM'] ,
+"NOMAR"        => $this->user[0]['NOMAR'] ,
+"PRENOM"       => $this->user[0]['PRENOM'] ,	
+"PRENOMAR"     => $this->user[0]['PRENOMAR'] ,					  
+"AGE"          => '0' ,
+"WILAYAN1"     => $this->user[0]['WILAYA'] ,"WILAYAN2"  => View::nbrtostring('wil','IDWIL',$this->user[0]['WILAYA'],'WILAYAS'),
+"COMMUNEN1"    => $this->user[0]['COMMUNE'] ,"COMMUNEN2" => View::nbrtostring('com','IDCOM',$this->user[0]['COMMUNE'],'COMMUNE'),
+"ADRESSE"      => $this->user[0]['ADRESSE'],
+"ADRESSEAR"    => $this->user[0]['ADRESSEAR'],
+"Mobile"       => $this->user[0]['Mobile'],
+"Fixe"         => $this->user[0]['Fixe'],
+"Email"        => $this->user[0]['Email'],
 "DIPLOME"      => date('d-m-Y'),
 "UNIV"         => '',
 "numorder"     => '0',
@@ -35,9 +37,9 @@ $data = array(
 "NREALISATION" => $this->user[0]['NREALISATION'],
 "OUVERTURE"    => view::dateUS2FR($this->user[0]['OUVERTURE']),
 "NOUVERTURE"   => $this->user[0]['NOUVERTURE'],
-"PROPRIETAIRE"  => $this->user[0]['PROPRIETAIRE'],
-"DEBUTCONTRAT"  => view::dateUS2FR($this->user[0]['DEBUTCONTRAT']),
-"FINCONTRAT"    => view::dateUS2FR($this->user[0]['FINCONTRAT'])
+"PROPRIETAIRE" => $this->user[0]['PROPRIETAIRE'],
+"DEBUTCONTRAT" => view::dateUS2FR($this->user[0]['DEBUTCONTRAT']),
+"FINCONTRAT"   => view::dateUS2FR($this->user[0]['FINCONTRAT'])
 );
 view::button($data['btn'],'');
 echo "<h2>Modifier Structure Sanitaire : ".$data['NOM'].'_'.$data['PRENOM']."</h2 ><hr /><br />";
@@ -45,8 +47,8 @@ $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
 
-                                                                                                                                            
-$this->label($x,$y+250,'Date');              $this->txts($x+100,$y+240,'DATE',0,$data['DATE'],'dateus');                                     $this->label($x+350,$y+250,'Type');                       $this->combostructure($x+450,$y+240,'STRUCTURE','structurebis',$this->user[0]['STRUCTURE'],View::nbrtostring('structurebis','id',$this->user[0]['STRUCTURE'],'structure'),'class','id','structure');$this->label($x+700,$y+250,'Nature');        $this->combov1($x+800,$y+240,'NATURE',$data['NATURE']);
+$this->label($x,$y+220,'Nature');           $this->combov1($x+100,$y+210,'NATURE',$data['NATURE']);                                                                                                                                           
+$this->label($x,$y+250,'Date');              $this->txts($x+100,$y+240,'DATE',0,$data['DATE'],'dateus');                                     $this->label($x+350,$y+250,'Type');                       $this->combostructure($x+450,$y+240,'STRUCTURE','structurebis',$this->user[0]['STRUCTURE'],View::nbrtostring('structurebis','id',$this->user[0]['STRUCTURE'],'structure'),'class','id','structure');$this->label($x+700,$y+250,'Spécialite');    $this->specialite($x+800,$y+240,'specialite',$data['specialite1'],$data['specialite2'],'classspecialite');
 $this->label($x,$y+280,'Nom');               $this->txt($x+100,$y+270,'NOM',0,$data['NOM'],'date');                                          $this->label($x+350,$y+280,'Prenom');                     $this->txt($x+450,$y+270,'PRENOM',0,$data['PRENOM'],'date');                                             $this->label($x+700,$y+280,'Sexe');          $this->combov1($x+800,$y+270,'SEXE',$data['SEXE']);
 $this->label($x,$y+310,'Wilaya');            $this->WILAYA($x+100,$y+300,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);$this->label($x+350,$y+310,'Commune');                    $this->COMMUNE($x+100+350,$y+300,'COMMUNE','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);            $this->label($x+700,$y+310,'Adresse');       $this->txt($x+100+350+350,$y+300,'ADRESSE',0,$data['ADRESSE'],'date');
 $this->label($x,$y+340,'Mobile');            $this->txts($x+100,$y+330,'Mobile',0,$data['Mobile'],'port');$this->label($x+350,$y+340,'Fixe');$this->txts($x+450,$y+330,'Fixe',0,$data['Fixe'],'phone');$this->label($x+700,$y+340,'E-mail');                                                                    $this->txt($x+100+350+350,$y+330,'Email',0,$data['Email'],'date');

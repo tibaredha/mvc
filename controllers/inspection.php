@@ -64,6 +64,7 @@ class inspection extends Controller {
 		$data['DATE']         = $_POST['DATE'];
 		$data['STRUCTURE']    = $_POST['STRUCTURE'];
 		$data['NATURE']       = $_POST['NATURE'];
+		$data['specialite']   = $_POST['specialite'];
 		$data['NOM']          = $_POST['NOM'];   
 		$data['NOMAR']        = $_POST['NOMAR'];
 		$data['PRENOM']       = $_POST['PRENOM'];
@@ -80,9 +81,9 @@ class inspection extends Controller {
 		$data['NREALISATION'] = $_POST['NREALISATION'];
 		$data['OUVERTURE']    = $_POST['OUVERTURE'];
 		$data['NOUVERTURE']   = $_POST['NOUVERTURE'];
-		$data['Mobile']   = $_POST['Mobile'];
-		$data['Fixe']     = $_POST['Fixe'];
-		$data['Email']   = $_POST['Email'];
+		$data['Mobile']       = $_POST['Mobile'];
+		$data['Fixe']         = $_POST['Fixe'];
+		$data['Email']        = $_POST['Email'];
 		//echo '<pre>';print_r ($data);echo '<pre>';  
 		$last_id=$this->model->createstructure($data);
 		header('location: ' . URL .$this->route. '/');	
@@ -102,10 +103,11 @@ class inspection extends Controller {
 	public function editSavestructure($id)
 	{
 		$data = array();//$id
-		$data['id']        = $id;
+		$data['id']           = $id;
 		$data['DATE']         = $_POST['DATE'];
 		$data['STRUCTURE']    = $_POST['STRUCTURE'];
 		$data['NATURE']       = $_POST['NATURE'];
+		$data['specialite']   = $_POST['specialite'];
 		$data['NOM']          = $_POST['NOM'];   
 		$data['NOMAR']        = $_POST['NOMAR'];
 		$data['PRENOM']       = $_POST['PRENOM'];
@@ -124,7 +126,7 @@ class inspection extends Controller {
 		$data['NOUVERTURE']   = $_POST['NOUVERTURE'];
 		$data['Mobile']       = $_POST['Mobile'];
 		$data['Fixe']         = $_POST['Fixe'];
-		$data['Email']       = $_POST['Email'];
+		$data['Email']        = $_POST['Email'];
 		// echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavestructure($data);//search/0/10?o=STRUCTURE&q=$data['STRUCTURE']
 		header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$data['id']);
