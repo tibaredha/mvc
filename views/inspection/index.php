@@ -19,18 +19,19 @@ view::button('inspection','');
 lang(Session::get('lang'));
 ob_start();
 view::munu('inspection'); 
-$colspan=18;				
+$colspan=19;				
 if (isset($this->userListview)) 
 {
 echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>" ;
 echo "<tr>" ;
-echo "<th style=\"width:50px;\" colspan=\"3\" >" ;
+echo "<th style=\"width:50px;\" colspan=\"4\" >" ;
 echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'tcpdf/inspection/odm.php?uc=" > Ordre de mission : </a>';
 echo "</th>" ;
 echo "<th style=\"width:50px;\"  colspan=\"15\">" ;
 echo "Releve Des structures sanitaire </th>" ;
 echo "</th>" ;	
 echo "<tr>" ;
+echo "<th style=\"width:10px;\">val</th>" ;
 echo "<th style=\"width:10px;\">view</th>" ;
 echo "<th style=\"width:10px;\">view</th>" ;
 echo "<th style=\"width:390px;\">Responssable</th>" ;
@@ -52,6 +53,8 @@ echo "</tr>" ;
 		{ 
 		$bgcolor_donate = 'white';
         echo "<tr bgcolor=\"".$bgcolor_donate."\"  onmouseover=\"this.style.backgroundColor='#9FF781';\"   onmouseout=\"this.style.backgroundColor='".$bgcolor_donate."';\"  >" ;
+		if ($value['val']==1) {?><td align="center"><a  title="désaprouver" href="<?php echo URL.'inspection/editvalstr/'.$value['id'].'/0';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
+		if ($value['val']==0) {?><td align="center"><a  title="aprouver" href="<?php echo URL.'inspection/editvalstr/'.$value['id'].'/1';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
 		echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'inspection/view/'.$value['id']."'\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' >         " ; 
 		echo "</td>" ;
 		$fichier = photosmfx('str',$value['id'].'.jpg',$value['SEX']) ;
@@ -182,6 +185,9 @@ echo "</tr>" ;
        
 		if ($value['ETAT']==0) {?><td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetatstr/'.$value['id'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
 		if ($value['ETAT']==1) {?><td align="center"><a  title="activé" href="<?php echo URL.'inspection/editetatstr/'.$value['id'].'/0';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
+		
+		
+		
 		echo "<td style=\"width:50px;\" align=\"center\" ><a title=\"editer\"    href=\"".URL.'inspection/editstructure/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/edit.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 		echo "<td style=\"width:50px;\" align=\"center\" ><a class=\"delete\" title=\"supprimer\"  href=\"".URL.'inspection/deletestructure/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/delete.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 		 
@@ -227,7 +233,7 @@ View::url(700,370+30,URL.'inspection/search/0/10?o=STRUCTURE&q=19','19-psycholog
 View::url(700,460,URL.'inspection/search/0/10?o=STRUCTURE&q=7','7-Polyclinique',3);View::url(1000,460,URL.'inspection/search/0/10?o=STRUCTURE&q=22','22-UDS',3);
 View::url(700,490,URL.'inspection/search/0/10?o=STRUCTURE&q=8','8-Salle de soins  ',3);
 View::url(700,490+30,URL.'inspection/search/0/10?o=STRUCTURE&q=3','3-EPH ',3);View::url(1000,490+30,URL.'inspection/search/0/10?o=STRUCTURE&q=5','5-EHS ',3);
-View::url(700,490+60,URL.'inspection/search/0/10?o=STRUCTURE&q=9','9-EHP  ',3);
+View::url(700,490+60,URL.'inspection/search/0/10?o=STRUCTURE&q=9','9-EHP  ',3);View::url(1000,490+60,URL.'inspection/search/0/10?o=STRUCTURE&q=4','4-EH  ',3);
 View::url(700,490+90,URL.'inspection/search/0/10?o=STRUCTURE&q=6','6-EPSP ',3);
 view::sautligne(10);			      
 }				

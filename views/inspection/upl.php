@@ -1,6 +1,6 @@
 <?php 
 verifsession();
-view::button('don','');
+view::button('inspection','');
 lang(Session::get('lang'));
 $url1 = explode('/',$_GET['url']);	
 ?>

@@ -7,7 +7,7 @@ class inspection_Model extends Model {
 	
 	public function userSearch($o, $q, $p, $l) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by COMMUNE limit $p,$l  ");
+		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by NOM,PRENOM limit $p,$l  ");
     }
 
     public function userSearch1($o, $q) {
@@ -82,6 +82,16 @@ class inspection_Model extends Model {
 		    'ETAT'       => $data['ETAT']   
         );
        //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('structure', $postData, "id =" . $data['id'] . "");
+    }
+	
+	public function editSavesval($data) {
+		$this->db->exec('SET NAMES utf8');
+		$postData = array(		
+			'id'        => $data['id'],	
+		    'val'       => $data['val']   
+        );
+       // echo '<pre>';print_r ($postData);echo '<pre>';
 	   $this->db->update('structure', $postData, "id =" . $data['id'] . "");
     }
 	

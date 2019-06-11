@@ -46,8 +46,8 @@ class inspection extends Controller {
 	    $this->view->userListviewo = $_GET['o']; //criter de choix
 	    $this->view->userListviewq = $_GET['q']; //key word  
 		$this->view->userListviewp =$url1[2]; // parametre 2 page                     limit 2,3
-		$this->view->userListviewl =10     ; // parametre 3 nombre de ligne par page  limit 2,3 
-		$this->view->userListviewb =15       ; // parametre nombre de chiffre dan la barre  navigation
+		$this->view->userListviewl =7     ; // parametre 3 nombre de ligne par page  limit 2,3 
+		$this->view->userListviewb =20       ; // parametre nombre de chiffre dan la barre  navigation
 		$this->view->userListview = $this->model->userSearch($this->view->userListviewo,$this->view->userListviewq,$this->view->userListviewp,$this->view->userListviewl);
 		$this->view->userListview1= $this->model->userSearch1($this->view->userListviewo,$this->view->userListviewq); // compte total pour bare de navigation
 		$this->view->render($this->route.'/index');
@@ -137,6 +137,16 @@ class inspection extends Controller {
 		$data['ETAT']         = $url1[3];
 		//echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavesstr($data);
+		header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$data['id']);
+	}
+	public function editvalstr($id)
+	{
+	    $url1 = explode('/',$_GET['url']);
+		$data = array();
+		$data['id']           = $id;
+		$data['val']         = $url1[3];
+		//echo '<pre>';print_r ($data);echo '<pre>';
+		$this->model->editSavesval($data);
 		header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$data['id']);
 	}
 	public function deletestructure($id)
