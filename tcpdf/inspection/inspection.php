@@ -71,7 +71,7 @@ class inspection extends TCPDF
 		}		
 	function JOURFR($DATEINS) {
 			$J      = substr($DATEINS,0,2);                  
-			$JOURS = array("premier","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onz","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit ","dix-neuf ","vingt","vingt et un","vingt et deux","vingt -trois","vingt -quatre"," vingt -cinq ","vingt -six"," vingt -sept ","vingt -huit ","vingt -neuf"," trente "," trente et un ");
+			$JOURS = array("premier","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit ","dix-neuf ","vingt","vingt et un","vingt et deux","vingt -trois","vingt -quatre"," vingt -cinq ","vingt -six"," vingt -sept ","vingt -huit ","vingt -neuf"," trente "," trente et un ");
 			$JOURS1 = $JOURS[$J-1] ;
 			$DATEPV=$JOURS1;
 			return $DATEPV;
