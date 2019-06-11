@@ -733,7 +733,10 @@ this.document.form1.CTHDL.value = result1;
  
 var result2 =  Math.round(parseFloat((result/b)));             
 this.document.form1.LDLHDL.value = result2; 
- 
- 
            
 }
+
+
+
+
+

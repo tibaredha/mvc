@@ -61,8 +61,12 @@ $this->submit($x+800,$y+570,$data['butun']);
 $this->f1();
 view::sautligne(19);
 ob_end_flush();
+
+ 
+
 ?>
 <script type="text/javascript">
+
 function PopupImage(img) {
 	w=open("",'image','weigth=toolbar=no,scrollbars=no,resizable=yes, width=220, height=268');	
 	w.document.write("<HTML><BODY onblur=\"window.close();\"><IMG src='"+img+"'>");

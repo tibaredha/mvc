@@ -479,6 +479,8 @@ class View {
 	function range($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"number\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"   max=\"50\" min=\"0\" step=\"5\"      required  />";echo "</div>";}
 	function txt0($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" />";echo "</div>";}
 	function date($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input id=\"datejour\"type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required  />";echo "</div>";}
+	function date1($x,$y,$name,$size,$value,$nomfonction){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input id=\"datejour1\"type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" onblur=\"".$nomfonction."\"  />";echo "</div>";}
+	
 	function txtautofocus($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required autofocus />";echo "</div>";}
 	function txts($x,$y,$name,$size,$value,$param){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input style=\"text-align:center;\"   type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"  id=\"".$param."\"   required />";echo "</div>";}
 	
