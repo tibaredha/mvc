@@ -55,7 +55,7 @@ if(!empty($_POST["keyword"])) {
 	$cnx = mysql_connect($db_host,$db_user,$db_pass)or die ('I cannot connect to the database because: ' . mysql_error());
 	$db  = mysql_select_db($db_name,$cnx) ;
 	mysql_query("SET NAMES 'UTF8' ");
-	$sql=mysql_query("SELECT * FROM dnr WHERE NOM like '" . $_POST["keyword"] . "%' ORDER BY NOM,PRENOM LIMIT 0,1000");
+	$sql=mysql_query("SELECT * FROM dnr WHERE NOM like '" . $_POST["keyword"] . "%' ORDER BY NOM,PRENOM LIMIT 0,5");
 	echo 'Total Donors : '. $totalmbr4=mysql_num_rows($sql);
 	echo "</br>" ;echo "</br>" ;
 	echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>" ;

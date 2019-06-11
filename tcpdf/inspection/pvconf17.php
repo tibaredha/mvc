@@ -27,30 +27,31 @@ $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'Inspection santé publique',0,1,
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"N° : ___________ /".date('Y'),0,1,'L');//$pdf->SetXY(155,$pdf->GetY()-5);$pdf->Cell(50,5,'الرقم : ___________/'.date('Y'),0,1,'R');
 
 
-$pdf->SetFont('aefurat', '', 15);
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Procés Verbal de Conformité du siège de l'unite de transport sanitaire ",0,1,'C');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"Mr : ".strtoupper($rowx->NOM).'_'.strtolower ($rowx->PRENOM),0,1,'C');$pdf->SetFont('aefurat', '', 12);
+
+$pdf->SetFont('aefurat', '', 14);
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"PROCÉS VERBAL DE CONFORMITÉ D'UN CABINET DE MEDECINE GENERALE ",0,1,'C');$pdf->SetFont('aefurat', '', 12);
+
 $pdf->SetXY(40,$pdf->GetY()+10);$pdf->Cell(200,5,"Suite à l'inspection éffectuée par le praticien inspecteur,en date du : ".$_POST["DATEP"],0,1,'L');
-$pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(200,5,"et compte tenu de l'état des lieux visités,à savoir : ",0,1,'L');
-$pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(200,5,"L'unité de transport sanitaire de ".strtoupper($rowx->NOM).'_'.strtolower ($rowx->PRENOM),0,1,'L');
+$pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(200,5,"et compte tenu de l'état des lieux visités,à savoir :",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- Cabinet de consultation ",0,1,'L');$pdf->SetXY(115,$pdf->GetY()-5); $pdf->Cell(20,5,"Superficie  : ".$_POST["CDS"]." M2",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- Salle de soins ",0,1,'L');             $pdf->SetXY(115,$pdf->GetY()-5); $pdf->Cell(20,5,"Superficie  : ".$_POST["SDS"]." M2",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- Salle d'attente  : Homme",0,1,'L');            $pdf->SetXY(115,$pdf->GetY()-5); $pdf->Cell(20,5,"Superficie  : ".$_POST["SAH"]." M2",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- Salle d'attente  : Femme",0,1,'L');            $pdf->SetXY(115,$pdf->GetY()-5); $pdf->Cell(20,5,"Superficie  : ".$_POST["SAF"]." M2",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- Sanitaire (cabinet de toilette et lavabos) : éxistant homme et femme ",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- Chauffage : éxistant et fonctionel.",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- Aération : suffisante.",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- Éclairage naturel : suffisant.",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- Éclairage artificiele : suffisant.",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- État général : bon.",0,1,'L');
+$pdf->SetXY(30,$pdf->GetY()+5); $pdf->Cell(200,5,"- Autres : RAS ",0,1,'L');
+$pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(200,5,"J'atteste que le cabinet médicale de Mr : ".strtoupper($rowx->NOM).'_'.strtolower ($rowx->PRENOM),0,1,'L');
 $pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(200,5,"Situé à : ".$rowx->ADRESSE,0,1,'L');
 $pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(200,5,"Commune de : ".$pdf->nbrtostring('mvc','com','IDCOM',$rowx->COMMUNE,'COMMUNE'),0,1,'L');
-$pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(200,5,"Wilaya de Djelfa .",0,1,'L');
-$pdf->SetXY(25,$pdf->GetY()+5);$pdf->Cell(200,5,"- Un garage de superficie de : ".$_POST["GRG"]." M2",0,1,'L');
-$pdf->SetXY(25,$pdf->GetY()+5);$pdf->Cell(200,5,"- Un bureau de réception des appels télephoniques de superficie de : ".$_POST["BRE"]." M2",0,1,'L');
-$pdf->SetXY(111,$pdf->GetY()+5);$pdf->Cell(200,5,"N° de téléphone : ".$rowx->Mobile,0,1,'L');
-$pdf->SetXY(25,$pdf->GetY()+5);$pdf->Cell(200,5,"- Un lieux de stokage et de rangement du materiel,equipement médical, ",0,1,'L');
-$pdf->SetXY(24,$pdf->GetY()+5);$pdf->Cell(200,5,"consomables et produits pharmaceutiques.",0,1,'L');
-$pdf->SetXY(50,$pdf->GetY()+5);$pdf->Cell(200,5,"* Superficie : ".$_POST["SDS"]." M2",0,1,'L');
-$pdf->SetXY(50,$pdf->GetY()+5);$pdf->Cell(200,5,"* Materiel disponible  : pieces de rechanges ",0,1,'L');
-$pdf->SetXY(50,$pdf->GetY()+5);$pdf->Cell(200,5,"* autres amenagements existants : néant ",0,1,'L');
-$pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(200,5,"Autres observations : RAS ",0,1,'L');
-
-
+$pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(200,5,"Est conforme a l'exercice de la profession de médecine générale. ",0,1,'L');
 
 $pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(200,5,"Fait a Djelfa  le : ".$_POST["DATEP"],0,1,'L');
 $pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(200,5,"Le Praticien Inspecteur ",0,1,'L');
-$pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(200,5,"Dr  TIBA ",0,1,'L');
+$pdf->SetXY(100,$pdf->GetY());$pdf->Cell(200,5,"Dr  TIBA ",0,1,'L');
 }
 $pdf->Output();
 ?>

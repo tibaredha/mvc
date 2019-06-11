@@ -1,4 +1,4 @@
-@import url(./tiba.css);
+﻿@import url(./tiba.css);
 
 :root{
 --color:black;
@@ -358,6 +358,13 @@ width: 80px;
 }
 #datejour{
 width: 70px;
+}
+#datejour1{
+width: 50px;
+}
+
+#surface{
+width: 10px;
 }
 .deces1
  {

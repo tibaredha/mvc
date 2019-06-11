@@ -46,8 +46,8 @@ class inspection extends Controller {
 	    $this->view->userListviewo = $_GET['o']; //criter de choix
 	    $this->view->userListviewq = $_GET['q']; //key word  
 		$this->view->userListviewp =$url1[2]; // parametre 2 page                     limit 2,3
-		$this->view->userListviewl =10     ; // parametre 3 nombre de ligne par page  limit 2,3 
-		$this->view->userListviewb =15       ; // parametre nombre de chiffre dan la barre  navigation
+		$this->view->userListviewl =7     ; // parametre 3 nombre de ligne par page  limit 2,3 
+		$this->view->userListviewb =20       ; // parametre nombre de chiffre dan la barre  navigation
 		$this->view->userListview = $this->model->userSearch($this->view->userListviewo,$this->view->userListviewq,$this->view->userListviewp,$this->view->userListviewl);
 		$this->view->userListview1= $this->model->userSearch1($this->view->userListviewo,$this->view->userListviewq); // compte total pour bare de navigation
 		$this->view->render($this->route.'/index');
@@ -125,7 +125,7 @@ class inspection extends Controller {
 		$data['Mobile']       = $_POST['Mobile'];
 		$data['Fixe']         = $_POST['Fixe'];
 		$data['Email']       = $_POST['Email'];
-		echo '<pre>';print_r ($data);echo '<pre>';
+		// echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavestructure($data);//search/0/10?o=STRUCTURE&q=$data['STRUCTURE']
 		header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$data['id']);
 	}
@@ -137,6 +137,16 @@ class inspection extends Controller {
 		$data['ETAT']         = $url1[3];
 		//echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavesstr($data);
+		header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$data['id']);
+	}
+	public function editvalstr($id)
+	{
+	    $url1 = explode('/',$_GET['url']);
+		$data = array();
+		$data['id']           = $id;
+		$data['val']         = $url1[3];
+		//echo '<pre>';print_r ($data);echo '<pre>';
+		$this->model->editSavesval($data);
 		header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$data['id']);
 	}
 	public function deletestructure($id)
@@ -389,7 +399,102 @@ class inspection extends Controller {
 		header('location: ' . URL . $this->route.'/auto/'.$data['idt'].'');
 	}
 	
+	/*pv de conformité*/
 	
+	function conformite($id) 
+	{
+	$this->view->title = 'conformite';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/conformite');    
+	}
+	function conformite15($id) 
+	{
+	$this->view->title = 'conformite chirurgien dentiste ';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/conformite15');    
+	}
+	function conformite16($id) 
+	{
+	$this->view->title = 'conformite medecin specialiste ';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/conformite16');    
+	}
+	function conformite17($id) 
+	{
+	$this->view->title = 'conformite medecin generaliste ';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/conformite17');    
+	}
+	
+	function conformite21($id) 
+	{
+	$this->view->title = 'conformite transport sanitaire ';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/conformite21');    
+	}
+	
+	/*DECISION PHARMACIE */
+	function installation($id) 
+	{
+	$this->view->title = 'installation';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/installation');    
+	}
+	function ouverture($id) 
+	{
+	$this->view->title = 'ouverture';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/ouverture');    
+	}
+	
+	function changement($id) 
+	{
+	$this->view->title = 'changement';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/changement');    
+	}
+	
+	/*DECISION MEDECIN GENERALISTE */
+	function installation17($id) 
+	{
+	$this->view->title = 'installation';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/installation17');    
+	}
+	function ouverture17($id) 
+	{
+	$this->view->title = 'ouverture';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/ouverture17');    
+	}
+	
+	function changement17($id) 
+	{
+	$this->view->title = 'changement';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/changement17');    
+	}
+	
+	/*DECISION DENTIST GENERALISTE */
+	function installation15($id) 
+	{
+	$this->view->title = 'installation';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/installation15');    
+	}
+	function ouverture15($id) 
+	{
+	$this->view->title = 'ouverture';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/ouverture15');    
+	}
+	
+	function changement15($id) 
+	{
+	$this->view->title = 'changement';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/changement15');    
+	}
 	
 	/*personnel*/	
 	
