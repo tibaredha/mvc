@@ -78,6 +78,15 @@ class View {
 	return $OP;
 	}
 	
+	function nbrhome($idt) 
+	{
+	mysqlconnect();
+	$sql = " select * from  home where idstructure=$idt  ";
+	$requete = @mysql_query($sql) or die($sql."<br>".mysql_error());
+	$OP=mysql_num_rows($requete);
+	mysql_free_result($requete);
+	return $OP;
+	}
 	
 	function decescomm($COMMUNER,$DATEJOUR1,$DATEJOUR2,$STRUCTURED) 
 	{
@@ -237,7 +246,19 @@ class View {
 		}
 		echo '</select>'."\n"; echo "</div>";
 	}
-	
+	function combopharmacienj($x,$y,$name,$value,$choisir,$class,$str,$SPECIALITEX) 
+	{
+		mysqlconnect(); 
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option   value=\"".$value."\" selected=\"selected\">".$choisir."</option>"."\n";
+		$result = mysql_query("SELECT * FROM structure where STRUCTURE = $str  and SPECIALITEX = $SPECIALITEX order by NOM" );
+		while($data =  mysql_fetch_array($result))
+		{
+		echo '<option value="'.$data["NOM"].'_'.$data["PRENOM"].'">'.$data["NOM"].'_'.$data["PRENOM"].'</option>';
+		}
+		echo '</select>'."\n"; echo "</div>";
+	}
 	function combopharmacien($x,$y,$name,$value,$choisir,$class,$str) 
 	{
 		mysqlconnect(); 
@@ -330,7 +351,7 @@ class View {
 	}
 	function nbrtostring($tb_name,$colonename,$colonevalue,$resultatstring) 
 	{
-		if (is_numeric($colonevalue) and $colonevalue!=='-1') 
+		if (is_numeric($colonevalue) and $colonevalue!=='0') 
 		{ 
 		mysqlconnect();
 		$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );

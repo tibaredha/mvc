@@ -123,9 +123,9 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		echo '<tr><td align="center" colspan="16" ><span> Click search button to start searching a vms.</span></td></tr>';
 		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="16" ><span>&nbsp;</span></td></tr>';					      
 		} 
-		echo "</table>";
+		
 		?>
-		<br/><br/>
+		</table><br/><br/>
 		
 		
 	<script type="text/javascript">
