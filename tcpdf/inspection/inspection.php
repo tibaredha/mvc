@@ -122,7 +122,7 @@ class inspection extends TCPDF
 	  return $date;
 	}
 	//************************//
-	function orderdemision($numm,$nomprenom,$fonction,$lieu,$depart,$arrive,$nbr,$num,$cause)
+	function orderdemision($numm,$nomprenom,$fonction,$wilaya,$commune,$lieu,$depart,$arrive,$nbr,$num,$cause)
 	{
 	$this->SetCreator(PDF_CREATOR);
 	$this->SetAuthor('tiba redha');
@@ -163,7 +163,7 @@ class inspection extends TCPDF
 	$this->setRTL(true);
 	$this->SetXY(40,120);$this->Cell(50,5,$nomprenom,0,1,'R');
 	$this->SetXY(40,130);$this->Cell(50,5,$fonction,0,1,'R');
-	$this->SetXY(40,140);$this->Cell(50,5,$lieu,0,1,'R');
+	$this->SetXY(40,140);$this->Cell(50,5,$lieu." بلدية  ".$this->nbrtostring('mvc','com','IDCOM',$commune,'communear')." ولاية ".$this->nbrtostring('mvc','wil','IDWIL',$wilaya,'WILAYASAR'),0,1,'R');
 	$this->SetXY(40,150);$this->Cell(50,5,$depart,0,1,'R');
 	$this->SetXY(40,160);$this->Cell(50,5,$arrive,0,1,'R');
     $this->SetXY(70,170);$this->Cell(50,5,$nbr,0,1,'R');
