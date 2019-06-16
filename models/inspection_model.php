@@ -7,12 +7,17 @@ class inspection_Model extends Model {
 	
 	public function userSearch($o, $q, $p, $l) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by NOM,PRENOM limit $p,$l  ");
+		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by $o,PRENOM limit $p,$l  ");
     }
 
     public function userSearch1($o, $q) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by COMMUNE ");
+		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by $o ");
+    }
+	
+	public function userSearchx($o, $q, $p, $l) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select("SELECT * FROM structure where $o = '$q' order by $o,PRENOM limit $p,$l  ");
     }
 	
 	 public function createstructure($data) {

@@ -38,7 +38,7 @@ class inspection extends Controller {
 		header('location: ' . URL . $this->route.'/inspecteur/');
 	}
 	
-   //***searchdeces***/
+   //***searchdeces***/userSearchx
 	function search()
 	{
 	    $url1 = explode('/',$_GET['url']);	
@@ -52,6 +52,21 @@ class inspection extends Controller {
 		$this->view->userListview1= $this->model->userSearch1($this->view->userListviewo,$this->view->userListviewq); // compte total pour bare de navigation
 		$this->view->render($this->route.'/index');
 	}
+	
+	function searchx()
+	{
+	    $url1 = explode('/',$_GET['url']);	
+		$this->view->title = 'Search structure';
+	    $this->view->userListviewo = $_GET['o']; //criter de choix
+	    $this->view->userListviewq = $_GET['q']; //key word  
+		$this->view->userListviewp =$url1[2]; // parametre 2 page                     limit 2,3
+		$this->view->userListviewl =7     ; // parametre 3 nombre de ligne par page  limit 2,3 
+		$this->view->userListviewb =20       ; // parametre nombre de chiffre dan la barre  navigation
+		$this->view->userListview = $this->model->userSearchx($this->view->userListviewo,$this->view->userListviewq,$this->view->userListviewp,$this->view->userListviewl);
+		$this->view->userListview1= $this->model->userSearch1($this->view->userListviewo,$this->view->userListviewq); // compte total pour bare de navigation
+		$this->view->render($this->route.'/index');
+	}
+	
 	function nstructure() 
 	{
 	$this->view->title = 'nstructure';
@@ -539,7 +554,13 @@ class inspection extends Controller {
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
 	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
 	$data['PHA1']= $_POST['PHA1'];$data['DIST1']= $_POST['DIST1'];$data['PHA2']= $_POST['PHA2'];$data['DIST2']= $_POST['DIST2'];$data['PHA3']= $_POST['PHA3'];$data['DIST3']= $_POST['DIST3'];
-	$data['CDS0']= $_POST['CDS0'];$data['SDS0']= $_POST['SDS0'];$data['SAH0']= $_POST['SAH0'];$data['SAF0']= $_POST['SAF0'];$data['SAN0']= $_POST['SAN0'];$data['STL']= $_POST['STL'];
+	$data['CDS0']= $_POST['CDS'];
+	$data['SDS0']= $_POST['SDS'];
+	$data['SAH0']= $_POST['SAH'];
+	$data['SAF0']= $_POST['SAF'];
+	$data['SAN0']= $_POST['SAN'];
+	$data['STL']= $_POST['STL'];
+	
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home17/'.$id);	
@@ -573,7 +594,12 @@ class inspection extends Controller {
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
 	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
 	$data['PHA1']= $_POST['PHA1'];$data['DIST1']= $_POST['DIST1'];$data['PHA2']= $_POST['PHA2'];$data['DIST2']= $_POST['DIST2'];$data['PHA3']= $_POST['PHA3'];$data['DIST3']= $_POST['DIST3'];
-	$data['CDS0']= $_POST['CDS0'];$data['SDS0']= $_POST['SDS0'];$data['SAH0']= $_POST['SAH0'];$data['SAF0']= $_POST['SAF0'];$data['SAN0']= $_POST['SAN0'];$data['STL']= $_POST['STL'];
+	$data['CDS0']= $_POST['CDS'];
+	$data['SDS0']= $_POST['SDS'];
+	$data['SAH0']= $_POST['SAH'];
+	$data['SAF0']= $_POST['SAF'];
+	$data['SAN0']= $_POST['SAN'];
+	$data['STL']= $_POST['STL'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home15/'.$id);	
@@ -607,7 +633,12 @@ class inspection extends Controller {
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
 	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
 	$data['PHA1']= $_POST['PHA1'];$data['DIST1']= $_POST['DIST1'];$data['PHA2']= $_POST['PHA2'];$data['DIST2']= $_POST['DIST2'];$data['PHA3']= $_POST['PHA3'];$data['DIST3']= $_POST['DIST3'];
-	$data['CDS0']= $_POST['CDS0'];$data['SDS0']= $_POST['SDS0'];$data['SAH0']= $_POST['SAH0'];$data['SAF0']= $_POST['SAF0'];$data['SAN0']= $_POST['SAN0'];$data['STL']= $_POST['STL'];
+	$data['CDS0']= $_POST['CDS'];
+	$data['SDS0']= $_POST['SDS'];
+	$data['SAH0']= $_POST['SAH'];
+	$data['SAF0']= $_POST['SAF'];
+	$data['SAN0']= $_POST['SAN'];
+	$data['STL']= $_POST['STL'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home16/'.$id);	
@@ -639,8 +670,19 @@ class inspection extends Controller {
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
 	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
-	$data['PHA1']= $_POST['PHA1'];$data['DIST1']= $_POST['DIST1'];$data['PHA2']= $_POST['PHA2'];$data['DIST2']= $_POST['DIST2'];$data['PHA3']= $_POST['PHA3'];$data['DIST3']= $_POST['DIST3'];
-	$data['CDS0']= $_POST['CDS0'];$data['SDS0']= $_POST['SDS0'];$data['SAH0']= $_POST['SAH0'];$data['SAF0']= $_POST['SAF0'];$data['SAN0']= $_POST['SAN0'];$data['STL']= $_POST['STL'];
+	$data['PHA1']= $_POST['PHA1'];
+	$data['DIST1']= $_POST['DIST1'];
+	$data['PHA2']= $_POST['PHA2'];
+	$data['DIST2']= $_POST['DIST2'];
+	$data['PHA3']= $_POST['PHA3'];
+	$data['DIST3']= $_POST['DIST3'];
+	
+	$data['CDS0']= $_POST['CDS'];
+	$data['SDS0']= $_POST['SDS'];
+	$data['SAH0']= $_POST['SAH'];
+	$data['SAF0']= $_POST['SAF'];
+	$data['SAN0']= $_POST['SAN'];
+	$data['STL']= $_POST['STL'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home12/'.$id);	
@@ -674,7 +716,12 @@ class inspection extends Controller {
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
 	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
 	$data['PHA1']= $_POST['PHA1'];$data['DIST1']= $_POST['DIST1'];$data['PHA2']= $_POST['PHA2'];$data['DIST2']= $_POST['DIST2'];$data['PHA3']= $_POST['PHA3'];$data['DIST3']= $_POST['DIST3'];
-	$data['CDS0']= $_POST['CDS0'];$data['SDS0']= $_POST['SDS0'];$data['SAH0']= $_POST['SAH0'];$data['SAF0']= $_POST['SAF0'];$data['SAN0']= $_POST['SAN0'];$data['STL']= $_POST['STL'];
+	$data['CDS0']= $_POST['CDS'];
+	$data['SDS0']= $_POST['SDS'];
+	$data['SAH0']= $_POST['SAH'];
+	$data['SAF0']= $_POST['SAF'];
+	$data['SAN0']= $_POST['SAN'];
+	$data['STL']= $_POST['STL'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home21/'.$id);	

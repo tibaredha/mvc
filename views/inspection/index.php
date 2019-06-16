@@ -25,7 +25,7 @@ if (isset($this->userListview))
 echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>" ;
 echo "<tr>" ;
 echo "<th style=\"width:50px;\" colspan=\"4\" >" ;
-echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'tcpdf/inspection/odm.php?uc=" > Ordre de mission : </a>';
+echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'cour/odm/" > Ordre de mission : </a>';
 echo "</th>" ;
 echo "<th style=\"width:50px;\"  colspan=\"15\">" ;
 echo "Releve Des structures sanitaire </th>" ;
