@@ -265,6 +265,60 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(5,$this->GetY()+10);  
 	}
 	}
+	
+	function NBRSPECIALISTE($ETAT,$SPECIALITEX) 
+	{
+	$this->mysqlconnect();
+	$requete="SELECT * FROM structure where ETAT=$ETAT and SPECIALITEX=$SPECIALITEX ";
+	$requete = @mysql_query($requete) or die($requete."<br>".mysql_error());
+	$OP=mysql_num_rows($requete);
+	mysql_free_result($requete);
+	return $OP;
+	}
+	
+	
+	function medecinspecialiste($EPH)
+	{
+	$this->mysqlconnect();
+	$query = "SELECT * from specialite ORDER BY specialitefr"; 
+	$res=mysql_query($query);
+	$tot=mysql_num_rows($res);
+	$this->SetXY(5,40); 
+	$x=0;
+	while($row=mysql_fetch_object($res))
+	{
+	    $this->cell(10,5,$x=$x+1,1,0,'L',1,0);
+		$this->cell(60,5,$row->specialitefr.' = '.$this->NBRSPECIALISTE(0,$row->idspecialite),1,0,'L',1,0);
+		$this->cell(20,5,"DNS",1,0,'C',1,0);
+		$this->cell(20,5,"DIS",1,0,'C',1,0);
+		$this->cell(30,5,"COMMUNE",1,0,'C',1,0);
+		$this->cell(60,5,"ADRESSE",1,0,'C',1,0);
+		$query1 = "SELECT * from structure where  STRUCTURE $EPH  and SPECIALITEX=$row->idspecialite and ETAT=0 ORDER BY NOM"; 
+		$res1=mysql_query($query1);
+		$tot2=mysql_num_rows($res1);
+		$this->SetXY(5,$this->GetY()+5); 
+		if ($tot2 > 0) {
+		 while($row1=mysql_fetch_object($res1))
+			{
+			$this->cell(35,5,$row1->NOM,1,0,'L',0,0);
+			$this->cell(35,5,$row1->PRENOM,1,0,'L',0,0);
+			$this->cell(20,5,$this->dateUS2FR($row1->DNS),1,0,'C',0,0);
+			$this->cell(20,5,$this->dateUS2FR($row1->DATE),1,0,'C',0,0);
+	
+			$this->cell(30,5,$this->nbrtostring('com','IDCOM',$row1->COMMUNE,'COMMUNE'),1,0,'L',0,0);		
+			$this->cell(60,5,$row1->ADRESSE,1,0,'L',0,0);
+			$this->SetXY(5,$this->GetY()+5); 
+			}
+	    }else {
+		$this->cell(200,5,'Néant',1,0,'C',0);
+		$this->SetXY(5,$this->GetY()+5);
+		}
+	$this->SetXY(5,$this->GetY()+5); 
+	}
+	}
+	
+	
+	
 	function medecinsp($EPH)
 	{
 	$this->mysqlconnect();

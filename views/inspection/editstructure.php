@@ -63,7 +63,7 @@ $this->label($x+350,$y+250,'Wilaya');        $this->WILAYA($x+450,$y+240,'WILAYA
 $this->label($x+700,$y+250,'Commune');       $this->COMMUNE($x+800,$y+240,'COMMUNEN','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);          
 $this->label($x,$y+260,'__________________________________________________________________________________________________________________');
 $this->label($x,$y+290,'Date diplome');      $this->txts($x+100,$y+280,'DIPLOME',0,	$data['DIPLOME'],'dateus44');
-$this->label($x,$y+290+30,'Universite');     $this->UNIVERSITE($x+100,$y+280+30,'UNIV','country','mvc','wil',$data['UNIV0'],$data['UNIV1']); 
+$this->label($x,$y+290+30,'Universite');     $this->UNIVERSITE($x+100,$y+280+30,'UNIV','UNIV','mvc','wil',$data['UNIV0'],$data['UNIV1']); 
 $this->label($x+350,$y+290,'Order N ');      $this->txt($x+450,$y+280,'NUMORDER',0,$data['NUMORDER'],'date');
 $this->label($x+350,$y+320,'Date order');    $this->txts($x+450,$y+280+30,'DATEORDER',0,$data['DATEORDER'],'dateusx');  
 $this->label($x+700,$y+290,'Démission N');   $this->txt($x+800,$y+280,'NUMDEM',0,$data['NUMDEM'],'date');

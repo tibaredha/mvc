@@ -1,6 +1,3 @@
-<SCRIPT LANGUAGE="JavaScript">
-
-</script>
 <?php 
 verifsession();	
 lang(Session::get('lang'));
@@ -9,17 +6,15 @@ $data = array(
 "Date"       => date('Y-m-j'), 
 "btn"        => 'inspection', 
 "id"         => '', 
-"butun"      => 'imprimer conformite', 
+"butun"      => 'Ajouter conformite + inspection', 
 "photos"     => 'public/images/icons/pers.PNG',
 "action"     => 'inspection/creathome12/'.$this->user[0]['id'],
-
-"WILAYAN1"  => $this->user[0]['WILAYA'] ,
-"WILAYAN2"  => View::nbrtostring('wil','IDWIL',$this->user[0]['WILAYA'],'WILAYAS'),
-"COMMUNEN1" => $this->user[0]['COMMUNE'] ,
-"COMMUNEN2" => View::nbrtostring('com','IDCOM',$this->user[0]['COMMUNE'],'COMMUNE'),
-"ADRESSE"  => $this->user[0]['ADRESSE'],
+"WILAYAN1"   => $this->user[0]['WILAYA'] ,
+"WILAYAN2"   => View::nbrtostring('wil','IDWIL',$this->user[0]['WILAYA'],'WILAYAS'),
+"COMMUNEN1"  => $this->user[0]['COMMUNE'] ,
+"COMMUNEN2"  => View::nbrtostring('com','IDCOM',$this->user[0]['COMMUNE'],'COMMUNE'),
+"ADRESSE"    => $this->user[0]['ADRESSE'],
 "ADRESSEAR"  => $this->user[0]['ADRESSEAR'],
-
 "NAT"        => array( 
 				"Transfert"=>"1",
 				"Instatllation"=>"2",
@@ -28,7 +23,6 @@ $data = array(
 "PROPRIETAIRE"  => 'x',
 "DEBUTCONTRAT"  => '00-00-0000',
 "FINCONTRAT"    => '00-00-0000'				
-				
 );
 view::button($data['btn'],'');
 echo "<h2>PV de conformite du local de : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
@@ -56,7 +50,7 @@ $this->label($x+400,$y+500,'3em pharmacien');   $this->combopharmacien($x+520,$y
 $this->label($x+800,$y+300,'Propriétaire');      $this->txtarid($x+880,$y+290,'PROPRIETAIRE','PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
 $this->label($x+800,$y+340,'Début contrat');     $this->txts($x+880,$y+330,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus2');
 $this->label($x+800,$y+380,'Fin contrat');       $this->txts($x+880,$y+370,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus3');
-
+$this->hide(100,100,"STRUCTURE","",$this->user[0]['STRUCTURE']);
 $this->submit($x+880,$y+540,$data['butun']);
 $this->f1();
 view::sautligne(22);
