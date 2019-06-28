@@ -9,7 +9,7 @@ class Session
 	
 	if (date('Y-m-d') <= self::dateexpiration )
 		{ 
-		session_save_path(path);       //default session.save_path = "c:/wamp/tmp"  +  path = constante definie dans le fichier lib/config 
+		session_save_path(self::path);       //default session.save_path = "c:/wamp/tmp"  +  path = constante definie dans le fichier lib/config 
 		session_name('Sessionamrane');   //default session.name = PHPSESSID  session_id()= nom du fichier stocker dans D:\framework\libs\sessions; 
 		session_set_cookie_params(0);
 		@session_start();
@@ -33,6 +33,7 @@ class Session
 	{
 		//unset($_SESSION);
 		session_destroy();
+		session_set_cookie_params(0);// kill session when browser closed
 	}
 	
 	
