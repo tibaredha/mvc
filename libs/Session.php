@@ -2,20 +2,16 @@
 
 class Session
 {
-	const dateexpiration ='2020-01-01';
-	const path = 'D:\mvc\libs\sessions';
+	
 	public static function init()
 	{
-	
-	if (date('Y-m-d') <= self::dateexpiration )
-		{ 
-		session_save_path(self::path);       //default session.save_path = "c:/wamp/tmp"  +  path = constante definie dans le fichier lib/config 
-		session_name('Sessionamrane');   //default session.name = PHPSESSID  session_id()= nom du fichier stocker dans D:\framework\libs\sessions; 
-		session_set_cookie_params(0);
+	    $date=date('Y-m-d');
+		if ($date <= '2020-01-01' )
+		{
+		session_set_cookie_params(0);// kill session when browser closed
 		@session_start();
-		//setcookie('tibaredha','030570', time() + 365*24*3600, null, null, false, true);
-		}
-
+		// echo $date ;
+		}	
 	}
 	
 	public static function set($key, $value)
@@ -33,7 +29,6 @@ class Session
 	{
 		//unset($_SESSION);
 		session_destroy();
-		session_set_cookie_params(0);// kill session when browser closed
 	}
 	
 	
