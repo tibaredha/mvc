@@ -3,6 +3,7 @@
 class Session
 {
 	const dateexpiration ='2020-01-01';
+	const path = 'D:\mvc\libs\sessions';
 	public static function init()
 	{
 	
