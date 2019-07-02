@@ -203,6 +203,26 @@ class inspection extends TCPDF
 	return $totalmbr1;
 	}
 	
+	function nbrpharcom($STRUCTURE,$COMMUNE)
+	{
+	$this-> mysqlconnect();
+	$query_liste = "SELECT * FROM structure WHERE STRUCTURE=12 and COMMUNE=$COMMUNE and ETAT='0'";//
+	$requete = mysql_query( $query_liste ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
+	$totalmbr1=mysql_num_rows($requete);
+	return $totalmbr1;
+	}
+	
+	function nbrhabitcom($val,$COMMUNE)
+	{
+	$this-> mysqlconnect();
+	$query_liste = "SELECT * FROM com WHERE IDCOM=$COMMUNE ";//
+	$requete = mysql_query( $query_liste ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
+	$result1 = mysql_fetch_array( $requete ) ;
+	$valhb=$result1["$val"];
+	return $valhb;
+	}
+	
+	
 	
 	function nbrpers($Categorie,$idt)
 	{

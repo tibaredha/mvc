@@ -23,7 +23,7 @@ $num=$rowx->NREALISATION;
 $date=$rowx->REALISATION;
 $num1=$rowx->NOUVERTURE;
 $date1=$rowx->OUVERTURE;
-$nom=$rowx->NOM;
+$nom=$rowx->NOM;$DNS=$rowx->DNS;$Mobile=$rowx->Mobile;
 $prenom=$rowx->PRENOM;
 $DIPLOME=$rowx->DIPLOME;
 $UNIV=$rowx->UNIV;
@@ -31,6 +31,7 @@ $NUMORDER=$rowx->NUMORDER;
 $DATEORDER=$rowx->DATEORDER;
 $NUMDEM=$rowx->NUMDEM;
 $DATEDEM=$rowx->DATEDEM;
+
 }
 
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
@@ -53,11 +54,10 @@ $SAF0=$rowy->SAF0;
 $SAN0=$rowy->SAN0;
 $STL=$rowy->STL;
 $adresse=$rowy->ADRESSE;
+$idcommune=$rowy->COMMUNE;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'COMMUNE');
 $wilaya=$pdf->nbrtostring('mvc','wil','IDWIL',$rowy->WILAYA,'WILAYAS');;
 }
-
-
 $pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
@@ -66,41 +66,64 @@ $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'Inspection santé publique',0,1,
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"N° : ___________ /".date('Y'),0,1,'L');//$pdf->SetXY(155,$pdf->GetY()-5);$pdf->Cell(50,5,'الرقم : ___________/'.date('Y'),0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+5);
 $pdf->SetFont('aefurat', '', 16);$pdf->SetFillColor(245);
-if ($NAT==1) { $pdf->Cell(200,5,"FICHE TECHNIQUE DE TRANSFERT D'UNE OFFICINE DE PHARMACIE ",0,1,'C',1,1);}
-if ($NAT==2) { $pdf->Cell(200,5,"FICHE TECHNIQUE D'INSTALLATION D'UNE OFFICINE DE PHARMACIE ",0,1,'C',1,1);}
-if ($NAT==3) { $pdf->Cell(200,5,"FICHE TECHNIQUE D'OUVERTURE D'UNE OFFICINE DE PHARMACIE ",0,1,'C',1,1);}
+$pdf->Cell(200,5,"FICHE TECHNIQUE D'INSCRIPTION ",0,1,'C',1,1);
 $pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(5,$pdf->GetY()+10); $pdf->Cell(200,5,"Pharmacien : ".strtoupper($nom).'_'.strtolower ($prenom),0,1,'L');
-$pdf->SetXY(5,$pdf->GetY()+5);  $pdf->Cell(200,5,"Objet de la demande N° : ".$NUMD." du ".$pdf->dateUS2FR($DATED),0,1,'L');
-$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Local situé à : ",0,1,'L');
-$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(75,5,"Adresse : ".$adresse,0,1,'L',1,1); 
-$pdf->SetXY(85,$pdf->GetY()-5.3); $pdf->Cell(50,5,"Commune : ".$commune,0,1,'L',1,1);
-$pdf->SetXY(140,$pdf->GetY()-5.3); $pdf->Cell(60,5,"Wilaya de ".$wilaya,0,1,'L',1,1);
+$pdf->SetXY(5,$pdf->GetY()+10); $pdf->Cell(200,5,"1 /Renseignements individuels du postulant : ",0,1,'L');
+$pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(200,5,"- Nom et Prénom du Pharmacien : ".strtoupper($nom).'_'.strtolower ($prenom),0,1,'L');
+$pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(200,5,"- Date de naissance : ".$pdf->dateUS2FR($DNS),0,1,'L');
+$pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(200,5,"- Adresse : ".$adresse,0,1,'L');
+$pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(200,5,"- Commune : ".$commune,0,1,'L');
+$pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(200,5,"- Dairas : ***",0,1,'L');
+$pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(200,5,"- N° de téléphone : ".$Mobile,0,1,'L');
+$pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(200,5,"- Date d'obtention du diplome : ".$pdf->dateUS2FR($DIPLOME),0,1,'L');
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"2 /Date de depot de la demande : ".$pdf->dateUS2FR($DATED),0,1,'L');
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"3 /N° d'enregistrement sur le registre : ".$NUMD,0,1,'L');
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"4 /Adresse du locale /site proposé : ".$adresse." Commune ".$commune,0,1,'L');
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"5 /Date de visite /ou de creation du site : ".$pdf->dateUS2FR($DATEP),0,1,'L');
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"6 /Le cadre de l'instalation : ",0,1,'L');
+$pdf->SetFont('aefurat', 'U', 12);$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Si arrèté :",0,0,'L');$pdf->SetFont('aefurat', '', 12);
+$pdf->SetXY(30,$pdf->GetY()); $pdf->Cell(200,5,"Nbr d'habitant : [".$pdf->nbrhabitcom("p2018",$idcommune)."]  Nbr D'officine : [".($pdf->nbrpharcom(12,$idcommune)-1)."]  Distance : ".$DIST1." Conformité du locale : conforme",0,1,'L');
+$pdf->SetFont('aefurat', 'U', 12);$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Si circulaire :",0,0,'L');$pdf->SetFont('aefurat', '', 12);
+$pdf->SetXY(30,$pdf->GetY()); $pdf->Cell(200,5,"Criteres :obstacle ,distance par rapport a la pharmacie la plus proche ,population a couvrir ",0,1,'L');
+$pdf->SetFont('aefurat', '', 12);
 
-$pdf->SetXY(5,$pdf->GetY()+5);
-if ($NAT==1) { $pdf->Cell(200,5,"Cadre du transfert d'une officine de pharmacie : Numerus-clausus",0,1,'L');}
-if ($NAT==2) { $pdf->Cell(200,5,"Cadre d'installation d'une officine de pharmacie : Numerus-clausus",0,1,'L');}
-if ($NAT==3) { $pdf->Cell(200,5,"Cadre d'ouverture d'une officine de pharmacie : Numerus-clausus",0,1,'L');}
-$pdf->SetXY(5,$pdf->GetY()+ 5); $pdf->Cell(60,5,"Date d'inspection : ".$pdf->dateUS2FR($DATEP),0,1,'L');
+// if ($NAT==1) { $pdf->Cell(200,5,"FICHE TECHNIQUE DE TRANSFERT D'UNE OFFICINE DE PHARMACIE ",0,1,'C',1,1);}
+// if ($NAT==2) { $pdf->Cell(200,5,"FICHE TECHNIQUE D'INSTALLATION D'UNE OFFICINE DE PHARMACIE ",0,1,'C',1,1);}
+// if ($NAT==3) { $pdf->Cell(200,5,"FICHE TECHNIQUE D'OUVERTURE D'UNE OFFICINE DE PHARMACIE ",0,1,'C',1,1);}
+// $pdf->SetFont('aefurat', '', 12);
+// $pdf->SetXY(5,$pdf->GetY()+10); $pdf->Cell(200,5,"Pharmacien : ".strtoupper($nom).'_'.strtolower ($prenom),0,1,'L');
+// $pdf->SetXY(5,$pdf->GetY()+5);  $pdf->Cell(200,5,"Objet de la demande N° : ".$NUMD." du ".$pdf->dateUS2FR($DATED),0,1,'L');
+// $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Local situé à : ",0,1,'L');
+// $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(75,5,"Adresse : ".$adresse,0,1,'L',1,1); 
+// $pdf->SetXY(85,$pdf->GetY()-5.3); $pdf->Cell(50,5,"Commune : ".$commune,0,1,'L',1,1);
+// $pdf->SetXY(140,$pdf->GetY()-5.3); $pdf->Cell(60,5,"Wilaya de ".$wilaya,0,1,'L',1,1);
 
-$pdf->SetFont('aefurat', 'U', 14);$pdf->SetXY(5,$pdf->GetY()+ 5); $pdf->Cell(60,5,"Constat :",0,1,'L');$pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(15,$pdf->GetY()+5);
-if ($NAT==1) { $pdf->Cell(150,5,"* Transfert d'une officine de pharmacie dans le cadre du Numerus-clausus",0,1,'L');}
-if ($NAT==2) { $pdf->Cell(150,5,"* Installation d'une officine de pharmacie dans le cadre du Numerus-clausus",0,1,'L');}
-if ($NAT==3) { $pdf->Cell(150,5,"* Ouverture d'une officine de pharmacie dans le cadre du Numerus-clausus",0,1,'L');}
-$pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(60,5,"* Local d'une superficie de ".$STL." M2",0,1,'L');
-$pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(60,5,"* Avec l'accord des officines les plus proches : ",0,1,'L');
-$pdf->SetXY(25,$pdf->GetY()+2); $pdf->Cell(10,5,"-",0,1,'L');$pdf->SetXY(30,$pdf->GetY()-5.7); $pdf->Cell(135,5,$PHA1,0,1,'L');$pdf->SetXY(165,$pdf->GetY()-5.7); $pdf->Cell(35,5,$DIST1." Mètres",0,1,'C');
-$pdf->SetXY(25,$pdf->GetY()+2); $pdf->Cell(10,5,"-",0,1,'L');$pdf->SetXY(30,$pdf->GetY()-5.7); $pdf->Cell(135,5,$PHA2,0,1,'L');$pdf->SetXY(165,$pdf->GetY()-5.7); $pdf->Cell(35,5,$DIST2." Mètres",0,1,'C');
-$pdf->SetXY(25,$pdf->GetY()+2); $pdf->Cell(10,5,"-",0,1,'L');$pdf->SetXY(30,$pdf->GetY()-5.7); $pdf->Cell(135,5,$PHA3,0,1,'L');$pdf->SetXY(165,$pdf->GetY()-5.7); $pdf->Cell(35,5,$DIST3." Mètres",0,1,'C');
-$pdf->SetFont('aefurat', 'U', 14);$pdf->SetXY(5,$pdf->GetY()+ 5); $pdf->Cell(60,5,"Conclusion :",0,1,'L');$pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(5,$pdf->GetY()+5); 
-if ($NAT==1) { $pdf->Cell(150,5,"Local proposé est conforme selon les condition de transfert d'une officine de pharmacie",0,1,'L');}
-if ($NAT==2) { $pdf->Cell(150,5,"Local proposé est conforme selon les condition de installation d'une officine de pharmacie",0,1,'L');}
-if ($NAT==3) { $pdf->Cell(150,5,"Local proposé est conforme selon les condition de ouverture d'une officine de pharmacie",0,1,'L');}
-$pdf->SetXY(15,$pdf->GetY()+15); $pdf->Cell(60,5,"AVIS DE LA COMMISSION DE WILAYA",0,1,'L');
-$pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(60,5,"Le conseil de l'ordre",0,0,'L');$pdf->SetXY(140,$pdf->GetY()); $pdf->Cell(60,5,"Le representant de la DSP ",0,1,'L');
-$pdf->SetXY(15,$pdf->GetY()+15); $pdf->Cell(60,5,"Le SNAPO",0,0,'L');
+// $pdf->SetXY(5,$pdf->GetY()+5);
+// if ($NAT==1) { $pdf->Cell(200,5,"Cadre du transfert d'une officine de pharmacie : Numerus-clausus",0,1,'L');}
+// if ($NAT==2) { $pdf->Cell(200,5,"Cadre d'installation d'une officine de pharmacie : Numerus-clausus",0,1,'L');}
+// if ($NAT==3) { $pdf->Cell(200,5,"Cadre d'ouverture d'une officine de pharmacie : Numerus-clausus",0,1,'L');}
+// $pdf->SetXY(5,$pdf->GetY()+ 5); $pdf->Cell(60,5,"Date d'inspection : ".$pdf->dateUS2FR($DATEP),0,1,'L');
+
+// $pdf->SetFont('aefurat', 'U', 14);$pdf->SetXY(5,$pdf->GetY()+ 5); $pdf->Cell(60,5,"Constat :",0,1,'L');$pdf->SetFont('aefurat', '', 12);
+// $pdf->SetXY(15,$pdf->GetY()+5);
+// if ($NAT==1) { $pdf->Cell(150,5,"* Transfert d'une officine de pharmacie dans le cadre du Numerus-clausus",0,1,'L');}
+// if ($NAT==2) { $pdf->Cell(150,5,"* Installation d'une officine de pharmacie dans le cadre du Numerus-clausus",0,1,'L');}
+// if ($NAT==3) { $pdf->Cell(150,5,"* Ouverture d'une officine de pharmacie dans le cadre du Numerus-clausus",0,1,'L');}
+// $pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(60,5,"* Local d'une superficie de ".$STL." M2",0,1,'L');
+// $pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(60,5,"* Avec l'accord des officines les plus proches : ",0,1,'L');
+// $pdf->SetXY(25,$pdf->GetY()+2); $pdf->Cell(10,5,"-",0,1,'L');$pdf->SetXY(30,$pdf->GetY()-5.7); $pdf->Cell(135,5,$PHA1,0,1,'L');$pdf->SetXY(165,$pdf->GetY()-5.7); $pdf->Cell(35,5,$DIST1." Mètres",0,1,'C');
+// $pdf->SetXY(25,$pdf->GetY()+2); $pdf->Cell(10,5,"-",0,1,'L');$pdf->SetXY(30,$pdf->GetY()-5.7); $pdf->Cell(135,5,$PHA2,0,1,'L');$pdf->SetXY(165,$pdf->GetY()-5.7); $pdf->Cell(35,5,$DIST2." Mètres",0,1,'C');
+// $pdf->SetXY(25,$pdf->GetY()+2); $pdf->Cell(10,5,"-",0,1,'L');$pdf->SetXY(30,$pdf->GetY()-5.7); $pdf->Cell(135,5,$PHA3,0,1,'L');$pdf->SetXY(165,$pdf->GetY()-5.7); $pdf->Cell(35,5,$DIST3." Mètres",0,1,'C');
+// $pdf->SetFont('aefurat', 'U', 14);$pdf->SetXY(5,$pdf->GetY()+ 5); $pdf->Cell(60,5,"Conclusion :",0,1,'L');$pdf->SetFont('aefurat', '', 12);
+// $pdf->SetXY(5,$pdf->GetY()+5); 
+// if ($NAT==1) { $pdf->Cell(150,5,"Local proposé est conforme selon les condition de transfert d'une officine de pharmacie",0,1,'L');}
+// if ($NAT==2) { $pdf->Cell(150,5,"Local proposé est conforme selon les condition de installation d'une officine de pharmacie",0,1,'L');}
+// if ($NAT==3) { $pdf->Cell(150,5,"Local proposé est conforme selon les condition de ouverture d'une officine de pharmacie",0,1,'L');}
+$pdf->SetXY(15,$pdf->GetY()+10); $pdf->Cell(60,5,"AVIS DE LA COMMISSION DE WILAYA (signature et griff)",0,1,'L');
+$pdf->SetXY(15,$pdf->GetY()+10); $pdf->Cell(60,5,"Le conseil de l'ordre",0,0,'L');
+$pdf->SetXY(100,$pdf->GetY()); $pdf->Cell(60,5,"SNAPO",0,0,'L');
+$pdf->SetXY(170,$pdf->GetY()); $pdf->Cell(60,5,"DSP ",0,1,'L');
+
 $pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');

@@ -17,7 +17,7 @@ $y=220;
 echo "<div class=\"mydiv\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	
 ?>
 <form method="post" action="<?php echo URL.'pdf/inspection/imp.php' ;?>">
-	<label>Ordre</label><?php   combov1('ordre',array("Nom"=>"NOM","Prenom"=>"PRENOM","Date"=>"DATE"));    ?><br />
+	<label>Ordre</label><?php   combov1('ordre',array("Nom"=>"NOM","Prenom"=>"PRENOM","Date"=>"DATE","DNS"=>"DNS"));    ?><br />
 	<label>Ascdesc</label><?php combov1('ascdesc',array("croissant"=>"asc","décroissant"=>"desc"));    ?><br />
 	<label>MFT</label><?php     combov1('SEXE',array("Tous Masculin et Feminin"=>"IS NOT NULL","Masculin"=>"='M'","Feminin"=>"='F'"));?><br />
 	<label>Structure</label>

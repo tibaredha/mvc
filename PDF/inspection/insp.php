@@ -33,7 +33,7 @@ $totalmbr1=mysql_num_rows($resultat);
 while($row=mysql_fetch_object($resultat))
 {
 
-        mysql_query("SET NAMES 'UTF8' ");
+         mysql_query("SET NAMES 'UTF8' ");
 		$query1 = "SELECT * FROM inspection where DATE='$row->DATE' and ids ='$row->ids' ORDER BY id"; 
 		$resultat1=mysql_query($query1);
 		$totalmbr11=mysql_num_rows($resultat1);
