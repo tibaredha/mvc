@@ -3,7 +3,7 @@ verifsession();
 lang(Session::get('lang'));
 ob_start();
 $data = array(
-"Date"       => date('Y-m-j'), 
+"Date"       => '00-00-0000', 
 "btn"        => 'inspection', 
 "id"         => '', 
 "butun"      => 'Ajouter conformite + inspection', 
@@ -33,7 +33,7 @@ $x=50;$y=10;
 $this->label($x,$y+220,'Wilaya');                $this->WILAYA($x+150,$y+210,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
 $this->label($x+400,$y+220,'Commune');           $this->COMMUNE($x+520,$y+210,'COMMUNE','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);
 $this->label($x+800,$y+220,'Adresse');           $this->txt($x+880,$y+210,'ADRESSE',0,$data['ADRESSE'],'date');
-$this->label($x,$y+260,'Date PV ');              $this->txts($x+150,$y+250,'DATEP',0,date('j-m-Y'),'dateus'); $this->label($x+400,$y+260,'Nature PV');    $this->combov1($x+520,$y+250,'NAT',$data['NAT']);              $this->label($x+800,$y+260,'Adresse ar ');  $this->txtarid($x+880,$y+250,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
+$this->label($x,$y+260,'Date PV ');              $this->txts($x+150,$y+250,'DATEP',0,$data['Date'],'dateus'); $this->label($x+400,$y+260,'Nature PV');    $this->combov1($x+520,$y+250,'NAT',$data['NAT']);              $this->label($x+800,$y+260,'Adresse ar ');  $this->txtarid($x+880,$y+250,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
 $this->label($x,$y+300,'Demande N ');            $this->txt($x+150,$y+290,'NUMD',0,"00");                     $this->label($x+400,$y+300,'Date demande'); $this->txts($x+520,$y+290,'DATED',0,date('j-m-Y'),'dateus1');
 
 $this->label($x,$y+340,'Salle des ventes : ');      $this->date1($x+150,$y+330,'CDS0',10,'00','cds();');$this->date1($x+225,$y+330,'CDS1',10,'00','cds();');  $this->date1($x+300,$y+330,'CDS',0,"00",'cds();');
