@@ -265,7 +265,10 @@ class inspection_Model extends Model {
 		return $this->db->select('SELECT * FROM home WHERE idstructure = :id  order by idstructure asc ', array(':id' => $id));    
     }
 	
-	
+	public function userhomeSingleList($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM home WHERE id = :id  order by id asc ', array(':id' => $id));
+    }
 	
 	
 	public function persSingleList($id) {
@@ -382,11 +385,11 @@ class inspection_Model extends Model {
 		$postData = array(		
 			 'MP'        => $data['MP']	    
         );
-       echo '<pre>';print_r ($postData);echo '<pre>';
+       //echo '<pre>';print_r ($postData);echo '<pre>';
 	   $this->db->update('insp', $postData, "id =" . $data['id'] . "");
     }
 
-	 public function creathome($data) {
+	public function creathome($data) {
 			$this->db->exec('SET NAMES utf8');
 			$this->db->insert('home', array('idstructure'=> $data['id'],'DATEP'=> $this->dateFR2US($data['DATEP']),'NAT'=> $data['NAT'],'WILAYA'=>$data['WILAYA'],'COMMUNE'=>$data['COMMUNE'],'ADRESSE'=>$data['ADRESSE'],'ADRESSEAR'=>$data['ADRESSEAR'],'NUMD'=> $data['NUMD'],'DATED'=> $this->dateFR2US($data['DATED']),'PROPRIETAIRE'=> $data['PROPRIETAIRE'],'DEBUTCONTRAT'=> $this->dateFR2US($data['DEBUTCONTRAT']),'FINCONTRAT'=> $this->dateFR2US($data['FINCONTRAT']),'PHA1'=> $data['PHA1'],'DIST1'=> $data['DIST1'],'PHA2'=> $data['PHA2'],'DIST2'=> $data['DIST2'],'PHA3'=> $data['PHA3'],'DIST3'=> $data['DIST3'],'CDS0'=> $data['CDS0'],'SDS0'=> $data['SDS0'],'SAH0'=> $data['SAH0'],'SAF0'=> $data['SAF0'],'SAN0'=> $data['SAN0'], 'STL'=> $data['STL']));
 			// echo '<pre>';print_r ($data);echo '<pre>';
@@ -395,7 +398,21 @@ class inspection_Model extends Model {
 			$this->db->update('structure', $postData, "id =" . $data['id'] . ""); 
 			$this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
 			return $last_id = $this->db->lastinsertid();
-		}
+	}
+	
+	public function edithome($data) {
+			$this->db->exec('SET NAMES utf8');
+			$postData = array('DATEP'=> $this->dateFR2US($data['DATEP']),'NAT'=> $data['NAT'],'WILAYA'=>$data['WILAYA'],'COMMUNE'=>$data['COMMUNE'],'ADRESSE'=>$data['ADRESSE'],'ADRESSEAR'=>$data['ADRESSEAR'],'NUMD'=> $data['NUMD'],'DATED'=> $this->dateFR2US($data['DATED']),'PROPRIETAIRE'=> $data['PROPRIETAIRE'],'DEBUTCONTRAT'=> $this->dateFR2US($data['DEBUTCONTRAT']),'FINCONTRAT'=> $this->dateFR2US($data['FINCONTRAT']),'PHA1'=> $data['PHA1'],'DIST1'=> $data['DIST1'],'PHA2'=> $data['PHA2'],'DIST2'=> $data['DIST2'],'PHA3'=> $data['PHA3'],'DIST3'=> $data['DIST3'],'CDS0'=> $data['CDS0'],'SDS0'=> $data['SDS0'],'SAH0'=> $data['SAH0'],'SAF0'=> $data['SAF0'],'SAN0'=> $data['SAN0'], 'STL'=> $data['STL']);
+			$this->db->update('home', $postData, "id =" . $data['id'] . "");	
+	        $postData1 = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
+			$this->db->update('structure', $postData1, "id =" . $data['idstructure'] . ""); 
+			// $this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
+			return $last_id = $this->db->lastinsertid();
+	}
+	
+	
+	
+	
 	public function deletehome($id) {       
         $this->db->delete('home', "id = '$id'");
     }	
