@@ -23,8 +23,13 @@ $num=$rowx->NREALISATION;
 $date=$rowx->REALISATION;
 $num1=$rowx->NOUVERTURE;
 $date1=$rowx->OUVERTURE;
-$nom=$rowx->NOM;$DNS=$rowx->DNS;$Mobile=$rowx->Mobile;
+$nom=$rowx->NOM;
 $prenom=$rowx->PRENOM;
+$nomar=$rowx->NOMAR;
+$prenomar=$rowx->PRENOMAR;
+$sexe=$rowx->SEX;
+$DNS=$rowx->DNS;
+$Mobile=$rowx->Mobile;
 $DIPLOME=$rowx->DIPLOME;
 $UNIV=$rowx->UNIV;
 $NUMORDER=$rowx->NUMORDER;
@@ -54,8 +59,12 @@ $SAF0=$rowy->SAF0;
 $SAN0=$rowy->SAN0;
 $STL=$rowy->STL;
 $adresse=$rowy->ADRESSE;
+$adressear=$rowy->ADRESSEAR;
+
+
 $idcommune=$rowy->COMMUNE;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'COMMUNE');
+$communear=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'communear');
 $wilaya=$pdf->nbrtostring('mvc','wil','IDWIL',$rowy->WILAYA,'WILAYAS');;
 }
 $pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
@@ -64,19 +73,32 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dspfr,0,1,'C');
 
 $pdf->setRTL($enable=true, $resetx=true);
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(140,5,'مصلحة الهياكل و النشاط الصحي',0,0,'R');$pdf->cell(50,5,"الجلفة في :".date('d-m-Y'),0,0,'L',0,0);
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(140,5,'الرقم : .........../ م ص س / '.date('Y'),0,0,'R');
-
-
-$pdf->SetXY(5,$pdf->GetY()+15);$pdf->Cell(200,5,'الى السيـــــــــــــد',0,0,'R');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'الى السيـــــــــــــد',0,0,'R');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'الى السيـــــــــــــد',0,0,'R');
-
-
-
-
-
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(140,5,'مصلحة الهياكل و النشاط الصحي',0,0,'R');$pdf->cell(50,5,"الجلفة في : ".date('Y-m-d'),0,1,'L',0,0);
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(140,5,'الرقم : .........../ م ص س / '.date('Y'),0,0,'R');
+$pdf->SetXY(85,$pdf->GetY()+10);$pdf->Cell(120,5,'السيد مدير الصحة و الســـــــــكان',0,1,'C');
+$pdf->SetXY(85,$pdf->GetY());$pdf->Cell(120,5,'الى',0,1,'C');
+$pdf->SetXY(85,$pdf->GetY());$pdf->Cell(120,5,' السيـــــــــد ( ة ) : '.$nomar.' - '.$prenomar,0,1,'C');
+$pdf->SetXY(85,$pdf->GetY());$pdf->Cell(120,5,$adressear. '  بلدية : '.$communear ,0,1,'C');
+$pdf->SetXY(25,$pdf->GetY()+15);$pdf->Cell(20,5,'الموضوع :',0,0,'R');$pdf->Cell(180,5,'ف / ي  طلبكم المتعلق بتنصيب صيدلية ببلدية '.$communear,0,1,'R');
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->Cell(200,5,'تبعا لطلبكم المتعلق بتنصيب صيدلية  يشرفني ان اعلمكم بالموافقة المبدئية كما اطلب منكم تكملة ملفكم بالوثائق التالية',0,1,'R');
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->Cell(200,5,'في اجل 20 يوما والا سوف يلغى طلبكم ',0,1,'R');
+$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- شهادة الميلاد',0,1,'R');
+$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- شهادة الجنسية',0,1,'R');
+$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- شهادة السوابق العدلية',0,1,'R');
+if ($sexe=='M'){$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- الوضعية تجاه الخدمة الوطنية',0,1,'R');} 
+$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- شهادت التسجيل في الفرع النضامي الجهوي للصيادلة ',0,1,'R');
+$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- شهادة عدم الانتساب'.' (CNAS + CASNOS) ',0,1,'R');
+$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- مفرر الاستقالة / مقرر الغلق ',0,1,'R');
+$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- شهادة النجاح ',0,1,'R');
+$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- شهادة طبية عامة و خاصة ',0,1,'R');
+$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- صور شمسية 02 ',0,1,'R');
+$pdf->SetXY(30,$pdf->GetY()+5);$pdf->Cell(150,5,'- عقد الكراء او الملكية ',0,1,'R');
+$pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(50,5,'تقبلوا تحيـــــــــــاتنا',0,1,'R');
+$pdf->SetXY(120,$pdf->GetY()+5);$pdf->Cell(50,5,'مدير الصحة و الســــــــكان',0,1,'R');
 $pdf->setRTL($enable=false, $resetx=true);
+
+
+
 $pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
@@ -87,21 +109,21 @@ $pdf->SetXY(40,$pdf->GetY()+10);$pdf->cell(165,5,"Monsieur le Directeur de la sa
 $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(165,5,"A",0,0,'C',0,0);
 $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(165,5,"Monsieur le Directeur générale de la pharmacie et des équipements de santé ",0,0,'C',0,0);
 $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(165,5,$pdf->mspfr,0,0,'C',0,0);
-$pdf->SetXY(5,$pdf->GetY()+15);$pdf->cell(200,10,"BORDEREAU D'ENVOI",0,0,'C',1,0);
-$pdf->SetXY(5,$pdf->GetY()+20);$pdf->cell(15,10,"N°",1,0,'C',1,0);$pdf->cell(105,10,"DESIGNATION",1,0,'C',1,0);$pdf->cell(15,10,"NBR",1,0,'C',1,0);$pdf->cell(65,10,"OBSERVATION",1,0,'C',1,0);
+$pdf->SetXY(5,$pdf->GetY()+15);$pdf->cell(195,10,"BORDEREAU D'ENVOI",0,0,'C',1,0);
+$pdf->SetXY(5,$pdf->GetY()+20);$pdf->cell(15,10,"N°",1,0,'C',1,0);$pdf->cell(105,10,"DESIGNATION",1,0,'C',1,0);$pdf->cell(15,10,"NBR",1,0,'C',1,0);$pdf->cell(60,10,"OBSERVATION",1,0,'C',1,0);
 $pdf->RoundedRect($x=5, $y=$pdf->GetY()+10, $w=15, $h=130, $r=1, $round_corner='1111', $style='', $border_style=array(), $fill_color=array());
 $pdf->RoundedRect($x=20, $y=$pdf->GetY()+10, $w=105, $h=130, $r=1, $round_corner='1111', $style='', $border_style=array(), $fill_color=array());
 $pdf->RoundedRect($x=125, $y=$pdf->GetY()+10, $w=15, $h=130, $r=1, $round_corner='1111', $style='', $border_style=array(), $fill_color=array());
-$pdf->RoundedRect($x=140, $y=$pdf->GetY()+10, $w=65, $h=130, $r=1, $round_corner='1111', $style='', $border_style=array(), $fill_color=array());
+$pdf->RoundedRect($x=140, $y=$pdf->GetY()+10, $w=60, $h=130, $r=1, $round_corner='1111', $style='', $border_style=array(), $fill_color=array());
 $pdf->SetXY(20,128);$pdf->cell(105,10,"Veuillez trouver ci-joint",0,0,'C',0,0);
 $pdf->SetXY(5,148);$pdf->cell(15,10,"1",0,0,'C',0,0);
-$pdf->SetXY(20,148);$pdf->cell(105,10,"Dossier d'instalation du pharmacien",0,0,'L',0,0);$pdf->SetXY(5+15+105,148);
+$pdf->SetXY(20,148);$pdf->cell(105,10,"Dossier d'installation du pharmacien",0,0,'L',0,0);$pdf->SetXY(5+15+105,148);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,$nom.'_'.$prenom,0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+15);$pdf->cell(105,10,"- Demande manuscrite.",0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Extrait de naissance.",0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Casier judiciaire.",0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Certificat de nationalité.",0,0,'L',0,0);
-$pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Situation vis-à-vis du service national.",0,0,'L',0,0);
+if ($sexe=='M'){$pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Situation vis-à-vis du service national.",0,0,'L',0,0);} 
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Deux certificats médicaux de bonne santé Mg + Pn-Ph.",0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Deux photos.",0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Photocopie légalisée du diplôme.",0,0,'L',0,0);
@@ -118,9 +140,14 @@ $pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dspfr,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'Inspection santé publique',0,1,'L');$pdf->SetXY(155,$pdf->GetY()-5);$pdf->Cell(50,5,'مفتشية الصــــحة العموميـة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"N° : ___________ /".date('Y'),0,1,'L');//$pdf->SetXY(155,$pdf->GetY()-5);$pdf->Cell(50,5,'الرقم : ___________/'.date('Y'),0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+5);
+$pdf->setRTL($enable=true, $resetx=true);
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(140,5,'مصلحة الهياكل و النشاط الصحي',0,0,'R');$pdf->cell(50,5,"الجلفة في : ".date('Y-m-d'),0,1,'L',0,0);
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(140,5,'الرقم : .........../ م ص س / '.date('Y'),0,0,'R');
+$pdf->setRTL($enable=false, $resetx=true);
+
+//$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'Inspection santé publique',0,1,'L');$pdf->SetXY(155,$pdf->GetY()-5);$pdf->Cell(50,5,'مفتشية الصــــحة العموميـة',0,1,'R');
+//$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"N° : ___________ /".date('Y'),0,1,'L');//$pdf->SetXY(155,$pdf->GetY()-5);$pdf->Cell(50,5,'الرقم : ___________/'.date('Y'),0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+15);
 $pdf->SetFont('aefurat', '', 16);$pdf->SetFillColor(245);
 $pdf->Cell(200,5,"FICHE TECHNIQUE D'INSCRIPTION ",0,1,'C',1,1);
 $pdf->SetFont('aefurat', '', 12);
@@ -136,7 +163,7 @@ $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"2 /Date de depot de la demande 
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"3 /N° d'enregistrement sur le registre : ".$NUMD,0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"4 /Adresse du locale /site proposé : ".$adresse." Commune ".$commune,0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"5 /Date de visite /ou de creation du site : ".$pdf->dateUS2FR($DATEP),0,1,'L');
-$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"6 /Le cadre de l'instalation : ",0,1,'L');
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"6 /Le cadre de l'installation : ",0,1,'L');
 $pdf->SetFont('aefurat', 'U', 12);$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Si arrèté ",0,0,'L');$pdf->SetFont('aefurat', '', 12);
 $distance = array ($DIST1,$DIST2,$DIST3) ;rsort($distance);
 $pdf->SetXY(30,$pdf->GetY()); $pdf->Cell(200,5,": Nbr d'habitant : [".$pdf->nbrhabitcom("p2018",$idcommune)."]  Nbr D'officine : [".($pdf->nbrpharcom(12,$idcommune)-0)."]  Distance : ".$distance[0]." Conformité du locale : conforme",0,1,'L');
