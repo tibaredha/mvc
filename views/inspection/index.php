@@ -87,10 +87,7 @@ echo "</tr>" ;
 				break;
 		case 15://dentiste generaliste 	ok 	
 				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SDEN.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
-				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite15/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'inspection/installation15/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
-			    // echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'inspection/ouverture15/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
-				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'inspection/changement15/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"           href=\"".URL.'inspection/home15/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
 				break;
 		case 16://medecin  specialiste 		
@@ -103,10 +100,6 @@ echo "</tr>" ;
 				break;
 		case 17://medecin generaliste ok 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
-				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite17/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'inspection/installation17/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
-			    // echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'inspection/ouverture17/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
-				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'inspection/changement17/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"           href=\"".URL.'inspection/home17/'.$value['id'].'/'.$value['STRUCTURE']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
 				break;
 		case 24://sage femme 
@@ -127,12 +120,14 @@ echo "</tr>" ;
 				break;
 		case 12://pharmacie OK 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/PHA.JPG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
-				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'inspection/installation/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
-			    // echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'inspection/ouverture/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
-				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'inspection/changement/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"           href=\"".URL.'inspection/home12/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
 				break;
+		case 26://entreprise de distribution de produit pharmaceutique OK 
+		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/PHA.JPG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"           href=\"".URL.'inspection/home26/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
+				break;
+		
+		
 		case 23://opticien 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SOPT.png'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				//echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;

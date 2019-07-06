@@ -18,7 +18,7 @@ $data = array(
 "NAT"        => array(
 				$this->home[0]['NAT']=>$this->home[0]['NAT'],
 				"Transfert"=>"1",
-				"Instatllation"=>"2",
+				"Installation"=>"2",
 				"Ouverture"=>"3"			 
 				),				
 "PROPRIETAIRE"  => $this->home[0]['PROPRIETAIRE'],

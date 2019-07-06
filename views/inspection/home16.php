@@ -17,7 +17,7 @@ $data = array(
 "ADRESSEAR"  => $this->user[0]['ADRESSEAR'],
 "NAT"        => array( 
 				"Transfert"=>"1",
-				"Instatllation"=>"2",
+				"Installation"=>"2",
 				"Ouverture"=>"3"			 
 				),				
 "PROPRIETAIRE"  => 'x',
