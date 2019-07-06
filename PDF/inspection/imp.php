@@ -70,7 +70,7 @@ $pdf->cell(10,5,$row->years,1,0,'C',0);
 
 
 $pdf->cell(30,5,$pdf->nbrtostring("com","IDCOM",$row->COMMUNE,"COMMUNE") 	,1,0,'L',0);
-$pdf->cell(70,5,html_entity_decode(utf8_decode($row->ADRESSE)),1,0,'L',0);
+$pdf->cell(70,5,$row->ADRESSE,1,0,'L',0);
 if ($row->STRUCTURE==16) {
 $pdf->cell(66,5,$pdf->nbrtostring("specialite","idspecialite",$row->SPECIALITEX,"specialitefr"),1,0,'L',0);
 } else {
