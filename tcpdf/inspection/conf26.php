@@ -58,10 +58,16 @@ $SAH0=$rowy->SAH0;
 $SAF0=$rowy->SAF0;
 $SAN0=$rowy->SAN0;
 $STL=$rowy->STL;
+
+
+$EXTA=$rowy->EXTA;
+$EXTB=$rowy->EXTB;
+$EXTC=$rowy->EXTC;
+$EXTD=$rowy->EXTD;
+$EXTE=$rowy->EXTE;
+
 $adresse=$rowy->ADRESSE;
 $adressear=$rowy->ADRESSEAR;
-
-
 $idcommune=$rowy->COMMUNE;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'COMMUNE');
 $communear=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'communear');
@@ -108,13 +114,15 @@ $pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Bureau 1 :",0,1,'L');        
 $pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Bureau 2 :",0,1,'L');                $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$SDS0."   M2",0,1,'L',1,1);
 $pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Bureau 3 :",0,1,'L');                $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$SAH0."   M2",0,1,'L',1,1);
 $pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Bureau 4 :",0,1,'L');                $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$SAF0."   M2",0,1,'L',1,1);
-$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Réception : ",0,1,'L');              $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$SAN0."   M2",0,1,'L',1,1);
+$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Sanitaires : ",0,1,'L');             $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$SAN0."   M2",0,1,'L',1,1);
+
+
 $pdf->AddPage();
-$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Depot : ",0,1,'L');                  $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface :    M2",0,1,'L',1,1);
-$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Sanitaires : ",0,1,'L');             $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface :    M2",0,1,'L',1,1);
-$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de quarantaine : ",0,1,'L');    $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface :    M2",0,1,'L',1,1);
-$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de produits réceptionnés : ",0,1,'L');$pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface :    M2",0,1,'L',1,1);
-$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de produits refusés : ",0,1,'L');$pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface :    M2",0,1,'L',1,1);
+$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Réception : ",0,1,'L');              $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$EXTA."   M2",0,1,'L',1,1);
+$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Depot : ",0,1,'L');                  $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$EXTB."   M2",0,1,'L',1,1);
+$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de quarantaine : ",0,1,'L');    $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$EXTC."   M2",0,1,'L',1,1);
+$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de produits réceptionnés : ",0,1,'L');$pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$EXTD."   M2",0,1,'L',1,1);
+$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de produits refusés : ",0,1,'L');$pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface :  ".$EXTE."  M2",0,1,'L',1,1);
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(60,5,"Le local s'étend sur une superficie de ".$STL." M2 (surface minimale admise 300 m2)",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(60,5,"Etat des mures : ",0,1,'L');            $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Satisfaisant",0,1,'L',1,1);
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(60,5,"Etat des plafonds :",0,1,'L');          $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Satisfaisant",0,1,'L',1,1);

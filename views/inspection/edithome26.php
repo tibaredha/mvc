@@ -36,24 +36,34 @@ $this->label($x+400,$y+220,'Commune');              $this->COMMUNE($x+520,$y+210
 $this->label($x+800,$y+220,'Adresse');              $this->txt($x+880,$y+210,'ADRESSE',0,$data['ADRESSE'],'date');
 $this->label($x,$y+260,'Date PV ');                 $this->txts($x+150,$y+250,'DATEP',0,$this->dateUS2FR($this->home[0]['DATEP']),'dateus'); $this->label($x+400,$y+260,'Nature PV');     $this->combov1($x+520,$y+250,'NAT',$data['NAT']);              $this->label($x+800,$y+260,'Adresse ar ');  $this->txtarid($x+880,$y+250,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
 $this->label($x,$y+300,'Demande N ');               $this->txt($x+150,$y+290,'NUMD',0,$this->home[0]['NUMD']);                     $this->label($x+400,$y+300,'Date demande');  $this->txts($x+520,$y+290,'DATED',0,$this->dateUS2FR($this->home[0]['DATED']),'dateus1');
-
-$this->label($x,$y+340,'Bureau 1 : ');      $this->date1($x+150,$y+330,'CDS0',10,'00','cds();');$this->date1($x+225,$y+330,'CDS1',10,'00','cds();');  $this->date1($x+300,$y+330,'CDS',0,$this->home[0]['CDS0'],'cds();');
-$this->label($x,$y+380,'Bureau 2 : ');                $this->date1($x+150,$y+370,'SDS0',10,'00','sds();');$this->date1($x+225,$y+370,'SDS1',10,'00','sds();');  $this->date1($x+300,$y+370,'SDS',0,$this->home[0]['SDS0'],'sds();');
-$this->label($x,$y+420,"Bureau 3 : ");  $this->date1($x+150,$y+410,'SAH0',10,'00','sah();');$this->date1($x+225,$y+410,'SAH1',10,'00','sah();');  $this->date1($x+300,$y+410,'SAH',0,$this->home[0]['SAH0'],'sah();');
-$this->label($x,$y+460,"Bureau 4 : ");     $this->date1($x+150,$y+450,'SAF0',10,'00','saf();');$this->date1($x+225,$y+450,'SAF1',10,'00','saf();');  $this->date1($x+300,$y+450,'SAF',0,$this->home[0]['SAF0'],'saf();');
-$this->label($x,$y+500,'Sanitaires ');              $this->date1($x+150,$y+490,'SAN0',10,'00','san();');$this->date1($x+225,$y+490,'SAN1',10,'00','san();');  $this->date1($x+300,$y+490,'SAN',0,$this->home[0]['SAN0'],'san();');
-$this->label($x,$y+540,'Surface total ');           $this->txt($x+150,$y+530,'STL',0,$this->home[0]['STL']);
-
-$this->label($x+400,$y+420,'1er E V D P P');       $this->combopharmacien($x+520,$y+410,"PHA1",$this->home[0]['PHA1'],$this->home[0]['PHA1'],"pharmacie",26);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,$this->home[0]['DIST1']);
-$this->label($x+400,$y+460,'2em E V D P P');       $this->combopharmacien($x+520,$y+450,"PHA2",$this->home[0]['PHA2'],$this->home[0]['PHA2'],"pharmacie",26);   $this->label($x+800,$y+460,'Distance 2 ');$this->txt($x+880,$y+450,'DIST2',0,$this->home[0]['DIST2']);
-$this->label($x+400,$y+500,'3em E V D P P');       $this->combopharmacien($x+520,$y+490,"PHA3",$this->home[0]['PHA3'],$this->home[0]['PHA3'],"pharmacie",26);   $this->label($x+800,$y+500,'Distance 3 '); $this->txt($x+880,$y+490,'DIST3',0,$this->home[0]['DIST3']);
-
 $this->label($x+800,$y+300,'Propriétaire');         $this->txtarid($x+880,$y+290,'PROPRIETAIRE','PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
 $this->label($x+800,$y+340,'Début contrat');        $this->txts($x+880,$y+330,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus2');
 $this->label($x+800,$y+380,'Fin contrat');          $this->txts($x+880,$y+370,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus3');
+$this->label($x+800,$y+420,'Surface total ');       $this->txt($x+880,$y+410,'STL',0,$this->home[0]['STL']);
+
+
+
+$this->label($x,$y+340,'Bureau 1 : ');      $this->date1($x+150,$y+330,'CDS0',10,'00','cds();');$this->date1($x+225,$y+330,'CDS1',10,'00','cds();');  $this->date1($x+300,$y+330,'CDS',0,$this->home[0]['CDS0'],'cds();');
+$this->label($x,$y+380,'Bureau 2 : ');      $this->date1($x+150,$y+370,'SDS0',10,'00','sds();');$this->date1($x+225,$y+370,'SDS1',10,'00','sds();');  $this->date1($x+300,$y+370,'SDS',0,$this->home[0]['SDS0'],'sds();');
+$this->label($x,$y+420,"Bureau 3 : ");      $this->date1($x+150,$y+410,'SAH0',10,'00','sah();');$this->date1($x+225,$y+410,'SAH1',10,'00','sah();');  $this->date1($x+300,$y+410,'SAH',0,$this->home[0]['SAH0'],'sah();');
+$this->label($x,$y+460,"Bureau 4 : ");      $this->date1($x+150,$y+450,'SAF0',10,'00','saf();');$this->date1($x+225,$y+450,'SAF1',10,'00','saf();');  $this->date1($x+300,$y+450,'SAF',0,$this->home[0]['SAF0'],'saf();');
+$this->label($x,$y+500,'Sanitaires ');      $this->date1($x+150,$y+490,'SAN0',10,'00','san();');$this->date1($x+225,$y+490,'SAN1',10,'00','san();');  $this->date1($x+300,$y+490,'SAN',0,$this->home[0]['SAN0'],'san();');
+
+
+$this->label($x+400,$y+340,'Réception : ');      $this->date1($x+520,$y+330,'EXTA0',10,'00','exta();');$this->date1($x+595,$y+330,'EXTA1',10,'00','exta();');$this->date1($x+670,$y+330,'EXTA',0,$this->home[0]['EXTA'],'exta();');
+$this->label($x+400,$y+380,'Depot : ');          $this->date1($x+520,$y+370,'EXTB0',10,'00','extb();');$this->date1($x+595,$y+370,'EXTB1',10,'00','extb();');$this->date1($x+670,$y+370,'EXTB',0,$this->home[0]['EXTB'],'extb();');
+$this->label($x+400,$y+420,"zp quarantaine :");  $this->date1($x+520,$y+410,'EXTC0',10,'00','extc();');$this->date1($x+595,$y+410,'EXTC1',10,'00','extc();');$this->date1($x+670,$y+410,'EXTC',0,$this->home[0]['EXTC'],'extc();');
+$this->label($x+400,$y+460,"Zp réceptionnés :"); $this->date1($x+520,$y+450,'EXTD0',10,'00','extd();');$this->date1($x+595,$y+450,'EXTD1',10,'00','extd();');$this->date1($x+670,$y+450,'EXTD',0,$this->home[0]['EXTD'],'extd();');
+$this->label($x+400,$y+500,"Zp refusés : ");     $this->date1($x+520,$y+490,'EXTE0',10,'00','exte();');$this->date1($x+595,$y+490,'EXTE1',10,'00','exte();');$this->date1($x+670,$y+490,'EXTE',0,$this->home[0]['EXTC'],'exte();');
+
+
+$this->label($x+400,$y+420+(40*3),'1er E V D P P'); $this->combopharmacien($x+520,$y+410+(40*3),"PHA1",$this->home[0]['PHA1'],$this->home[0]['PHA1'],"pharmacie",26);   $this->label($x+800,$y+420+(40*3),'D 1 ');$this->txt($x+880,$y+410+(40*3),'DIST1',0,$this->home[0]['DIST1']);
+$this->label($x+400,$y+460+(40*3),'2em E V D P P'); $this->combopharmacien($x+520,$y+450+(40*3),"PHA2",$this->home[0]['PHA2'],$this->home[0]['PHA2'],"pharmacie",26);   $this->label($x+800,$y+460+(40*3),'D 2 ');$this->txt($x+880,$y+450+(40*3),'DIST2',0,$this->home[0]['DIST2']);
+$this->label($x+400,$y+500+(40*3),'3em E V D P P'); $this->combopharmacien($x+520,$y+490+(40*3),"PHA3",$this->home[0]['PHA3'],$this->home[0]['PHA3'],"pharmacie",26);   $this->label($x+800,$y+500+(40*3),'D 3 ');$this->txt($x+880,$y+490+(40*3),'DIST3',0,$this->home[0]['DIST3']);
+
 $this->hide(100,100,"STRUCTURE","",$this->user[0]['STRUCTURE']);
 $this->hide(100,100,"idstructure","",$this->home[0]['idstructure']);
-$this->submit($x+880,$y+540,$data['butun']);
+$this->submit($x+880,$y+480,$data['butun']);
 $this->f1();
 view::sautligne(22);
 ob_end_flush();
@@ -66,6 +76,11 @@ function sah(){var a = parseFloat(this.document.form1.SAH0.value);var b = parseF
 function sds(){var a = parseFloat(this.document.form1.SDS0.value);var b = parseFloat(this.document.form1.SDS1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SDS.value = result;}
 function cds(){var a = parseFloat(this.document.form1.CDS0.value);var b = parseFloat(this.document.form1.CDS1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.CDS.value = result;}
 function san(){var a = parseFloat(this.document.form1.SAN0.value);var b = parseFloat(this.document.form1.SAN1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SAN.value = result;}
+function exta(){var a = parseFloat(this.document.form1.EXTA0.value);var b = parseFloat(this.document.form1.EXTA1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.EXTA.value = result;}
+function extb(){var a = parseFloat(this.document.form1.EXTB0.value);var b = parseFloat(this.document.form1.EXTB1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.EXTB.value = result;}
+function extc(){var a = parseFloat(this.document.form1.EXTC0.value);var b = parseFloat(this.document.form1.EXTC1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.EXTC.value = result;}
+function extd(){var a = parseFloat(this.document.form1.EXTD0.value);var b = parseFloat(this.document.form1.EXTD1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.EXTD.value = result;}
+function exte(){var a = parseFloat(this.document.form1.EXTE0.value);var b = parseFloat(this.document.form1.EXTE1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.EXTE.value = result;}
 
 function PopupImage(img) {
 	w=open("",'image','weigth=toolbar=no,scrollbars=no,resizable=yes, width=220, height=268');	

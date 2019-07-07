@@ -774,8 +774,15 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
-	// echo '<pre>';print_r ($data);echo '<pre>';  
-	$last_id=$this->model->creathome($data);
+	
+	$data['EXTA']= $_POST['EXTA'];
+	$data['EXTB']= $_POST['EXTB'];
+	$data['EXTC']= $_POST['EXTC'];
+	$data['EXTD']= $_POST['EXTD'];
+	$data['EXTE']= $_POST['EXTE'];
+	
+	//echo '<pre>';print_r ($data);echo '<pre>';  
+	$last_id=$this->model->creathomex($data);
 	header('location: ' . URL .$this->route. '/home26/'.$id);	
 	}
 	function edithome26($id) 
@@ -814,8 +821,13 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	$data['EXTA']= $_POST['EXTA'];
+	$data['EXTB']= $_POST['EXTB'];
+	$data['EXTC']= $_POST['EXTC'];
+	$data['EXTD']= $_POST['EXTD'];
+	$data['EXTE']= $_POST['EXTE'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
-	$last_id=$this->model->edithome($data);
+	$last_id=$this->model->edithomex($data);
 	header('location: ' . URL .$this->route. '/home26/'.$data['idstructure']);	
 	}
 	
