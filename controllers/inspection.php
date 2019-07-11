@@ -875,6 +875,68 @@ class inspection extends Controller {
 	header('location: ' . URL .$this->route. '/home21/'.$id);	
 	}
 	
+	function edithome21($id) 
+	{
+	 $url1 = explode('/',$_GET['url']);
+	$this->view->title = 'edithome21';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->home = $this->model->userhomeSingleList( $url1[3]);
+	$this->view->render($this->route.'/edithome21');
+	}
+	
+	
+	function edit1home21($id) 
+	{
+	$this->view->title = 'edithome21';
+	
+    $data = array();
+	$data['id']= $id;
+	$data['DATEP']= $_POST['DATEP'];
+	$data['NAT']= $_POST['NAT'];
+    $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
+	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PHA1']= $_POST['PHA1'];$data['DIST1']= $_POST['DIST1'];$data['PHA2']= $_POST['PHA2'];$data['DIST2']= $_POST['DIST2'];$data['PHA3']= $_POST['PHA3'];$data['DIST3']= $_POST['DIST3'];
+	$data['CDS0']= $_POST['CDS'];
+	$data['SDS0']= $_POST['SDS'];
+	$data['SAH0']= $_POST['SAH'];
+	$data['SAF0']= $_POST['SAF'];
+	$data['SAN0']= $_POST['SAN'];
+	$data['STL']= $_POST['STL'];
+	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	
+	// $data['id']= $id;
+	// $data['idstructure']= $_POST['idstructure'];;
+	// $data['DATEP']= $_POST['DATEP'];
+	// $data['NAT']= $_POST['NAT'];
+    // $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
+	// $data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
+	// $data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	// $data['PHA1']= $_POST['PHA1'];
+	// $data['DIST1']= $_POST['DIST1'];
+	// $data['PHA2']= $_POST['PHA2'];
+	// $data['DIST2']= $_POST['DIST2'];
+	// $data['PHA3']= $_POST['PHA3'];
+	// $data['DIST3']= $_POST['DIST3'];
+	// $data['CDS0']= $_POST['CDS'];
+	// $data['SDS0']= $_POST['SDS'];
+	// $data['SAH0']= $_POST['SAH'];
+	// $data['SAF0']= $_POST['SAF'];
+	// $data['SAN0']= $_POST['SAN'];
+	// $data['STL']= $_POST['STL'];
+	// $data['STRUCTURE']= $_POST['STRUCTURE'];
+	// $data['EXTA']= $_POST['EXTA'];
+	// $data['EXTB']= $_POST['EXTB'];
+	// $data['EXTC']= $_POST['EXTC'];
+	// $data['EXTD']= $_POST['EXTD'];
+	// $data['EXTE']= $_POST['EXTE'];
+	echo '<pre>';print_r ($data);echo '<pre>';  
+	// $last_id=$this->model->edithomex($data);
+	// header('location: ' . URL .$this->route. '/home21/'.$data['idstructure']);	
+	}
+	
+	
+	// edithome21
 	public function deletehome21($id)
 	{
 	$url1 = explode('/',$_GET['url']);	

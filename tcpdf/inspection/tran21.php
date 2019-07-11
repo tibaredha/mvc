@@ -47,7 +47,6 @@ while($rowx=mysql_fetch_object($requetex))
 // $pdf->cell(40,06,$rowx->Marque,1,0,'C',0);
 $num=$rowx->NOUVERTURE;
 $date=$rowx->OUVERTURE;
-
 $nomar=$rowx->NOMAR;
 $prenomar=$rowx->PRENOMAR;
 $adresse=$rowx->ADRESSEAR;
@@ -66,8 +65,6 @@ $SDS0=$rowy->SDS0;
 $SAH0=$rowy->SAH0;
 $NUMD=$rowy->NUMD;
 $DATED=$rowy->DATED;
-
-
 }
 
 
@@ -88,8 +85,8 @@ $pdf->SetFont('aefurat', 'U', 16);
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');
 /*************************************************************************************************************************/
 $pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'المادة الأولى : تهدف هذه المقررة إلى تغيير الأحكام الخاصة  '.$nomar.' '.$prenomar.' بفتح و إستغلال وحدة للنقل الصحي الكائن مقرها ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,' ب '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'المادة الأولى : تهدف هذه المقررة إلى تغيير الأحكام الخاصة بالوسائل المادية (سيارة) للسيد : '.$nomar.' '.$prenomar,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,' لوحدة النقل الصحي الكائن مقره ب'.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
 
 
 $pdf->AddPage();
