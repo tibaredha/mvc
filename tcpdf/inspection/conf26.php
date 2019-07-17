@@ -90,11 +90,12 @@ $pdf->SetFont('aefurat', '', 14);
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"L'an deux mille ".$pdf->ANNEEFR($pdf->dateUS2FR($DATEP))." et le ".$pdf->JOURFR($pdf->dateUS2FR($DATEP))." du mois de ".$pdf->MOISFR($pdf->dateUS2FR($DATEP)),0,1,'L');
 $pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Nous (Nom -Prénom-Grade) ",0,1,'L');
-$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"TIBA Redha praticien inspecteur ( DSP DJELFA )",0,1,'L');
-$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"LOUBACHRIA Benazzouz praticien pharmacien ( séction ordinale des pharmaciens de blida ) ",0,1,'L');
+// $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"TIBA Redha praticien inspecteur ( DSP DJELFA )",0,1,'L');
+// $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"LOUBACHRIA Benazzouz praticien pharmacien ( séction ordinale des pharmaciens de blida ) ",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"--",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"--",0,1,'L');
-
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"--",0,1,'L');
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"--",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"En vertu du Déc exé n° 93-114 du 12 mai 1993 modifiant et complétant le Déc exé n° 92-285 du 6 juillet 1992 ",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"relatif à l'autorisation d'exploitation d'un établissement de production ou de distribution de produits pharmaceutiques",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Et sur ordre de MR le directeur de la santé et de la population de la wilaya de Djelfa ",0,1,'L');
@@ -120,9 +121,9 @@ $pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Sanitaires : ",0,1,'L');     
 $pdf->AddPage();
 $pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Réception : ",0,1,'L');              $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$EXTA."   M2",0,1,'L',1,1);
 $pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Depot : ",0,1,'L');                  $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$EXTB."   M2",0,1,'L',1,1);
-$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de quarantaine : ",0,1,'L');    $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$EXTC."   M2",0,1,'L',1,1);
-$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de produits réceptionnés : ",0,1,'L');$pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$EXTD."   M2",0,1,'L',1,1);
-$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de produits refusés : ",0,1,'L');$pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface :  ".$EXTE."  M2",0,1,'L',1,1);
+$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de stockage 1 : ",0,1,'L');    $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$EXTC."   M2",0,1,'L',1,1);
+$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de stockage 2 : ",0,1,'L');$pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface : ".$EXTD."   M2",0,1,'L',1,1);
+$pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(60,5,"* Zone de stockage 3 : ",0,1,'L');$pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Surface :  ".$EXTE."  M2",0,1,'L',1,1);
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(60,5,"Le local s'étend sur une superficie de ".$STL." M2 (surface minimale admise 300 m2)",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(60,5,"Etat des mures : ",0,1,'L');            $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Satisfaisant",0,1,'L',1,1);
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(60,5,"Etat des plafonds :",0,1,'L');          $pdf->SetXY(140,$pdf->GetY()-5); $pdf->Cell(60,5,"Satisfaisant",0,1,'L',1,1);
@@ -139,7 +140,7 @@ $pdf->SetXY(5,$pdf->GetY()+10); $pdf->Cell(60,5,"Et donnons un avis  ",0,1,'L');
 
 $pdf->SetXY(10,$pdf->GetY()+15);$pdf->Cell(100,5,"La direction de la santé et de la population   ",0,0,'L');$pdf->Cell(100,5,"Le conseil de l'ordre des pharmaciens ",0,1,'L');
 
-$pdf->SetXY(10,$pdf->GetY()+20);$pdf->Cell(100,5,"La direction de L'industrie ",0,0,'L');$pdf->Cell(100,5,"La direction du commerce ",0,1,'L');
+$pdf->SetXY(10,$pdf->GetY()+25);$pdf->Cell(100,5,"La direction de L'industrie ",0,0,'L');$pdf->Cell(100,5,"La direction du commerce ",0,1,'L');
 
 // $pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(200,5,"Dr  TIBA ",0,1,'L'); 
 $pdf->Output();
