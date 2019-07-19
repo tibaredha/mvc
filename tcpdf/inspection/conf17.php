@@ -24,6 +24,7 @@ $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'Inspection santé publique',0,1,
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"N° : ___________ /".date('Y'),0,1,'L');//$pdf->SetXY(155,$pdf->GetY()-5);$pdf->Cell(50,5,'الرقم : ___________/'.date('Y'),0,1,'R');
 $pdf->SetFont('aefurat', '', 14);
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"PROCÉS VERBAL DE CONFORMITÉ D'UN CABINET DE MEDECINE GENERALE ",0,1,'C');$pdf->SetFont('aefurat', '', 12);
+$pdf->SetFont('aefurat', '', 10);$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"REF : Note N°664/MSP/DSS/SDCC du 01/12/1997 ",0,1,'C');$pdf->SetFont('aefurat', '', 12);
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 while($rowy=mysql_fetch_object($requetey))
 {
