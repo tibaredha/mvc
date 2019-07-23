@@ -85,22 +85,17 @@ $pdf->SetFont('aefurat', 'U', 16);
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');
 /*************************************************************************************************************************/
 $pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'المادة الأولى : تهدف هذه المقررة إلى تغيير الأحكام الخاصة بالوسائل المادية (سيارة) للسيد : '.$nomar.' '.$prenomar,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,' لوحدة النقل الصحي الكائن مقره ب'.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
-
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'المادة الأولى : تهدف هذه المقررة إلى تغيير الأحكام الخاصة بالوسائل المادية و البشرية للسيد(ة) : '.$nomar.' '.$prenomar,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,' لوحدة النقل الصحي الكائن مقرها ب'.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
 
 $pdf->AddPage();
 $pdf->SetLineWidth(0.4);
 $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'المادة 02 : ',0,1,'R');
-
-
-
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,' المادة 02 : تعين الوسائل المادية و البشرية  للسيد(ة) '.$nomar.' '.$prenomar.' كالتالي :',0,1,'R');
 
 $pdf->SetXY(15,$pdf->GetY()+6);$pdf->cell(180,6,'الوسائل المادية',1,0,'C',1,0);
 $pdf->SetXY(15,$pdf->GetY()+6);$pdf->cell(40,6,'الشركة المصنعة',1,0,'C',1,0);$pdf->cell(40,6,'الطراز',1,0,'C',1,0);$pdf->cell(40,6,'رقم التسلسلي في الطراز',1,0,'C',1,0);$pdf->cell(40,6,'الترقيم',1,0,'C',1,0);$pdf->cell(20,6,'الصنف',1,0,'C',1,0);
 $pdf->SetXY(15,$pdf->GetY()+6);
- 
 $query_liste = "SELECT * FROM auto WHERE idt  ='$ids' and ETAT='0' order by Categorie";//
 $requete = mysql_query( $query_liste ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 $tot1=mysql_num_rows($requete);
@@ -111,54 +106,43 @@ $pdf->cell(40,06,$row->Type,1,0,'C',0);
 $pdf->cell(40,06,$row->Serie_Type,1,0,'C',0);
 $pdf->cell(40,06,$row->Immatri,1,0,'C',0);
 $pdf->cell(20,06,$row->Categorie,1,0,'C',0);
-
 $pdf->SetXY(15,$pdf->GetY()+6); 
 }
-$pdf->SetXY(15,$pdf->GetY()+6);
+$pdf->SetXY(15,$pdf->GetY());
 $pdf->cell(40,6,'المجموع : '.$tot1,1,0,'C',1,0);
 $pdf->cell(40,6,$pdf->nbrcategorie('C',$ids).' : C',1,0,'C',1,0);
 $pdf->cell(40,6,$pdf->nbrcategorie('B',$ids).' : B',1,0,'C',1,0);
 $pdf->cell(40,6,$pdf->nbrcategorie('A',$ids).' : A',1,0,'C',1,0);
 $pdf->cell(20,6,'الصنف',1,0,'C',1,0);
 
+
+
 $pdf->SetXY(15,$pdf->GetY()+12);$pdf->cell(180,6,'الوسائل البشرية',1,0,'C',1,0);
 $pdf->SetXY(15,$pdf->GetY()+6);
-
 $pdf->cell(100,6,'الرتبة',1,0,'C',1,0);
 $pdf->cell(40,6,'الإسم',1,0,'C',1,0);
 $pdf->cell(40,6,'اللقب',1,0,'C',1,0);
-
-
 $pdf->SetXY(15,$pdf->GetY()+6);
 $query_listep = "SELECT * FROM pers WHERE idt  ='$ids' and ETAT='0' order by Categorie";//
 $requetep = mysql_query( $query_listep ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 $tot1p=mysql_num_rows($requetep);
 while($rowp=mysql_fetch_object($requetep))
 {
-if ($rowp->Categorie=='M') {
-$pdf->cell(100,06,'',1,0,'R',0);
-}
-
-if ($rowp->Categorie=='P') {
-$pdf->cell(100,06,'ممرض',1,0,'C',0);
-}
-if ($rowp->Categorie=='C') {
-$pdf->cell(100,06,'سائق',1,0,'C',0);
-}
-if ($rowp->Categorie=='') {
-$pdf->cell(100,06,'X',1,0,'C',0);
-}
+if ($rowp->Categorie=='M') {$pdf->cell(100,06,'',1,0,'R',0);}
+if ($rowp->Categorie=='P') {$pdf->cell(100,06,'ممرض',1,0,'C',0);}
+if ($rowp->Categorie=='C') {$pdf->cell(100,06,'سائق',1,0,'C',0);}
+if ($rowp->Categorie=='')  {$pdf->cell(100,06,'X',1,0,'C',0);}
 $pdf->cell(40,06,$rowp->NOMAR,1,0,'R',0);
 $pdf->cell(40,06,$rowp->PRENOMAR,1,0,'R',0);
 $pdf->SetXY(15,$pdf->GetY()+6); 
 }
-$pdf->SetXY(15,$pdf->GetY()+6);
+$pdf->SetXY(15,$pdf->GetY());
 $pdf->cell(100,6,'المجموع : '.$tot1p,1,0,'C',1,0);
 $pdf->cell(40,6,'  سائق : '.$pdf->nbrpers('C',$ids),1,0,'C',1,0);
 $pdf->cell(40,6,'  ممرض : '.$pdf->nbrpers('P',$ids),1,0,'C',1,0);
 
-$pdf->SetXY(5,$pdf->GetY()+12);$pdf->Cell(200,5,'المادة 03 :  يكلف كل من السادة مدير المؤسسة العمومية للصحة الجوارية  ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+6);$pdf->Cell(200,5,'و مدير صندوق الضمان الإجتماعي بتنفيذ هذه المقررة .',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+12);$pdf->Cell(200,5,"المادة 03 : لايمكن تحويل مقر وحدة النقل الصحي او تغير الوسائل المادية و البشرية  دون استشارة مصالح مديرية الصحة و السكان",0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+6);$pdf->Cell(200,5,'المادة 04 : يكلف كل من السادة مدير المؤسسة العمومية للصحة الجوارية '.' و مدير صندوق الضمان الإجتماعي بتنفيذ هذه المقررة .',0,1,'R');
 
 $pdf->SetFont('aefurat', 'B', 14);
 $pdf->SetXY(5,$pdf->GetY()+6);$pdf->Cell(100,5,'الجلفة في : ..............',0,1,'C');
