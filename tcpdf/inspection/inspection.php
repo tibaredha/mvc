@@ -84,7 +84,15 @@ class inspection extends TCPDF
 			return $DATEPV;
 		}	
 	
-	
+	function entetesiple()
+	{
+	$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,0,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->repfr,0,0,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->mspar,0,0,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->mspfr,0,0,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->dspar,0,0,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->dspfr,0,0,'C');	
+	}
 	
 	
 	function entete($id2)

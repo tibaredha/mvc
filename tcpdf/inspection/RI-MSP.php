@@ -17,12 +17,8 @@ $id=$_GET["uc"];
 $id1=$_GET["uc1"];  
 $id2=$pdf->dateUS2FR($_GET["date"]); 
 // $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,0,'C');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->repfr,0,0,'C');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->mspar,0,0,'C');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->mspfr,0,0,'C');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->dspar,0,0,'C');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->dspfr,0,0,'C');
+
+$pdf->entetesiple();
 
 $pdf-> mysqlconnect(); 
 $query_listey = "SELECT * FROM insp WHERE id  ='$id' ";
@@ -32,6 +28,8 @@ while($rowy=mysql_fetch_object($requetey))
 {
 	if ($rowy->STRUCTURE==26)
 	{	
+	
+	
 	$pdf->SetXY(5,$pdf->GetY()+15);$pdf->Cell(200,10,"INSPECTION  D'UNE ENTREPRISE  ",1,0,'C',1,0);
 	$pdf->SetXY(5,$pdf->GetY()+11);$pdf->Cell(200,10,"DE PRODUCTION ET/OU DE DISTRIBUTION DE PRODUITS PHARMACEUTIQUES",1,1,'C',1,0);
 	
@@ -146,6 +144,81 @@ while($rowy=mysql_fetch_object($requetey))
 	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,"-> Recommandations : ",1,0,'L',1,0);
 	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,"-> Signatures des praticiens médicaux inspecteurs de santé publique  : ",1,0,'L',1,0);
 	}
+	
+	if ($rowy->STRUCTURE==9)
+	{
+	$pdf->SetFont('aefurat', 'B', 12);
+	$pdf->SetXY(5,$pdf->GetY()+15);$pdf->Cell(200,10,"INSPECTION ",1,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+11);$pdf->Cell(200,10,"D'UN ETABLISSEMENT HOSPITALIER PRIVE  ",1,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+11);$pdf->Cell(200,10,"D'UN CENTRE DE  DIAGNOSTIC  ",1,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+11);$pdf->Cell(200,10,"D'UN ETABLISSEMENT DE SANTE PRIVE DE TYPE AMBULATOIRE  ",1,0,'C',1,0);
+	$pdf->AddPage();
+	
+	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,"TYPE D'ETABLISSEMENT PRIVE : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"ADRESSE : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"TEL :                        FAX :                          EMAIL  : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"ACTIVITES AUTORISEES ET PORTEES SUR LA DECISION D'OUVERTURE : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"JOINDRE COPIE DE LA DECISION : ",0,1,'L',1,0);
+	
+	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,"______________________________________________________________________________________________ ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"SUPPORTS D'INFORMATION ET IDENTIFICATION  : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"- Enseigne : Est-elle conforme à l'article 78 du décret exécutif n°92-276 du 06/07/1992 portant code de déontologie ",0,0,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(160,5,"   médicale : ",0,0,'L',1,0);                  $pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(160,5,"- Panneau de renseignements  : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(160,5,"- Programme de consultation  : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	
+	
+	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,"______________________________________________________________________________________________ ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"ACCUEIL / ORIENTATION   : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(160,5,"Comptoir d'accueil : réceptionniste, téléphone : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(160,5,"Salles  d'attentes : hommes, femmes :   séparées ou uniques  : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(160,5,"Sanitaires :            hommes, femmes :   séparées ou uniques  : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	
+	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,"______________________________________________________________________________________________ ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"INFORMATIONS  SUR LA STRUCTURE : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Dénomination portée sur la décision d'ouverture : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Promoteur de l'établissement : Nom et prénom : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Directeur technique (médical) : Nom, prénom et spécialité : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Directeur administratif : Nom, prénom et profil de formation : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Les jours d'ouverture : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Les horaires d'ouverture : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Le repos hebdomadaire : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"La garde  est-elle assurée et indication de la plage horaire : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Composition de l'équipe de garde : ",0,1,'L',1,0);
+	
+	$pdf->AddPage();
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"-Type de construction : RDC :...... / R+1 :...... / R+2 :...... / R+3 :...... / Autre :...... ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(160,5,"- Ascenseur (s) exist  : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(160,5,"- Ascenseur (s) Fonctionnel  : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,1,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"- Capacité en lits théoriques  : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"- Capacité en lits organisés : ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"- Les spécialités assurées réellement  : ",0,1,'L',1,0);
+	
+	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,"______________________________________________________________________________________________ ",0,1,'L',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"ETAT DE LA STRUCTURE  : ",0,1,'L',1,0);
+	}
+	
+	
+	if ($rowy->STRUCTURE==12)
+	{
+	$pdf->SetXY(5,$pdf->GetY()+15);$pdf->Cell(200,10,"INSPECTION D'UNE OFFICINE PHARMACEUTIQUE",1,0,'C',1,0);
+	
+	$pdf->SetXY(5,$pdf->GetY()+11);$pdf->Cell(200,10,"REF : circulaire N° 12 MSP-RH/MIN DU 22/10/2006 relative  a l'exercice de la profession de pharmacie d'officine  ",1,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+20);$pdf->Cell(160,5,"La présence éffective du pharmacien titulaire   : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+20);$pdf->Cell(160,5,"Le réspect des regles d'hygiene : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+20);$pdf->Cell(160,5,"La garde au niveau de l'officine est assurée par le pharmacien titulaire : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+20);$pdf->Cell(160,5,"Les conditions de stockage des produits pharmaceutiques son respectées : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+20);$pdf->Cell(160,5,"La presence d'un registre a jours des substances psychotropes et stupefiants : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+20);$pdf->Cell(160,5,"La durée de validité des produits pharmaceutiques est confome : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	$pdf->SetXY(5,$pdf->GetY()+20);$pdf->Cell(160,5,"La presence éffective du vignettage des produits pharmaceutiques : ",0,0,'L',1,0);$pdf->Cell(20,5,"OUI ",0,0,'C',1,0); $pdf->Cell(20,5,"NON ",0,0,'C',1,0);
+	
+	
+	
+	}
+	
+	
+	
+	
 }
 
 $pdf->Output('.PDF','I');
