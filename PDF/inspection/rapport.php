@@ -62,6 +62,11 @@ $pdf->anomalies($EPH);
 
 //**********************************************en fonction de la structure *****************************************************************//
 if ($_POST['EPH']=='16') {//medecin specialiste 
+
+$pdf->AddPage('p','A4');
+$pdf->entete($datejour1,$datejour2,'Repartition par spécialite : ',$EPH1);
+$pdf->medecinspecialiste($EPH);
+
 $pdf->AddPage('p','A4');
 $pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
 $pdf->medecinsp($EPH);

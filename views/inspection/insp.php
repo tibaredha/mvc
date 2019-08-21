@@ -58,6 +58,8 @@ ob_end_flush();
 		<th style="width:70px;">Date Inspection</th>
 		<th style="width:10px;">Ajout   Anomalie</th>
 		<th style="width:10px;">Rapport Inspection</th>
+		<th style="width:10px;">RI-MSP</th>
+		
 		<th style="width:10px;">Mesure Prise</th>
 		<th style="width:10px;">Imp Mesure Prise</th>
 		<th style="width:10px;">Update Inspection</th>
@@ -72,6 +74,10 @@ ob_end_flush();
 						<?php		
 						 echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Ajout anomalie\" href=\"".URL.'inspection/anomalie/'.$value['id'].'/'.$value['ids']."\" ><img  src=\"".URL.'public/images/icons/anom.PNG'."\"  width='35' height='16' border='0' alt='' ></a> [ ".view::nbranoinsp($value['id'])." ]</td>" ;		
 						 echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"rapport inspection\" href=\"".URL.'tcpdf/inspection/rapportinsp.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.PNG'."\"  width='16' height='16' border='0' alt='' ></a> </td>" ;		
+						
+						echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"RI-MSP\" href=\"".URL.'tcpdf/inspection/RI-MSP.php?uc='.$value['id'].'&uc1='.$value['ids'].'&date='.$value['DATE']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.PNG'."\"  width='16' height='16' border='0' alt='' ></a> </td>" ;		
+						
+						
 						?>
 						<td align="center"><a title="Mesure Prise" href="<?php echo URL.'inspection/MesurePrise/'.$value['id'].'/'.$value['ids'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 						<?php		 

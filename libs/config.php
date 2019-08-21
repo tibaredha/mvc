@@ -387,7 +387,7 @@ echo "<option value=\"12\">12</option><br />";
 }
 function annee()
 {
-for ($i=2015; $i<=2020; $i++) 
+for ($i=1960; $i<=2020; $i++) 
 { 
 echo "<option value=\"$i\">". $i."</option><br />"; 
 }  

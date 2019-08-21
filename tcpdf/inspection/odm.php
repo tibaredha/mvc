@@ -1,7 +1,7 @@
 <?php
 require_once('inspection.php');
 $pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
-$pdf->orderdemision($_POST['NM'],$_POST['NOMPRENOM'],$_POST['FONCTION'],$_POST['DEST'],$pdf->dateUS2FR($_POST['DATED']),$_POST['DATEA'],$_POST['NBRP'],$_POST['NUMV'],$_POST['OBJ']);
+$pdf->orderdemision($_POST['NM'],$_POST['NOMPRENOM'],$_POST['FONCTION'],$_POST['WILAYA'],$_POST['COMMUNE'],$_POST['DEST'],$pdf->dateUS2FR($_POST['DATED']),$_POST['DATEA'],$_POST['NBRP'],$_POST['NUMV'],$_POST['OBJ']);
 
 // print a message
 // $txt = "You can also export 1D barcodes in other formats (PNG, SVG, HTML). Check the examples inside the barcodes directory.\n";
