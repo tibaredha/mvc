@@ -15,6 +15,11 @@ $data = array(
 "id"         => '', 
 "butun"      => 'Inser Ordre de mission ', 
 "photos"     => 'public/images/icons/mision.jpg',
+"NOMPRENOM"  => array(  "طيبة رضا"=>"طيبة رضا" ,"بن سليمان فطيمة"=>"بن سليمان فطيمة","بولعواش عزالدين"=>"بولعواش عزالدين"),
+"WILAYAN1"     => '17000' ,
+"WILAYAN2"     => 'DJELFA',
+"COMMUNEN1"    => '924' ,
+"COMMUNEN2"    => 'Ain-oussera',   
 "action"     => 'tcpdf/inspection/odm.php'
 );
 view::button($data['btn'],'');
@@ -32,14 +37,24 @@ else
 $NAR=view::lastid("courar");
 }
 $this->label($x,$y+250,'N° mission');$this->txt($x+110,$y+240,'NM',0,$NAR+1,'dateus');
-$this->label($x,$y+250+30,'Nom et Prénom');$this->txt($x+110,$y+240+30,'NOMPRENOM',0,'طيبة رضا','dateus');  
+$this->label($x,$y+250+30,'Nom et Prénom'); $this->combov1($x+110,$y+240+30,'NOMPRENOM',$data['NOMPRENOM']); //$this->txt($x+110,$y+240+30,'NOMPRENOM',0,'طيبة رضا','dateus');  
 $this->label($x,$y+250+60,'Fonction');$this->txt($x+110,$y+240+60,'FONCTION',0,'طبيب مفتش في الصحة العمومية','dateus');
-$this->label($x,$y+250+90,'Destination');$this->txt($x+110,$y+240+90,'DEST',0,'الجلفـــــــــة','date');
+
+
+$this->label($x,$y+250+90,'Destination');
+// 
+$this->WILAYA($x+110,$y+240+90,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
+$this->COMMUNE($x+330,$y+240+90,'COMMUNE','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);  
+$this->txt($x+550,$y+240+90,'DEST',0,'الجلفـــــــــة','date');
+
 $this->label($x,$y+250+120,'Date depart');  $this->txts($x+110,$y+240+120,'DATED',0,date('d-m-Y'),'dateus'); 
 $this->label($x,$y+250+150,'Date retour');  $this->txt($x+110,$y+240+150,'DATEA',0,'نهاية المهمة','dateus');  
 $this->label($x,$y+250+180,'NBR personne');$this->txt($x+110,$y+240+180,'NBRP',0,'02','date');
 $this->label($x,$y+250+180+30,'NUM véhicule');$this->txt($x+110,$y+240+180+30,'NUMV',0,'00000-00-17','date');
 $this->label($x,$y+250+180+60,'Objet');$this->txt($x+110,$y+240+180+60,'OBJ',0,'مهمة تفتيشية','date');
+
+
+
 $this->submit($x+110,$y+250+180+90,$data['butun']);
 $this->f1();
 view::sautligne(12);

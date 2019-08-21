@@ -21,14 +21,14 @@ $pdf->Text(60,40,"Du  ".date("d-m-Y"));
 $h=50;
 $pdf->SetFillColor(200 );
 $pdf->SetXY(05,$h);
-$pdf->cell(20,10,"Date",1,0,1,'C',0);
+$pdf->cell(20,10,"Date Instal",1,0,1,'C',0);$pdf->cell(10,10,"Nbr",1,0,1,'C',0);
 $pdf->cell(50,10,"Nom_Prenom",1,0,1,'C',0);
 $pdf->cell(10,10,"Sexe",1,0,1,'C',0);
 $pdf->cell(20,10,"Nee le",1,0,1,'C',0);
 $pdf->cell(10,10,"Age",1,0,1,'C',0);
 $pdf->cell(30,10,"Commune",1,0,1,'C',0);
 $pdf->cell(70,10,"Adresse",1,0,1,'C',0);
-$pdf->cell(76,10,"Type Structure ",1,0,1,'C',0);
+$pdf->cell(66,10,"Type Structure ",1,0,1,'C',0);
 
 $pdf->SetXY(05,$h+10); 
 $pdf->mysqlconnect();
@@ -48,22 +48,34 @@ else
 $commune="IS NOT NULL";
 }
 mysql_query("SET NAMES 'UTF8' ");
-$query = "SELECT * FROM structure where STRUCTURE $STRUCTURED  AND   SEX $SEXE   and  commune $commune order by TRIM($ordre) $ascdesc limit $nbrlimit  ";//      
+$query = "SELECT val,STRUCTURE,DATE,SEX,COMMUNE,UPPER(NOM) as NOM,PRENOM,ADRESSE,DNS,SPECIALITEX,round((DATEDIFF(CURDATE(),DNS )/365),1) AS years FROM structure where STRUCTURE $STRUCTURED AND SEX $SEXE  and commune $commune order by TRIM($ordre) $ascdesc limit $nbrlimit  ";  
 $resultat=mysql_query($query);
 $totalmbr1=mysql_num_rows($resultat);
 while($row=mysql_fetch_object($resultat))
 {
 $pdf->SetFillColor(200 );
+
+if ($row->val==0) {
+$pdf->cell(20,5,$pdf->dateUS2FR($row->DATE),1,0,'C',1,0);
+} else {
 $pdf->cell(20,5,$pdf->dateUS2FR($row->DATE),1,0,'C',0);
+} 
+
+$pdf->cell(10,5,date('Y')- substr($row->DATE,0,4),1,0,'C',0);
 $pdf->cell(50,5,trim($row->NOM).'_'.strtolower (trim($row->PRENOM)),1,0,'L',0);
 $pdf->cell(10,5,$row->SEX,1,0,'C',0);
-$pdf->cell(20,5,$row->DATENAISSANCE,1,0,'C',0);
-$pdf->cell(10,5,"",1,0,'C',0);
+$pdf->cell(20,5,$pdf->dateUS2FR($row->DNS),1,0,'C',0);
+//$pdf->cell(10,5,date('Y')- substr($row->DNS,0,4),1,0,'C',0);
+$pdf->cell(10,5,$row->years,1,0,'C',0);
+
+
 $pdf->cell(30,5,$pdf->nbrtostring("com","IDCOM",$row->COMMUNE,"COMMUNE") 	,1,0,'L',0);
-$pdf->cell(70,5,html_entity_decode(utf8_decode($row->ADRESSE)),1,0,'L',0);
-$pdf->cell(76,5,$pdf->nbrtostring("structurebis","id",$row->STRUCTURE,"structure"),1,0,'L',0);
-
-
+$pdf->cell(70,5,$row->ADRESSE,1,0,'L',0);
+if ($row->STRUCTURE==16) {
+$pdf->cell(66,5,$pdf->nbrtostring("specialite","idspecialite",$row->SPECIALITEX,"specialitefr"),1,0,'L',0);
+} else {
+$pdf->cell(66,5,$pdf->nbrtostring("structurebis","id",$row->STRUCTURE,"structure"),1,0,'L',0);
+}
 $pdf->SetXY(5,$pdf->GetY()+5); 
 }
 $pdf->SetFillColor(200 );

@@ -78,6 +78,15 @@ class View {
 	return $OP;
 	}
 	
+	function nbrhome($idt) 
+	{
+	mysqlconnect();
+	$sql = " select * from  home where idstructure=$idt  ";
+	$requete = @mysql_query($sql) or die($sql."<br>".mysql_error());
+	$OP=mysql_num_rows($requete);
+	mysql_free_result($requete);
+	return $OP;
+	}
 	
 	function decescomm($COMMUNER,$DATEJOUR1,$DATEJOUR2,$STRUCTURED) 
 	{
@@ -224,8 +233,32 @@ class View {
 		}
 		echo '</select>'."\n"; echo "</div>";
 	}
-	
-	
+	function specialite($x,$y,$name,$value,$choisir,$class) 
+	{
+		mysqlconnect(); 
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option   value=\"".$value."\" selected=\"selected\">".$choisir."</option>"."\n";
+		$result = mysql_query("SELECT * FROM specialite  order by specialitefr" );
+		while($data =  mysql_fetch_array($result))
+		{
+		echo '<option value="'.$data["idspecialite"].'">'.$data["specialitefr"].'</option>';
+		}
+		echo '</select>'."\n"; echo "</div>";
+	}
+	function combopharmacienj($x,$y,$name,$value,$choisir,$class,$str,$SPECIALITEX) 
+	{
+		mysqlconnect(); 
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option   value=\"".$value."\" selected=\"selected\">".$choisir."</option>"."\n";
+		$result = mysql_query("SELECT * FROM structure where STRUCTURE = $str  and SPECIALITEX = $SPECIALITEX order by NOM" );
+		while($data =  mysql_fetch_array($result))
+		{
+		echo '<option value="'.$data["NOM"].'_'.$data["PRENOM"].'">'.$data["NOM"].'_'.$data["PRENOM"].'</option>';
+		}
+		echo '</select>'."\n"; echo "</div>";
+	}
 	function combopharmacien($x,$y,$name,$value,$choisir,$class,$str) 
 	{
 		mysqlconnect(); 
@@ -318,16 +351,31 @@ class View {
 	}
 	function nbrtostring($tb_name,$colonename,$colonevalue,$resultatstring) 
 	{
-	if (is_numeric($colonevalue) and $colonevalue!=='-1') 
-	{ 
-	mysqlconnect();
-	$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
-	$row=mysql_fetch_object($result);
-	$resultat=$row->$resultatstring;
-	return $resultat;
-	} 
+		if (is_numeric($colonevalue) and $colonevalue!=='0') 
+		{ 
+		mysqlconnect();
+		$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
+		$row=mysql_fetch_object($result);
+		$resultat=$row->$resultatstring;
+		return $resultat;
+		} 
 	return $resultat2='??????';
 	}
+	
+	function nbrtostring1($tb_name,$colonename,$colonevalue,$resultatstring) 
+	{
+		if (is_numeric($colonevalue) and $colonevalue!=='0') 
+		{ 
+		mysqlconnect();
+		$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
+		$row=mysql_fetch_object($result);
+		$resultat=$row->$resultatstring;
+		return $resultat;
+		} 
+	return $resultat2='??????';
+	}
+	
+	
 	function UNIVERSITE($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
 	{
 	mysqlconnect();
@@ -479,6 +527,8 @@ class View {
 	function range($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"number\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"   max=\"50\" min=\"0\" step=\"5\"      required  />";echo "</div>";}
 	function txt0($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" />";echo "</div>";}
 	function date($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input id=\"datejour\"type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required  />";echo "</div>";}
+	function date1($x,$y,$name,$size,$value,$nomfonction){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input id=\"datejour1\"type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" onblur=\"".$nomfonction."\"  />";echo "</div>";}
+	
 	function txtautofocus($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required autofocus />";echo "</div>";}
 	function txts($x,$y,$name,$size,$value,$param){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input style=\"text-align:center;\"   type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"  id=\"".$param."\"   required />";echo "</div>";}
 	

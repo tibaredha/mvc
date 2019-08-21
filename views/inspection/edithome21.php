@@ -6,28 +6,23 @@ $data = array(
 "Date"       => date('Y-m-j'), 
 "btn"        => 'inspection', 
 "id"         => '', 
-"butun"      => 'imprimer conformite', 
+"butun"      => 'editer conformite + inspection', 
 "photos"     => 'public/images/icons/pers.PNG',
-"action"     => 'tcpdf/inspection/pvconf17.php?uc='.$this->user[0]['id'],
-
-"WILAYAN1"  => $this->user[0]['WILAYA'] ,
-"WILAYAN2"  => View::nbrtostring('wil','IDWIL',$this->user[0]['WILAYA'],'WILAYAS'),
-"COMMUNEN1" => $this->user[0]['COMMUNE'] ,
-"COMMUNEN2" => View::nbrtostring('com','IDCOM',$this->user[0]['COMMUNE'],'COMMUNE'),
-"ADRESSE"  => $this->user[0]['ADRESSE'],
+"action"     => 'inspection/edit1home21/'.$this->user[0]['id'],
+"WILAYAN1"   => $this->user[0]['WILAYA'] ,
+"WILAYAN2"   => View::nbrtostring('wil','IDWIL',$this->user[0]['WILAYA'],'WILAYAS'),
+"COMMUNEN1"  => $this->user[0]['COMMUNE'] ,
+"COMMUNEN2"  => View::nbrtostring('com','IDCOM',$this->user[0]['COMMUNE'],'COMMUNE'),
+"ADRESSE"    => $this->user[0]['ADRESSE'],
 "ADRESSEAR"  => $this->user[0]['ADRESSEAR'],
-
 "NAT"        => array( 
 				"Transfert"=>"1",
-				"Instatllation"=>"2",
+				"Installation"=>"2",
 				"Ouverture"=>"3"			 
-				),
-				
-				
+				),				
 "PROPRIETAIRE"  => 'x',
 "DEBUTCONTRAT"  => '00-00-0000',
-"FINCONTRAT"    => '00-00-0000'				
-				
+"FINCONTRAT"    => '00-00-0000'					
 );
 view::button($data['btn'],'');
 echo "<h2>PV de conformite du local de : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
@@ -41,32 +36,28 @@ $this->label($x+800,$y+220,'Adresse');           $this->txt($x+880,$y+210,'ADRES
 $this->label($x,$y+260,'Date PV ');              $this->txts($x+150,$y+250,'DATEP',0,date('j-m-Y'),'dateus'); $this->label($x+400,$y+260,'Nature PV');    $this->combov1($x+520,$y+250,'NAT',$data['NAT']);              $this->label($x+800,$y+260,'Adresse ar ');  $this->txtarid($x+880,$y+250,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
 $this->label($x,$y+300,'Demande N ');            $this->txt($x+150,$y+290,'NUMD',0,"00");                     $this->label($x+400,$y+300,'Date demande'); $this->txts($x+520,$y+290,'DATED',0,date('j-m-Y'),'dateus1');
 
+$this->label($x,$y+340,'Garage : ');             $this->date1($x+150,$y+330,'CDS0',10,'00','cds();');$this->date1($x+225,$y+330,'CDS1',10,'00','cds();');  $this->date1($x+300,$y+330,'CDS',0,"00",'cds();');
+$this->label($x,$y+380,'Bureau : ');             $this->date1($x+150,$y+370,'SDS0',10,'00','sds();');$this->date1($x+225,$y+370,'SDS1',10,'00','sds();');  $this->date1($x+300,$y+370,'SDS',0,"00",'sds();');
+$this->label($x,$y+420,"Salle de stokage : ");   $this->date1($x+150,$y+410,'SAH0',10,'00','sah();');$this->date1($x+225,$y+410,'SAH1',10,'00','sah();');$this->date1($x+300,$y+410,'SAH',0,"00",'sah();');
+$this->label($x,$y+460,"Autres : ");             $this->date1($x+150,$y+450,'SAF0',10,'00','saf();');$this->date1($x+225,$y+450,'SAF1',10,'00','saf();');$this->date1($x+300,$y+450,'SAF',0,"00",'saf();');
+$this->label($x,$y+500,'Sanitaires ');           $this->date1($x+150,$y+490,'SAN0',10,'00','san();');$this->date1($x+225,$y+490,'SAN1',10,'00','san();');$this->date1($x+300,$y+490,'SAN',0,"00",'san();');
+$this->label($x,$y+540,'Surface total ');        $this->txt($x+150,$y+530,'STL',0,"00");
 
+$this->label($x+400,$y+420,'1er transporteur');   $this->combopharmacien($x+520,$y+410,"PHA1",$this->user[0]['PHA1'],$this->user[0]['PHA1'],"pharmacie",21);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,"00");
+$this->label($x+400,$y+460,'2em transporteur');   $this->combopharmacien($x+520,$y+450,"PHA2",$this->user[0]['PHA2'],$this->user[0]['PHA2'],"pharmacie",21);   $this->label($x+800,$y+460,'Distance 2 ');$this->txt($x+880,$y+450,'DIST2',0,"00");
+$this->label($x+400,$y+500,'3em transporteur');   $this->combopharmacien($x+520,$y+490,"PHA3",$this->user[0]['PHA3'],$this->user[0]['PHA3'],"pharmacie",21);   $this->label($x+800,$y+500,'Distance 3 '); $this->txt($x+880,$y+490,'DIST3',0,"00");
 
-$this->label($x,$y+340,'Cabinet de consultation '); $this->date1($x+150,$y+330,'CDS0',10,'00','cds();');$this->date1($x+225,$y+330,'CDS1',10,'00','cds();');  $this->date1($x+300,$y+330,'CDS',0,"00",'cds();');
-$this->label($x,$y+380,'Salle de soins');           $this->date1($x+150,$y+370,'SDS0',10,'00','sds();');$this->date1($x+225,$y+370,'SDS1',10,'00','sds();');  $this->date1($x+300,$y+370,'SDS',0,"00",'sds();');
-$this->label($x,$y+420,"Salle d'attente  : H ");    $this->date1($x+150,$y+410,'SAH0',10,'00','sah();');$this->date1($x+225,$y+410,'SAH1',10,'00','sah();');$this->date1($x+300,$y+410,'SAH',0,"00",'sah();');
-$this->label($x,$y+460,"Salle d'attente  : F ");    $this->date1($x+150,$y+450,'SAF0',10,'00','saf();');$this->date1($x+225,$y+450,'SAF1',10,'00','saf();');$this->date1($x+300,$y+450,'SAF',0,"00",'saf();');
-$this->label($x,$y+500,'Sanitaires ');              $this->date1($x+150,$y+490,'SAN0',10,'00','san();');$this->date1($x+225,$y+490,'SAN1',10,'00','san();');$this->date1($x+300,$y+490,'SAN',0,"00",'san();');
-$this->label($x,$y+540,'Surface total ');           $this->txt($x+150,$y+530,'STL',0,"00");
-
-
-
-
-$this->label($x+400,$y+420,'1er généraliste');  $this->combopharmacien($x+520,$y+410,"PHA1","","","pharmacie",17);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,"00");
-$this->label($x+400,$y+460,'2em généraliste');  $this->combopharmacien($x+520,$y+450,"PHA2","","","pharmacie",17);   $this->label($x+800,$y+460,'Distance 2 ');$this->txt($x+880,$y+450,'DIST2',0,"00");
-$this->label($x+400,$y+500,'3em généraliste');  $this->combopharmacien($x+520,$y+490,"PHA3","","","pharmacie",17);   $this->label($x+800,$y+500,'Distance 3 '); $this->txt($x+880,$y+490,'DIST3',0,"00");
-
-$this->label($x+800,$y+300,'Propriétaire');           $this->txtarid($x+880,$y+290,'PROPRIETAIRE','PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
-$this->label($x+800,$y+340,'Début contrat');          $this->txts($x+880,$y+330,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus2');
-$this->label($x+800,$y+380,'Fin contrat');            $this->txts($x+880,$y+370,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus3');
-
+$this->label($x+800,$y+300,'Propriétaire');      $this->txtarid($x+880,$y+290,'PROPRIETAIRE','PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
+$this->label($x+800,$y+340,'Début contrat');     $this->txts($x+880,$y+330,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus2');
+$this->label($x+800,$y+380,'Fin contrat');       $this->txts($x+880,$y+370,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus3');
+$this->hide(100,100,"STRUCTURE","",$this->user[0]['STRUCTURE']);
 $this->submit($x+880,$y+540,$data['butun']);
 $this->f1();
-view::sautligne(15);
+view::sautligne(22);
 ob_end_flush();
 
 ?>
+
 <script type="text/javascript">
 function saf(){var a = parseFloat(this.document.form1.SAF0.value);var b = parseFloat(this.document.form1.SAF1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SAF.value = result;}
 function sah(){var a = parseFloat(this.document.form1.SAH0.value);var b = parseFloat(this.document.form1.SAH1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SAH.value = result;}

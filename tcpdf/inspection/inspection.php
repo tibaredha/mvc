@@ -23,6 +23,9 @@ class inspection extends TCPDF
 	public $ledspar = "إن مدير الصحة و السكان لولاية الجلفة ";
 	
 	public $loi85_05 = "- بمقتضى القانون 05-85 المؤرخ في 1985/02/16 المتعلق بحماية الصحة و ترقيتها المعدل و المتمم .";
+	public $loi18_11 = "- بمقتضى القانون 11-18 المؤرخ في 2018/07/02 المتعلق بالصحة";
+	
+	
 	public $decret92_276 = "- بمقتضى المرسوم التنفيدي رقم 276-92 المؤرخ في 1992/07/06 المتعلق بمدونة اخلاقيات الطب .";
 	public $decret97_261 = "- بمقتضى المرسوم التنفيدي رقم 261-97 المؤرخ في 1997/07/14 المحدد للقواعد الخاصة بتنظيم مديرية الصحة و السكان ";
 	
@@ -33,7 +36,8 @@ class inspection extends TCPDF
 	public $arrete110_96 = "- بمقتضى القرار رقم 110 و. ص. س  المؤرخ في 1996/11/27 المحدد لشروط تنصيب فتح و تحويل صيدلية خاصة";
 	public $cm03_05 = "- بناء على المنشور الوزاري رقم 03 م. ص المؤرخ قي 2005/11/05 المتعلق بامكانية فتح صيدليات على مستوى المناطق المعزولة";
 	public $pvconformite = "- بناء على محضر المطابقة الخاص بالمحل  للصيدلية المؤرخ في ";
-	public $diplome = "- بناء على شهادة النجاح في الصيدلة بتاريخ ";public $diplome17 = "- بناء على شهادة النجاح في الطب العام بتاريخ  ";
+	public $diplome = "- بناء على شهادة النجاح في الصيدلة بتاريخ ";
+	public $diplome17 = "- بناء على شهادة النجاح في الطب العام بتاريخ  ";
 	public $ordre = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة للصيدلة رقم ";
 	//*dentiste*//
 	public $instruction112_90 = "- بمقتضى التعليمة الوزارية للصحة رقم 112 المؤرخة في 1987/03/02 المتعلقة بأحكام تنصيب جراحو الأسنان ";
@@ -51,9 +55,12 @@ class inspection extends TCPDF
 	public $article4 = "المادة 04 : يكلف كل من السادة مدير المؤسسة العمومية للصحة الجوارية و مدير صندوق الضمان الإجتماعي بتنفيذ هذه المقررة .";
 	
 	
+	public $circulaire10_2018 = "- بمقتضى التعليمة الوزارية رقم 10 المؤرخة في 2018/06/09 المتعلقة بتنصيب الممارسين الاخصائين الخواص";
 	
+	public  $avisfavorable="- وبعد الاطلاع على راي الموافقة الصادر عن اللجنة المركزية المكلفة بدراسة طلبات تنصيب الممارسين الاخصائين";
 	
-	
+	public $servicecivile ="- وبعد الاطلاع على شهادة الابراء من التزمات الخدمة المدنية الصادرة عن ";
+	public $diplome16 = "- بناء على الشهادة المؤقتة للدراسات الطبية المتخصصة بتاريخ  ";
 	
 	function ANNEEFR($DATEINS) {
 			$A      = substr($DATEINS,6,2); 
@@ -71,13 +78,21 @@ class inspection extends TCPDF
 		}		
 	function JOURFR($DATEINS) {
 			$J      = substr($DATEINS,0,2);                  
-			$JOURS = array("premier","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onz","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit ","dix-neuf ","vingt","vingt et un","vingt et deux","vingt -trois","vingt -quatre"," vingt -cinq ","vingt -six"," vingt -sept ","vingt -huit ","vingt -neuf"," trente "," trente et un ");
+			$JOURS = array("premier","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit ","dix-neuf ","vingt","vingt et un","vingt et deux","vingt -trois","vingt -quatre"," vingt -cinq ","vingt -six"," vingt -sept ","vingt -huit ","vingt -neuf"," trente "," trente et un ");
 			$JOURS1 = $JOURS[$J-1] ;
 			$DATEPV=$JOURS1;
 			return $DATEPV;
 		}	
 	
-	
+	function entetesiple()
+	{
+	$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,0,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->repfr,0,0,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->mspar,0,0,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->mspfr,0,0,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->dspar,0,0,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->dspfr,0,0,'C');	
+	}
 	
 	
 	function entete($id2)
@@ -122,7 +137,7 @@ class inspection extends TCPDF
 	  return $date;
 	}
 	//************************//
-	function orderdemision($numm,$nomprenom,$fonction,$lieu,$depart,$arrive,$nbr,$num,$cause)
+	function orderdemision($numm,$nomprenom,$fonction,$wilaya,$commune,$lieu,$depart,$arrive,$nbr,$num,$cause)
 	{
 	$this->SetCreator(PDF_CREATOR);
 	$this->SetAuthor('tiba redha');
@@ -163,7 +178,7 @@ class inspection extends TCPDF
 	$this->setRTL(true);
 	$this->SetXY(40,120);$this->Cell(50,5,$nomprenom,0,1,'R');
 	$this->SetXY(40,130);$this->Cell(50,5,$fonction,0,1,'R');
-	$this->SetXY(40,140);$this->Cell(50,5,$lieu,0,1,'R');
+	$this->SetXY(40,140);$this->Cell(50,5,$lieu." بلدية  ".$this->nbrtostring('mvc','com','IDCOM',$commune,'communear')." ولاية ".$this->nbrtostring('mvc','wil','IDWIL',$wilaya,'WILAYASAR'),0,1,'R');
 	$this->SetXY(40,150);$this->Cell(50,5,$depart,0,1,'R');
 	$this->SetXY(40,160);$this->Cell(50,5,$arrive,0,1,'R');
     $this->SetXY(70,170);$this->Cell(50,5,$nbr,0,1,'R');
@@ -179,11 +194,11 @@ class inspection extends TCPDF
 	$this->SetXY(5,180);$this->Cell(50,5,'رقم السيارة : '.'  ....................................................................................................................... ',0,1,'R');
 	$this->SetXY(5,190);$this->Cell(50,5,'سبب الانتقال : '.'  ..................................................................................................................... ',0,1,'R');//.''.strtoupper($this->nbrtostring('mvc','structure','id',$rowy->ids,'NOM'))."_".ucfirst($this->nbrtostring('mvc','structure','id',$rowy->ids,'PRENOM'))
 	$this->SetFont('aefurat', 'B', 16);
-	$this->SetXY(120,$this->GetY()+20);$this->Cell(20,5,'في : الجلفة '.'يوم :'.' ............................ ',0,1,'R');
+	$this->SetXY(120,$this->GetY()+20);$this->Cell(20,5,'في : الجلفة '.'يوم : '.$depart,0,1,'R');
 	$this->SetXY(140,$this->GetY()+10);$this->Cell(20,5,'المدير',0,1,'R');
-	$this->SetFont('aefurat', 'B', 10);
-	$this->SetXY(1,$this->GetY()+25);$this->Cell(50,5,'____________________________________________________________________________________________________________________',0,1,'R');
-	$this->SetXY(1,$this->GetY());$this->Cell(50,5,'على السلطات المدنية و العسكرية السماح لحامل هذا الامر بالمهمة بالمرور بكل حرية  وفي كل الضروف وتسهيل عليه القيام بمهمته وتمديد له يد المساعدة عند الضرورة',0,1,'R');
+	$this->SetFont('aefurat', '', 9.5);
+	$this->SetXY(5.5,$this->GetY()+25);$this->Cell(200,5,'______________________________________________________________________________________________________________________',0,1,'R');
+	$this->SetXY(5.5,$this->GetY()+0);$this->Cell(200,5,'على السلطات المدنية و العسكرية السماح لحامل هذا الامر بالمهمة بالمرور بكل حرية  وفي كل الضروف وتسهيل عليه القيام بمهمته وتمديد له يد المساعدة عند الضرورة',0,1,'C');
 	$this->setRTL(false);
 	}
 	//************************//
@@ -195,6 +210,26 @@ class inspection extends TCPDF
 	$totalmbr1=mysql_num_rows($requete);
 	return $totalmbr1;
 	}
+	
+	function nbrpharcom($STRUCTURE,$COMMUNE)
+	{
+	$this-> mysqlconnect();
+	$query_liste = "SELECT * FROM structure WHERE STRUCTURE=12 and COMMUNE=$COMMUNE and ETAT='0'";//
+	$requete = mysql_query( $query_liste ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
+	$totalmbr1=mysql_num_rows($requete);
+	return $totalmbr1;
+	}
+	
+	function nbrhabitcom($val,$COMMUNE)
+	{
+	$this-> mysqlconnect();
+	$query_liste = "SELECT * FROM com WHERE IDCOM=$COMMUNE ";//
+	$requete = mysql_query( $query_liste ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
+	$result1 = mysql_fetch_array( $requete ) ;
+	$valhb=$result1["$val"];
+	return $valhb;
+	}
+	
 	
 	
 	function nbrpers($Categorie,$idt)
