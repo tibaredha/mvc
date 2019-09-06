@@ -52,6 +52,12 @@ $num=$rowx->NOUVERTURE;
 $date=$rowx->OUVERTURE;
 $nomar=$rowx->NOMAR;
 $prenomar=$rowx->PRENOMAR;
+
+$nomfr=$rowx->NOM;
+$prenomfr=$rowx->PRENOM;
+
+
+
 $adresse=$rowx->ADRESSEAR;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
 $wilaya=$rowx->WILAYA;
@@ -150,5 +156,5 @@ $pdf->SetXY(5,$pdf->GetY()+6);$pdf->Cell(200,5,'المادة 04 : يكلف كل 
 $pdf->SetFont('aefurat', 'B', 14);
 $pdf->SetXY(5,$pdf->GetY()+6);$pdf->Cell(100,5,'الجلفة في : ..............',0,1,'C');
 $pdf->SetXY(5,$pdf->GetY()+6);$pdf->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
-$pdf->Output();
+$pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>
