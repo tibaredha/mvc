@@ -18,7 +18,8 @@ $data = array(
 "NAT"        => array( 
 				"Transfert"=>"1",
 				"Installation"=>"2",
-				"Ouverture"=>"3"			 
+				"Ouverture"=>"3",
+				"Fermeture"=>"4"			 
 				),				
 "PROPRIETAIRE"  => 'x',
 "DEBUTCONTRAT"  => '00-00-0000',

@@ -51,7 +51,7 @@ $data = array(
 "AUCTRL"  => '' 
 );
 view::button($data['btn'],'');
-echo "<h2>Nouveau Vehicule : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
+echo "<h2>Nouveau Vehicule : ".strtoupper($this->user[0]['NOM'])."_ ".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
@@ -81,7 +81,7 @@ $this->submit($x+800,$y+450,$data['butun']);
 $this->f1();
 view::sautligne(15);
 ob_end_flush();
-echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
+echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_ ".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 ?>
 		
 		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
@@ -89,6 +89,8 @@ echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_".$this->us
 		<th  colspan=16    style="width:50px;">
 		<?php
 		echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche vehicules de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
+		echo " /__ / ";
+		echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'tcpdf/inspection/auth21.php?ids='.$this->user[0]['id'].'&idh=108'.'" > Autentification : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
 		?>
 		</th> 
 		</tr>
@@ -144,7 +146,7 @@ echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_".$this->us
 						 <?php 
 		                }
 		                ?>
-						<td align="center"><a title="PV de conformité" href="<?php echo URL.'tcpdf/inspection/pvconfv.php?uc='.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/document-pdf.png';?>' width='16' height='16' border='0' alt=''/></a></td>
+						<td align="center"><a title="PV de conformité" target="_blank" href="<?php echo URL.'tcpdf/inspection/pvconfv.php?uc='.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/document-pdf.png';?>' width='16' height='16' border='0' alt=''/></a></td>
 						<td align="center"><a title="editer" href="<?php echo URL.'inspection/editauto/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deleteauto/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
 						</tr>
