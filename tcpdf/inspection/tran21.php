@@ -103,24 +103,24 @@ $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,' المادة 02 : تعين الوسائل المادية و البشرية  للسيد(ة) '.$nomar.' '.$prenomar.' كالتالي :',0,1,'R');
 
 $pdf->SetXY(15,$pdf->GetY()+6);$pdf->cell(180,6,'الوسائل المادية',1,0,'C',1,0);
-$pdf->SetXY(15,$pdf->GetY()+6);$pdf->cell(40,6,'الشركة المصنعة',1,0,'C',1,0);$pdf->cell(40,6,'الطراز',1,0,'C',1,0);$pdf->cell(40,6,'رقم التسلسلي في الطراز',1,0,'C',1,0);$pdf->cell(40,6,'الترقيم',1,0,'C',1,0);$pdf->cell(20,6,'الصنف',1,0,'C',1,0);
+$pdf->SetXY(15,$pdf->GetY()+6);$pdf->cell(30,6,'الشركة المصنعة',1,0,'C',1,0);$pdf->cell(40,6,'الطراز',1,0,'C',1,0);$pdf->cell(50,6,'رقم التسلسلي في الطراز',1,0,'C',1,0);$pdf->cell(40,6,'الترقيم',1,0,'C',1,0);$pdf->cell(20,6,'الصنف',1,0,'C',1,0);
 $pdf->SetXY(15,$pdf->GetY()+6);
 $query_liste = "SELECT * FROM auto WHERE idt  ='$ids' and ETAT='0' order by Categorie";//
 $requete = mysql_query( $query_liste ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 $tot1=mysql_num_rows($requete);
 while($row=mysql_fetch_object($requete))
 {
-$pdf->cell(40,06,$row->Marque,1,0,'C',0);
+$pdf->cell(30,06,$row->Marque,1,0,'C',0);
 $pdf->cell(40,06,$row->Type,1,0,'C',0);
-$pdf->cell(40,06,$row->Serie_Type,1,0,'C',0);
+$pdf->cell(50,06,$row->Serie_Type,1,0,'C',0);
 $pdf->cell(40,06,$row->Immatri,1,0,'C',0);
 $pdf->cell(20,06,$row->Categorie,1,0,'C',0);
 $pdf->SetXY(15,$pdf->GetY()+6); 
 }
 $pdf->SetXY(15,$pdf->GetY());
-$pdf->cell(40,6,'المجموع : '.$tot1,1,0,'C',1,0);
+$pdf->cell(30,6,'المجموع : '.$tot1,1,0,'C',1,0);
 $pdf->cell(40,6,$pdf->nbrcategorie('C',$ids).' : C',1,0,'C',1,0);
-$pdf->cell(40,6,$pdf->nbrcategorie('B',$ids).' : B',1,0,'C',1,0);
+$pdf->cell(50,6,$pdf->nbrcategorie('B',$ids).' : B',1,0,'C',1,0);
 $pdf->cell(40,6,$pdf->nbrcategorie('A',$ids).' : A',1,0,'C',1,0);
 $pdf->cell(20,6,'الصنف',1,0,'C',1,0);
 
