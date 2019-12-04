@@ -44,7 +44,7 @@ if ($rowx->SEX =='M'){$pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Situat
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Deux certificats médicaux de bonne santé Mg + Pn-Ph.",0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Deux photos.",0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Photocopie légalisée du diplôme.",0,0,'L',0,0);
-$pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Inscription à la section ordinale des pharmaciens.",0,0,'L',0,0);
+$pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Inscription à la section ordinale des medecins specialistes.",0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Attestation de non affiliation CNAS + CASNOS.",0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Acte de propriété ou contrat de location notarié.",0,0,'L',0,0);
 $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Fiche technique d'inscription.",0,0,'L',0,0);
