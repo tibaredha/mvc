@@ -106,16 +106,16 @@ echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_ ".$this->u
 		
 		<th style="width:80px;">Immatri</th>
 		<th style="width:80px;">Precedent</th>
-		<th style="width:100px;">Annee</th>
+		<th style="width:50px;">Annee</th>
 		
 		
 		<th style="width:70px;">ASS</th>
 		<th style="width:70px;">CTRL</th>
-		<th style="width:70px;">ETAT</th>
+		<th style="width:40px;">ETAT</th>
 		
-		<th style="width:50px;">PVC </th>
-		<th style="width:50px;">Update </th>
-		<th style="width:50px;">Delete</th>
+		<th style="width:30px;">PVC </th>
+		<th style="width:30px;">Update </th>
+		<th style="width:30px;">Delete</th>
 		</tr>
 		<?php
 		if (isset($this->userListview)) 
