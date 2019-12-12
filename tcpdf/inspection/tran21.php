@@ -104,6 +104,8 @@ $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,' المادة 02 : تعين ال
 
 $pdf->SetXY(15,$pdf->GetY()+6);$pdf->cell(180,6,'الوسائل المادية',1,0,'C',1,0);
 $pdf->SetXY(15,$pdf->GetY()+6);$pdf->cell(30,6,'الشركة المصنعة',1,0,'C',1,0);$pdf->cell(40,6,'الطراز',1,0,'C',1,0);$pdf->cell(50,6,'رقم التسلسلي في الطراز',1,0,'C',1,0);$pdf->cell(40,6,'الترقيم',1,0,'C',1,0);$pdf->cell(20,6,'الصنف',1,0,'C',1,0);
+
+
 $pdf->SetXY(15,$pdf->GetY()+6);
 $query_liste = "SELECT * FROM auto WHERE idt  ='$ids' and ETAT='0' order by Categorie";//
 $requete = mysql_query( $query_liste ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );

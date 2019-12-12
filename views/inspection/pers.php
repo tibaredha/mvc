@@ -94,7 +94,7 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 						<tr bgcolor='WHITE' onmouseover="this.style.backgroundColor='#9FF781';" onmouseout="this.style.backgroundColor='WHITE';" >
 						<?php 
 		                $fichier = photosmfx('pers',$value['id'].'.jpg','M') ;
-		                echo "<td  style=\"width:10px;\"     align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl***/".$value['id']."\" ><img  src=\"".URL."public/webcam/str/".$fichier."?t=".time()."\"  width='25' height='25' border='0'></td> " ;
+		                echo "<td  style=\"width:10px;\"     align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl***/".$value['id']."\" ><img  src=\"".URL."public/webcam/str/".$fichier."?t=".time()."\"  width='20' height='20' border='0'></td> " ;
 		                ?>
 						<td align="center"><?php echo $value['Categorie'];?></td>
 						<td align="center"><?php echo $value['CASNOS'];?></td>

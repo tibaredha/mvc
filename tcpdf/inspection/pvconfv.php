@@ -55,7 +55,7 @@ $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"- La cellule de conduite du vé
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"- La cellule sanitaire offre les dimensions minimales : ",0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"* Longueur : 02 mètres au niveau du plan brancard  : Oui ",0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"* Largeur : 1,10 mètres à hauteur du siège de l'accompagnateur : Oui ",0,1,'L');
-$pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"* Hauteur : 0,95 mètre au dessus du plan du brancard : Oui / Non",0,1,'L');
+$pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"* Hauteur : 0,95 mètre au dessus du plan du brancard : Oui ",0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"* les revètements intérieurs des parois doivent etre lisses Ces revêtements, ainsi que ceux du sol ",0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"  et des sièges doivent être lavable et résistant aux procédes usuels de désinfection : Oui ",0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"* la cellule sanitaire s'ouvre aisément par l'arrière pour permettre les manœuvres de brancardage ",0,1,'L');
