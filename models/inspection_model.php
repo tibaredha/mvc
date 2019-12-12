@@ -176,7 +176,13 @@ class inspection_Model extends Model {
 			'AUNASS'     => $this->dateFR2US($data['AUNASS']),
 			'CTRL'       => $data['CTRL'],
 			'DUCTRL'     => $this->dateFR2US($data['DUCTRL']),
-			'AUCTRL'     => $this->dateFR2US($data['AUCTRL'])
+			'AUCTRL'     => $this->dateFR2US($data['AUCTRL']),
+			
+			'sieges'    => $data['sieges'],
+			'ess'       => $data['ess'],
+			'die'       => $data['die'],
+			'gaz'       => $data['gaz']
+			
 			));
 			//echo '<pre>';print_r ($data);echo '<pre>';
 			return $last_id = $this->db->lastInsertId();
@@ -204,7 +210,13 @@ class inspection_Model extends Model {
 			'AUNASS'     => $this->dateFR2US($data['AUNASS']),
 			'CTRL'       => $data['CTRL'],
 			'DUCTRL'     => $this->dateFR2US($data['DUCTRL']),
-			'AUCTRL'     => $this->dateFR2US($data['AUCTRL'])	
+			'AUCTRL'     => $this->dateFR2US($data['AUCTRL']),
+
+            'sieges'    => $data['sieges'],
+			'ess'       => $data['ess'],
+			'die'       => $data['die'],
+			'gaz'       => $data['gaz']
+	
         );
        // echo '<pre>';print_r ($postData);echo '<pre>';
 		$this->db->update('auto', $postData, "id =" . $data['id'] . "");

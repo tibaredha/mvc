@@ -42,6 +42,10 @@ $data = array(
 "Immatri"  => '0' ,
 "Precedent"  => '0' ,					  
 "Annee"  => date('Y'), 
+
+"sieges"  => '5' ,
+
+
 					  
 "NASS"  => '0', 
 "DUNASS"  => '', 
@@ -70,14 +74,21 @@ $this->label($x,$y+310,'Immatriculation');   $this->txts($x+100,$y+300,'Immatri'
 $this->label($x+350,$y+310,'Precedent num'); $this->txts($x+450,$y+300,'Precedent',0,$data['Precedent'],'immat1');
 $this->label($x+700,$y+310,'Annee');         $this->txt($x+100+350+350,$y+300,'Annee',0,$data['Annee'],'date');
 
-$this->label($x,$y+340,'_______________________________________________________________________________________'); 
-$this->label($x,$y+380,'N ASSURANCE');       $this->txt($x+100,$y+370,'NASS',0,$data['NASS'],'date');
-$this->label($x+350,$y+380,'DU');            $this->txts($x+450,$y+370,'DUNASS',0,$data['DUNASS'],'dateus1');
-$this->label($x+700,$y+380,'AU');            $this->txts($x+100+350+350,$y+370,'AUNASS',0,$data['AUNASS'],'dateus2');
-$this->label($x,$y+420,'N CONTROLE');        $this->txt($x+100,$y+410,'CTRL',0,$data['CTRL'],'date');
-$this->label($x+350,$y+420,'DU');            $this->txts($x+450,$y+410,'DUCTRL',0,$data['DUCTRL'],'dateus3');
-$this->label($x+700,$y+420,'AU');            $this->txts($x+100+350+350,$y+410,'AUCTRL',0,$data['AUCTRL'],'dateus4');
-$this->submit($x+800,$y+450,$data['butun']);
+$this->label($x,$y+350,'Nbr de sièges');  $this->txts($x+100,$y+340,'sieges',0,$data['sieges'],'sieges');
+$this->label($x+350,$y+350,'Energie');    
+
+$this->label($x+450,$y+350,'Essence');      $this->chekbox($x+505,$y+345,"ess");
+$this->label($x+450+90,$y+350,'Diesel');    $this->chekbox($x+500+80,$y+345,"die"); 
+$this->label($x+450+90+85,$y+350,'Gaz');    $this->chekbox($x+500+80+70,$y+345,"gaz"); 
+
+$this->label($x,$y+340+40,'_______________________________________________________________________________________'); 
+$this->label($x,$y+380+40,'N ASSURANCE');       $this->txt($x+100,$y+370+40,'NASS',0,$data['NASS'],'date');
+$this->label($x+350,$y+380+40,'DU');            $this->txts($x+450,$y+370+40,'DUNASS',0,$data['DUNASS'],'dateus1');
+$this->label($x+700,$y+380+40,'AU');            $this->txts($x+100+350+350,$y+370+40,'AUNASS',0,$data['AUNASS'],'dateus2');
+$this->label($x,$y+420+40,'N CONTROLE');        $this->txt($x+100,$y+410+40,'CTRL',0,$data['CTRL'],'date');
+$this->label($x+350,$y+420+40,'DU');            $this->txts($x+450,$y+410+40,'DUCTRL',0,$data['DUCTRL'],'dateus3');
+$this->label($x+700,$y+420+40,'AU');            $this->txts($x+100+350+350,$y+410+40,'AUCTRL',0,$data['AUCTRL'],'dateus4');
+$this->submit($x+800,$y+450+40,$data['butun']);
 $this->f1();
 view::sautligne(15);
 ob_end_flush();
@@ -86,13 +97,26 @@ echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_ ".$this->u
 		
 		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
-		<th  colspan=16    style="width:50px;">
+		
+		<th  colspan=5    style="width:50px;">
 		<?php
-		echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche vehicules de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
-		echo " /__ / ";
-		echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'tcpdf/inspection/auth21.php?ids='.$this->user[0]['id'].'&idh=108'.'" > Autentification : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
+		echo '<a title="Autres transport sanitaire"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=21'.'" > Autres transport sanitaire : '.'</a>';
 		?>
 		</th> 
+		
+		<th  colspan=5    style="width:50px;">
+		<?php
+		echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche vehicules </a>';
+		?>
+		</th> 
+		
+		<th  colspan=5    style="width:50px;">
+		<?php
+		echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'tcpdf/inspection/auth21.php?ids='.$this->user[0]['id'].'&idh=108'.'" > Autentification vehicules</a>';
+		?>
+		</th> 
+		
+		
 		</tr>
 		<tr>
 		<th style="width:70px;">WILAYA</th>

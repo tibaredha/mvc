@@ -373,6 +373,12 @@ class inspection extends Controller {
 		$data['CTRL']         = $_POST['CTRL'];
 		$data['DUCTRL']       = $_POST['DUCTRL'];
 		$data['AUCTRL']       = $_POST['AUCTRL'];
+		
+		$data['sieges']    = $_POST['sieges'];
+		if (isset ($_POST['ess'])){$data['ess'] = 1;}  else  {$data['ess'] = 0;}
+		if (isset ($_POST['die'])){$data['die'] = 1;}  else  {$data['die'] = 0;}
+		if (isset ($_POST['gaz'])){$data['gaz'] = 1;}  else  {$data['gaz'] = 0;}
+		
 		$data['id']           = $id;
 		// echo '<pre>';print_r ($data);echo '<pre>';  
 		$last_id=$this->model->creatautodb($data);
@@ -416,9 +422,15 @@ class inspection extends Controller {
 		$data['AUCTRL']       = $_POST['AUCTRL'];
 		$data['id']           = $id;
 		$data['idt']          = $_POST['idt'];;
+		
+		$data['sieges']    = $_POST['sieges'];
+		if (isset ($_POST['ess'])){$data['ess'] = 1;}  else  {$data['ess'] = 0;}
+		if (isset ($_POST['die'])){$data['die'] = 1;}  else  {$data['die'] = 0;}
+		if (isset ($_POST['gaz'])){$data['gaz'] = 1;}  else  {$data['gaz'] = 0;}
+		
 		// echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavesauto($data);
-		header('location: ' . URL . $this->route.'/editauto/'.$id.'/'.$data['idt'].'');
+		header('location: ' . URL . $this->route.'/auto/'.$data['idt']);
 	}
 	
 	
@@ -1015,7 +1027,7 @@ class inspection extends Controller {
 		$data['NOMAR']= $_POST['NOMAR'];$data['PRENOMAR']= $_POST['PRENOMAR'];$data['Categorie']= $_POST['Categorie'];$data['id']=$id;$data['idt']= $url1[3];$data['CASNOS']= $_POST['CASNOS'];$data['DEBUTCONTRAT']=$_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
 		//echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavespers($data);
-		header('location: ' . URL . $this->route.'/editpers/'.$id.'/'.$data['idt'].'');
+		header('location: ' . URL . $this->route.'/pers/'.$data['idt'].'');
 	}
 
 	public function editetatpers($id)

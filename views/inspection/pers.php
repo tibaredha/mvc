@@ -41,7 +41,7 @@ $this->label($x+640,$y+300,'الاســـــــم');        $this->txtarid($x
 $this->label($x+290,$y+300,'المهنة');             $this->combov1($x,$y+290,'Categorie',$data['Categorie'],'date');
 
 $this->label($x,$y+370,'__________________________________________________________________________________________________________________');
-$this->label($x,$y+400,'N°_Casnos');              $this->txt($x+100,$y+390,'CASNOS',0,$data['CASNOS'],'date');
+$this->label($x,$y+400,'N°_CNAS');              $this->txt($x+100,$y+390,'CASNOS',0,$data['CASNOS'],'date');
 $this->label($x+350,$y+400,'Début contrat');      $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');
 $this->label($x+700,$y+400,'Fin contrat');        $this->txts($x+100+350+350,$y+390,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus2');
 
@@ -54,16 +54,31 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		
 		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
-		<th  colspan=16    style="width:50px;">
+		<th  colspan=3   style="width:50px;">
 		<?php
-		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
+		echo '<a title="Autres transport sanitaire"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=21'.'" > Autres transport sanitaire : '.'</a>';
 		?>
 		</th> 
+		
+		<th  colspan=3    style="width:50px;">
+		<?php
+		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche personnels </a>';
+		?>
+		</th> 
+		
+		<th  colspan=4    style="width:50px;">
+		<?php
+		//echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
+		?>
+		</th> 
+		
+		
+		
 		</tr>
 		<tr>
 		<th style="width:10px;">Photos</th>
 		<th style="width:50px;">Categorie</th>
-		<th style="width:50px;">CASNOS</th>
+		<th style="width:50px;">CNAS</th>
 		<th style="width:70px;">debut contrat</th>
 		<th style="width:70px;">fin contrat</th>
 		<th style="width:70px;">الاســـــــم</th>
