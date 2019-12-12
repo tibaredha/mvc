@@ -59,11 +59,19 @@ ob_end_flush();
 ?>
 <table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
-		<th  colspan=8    style="width:50px;">
+		<th  colspan=4    style="width:50px;">
+		<?php
+		echo '<a title="Autres officine pharmaceutique"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=12'.'" > Autres officine pharmaceutique : '.'</a>';
+		?>
+		</th> 
+		
+		<th  colspan=4    style="width:50px;">
 		<?php
 		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'inspection/searchx/0/10?o=id&q='.trim($this->user[0]['id']).'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
 		?>
 		</th> 
+		
+		
 		</tr>
 		<tr>
 		<th style="width:10px;">Date PV</th>
