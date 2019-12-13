@@ -20,18 +20,19 @@ $requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_
 while($rowx=mysql_fetch_object($requetex))
 {
 $pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'REPUBLIQUE ALGERIENNE DEMOCRATIQUE ET POPULAIRE ',0,1,'C');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE ',0,1,'C');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA',0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'INSPECTION SANTE PUBLIQUE',0,1,'L');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"N ..... / ".date('Y'),0,1,'L');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'République algérienne démocratique et populaire ',0,1,'C');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'Ministère de la santé de la population et de la réforme hospitalière ',0,1,'C');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'Direction de la santé et de la population de la wilaya de Djelfa',0,1,'C');
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'Inspection Santé Publique',0,1,'L');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"N° : ___________ / ".date('Y'),0,1,'L');
 $pdf->SetFont('aefurat', '', 15);
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Procés-Verbal de Conformité du véhicule de categorie (".$rowx->Categorie.")",0,1,'C');
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Procés-Verbal de Conformité d'un véhicule de categorie (".$rowx->Categorie.")",0,1,'C');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"de l'unite de transport santaire de Mr : ".$pdf->nbrtostring('mvc','structure','id',$rowx->idt,'NOM').'_'.strtolower ($pdf->nbrtostring('mvc','structure','id',$rowx->idt,'PRENOM')),0,1,'C');$pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(20,$pdf->GetY()+10);$pdf->Cell(200,5,"Suite à l'inspection éffectuée par le praticien inspecteur,en date du : ",0,1,'L');
-$pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"et compte tenu de l'état du véhicule visité: ",0,1,'L');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"REF : Arrêté n°39/MSP/MIN du 15 septembre 1998 portant réglementation du transport sanitaire",0,1,'C');$pdf->SetFont('aefurat', '', 12);
+$pdf->SetXY(20,$pdf->GetY()+10);$pdf->Cell(200,5,"Suite à l'inspection éffectuée par le praticien inspecteur,en date du : ___ / ___ / ".date('Y'),0,1,'L');
+$pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"et compte tenu de l'état du véhicule visité : ",0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"- Marque : ".$rowx->Marque,0,1,'L');
-$pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"- Immatriculation : ".$rowx->Immatri,0,1,'L');
+$pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(65,5,"- Immatriculation : ".$rowx->Immatri,0,0,'L');$pdf->Cell(55,5,"- Type : ".$rowx->Type,0,0,'L');$pdf->Cell(75,5,"- Serie_Type : ".$rowx->Serie_Type,0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"- Couleur : blanche",0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"- Nombre de sièges : ".$rowx->sieges,0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);
@@ -74,9 +75,10 @@ $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"j'atteste que le véhicule imma
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"Situé à : ".$pdf->nbrtostring('mvc','structure','id',$rowx->idt,'ADRESSE'),0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"Commune de : ".$pdf->nbrtostring('mvc','com','IDCOM',$pdf->nbrtostring('mvc','structure','id',$rowx->idt,'COMMUNE'),'COMMUNE'),0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(200,5,"Est conforme aux normes concernant les véhicules santaires de categorie (".$rowx->Categorie.").",0,1,'L');
-$pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(200,5,"Fait a Djelfa  le : ",0,1,'L');
+$pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(200,5,"Fait a Djelfa  le : ___ / ___ / ".date('Y'),0,1,'L');
 $pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(200,5,"Le Praticien Inspecteur ",0,1,'L');
 $pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(200,5,"Dr  TIBA ",0,1,'L');
+$pdf->Output($pdf->nbrtostring('mvc','structure','id',$rowx->idt,'NOM').'_pvdeconformite.pdf','I');
 }
-$pdf->Output();
+
 ?>
