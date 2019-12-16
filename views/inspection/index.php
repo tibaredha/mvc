@@ -62,7 +62,7 @@ echo "</tr>" ;
 		$fichier = photosmfx('str',$value['id'].'.jpg',$value['SEX']) ;
 		echo "<td align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl/".$value['id']."\" ><img  src=\"".URL."public/webcam/str/".$fichier."?t=".time()."\"  width='25' height='25' border='0'></td> " ;
 		
-		echo "<td style=\"width:270px;\" align=\"left\" >".strtoupper($value['NOM']).'_'.strtolower ($value['PRENOM'])."</td>" ;
+		echo "<td style=\"width:270px;\" align=\"left\" ><a title=\"Authentification diplome\" href=\"".URL.'tcpdf/inspection/authdiplome.php?uc='.$value['id']."\" >".strtoupper($value['NOM']).'_'.strtolower ($value['PRENOM'])."</a></td>" ;
 		
 		echo "<td"; if ($value['FINCONTRAT'] > date('Y-m-d')) { echo " bgcolor=\"#7BCCB5\" ";} else { echo " bgcolor=\"red\" ";}echo " style=\"width:110px;\" align=\"center\" >".strtolower (view::dateUS2FR($value['FINCONTRAT']))."</td>" ;
 		
