@@ -904,7 +904,7 @@ class INSPECTION1 extends PDF_Invoice
 	
 	
 	$this->SetXY(05,$this->GetY()+15);$this->cell(200,5,"OBJET : A/S  INSPECTION DES ETABLISSEMENTS PUBLICS ET PRIVES",0,0,'L',0,0);
-	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"REF : ENVOI DU 07/01/2019 ",0,0,'L',0,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"REF : ENVOI N° 554 DU 05/12/2019 ",0,0,'L',0,0);
 	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"PJ : CANEVAS",0,0,'L',0,0);
 	
 	$this->SetXY(25,$this->GetY()+15);$this->cell(200,5,"Suite à votre envoi cité en référence, j'ai l'honneur de vous transmettre le bilan des inspections  ",0,0,'L',0,0);
@@ -931,7 +931,7 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"> Wilaya : ",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(20,$this->GetY());$this->cell(200,5,"DJELFA ",0,0,'L',0,0);$this->SetTextColor(0,0,0);
 	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> Nombre total de praticiens inspecteurs : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(71,$this->GetY());$this->cell(200,5,"1",0,0,'L',0,0);$this->SetTextColor(0,0,0);
     $this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs en poste à la DSP : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(91,$this->GetY());$this->cell(200,5,"0",0,0,'L',0,0);$this->SetTextColor(0,0,0);
-	$this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs ayant désistés du poste de praticien médical inspecteur de santé publique : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(164,$this->GetY());$this->cell(200,5,"0",0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs ayant désistés du poste de praticien médical inspecteur de santé publique : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(180,$this->GetY());$this->cell(200,5,"0",0,0,'L',0,0);$this->SetTextColor(0,0,0);
 	$this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs admis en cette qualité ,n'ayant pas signés de PV d'installation ,mais exercent en cette qualité : I__I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(205,$this->GetY());$this->cell(200,5,"1",0,0,'L',0,0);$this->SetTextColor(0,0,0);
 	
 	
