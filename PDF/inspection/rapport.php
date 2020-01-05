@@ -37,28 +37,30 @@ $date=date("d-m-y");
 $pdf->SetFillColor(200);//fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
 $pdf->SetTextColor(0,0,0);//text noire
 $pdf->SetFont('Times', 'B', 10);
-$pdf->AddPage('p','A4');
-$pdf->BORDEREAU("",$datejour1,$datejour2,$EPH1,"");
 
 
-$pdf->AddPage('p','A4');
-$pdf->entete($datejour1,$datejour2,'Repartition Geographique : ',$EPH1);
-$pdf->djelfa($pdf->datasig($datejour1,$datejour2,$EPH,33),20,128,3.7,'commune');//commune//dairas 
+// $pdf->AddPage('p','A4');
+// $pdf->BORDEREAU("",$datejour1,$datejour2,$EPH1,"");
 
 
-$pdf->AddPage('p','A4');
-$pdf->entete($datejour1,$datejour2,'Repartition par communes de residence : ',$EPH1);
-$pdf->tblparcommune('Structure',$datejour1,$datejour2,$EPH) ;
+// $pdf->AddPage('p','A4');
+// $pdf->entete($datejour1,$datejour2,'Repartition Geographique : ',$EPH1);
+// $pdf->djelfa($pdf->datasig($datejour1,$datejour2,$EPH,33),20,128,3.7,'commune');//commune//dairas 
 
 
-$pdf->AddPage('p','A4');
-$pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
-$pdf->listenominative($EPH);
+// $pdf->AddPage('p','A4');
+// $pdf->entete($datejour1,$datejour2,'Repartition par communes de residence : ',$EPH1);
+// $pdf->tblparcommune('Structure',$datejour1,$datejour2,$EPH) ;
 
 
-$pdf->AddPage('p','A4');
-$pdf->entete($datejour1,$datejour2,'Repartition par commune des anomalies : ',$EPH1);
-$pdf->anomalies($EPH);
+// $pdf->AddPage('p','A4');
+// $pdf->entete($datejour1,$datejour2,'Repartition par commune : ',$EPH1);
+// $pdf->listenominative($EPH);
+
+
+// $pdf->AddPage('p','A4');
+// $pdf->entete($datejour1,$datejour2,'Repartition par commune des anomalies : ',$EPH1);
+// $pdf->anomalies($EPH);
 
 //**********************************************en fonction de la structure *****************************************************************//
 if ($_POST['EPH']=='16') {//medecin specialiste 
@@ -140,12 +142,12 @@ $pdf->bilaninspection($datejour1,$datejour2,$EPH,2);$pdf->pied();
 
 //bilan 2018 derniere verssion 2019 
 if ($_POST['EPH']=='0') {  //structure 
-$pdf->enteteinspectionp($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);$pdf->pied();
+// $pdf->enteteinspectionp($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);$pdf->pied();
 }
 
 //bilan 2018 letre d'accompagnement
 if ($_POST['EPH']=='0') {  //structure 
-$pdf->enteterapport($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);
+// $pdf->enteterapport($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);
 }
 
 
