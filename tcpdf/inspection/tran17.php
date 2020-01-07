@@ -28,18 +28,12 @@ $prenomar=$rowx->PRENOMAR;
 $adresse=$rowx->ADRESSEAR;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
 $wilaya=$rowx->WILAYA;
-
 $DIPLOME=$rowx->DIPLOME;
 $UNIV=$rowx->UNIV;
 $NUMORDER=$rowx->NUMORDER;
 $DATEORDER=$rowx->DATEORDER;
-
 $NUMDEM=$rowx->NUMDEM;
 $DATEDEM=$rowx->DATEDEM;
-
-
-
-
 }
 
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
@@ -48,10 +42,6 @@ while($rowy=mysql_fetch_object($requetey))
 $NUMD=$rowy->NUMD;
 $DATED=$rowy->DATED;
 $DATEP=$rowy->DATEP;
-
-
-
-
 }
 
 
@@ -63,9 +53,12 @@ $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->wilayaar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->dsparp,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->dssar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'رقم : '.'_____'.' / م. ص. س / '.substr($DATEP,0,4),0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'مقــــررة فتح  عيادة طبية عامـــــــة',0,1,'C');$pdf->SetFont('aefurat', '', 16);
+//$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'مقــــررة فتح  عيادة طبية عامـــــــة',0,1,'C');$pdf->SetFont('aefurat', '', 16);
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'مقــــررة تحويل عيادة طبية عامـــــــة',0,1,'C');$pdf->SetFont('aefurat', '', 16);
+
+
 $pdf->SetXY(100,$pdf->GetY()+$y);$pdf->Cell(100,5,$pdf->ledspar,0,1,'C');$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->loi85_05,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->loi18_11,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->decret92_276,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->diplome17.$DIPLOME.' الصادرة عن جامعة '.$UNIV,0,1,'R');$pdf->SetFont('aefurat', '', 12);
@@ -79,8 +72,8 @@ $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء علي محضر ال
 $pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(200,5,$pdf->proposition,0,1,'C');$pdf->SetFont('aefurat', 'U', 16);
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');$pdf->SetFont('aefurat', '', 13);
 /*************************************************************************************************************************/
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' طبيب عام'.' بفتح عيادته (ها) الطبية العامة الكائن مقرها ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,' ب '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' طبيب عام'.' بتحويل عيادته (ها) الطبية العامة الكائن مقرها ',0,1,'R');
+$pdf->SetXY(0,$pdf->GetY()+$y);$pdf->Cell(200,5,'                بـ : '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article3,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article4,0,1,'R');$pdf->SetFont('aefurat', 'B', 14);

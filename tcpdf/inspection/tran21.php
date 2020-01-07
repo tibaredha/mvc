@@ -52,12 +52,8 @@ $num=$rowx->NOUVERTURE;
 $date=$rowx->OUVERTURE;
 $nomar=$rowx->NOMAR;
 $prenomar=$rowx->PRENOMAR;
-
 $nomfr=$rowx->NOM;
 $prenomfr=$rowx->PRENOM;
-
-
-
 $adresse=$rowx->ADRESSEAR;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
 $wilaya=$rowx->WILAYA;
