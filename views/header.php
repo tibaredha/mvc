@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/function.js"></script>
 	
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/calendar_db.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>public/webcam/webcam.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>public/webcam/dnr/webcam.js"></script>
 	
 	<?php 
     if (isset($this->js)) 
