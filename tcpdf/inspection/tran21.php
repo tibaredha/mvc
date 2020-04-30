@@ -63,6 +63,8 @@ $wilaya=$rowx->WILAYA;
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 while($rowy=mysql_fetch_object($requetey))
 {
+	
+$NAT=$rowy->NAT;
 $STL=$rowy->STL;
 $DATEP=$rowy->DATEP;
 $CDS0=$rowy->CDS0;
@@ -71,14 +73,8 @@ $SAH0=$rowy->SAH0;
 $NUMD=$rowy->NUMD;
 $DATED=$rowy->DATED;
 }
-
-
-
-
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'- بناءا على المقررة رقم '.$num.' المؤرخة في '.$date.' المتضمنة فتح وحدة نقل صحي '.' الخاصة بالسيد(ة) '.$nomar.' '.$prenomar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'- بناءا على الطلب الخاص بالسيد(ة) : '.$nomar.' '.$prenomar.' المؤرخ في '.$DATED.' المتضمن تجديد الموارد المادية و البشرية ',0,1,'R');//$num.
-
-
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'- و بعد الإطلاع على ملف وحدة النقل الصحي للسيد(ة) : '.$nomar.' '.$prenomar,0,1,'R');
 // $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,' على مستوى '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
 
