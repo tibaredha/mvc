@@ -23,12 +23,19 @@ $data = array(
 "FINCONTRAT"    => '',
 
 "NOMAR"  => 'x' ,
-"PRENOMAR"  => 'x' ,	
+"PRENOMAR"  => 'x' ,
+"NOMFR"  => 'x' ,
+"PRENOMFR"  => 'x' ,
+	 
 "ADRESSEAR"  => 'x',
 "Categorie"  => array(      
-                        "MEDECIN"=>"M",
+                        "MEDECIN-S"=>"MS",
+						"MEDECIN-G"=>"MG",
 						"PARAMEDICALE"=>"P",
-					    "CHAUFFEUR"=>"C"						
+					    "TECHNICIEN DE MAINTENANCE"=>"TDM",
+						"AGENT D'HYGIÈNE"=>"ADH",
+						"AGENT DE SÉCURITÉ"=>"ADS",
+						"CHAUFFEUR"=>"C"						
 					  )
 );
 view::button($data['btn'],'');
@@ -40,8 +47,13 @@ $this->label($x+970,$y+300,'اللقـــب');           $this->txtarid($x+690,
 $this->label($x+640,$y+300,'الاســـــــم');        $this->txtarid($x+340,$y+290,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
 $this->label($x+290,$y+300,'المهنة');             $this->combov1($x,$y+290,'Categorie',$data['Categorie'],'date');
 
+$this->label($x+970,$y+330,'NOM');                $this->txt($x+690,$y+290+30,'PRENOMFR','PRENOMFR',"x",$data['PRENOMFR'],'date');
+$this->label($x+620,$y+330,'PRENOM');             $this->txt($x+340,$y+290+30,'NOMFR','NOMFR',"x",$data['NOMFR'],'date');
+
+
+
 $this->label($x,$y+370,'__________________________________________________________________________________________________________________');
-$this->label($x,$y+400,'N°_CNAS');              $this->txt($x+100,$y+390,'CASNOS',0,$data['CASNOS'],'date');
+$this->label($x,$y+400,'N°_CNAS');                $this->txt($x+100,$y+390,'CASNOS',0,$data['CASNOS'],'date');
 $this->label($x+350,$y+400,'Début contrat');      $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');
 $this->label($x+700,$y+400,'Fin contrat');        $this->txts($x+100+350+350,$y+390,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus2');
 
@@ -60,7 +72,7 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		?>
 		</th> 
 		
-		<th  colspan=3    style="width:50px;">
+		<th  colspan=4    style="width:50px;">
 		<?php
 		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche personnels </a>';
 		?>
@@ -83,6 +95,7 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		<th style="width:70px;">fin contrat</th>
 		<th style="width:70px;">الاســـــــم</th>
 		<th style="width:50px;">اللقب</th>
+		<th style="width:10px;">Autorisation</th>
 		<th style="width:10px;">Etat</th>
 		<th style="width:10px;">Upd </th>
 		<th style="width:10px;">Del</th>
@@ -104,6 +117,7 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 						<td align="center"><?php echo $value['NOMAR'];?></td>
 						<td align="center"><?php echo $value['PRENOMAR'];?></td>
 						<?php 
+						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Autorisation d'exercice\" href=\"".URL.'tcpdf/inspection/auto10.php?id='.$value['id']."&ids=".$value['idt']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
 		                if ($value['ETAT']==0) {
 		                ?>
 						<td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetatpers/'.$value['id'].'/'.$value['idt'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
@@ -112,10 +126,9 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		                if ($value['ETAT']==1) {
 		                ?>
 						<td align="center"><a  title="activé" href="<?php echo URL.'inspection/editetatpers/'.$value['id'].'/'.$value['idt'].'/0';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
-						 <?php 
+						<?php 
 		                }
-		                ?>
-						
+						?>
 						<td align="center"><a title="editer" href="<?php echo URL.'inspection/editpers/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deletepers/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
 						</tr>

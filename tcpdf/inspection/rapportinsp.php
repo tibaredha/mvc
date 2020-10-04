@@ -84,7 +84,7 @@ if ($totalmbr2==0)
 	$pdf->SetXY(25,$pdf->GetY()+2);$pdf->Cell(100,5,'Non respect de la réglementation en vigueur.',0,1,'L');
 }
 $pdf->SetXY(140,$pdf->GetY()+10);$pdf->Cell(50,5,'A Djelfa le : '.$id2,0,1,'L');
-$pdf->SetXY(140,$pdf->GetY());$pdf->Cell(50,5," L'enquêteur ",0,1,'C');
+$pdf->SetXY(140,$pdf->GetY());$pdf->Cell(50,5," Le Praticien Inspecteur ",0,1,'C');
 $pdf->SetXY(140,$pdf->GetY());$pdf->Cell(50,5," Dr TIBA ",0,1,'C');
 $pdf->SetXY(5,$pdf->GetY()-15);$pdf->Cell(100,5,'CT :',0,1,'L');
 $pdf->SetXY(15,$pdf->GetY());$pdf->Cell(100,5,'- Archives',0,1,'L');
