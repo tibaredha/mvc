@@ -35,7 +35,7 @@ $this->label($x,$y+220,'Wilaya');                $this->WILAYA($x+150,$y+210,'WI
 $this->label($x+400,$y+220,'Commune');           $this->COMMUNE($x+520,$y+210,'COMMUNE','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);
 $this->label($x+800,$y+220,'Adresse');           $this->txt($x+880,$y+210,'ADRESSE',0,$data['ADRESSE'],'date');
 $this->label($x,$y+260,'Date PV ');              $this->txts($x+150,$y+250,'DATEP',0,$data['Date'],'dateus'); $this->label($x+400,$y+260,'Nature PV');    $this->combov1($x+520,$y+250,'NAT',$data['NAT']);              $this->label($x+800,$y+260,'Adresse ar ');  $this->txtarid($x+880,$y+250,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
-$this->label($x,$y+300,'Demande N ');            $this->txt($x+150,$y+290,'NUMD',0,"00");                     $this->label($x+400,$y+300,'Date demande'); $this->txts($x+520,$y+290,'DATED',0,date('j-m-Y'),'dateus1');
+$this->label($x,$y+300,'Demande N ');            $this->txt($x+150,$y+290,'NUMD',0,"00");                     $this->label($x+400,$y+300,'Date demande'); $this->txts($x+520,$y+290,'DATED',0,date('d-m-Y'),'dateus1');
 
 $this->label($x,$y+340,'Salle des ventes : ');      $this->date1($x+150,$y+330,'CDS0',10,'00','cds();');$this->date1($x+225,$y+330,'CDS1',10,'00','cds();');  $this->date1($x+300,$y+330,'CDS',0,"00",'cds();');
 $this->label($x,$y+380,'Bureau : ');                $this->date1($x+150,$y+370,'SDS0',10,'00','sds();');$this->date1($x+225,$y+370,'SDS1',10,'00','sds();');  $this->date1($x+300,$y+370,'SDS',0,"00",'sds();');
@@ -136,11 +136,73 @@ ob_end_flush();
 		?>
 		</table><br/><br/>		
 <script type="text/javascript">
-function saf(){var a = parseFloat(this.document.form1.SAF0.value);var b = parseFloat(this.document.form1.SAF1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SAF.value = result;}
-function sah(){var a = parseFloat(this.document.form1.SAH0.value);var b = parseFloat(this.document.form1.SAH1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SAH.value = result;}
-function sds(){var a = parseFloat(this.document.form1.SDS0.value);var b = parseFloat(this.document.form1.SDS1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SDS.value = result;}
-function cds(){var a = parseFloat(this.document.form1.CDS0.value);var b = parseFloat(this.document.form1.CDS1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.CDS.value = result;}
-function san(){var a = parseFloat(this.document.form1.SAN0.value);var b = parseFloat(this.document.form1.SAN1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SAN.value = result;}
+function saf(){
+	var a = parseFloat(this.document.form1.SAF0.value);
+	var b = parseFloat(this.document.form1.SAF1.value);
+	var result =  parseFloat(a * b).toFixed(2);
+	this.document.form1.SAF.value = result;
+	var st1 = parseFloat(this.document.form1.SAF.value);
+	var st2 = parseFloat(this.document.form1.SAH.value);
+	var st3 = parseFloat(this.document.form1.SDS.value);
+	var st4 = parseFloat(this.document.form1.CDS.value);
+	var st5 = parseFloat(this.document.form1.SAN.value);
+	var tot = st1 + st2 + st3 + st4 + st5  ;
+	this.document.form1.STL.value = tot;
+	}
+function sah(){
+	var a = parseFloat(this.document.form1.SAH0.value);
+    var b = parseFloat(this.document.form1.SAH1.value);
+    var result =  parseFloat(a * b).toFixed(2);
+    this.document.form1.SAH.value = result;
+    var st1 = parseFloat(this.document.form1.SAF.value);
+	var st2 = parseFloat(this.document.form1.SAH.value);
+	var st3 = parseFloat(this.document.form1.SDS.value);
+	var st4 = parseFloat(this.document.form1.CDS.value);
+	var st5 = parseFloat(this.document.form1.SAN.value);
+	var tot = st1 + st2 + st3 + st4 + st5  ;
+	this.document.form1.STL.value = tot;
+}
+function sds(){
+	var a = parseFloat(this.document.form1.SDS0.value);
+	var b = parseFloat(this.document.form1.SDS1.value);
+	var result =  parseFloat(a * b).toFixed(2);
+	this.document.form1.SDS.value = result;
+	var st1 = parseFloat(this.document.form1.SAF.value);
+	var st2 = parseFloat(this.document.form1.SAH.value);
+	var st3 = parseFloat(this.document.form1.SDS.value);
+	var st4 = parseFloat(this.document.form1.CDS.value);
+	var st5 = parseFloat(this.document.form1.SAN.value);
+	var tot = st1 + st2 + st3 + st4 + st5  ;
+	this.document.form1.STL.value = tot;
+	
+	}
+function cds(){
+	var a = parseFloat(this.document.form1.CDS0.value);
+	var b = parseFloat(this.document.form1.CDS1.value);
+	var result =  parseFloat(a * b).toFixed(2);
+	this.document.form1.CDS.value = result;
+	var st1 = parseFloat(this.document.form1.SAF.value);
+	var st2 = parseFloat(this.document.form1.SAH.value);
+	var st3 = parseFloat(this.document.form1.SDS.value);
+	var st4 = parseFloat(this.document.form1.CDS.value);
+	var st5 = parseFloat(this.document.form1.SAN.value);
+	var tot = st1 + st2 + st3 + st4 + st5  ;
+	this.document.form1.STL.value = tot;
+	}
+function san(){
+	var a = parseFloat(this.document.form1.SAN0.value);
+	var b = parseFloat(this.document.form1.SAN1.value);
+	var result =  parseFloat(a * b).toFixed(2);
+	this.document.form1.SAN.value = result;
+	var st1 = parseFloat(this.document.form1.SAF.value);
+	var st2 = parseFloat(this.document.form1.SAH.value);
+	var st3 = parseFloat(this.document.form1.SDS.value);
+	var st4 = parseFloat(this.document.form1.CDS.value);
+	var st5 = parseFloat(this.document.form1.SAN.value);
+	var tot = st1 + st2 + st3 + st4 + st5  ;
+	this.document.form1.STL.value = tot;
+	
+	}
 
 function PopupImage(img) {
 	w=open("",'image','weigth=toolbar=no,scrollbars=no,resizable=yes, width=220, height=268');	

@@ -315,8 +315,10 @@ echo '<div id="cssmenu">';
 			
 			echo '</ul>';
 		echo '</li>';
-		echo '<li class="last"><a href="https://www.facebook.com/"><img src="'.URL.'public/images/icons/fb.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
-	    echo '<li class="last"><a href="https://twitter.com/"><img src="'.URL.'public/images/icons/tw.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
+		echo '<li class="last"><a href="'.URL.'inspection/"><img src="'.URL.'public/images/icons/SS.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
+	    echo '<li class="last"><a href="https://www.facebook.com/"><img src="'.URL.'public/images/icons/fb.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
+	    
+		echo '<li class="last"><a href="https://twitter.com/"><img src="'.URL.'public/images/icons/tw.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
 	    echo '<li class="last"><a href="https://www.youtube.com/"><img src="'.URL.'public/images/icons/yt.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
 		echo '<li class="last"><a href="https://www.facebook.com/"><img src="'.URL.'public/images/icons/rss.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
 		echo '<li class="last"><a href="https://www.facebook.com/"><img src="'.URL.'public/images/icons/linkedin.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 

@@ -16,6 +16,7 @@ useremail="tibaredha@yahoo.fr"
 # {=123  |=124  }=125  ~=126  <=60  ==61 >=62  ?=63 @=64  
 
 ##########################################################################
+#C:\Program Files\Git\usr\bin
 if [ ! -f /bin/tiba ]; then
 cp index.sh /bin/tiba
 echo "you can use tiba" 
@@ -39,24 +40,33 @@ show_help(){
 	# echo "Utilisation: $0 [EXTENSIONS]"
 	# echo "Additionneur de ligne de code de vos projets"
 	# echo  "+---------------|-------|--------------------------------+"
+	
 	#Configuration
-	echo -e "| --help,     \t afficher l'aide                          |"
+	echo -e "| --help,--h  \t afficher l'aide                          |"
 	echo -e "| --version,  \t afficher des informations de version     |"
 	echo -e "| --ssh       \t set ssh key                              |"
-	#importe un projet  ou clone le projet d'xy 
-	echo -e "| --cl,       \t git clone to get the code and history    |" 
-	echo -e "| --cfg       \t git init(--gh)*create remote repository  |"
-	echo -e "| --ignore    \t add .gitignore                           |"
-	echo -e "| --listdir   \t afficher list des dossiers               |"
+	echo -e "| --gpg       \t set gpg key                              |"
 	echo -e "| --listpath  \t afficher list path                       |"
+	echo -e "| --config    \t git config -l --show-origin              |"
+	#git config -l --show-origin
+	#importe un projet  ou clone le projet d'xy 
 	echo  "+---------------|-----------------------------------------+"
+	echo -e "| --cl,       \t git clone to get the code and history    |" 
+	echo  "+---------------|-----------------------------------------+"
+	echo -e "| --in        \t git init a new repository                |"
+	echo -e "| --ig        \t add .gitignore                           |"
+	echo -e "| --rr        \t create remote repository on github       |"
+	echo -e "| --ld        \t display folders and files                |"
+	echo  "+---------------|-----------------------------------------+"
+	
 	#Faire des modifications
 	echo -e "| -st,       \t git status                               |"
 	echo -e "| -ac,       \t git add + commit                         |"
 	#Voir l'historique
 	echo -e "| -lo,       \t git log --oneline to see the history     |"
 	#Gérer des branches /tags
-	echo -e "| -am,       \t add module : ctrl_mdl_view               |"
+	echo -e "| -am        \t add module : ctrl_mdl_view               |"
+	echo -e "| -as,       \t add submodule : url / branch             |"
 	echo -e "| -at,       \t git tag -a -m                            |"
 	echo -e "| -rv        \t git remote -v                            |"
 	echo -e "| -po,       \t git push origin master                   |"
@@ -66,8 +76,54 @@ show_help(){
 	echo -e "| -rs,       \t flow release start release_name          |"
 	echo -e "| -rf,       \t flow release finish release_name         |"
 	echo  "+---------------|-----------------------------------------+"
+    echo -e "| -ci,       \t composer init                            |"
+	echo -e "| -cd,       \t composer dumpautoload                    |"
+	echo  "+---------------|-----------------------------------------+"
 	exit 0
 }
+
+show_config(){
+
+
+git config -l --show-origin
+
+}
+
+composerinit(){
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} composer init ${NC}                                 |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to init composer ? (y/n)" answer
+	case $answer in
+		y)
+			composer init 
+			
+		;;
+		n)
+		;;
+		*)
+		;;
+	esac
+
+}
+composerdump (){
+	clear
+	echo  "---------------|-------------------------------------------"
+	printf "|${GREEN}$0:${YELLOW} composer dumpautoload ${NC}                         |\n"
+	echo  "---------------|-------------------------------------------"
+	read -p "Do you want to dumpautoload composer ? (y/n)" answer
+	case $answer in
+		y)
+			composer dumpautoload	
+		;;
+		n)
+		;;
+		*)
+		;;
+	esac
+}
+
 ##########################################################################
 # MESSAGES : message de version
 show_version(){
@@ -217,6 +273,18 @@ release_finish()
  
 # flow release 
 ##########################################################################
+add_folder(){
+	###0-contorleur
+	# Check for Directory
+	if [ ! -d $1 ]; then
+	   echo $1" folder doesn't exist "
+	   mkdir $1
+	   echo $1" folder a été ajouté avec succés"
+	else
+	   echo $1" folder exist"
+	fi
+}
+
 add_module()
 {
 clear
@@ -227,7 +295,10 @@ read -p "Do you want to add module ? (y/n)" answer
 case $answer in
 y)
 read -p 'ajouter nom module : ' msg
+
 ###1-contorleur
+echo  "---------------|-------------------------------------------"
+add_folder "controllers"
 touch controllers/"$msg".php
 OUTC=controllers/"$msg".php	
 cat  << EOF > $OUTC 
@@ -270,7 +341,10 @@ for file in $(ls $DIR); do
 # Affichage du nom du fichier et de ses droits
 echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")	  
 done
+
 ###2-model
+echo  "---------------|-------------------------------------------"
+add_folder "models"
 touch models/"$msg"_model.php
 message0=$msg"_Model"
 OUTM=models/"$msg"_model.php
@@ -298,7 +372,10 @@ for file in $(ls $DIR); do
 # Affichage du nom du fichier et de ses droits
 echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
 done
+
 ###3-view
+echo  "---------------|-------------------------------------------"
+add_folder "views"
 mkdir views/"$msg"
 touch views/"$msg"/index.php
 OUTV=views/"$msg"/index.php
@@ -312,6 +389,7 @@ for file in $(ls $DIR); do
 # Affichage du nom du fichier et de ses droits
 echo "Fichier : "$file" a pour droits : "$(stat -c "%A" "$file")
 done
+
 ###4-creer le dossier css/default.css + js /default.js
 mkdir views/"$msg"/css
 touch views/"$msg"/css/default.css
@@ -319,13 +397,68 @@ mkdir views/"$msg"/js
 touch views/"$msg"/js/default.js
 
 ###
+echo  "---------------|-------------------------------------------"
 echo  "le module : $msg a été ajouté avec succés"
+echo  "---------------|-------------------------------------------"
+git add .
+git commit -m "add module $msg"
+echo  "---------------|-------------------------------------------"
 ;;
 n)
 ;;
 *)
 ;;
 esac
+}
+##########################################################################
+add_submodule(){
+clear
+echo  "---------------|-------------------------------------------"
+printf "|${GREEN}$0:${YELLOW} ajouter nom submodule ${NC}                       |\n"
+echo  "---------------|-------------------------------------------"
+read -p "Do you want to add submodule ? (y/n)" answer
+case $answer in
+y)
+read -p 'Ajouter nom submodule : ' submodule
+###################################################
+# 1-Add a submodule
+git submodule add --force  https://github.com/tibaredha/$submodule.git
+git submodule status
+cat .gitmodules
+# git submodule add <remote_url> <destination_folder> like : ./xxxxx
+# git submodule add https://github.com/tibaredha/data.git
+# git status
+
+# git config --global diff.submodule log
+
+# git config -f .gitmodules submodule.data.branch develop
+# git submodule update --remote data
+
+###################################################
+# 2-Cloning a project with submodules
+# When you clone a repository that contains submodules there are a few extra steps to be taken
+# git clone /url/to/repo/with/submodules
+# git submodule init
+# git submodule update
+
+###################################################
+# 3-Remove a submodule
+# git submodule deinit <submodule>
+# git rm <submodule>
+# git commit -m "removes submodule <submodule>"
+
+###################################################
+# 4-see submodule status in git status
+# git config status.submodulesummary 1
+# git log -p 
+# git log -p --submodule
+;;
+n)
+;;
+*)
+;;
+esac
+#git status
 }
 ##########################################################################
 show_status(){
@@ -369,6 +502,7 @@ esac
 ##########################################################################
 view_status(){
 clear
+echo  "---------------|-------|-----------------------------------"
 # echo "preciser le nombre de commit : "
 read -p 'preciser le nombre de commit :' nbr
 git log --oneline  -$nbr
@@ -415,6 +549,7 @@ esac
 ##########################################################################
 config_status(){
 clear
+echo  "---------------|-------|-----------------------------------"
 git init              #--bare 
 git config --local user.name "$username"
 git config --local user.email "$useremail"
@@ -423,14 +558,41 @@ git config --local alias.br branch
 git config --local alias.ci commit
 git config --local alias.st status
 echo  "---------------|-------|-----------------------------------"
-echo  "git flow init : "
+echo  "git init : "
+echo  "---------------|-------|-----------------------------------"
+git flow init
 echo  "---------------|-------|-----------------------------------"
 git add .
-git commit -m "initialisation" 
+git commit -m "add index.sh  cfg.sh" 
+echo  "---------------|-------|-----------------------------------"
+# create empty README.md
+echo "Creating README ..."
+touch README.md
+echo " projet : tibaredha" >> README.md
+echo " done."
+git add .
+git commit -m "add README.md" 
+echo  "---------------|-------|-----------------------------------"
+# touch index.php
+# cat  << EOF > index.php
+# <?php
+# require './libs/config.php';
+# // \$cfg = './libs/cfgg.php';
+# \$cfg = './libs/cfg.php';
+# if(!file_exists(\$cfg)) {header('location: ./install/');}else {require \$cfg;} 
+# spl_autoload_register(function (\$class) {require LIBS . \$class .".php";});
+# \$app = new Bootstrap();
+# ?>
+# EOF
+# echo " done."
+# git add .
+# git commit -m "add index.php" 
 echo  "---------------|-------|-----------------------------------"
 echo "list configuration : "
 echo  "---------------|-------|-----------------------------------"
 git config --list
+echo  "---------------|-------|-----------------------------------"
+git log
 echo  "---------------|-------|-----------------------------------"
 }
 ##########################################################################
@@ -528,10 +690,50 @@ set +e
 echo  "---------------|-------|-----------------------------------"
 }
 ##########################################################################
+# from https://docs.github.com/en
+#cle SSH
+#ls -al ~/.ssh
+#ssh-keygen -t ed25519 -C "your_email@example.com"
+#lire la suite
+
+#clé GPG
+#gpg --list-secret-keys --keyid-format LONG
+#gpg --full-generate-key
+#Enter passphrase the pass phrase = tibaredha  ou laisser vide 
+#git config --global user.signingkey *la clé * a 16 caractere
+#gpg --armor --export  *la clé * a 16 caractere
+
+#Copiez votre clé GPG, en commençant par -----BEGIN PGP PUBLIC KEY BLOCK-----et en terminant par -----END PGP PUBLIC KEY BLOCK-----.
+#settings /SSH and GPG keys / new GPG key / copy and paste (Copiez votre clé GPG en commençant par -----BEGIN)
+#github / framework / la ligne de tibaredha / commits / mention verified  est presente 
+
+#en peut signe le tag 
+#git tag -s mytag
+#git tag -v mytag
+gpg_status ()
+{
+clear
+# Exit script on Error
+set -e
+# Check for GPG Directory
+echo  "---------------|-------|-----------------------------------"
+if [ ! -f ~/.gnupg/pubring.kbx ]; then
+        gpg --full-generate-key
+        echo "Execute ssh-keygen --[done]"
+else
+	    echo "/.gnupg/pubring.kbx fille exist"
+echo  "---------------|-------|-----------------------------------"		      		
+fi
+gpg --list-secret-keys --keyid-format LONG
+echo  "---------------|-------|-----------------------------------"
+}
+##########################################################################
 addToGitignore () {
     # add filename to .gitignore
-    printf "${YELLOW} Hit q for quit ${NC}\n"
-    while :
+    echo  "---------------|-------|-----------------------------------"
+	printf "${YELLOW} Hit q for quit ${NC}                                          |\n"
+    echo  "---------------|-------|-----------------------------------"
+	while :
     do
         read -p "Type file name to add to .gitignore: " filename
         # quit when
@@ -539,7 +741,7 @@ addToGitignore () {
             then
                 break
             else
-                echo $filename >> .gitignore
+               echo $filename >> .gitignore
         fi
     done
 
@@ -549,7 +751,7 @@ ignore_status(){
 clear
 echo  "---------------|-------|-----------------------------------"
 if [ ! -f  .gitignore  ]; then
-	printf "${YELLOW} .gitignore doesn't exist  ${NC}\n"
+	printf "${YELLOW} .gitignore doesn't exist  ${NC}                               |\n"
 echo  "---------------|-------|-----------------------------------"
 	read -p "Do you want to add .gitignore? (y/n)" answer
 	case $answer in
@@ -563,7 +765,7 @@ echo  "---------------|-------|-----------------------------------"
 		;;
 	esac
 else
-	printf "${YELLOW} .gitignore exist  ${NC}\n"
+	printf "${YELLOW} .gitignore exist  ${NC}                                       |\n"
 echo  "---------------|-------|-----------------------------------"
 	read -p "Do you want to update .gitignore? (y/n)" answer
 	case $answer in
@@ -577,6 +779,12 @@ echo  "---------------|-------|-----------------------------------"
 	esac		
 fi
 echo  "---------------|-------|-----------------------------------"
+printf "${YELLOW} .gitignore =   ${NC}                                          |\n"
+echo  "---------------|-------|-----------------------------------"
+git add .
+git commit -m "add .gitignore" 
+cat .gitignore
+git log 
 }
 
 ##########################################################################
@@ -643,19 +851,19 @@ curl -u "tibaredha:git030570" https://api.github.com/user/repos -d '{"name":"'$r
 echo " done."
 
 # create empty README.md
-echo "Creating README ..."
-touch README.md
-echo "tibaredha" >> README.md
-echo " done."
+# echo "Creating README ..."
+# touch README.md
+# echo "tibaredha" >> README.md
+# echo " done."
 
 # push to remote repo
 echo "Pushing to remote ..."
 # git init
-git add README.md
-git commit -m "first commit"
+# git add README.md
+# git commit -m "first commit"
 git remote add origin git@github.com:tibaredha/$reponame.git
 git push -u origin master
-git flow init
+# git flow init
 git push --set-upstream origin develop
 echo " done."
 
@@ -674,27 +882,28 @@ for option in "$@" ; do
 		# affiche la version
 		--v|--version)
 		show_version $1;;
-		# git clone_status
 		--cl)
 		clone_status;;
-		# git config_status
-		--cfg)
+		--in)
 		config_status;;
-		# git ignore_status
-		--ignore)
+		--ig)
 		ignore_status;;
-		# git ssh_status
 		--ssh)
 		ssh_status;;
+		--gpg)
+		gpg_status;;
 		# git github_status
-		--gh)
+		--rr)
 		github_status;;
 		# affiche la version
-		--listdir)
+		--ld)
 		list_status;;
 		# affiche listpath
 		--listpath)
 		show_listpath;;
+		# affiche config file localisation  
+		--config)
+		show_config;;
         ##########################################################################
 		-st)
 		show_status;;
@@ -716,6 +925,8 @@ for option in "$@" ; do
 		show_color1;;
 		-am)
 		add_module;;
+		-as)
+		add_submodule;;
 		-fs)
 		feature_start;;
 		-ff)
@@ -724,6 +935,10 @@ for option in "$@" ; do
 		release_start;;
 		-rf)
 		release_finish;;
+		-ci)
+		composerinit;;
+		-cd)
+		composerdump;;
 		*)
 		show_error_miss $1;; 	 
 	esac

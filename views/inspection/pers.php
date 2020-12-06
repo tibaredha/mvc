@@ -68,7 +68,8 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		<tr>
 		<th  colspan=3   style="width:50px;">
 		<?php
-		echo '<a title="Autres transport sanitaire"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=21'.'" > Autres transport sanitaire : '.'</a>';
+		
+		echo '<a title="Autres"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q='.$this->user[0]['STRUCTURE'].'" > Autres : '.$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure").'</a>';
 		?>
 		</th> 
 		
@@ -117,8 +118,12 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 						<td align="center"><?php echo $value['NOMAR'];?></td>
 						<td align="center"><?php echo $value['PRENOMAR'];?></td>
 						<?php 
-						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Autorisation d'exercice\" href=\"".URL.'tcpdf/inspection/auto10.php?id='.$value['id']."&ids=".$value['idt']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-		                if ($value['ETAT']==0) {
+						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Autorisation d'exercice\" href=\"".URL.'tcpdf/inspection/auto'.$this->user[0]['STRUCTURE'].'.php?id='.$value['id']."&ids=".$value['idt']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+		                
+						
+						
+						
+						if ($value['ETAT']==0) {
 		                ?>
 						<td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetatpers/'.$value['id'].'/'.$value['idt'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
 		                <?php 
