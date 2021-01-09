@@ -108,8 +108,14 @@ while($rowp=mysql_fetch_object($requetep))
 	$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,"- بناء على المقرر رقم ".$NOUVERTURE." / و ص س / "."المؤرخ في ".$OUVERTURE." المتضمن الترخيص بفتح ".$clinique,0,1,'R');
 
 	$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,"- بناء على ملف التوظيف المودع من طرف ".$etablissement0." للسيد(ة) : ".$rowp->PRENOMAR.' '.$rowp->NOMAR,0,1,'R');
-	$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,"",0,1,'R');	$pdf->SetFont('aefurat', '', 16);
-    $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'باقتراح من السيد رئيس مصلحة الهياكل و النشاط الصحي ',0,1,'C');
+	
+	if ($rowp->Categorie=='MS'){$pdf->SetXY(0,$pdf->GetY()+$y);$pdf->Cell(200,5,"أخصائي في : ".$pdf->nbrtostring('mvc','specialite','idspecialite',$rowp->SPECIALITE,'specialitear'),0,1,'R');}	
+	else {$pdf->SetXY(0,$pdf->GetY()+$y);$pdf->Cell(200,5,"",0,1,'R');}
+	
+	$pdf->SetFont('aefurat', '', 16);
+    
+	
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'باقتراح من السيد رئيس مصلحة الهياكل و النشاط الصحي ',0,1,'C');
 	$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');$pdf->SetFont('aefurat', '', 13);
 	$pdf->SetXY(5,$pdf->GetY()+$y);
 	if ($rowp->Categorie=='MS'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.' طبيب أخصائي '.' بالعمل '.$etablissement ,0,1,'R');}

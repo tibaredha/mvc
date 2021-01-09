@@ -1379,18 +1379,18 @@ class View {
 	}
 	function lang ($lang,$route)
     {
-	if($lang=='1') 
-	{
-	include $route;	
-	}
-	if($lang=='2') 
-	{
-	 include $route;	
-	}
-	if($lang=='3') 
-	{
-	include $route;	
-	}
+		if($lang=='1') 
+		{
+		include $route;	
+		}
+		if($lang=='2') 
+		{
+		 include $route;	
+		}
+		if($lang=='3') 
+		{
+		include $route;	
+		}
     }
 	
 	
@@ -1892,8 +1892,8 @@ echo "</table>\n";
 	$this->label($data['x']+720,$data['y']+310,'NSS');                  $this->txt($data['x']+800,$data['y']+300,'NSS',0,$data['NSS']);
 	$this->label($data['x'],$data['y']+360,'Groupe');                   $this->combovsex($data['x']+60,$data['y']+350,'GROUPE',array($data['GROUPE'],"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
 	$this->label($data['x']+155,$data['y']+360,'Jours');                $this->combovsex($data['x']+190,$data['y']+350,'JOURS',array($data['JOURS'],"SLM","DMJ"));
-	$this->label($data['x']+350,$data['y']+360,'Branchement');          $this->combovsex($data['x']+430,$data['y']+350,'BRANCHEMENT',array($data['BRANCHEMENT'],"1","2","3","4","5","6"));
-	$this->label($data['x']+530,$data['y']+360,'Gen');                  $this->combovsex($data['x']+560,$data['y']+350,'APP',array($data['APP'],"1","2","3","4","5","6","7","8","9","10"));
+	$this->label($data['x']+350,$data['y']+360,'Branchement');          $this->combovsex($data['x']+430,$data['y']+350,'BRANCHEMENT',array($data['BRANCHEMENT'],"1","2","3"));
+	$this->label($data['x']+530,$data['y']+360,'Gen');                  $this->combovsex($data['x']+560,$data['y']+350,'APP',array($data['APP'],"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"));
 	$this->label($data['x']+720,$data['y']+360,'Forfait');              $this->forfait($data['x']+800,$data['y']+350,'FORFAIT','mvc','forfait',$data['FORFAIT0'],$data['FORFAIT1']);
 	
 	$this->label($data['x']+785+300,$data['y']+360,'Transport');  $this->combovsex($data['x']+840+400,$data['y']+350,'TRANS',array($data['TRANS'],"VSL","ACB"));

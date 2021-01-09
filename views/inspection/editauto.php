@@ -31,12 +31,18 @@ $data = array(
 "Serie_Type"  => $this->user[0]['Serie_Type'] ,						  
 "Marque"  => array( 
                         $this->user[0]['Marque'] => $this->user[0]['Marque'],
-                        "PEUGEOT"=>"PEUGEOT",
-						"RENAULT"=>"RENAULT",
-					    "DACIA"=>"DACIA",
+                        "BALARUS"=>"BALARUS",
+						"BOULARSANE"=>"BOULARSANE",
+						"CITROËN"=>"CITROËN",
+						"CHEVROLET"=>"CHEVROLET",
+						"DACIA"=>"DACIA",
+						"HYUNDAI"=>"HYUNDAI",
+						"JINBEI"=>"JINBEI",
+						"JMC"=>"JMC",
+						"KIA"=>"KIA",
 						"NISSANE"=>"NISSANE",
-						"KIA"=>"KIA","BALARUS"=>"BALARUS","JMC"=>"JMC","BOULARSANE"=>"BOULARSANE","CHEVROLET"=>"CHEVROLET","JINBEI"=>"JINBEI",
-						"HYUNDAI"=>"HYUNDAI"
+						"PEUGEOT"=>"PEUGEOT",
+						"RENAULT"=>"RENAULT"
 					  ),					  
 					  
 "Immatri"  => $this->user[0]['Immatri'],

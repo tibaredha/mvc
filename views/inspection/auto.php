@@ -31,13 +31,18 @@ $data = array(
 "Type"  => '0' ,					  
 "Serie_Type"  => '0' ,					  
 "Marque"  => array(      
-                        "PEUGEOT"=>"PEUGEOT",
-						"RENAULT"=>"RENAULT",
-					    "DACIA"=>"DACIA",
+						"BALARUS"=>"BALARUS",
+						"BOULARSANE"=>"BOULARSANE",
+						"CITROËN"=>"CITROËN",
+						"CHEVROLET"=>"CHEVROLET",
+						"DACIA"=>"DACIA",
+						"HYUNDAI"=>"HYUNDAI",
+						"JINBEI"=>"JINBEI",
+						"JMC"=>"JMC",
 						"KIA"=>"KIA",
 						"NISSANE"=>"NISSANE",
-						"BALARUS"=>"BALARUS","JMC"=>"JMC","BOULARSANE"=>"BOULARSANE","CHEVROLET"=>"CHEVROLET","JINBEI"=>"JINBEI",
-						"HYUNDAI"=>"HYUNDAI"
+						"PEUGEOT"=>"PEUGEOT",
+						"RENAULT"=>"RENAULT"						
 					  ),
 "Immatri"  => '0' ,
 "Precedent"  => '0' ,					  
@@ -59,7 +64,7 @@ echo "<h2>Nouveau Vehicule : ".strtoupper($this->user[0]['NOM'])."_ ".$this->use
 $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
-$this->label($x,$y+220,'Date carte');                 $this->txts($x+100,$y+210,'Date',0,$data['Date'],'dateus');  
+$this->label($x,$y+220,'Date carte');           $this->txts($x+100,$y+210,'Date',0,$data['Date'],'dateus');  
 $this->label($x,$y+250,'Wilaya aff');           $this->WILAYA($x+100,$y+240,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
 $this->label($x+350,$y+250,'Commune Aff');      $this->COMMUNE($x+100+350,$y+240,'COMMUNE','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);
 $this->label($x+700,$y+250,'Categorie');        $this->combov1($x+800,$y+240,'Categorie',$data['Categorie']);
@@ -83,9 +88,10 @@ $this->label($x+350,$y+420+40,'DU');            $this->txts($x+450,$y+410+40,'DU
 $this->label($x+700,$y+420+40,'AU');            $this->txts($x+100+350+350,$y+410+40,'AUCTRL',0,$data['AUCTRL'],'dateus4');
 $this->submit($x+800,$y+450+40,$data['butun']);
 $this->f1();
-view::sautligne(15);
-ob_end_flush();
-echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_ ".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
+view::sautligne(17);
+echo "<br/><br/><hr/>";
+
+echo "<h2>List des véhicules appartenant à Mr : ".strtoupper($this->user[0]['NOM'])."_ ".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 >";
 ?>
 		
 		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
@@ -147,5 +153,49 @@ echo "<h2>List des vehicules : ".strtoupper($this->user[0]['NOM'])."_ ".$this->u
 		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="16" ><span>&nbsp;</span></td></tr>';					      
 		} 
 		echo "</table>";
-		?>
-		</form> <br/><br/>		
+		echo "</form> <br/><br/>";
+
+echo "<h2>List des véhicules en double emploi avec Mr : ".strtoupper($this->user[0]['NOM'])."_ ".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 >";
+echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>";
+echo "<tr>";
+$url1 = explode('/',$_GET['url']);
+if (isset($url1[3]) and  $url1[3] !="") 
+{	
+	echo '<th colspan=6  style="width:50px;">Alerte : risque de doublon '.$url1[3];echo "</th>";			
+	echo "<tr>";
+	echo '<th style="width:70px;">Type</th><th style="width:50px;">Serie_Type</th><th style="width:80px;">Immatri</th><th style="width:50px;">Marque</th><th style="width:80px;">Proprietaire</th><th style="width:80px;">Statut</th>';
+	echo "</tr>";
+	if (isset($this->doubleemploi)) 
+	{	
+		foreach($this->doubleemploi as $key => $value)
+		{
+			echo "<tr bgcolor='WHITE' onmouseover=\"this.style.backgroundColor='#9FF781';\" onmouseout=\"this.style.backgroundColor='WHITE';\" >";
+			echo "<td>".$value['Type']."</td>";
+			echo "<td>".$value['Serie_Type']."</td>";
+			echo "<td>".$value['Immatri']."</td>";
+			echo "<td>".$value['Marque']."</td>";
+			echo "<td>".$this->stringtostring("structure","id",$value['idt'],"NOM").'_'.$this->stringtostring("structure","id",$value['idt'],"PRENOM")."</td>";
+			if($this->stringtostring("structure","id",$value['idt'],"ETAT")==0)
+			{
+				echo "<td>Actif</td>";	
+			}
+			else
+			{
+				echo "<td>Non actif</td>";	
+			}
+			echo '</tr>';
+		}	
+	}
+	echo "</tr>";
+
+} 
+else
+{	
+	echo '<th colspan=5  style="width:50px;">Alerte : aucun risque de doublon ';echo "</th>";			
+} 
+echo "</table>";
+ob_end_flush();
+?>
+
+
+		

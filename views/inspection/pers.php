@@ -46,10 +46,10 @@ $x=50;$y=10;
 $this->label($x+970,$y+300,'اللقـــب');           $this->txtarid($x+690,$y+290,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date');
 $this->label($x+640,$y+300,'الاســـــــم');        $this->txtarid($x+340,$y+290,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
 $this->label($x+290,$y+300,'المهنة');             $this->combov1($x,$y+290,'Categorie',$data['Categorie'],'date');
+                                                  $this->specialite($x,$y+290+30,'SPECIALITE',"0","SPECIALITE",'classspecialite');
 
 $this->label($x+970,$y+330,'NOM');                $this->txt($x+690,$y+290+30,'PRENOMFR','PRENOMFR',"x",$data['PRENOMFR'],'date');
 $this->label($x+620,$y+330,'PRENOM');             $this->txt($x+340,$y+290+30,'NOMFR','NOMFR',"x",$data['NOMFR'],'date');
-
 
 
 $this->label($x,$y+370,'__________________________________________________________________________________________________________________');

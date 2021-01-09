@@ -66,28 +66,31 @@ $requetep = mysql_query( $query_listep ) or die( "ERREUR MYSQL numéro: ".mysql_
 $tot1p=mysql_num_rows($requetep);
 $pdf->SetXY(15,$pdf->GetY()+5);$pdf->Cell(200,5,"- Un (01) médecin spécialiste en néphrologie directeur médicale du centre : ".$tot1p,0,1,'L');                         $pdf->SetXY(180,$pdf->GetY()-5); $pdf->Cell(20,5,"Oui",0,1,'C',1,1);
 $pdf->SetXY(25,$pdf->GetY());
-while($rowp=mysql_fetch_object($requetep)){$pdf->cell(40,06,"*".$rowp->NOMFR."_".$rowp->PRENOMFR,0,0,'L',0);$pdf->SetXY(15,$pdf->GetY()+6); }
+while($rowp=mysql_fetch_object($requetep)){
+	
+	$pdf->SetXY(25,$pdf->GetY());
+	$pdf->cell(40,06,"- ".$rowp->PRENOMFR."_".$rowp->NOMFR,0,0,'L',0);$pdf->SetXY(15,$pdf->GetY()+6); }
 //************************************************************************************************************************************************//
 $query_listep = "SELECT * FROM pers WHERE idt ='$ids' and  ETAT='0' and Categorie='MG' ";//
 $requetep = mysql_query( $query_listep ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 $tot1p=mysql_num_rows($requetep);
 $pdf->SetXY(15,$pdf->GetY()+5);$pdf->Cell(200,5,"- Un (01) médecin dialyseur pour 25 malades. reconnu compétent en hémodialyse : ".$tot1p,0,1,'L');                     $pdf->SetXY(180,$pdf->GetY()-5); $pdf->Cell(20,5,"Oui",0,1,'C',1,1);
 $pdf->SetXY(25,$pdf->GetY());
-while($rowp=mysql_fetch_object($requetep)){$pdf->cell(40,06,"*".$rowp->NOMFR."_".$rowp->PRENOMFR,0,0,'L',0);$pdf->SetXY(15,$pdf->GetY()+6); }
+while($rowp=mysql_fetch_object($requetep)){$pdf->SetXY(25,$pdf->GetY());$pdf->cell(40,06,"- ".$rowp->PRENOMFR."_".$rowp->NOMFR,0,0,'L',0);$pdf->SetXY(15,$pdf->GetY()+5); }
 //************************************************************************************************************************************************//
 $query_listep = "SELECT * FROM pers WHERE idt ='$ids' and  ETAT='0' and Categorie='P' ";//
 $requetep = mysql_query( $query_listep ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 $tot1p=mysql_num_rows($requetep);
 $pdf->SetXY(15,$pdf->GetY()+5);$pdf->Cell(200,5,"- Un (01) agent paramédical pour trois (03) machines d'hémodialyse fonctionnelles : ".$tot1p,0,1,'L');                 $pdf->SetXY(180,$pdf->GetY()-5); $pdf->Cell(20,5,"Oui",0,1,'C',1,1);
 $pdf->SetXY(25,$pdf->GetY());
-while($rowp=mysql_fetch_object($requetep)){$pdf->cell(40,06,"*".$rowp->NOMFR."_".$rowp->PRENOMFR,0,0,'L',0);$pdf->SetXY(15,$pdf->GetY()+6); }
+while($rowp=mysql_fetch_object($requetep)){$pdf->SetXY(25,$pdf->GetY());$pdf->cell(40,06,"- ".$rowp->PRENOMFR."_".$rowp->NOMFR,0,0,'L',0);$pdf->SetXY(15,$pdf->GetY()+5); }
 //************************************************************************************************************************************************//
 $query_listep = "SELECT * FROM pers WHERE idt ='$ids' and  ETAT='0' and Categorie='TDM' ";//
 $requetep = mysql_query( $query_listep ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 $tot1p=mysql_num_rows($requetep);
 $pdf->SetXY(15,$pdf->GetY()+5);$pdf->Cell(200,5,"- Un (01) technicien de maintenance  : ".$tot1p,0,1,'L');          $pdf->SetXY(180,$pdf->GetY()-5); $pdf->Cell(20,5,"Oui",0,1,'C',1,1);
 $pdf->SetXY(25,$pdf->GetY());/// un contrat établi avec une société de maintenance
-while($rowp=mysql_fetch_object($requetep)){$pdf->cell(40,06,"*".$rowp->NOMFR."_".$rowp->PRENOMFR,0,0,'L',0);$pdf->SetXY(15,$pdf->GetY()+6); }
+while($rowp=mysql_fetch_object($requetep)){$pdf->cell(40,06,"*".$rowp->NOMFR."_".$rowp->PRENOMFR,0,0,'L',0);$pdf->SetXY(15,$pdf->GetY()+5); }
 //************************************************************************************************************************************************//
 $query_listep = "SELECT * FROM pers WHERE idt ='$ids' and  ETAT='0' and Categorie='ADH' ";//
 $requetep = mysql_query( $query_listep ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
@@ -103,11 +106,6 @@ $pdf->SetXY(15,$pdf->GetY()+5);$pdf->Cell(200,5,"- Un (01) agent de sécurité. 
 $pdf->SetXY(25,$pdf->GetY());
 while($rowp=mysql_fetch_object($requetep)){$pdf->cell(40,06,"*".$rowp->NOMFR."_".$rowp->PRENOMFR,0,0,'L',0);$pdf->SetXY(15,$pdf->GetY()+6); }
 //************************************************************************************************************************************************//
-
-
-
-
-
 
 $pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(10,$pdf->GetY()+10);$pdf->Cell(200,5,"II-NORMES EN LOCAUX .",0,1,'L');

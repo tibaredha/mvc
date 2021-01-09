@@ -5,6 +5,17 @@ class inspection_Model extends Model {
         parent::__construct();
     }
 	
+	function dateFR2US($date)//01/01/2013
+	{
+	$J      = substr($date,0,2);
+    $M      = substr($date,3,2);
+    $A      = substr($date,6,4);
+	$dateFR2US =  $A."-".$M."-".$J ;
+    return $dateFR2US;//2013-01-01
+	}
+	
+	
+	
 	public function userSearch($o, $q, $p, $l) {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by NOM,PRENOM limit $p,$l  ");
@@ -149,15 +160,22 @@ class inspection_Model extends Model {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM auto WHERE id = :id  order by DATE asc ', array(':id' => $id));    
     }
-	function dateFR2US($date)//01/01/2013
-	{
-	$J      = substr($date,0,2);
-    $M      = substr($date,3,2);
-    $A      = substr($date,6,4);
-	$dateFR2US =  $A."-".$M."-".$J ;
-    return $dateFR2US;//2013-01-01
+	
+	public function doubleemploi($Serie_Type,$id) {
+        $this->db->exec('SET NAMES utf8');
+		//return $this->db->select('SELECT COUNT(*) AS nbr_doublon,Type,Serie_Type,Immatri,Marque FROM auto  GROUP BY Type,Serie_Type   HAVING COUNT(*) > 1'); //   
+        return $this->db->select(" SELECT  * FROM auto WHERE Serie_Type='$Serie_Type' and  idt !=$id "); //
 	}
-	 public function creatautodb($data) {
+		// SELECT   COUNT(*) AS nbr_doublon, champ1, champ2, champ3
+		// FROM     table
+		// GROUP BY champ1, champ2, champ3
+		// HAVING   COUNT(*) > 1
+	
+	
+	 public function creatautodb($data) 
+	 {
+		   
+			
 			$this->db->exec('SET NAMES utf8');
 			$this->db->insert('auto', array(
 			'idt'        => $data['id'],	
@@ -184,8 +202,17 @@ class inspection_Model extends Model {
 			'gaz'       => $data['gaz']
 			
 			));
-			//echo '<pre>';print_r ($data);echo '<pre>';
-			return $last_id = $this->db->lastInsertId();
+			// echo '<pre>';print_r ($data);echo '<pre>';
+			//return $last_id = $this->db->lastInsertId();
+			//verification des doublons 
+			$doub = $this->db->prepare("SELECT * FROM auto WHERE Serie_Type = :Serie_Type ");
+			$doub->execute(array( ':Serie_Type' => $data['Serie_Type']	));
+			$data1 = $doub->fetch();	
+			$count = $doub->rowCount();
+			if (isset($count) and $count > 0) 
+			{
+				return $data['Serie_Type'];  
+			}	
 		}
 	public function deleteauto($id) {       
         $this->db->delete('auto', "id = '$id'");
@@ -242,7 +269,8 @@ class inspection_Model extends Model {
 			'Categorie'  => $data['Categorie'],
 			'CASNOS'       => $data['CASNOS'],
 			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
-			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT'])
+			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT']),
+			'SPECIALITE'   => $data['SPECIALITE']
 			));
 			// echo '<pre>';print_r ($data);echo '<pre>';
 			return $last_id = $this->db->lastInsertId();
@@ -259,8 +287,10 @@ class inspection_Model extends Model {
 			'Categorie'    => $data['Categorie'],
 			'CASNOS'       => $data['CASNOS'],
 			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
-			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT'])  
-        );
+			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT']),  
+            'SPECIALITE'   => $data['SPECIALITE']
+
+	   );
        echo '<pre>';print_r ($postData);echo '<pre>';
 	   $this->db->update('pers', $postData, "id =" . $data['id'] . "");
     }	

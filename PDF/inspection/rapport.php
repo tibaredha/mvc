@@ -61,7 +61,8 @@ $pdf->SetFont('Times', 'B', 10);
 // $pdf->AddPage('p','A4');
 // $pdf->entete($datejour1,$datejour2,'Repartition par commune des anomalies : ',$EPH1);
 // $pdf->anomalies($EPH);
-
+if ($_POST['type']=='1') 
+{
 //**********************************************en fonction de la structure *****************************************************************//
 if ($_POST['EPH']=='16') {//medecin specialiste 
 
@@ -140,18 +141,65 @@ $pdf->enteteinspection($datejour1,$datejour2,'SYNTHESE DU BILAN DES INSPECTIONS 
 $pdf->bilaninspection($datejour1,$datejour2,$EPH,2);$pdf->pied();
 }
 
+}
+
+
+if ($_POST['type']=='2') 
+{
+if ($_POST['EPH']=='0') {  //structure 
+$pdf->enteterapport($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);
+}
+
+
+if ($_POST['EPH']=='0') {  
+$pdf->AddPage('p','A4');
+$pdf->SetFont('Times', 'B', 10);
+
+$pdf->SetXY(8,25);$pdf->cell(195,5,"BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS",1,0,'C',1,0);
+$pdf->SetXY(8,30);$pdf->cell(195,5,"Du ".$datejour1." Au ".$datejour2,1,0,'C',1,0);
+$pdf->SetXY(8,35);
+$pdf->cell(10,5,"N°",1,0,'C',1,0);
+$pdf->cell(95,5,"Structures",1,0,'C',1,0);
+$pdf->cell(30,5,"NBR Structures",1,0,'C',1,0);
+$pdf->cell(30,5,"NBR Inspections",1,0,'C',1,0);
+$pdf->cell(30,5,"Rapport Inspections",1,0,'C',1,0);
+
+$pdf->mysqlconnect();
+$query="SELECT * FROM structurebis order by id ";      
+$resultat=mysql_query($query);
+$totalmbr1=mysql_num_rows($resultat);
+
+$pdf->SetXY(8,40);
+$x=0;
+while($row=mysql_fetch_object($resultat))
+{
+$pdf->SetFont('Times', '', 10);
+$pdf->cell(10,5,trim($x=$x+1),1,0,'C',0);
+$pdf->cell(95,5,trim($row->structure),1,0,'L',0);
+$pdf->cell(30,5,$pdf->totalstructure("=".$row->id),1,0,'C',0);
+$pdf->cell(30,5,$pdf->inspectionpardate($datejour1,$datejour2,"=".$row->id) ,1,0,'C',0);
+$pdf->cell(30,5,"***",1,0,'C',0);
+$pdf->SetXY(8,$pdf->GetY()+5); 
+}
+$pdf->SetXY(8,$pdf->GetY());
+$pdf->cell(105,5,"Total structures ",1,0,'C',1,0);
+$pdf->cell(30,5,$pdf->totalstructure(NULL) ,1,0,'C',1,0);
+$pdf->cell(30,5,$pdf->inspectionpardate($datejour1,$datejour2,NULL) ,1,0,'C',1,0);
+$pdf->cell(30,5,"***" ,1,0,'C',1,0);
+}	
+	
+	
+	
 //bilan 2018 derniere verssion 2019 
-if ($_POST['EPH']=='0') {  //structure 
+// if ($_POST['EPH']=='0') {  //structure 
 // $pdf->enteteinspectionp($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);$pdf->pied();
+// }
+
+
+
+
+
 }
-
-//bilan 2018 letre d'accompagnement
-if ($_POST['EPH']=='0') {  //structure 
-// $pdf->enteterapport($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);
-}
-
-
-
 
 
 //**********************************************en fonction de la structure *****************************************************************//	

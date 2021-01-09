@@ -25,7 +25,8 @@ class inspection extends Controller {
 		$this->view->user = $this->model->userSingleinspecteur($id);
 		$this->view->render($this->route.'/editinspecteur');
 	}
-		public function editinspecteurx ($id)
+	
+	public function editinspecteurx ($id)
 	{
 		$data = array();//$id
 		$data['id']        = $id;
@@ -349,9 +350,11 @@ class inspection extends Controller {
 	
 	function auto($id) 
 	{
+	$url1 = explode('/',$_GET['url']);
 	$this->view->title = 'nstructure';
 	$this->view->user = $this->model->userSinglestructure($id);
 	$this->view->userListview = $this->model->autoSingleList($id);
+	$this->view->doubleemploi = $this->model->doubleemploi($url1[3],$id);
 	$this->view->render($this->route.'/auto');    
 	}
 	public function creatauto($id) 
@@ -382,14 +385,15 @@ class inspection extends Controller {
 		$data['id']           = $id;
 		// echo '<pre>';print_r ($data);echo '<pre>';  
 		$last_id=$this->model->creatautodb($data);
-		header('location: ' . URL .$this->route. '/auto/'.$id);	
+		// echo $last_id;
+		header('location: ' . URL .$this->route. '/auto/'.$id.'/'.$last_id);	
 	} 
 	
 	public function deleteauto($id)
 	{
 	$url1 = explode('/',$_GET['url']);	
 	$this->model->deleteauto($id); 
-	header('location: ' . URL .$this->route. '/auto/'.$url1[3]);
+	header('location: ' . URL .$this->route. '/auto/'.$url1[3].'/');
 	}
 	
 	public function editauto($id) 
@@ -1051,7 +1055,9 @@ class inspection extends Controller {
 		$data = array();
 		$data['NOMAR']= $_POST['NOMAR'];$data['PRENOMAR']= $_POST['PRENOMAR']; $data['Categorie']= $_POST['Categorie'];$data['id']= $id;$data['CASNOS']= $_POST['CASNOS'];$data['DEBUTCONTRAT'] = $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
 		$data['NOMFR']= $_POST['NOMFR'];$data['PRENOMFR']= $_POST['PRENOMFR'];
-		echo '<pre>';print_r ($data);echo '<pre>';  
+		$data['SPECIALITE']= $_POST['SPECIALITE'];
+		
+		// echo '<pre>';print_r ($data);echo '<pre>';  
 		$last_id=$this->model->creatpersdb($data);
 		header('location: ' . URL .$this->route. '/pers/'.$id);	
 	} 
@@ -1071,6 +1077,7 @@ class inspection extends Controller {
 		$data = array();
 		$data['NOMAR']= $_POST['NOMAR'];$data['PRENOMAR']= $_POST['PRENOMAR'];$data['Categorie']= $_POST['Categorie'];$data['id']=$id;$data['idt']= $url1[3];$data['CASNOS']= $_POST['CASNOS'];$data['DEBUTCONTRAT']=$_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
 		$data['NOMFR']= $_POST['NOMFR'];$data['PRENOMFR']= $_POST['PRENOMFR'];
+		$data['SPECIALITE']= $_POST['SPECIALITE'];
 		//echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavespers($data);
 		header('location: ' . URL . $this->route.'/pers/'.$data['idt'].'');
