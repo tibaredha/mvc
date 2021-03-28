@@ -673,7 +673,7 @@ class inspection extends Controller {
 	$this->model->deletehome($id); 
 	header('location: ' . URL .$this->route. '/home15/'.$url1[3]);
 	}
-	
+	//**************************************************//
 	function home16($id) 
 	{
 	$this->view->title = 'home';
@@ -712,7 +712,18 @@ class inspection extends Controller {
 	$this->model->deletehome($id); 
 	header('location: ' . URL .$this->route. '/home16/'.$url1[3]);
 	}
+	//**************************************************//
+	function home13($id) 
+	{
+	$this->view->title = 'home';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->userListview = $this->model->homeSingleList($id);
+	$this->view->render($this->route.'/home13');
+	}
 	
+	
+	
+	//**************************************************//
 	function home12($id) 
 	{
 	$this->view->title = 'home';

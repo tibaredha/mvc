@@ -25,7 +25,7 @@ $nomfr=$rowx->NOM;
 $prenomfr=$rowx->PRENOM;
 $adressear=$rowx->ADRESSEAR;
 $communear=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
-
+$telphone=$rowx->Mobile;
 
 }
 
@@ -44,7 +44,7 @@ $pdf->SetXY(8,$pdf->GetY());$pdf->Cell(140,5,"مدير الصحة و السكا�
 $pdf->SetXY(8,$pdf->GetY()+8);$pdf->Cell(140,5,"الى",0,0,'C',0,1);
 $pdf->SetXY(8,$pdf->GetY()+8);$pdf->Cell(140,5,"السيد (ة) : ".$nomar.'  '.$prenomar ,0,0,'C',0,1);
 $pdf->SetXY(8,$pdf->GetY()+8);$pdf->Cell(140,5,"  العنوان : ".$adressear,0,0,'C',0,1);
-$pdf->SetXY(8,$pdf->GetY()+8);$pdf->Cell(140,5,"  بلدية ".$communear.' ولاية الجلفة ',0,0,'C',0,1);
+$pdf->SetXY(8,$pdf->GetY()+8);$pdf->Cell(140,5,"  بلدية ".$communear.' ولاية الجلفة ',0,0,'C',0,1);//$pdf->Cell(55,5,"Tel : ".strval($telphone),1,0,'R',0,1);
 $pdf->SetXY(80,$pdf->GetY()+12);$pdf->Cell(120,5," الموضوع : ف / ي المراقبة الدورية للوسائل المادية",0,0,'R',0,1);
 
 $pdf->SetFont('aefurat', '', 12);

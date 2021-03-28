@@ -81,11 +81,14 @@ while($rowp=mysql_fetch_object($requetep))
 	if ($rowp->Categorie=='ADS'){$pdf->Cell(200,5,$travail.'عون أمن '.$etablissement,0,1,'C');}
 	if ($rowp->Categorie=='C'){$pdf->Cell(200,5,$travail.'سائق مركبة '.$etablissement,0,1,'C');}
 	
-	$nail="( العيادة الطبية الجراجية نايل )";
-	$elmouroudj="( العيادة الطبية الجراجية المروج )";
+	$etax="( العيادة الطبية الجراحية";
 	
-	if (trim($nom) =='LAHRECH'){$clinique=$nail;}
-	if (trim($nom) =='KHALDI'){$clinique=$elmouroudj;}
+	
+	$eta1=$etax." نايل )";
+	$eta2=$etax."المروج)";
+	
+	if (trim($nom) =='LAHRECH'){$clinique=$eta1;}
+	if (trim($nom) =='KHALDI'){$clinique=$eta2;}
 	$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$clinique,0,1,'C');
 	
 	
@@ -127,7 +130,7 @@ while($rowp=mysql_fetch_object($requetep))
     $pdf->SetXY(0,$pdf->GetY()+$y);$pdf->Cell(200,5,$clinique." الكائن مقرها ب : ".$adresse.' بلدية '.$commune.' ولاية الجلفة ',0,1,'R');
 	$pdf->SetXY(0,$pdf->GetY()+$y);$pdf->Cell(200,5,' إبتداء من '.$rowp->DEBUTCONTRAT." إلى غاية ".$rowp->FINCONTRAT,0,1,'R');
 	$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'المادة 02 :  يكلف كل من السادة المدير التقني . مدير المؤسسة العمومية للصحة الجوارية . ',0,1,'R');
-	$pdf->SetXY(0,$pdf->GetY()+$y);$pdf->Cell(200,5,'مدير صندوق الضمان الاجتماعي بتنفيذ هذا القرار .',0,1,'R');
+	$pdf->SetXY(0,$pdf->GetY()+$y);$pdf->Cell(200,5,'مدير صندوق الضمان الاجتماعي بتنفيذ هذا المقرر',0,1,'R');
 	
 	$pdf->SetFont('aefurat', 'B', 14);
 	$pdf->setRTL(true); 

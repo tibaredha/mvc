@@ -238,6 +238,7 @@ View::url(700,490,URL.'inspection/search/0/10?o=STRUCTURE&q=8','8-Salle de soins
 View::url(700,490+30,URL.'inspection/search/0/10?o=STRUCTURE&q=3','3-EPH ',3);View::url(1000,490+30,URL.'inspection/search/0/10?o=STRUCTURE&q=5','5-EHS ',3);
 View::url(700,490+60,URL.'inspection/search/0/10?o=STRUCTURE&q=9','9-EHP  ',3);View::url(1000,490+60,URL.'inspection/search/0/10?o=STRUCTURE&q=4','4-EH  ',3);
 View::url(700,490+90,URL.'inspection/search/0/10?o=STRUCTURE&q=6','6-EPSP ',3);
+View::url(700,490+90+30,URL.'inspection/search/0/10?o=STRUCTURE&q=11','11-CENTER DE DIAGNOSTIQUE ',3);
 view::sautligne(10);			      
 }				
 echo "</table>";

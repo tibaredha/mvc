@@ -18,9 +18,9 @@ $data = array(
 "photos"     => 'public/images/icons/pers.PNG',
 "action"     => 'inspection/creatpers/'.$this->user[0]['id'],
 
-"CASNOS"        => '',
-"DEBUTCONTRAT"  => '',
-"FINCONTRAT"    => '',
+"CASNOS"        => '0',
+"DEBUTCONTRAT"  => date('j-m-Y'),
+"FINCONTRAT"    => '31-12-'.date('Y'),
 
 "NOMAR"  => 'x' ,
 "PRENOMAR"  => 'x' ,

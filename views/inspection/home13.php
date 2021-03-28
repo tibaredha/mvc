@@ -3,12 +3,12 @@ verifsession();
 lang(Session::get('lang'));
 ob_start();
 $data = array(
-"Date"       => '00-00-0000', 
+"Date"       => date('Y-m-j'), 
 "btn"        => 'inspection', 
 "id"         => '', 
 "butun"      => 'Ajouter conformite + inspection', 
 "photos"     => 'public/images/icons/pers.PNG',
-"action"     => 'inspection/creathome26/'.$this->user[0]['id'],
+"action"     => 'inspection/creathome16/'.$this->user[0]['id'],
 "WILAYAN1"   => $this->user[0]['WILAYA'] ,
 "WILAYAN2"   => View::nbrtostring('wil','IDWIL',$this->user[0]['WILAYA'],'WILAYAS'),
 "COMMUNEN1"  => $this->user[0]['COMMUNE'] ,
@@ -18,15 +18,14 @@ $data = array(
 "NAT"        => array( 
 				"Transfert"=>"1",
 				"Installation"=>"2",
-				"Ouverture"=>"3",
-				"Changement du directeur thechnique"=>"4"		 
+				"Ouverture"=>"3"			 
 				),				
 "PROPRIETAIRE"  => 'x',
 "DEBUTCONTRAT"  => '00-00-0000',
-"FINCONTRAT"    => '00-00-0000'				
+"FINCONTRAT"    => '00-00-0000'								
 );
 view::button($data['btn'],'');
-echo "<h2>PV de conformite du local de : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
+echo "<h2>PV de conformite du laboratoire  de : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
@@ -34,44 +33,47 @@ $x=50;$y=10;
 $this->label($x,$y+220,'Wilaya');                $this->WILAYA($x+150,$y+210,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
 $this->label($x+400,$y+220,'Commune');           $this->COMMUNE($x+520,$y+210,'COMMUNE','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);
 $this->label($x+800,$y+220,'Adresse');           $this->txt($x+880,$y+210,'ADRESSE',0,$data['ADRESSE'],'date');
-$this->label($x,$y+260,'Date PV ');              $this->txts($x+150,$y+250,'DATEP',0,$data['Date'],'dateus'); $this->label($x+400,$y+260,'Nature PV');    $this->combov1($x+520,$y+250,'NAT',$data['NAT']);              $this->label($x+800,$y+260,'Adresse ar ');  $this->txtarid($x+880,$y+250,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
+$this->label($x,$y+260,'Date PV ');              $this->txts($x+150,$y+250,'DATEP',0,date('j-m-Y'),'dateus'); $this->label($x+400,$y+260,'Nature PV');    $this->combov1($x+520,$y+250,'NAT',$data['NAT']);              $this->label($x+800,$y+260,'Adresse ar ');  $this->txtarid($x+880,$y+250,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
 $this->label($x,$y+300,'Demande N ');            $this->txt($x+150,$y+290,'NUMD',0,"00");                     $this->label($x+400,$y+300,'Date demande'); $this->txts($x+520,$y+290,'DATED',0,date('j-m-Y'),'dateus1');
+
+$this->label($x,$y+340,'Cabinet de consultation '); $this->date1($x+150,$y+330,'CDS0',10,'00','cds();');$this->date1($x+225,$y+330,'CDS1',10,'00','cds();');  $this->date1($x+300,$y+330,'CDS',0,"00",'cds();');
+$this->label($x,$y+380,'Salle de soins');           $this->date1($x+150,$y+370,'SDS0',10,'00','sds();');$this->date1($x+225,$y+370,'SDS1',10,'00','sds();');  $this->date1($x+300,$y+370,'SDS',0,"00",'sds();');
+$this->label($x,$y+420,"Salle d'attente  : H ");    $this->date1($x+150,$y+410,'SAH0',10,'00','sah();');$this->date1($x+225,$y+410,'SAH1',10,'00','sah();');$this->date1($x+300,$y+410,'SAH',0,"00",'sah();');
+$this->label($x,$y+460,"Salle d'attente  : F ");    $this->date1($x+150,$y+450,'SAF0',10,'00','saf();');$this->date1($x+225,$y+450,'SAF1',10,'00','saf();');$this->date1($x+300,$y+450,'SAF',0,"00",'saf();');
+$this->label($x,$y+500,'Sanitaires ');              $this->date1($x+150,$y+490,'SAN0',10,'00','san();');$this->date1($x+225,$y+490,'SAN1',10,'00','san();');$this->date1($x+300,$y+490,'SAN',0,"00",'san();');
+$this->label($x,$y+540,'Surface total ');           $this->txt($x+150,$y+530,'STL',0,"00");
+
+$this->label($x+400,$y+420,'1er spécialiste');   $this->combopharmacien($x+520,$y+410,"PHA1","","","pharmacie",16);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,"00");
+$this->label($x+400,$y+460,'2em spécialiste');   $this->combopharmacien($x+520,$y+450,"PHA2","","","pharmacie",16);   $this->label($x+800,$y+460,'Distance 2 ');$this->txt($x+880,$y+450,'DIST2',0,"00");
+$this->label($x+400,$y+500,'3em spécialiste');   $this->combopharmacien($x+520,$y+490,"PHA3","","","pharmacie",16);   $this->label($x+800,$y+500,'Distance 3 '); $this->txt($x+880,$y+490,'DIST3',0,"00");
 
 $this->label($x+800,$y+300,'Propriétaire');      $this->txtarid($x+880,$y+290,'PROPRIETAIRE','PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
 $this->label($x+800,$y+340,'Début contrat');     $this->txts($x+880,$y+330,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus2');
 $this->label($x+800,$y+380,'Fin contrat');       $this->txts($x+880,$y+370,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus3');
-$this->label($x+800,$y+420,'Surface total ');    $this->txt($x+880,$y+410,'STL',0,"00");
-
-$this->label($x,$y+340,'Bureau 1 : ');           $this->date1($x+150,$y+330,'CDS0',10,'00','cds();');$this->date1($x+225,$y+330,'CDS1',10,'00','cds();');$this->date1($x+300,$y+330,'CDS',0,"00",'cds();');
-$this->label($x,$y+380,'Bureau 2 : ');           $this->date1($x+150,$y+370,'SDS0',10,'00','sds();');$this->date1($x+225,$y+370,'SDS1',10,'00','sds();');$this->date1($x+300,$y+370,'SDS',0,"00",'sds();');
-$this->label($x,$y+420,"Bureau 3 : ");           $this->date1($x+150,$y+410,'SAH0',10,'00','sah();');$this->date1($x+225,$y+410,'SAH1',10,'00','sah();');$this->date1($x+300,$y+410,'SAH',0,"00",'sah();');
-$this->label($x,$y+460,"Bureau 4 : ");           $this->date1($x+150,$y+450,'SAF0',10,'00','saf();');$this->date1($x+225,$y+450,'SAF1',10,'00','saf();');$this->date1($x+300,$y+450,'SAF',0,"00",'saf();');
-$this->label($x,$y+500,'Sanitaires ');           $this->date1($x+150,$y+490,'SAN0',10,'00','san();');$this->date1($x+225,$y+490,'SAN1',10,'00','san();');$this->date1($x+300,$y+490,'SAN',0,"00",'san();');
-
-$this->label($x+400,$y+340,'Réception : ');      $this->date1($x+520,$y+330,'EXTA0',10,'00','exta();');$this->date1($x+595,$y+330,'EXTA1',10,'00','exta();');$this->date1($x+670,$y+330,'EXTA',0,"00",'exta();');
-$this->label($x+400,$y+380,'Depot : ');          $this->date1($x+520,$y+370,'EXTB0',10,'00','extb();');$this->date1($x+595,$y+370,'EXTB1',10,'00','extb();');$this->date1($x+670,$y+370,'EXTB',0,"00",'extb();');
-$this->label($x+400,$y+420,"zp quarantaine :");  $this->date1($x+520,$y+410,'EXTC0',10,'00','extc();');$this->date1($x+595,$y+410,'EXTC1',10,'00','extc();');$this->date1($x+670,$y+410,'EXTC',0,"00",'extc();');
-$this->label($x+400,$y+460,"Zp réceptionnés :"); $this->date1($x+520,$y+450,'EXTD0',10,'00','extd();');$this->date1($x+595,$y+450,'EXTD1',10,'00','extd();');$this->date1($x+670,$y+450,'EXTD',0,"00",'extd();');
-$this->label($x+400,$y+500,"Zp refusés : ");     $this->date1($x+520,$y+490,'EXTE0',10,'00','exte();');$this->date1($x+595,$y+490,'EXTE1',10,'00','exte();');$this->date1($x+670,$y+490,'EXTE',0,"00",'exte();');
-
-$this->label($x+400,$y+420+(40*3),'1er E V D P P'); $this->combopharmacien($x+520,$y+410+(40*3),"PHA1","","","pharmacie",26);   $this->label($x+800,$y+420+(40*3),'D 1 ');$this->txt($x+880,$y+410+(40*3),'DIST1',0,"00");
-$this->label($x+400,$y+460+(40*3),'2em E V D P P'); $this->combopharmacien($x+520,$y+450+(40*3),"PHA2","","","pharmacie",26);   $this->label($x+800,$y+460+(40*3),'D 2 ');$this->txt($x+880,$y+450+(40*3),'DIST2',0,"00");
-$this->label($x+400,$y+500+(40*3),'3em E V D P P'); $this->combopharmacien($x+520,$y+490+(40*3),"PHA3","","","pharmacie",26);   $this->label($x+800,$y+500+(40*3),'D 3 ');$this->txt($x+880,$y+490+(40*3),'DIST3',0,"00");
-
 $this->hide(100,100,"STRUCTURE","",$this->user[0]['STRUCTURE']);
-$this->submit($x+880,$y+480,$data['butun']);
+$this->submit($x+880,$y+540,$data['butun']);
 $this->f1();
-view::sautligne(26);
+view::sautligne(22);
 ob_end_flush();
 
 ?>
 <table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
-		<th  colspan=9    style="width:50px;">
+		
+		<th  colspan=4    style="width:50px;">
 		<?php
-		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'inspection/searchx/0/10?o=id&q='.trim($this->user[0]['id']).'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
+		echo '<a title="Autres médecin spécialiste"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=16'.'" > Autres médecin spécialiste : '.'</a>';
 		?>
 		</th> 
+		
+		<th  colspan=4    style="width:50px;">
+		<?php
+		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'inspection/searchx/0/10?o=id&q='.$this->user[0]['id'].'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
+		?>
+		</th> 
+		
+		
+		
 		</tr>
 		<tr>
 		<th style="width:10px;">Date PV</th>
@@ -80,7 +82,6 @@ ob_end_flush();
 		<th style="width:50px;">Fin contrat</th>
 		
 		<th style="width:50px;">Pv-Conformite</th>
-		<th style="width:50px;">canvas-inspection</th>
 		<th style="width:70px;">Décision</th>
 		<th style="width:10px;">UPD </th>
 		<th style="width:10px;">DEL</th>
@@ -101,18 +102,14 @@ ob_end_flush();
 						<td align="center"><?php echo $value['ADRESSE'];?></td>
 						<td align="center"><?php echo view::dateUS2FR($value['FINCONTRAT']) ;?></td>
 						<?php    
-					    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'tcpdf/inspection/conf26.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-	                    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"canvas inspection\"     href=\"".URL.'tcpdf/inspection/conf26_insp.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-	                    
-						
-						if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/tran26.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
-						if($value['NAT']==2){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/inst26.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
-						if($value['NAT']==3){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/ouve26.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
-						if($value['NAT']==4){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/ouve26.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+					    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'tcpdf/inspection/conf13.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+	                    if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/tran16.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+						if($value['NAT']==2){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/inst16.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+						if($value['NAT']==3){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/ouve16.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						?>
 						
-						<td align="center"><a title="editer" href="<?php echo URL.'inspection/edithome26/'.$value['idstructure'].'/'.$value['id'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
-						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deletehome26/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
+						<td align="center"><a title="editer" href="<?php echo URL.'inspection/edithome16/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
+						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deletehome16/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
 						</tr>
 				<?php 
 				}
@@ -125,13 +122,13 @@ ob_end_flush();
 				else
 				{		
 				//echo '<tr bgcolor=""  ><td align="center" colspan="8" >'. barre_navigation ($total_count,$this->userListviewl,$this->userListviewo,$this->userListviewq,$this->userListviewp,$this->userListviewb).'</td></tr>';	
-			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="9" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
+			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="8" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
 				}		
 		}
 		else 
 		{
-		echo '<tr><td align="center" colspan="9" ><span> Click search button to start searching a vms.</span></td></tr>';
-		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="9" ><span>&nbsp;</span></td></tr>';					      
+		echo '<tr><td align="center" colspan="8" ><span> Click search button to start searching a vms.</span></td></tr>';
+		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="8" ><span>&nbsp;</span></td></tr>';					      
 		} 
 		
 		?>
@@ -142,12 +139,6 @@ function sah(){var a = parseFloat(this.document.form1.SAH0.value);var b = parseF
 function sds(){var a = parseFloat(this.document.form1.SDS0.value);var b = parseFloat(this.document.form1.SDS1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SDS.value = result;}
 function cds(){var a = parseFloat(this.document.form1.CDS0.value);var b = parseFloat(this.document.form1.CDS1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.CDS.value = result;}
 function san(){var a = parseFloat(this.document.form1.SAN0.value);var b = parseFloat(this.document.form1.SAN1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SAN.value = result;}
-function exta(){var a = parseFloat(this.document.form1.EXTA0.value);var b = parseFloat(this.document.form1.EXTA1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.EXTA.value = result;}
-function extb(){var a = parseFloat(this.document.form1.EXTB0.value);var b = parseFloat(this.document.form1.EXTB1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.EXTB.value = result;}
-function extc(){var a = parseFloat(this.document.form1.EXTC0.value);var b = parseFloat(this.document.form1.EXTC1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.EXTC.value = result;}
-function extd(){var a = parseFloat(this.document.form1.EXTD0.value);var b = parseFloat(this.document.form1.EXTD1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.EXTD.value = result;}
-function exte(){var a = parseFloat(this.document.form1.EXTE0.value);var b = parseFloat(this.document.form1.EXTE1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.EXTE.value = result;}
-
 
 function PopupImage(img) {
 	w=open("",'image','weigth=toolbar=no,scrollbars=no,resizable=yes, width=220, height=268');	
