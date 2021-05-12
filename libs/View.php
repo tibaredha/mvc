@@ -380,15 +380,15 @@ class View {
 	{
 	mysqlconnect();
 	echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";		 
-	echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
-	echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
-	mysql_query("SET NAMES 'UTF8' ");
-	$result = mysql_query("SELECT * FROM $tb_name order by WILAYAS" );
-	while($data =  mysql_fetch_array($result))
-	{
-	echo '<option value="'.$data[2].'">'.$data[1].'</option>';
-	}
-	echo '</select>'."\n"; 
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+			echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+			mysql_query("SET NAMES 'UTF8' ");
+			$result = mysql_query("SELECT * FROM $tb_name order by WILAYAS" );
+			while($data =  mysql_fetch_array($result))
+			{
+			echo '<option value="'.$data[2].'">'.$data[1].'</option>';
+			}
+		echo '</select>'."\n"; 
 	echo "</div>";
 	}
 	

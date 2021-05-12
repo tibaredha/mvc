@@ -118,7 +118,9 @@ class inspection extends TCPDF
 	$this->SetXY(5,$this->GetY()+2);$this->Cell(200,5,$this->dspar,0,1,'C');
 	$this->SetXY(5,$this->GetY()+2);$this->Cell(200,5,$this->dspfr,0,1,'C');
 	$this->SetXY(10,55);$this->Cell(40,5,'N° : ........../DSP/'.$url1[2],0,1,'C');
-	$this->SetXY(140,55);$this->Cell(50,5,'Djelfa le : '.$id2,0,1,'L');
+	//$this->SetXY(140,55);$this->Cell(50,5,'Djelfa le : '.$id2,0,1,'L');
+	$this->SetXY(140,55);$this->Cell(50,5,'Djelfa le : ',0,1,'L');
+	
 	$this->SetXY(90,$this->GetY()+5);$this->Cell(100,5,'Le directeur de la santé et de la population de la wilaya de Djelfa',0,1,'C');
 	$this->SetXY(70,$this->GetY()+2.5);$this->Cell(100,5,'A',0,1,'C');
 	}
