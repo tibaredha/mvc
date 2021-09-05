@@ -85,10 +85,12 @@ while($rowp=mysql_fetch_object($requetep))
 	
 	
 	$eta1=$etax." نايل )";
-	$eta2=$etax."المروج)";
+	$eta2=$etax." المروج)";
+	$eta3=$etax." نائلة )";
 	
 	if (trim($nom) =='LAHRECH'){$clinique=$eta1;}
 	if (trim($nom) =='KHALDI'){$clinique=$eta2;}
+	if (trim($nom) =='BAFA'){$clinique=$eta3;}
 	$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$clinique,0,1,'C');
 	
 	

@@ -273,6 +273,21 @@ class View {
 		echo '</select>'."\n"; echo "</div>";
 	}
 	
+	function combopharmacieng($x,$y,$name,$value,$choisir,$class,$str) 
+	{
+		mysqlconnect(); 
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option   value=\"".$value."\" selected=\"selected\">".$choisir."</option>"."\n";
+		$result = mysql_query("SELECT * FROM structure where STRUCTURE = $str  order by NOM" );
+		while($data =  mysql_fetch_array($result))
+		{
+		echo '<option value="'.$data["id"].'">'.$data["NOM"].'_'.$data["PRENOM"].'</option>';
+		}
+		echo '</select>'."\n"; echo "</div>";
+	}
+	
+	
 	function combostructure($x,$y,$name,$tb_name,$value,$choisir,$class,$ve,$va) 
 	{
 		mysqlconnect(); 
@@ -513,7 +528,11 @@ class View {
 	$dateFR2US =  $A."-".$M."-".$J ;
     return $dateFR2US;//2013-01-01
 	}
-    function hr(){echo "<hr/>";}
+    function hr($x,$y){
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";
+		echo '<hr class="new1">';
+		echo "</div>";
+		}
     function h($h,$x,$y,$txt){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 echo "<h".$h." >".$txt."</h".$h.">";echo "</div>";}
 	function f0($url,$method){echo "<form class=\"form\" action=\"".$url."\" method=\"".$method."\" name=\"form1\" id=\"form1\">";}
 	function label($x,$y,$l){echo "<div class=\"label\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	echo $l;echo "</div>";}
