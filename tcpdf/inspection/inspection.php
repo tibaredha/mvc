@@ -90,6 +90,40 @@ class inspection extends TCPDF
 			return $DATEPV;
 		}	
 	
+	function entetedecision($titre,$DATEP)
+	{
+		$this->Rect(5, 5, 200, 285 ,'D');$this->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->mspar,0,1,'C');$this->SetFont('aefurat', '', 14);
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->wilayaar,0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dsparp,0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dssar,0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'رقم : '.'_____'.' / م. ص. س / '.substr($DATEP,0,4),0,1,'R');$this->SetFont('aefurat', 'B', 22);
+		$this->SetXY(5,$this->GetY()+3);$this->Cell(200,5,$titre,0,1,'C');$this->SetFont('aefurat', '', 16);
+		$this->SetXY(100,$this->GetY()+5);$this->Cell(100,5,$this->ledspar,0,1,'C');$this->SetFont('aefurat', '', 12);	
+	}
+	
+	
+	function propositiondecision()
+	{
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->proposition,0,1,'C');$this->SetFont('aefurat', 'U', 16);
+		$this->SetXY(5,$this->GetY()+3);$this->Cell(200,5,'يقــــــــــرر ',0,1,'C');$this->SetFont('aefurat', '', 13);
+
+	}
+	
+	function footdecision($nomar,$prenomar,$adresse,$commune,$DATEP)
+	{
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بفتح عيادته (ها) الطبية العامة الكائن مقرها ',0,1,'R');
+		$this->SetXY(0,$this->GetY());$this->Cell(200,5,'               بـ : '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->article3,0,1,'R');$this->SetFont('aefurat', '', 12.5);
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->article4,0,1,'R');$this->SetFont('aefurat', 'B', 14);
+		$this->SetXY(5,$this->GetY()+13);$this->Cell(100,5,'الجلفة في : '.$DATEP,0,1,'C');
+		$this->SetXY(5,$this->GetY()+3);$this->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
+
+	}
+	
+	
 	function entetesiple()
 	{
 	$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,0,'C');

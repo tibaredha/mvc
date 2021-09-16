@@ -15,6 +15,7 @@ $pdf->SetFont('aefurat', 'B', 16);
 $pdf->SetDisplayMode('fullpage','single');//mode d affichage 
 $pdf->AddPage();
 $pdf->SetLineWidth(0.4);
+//***************************************************//
 $pdf-> mysqlconnect(); 
 $query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";$requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
 while($rowx=mysql_fetch_object($requetex))
@@ -35,7 +36,7 @@ $DATEORDER=$rowx->DATEORDER;
 $NUMDEM=$rowx->NUMDEM;
 $DATEDEM=$rowx->DATEDEM;
 }
-
+//***************************************************//
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
 while($rowy=mysql_fetch_object($requetey))
 {
@@ -43,16 +44,9 @@ $NUMD=$rowy->NUMD;
 $DATED=$rowy->DATED;
 $DATEP=$rowy->DATEP;
 }
-$y=3;
-$pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetFont('aefurat', '', 14);
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->wilayaar,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dsparp,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dssar,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'رقم : '.'_____'.' / م. ص. س / '.substr($DATEP,0,4),0,1,'R');$pdf->SetFont('aefurat', 'B', 20);
-$pdf->SetXY(5,$pdf->GetY()+3);$pdf->Cell(200,5,'مقــــررة فتح  عيادة طبية عامـــــــة',0,1,'C');$pdf->SetFont('aefurat', '', 16);
-$pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(100,5,$pdf->ledspar,0,1,'C');$pdf->SetFont('aefurat', '', 12);
+//*************************************************************************************************************************//
+$pdf->entetedecision("مقررة فتح عيادة طبية عامة ",$DATEP);
+//*************************************************************************************************************************//
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->loi18_11,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret92_276,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
@@ -64,16 +58,9 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على شهادة ال�
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) بتاريخ '.$DATED.' المتعلق بفتح عيادة طبية عامة',0,1,'R');$pdf->SetFont('aefurat', '', 13);
 $pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adresse.'  ببلدية  '.$commune.' ولاية الجلفة',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على محضر المطابقة الخاص بالعيادة المؤرخ في '.$DATEP,0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
-/*************************************************************************************************************************/
-$pdf->SetXY(5,$pdf->GetY()+$y+5);$pdf->Cell(200,5,$pdf->proposition,0,1,'C');$pdf->SetFont('aefurat', 'U', 16);
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');$pdf->SetFont('aefurat', '', 13);
-/*************************************************************************************************************************/
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بفتح عيادته (ها) الطبية العامة الكائن مقرها ',0,1,'R');
-$pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,'               بـ : '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->article3,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->article4,0,1,'R');$pdf->SetFont('aefurat', 'B', 14);
-$pdf->SetXY(5,$pdf->GetY()+$y+10);$pdf->Cell(100,5,'الجلفة في : '.$DATEP,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
+//*************************************************************************************************************************//
+$pdf->propositiondecision();
+//*************************************************************************************************************************//
+$pdf->footdecision($nomar,$prenomar,$adresse,$commune,$DATEP);
 $pdf->Output();
 ?>
