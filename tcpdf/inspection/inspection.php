@@ -89,7 +89,7 @@ class inspection extends TCPDF
 			$DATEPV=$JOURS1;
 			return $DATEPV;
 		}	
-	
+	//*************************************************************************************************************//
 	function entetedecision($titre,$DATEP)
 	{
 		$this->Rect(5, 5, 200, 285 ,'D');$this->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
@@ -118,11 +118,24 @@ class inspection extends TCPDF
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->article3,0,1,'R');$this->SetFont('aefurat', '', 12.5);
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->article4,0,1,'R');$this->SetFont('aefurat', 'B', 14);
-		$this->SetXY(5,$this->GetY()+13);$this->Cell(100,5,'الجلفة في : '.$DATEP,0,1,'C');
+		
+
+	}
+	function ctdecision($nomfr,$prenomfr,$DATEP)
+	{   
+	    $this->SetXY(5,$this->GetY()+13);$this->Cell(100,5,' حرر بالجلفة في : '.$DATEP,0,1,'C');
 		$this->SetXY(5,$this->GetY()+3);$this->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,"الاسم و اللقب بالاحرف اللاتنية :",0,1,'R');$this->SetFont('aefurat', 'B', 12);
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$nomfr." ".$prenomfr,0,1,'R');$this->SetFont('aefurat', 'B', 14);
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,"نسخة مرسلة الى :",0,1,'R');
+		$this->SetXY(5,$this->GetY()+2);$this->Cell(200,5," - صندوق الضمان الاجتماعي",0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5," - المعني (نسخة أصلية)",0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5," - ملف المعني",0,1,'R');
 
 	}
 	
+	
+	//*************************************************************************************************************//
 	
 	function entetesiple()
 	{

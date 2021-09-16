@@ -26,6 +26,9 @@ $num1=$rowx->NOUVERTURE;
 $date1=$rowx->OUVERTURE;
 $nomar=$rowx->NOMAR;
 $prenomar=$rowx->PRENOMAR;
+$nomfr=$rowx->NOM;
+$prenomfr=$rowx->PRENOM;
+$adresse=$rowx->ADRESSEAR;
 $adresse=$rowx->ADRESSEAR;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
 $wilaya=$rowx->WILAYA;
@@ -45,7 +48,7 @@ $DATED=$rowy->DATED;
 $DATEP=$rowy->DATEP;
 }
 //*************************************************************************************************************************//
-$pdf->entetedecision("مقررة فتح عيادة طبية عامة ",$DATEP);
+$pdf->entetedecision("مقررة ترخيص بفتح عيادة طبية عامة ",$DATEP);
 //*************************************************************************************************************************//
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->loi18_11,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret92_276,0,1,'R');
@@ -62,5 +65,6 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على محضر الم�
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
 $pdf->footdecision($nomar,$prenomar,$adresse,$commune,$DATEP);
+$pdf->ctdecision($nomfr,$prenomfr,$DATEP);
 $pdf->Output();
 ?>

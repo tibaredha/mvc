@@ -25,6 +25,8 @@ $num1=$rowx->NOUVERTURE;
 $date1=$rowx->OUVERTURE;
 $nomar=$rowx->NOMAR;
 $prenomar=$rowx->PRENOMAR;
+$nomfr=$rowx->NOM;
+$prenomfr=$rowx->PRENOM;
 $adresse=$rowx->ADRESSEAR;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
 $wilaya=$rowx->WILAYA;
@@ -46,7 +48,7 @@ $DATED=$rowy->DATED;
 $DATEP=$rowy->DATEP;
 }
 //*************************************************************************************************************************//
-$pdf->entetedecision("مقررة تحويل عيادة طبية عامة ",$DATEP);
+$pdf->entetedecision("مقررة ترخيص بتحويل عيادة طبية عامة ",$DATEP);
 //*************************************************************************************************************************//
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->loi18_11,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret92_276,0,1,'R');
@@ -68,7 +70,6 @@ $pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,'        إلى '.$adresse.' بلد
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->article3,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->article4,0,1,'R');$pdf->SetFont('aefurat', 'B', 14);
-$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(100,5,'الجلفة في : '.$DATEP,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+3);$pdf->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
+$pdf->ctdecision($nomfr,$prenomfr,$DATEP);
 $pdf->Output();
 ?>
