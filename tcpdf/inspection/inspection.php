@@ -39,6 +39,7 @@ class inspection extends TCPDF
 	public $pvconformite = "- بناء على محضر المطابقة الخاص بالمحل  للصيدلية المؤرخ في ";
 	public $diplome = "- بناء على شهادة النجاح في الصيدلة بتاريخ ";
 	public $diplome17 = "- بناء على شهادة النجاح في الطب العام بتاريخ  ";
+	public $diplome15 = "- بناء على شهادة النجاح في جراحة الاسنان بتاريخ ";
 	
 	
 	public $ordre = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة للصيدلة رقم ";
@@ -48,6 +49,7 @@ class inspection extends TCPDF
 	
 	public $instruction01_99 = "- بمقتضى التعليمة الوزارية للصحة رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة الحرة لمهن الصحة ";
 	public $ordre15 = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة لجراحة الأسنان رقم  ";
+	public $ordre17 = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة للطب العام رقم  ";
 	
 	public $proposition = "بإقتراح من السيد رئيس مصلحة الهياكل و النشاط الصحي  ";
 	public $article1 = "المادة الأولى : يرخص للسيد(ة) ";
@@ -111,9 +113,12 @@ class inspection extends TCPDF
 
 	}
 	
-	function footdecision($nomar,$prenomar,$adresse,$commune,$DATEP)
+	function footdecision($nomar,$prenomar,$adresse,$commune,$DATEP,$grade)
 	{
-		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بفتح عيادته (ها) الطبية العامة الكائن مقرها ',0,1,'R');
+		$this->SetXY(5,$this->GetY()+5);
+		if($grade=="M"){$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بفتح عيادته (ها) الطبية العامة الكائن مقرها ',0,1,'R');}
+		if($grade=="D"){$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' جراح (ة) أسنان'.' بفتح عيادته (ها) الطبية لجراحة الاسنان الكائن مقرها ',0,1,'R');}
+		
 		$this->SetXY(0,$this->GetY());$this->Cell(200,5,'               بـ : '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->article3,0,1,'R');$this->SetFont('aefurat', '', 12.5);

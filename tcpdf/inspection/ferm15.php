@@ -16,9 +16,7 @@ $pdf->SetDisplayMode('fullpage','single');//mode d affichage
 $pdf->AddPage();
 $pdf->SetLineWidth(0.4);
 $pdf-> mysqlconnect(); 
-$query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";//
-$requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
-
+$query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";$requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
 while($rowx=mysql_fetch_object($requetex))
 {
 $num=$rowx->NREALISATION;
@@ -30,6 +28,7 @@ $prenomar=$rowx->PRENOMAR;
 $nomfr=$rowx->NOM;
 $prenomfr=$rowx->PRENOM;
 $adresse=$rowx->ADRESSEAR;
+$adresse=$rowx->ADRESSEAR;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
 $wilaya=$rowx->WILAYA;
 $DIPLOME=$rowx->DIPLOME;
@@ -38,6 +37,8 @@ $NUMORDER=$rowx->NUMORDER;
 $DATEORDER=$rowx->DATEORDER;
 $NUMDEM=$rowx->NUMDEM;
 $DATEDEM=$rowx->DATEDEM;
+$OUVERTURE=$rowx->OUVERTURE;
+$NOUVERTURE=$rowx->NOUVERTURE;
 }
 
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
@@ -48,7 +49,7 @@ $DATED=$rowy->DATED;
 $DATEP=$rowy->DATEP;
 }
 //*************************************************************************************************************************//
-$pdf->entetedecision("مقررة ترخيص بفتح عيادة طبية لجراحة الاسنان",$DATEP);
+$pdf->entetedecision("مقررة غلق عيادة طبية لجراحة الاسنان",$DATEP);
 //*************************************************************************************************************************//
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->loi18_11,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret92_276,0,1,'R');
@@ -58,13 +59,16 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction06_98,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction01_99,0,1,'R');$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome15.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');$pdf->SetFont('aefurat', '', 12);//
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->ordre15.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' جراح (ة) أسنان بتاريخ '.$DATED.' المتعلق بفتح عيادة طبية في جراحة الاسنان',0,1,'R');$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adresse.'  ببلدية  '.$commune.' ولاية الجلفة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء علي محضر المطابقة الخاص بالعيادة المؤرخ في '.$DATEP,0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على المقررة رقم '.$NOUVERTURE.' المؤرخة في '.$OUVERTURE.' المتعلقة بفتح عيادة طبية لجراحة الاسنان '."للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب المعني (ة) '.'بتاريخ '.$DATED.' المتعلق بغلق عيادته (ها) الطبية لجراحة الاسنان الكائن مقرها',0,1,'R');$pdf->SetFont('aefurat', '', 13);
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adresse.'  ببلدية  '.$commune.' ولاية الجلفة',0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
-$pdf->footdecision($nomar,$prenomar,$adresse,$commune,$DATEP,"D");
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->article1f.$nomar.' '.$prenomar.' جراح (ة) اسنان'.' الكائن مقرها',0,1,'R');
+$pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,'           بـ : '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"المادة 02 :  يسري مفعول هذه المقررة ابتداء من تاريخ إمضائها",0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5," المادة 03 : يكلف كل من السادة مدير المؤسسة العمومية للصحة الجوارية و مدير صندوق الضمان الإجتماعي بتنفيذ هذه المقررة .",0,1,'R');$pdf->SetFont('aefurat', 'B', 14);
 $pdf->ctdecision($nomfr,$prenomfr,$DATEP);
 $pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>

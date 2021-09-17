@@ -55,16 +55,16 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret92_276,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 112 المؤرخة في 1987/03/02 المتعلقة بأحكام تنصيب الممارسين الطبيين العامين و المتخصصين",0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 06 المؤرخة في 1998/06/28 المتعلقة بتشغيل الشبه الطبيين في الهياكل الصحية الخاصة",0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة في القطاع الخاص لمهنيي الصحة ",0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome17.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');$pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة للطب العام رقم '.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة في القطاع الخاص لمهنيي الصحة ",0,1,'R');$pdf->SetFont('aefurat', '', 12);
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome17.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->ordre17.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) بتاريخ '.$DATED.' المتعلق بفتح عيادة طبية عامة',0,1,'R');$pdf->SetFont('aefurat', '', 13);
 $pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adresse.'  ببلدية  '.$commune.' ولاية الجلفة',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على محضر المطابقة الخاص بالعيادة المؤرخ في '.$DATEP,0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
-$pdf->footdecision($nomar,$prenomar,$adresse,$commune,$DATEP);
+$pdf->footdecision($nomar,$prenomar,$adresse,$commune,$DATEP,"M");
 $pdf->ctdecision($nomfr,$prenomfr,$DATEP);
-$pdf->Output();
+$pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>
