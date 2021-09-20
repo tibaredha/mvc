@@ -72,8 +72,8 @@ class inspection extends TCPDF
 	
 	function ANNEEFR($DATEINS) {
 			$A      = substr($DATEINS,6,2); 
-			$ANNEE = array("treize","quatorze","quinze","seize","dix-sept","dix-huit ","dix-neuf","vingt","vingt et un ","vingt et deux","vingt -trois");
-			$ANNEE1 =  $ANNEE[ $A - 13] ;
+			$ANNEE  = array("treize","quatorze","quinze","seize","dix-sept","dix-huit ","dix-neuf","vingt","vingt et un ","vingt et deux","vingt -trois");
+			$ANNEE1 =  $ANNEE[ $A - 12] ;
 			$DATEPV=$ANNEE1;
 			return $DATEPV;
 		}
