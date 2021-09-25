@@ -5,7 +5,7 @@ require_once('inspection.php');
 $pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
-$pdf->SetTitle('dossier_pharmacien');
+$pdf->SetTitle('dossier_medecin');
 $pdf->SetSubject('PROTOCOLE');
 $pdf->SetFillColor(230);    //fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
 $pdf->SetTextColor(0,0,0);  //text noire 0   //text BLEU 180 
@@ -25,8 +25,7 @@ $num1=$rowx->NOUVERTURE;
 $date1=$rowx->OUVERTURE;
 $nom=$rowx->NOM;
 $prenom=$rowx->PRENOM;
-$nomar=$rowx->NOMAR;
-$prenomar=$rowx->PRENOMAR;
+$nomar=$rowx->NOMAR;$prenomar=$rowx->PRENOMAR;
 $nomfr=$rowx->NOM;$prenomfr=$rowx->PRENOM;
 $sexe=$rowx->SEX;
 $DNS=$rowx->DNS;
@@ -78,6 +77,6 @@ $pdf->SetXY(85,$pdf->GetY()+5);$pdf->Cell(120,5,'السيد مدير الصحة 
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,'الى',0,1,'C');
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,' السيـــــــــد ( ة ) : '.$nomar.' - '.$prenomar,0,1,'C');
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,$adressear. ' بلدية : '.$communear ,0,1,'C');
-$pdf->dossierm($NUMD,$DATED,$NAT,$communear,$sexe,"صيدلية");
+$pdf->dossierm($NUMD,$DATED,$NAT,$communear,$sexe,"عيادة طبية عامة");
 $pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>

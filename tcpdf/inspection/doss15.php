@@ -5,7 +5,7 @@ require_once('inspection.php');
 $pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
-$pdf->SetTitle('dossier_pharmacien');
+$pdf->SetTitle('dossier_dentiste');
 $pdf->SetSubject('PROTOCOLE');
 $pdf->SetFillColor(230);    //fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
 $pdf->SetTextColor(0,0,0);  //text noire 0   //text BLEU 180 
@@ -66,7 +66,7 @@ $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'COMMUNE');
 $communear=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'communear');
 $wilaya=$pdf->nbrtostring('mvc','wil','IDWIL',$rowy->WILAYA,'WILAYAS');;
 }
-$pdf->dossier($DATEP);
+//$pdf->dossier($DATEP);
 $pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
@@ -78,6 +78,6 @@ $pdf->SetXY(85,$pdf->GetY()+5);$pdf->Cell(120,5,'السيد مدير الصحة 
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,'الى',0,1,'C');
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,' السيـــــــــد ( ة ) : '.$nomar.' - '.$prenomar,0,1,'C');
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,$adressear. ' بلدية : '.$communear ,0,1,'C');
-$pdf->dossierm($NUMD,$DATED,$NAT,$communear,$sexe,"صيدلية");
+$pdf->dossierm($NUMD,$DATED,$NAT,$communear,$sexe,"عيادة طبية لجراحة الاسنان");
 $pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>

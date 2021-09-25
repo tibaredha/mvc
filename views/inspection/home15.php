@@ -67,7 +67,7 @@ ob_end_flush();
 		</th>
 
 
-       <th  colspan=4    style="width:50px;">
+       <th  colspan=5    style="width:50px;">
 		<?php
 		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'inspection/searchx/0/10?o=id&q='.$this->user[0]['id'].'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
 		?>
@@ -78,12 +78,12 @@ ob_end_flush();
 		</tr>
 		<tr>
 		<th style="width:10px;">Date PV</th>
-		<th style="width:50px;">Nature PV</th>
-		<th style="width:70px;">Adresse</th>
-		<th style="width:50px;">Fin contrat</th>
-		
-		<th style="width:50px;">Pv-Conformite</th>
-		<th style="width:70px;">Décision</th>
+		<th style="width:10px;">Nature PV</th>
+		<th style="width:200px;">Adresse</th>
+		<th style="width:10px;">Fin contrat</th>
+		<th style="width:10px;">Dossier</th>
+		<th style="width:10px;">Pv-Conformite</th>
+		<th style="width:10px;">Décision</th>
 		<th style="width:10px;">UPD </th>
 		<th style="width:10px;">DEL</th>
 		</tr>
@@ -102,9 +102,14 @@ ob_end_flush();
 						</td>
 						<td align="center"><?php echo $value['ADRESSE'];?></td>
 						<td align="center"><?php echo view::dateUS2FR($value['FINCONTRAT']) ;?></td>
-						<?php    
+						<?php 
+						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Dossier\"               href=\"".URL.'tcpdf/inspection/doss15.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+	                       
 					    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'tcpdf/inspection/conf15.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-	                    if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/tran15.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+	                    
+						
+						
+						if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/tran15.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						if($value['NAT']==2){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/inst15.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						if($value['NAT']==3){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/ouve15.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						?>
@@ -117,19 +122,19 @@ ob_end_flush();
 				$total_count=count($this->userListview);
 				if ($total_count <= 0 )
 				{
-				echo '<tr><td align="center" colspan="8" ><span> No record found for autos </span></td> </tr>';
+				echo '<tr><td align="center" colspan="9" ><span> No record found for autos </span></td> </tr>';
 				echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="8" ><span>' .$total_count.'/'.$total_count.' Record(s) found.</span></td></tr>';					
 				}
 				else
 				{		
 				//echo '<tr bgcolor=""  ><td align="center" colspan="8" >'. barre_navigation ($total_count,$this->userListviewl,$this->userListviewo,$this->userListviewq,$this->userListviewp,$this->userListviewb).'</td></tr>';	
-			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="8" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
+			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="9" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
 				}		
 		}
 		else 
 		{
 		echo '<tr><td align="center" colspan="8" ><span> Click search button to start searching a vms.</span></td></tr>';
-		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="8" ><span>&nbsp;</span></td></tr>';					      
+		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="9" ><span>&nbsp;</span></td></tr>';					      
 		} 
 		
 		?>

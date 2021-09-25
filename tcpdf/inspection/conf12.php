@@ -130,7 +130,7 @@ $pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(200,5,"- N° de téléphone : ".$Mobi
 $pdf->SetXY(15,$pdf->GetY()+5); $pdf->Cell(200,5,"- Date d'obtention du diplome : ".$pdf->dateUS2FR($DIPLOME),0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"2 /Date de depot de la demande : ".$pdf->dateUS2FR($DATED),0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"3 /N° d'enregistrement sur le registre : ".$NUMD,0,1,'L');
-$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"4 /Adresse du locale /site proposé : ".$adresse." Commune ".$commune,0,1,'L');
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"4 /Adresse du locale /site proposé : ".$adresse,0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"5 /Date de visite /ou de creation du site : ".$pdf->dateUS2FR($DATEP),0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"6 /Le cadre de l'installation : ",0,1,'L');
 $pdf->SetFont('aefurat', 'U', 12);$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Si arrèté ",0,0,'L');$pdf->SetFont('aefurat', '', 12);
@@ -197,8 +197,8 @@ $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"En vertu de l'article 10 de l'a
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"D'installation d'ouverture et de transfert d'une officine de pharmacie modifié et complété",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Et sur ordre de MR le directeur de la santé et de la population de la wilaya de Djelfa ",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Avons effectué une visite de conformité du local situé à : ",0,1,'L');
-$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(75,5,"Adresse : ".$adresse,0,1,'L',1,1); 
-$pdf->SetXY(85,$pdf->GetY()-5.3); $pdf->Cell(50,5,"Commune : ".$commune,0,1,'L',1,1);
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(195,5,"Adresse : ".$adresse,0,1,'L',1,1); 
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(50,5,"Commune : ".$commune,0,1,'L',1,1);
 $pdf->SetXY(140,$pdf->GetY()-5.3); $pdf->Cell(60,5,"Wilaya de ".$wilaya,0,1,'L',1,1);
 $pdf->SetXY(5,$pdf->GetY()+5);
 if ($NAT==1) { $pdf->Cell(195,5,"Objet de la demande de transfert N°: ".$NUMD." du ".$pdf->dateUS2FR($DATED),0,1,'L',1,1);}
@@ -260,8 +260,8 @@ $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"D'installation d'ouverture et d
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Et sur ordre de MR le directeur de la santé et de la population de la wilaya de Djelfa ",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Avons procédé au mesurage des distances qui séparent les officines de pharmacie les plus proches ",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(200,5,"Ainsi que la superficie du local situé à : ",0,1,'L');
-$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(75,5,"Adresse : ".$adresse,0,1,'L',1,1); 
-$pdf->SetXY(85,$pdf->GetY()-5.3); $pdf->Cell(50,5,"Commune : ".$commune,0,1,'L',1,1);
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(195,5,"Adresse : ".$adresse,0,1,'L',1,1); 
+$pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(50,5,"Commune : ".$commune,0,1,'L',1,1);
 $pdf->SetXY(140,$pdf->GetY()-5.3); $pdf->Cell(60,5,"Wilaya de ".$wilaya,0,1,'L',1,1);
 $pdf->SetXY(5,$pdf->GetY()+5);
 if ($NAT==1) { $pdf->Cell(195,5,"Objet de la demande de transfert N°: ".$NUMD." du ".$pdf->dateUS2FR($DATED),0,1,'L',1,1);}
@@ -273,7 +273,7 @@ $pdf->SetXY(10,$pdf->GetY()+5); $pdf->Cell(190,5,"Le pharmacien N°1 : ".$PHA1,0
 $pdf->SetXY(10,$pdf->GetY()+16); $pdf->Cell(190,5,"Le pharmacien N°2 : ".$PHA2,0,1,'L',1,1);
 $pdf->SetXY(10,$pdf->GetY()+16); $pdf->Cell(190,5,"Le pharmacien N°3 : ".$PHA3,0,1,'L',1,1);
 $pdf->AddPage();
-$pdf->SetXY(5,$pdf->GetY()); $pdf->Cell(60,5,"Le mesurage des distances a été effectuée à l'aide  d'un compteur kilométrique ",0,1,'L');
+$pdf->SetXY(5,$pdf->GetY()); $pdf->Cell(60,5,"Le mesurage des distances a été effectuée à l'aide d'un compteur kilométrique ou a default google earth",0,1,'L');
 $pdf->SetXY(5,$pdf->GetY()); $pdf->Cell(60,5,"d'éxtrémité de façade du local au début de façade  de l'officine  la plus proche et a donné  ces résultats :",0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+10);   $pdf->Cell(10,5,"N°",1,1,'L');$pdf->SetXY(20,$pdf->GetY()-5.7); $pdf->Cell(140,5,"Pharmaciens ",1,1,'C');$pdf->SetXY(160,$pdf->GetY()-5.7); $pdf->Cell(40,5,"Distance en métres ",1,1,'C');
 $pdf->SetXY(10,$pdf->GetY()+2); $pdf->Cell(10,5,"01 ",1,1,'L');$pdf->SetXY(20,$pdf->GetY()-5.7); $pdf->Cell(140,5,$PHA1,1,1,'L');$pdf->SetXY(160,$pdf->GetY()-5.7); $pdf->Cell(40,5,$DIST1,1,1,'C');

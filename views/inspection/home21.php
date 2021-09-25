@@ -78,7 +78,7 @@ ob_end_flush();
 		<tr>
 		<th style="width:10px;">Date PV</th>
 		<th style="width:50px;">Nature PV</th>
-		<th style="width:70px;">Adresse</th>
+		<th style="width:170px;">Adresse</th>
 		<th style="width:50px;">Fin contrat</th>
 		
 		<th style="width:50px;">Pv-Conformite</th>

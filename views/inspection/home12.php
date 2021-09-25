@@ -76,12 +76,12 @@ ob_end_flush();
 		</tr>
 		<tr>
 		<th style="width:10px;">Date PV</th>
-		<th style="width:50px;">Nature PV</th>
-		<th style="width:70px;">Adresse</th>
-		<th style="width:50px;">Fin contrat</th>
-		<th style="width:50px;">Dossier</th>
-		<th style="width:50px;">Pv-Conformite</th>
-		<th style="width:70px;">Décision</th>
+		<th style="width:10px;">Nature PV</th>
+		<th style="width:200px;">Adresse</th>
+		<th style="width:10px;">Fin contrat</th>
+		<th style="width:10px;">Dossier</th>
+		<th style="width:10px;">Pv-Conformite</th>
+		<th style="width:10px;">Décision</th>
 		<th style="width:10px;">UPD </th>
 		<th style="width:10px;">DEL</th>
 		</tr>
@@ -102,7 +102,8 @@ ob_end_flush();
 						<td align="center"><?php echo view::dateUS2FR($value['FINCONTRAT']) ;?></td>
 						<?php    
 					    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Dossier\"               href=\"".URL.'tcpdf/inspection/doss12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-	                    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'tcpdf/inspection/conf12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+	                    
+						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'tcpdf/inspection/conf12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
 	                    
 						
 						if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/tran12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}

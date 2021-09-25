@@ -147,7 +147,7 @@ class inspection extends TCPDF
 	}
 	function ctdecision($nomfr,$prenomfr,$DATEP)
 	{   
-	    $this->SetXY(5,$this->GetY()+13);$this->Cell(100,5,' حرر بالجلفة في : '.$DATEP,0,1,'C');
+	    $this->SetXY(5,$this->GetY()+10);$this->Cell(100,5,' حرر بالجلفة في : '.$DATEP,0,1,'C');
 		$this->SetXY(5,$this->GetY()+3);$this->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,"الاسم و اللقب بالاحرف اللاتنية :",0,1,'R');$this->SetFont('aefurat', 'B', 12);
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$nomfr." ".$prenomfr,0,1,'R');$this->SetFont('aefurat', 'B', 14);
@@ -167,7 +167,7 @@ class inspection extends TCPDF
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dssar,0,1,'R');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'رقم : '.'_____'.' / م. ص. س / '.substr($DATEP,0,4),0,1,'R');$this->SetFont('aefurat', 'B', 14);
 		$this->SetXY(5,$this->GetY()+3);$this->Cell(200,5,"الوثائق المطلوبة لتكوين ملف, فتح / تحويل / غلق ,محل للممارسة الحرة لمهن الصحة ",0,1,'C');$this->SetFont('aefurat', '', 14);
-	    $this->SetXY(5,$this->GetY()+3);$this->Cell(200,5,"طبيب أخصائي / طبيب عام / جراح أسنان / صيدلي /  أخصائي نفساني /شبه طبي  ",0,1,'C');$this->SetFont('aefurat', '', 14);
+	    $this->SetXY(5,$this->GetY()+3);$this->Cell(200,5,"طبيب أخصائي / طبيب عام / جراح أسنان / صيدلي /  أخصائي نفساني /شبه طبي  ",0,1,'C');$this->SetFont('aefurat', '', 12);
 	    
 		$this->SetXY(5,$this->GetY()+10);$this->Cell(25,5,"غلق مقر",1,0,'C',1,0);$this->Cell(25,5,"تحويل مقر",1,0,'C',1,0);$this->Cell(25,5,"فتح مقر",1,0,'C',1,0);$this->Cell(110,5,"الوثائق المطلوبة",1,0,'C',1,0);$this->Cell(15,5,"الرقم",1,1,'C',1,0);
 	    $this->SetXY(5,$this->GetY());$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"طلب خطي ",1,0,'R');$this->Cell(15,5,"01",1,1,'C');
@@ -192,10 +192,54 @@ class inspection extends TCPDF
 		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"فاتورة جهاز التعقييم  للإختصاصات الجراحية بإسم المعني",1,0,'R');$this->Cell(15,5,"20",1,1,'C');
 		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"إتفاقية حرق النفايات مع مؤسسة عمومية أو خاصة",1,0,'R');$this->Cell(15,5,"21",1,1,'C');
 		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"شهادة مطابقة العزل للأشعة بالنسبة لمالكي جهاز الأشعة ",1,0,'R');$this->Cell(15,5,"22",1,1,'C');
-	    $this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,"ملاحظة : يودع الملف لدى أمانة مديرية الصحة و السكان ",0,1,'R',1,0);
+	    $this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,"ملاحظة : يودع الملف لدى أمانة مديرية الصحة و السكان كل يوم ثلثاء إبتداء من الساعة الثامنة",0,1,'R',1,0);
 		$this->SetXY(5,$this->GetY()+10);$this->Cell(100,5,' حرر بالجلفة في : ',0,1,'C');
 		$this->SetXY(5,$this->GetY()+3);$this->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
 	}
+	
+	
+	function dossierm($NUMD,$DATED,$NAT,$communear,$sexe,$titre)
+	{
+		$this->SetXY(25,$this->GetY()+10);$this->Cell(20,5,'الموضوع :',0,0,'R');
+		if ($NAT==1) {$this->Cell(180,5,'ف / ي  طلبكم المتعلق '.'بتحويل '.$titre.' ببلدية '.$communear." رقم ".$NUMD." المؤرخة في ".$DATED,0,1,'R'); }
+		if ($NAT==2) {$this->Cell(180,5,'ف / ي  طلبكم المتعلق '.'بتنصيب '.$titre.' ببلدية '.$communear." رقم ".$NUMD." المؤرخة في ".$DATED,0,1,'R'); }
+		if ($NAT==3) {$this->Cell(180,5,'ف / ي  طلبكم المتعلق '.'بفتح '.$titre.' ببلدية '.$communear." رقم ".$NUMD." المؤرخة في ".$DATED,0,1,'R'); }
+		if ($NAT==4) {$this->Cell(180,5,'ف / ي  طلبكم المتعلق '.'بغلق '.$titre.' ببلدية '.$communear." رقم ".$NUMD." المؤرخة في ".$DATED,0,1,'R'); }
+		if ($NAT==1) {$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'تبعا لطلبكم المتعلق '.'بتحويل '.$titre. ' يشرفني ان اعلمكم بالموافقة المبدئية كما اطلب منكم تكملة ملفكم بالوثائق التالية',0,1,'R');}
+		if ($NAT==2) {$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'تبعا لطلبكم المتعلق '.'بتنصيب '.$titre. ' يشرفني ان اعلمكم بالموافقة المبدئية كما اطلب منكم تكملة ملفكم بالوثائق التالية',0,1,'R');}
+		if ($NAT==3) {$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'تبعا لطلبكم المتعلق '.'بفتح '.$titre. ' يشرفني ان اعلمكم بالموافقة المبدئية كما اطلب منكم تكملة ملفكم بالوثائق التالية',0,1,'R');}
+		if ($NAT==4) {$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'تبعا لطلبكم المتعلق '.'بغلق'.$titre. ' يشرفني ان اعلمكم بالموافقة المبدئية كما اطلب منكم تكملة ملفكم بالوثائق التالية',0,1,'R');}
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'في اجل 20 يوما والا سوف يلغى طلبكم ',0,1,'R');
+		$this->SetXY(15,$this->GetY()+5);$this->Cell(95,5,'قائمة الوثائق المطلوبة في حالة ',0,0,'R');                        
+		if ($NAT==1) {$this->Cell(20,5,'التحويل',1,1,'C',1,0);}
+		if ($NAT==2) {$this->Cell(20,5,'التنصيب',1,1,'C',1,0);} 
+		if ($NAT==3) {$this->Cell(20,5,'الفتح',1,1,'C',1,0);}
+		if ($NAT==4) {$this->Cell(20,5,'الغلق',1,1,'C',1,0);}
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- طلب خطي ',0,0,'R');                                   $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- شهادة ميلاد أصلية ',0,0,'R');                          $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- شهادة الجنسية',0,0,'R');                              $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- سوابق عدلية',0,0,'R');                                $this->Cell(20,5,'',1,1,'C');
+		if ($sexe=='M'){$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- شهادة أداء أو إعفاء من الخدمة الوطنية',0,0,'R');$this->Cell(20,5,'',1,1,'C');} 
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- شهادة إقامة ',0,0,'R');                              $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- شهادة النجاح ',0,0,'R');                              $this->Cell(20,5,'',1,1,'C');
+		//$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- شهادة الحالة العائلية',0,0,'R');                              $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- شهادت التسجيل في الفرع النضامي الجهوي ',0,0,'R');     $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- مقرر الاستقالة / مقرر الغلق ',0,0,'R');                $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- شهادة عدم الانتساب'.' (CNAS + CASNOS) ',0,0,'R');      $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- شهادة طبية عامة و خاصة ',0,0,'R');                    $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- صور شمسية 02 ',0,0,'R');                              $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'- عقد ملكية أو كراء أو إمتياز أو إعارة ',0,0,'R');               $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'مخطط تفصيلي للمحل مقياس 1/100 (A4) ',0,0,'R');          $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(95,5,'شهادة المطابقة للمحل',0,0,'R');                         $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,"ملاحظة : يودع الملف لدى أمانة مديرية الصحة و السكان كل يوم ثلثاء إبتداء من الساعة الثامنة",0,1,'R',1,0);
+		$this->SetXY(100,$this->GetY()+5);$this->Cell(50,5,'تقبلوا تحيـــــــــــاتنا',0,1,'R');
+		$this->setRTL($enable=false, $resetx=true);
+		$this->SetXY(5,$this->GetY()+10);$this->Cell(100,5,' حرر بالجلفة في : ',0,1,'C');
+		$this->SetXY(5,$this->GetY()+3);$this->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
+		
+	}
+	
+	
 	
 	//*************************************************************************************************************//
 	

@@ -5,7 +5,7 @@ require_once('inspection.php');
 $pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
-$pdf->SetTitle('DECISION');
+$pdf->SetTitle('ouverture_dentiste');
 $pdf->SetSubject('PROTOCOLE');
 $pdf->SetFillColor(230);    //fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
 $pdf->SetTextColor(0,0,0);  //text noire 0   //text BLEU 180 
@@ -25,10 +25,8 @@ $num=$rowx->NREALISATION;
 $date=$rowx->REALISATION;
 $num1=$rowx->NOUVERTURE;
 $date1=$rowx->OUVERTURE;
-$nomar=$rowx->NOMAR;
-$prenomar=$rowx->PRENOMAR;
-$nomfr=$rowx->NOM;
-$prenomfr=$rowx->PRENOM;
+$nomar=$rowx->NOMAR;$prenomar=$rowx->PRENOMAR;
+$nomfr=$rowx->NOM;$prenomfr=$rowx->PRENOM;
 $adresse=$rowx->ADRESSEAR;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
 $wilaya=$rowx->WILAYA;
@@ -46,6 +44,7 @@ while($rowy=mysql_fetch_object($requetey))
 $NUMD=$rowy->NUMD;
 $DATED=$rowy->DATED;
 $DATEP=$rowy->DATEP;
+$adressen=$rowy->ADRESSEAR;$communen=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'communear');$wilayan=$rowy->WILAYA;
 }
 //*************************************************************************************************************************//
 $pdf->entetedecision("مقررة ترخيص بفتح عيادة طبية لجراحة الاسنان",$DATEP);
@@ -59,12 +58,12 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction01_99,0,1,'R');$pd
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome15.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');$pdf->SetFont('aefurat', '', 12);//
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->ordre15.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' جراح (ة) أسنان بتاريخ '.$DATED.' المتعلق بفتح عيادة طبية في جراحة الاسنان',0,1,'R');$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adresse.'  ببلدية  '.$commune.' ولاية الجلفة',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adressen.'  ببلدية  '.$communen.' ولاية الجلفة',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء علي محضر المطابقة الخاص بالعيادة المؤرخ في '.$DATEP,0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
-$pdf->footdecision($nomar,$prenomar,$adresse,$commune,$DATEP,"D");
+$pdf->footdecision($nomar,$prenomar,$adressen,$communen,$DATEP,"D");
 $pdf->ctdecision($nomfr,$prenomfr,$DATEP);
 $pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>

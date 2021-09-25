@@ -5,7 +5,7 @@ require_once('inspection.php');
 $pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
-$pdf->SetTitle('DECISION');
+$pdf->SetTitle('fermeture_dentiste');
 $pdf->SetSubject('PROTOCOLE');
 $pdf->SetFillColor(230);    //fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
 $pdf->SetTextColor(0,0,0);  //text noire 0   //text BLEU 180 
@@ -47,6 +47,7 @@ while($rowy=mysql_fetch_object($requetey))
 $NUMD=$rowy->NUMD;
 $DATED=$rowy->DATED;
 $DATEP=$rowy->DATEP;
+$adressen=$rowy->ADRESSEAR;$communen=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'communear');$wilayan=$rowy->WILAYA;
 }
 //*************************************************************************************************************************//
 $pdf->entetedecision("مقررة غلق عيادة طبية لجراحة الاسنان",$DATEP);
@@ -61,12 +62,12 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome15.$DIPLOME.' الصا
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->ordre15.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على المقررة رقم '.$NOUVERTURE.' المؤرخة في '.$OUVERTURE.' المتعلقة بفتح عيادة طبية لجراحة الاسنان '."للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب المعني (ة) '.'بتاريخ '.$DATED.' المتعلق بغلق عيادته (ها) الطبية لجراحة الاسنان الكائن مقرها',0,1,'R');$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adresse.'  ببلدية  '.$commune.' ولاية الجلفة',0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adressen.'  ببلدية  '.$communen.' ولاية الجلفة',0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->article1f.$nomar.' '.$prenomar.' جراح (ة) اسنان'.' الكائن مقرها',0,1,'R');
-$pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,'           بـ : '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
+$pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"المادة 02 :  يسري مفعول هذه المقررة ابتداء من تاريخ إمضائها",0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5," المادة 03 : يكلف كل من السادة مدير المؤسسة العمومية للصحة الجوارية و مدير صندوق الضمان الإجتماعي بتنفيذ هذه المقررة .",0,1,'R');$pdf->SetFont('aefurat', 'B', 14);
 $pdf->ctdecision($nomfr,$prenomfr,$DATEP);
