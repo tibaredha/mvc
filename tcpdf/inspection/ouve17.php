@@ -15,31 +15,18 @@ $pdf->SetFont('aefurat', 'B', 16);
 $pdf->SetDisplayMode('fullpage','single');//mode d affichage 
 $pdf->AddPage();
 $pdf->SetLineWidth(0.4);
-//***************************************************//
 $pdf-> mysqlconnect(); 
 $query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";$requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
 while($rowx=mysql_fetch_object($requetex))
 {
-$num=$rowx->NREALISATION;
-$date=$rowx->REALISATION;
-$num1=$rowx->NOUVERTURE;
-$date1=$rowx->OUVERTURE;
-$nomar=$rowx->NOMAR;
-$prenomar=$rowx->PRENOMAR;
-$nomfr=$rowx->NOM;
-$prenomfr=$rowx->PRENOM;
-$adresse=$rowx->ADRESSEAR;
-$adresse=$rowx->ADRESSEAR;
-$commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
-$wilaya=$rowx->WILAYA;
-$DIPLOME=$rowx->DIPLOME;
-$UNIV=$rowx->UNIV;
-$NUMORDER=$rowx->NUMORDER;
-$DATEORDER=$rowx->DATEORDER;
-$NUMDEM=$rowx->NUMDEM;
-$DATEDEM=$rowx->DATEDEM;
+$num=$rowx->NREALISATION;$date=$rowx->REALISATION;
+$num1=$rowx->NOUVERTURE;$date1=$rowx->OUVERTURE;
+$nomar=$rowx->NOMAR;$prenomar=$rowx->PRENOMAR;$nomfr=$rowx->NOM;$prenomfr=$rowx->PRENOM;
+$adresse=$rowx->ADRESSEAR;$commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');$wilaya=$rowx->WILAYA;
+$DIPLOME=$rowx->DIPLOME;$UNIV=$rowx->UNIV;
+$NUMORDER=$rowx->NUMORDER;$DATEORDER=$rowx->DATEORDER;
+$NUMDEM=$rowx->NUMDEM;$DATEDEM=$rowx->DATEDEM;
 }
-//***************************************************//
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
 while($rowy=mysql_fetch_object($requetey))
 {

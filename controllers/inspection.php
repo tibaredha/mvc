@@ -759,6 +759,8 @@ class inspection extends Controller {
 	$data['SAF0']= $_POST['SAF'];
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
@@ -803,6 +805,7 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->edithome($data);
 	header('location: ' . URL .$this->route. '/home12/'.$data['idstructure']);	

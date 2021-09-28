@@ -27,6 +27,7 @@ $nom=$rowx->NOM;
 $prenom=$rowx->PRENOM;
 $nomar=$rowx->NOMAR;
 $prenomar=$rowx->PRENOMAR;
+$nomfr=$rowx->NOM;$prenomfr=$rowx->PRENOM;
 $sexe=$rowx->SEX;
 $DNS=$rowx->DNS;
 $Mobile=$rowx->Mobile;
@@ -36,7 +37,6 @@ $NUMORDER=$rowx->NUMORDER;
 $DATEORDER=$rowx->DATEORDER;
 $NUMDEM=$rowx->NUMDEM;
 $DATEDEM=$rowx->DATEDEM;
-
 }
 
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
@@ -300,5 +300,5 @@ $pdf->SetXY(13,$pdf->GetY()+5); $pdf->Cell(60,5,"la léglisation et la réglemen
 $pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(200,5,"Le Praticien Inspecteur ",0,1,'L');
 $pdf->SetXY(100,$pdf->GetY()+5);$pdf->Cell(200,5,"Dr  TIBA ",0,1,'L');
 
-$pdf->Output();
+$pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>

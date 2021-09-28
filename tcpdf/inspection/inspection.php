@@ -1,5 +1,6 @@
 <?php
 require('../TCPDF.php');
+//require('../../TCPDF.php'); dans le cas ou chaque dossier contient un module
 class inspection extends TCPDF
 { 
     public $db_host="localhost";
@@ -147,7 +148,7 @@ class inspection extends TCPDF
 	}
 	function ctdecision($nomfr,$prenomfr,$DATEP)
 	{   
-	    $this->SetXY(5,$this->GetY()+10);$this->Cell(100,5,' حرر بالجلفة في : '.$DATEP,0,1,'C');
+	    $this->SetXY(5,$this->GetY()+10);$this->Cell(100,5,' حرر بالجلفة في : .........................',0,1,'C');
 		$this->SetXY(5,$this->GetY()+3);$this->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,"الاسم و اللقب بالاحرف اللاتنية :",0,1,'R');$this->SetFont('aefurat', 'B', 12);
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$nomfr." ".$prenomfr,0,1,'R');$this->SetFont('aefurat', 'B', 14);

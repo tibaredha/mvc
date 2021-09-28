@@ -1,7 +1,7 @@
 <?php
 $ids=$_GET["ids"]; 
 $idh=$_GET["idh"];  
-require_once('inspection.php');
+require_once('../inspection.php');
 $pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
@@ -19,28 +19,14 @@ $pdf-> mysqlconnect();
 $query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";$requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
 while($rowx=mysql_fetch_object($requetex))
 {
-$num=$rowx->NREALISATION;
-$date=$rowx->REALISATION;
-$num1=$rowx->NOUVERTURE;
-$date1=$rowx->OUVERTURE;
-$nomar=$rowx->NOMAR;
-$prenomar=$rowx->PRENOMAR;
-$nomfr=$rowx->NOM;
-$prenomfr=$rowx->PRENOM;
-$adresse=$rowx->ADRESSEAR;
-$adresse=$rowx->ADRESSEAR;
-$commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');
-$wilaya=$rowx->WILAYA;
-$DIPLOME=$rowx->DIPLOME;
-$UNIV=$rowx->UNIV;
-$NUMORDER=$rowx->NUMORDER;
-$DATEORDER=$rowx->DATEORDER;
-$NUMDEM=$rowx->NUMDEM;
-$DATEDEM=$rowx->DATEDEM;
-$OUVERTURE=$rowx->OUVERTURE;
-$NOUVERTURE=$rowx->NOUVERTURE;
+$num=$rowx->NREALISATION;$date=$rowx->REALISATION;
+$num1=$rowx->NOUVERTURE;$date1=$rowx->OUVERTURE;
+$nomar=$rowx->NOMAR;$prenomar=$rowx->PRENOMAR;$nomfr=$rowx->NOM;$prenomfr=$rowx->PRENOM;
+$adresse=$rowx->ADRESSEAR;$commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowx->COMMUNE,'communear');$wilaya=$rowx->WILAYA;
+$DIPLOME=$rowx->DIPLOME;$UNIV=$rowx->UNIV;
+$NUMORDER=$rowx->NUMORDER;$DATEORDER=$rowx->DATEORDER;
+$NUMDEM=$rowx->NUMDEM;$DATEDEM=$rowx->DATEDEM;
 }
-
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
 while($rowy=mysql_fetch_object($requetey))
 {
@@ -60,7 +46,7 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة ا
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة في القطاع الخاص لمهنيي الصحة ",0,1,'R');$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome17.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->ordre17.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على المقررة رقم '.$NOUVERTURE.' المؤرخة في '.$OUVERTURE.' المتعلقة بفتح عيادة طبية عامة '."للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على المقررة رقم '.$num1.' المؤرخة في '.$date1.' المتعلقة بفتح عيادة طبية عامة '."للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب المعني (ة) '.'بتاريخ '.$DATED.' المتعلق بغلق عيادته (ها) الطبية العامة  الكائن مقرها ',0,1,'R');$pdf->SetFont('aefurat', '', 13);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adressen.'  ببلدية  '.$communen.' ولاية الجلفة',0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 //*************************************************************************************************************************//

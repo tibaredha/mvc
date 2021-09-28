@@ -5,7 +5,7 @@ require_once('inspection.php');
 $pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
-$pdf->SetTitle('instalation_pharmacien');
+$pdf->SetTitle('transfer_pharmacien');
 $pdf->SetSubject('PROTOCOLE');
 $pdf->SetFillColor(230);    //fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
 $pdf->SetTextColor(0,0,0);  //text noire 0   //text BLEU 180 
@@ -46,7 +46,7 @@ $adressen=$rowy->ADRESSEAR;$communen=$pdf->nbrtostring('mvc','comar','IDCOM',$ro
 $ZE=$rowy->ZE;
 }
 //*************************************************************************************************************************//
-$pdf->entetedecision("مقررة ترخيص بتنصيب صيدلية",$DATEP);
+$pdf->entetedecision("مقررة غلق صيدلية",$DATEP);
 //*************************************************************************************************************************//
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->loi18_11,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret92_276,0,1,'R');
@@ -58,16 +58,16 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->arrete110_96,0,1,'R');$pdf->S
 if($ZE==1){$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->cm03_05,0,1,'R');}$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->ordre.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' صيدلي (ة) بتاريخ '.$DATED.' المتعلق بتنصيب صيدلية ',0,1,'R');$pdf->SetFont('aefurat', '', 13);
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على المقررة رقم '.$num1.' المؤرخة في '.$date1.' المتعلقة بفتح صيدلية '."للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' صيدلي (ة) بتاريخ '.$DATED.' المتعلق بغلق صيدلية',0,1,'R');$pdf->SetFont('aefurat', '', 13);
 $pdf->SetXY(0,$pdf->GetY());if($ZE==1){$pdf->Cell(200,5,'  بـ : '.$adressen.'  ببلدية  '.$communen.' ولاية الجلفة '.'في إطار المناطق المعزولة',0,1,'R');}else{$pdf->Cell(200,5,'  بـ : '.$adressen.'  ببلدية  '.$communen.' ولاية الجلفة',0,1,'R');}
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على محضر المطابقة الخاص بالصيدلية المؤرخ في  '.$DATEP,0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' صيدلي (ة) '.' بتنصيب  صيدليته (ها) الكائن مقرها ',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' صيدلي (ة) '.' بتحويل  صيدليته (ها) الكائن مقرها ',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());if($ZE==1){$pdf->Cell(200,5,' ب '.$adresse.' بلدية '.$communen.' ولاية الجلفة '.'في إطار المناطق المعزولة',0,1,'R');}else{$pdf->Cell(200,5,' ب '.$adresse.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');}
-
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->article2bis,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->article2,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->article3,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->article4,0,1,'R');$pdf->SetFont('aefurat', 'B', 14);
 $pdf->ctdecision($nomfr,$prenomfr,$DATEP);

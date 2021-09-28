@@ -550,8 +550,7 @@ class View {
 	
 	function txtautofocus($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required autofocus />";echo "</div>";}
 	function txts($x,$y,$name,$size,$value,$param){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input style=\"text-align:center;\"   type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"  id=\"".$param."\"   required />";echo "</div>";}
-	
-	
+	function verif($id,$val) {if ($id == $val){return 'checked';}}
 	function hide($x,$y,$name,$size,$value){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	  echo " <input type=\"hidden\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" />";echo "</div>";}
 	function sautligne($x){for ($i=1; $i<=$x; $i++){echo "<br />";}}
 	function submit($x,$y,$value){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 echo " <input type=\"submit\" name=\"VALIDER\" id=\"VALIDER\" style=\"color: red\" value=\" ".$value."\" />";echo "</div>";}
@@ -563,6 +562,8 @@ class View {
 	function ques1 ($nom,$ques,$yes,$no){echo'<tr>'; echo'<td>'.$ques.'</td>';echo'<td style="text-align:center;"><input type="radio" name="'.$nom.'" value="1" '.$yes.' /></td>';echo'<td style="text-align:center;"><input type="radio" name="'.$nom.'" value="0" '.$no.' /></td>';echo'</tr>';}
 	function chekbox($x,$y,$nom){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	  echo " <input id=\"CHECK\"    type=\"checkbox\" name=\"$nom\"  />";echo "</div>";}
 	function chekboxed($x,$y,$nom){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">"; echo " <input id=\"CHECK\"    type=\"checkbox\" name=\"$nom\" checked=\"checked\" />";echo "</div>";}
+	function chekboxvx($x,$y,$nom,$vx){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">"; echo "<input id=\"CHECK\"   type=\"checkbox\" name=\"$nom\" $vx >";echo "</div>";}
+	
 	function radio($x,$y,$nom,$val){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"radio\" name=\"$nom\" value=\"$val\"  />";echo "</div>";}
 	function radioed($x,$y,$nom,$val){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"radio\" name=\"$nom\" value=\"$val\" checked=\"checked\"    />";echo "</div>";}
 

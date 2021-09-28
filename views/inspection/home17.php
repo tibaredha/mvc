@@ -63,18 +63,11 @@ ob_end_flush();
 ?>
 <table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
-		
 		<th  colspan=4   style="width:50px;">
-		<?php
-		echo '<a title="Autres Medecin generaliste"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=17'.'" > Autres Medecin generaliste : '.'</a>';
-		?>
+		<?php echo '<a title="Autres Medecin generaliste"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=17'.'" > Autres Medecin generaliste : '.'</a>';?>
 		</th> 
-		
-		
 		<th  colspan=5   style="width:50px;">
-		<?php
-		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'inspection/searchx/0/10?o=id&q='.$this->user[0]['id'].'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
-		?>
+		<?php echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'inspection/searchx/0/10?o=id&q='.$this->user[0]['id'].'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';?>
 		</th> 
 		</tr>
 		<tr>
@@ -102,20 +95,15 @@ ob_end_flush();
 						?>
 						</td>
 						<td align="center"><?php echo $value['ADRESSE'];?></td>
-						<td align="center"><?php echo view::dateUS2FR($value['FINCONTRAT']) ;?></td>
+						<td align="center"><?php echo view::dateUS2FR($value['FINCONTRAT']);?></td>
 						<?php    
-					    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Dossier\"               href=\"".URL.'tcpdf/inspection/doss17.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-						
-						
-						
-						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'tcpdf/inspection/conf17.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+					    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Dossier\" href=\"".URL.'tcpdf/inspection/doss17.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\" href=\"".URL.'tcpdf/inspection/conf17.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
 	                    if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/tran17.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						if($value['NAT']==2){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/inst17.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						if($value['NAT']==3){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/ouve17.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						if($value['NAT']==4){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_fermeture\"    href=\"".URL.'tcpdf/inspection/ferm17.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
-						
 						?>
-						
 						<td align="center"><a title="editer" href="<?php echo URL.'inspection/edithome17/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deletehome17/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
 						</tr>

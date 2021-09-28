@@ -23,8 +23,11 @@ $data = array(
 				),				
 "PROPRIETAIRE"  => $this->home[0]['PROPRIETAIRE'],
 "DEBUTCONTRAT"  => $this->dateUS2FR($this->home[0]['DEBUTCONTRAT']),
-"FINCONTRAT"    => $this->dateUS2FR($this->home[0]['FINCONTRAT'])				
+"FINCONTRAT"    => $this->dateUS2FR($this->home[0]['FINCONTRAT']),
+"ZE"            => $this->home[0]['ZE']				
 );
+
+
 view::button($data['btn'],'');
 echo "<h2>Editer PV de conformite du local de : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
@@ -42,6 +45,9 @@ $this->label($x,$y+420,"Salle de préparation : ");  $this->date1($x+150,$y+410,
 $this->label($x,$y+460,"Salle de stockage : ");     $this->date1($x+150,$y+450,'SAF0',10,'00','saf();');$this->date1($x+225,$y+450,'SAF1',10,'00','saf();');  $this->date1($x+300,$y+450,'SAF',0,$this->home[0]['SAF0'],'saf();');
 $this->label($x,$y+500,'Sanitaires ');              $this->date1($x+150,$y+490,'SAN0',10,'00','san();');$this->date1($x+225,$y+490,'SAN1',10,'00','san();');  $this->date1($x+300,$y+490,'SAN',0,$this->home[0]['SAN0'],'san();');
 $this->label($x,$y+540,'Surface total ');           $this->txt($x+150,$y+530,'STL',0,$this->home[0]['STL']);
+
+$this->label($x+400,$y+340,'ًZone encl');            $this->chekboxvx($x+470,$y+335,"ZE",View::verif($this->home[0]['ZE'],'1'));
+$this->label($x+400,$y+380,'Groupe');               $this->chekbox($x+470,$y+375,"groupe"); $this->combopharmacieng($x+520,$y+370,"PHA4","","","pharmacie",17);
 
 $this->label($x+400,$y+420,'1er pharmacien');       $this->combopharmacien($x+520,$y+410,"PHA1",$this->home[0]['PHA1'],$this->home[0]['PHA1'],"pharmacie",12);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,$this->home[0]['DIST1']);
 $this->label($x+400,$y+460,'2em pharmacien');       $this->combopharmacien($x+520,$y+450,"PHA2",$this->home[0]['PHA2'],$this->home[0]['PHA2'],"pharmacie",12);   $this->label($x+800,$y+460,'Distance 2 ');$this->txt($x+880,$y+450,'DIST2',0,$this->home[0]['DIST2']);
