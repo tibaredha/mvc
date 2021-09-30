@@ -45,8 +45,9 @@ class inspection extends TCPDF
 	
 	public $ordre = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة للصيدلة رقم ";
 	//*dentiste*//
-	public $instruction112_90 = "- بمقتضى التعليمة الوزارية للصحة رقم 112 المؤرخة في 1987/03/02 المتعلقة بأحكام تنصيب جراحو الأسنان ";
-	public $instruction06_98 = "- بمقتضى التعليمة الوزارية للصحة رقم 06 ال مؤرخة في 1998/06/28 المتعلقة بتشغيل الشبه الطبيين في الهياكل الصحية الخاصة";
+	public $instruction112_90   = "- بمقتضى التعليمة الوزارية للصحة رقم 112 المؤرخة في 1987/03/02 المتعلقة بأحكام تنصيب جراحو الأسنان ";
+	public $instruction112_87_m = "- بمقتضى التعليمة الوزارية رقم 112 المؤرخة في 1987/03/02 المتعلقة بأحكام تنصيب الممارسين الطبيين العامين و المتخصصين";
+	public $instruction06_98 = "- بمقتضى التعليمة الوزارية رقم 06 المؤرخة في 1998/06/28 المتعلقة بتشغيل الشبه الطبيين في الهياكل الصحية الخاصة";
 	
 	public $instruction01_99 = "- بمقتضى التعليمة الوزارية للصحة رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة الحرة لمهن الصحة ";
 	public $ordre15 = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة لجراحة الأسنان رقم  ";
@@ -70,6 +71,15 @@ class inspection extends TCPDF
 	public $diplome161 = "- بناء على شهادة النجاح في الدراسات الطبية المتخصصة بتاريخ  ";
 	public $ordre16 = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة لللاطباء الاخصائين رقم  ";
 	public $circulaire10_2018 = "- بمقتضى التعليمة الوزارية رقم 10 / و .ص. س .ا . م / ا ع المؤرخة في 09 جوان 2018 و المتعلقة بتنصيب الممارسين الاخصائيين الخواص";
+	
+	public $decision39_98 = "- بمقتضى القرار رقم 39  و. ص. س المؤرخ في 1998/09/15 الخاص بتنظيم النقل الصحي . ";
+	public $circulaire03_99 = "- بمقتضى المنشور رقم 03 و. ص. س المؤرخ في 1999/12/25 المتضمن الإجراءات المتعلقة بتسليم مقررات الإنجاز و الفتح ";
+	public $circulaire03_99_0 = " لمؤسسات النقل الصحي .";
+	
+	public $note_00_2006 = "- بمقتضى المذكرة المؤرخة في 2006/06/21 المتعلقة بملف إنجاز وحدة النقل الصحي .";
+	public $note_01_2006 = "- بمقتضى المذكرة رقم 01 المؤرخة في 2006/09/05 المتعلقة بمحضر المطابقة للنقل الصحي .";
+	public $note_01_2008 = "- بمقتضى المذكرة رقم 01 و. ص. س المؤرخة في 2008/06/18 المتعلقة بالمقاييس التقنية لسيارات الإسعاف صنف ب . ";
+	public $note_06_2013 = "- بمقتضى المذكرة رقم 06 و. ص. س المؤرخة في 2013/08/05 المتعلقة بإجراءات تسليم مقررات إنجاز و فتح مؤسسات النقل الصحي .";
 	
 	function ANNEEFR($DATEINS) {
 			$A      = substr($DATEINS,6,2); 
@@ -241,7 +251,62 @@ class inspection extends TCPDF
 	}
 	
 	
-	
+	//*************************************************************************************************************//
+	function mhmts($ids,$nomar,$prenomar)
+	{
+	$this->AddPage();
+	$this->SetLineWidth(0.4);
+	$this->Rect(5, 5, 200, 285 ,'D');$this->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
+	$this->SetXY(5,$this->GetY());$this->Cell(200,5,'ملحق المقررة رقم ___________',0,1,'C');
+	$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'  المادة 03 : تعين الوسائل المادية و البشرية  للسيد(ة) '.$nomar.' '.$prenomar.' كالتالي :',0,1,'R');
+	$this->SetXY(15,$this->GetY()+6);$this->cell(180,6,'الوسائل المادية',1,0,'C',1,0);
+	$this->SetXY(15,$this->GetY()+6);$this->cell(30,6,'الشركة المصنعة',1,0,'C',1,0);$this->cell(40,6,'الطراز',1,0,'C',1,0);$this->cell(50,6,'رقم التسلسلي في الطراز',1,0,'C',1,0);$this->cell(40,6,'الترقيم',1,0,'C',1,0);$this->cell(20,6,'الصنف',1,0,'C',1,0);
+	$this->SetXY(15,$this->GetY()+6);
+	$query_liste = "SELECT * FROM auto WHERE idt  ='$ids' and ETAT='0' order by Categorie";//
+	$requete = mysql_query( $query_liste ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
+	$tot1=mysql_num_rows($requete);
+	while($row=mysql_fetch_object($requete))
+	{
+	$this->cell(30,06,$row->Marque,1,0,'C',0);
+	$this->cell(40,06,$row->Type,1,0,'C',0);
+	$this->cell(50,06,$row->Serie_Type,1,0,'C',0);
+	$this->cell(40,06,$row->Immatri,1,0,'C',0);
+	$this->cell(20,06,$row->Categorie,1,0,'C',0);
+	$this->SetXY(15,$this->GetY()+6); 
+	}
+	$this->SetXY(15,$this->GetY());
+	$this->cell(30,6,'المجموع : '.$tot1,1,0,'C',1,0);
+	$this->cell(40,6,$this->nbrcategorie('C',$ids).' : C',1,0,'C',1,0);
+	$this->cell(50,6,$this->nbrcategorie('B',$ids).' : B',1,0,'C',1,0);
+	$this->cell(40,6,$this->nbrcategorie('A',$ids).' : A',1,0,'C',1,0);
+	$this->cell(20,6,'الصنف',1,0,'C',1,0);
+	$this->SetXY(15,$this->GetY()+12);$this->cell(180,6,'الوسائل البشرية',1,0,'C',1,0);
+	$this->SetXY(15,$this->GetY()+6);
+	$this->cell(100,6,'الرتبة',1,0,'C',1,0);
+	$this->cell(40,6,'الإسم',1,0,'C',1,0);
+	$this->cell(40,6,'اللقب',1,0,'C',1,0);
+	$this->SetXY(15,$this->GetY()+6);
+	$query_listep = "SELECT * FROM pers WHERE idt  ='$ids' and ETAT='0' order by Categorie";//
+	$requetep = mysql_query( $query_listep ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
+	$tot1p=mysql_num_rows($requetep);
+	while($rowp=mysql_fetch_object($requetep))
+	{
+	if ($rowp->Categorie=='M') {$this->cell(100,06,'',1,0,'R',0);}
+	if ($rowp->Categorie=='P') {$this->cell(100,06,'ممرض',1,0,'C',0);}
+	if ($rowp->Categorie=='C') {$this->cell(100,06,'سائق',1,0,'C',0);}
+	if ($rowp->Categorie=='')  {$this->cell(100,06,'X',1,0,'C',0);}
+	$this->cell(40,06,$rowp->NOMAR,1,0,'R',0);
+	$this->cell(40,06,$rowp->PRENOMAR,1,0,'R',0);
+	$this->SetXY(15,$this->GetY()+6); 
+	}
+	$this->SetXY(15,$this->GetY());
+	$this->cell(100,6,'المجموع : '.$tot1p,1,0,'C',1,0);
+	$this->cell(40,6,'  سائق : '.$this->nbrpers('C',$ids),1,0,'C',1,0);
+	$this->cell(40,6,'  ممرض : '.$this->nbrpers('P',$ids),1,0,'C',1,0);
+
+	$this->SetXY(5,$this->GetY()+12);$this->Cell(200,5,"المادة 04 : لايمكن تحويل مقر وحدة النقل الصحي او تغير الوسائل المادية و البشرية  دون استشارة مصالح مديرية الصحة و السكان",0,1,'R');
+	$this->SetXY(5,$this->GetY()+6);$this->Cell(200,5,'المادة 05 : يكلف كل من السادة مدير المؤسسة العمومية للصحة الجوارية '.' و مدير صندوق الضمان الإجتماعي بتنفيذ هذه المقررة .',0,1,'R');
+	}
 	//*************************************************************************************************************//
 	
 	function entetesiple()

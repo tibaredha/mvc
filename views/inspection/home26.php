@@ -54,6 +54,9 @@ $this->label($x+400,$y+420,"zp quarantaine :");  $this->date1($x+520,$y+410,'EXT
 $this->label($x+400,$y+460,"Zp réceptionnés :"); $this->date1($x+520,$y+450,'EXTD0',10,'00','extd();');$this->date1($x+595,$y+450,'EXTD1',10,'00','extd();');$this->date1($x+670,$y+450,'EXTD',0,"00",'extd();');
 $this->label($x+400,$y+500,"Zp refusés : ");     $this->date1($x+520,$y+490,'EXTE0',10,'00','exte();');$this->date1($x+595,$y+490,'EXTE1',10,'00','exte();');$this->date1($x+670,$y+490,'EXTE',0,"00",'exte();');
 
+$this->label($x+400,$y+340,'ًZone encl');            $this->chekbox($x+470,$y+335,"ZE");
+$this->label($x+400,$y+380,'Groupe');               $this->chekbox($x+470,$y+375,"groupe"); $this->combopharmacieng($x+520,$y+370,"PHA4","","","pharmacie",17);
+
 $this->label($x+400,$y+420+(40*3),'1er E V D P P'); $this->combopharmacien($x+520,$y+410+(40*3),"PHA1","","","pharmacie",26);   $this->label($x+800,$y+420+(40*3),'D 1 ');$this->txt($x+880,$y+410+(40*3),'DIST1',0,"00");
 $this->label($x+400,$y+460+(40*3),'2em E V D P P'); $this->combopharmacien($x+520,$y+450+(40*3),"PHA2","","","pharmacie",26);   $this->label($x+800,$y+460+(40*3),'D 2 ');$this->txt($x+880,$y+450+(40*3),'DIST2',0,"00");
 $this->label($x+400,$y+500+(40*3),'3em E V D P P'); $this->combopharmacien($x+520,$y+490+(40*3),"PHA3","","","pharmacie",26);   $this->label($x+800,$y+500+(40*3),'D 3 ');$this->txt($x+880,$y+490+(40*3),'DIST3',0,"00");

@@ -46,6 +46,9 @@ $this->label($x,$y+540,"Salle de stérilisation ");        $this->date1($x+150,$
 $this->label($x,$y+580,"La pharmacie");                   $this->date1($x+150,$y+570,'PHR0',10,'00','phr();');$this->date1($x+225,$y+570,'PHR1',10,'00','phr();');$this->date1($x+300,$y+570,'PHR',0,"00",'phr();');
 $this->label($x,$y+620,"Le laboratoire");                 $this->date1($x+150,$y+610,'LAB0',10,'00','lab();');$this->date1($x+225,$y+610,'LAB1',10,'00','lab();');$this->date1($x+300,$y+610,'LAB',0,"00",'lab();');
 
+$this->label($x+400,$y+340,'ًZone encl');            $this->chekbox($x+470,$y+335,"ZE");
+$this->label($x+400,$y+380,'Groupe');               $this->chekbox($x+470,$y+375,"groupe"); $this->combopharmacieng($x+520,$y+370,"PHA4","","","pharmacie",17);
+
 // $this->label($x,$y+540,'salle de stérilisation ');        $this->txt($x+150,$y+530,'STL',0,"00");
 
 $this->label($x+400,$y+420,'1er centre');   $this->combopharmacien($x+520,$y+410,"PHA1","","","pharmacie",10);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,"00");

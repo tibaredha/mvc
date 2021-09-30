@@ -78,6 +78,7 @@ $pdf->SetXY(85,$pdf->GetY()+5);$pdf->Cell(120,5,'السيد مدير الصحة 
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,'الى',0,1,'C');
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,' السيـــــــــد ( ة ) : '.$nomar.' - '.$prenomar,0,1,'C');
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,$adressear. ' بلدية : '.$communear ,0,1,'C');
+$pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,'Tel : '.$Mobile ,0,1,'C');
 $pdf->dossierm($NUMD,$DATED,$NAT,$communear,$sexe,"صيدلية");
 $pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>

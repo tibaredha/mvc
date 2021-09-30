@@ -452,7 +452,7 @@ class inspection_Model extends Model {
 			$this->db->update('home', $postData, "id =" . $data['id'] . "");	
 	        $postData1 = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
 			$this->db->update('structure', $postData1, "id =" . $data['idstructure'] . ""); 
-			// $this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
+			$this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
 			return $last_id = $this->db->lastinsertid();
 	}
 	

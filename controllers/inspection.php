@@ -579,6 +579,7 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	//echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home10/'.$id);	
@@ -624,8 +625,9 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	//echo '<pre>';print_r ($data);echo '<pre>';  
-	$last_id=$this->model->creathome($data);
+    $last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home17/'.$id);	
 	}
 	
@@ -636,6 +638,48 @@ class inspection extends Controller {
 	header('location: ' . URL .$this->route. '/home17/'.$url1[3]);
 	}
 	
+	function edithome17($id) 
+	{
+	$url1 = explode('/',$_GET['url']);
+	//print_r ($url1);
+	$this->view->title = 'edithome';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->home = $this->model->userhomeSingleList( $url1[3]);
+	// $this->view->userListview = $this->model->homeSingleList($id);
+	$this->view->render($this->route.'/edithome17');
+	}
+	function edit1home17($id) 
+	{
+	$this->view->title = 'edithome';
+	// $this->view->user = $this->model->userSinglestructure($id);
+	// $this->view->userListview = $this->model->homeSingleList($id);
+    $data = array();
+	$data['id']= $id;
+	$data['idstructure']= $_POST['idstructure'];;
+	$data['DATEP']= $_POST['DATEP'];
+	$data['NAT']= $_POST['NAT'];
+    $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
+	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PHA1']= $_POST['PHA1'];
+	$data['DIST1']= $_POST['DIST1'];
+	$data['PHA2']= $_POST['PHA2'];
+	$data['DIST2']= $_POST['DIST2'];
+	$data['PHA3']= $_POST['PHA3'];
+	$data['DIST3']= $_POST['DIST3'];
+	$data['CDS0']= $_POST['CDS'];
+	$data['SDS0']= $_POST['SDS'];
+	$data['SAH0']= $_POST['SAH'];
+	$data['SAF0']= $_POST['SAF'];
+	$data['SAN0']= $_POST['SAN'];
+	$data['STL']= $_POST['STL'];
+	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	// echo '<pre>';print_r ($data);echo '<pre>';  
+	$last_id=$this->model->edithome($data);
+	header('location: ' . URL .$this->route. '/home17/'.$data['idstructure']);	
+	}
+	//**************************************************************************************//
 	function home15($id) 
 	{
 	$this->view->title = 'home';
@@ -664,6 +708,7 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home15/'.$id);	
@@ -705,6 +750,7 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home16/'.$id);	
@@ -857,7 +903,7 @@ class inspection extends Controller {
 	$data['EXTC']= $_POST['EXTC'];
 	$data['EXTD']= $_POST['EXTD'];
 	$data['EXTE']= $_POST['EXTE'];
-	
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	//echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathomex($data);
 	header('location: ' . URL .$this->route. '/home26/'.$id);	
@@ -903,6 +949,7 @@ class inspection extends Controller {
 	$data['EXTC']= $_POST['EXTC'];
 	$data['EXTD']= $_POST['EXTD'];
 	$data['EXTE']= $_POST['EXTE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->edithomex($data);
 	header('location: ' . URL .$this->route. '/home26/'.$data['idstructure']);	
@@ -943,6 +990,7 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home24/'.$id);	
@@ -982,6 +1030,7 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home21/'.$id);	
@@ -1016,7 +1065,7 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
-	
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	// $data['id']= $id;
 	// $data['idstructure']= $_POST['idstructure'];;
 	// $data['DATEP']= $_POST['DATEP'];

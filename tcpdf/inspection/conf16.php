@@ -16,47 +16,6 @@ $pdf->SetDisplayMode('fullpage','single');$pdf->SetLineWidth(0.4);
 $pdf-> mysqlconnect();$query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";$requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 while($rowx=mysql_fetch_object($requetex))
 {
-$pdf->dossier("2021");
-
-
-
-// $pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
-// $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
-// $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
-// $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dspfr,0,1,'C');
-////$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'Inspection santé publique',0,1,'L');$pdf->SetXY(155,$pdf->GetY()-5);$pdf->Cell(50,5,'مفتشية الصــــحة العموميـة',0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+5); $pdf->Cell(150,5,"N° : ___________ /DSP/".date('Y'),0,0,'L',0,0);$pdf->cell(50,5,"Le : ".date('d-m-Y'),0,0,'L',0,0);
-// $pdf->SetXY(40,$pdf->GetY()+10);$pdf->cell(165,5,"Monsieur le Directeur de la sante et de la population de la wilaya de djelfa ",0,0,'C',0,0);
-// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(165,5,"A",0,0,'C',0,0);
-// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(165,5,"Monsieur le Directeur générale de la pharmacie et des équipements de santé ",0,0,'C',0,0);
-// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(165,5,$pdf->mspfr,0,0,'C',0,0);
-// $pdf->SetXY(5,$pdf->GetY()+15);$pdf->cell(195,10,"BORDEREAU D'ENVOI",0,0,'C',1,0);
-// $pdf->SetXY(5,$pdf->GetY()+20);$pdf->cell(15,10,"N°",1,0,'C',1,0);$pdf->cell(105,10,"DESIGNATION",1,0,'C',1,0);$pdf->cell(15,10,"NBR",1,0,'C',1,0);$pdf->cell(60,10,"OBSERVATION",1,0,'C',1,0);
-// $pdf->RoundedRect($x=5, $y=$pdf->GetY()+10, $w=15, $h=130, $r=1, $round_corner='1111', $style='', $border_style=array(), $fill_color=array());
-// $pdf->RoundedRect($x=20, $y=$pdf->GetY()+10, $w=105, $h=130, $r=1, $round_corner='1111', $style='', $border_style=array(), $fill_color=array());
-// $pdf->RoundedRect($x=125, $y=$pdf->GetY()+10, $w=15, $h=130, $r=1, $round_corner='1111', $style='', $border_style=array(), $fill_color=array());
-// $pdf->RoundedRect($x=140, $y=$pdf->GetY()+10, $w=60, $h=130, $r=1, $round_corner='1111', $style='', $border_style=array(), $fill_color=array());
-// $pdf->SetXY(20,128);$pdf->cell(105,10,"Veuillez trouver ci-joint",0,0,'C',0,0);
-// $pdf->SetXY(5,148);$pdf->cell(15,10,"1",0,0,'C',0,0);
-// $pdf->SetXY(20,148);$pdf->cell(105,10,"Dossier d'installation du praticien spécialiste ",0,0,'L',0,0);$pdf->SetXY(5+15+105,148);
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,$rowx->NOM.'_'.$rowx->PRENOM,0,0,'L',0,0);
-// $pdf->SetXY(25,$pdf->GetY()+15);$pdf->cell(105,10,"- Demande manuscrite.",0,0,'L',0,0);
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Extrait de naissance.",0,0,'L',0,0);
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Casier judiciaire.",0,0,'L',0,0);
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Certificat de nationalité.",0,0,'L',0,0);
-// if ($rowx->SEX =='M'){$pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Situation vis-à-vis du service national.",0,0,'L',0,0);} 
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Deux certificats médicaux de bonne santé Mg + Pn-Ph.",0,0,'L',0,0);
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Deux photos.",0,0,'L',0,0);
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Photocopie légalisée du diplôme.",0,0,'L',0,0);
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Inscription à la section ordinale des medecins specialistes.",0,0,'L',0,0);
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Attestation de non affiliation CNAS + CASNOS.",0,0,'L',0,0);
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Acte de propriété ou contrat de location notarié.",0,0,'L',0,0);
-// $pdf->SetXY(25,$pdf->GetY()+5);$pdf->cell(105,10,"- Fiche technique d'inscription.",0,0,'L',0,0);
-// $pdf->SetXY(5+15+105,148);$pdf->cell(15,10,"1",0,0,'C',0,0);
-// $pdf->SetXY(5+30+105,148);$pdf->cell(65,10,"***",0,0,'C',0,0);
-// $pdf->SetXY(5+30+105,260);$pdf->cell(40,10,"Le Directeur",0,0,'L',0,0);
-
-
 $pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
