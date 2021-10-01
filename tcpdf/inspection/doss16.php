@@ -36,7 +36,6 @@ $NUMORDER=$rowx->NUMORDER;
 $DATEORDER=$rowx->DATEORDER;
 $NUMDEM=$rowx->NUMDEM;
 $DATEDEM=$rowx->DATEDEM;
-
 }
 
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
@@ -114,12 +113,12 @@ $pdf->SetXY(110,$pdf->GetY()+5);$pdf->Cell(90,5,"...............................
 $pdf->SetXY(110,$pdf->GetY()+5);$pdf->Cell(90,5,"......................................................................................",0,1,'C');
 
 if ($NAT==1){
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",0,0,'L');  $pdf->Cell(55,5,"",0,0,'R');                         $pdf->Cell(130,5,"DANS LA WILAYA DE : DJELFA",0,0,'L');                    
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"X",1,0,'C'); $pdf->Cell(55,5,"DESIR",0,0,'C');                     $pdf->Cell(130,5,"DANS LA DAIRA DE :",0,0,'L'); 
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",0,0,'L');  $pdf->Cell(55,5,"",0,0,'R');                          $pdf->Cell(130,5,"DANS LA WILAYA DE : ",0,0,'L');                    
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",1,0,'C'); $pdf->Cell(55,5,"DESIR",0,0,'C');                      $pdf->Cell(130,5,"DANS LA DAIRA DE :",0,0,'L'); 
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",0,0,'L');  $pdf->Cell(55,5,"M'INSTALLER",0,0,'C');               $pdf->Cell(130,5,"DANS LA COMMUNE :",0,0,'L');   
-$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(10,5,"",0,0,'L'); $pdf->Cell(55,5,"DESIR",0,0,'C');                     $pdf->Cell(130,5,"DANS LA WILAYA DE :",0,0,'L');                    
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",1,0,'L');  $pdf->Cell(55,5,"TRANSFERER",0,0,'C');                $pdf->Cell(130,5,"DANS LA DAIRA DE :",0,0,'L'); 
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",0,0,'L');  $pdf->Cell(55,5,"MON CABINET VERS",0,0,'C');          $pdf->Cell(130,5,"DANS LA COMMUNE :",0,0,'L');   
+$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(10,5,"",0,0,'L'); $pdf->Cell(55,5,"DESIR",0,0,'C');                     $pdf->Cell(130,5,"DANS LA WILAYA DE : DJELFA",0,0,'L');                    
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"X",1,0,'C');  $pdf->Cell(55,5,"TRANSFERER",0,0,'C');               $pdf->Cell(130,5,"DANS LA DAIRA DE :",0,0,'L'); 
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",0,0,'L');  $pdf->Cell(55,5,"MON CABINET VERS",0,0,'C');          $pdf->Cell(130,5,"DANS LA COMMUNE : ".$commune,0,0,'L');   
 $pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(10,5,"",0,0,'L'); $pdf->Cell(55,5,"DEMANDE DE FERMETURE",0,0,'C');      $pdf->Cell(130,5,"DANS LA WILAYA DE :",0,0,'L');                    
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",1,0,'L');  $pdf->Cell(55,5,"DE MON CABINET POUR",0,0,'C');       $pdf->Cell(130,5,"DANS LA DAIRA DE :",0,0,'L'); 
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",0,0,'L');  $pdf->Cell(55,5,"POUR LES RAISONS SUIVANTES",0,0,'C');$pdf->Cell(130,5,"DANS LA COMMUNE :",0,0,'L');   
@@ -139,7 +138,7 @@ $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",0,0,'L');  $pdf->Cell(55,5,"...
 }
 if ($NAT==3){
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",0,0,'L');  $pdf->Cell(55,5,"",0,0,'R');                         $pdf->Cell(130,5,"DANS LA WILAYA DE : DJELFA",0,0,'L');                    
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"X",1,0,'C'); $pdf->Cell(55,5,"DESIR",0,0,'C');                     $pdf->Cell(130,5,"DANS LA DAIRA DE :",0,0,'L'); 
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",1,0,'C'); $pdf->Cell(55,5,"DESIR",0,0,'C');                     $pdf->Cell(130,5,"DANS LA DAIRA DE :",0,0,'L'); 
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",0,0,'L');  $pdf->Cell(55,5,"M'INSTALLER",0,0,'C');               $pdf->Cell(130,5,"DANS LA COMMUNE :",0,0,'L');   
 $pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(10,5,"",0,0,'L'); $pdf->Cell(55,5,"DESIR",0,0,'C');                     $pdf->Cell(130,5,"DANS LA WILAYA DE :",0,0,'L');                    
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(10,5,"",1,0,'L');  $pdf->Cell(55,5,"TRANSFERER",0,0,'C');                $pdf->Cell(130,5,"DANS LA DAIRA DE :",0,0,'L'); 

@@ -45,7 +45,7 @@ $this->label($x,$y+500,'Sanitaires ');           $this->date1($x+150,$y+490,'SAN
 $this->label($x,$y+540,'Surface total ');        $this->txt($x+150,$y+530,'STL',0,"00");
 
 $this->label($x+400,$y+340,'ًZone encl');            $this->chekbox($x+470,$y+335,"ZE");
-$this->label($x+400,$y+380,'Groupe');               $this->chekbox($x+470,$y+375,"groupe"); $this->combopharmacieng($x+520,$y+370,"PHA4","","","pharmacie",17);
+$this->label($x+400,$y+380,'Groupe');               $this->chekbox($x+470,$y+375,"groupe"); $this->combopharmacieng($x+520,$y+370,"PHA4","","","pharmacie",21);
 
 $this->label($x+400,$y+420,'1er transporteur');   $this->combopharmacien($x+520,$y+410,"PHA1","","","pharmacie",21);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,"00");
 $this->label($x+400,$y+460,'2em transporteur');   $this->combopharmacien($x+520,$y+450,"PHA2","","","pharmacie",21);   $this->label($x+800,$y+460,'Distance 2 ');$this->txt($x+880,$y+450,'DIST2',0,"00");
@@ -114,7 +114,7 @@ ob_end_flush();
 						if($value['NAT']==4){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_Fermeture\"    href=\"".URL.'tcpdf/inspection/ferm21.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						?>
 						
-						<td align="center"><a title="editer" href="<?php echo URL.'inspection/edithome21/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
+						<td align="center"><a title="editer" href="<?php echo URL.'inspection/edithome21/'.$value['idstructure'].'/'.$value['id'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deletehome21/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
 						</tr>
 				<?php 

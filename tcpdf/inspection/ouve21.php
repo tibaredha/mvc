@@ -58,7 +58,7 @@ $pdf->propositiondecision();
 $pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'المادة الأولى : يرخص للسيد(ة)  '.$nomar.' '.$prenomar.' بفتح و إستغلال وحدة للنقل الصحي الكائن مقرها ',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,' ب'.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'المادة 02 : يسري مفعول هذه المقررة ابتداء من تاريخ إمضائها',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"المادة 02 : "."لايمكن تحويل مقر وحدة النقل الصحي او تغير الوسائل المادية و البشرية  دون استشارة مصالح مديرية الصحة و السكان ",0,1,'R');
 $pdf->mhmts($ids,$nomar,$prenomar);
 $pdf->SetFont('aefurat', '', 14);
 $pdf->ctdecision($nomfr,$prenomfr,$DATEP);
