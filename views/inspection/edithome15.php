@@ -8,7 +8,7 @@ $data = array(
 "id"         => '', 
 "butun"      => 'Editer conformite + inspection', 
 "photos"     => 'public/images/icons/pers.PNG',
-"action"     => 'inspection/edit1home17/'.$this->home[0]['id'],
+"action"     => 'inspection/edit1home15/'.$this->home[0]['id'],
 "WILAYAN1"   => $this->home[0]['WILAYA'] ,
 "WILAYAN2"   => View::nbrtostring('wil','IDWIL',$this->home[0]['WILAYA'],'WILAYAS'),
 "COMMUNEN1"  => $this->home[0]['COMMUNE'] ,
@@ -47,11 +47,11 @@ $this->label($x,$y+500,'Sanitaires ');              $this->date1($x+150,$y+490,'
 $this->label($x,$y+540,'Surface total ');           $this->txt($x+150,$y+530,'STL',0,$this->home[0]['STL']);
 
 $this->label($x+400,$y+340,'ًZone encl');            $this->chekboxvx($x+470,$y+335,"ZE",View::verif($this->home[0]['ZE'],'1'));
-$this->label($x+400,$y+380,'Groupe');               $this->chekboxvx($x+470,$y+375,"groupe",View::verif($this->home[0]['groupe'],'1')); $this->combopharmacieng($x+520,$y+370,"PHA4",$this->home[0]['PHA4'],View::nbrtostring('structure','id',$this->home[0]['PHA4'],'NOM')."_".View::nbrtostring('structure','id',$this->home[0]['PHA4'],'PRENOM'),"pharmacie",17);
+$this->label($x+400,$y+380,'Groupe');               $this->chekboxvx($x+470,$y+375,"groupe",View::verif($this->home[0]['groupe'],'1')); $this->combopharmacieng($x+520,$y+370,"PHA4",$this->home[0]['PHA4'],View::nbrtostring('structure','id',$this->home[0]['PHA4'],'NOM')."_".View::nbrtostring('structure','id',$this->home[0]['PHA4'],'PRENOM'),"pharmacie",15);
 
-$this->label($x+400,$y+420,'1er géneraliste');      $this->combopharmacien($x+520,$y+410,"PHA1",$this->home[0]['PHA1'],$this->home[0]['PHA1'],"pharmacie",17);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,$this->home[0]['DIST1']);
-$this->label($x+400,$y+460,'2em géneraliste');      $this->combopharmacien($x+520,$y+450,"PHA2",$this->home[0]['PHA2'],$this->home[0]['PHA2'],"pharmacie",17);   $this->label($x+800,$y+460,'Distance 2 ');$this->txt($x+880,$y+450,'DIST2',0,$this->home[0]['DIST2']);
-$this->label($x+400,$y+500,'3em géneraliste');      $this->combopharmacien($x+520,$y+490,"PHA3",$this->home[0]['PHA3'],$this->home[0]['PHA3'],"pharmacie",17);   $this->label($x+800,$y+500,'Distance 3 ');$this->txt($x+880,$y+490,'DIST3',0,$this->home[0]['DIST3']);
+$this->label($x+400,$y+420,'1er dentiste');         $this->combopharmacien($x+520,$y+410,"PHA1",$this->home[0]['PHA1'],$this->home[0]['PHA1'],"pharmacie",15);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,$this->home[0]['DIST1']);
+$this->label($x+400,$y+460,'2em dentiste');         $this->combopharmacien($x+520,$y+450,"PHA2",$this->home[0]['PHA2'],$this->home[0]['PHA2'],"pharmacie",15);   $this->label($x+800,$y+460,'Distance 2 ');$this->txt($x+880,$y+450,'DIST2',0,$this->home[0]['DIST2']);
+$this->label($x+400,$y+500,'3em dentiste');         $this->combopharmacien($x+520,$y+490,"PHA3",$this->home[0]['PHA3'],$this->home[0]['PHA3'],"pharmacie",15);   $this->label($x+800,$y+500,'Distance 3 ');$this->txt($x+880,$y+490,'DIST3',0,$this->home[0]['DIST3']);
 
 $this->label($x+800,$y+300,'Propriétaire');         $this->txtarid($x+880,$y+290,'PROPRIETAIRE','PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
 $this->label($x+800,$y+340,'Début contrat');        $this->txts($x+880,$y+330,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus2');

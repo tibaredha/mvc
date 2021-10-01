@@ -11,7 +11,7 @@ $data = array(
 "action"     => 'inspection/edit1home12/'.$this->home[0]['id'],
 "WILAYAN1"   => $this->home[0]['WILAYA'] ,
 "WILAYAN2"   => View::nbrtostring('wil','IDWIL',$this->home[0]['WILAYA'],'WILAYAS'),
-"COMMUNEN1"  => $this->user[0]['COMMUNE'] ,
+"COMMUNEN1"  => $this->home[0]['COMMUNE'] ,
 "COMMUNEN2"  => View::nbrtostring('com','IDCOM',$this->home[0]['COMMUNE'],'COMMUNE'),
 "ADRESSE"    => $this->home[0]['ADRESSE'],
 "ADRESSEAR"  => $this->home[0]['ADRESSEAR'],
@@ -26,8 +26,6 @@ $data = array(
 "FINCONTRAT"    => $this->dateUS2FR($this->home[0]['FINCONTRAT']),
 "ZE"            => $this->home[0]['ZE']				
 );
-
-
 view::button($data['btn'],'');
 echo "<h2>Editer PV de conformite du local de : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
@@ -47,7 +45,7 @@ $this->label($x,$y+500,'Sanitaires ');              $this->date1($x+150,$y+490,'
 $this->label($x,$y+540,'Surface total ');           $this->txt($x+150,$y+530,'STL',0,$this->home[0]['STL']);
 
 $this->label($x+400,$y+340,'ًZone encl');            $this->chekboxvx($x+470,$y+335,"ZE",View::verif($this->home[0]['ZE'],'1'));
-$this->label($x+400,$y+380,'Groupe');               $this->chekbox($x+470,$y+375,"groupe"); $this->combopharmacieng($x+520,$y+370,"PHA4","","","pharmacie",17);
+$this->label($x+400,$y+380,'Groupe');               $this->chekboxvx($x+470,$y+375,"groupe",View::verif($this->home[0]['groupe'],'1')); $this->combopharmacieng($x+520,$y+370,"PHA4",$this->home[0]['PHA4'],View::nbrtostring('structure','id',$this->home[0]['PHA4'],'NOM')."_".View::nbrtostring('structure','id',$this->home[0]['PHA4'],'PRENOM'),"pharmacie",12);
 
 $this->label($x+400,$y+420,'1er pharmacien');       $this->combopharmacien($x+520,$y+410,"PHA1",$this->home[0]['PHA1'],$this->home[0]['PHA1'],"pharmacie",12);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,$this->home[0]['DIST1']);
 $this->label($x+400,$y+460,'2em pharmacien');       $this->combopharmacien($x+520,$y+450,"PHA2",$this->home[0]['PHA2'],$this->home[0]['PHA2'],"pharmacie",12);   $this->label($x+800,$y+460,'Distance 2 ');$this->txt($x+880,$y+450,'DIST2',0,$this->home[0]['DIST2']);
@@ -62,9 +60,7 @@ $this->submit($x+880,$y+540,$data['butun']);
 $this->f1();
 view::sautligne(22);
 ob_end_flush();
-
 ?>
-
 <script type="text/javascript">
 function saf(){var a = parseFloat(this.document.form1.SAF0.value);var b = parseFloat(this.document.form1.SAF1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SAF.value = result;}
 function sah(){var a = parseFloat(this.document.form1.SAH0.value);var b = parseFloat(this.document.form1.SAH1.value);var result =  parseFloat(a * b).toFixed(2);this.document.form1.SAH.value = result;}

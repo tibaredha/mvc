@@ -592,7 +592,7 @@ class inspection extends Controller {
 	header('location: ' . URL .$this->route. '/home10/'.$url1[3]);
 	}
 	
-	
+	//************************************medecin generaliste*********************************************************************//
 	
 	function home17($id) 
 	{
@@ -641,7 +641,6 @@ class inspection extends Controller {
 	function edithome17($id) 
 	{
 	$url1 = explode('/',$_GET['url']);
-	//print_r ($url1);
 	$this->view->title = 'edithome';
 	$this->view->user = $this->model->userSinglestructure($id);
 	$this->view->home = $this->model->userhomeSingleList( $url1[3]);
@@ -667,6 +666,7 @@ class inspection extends Controller {
 	$data['DIST2']= $_POST['DIST2'];
 	$data['PHA3']= $_POST['PHA3'];
 	$data['DIST3']= $_POST['DIST3'];
+	if(isset($_POST['groupe'])){$data['groupe']= 1;$data['PHA4']= $_POST['PHA4'];}else{$data['groupe']= 0;$data['PHA4']= 0;}
 	$data['CDS0']= $_POST['CDS'];
 	$data['SDS0']= $_POST['SDS'];
 	$data['SAH0']= $_POST['SAH'];
@@ -677,9 +677,10 @@ class inspection extends Controller {
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->edithome($data);
-	header('location: ' . URL .$this->route. '/home17/'.$data['idstructure']);	
+	header('location: ' . URL .$this->route. '/home17/'.$data['idstructure']);		
 	}
-	//**************************************************************************************//
+	//*****************************************chirurgien dentiste****************************************************************//
+	
 	function home15($id) 
 	{
 	$this->view->title = 'home';
@@ -721,7 +722,51 @@ class inspection extends Controller {
 	$this->model->deletehome($id); 
 	header('location: ' . URL .$this->route. '/home15/'.$url1[3]);
 	}
-	//**************************************************//
+	
+	function edithome15($id) 
+	{
+	$url1 = explode('/',$_GET['url']);
+	$this->view->title = 'edithome';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->home = $this->model->userhomeSingleList( $url1[3]);
+	// $this->view->userListview = $this->model->homeSingleList($id);
+	$this->view->render($this->route.'/edithome15');
+	}
+	
+	function edit1home15($id) 
+	{
+	$this->view->title = 'edithome';
+	// $this->view->user = $this->model->userSinglestructure($id);
+	// $this->view->userListview = $this->model->homeSingleList($id);
+    $data = array();
+	$data['id']= $id;
+	$data['idstructure']= $_POST['idstructure'];;
+	$data['DATEP']= $_POST['DATEP'];
+	$data['NAT']= $_POST['NAT'];
+    $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
+	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PHA1']= $_POST['PHA1'];
+	$data['DIST1']= $_POST['DIST1'];
+	$data['PHA2']= $_POST['PHA2'];
+	$data['DIST2']= $_POST['DIST2'];
+	$data['PHA3']= $_POST['PHA3'];
+	$data['DIST3']= $_POST['DIST3'];
+	if(isset($_POST['groupe'])){$data['groupe']= 1;$data['PHA4']= $_POST['PHA4'];}else{$data['groupe']= 0;$data['PHA4']= 0;}
+	$data['CDS0']= $_POST['CDS'];
+	$data['SDS0']= $_POST['SDS'];
+	$data['SAH0']= $_POST['SAH'];
+	$data['SAF0']= $_POST['SAF'];
+	$data['SAN0']= $_POST['SAN'];
+	$data['STL']= $_POST['STL'];
+	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	// echo '<pre>';print_r ($data);echo '<pre>';  
+	$last_id=$this->model->edithome($data);
+	header('location: ' . URL .$this->route. '/home15/'.$data['idstructure']);		
+	}
+	//************************************************medecin specialiste*********************************************************//
+	
 	function home16($id) 
 	{
 	$this->view->title = 'home';
@@ -761,6 +806,48 @@ class inspection extends Controller {
 	$this->model->deletehome($id); 
 	header('location: ' . URL .$this->route. '/home16/'.$url1[3]);
 	}
+	function edithome16($id) 
+	{
+	$url1 = explode('/',$_GET['url']);
+	$this->view->title = 'edithome';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->home = $this->model->userhomeSingleList( $url1[3]);
+	// $this->view->userListview = $this->model->homeSingleList($id);
+	$this->view->render($this->route.'/edithome16');
+	}
+	
+	function edit1home16($id) 
+	{
+	$this->view->title = 'edithome';
+	// $this->view->user = $this->model->userSinglestructure($id);
+	// $this->view->userListview = $this->model->homeSingleList($id);
+    $data = array();
+	$data['id']= $id;
+	$data['idstructure']= $_POST['idstructure'];;
+	$data['DATEP']= $_POST['DATEP'];
+	$data['NAT']= $_POST['NAT'];
+    $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
+	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PHA1']= $_POST['PHA1'];
+	$data['DIST1']= $_POST['DIST1'];
+	$data['PHA2']= $_POST['PHA2'];
+	$data['DIST2']= $_POST['DIST2'];
+	$data['PHA3']= $_POST['PHA3'];
+	$data['DIST3']= $_POST['DIST3'];
+	if(isset($_POST['groupe'])){$data['groupe']= 1;$data['PHA4']= $_POST['PHA4'];}else{$data['groupe']= 0;$data['PHA4']= 0;}
+	$data['CDS0']= $_POST['CDS'];
+	$data['SDS0']= $_POST['SDS'];
+	$data['SAH0']= $_POST['SAH'];
+	$data['SAF0']= $_POST['SAF'];
+	$data['SAN0']= $_POST['SAN'];
+	$data['STL']= $_POST['STL'];
+	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	// echo '<pre>';print_r ($data);echo '<pre>';  
+	$last_id=$this->model->edithome($data);
+	header('location: ' . URL .$this->route. '/home16/'.$data['idstructure']);		
+	}
 	//**************************************************//
 	function home13($id) 
 	{
@@ -770,9 +857,7 @@ class inspection extends Controller {
 	$this->view->render($this->route.'/home13');
 	}
 	
-	
-	
-	//**************************************************//
+	//***********************pharmacien***************************//
 	function home12($id) 
 	{
 	$this->view->title = 'home';
@@ -816,7 +901,7 @@ class inspection extends Controller {
 	
 	function edithome12($id) 
 	{
-	 $url1 = explode('/',$_GET['url']);
+	$url1 = explode('/',$_GET['url']);
 	$this->view->title = 'edithome';
 	$this->view->user = $this->model->userSinglestructure($id);
 	$this->view->home = $this->model->userhomeSingleList( $url1[3]);
@@ -844,6 +929,7 @@ class inspection extends Controller {
 	$data['DIST2']= $_POST['DIST2'];
 	$data['PHA3']= $_POST['PHA3'];
 	$data['DIST3']= $_POST['DIST3'];
+	if(isset($_POST['groupe'])){$data['groupe']= 1;$data['PHA4']= $_POST['PHA4'];}else{$data['groupe']= 0;$data['PHA4']= 0;}
 	$data['CDS0']= $_POST['CDS'];
 	$data['SDS0']= $_POST['SDS'];
 	$data['SAH0']= $_POST['SAH'];
@@ -863,7 +949,7 @@ class inspection extends Controller {
 	$this->model->deletehome($id); 
 	header('location: ' . URL .$this->route. '/home12/'.$url1[3]);
 	}
-	
+	//************************************************************************************//
 	function home26($id) 
 	{
 	$this->view->title = 'home26';

@@ -45,7 +45,7 @@ $this->label($x,$y+500,'Sanitaires ');              $this->date1($x+150,$y+490,'
 $this->label($x,$y+540,'Surface total ');           $this->txt($x+150,$y+530,'STL',0,"00");
 
 $this->label($x+400,$y+340,'ًZone encl');            $this->chekbox($x+470,$y+335,"ZE");
-$this->label($x+400,$y+380,'Groupe');               $this->chekbox($x+470,$y+375,"groupe"); $this->combopharmacieng($x+520,$y+370,"PHA4","","","pharmacie",17);
+$this->label($x+400,$y+380,'Groupe');               $this->chekbox($x+470,$y+375,"groupe"); $this->combopharmacieng($x+520,$y+370,"PHA4","","","pharmacie",12);
 
 $this->label($x+400,$y+420,'1er pharmacien');   $this->combopharmacien($x+520,$y+410,"PHA1","","","pharmacie",12);   $this->label($x+800,$y+420,'Distance 1 ');$this->txt($x+880,$y+410,'DIST1',0,"00");
 $this->label($x+400,$y+460,'2em pharmacien');   $this->combopharmacien($x+520,$y+450,"PHA2","","","pharmacie",12);   $this->label($x+800,$y+460,'Distance 2 ');$this->txt($x+880,$y+450,'DIST2',0,"00");
