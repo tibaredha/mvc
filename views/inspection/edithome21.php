@@ -19,11 +19,21 @@ $data = array(
 				$this->home[0]['NAT']=>$this->home[0]['NAT'],
 				"Transfert"=>"1",
 				"Installation"=>"2",
-				"Ouverture"=>"3"			 
+				"Ouverture"=>"3",
+                "Fermeture"=>"4"				
 				),				
 "PROPRIETAIRE"  => $this->home[0]['PROPRIETAIRE'],
 "DEBUTCONTRAT"  => $this->dateUS2FR($this->home[0]['DEBUTCONTRAT']),
-"FINCONTRAT"    => $this->dateUS2FR($this->home[0]['FINCONTRAT']),
+"DATECOM"       => $this->dateUS2FR($this->home[0]['DATECOM']),
+"FINCONTRAT"    => array(
+				"00m"=>"0",
+				"06m"=>"180",
+				"12m"=>"365",//1a
+				"18m"=>"545",//1.5a
+				"24m"=>"730",//2a
+				"30m"=>"910",//2.5a
+				"36m"=>"1095"//3a
+				),
 "ZE"            => $this->home[0]['ZE']					
 );
 view::button($data['btn'],'');
@@ -50,10 +60,18 @@ $this->label($x+400,$y+460,'2em transporteur');  $this->combopharmacien($x+520,$
 $this->label($x+400,$y+500,'3em transporteur');  $this->combopharmacien($x+520,$y+490,"PHA3",$this->home[0]['PHA3'],$this->home[0]['PHA3'],"pharmacie",21);   $this->label($x+800,$y+500,'Distance 3 '); $this->txt($x+880,$y+490,'DIST3',0,$this->home[0]['DIST3']);
 $this->label($x+800,$y+300,'Propriétaire');      $this->txtarid($x+880,$y+290,'PROPRIETAIRE','PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
 $this->label($x+800,$y+340,'Début contrat');     $this->txts($x+880,$y+330,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus2');
-$this->label($x+800,$y+380,'Fin contrat');       $this->txts($x+880,$y+370,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus3');
+$this->label($x+800,$y+380,'Fin contrat');       
+// $this->txts($x+880,$y+370,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus3');
+$this->combov1($x+880,$y+370,'FINCONTRAT',$data['FINCONTRAT']); 
+
+$this->label(450,550,'Num commission');$this->txt(570,540,'NUMCOM',0,$this->home[0]['NUMCOM']);
+$this->label(850,550,'Date commission '); $this->txts(930,540,'DATECOM',0,$data['DATECOM'],'dateus3'); 
+
+
 $this->hide(100,100,"STRUCTURE","",$this->user[0]['STRUCTURE']);
 $this->hide(100,100,"idstructure","",$this->home[0]['idstructure']);
-$this->submit($x+880,$y+540,$data['butun']);
+
+$this->submit($x+1140,$y+520,$data['butun']);
 $this->f1();
 view::sautligne(22);
 ob_end_flush();

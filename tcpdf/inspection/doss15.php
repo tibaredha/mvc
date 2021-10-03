@@ -11,7 +11,7 @@ $pdf->SetFillColor(230);    //fond gris il faut ajouter au cell un autre paramet
 $pdf->SetTextColor(0,0,0);  //text noire 0   //text BLEU 180 
 $pdf->setPrintHeader(false);
 $pdf->setPrintFooter(false);
-$pdf->SetFont('aefurat', 'B', 12);
+$pdf->SetFont('aefurat', 'B', 12);$pdf->SetAutoPageBreak(TRUE, 0);
 $pdf->SetDisplayMode('fullpage','single');//mode d affichage 
 $pdf->SetLineWidth(0.4);
 $pdf-> mysqlconnect(); 

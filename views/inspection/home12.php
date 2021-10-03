@@ -23,12 +23,21 @@ $data = array(
 				),				
 "PROPRIETAIRE"  => 'x',
 "DEBUTCONTRAT"  => '00-00-0000',
-"FINCONTRAT"    => '00-00-0000'				
+"DATECOM"    => "00-00-0000",
+"FINCONTRAT"    => array(
+				"00m"=>"0",
+				"06m"=>"180",
+				"12m"=>"365",//1a
+				"18m"=>"545",//1.5a
+				"24m"=>"730",//2a
+				"30m"=>"910",//2.5a
+				"36m"=>"1095"//3a
+				)			
 );
 view::button($data['btn'],'');
 echo "<h2>PV de conformite du local de : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
-View::photosurl(1170,230,URL.$data['photos']);
+View::photosurl(1170,210,URL.$data['photos']);
 $x=50;$y=10;
 //$this->txts($x+100,$y+240,'DATE',0,$data['DATE'],'dateus');
 $this->label($x,$y+220,'Wilaya');                $this->WILAYA($x+150,$y+210,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
@@ -53,89 +62,94 @@ $this->label($x+400,$y+500,'3em pharmacien');   $this->combopharmacien($x+520,$y
 
 $this->label($x+800,$y+300,'Propriétaire');      $this->txtarid($x+880,$y+290,'PROPRIETAIRE','PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
 $this->label($x+800,$y+340,'Début contrat');     $this->txts($x+880,$y+330,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus2');
-$this->label($x+800,$y+380,'Fin contrat');       $this->txts($x+880,$y+370,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus3');
+$this->label($x+800,$y+380,'Fin contrat');       
+// $this->txts($x+880,$y+370,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus3');
+$this->combov1($x+880,$y+370,'FINCONTRAT',$data['FINCONTRAT']); 
+
+$this->label(450,550,'Num commission');$this->txt(570,540,'NUMCOM',0,"00");
+$this->label(850,550,'Date commission '); $this->txts(930,540,'DATECOM',0,$data['DATECOM'],'dateus3'); 
+
 $this->hide(100,100,"STRUCTURE","",$this->user[0]['STRUCTURE']);
-$this->submit($x+880,$y+540,$data['butun']);
+$this->submit($x+1140,$y+520,$data['butun']);
 $this->f1();
 view::sautligne(22);
 ob_end_flush();
-
-?>
-<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
-		<tr>
-		<th  colspan=4    style="width:50px;">
-		<?php
+$colspan=9;
+echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>";
+	echo "<tr>";
+		echo "<th  colspan=4    style='width:50px;'>";
 		echo '<a title="Autres officine pharmaceutique"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=12'.'" > Autres officine pharmaceutique : '.'</a>';
-		?>
-		</th> 
-		
-		<th  colspan=5    style="width:50px;">
-		<?php
+		echo "</th>";		
+		echo "<th  colspan=5    style='width:50px;'>";
 		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'inspection/searchx/0/10?o=id&q='.trim($this->user[0]['id']).'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
-		?>
-		</th> 
-		
-		
-		</tr>
-		<tr>
-		<th style="width:10px;">Date PV</th>
-		<th style="width:10px;">Nature PV</th>
-		<th style="width:200px;">Adresse</th>
-		<th style="width:10px;">Fin contrat</th>
-		<th style="width:10px;">Dossier</th>
-		<th style="width:10px;">Pv-Conformite</th>
-		<th style="width:10px;">Décision</th>
-		<th style="width:10px;">UPD </th>
-		<th style="width:10px;">DEL</th>
-		</tr>
-		<?php
-		if (isset($this->userListview)) 
-		{		
-				foreach($this->userListview as $key => $value){ ?>
-						<tr bgcolor='WHITE' onmouseover="this.style.backgroundColor='#9FF781';" onmouseout="this.style.backgroundColor='WHITE';" >
-						<td align="center"><?php echo view::dateUS2FR($value['DATEP']);?></td>
-						<td align="center">
-						<?php 
-						if($value['NAT']==1){echo "Transfert";}
-						if($value['NAT']==2){echo "Instatllation";}
-						if($value['NAT']==3){echo "Ouverture";}
-						?>
-						</td>
-						<td align="center"><?php echo $value['ADRESSE'];?></td>
-						<td align="center"><?php echo view::dateUS2FR($value['FINCONTRAT']) ;?></td>
-						<?php    
-					    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Dossier\"               href=\"".URL.'tcpdf/inspection/doss12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-	                    
-						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'tcpdf/inspection/conf12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-	                    
-						
-						if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/tran12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
-						if($value['NAT']==2){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/inst12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
-						if($value['NAT']==3){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/ouve12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
-						?>
-						
-						<td align="center"><a title="editer" href="<?php echo URL.'inspection/edithome12/'.$value['idstructure'].'/'.$value['id'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
-						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deletehome12/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
-						</tr>
-				<?php 
-				}
-				$total_count=count($this->userListview);
-				if ($total_count <= 0 )
-				{
-				echo '<tr><td align="center" colspan="8" ><span> No record found for autos </span></td> </tr>';
-				echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="9" ><span>' .$total_count.'/'.$total_count.' Record(s) found.</span></td></tr>';					
-				}
-				else
-				{		
-				//echo '<tr bgcolor=""  ><td align="center" colspan="8" >'. barre_navigation ($total_count,$this->userListviewl,$this->userListviewo,$this->userListviewq,$this->userListviewp,$this->userListviewb).'</td></tr>';	
-			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="9" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
-				}		
-		}
-		else 
-		{
+		echo "</th>";
+	echo "</tr>";
+	echo"<tr>";
+		echo"<th style='width:10px;'>Date PV</th>";
+		echo"<th style='width:10px;'>Nature PV</th>";
+		echo"<th style='width:200px;'>Adresse</th>";
+		echo"<th style='width:10px;'>Fin contrat</th>";
+		echo"<th style='width:10px;'>Dossier</th>";
+		echo"<th style='width:10px;'>Pv-Conformite</th>";
+		echo"<th style='width:10px;'>Décision</th>";
+		echo"<th style='width:10px;'>UPD </th>";
+		echo"<th style='width:10px;'>DEL</th>";
+	echo"</tr>";
+	if (isset($this->userListview)) 
+	{		
+		foreach($this->userListview as $key => $value){ 
+				echo'<tr bgcolor="WHITE" onmouseover='."this.style.backgroundColor='#9FF781';".' onmouseout='."this.style.backgroundColor='WHITE';".' >';
+				echo'<td align="center">';
+					echo view::dateUS2FR($value['DATEP']);
+				echo'</td>';
+				echo'<td align="center">';
+					if($value['NAT']==1){echo "Transfert";}
+					if($value['NAT']==2){echo "Instatllation";}
+					if($value['NAT']==3){echo "Ouverture";}
+					if($value['NAT']==4){echo "Fermeture";}
+				echo'</td>';
+				echo'<td align="center">';
+					echo $value['ADRESSE'];
+				echo'</td>';
+				echo'<td align="center">';
+					echo view::dateUS2FR($value['FINCONTRAT']) ;
+				echo'</td>';
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Dossier\"               href=\"".URL.'tcpdf/inspection/doss12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'tcpdf/inspection/conf12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+					if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/tran12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+					if($value['NAT']==2){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/inst12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+					if($value['NAT']==3){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/ouve12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+					if($value['NAT']==4){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_fermeture\"    href=\"".URL.'tcpdf/inspection/ferm12.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+				
+				
+				echo'<td align="center">';
+					echo'<a title="editer" href="'.URL.'inspection/edithome12/'.$value['idstructure'].'/'.$value['id'].'"><img src="'.URL.'public/images/icons/edit.PNG " width="16" height="16" border="0" alt=""/></a>';
+				echo'</td>';
+				echo'<td align="center">';
+					echo'<a class="delete" title="supprimer" href="'.URL.'inspection/deletehome12/'.$value['id'].'/'.$value['idstructure'].'">';
+						echo '<img src="'.URL.'public/images/icons/delete.PNG " width="16" height="16" border="0" alt=""/>';
+					echo '</a>';
+				echo '</td>';
+				echo'</tr>';
+
+			}
+			$total_count=count($this->userListview);
+			if ($total_count <= 0 )
+			{
+				echo '<tr><td align="center" colspan="'.$colspan.'" ><span> No record found for autos </span></td> </tr>';
+				echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="'.$colspan.'" ><span>' .$total_count.'/'.$total_count.' Record(s) found.</span></td></tr>';					
+			}
+			else
+			{		
+				
+				echo '<tr bgcolor="#00CED1"><td align="left"   colspan="'.$colspan.'" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
+			}		
+	}
+	else 
+	{
 		echo '<tr><td align="center" colspan="8" ><span> Click search button to start searching a vms.</span></td></tr>';
-		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="9" ><span>&nbsp;</span></td></tr>';					      
-		} 
+		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="'.$colspan.'" ><span>&nbsp;</span></td></tr>';					      
+	} 
 		
 		?>
 		</table><br/><br/>		

@@ -613,7 +613,10 @@ class inspection extends Controller {
 	$data['NAT']= $_POST['NAT'];
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
-	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
 	$data['PHA1']= $_POST['PHA1'];$data['DIST1']= $_POST['DIST1'];
 	$data['PHA2']= $_POST['PHA2'];$data['DIST2']= $_POST['DIST2'];
 	$data['PHA3']= $_POST['PHA3'];$data['DIST3']= $_POST['DIST3'];
@@ -626,6 +629,8 @@ class inspection extends Controller {
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	//echo '<pre>';print_r ($data);echo '<pre>';  
     $last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home17/'.$id);	
@@ -659,7 +664,10 @@ class inspection extends Controller {
 	$data['NAT']= $_POST['NAT'];
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
-	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
 	$data['PHA1']= $_POST['PHA1'];
 	$data['DIST1']= $_POST['DIST1'];
 	$data['PHA2']= $_POST['PHA2'];
@@ -675,6 +683,8 @@ class inspection extends Controller {
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->edithome($data);
 	header('location: ' . URL .$this->route. '/home17/'.$data['idstructure']);		
@@ -700,7 +710,10 @@ class inspection extends Controller {
 	$data['NAT']= $_POST['NAT'];
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
-	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
 	$data['PHA1']= $_POST['PHA1'];$data['DIST1']= $_POST['DIST1'];$data['PHA2']= $_POST['PHA2'];$data['DIST2']= $_POST['DIST2'];$data['PHA3']= $_POST['PHA3'];$data['DIST3']= $_POST['DIST3'];
 	$data['CDS0']= $_POST['CDS'];
 	$data['SDS0']= $_POST['SDS'];
@@ -710,6 +723,8 @@ class inspection extends Controller {
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home15/'.$id);	
@@ -745,7 +760,10 @@ class inspection extends Controller {
 	$data['NAT']= $_POST['NAT'];
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
-	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
 	$data['PHA1']= $_POST['PHA1'];
 	$data['DIST1']= $_POST['DIST1'];
 	$data['PHA2']= $_POST['PHA2'];
@@ -761,6 +779,8 @@ class inspection extends Controller {
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->edithome($data);
 	header('location: ' . URL .$this->route. '/home15/'.$data['idstructure']);		
@@ -786,7 +806,10 @@ class inspection extends Controller {
 	$data['NAT']= $_POST['NAT'];
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
-	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
 	$data['PHA1']= $_POST['PHA1'];$data['DIST1']= $_POST['DIST1'];$data['PHA2']= $_POST['PHA2'];$data['DIST2']= $_POST['DIST2'];$data['PHA3']= $_POST['PHA3'];$data['DIST3']= $_POST['DIST3'];
 	$data['CDS0']= $_POST['CDS'];
 	$data['SDS0']= $_POST['SDS'];
@@ -796,6 +819,8 @@ class inspection extends Controller {
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home16/'.$id);	
@@ -815,6 +840,30 @@ class inspection extends Controller {
 	// $this->view->userListview = $this->model->homeSingleList($id);
 	$this->view->render($this->route.'/edithome16');
 	}
+	function datePlus($dateDo,$nbrJours)
+	{
+	$timeStamp = strtotime($dateDo); 
+	$timeStamp += 24 * 60 * 60 * $nbrJours;
+	$newDate = date("Y-m-d", $timeStamp);
+	return  $newDate;
+	}
+	function dateUS2FR($date)//2013-01-01
+    {
+	$J      = substr($date,8,2);
+    $M      = substr($date,5,2);
+    $A      = substr($date,0,4);
+	$dateUS2FR =  $J."-".$M."-".$A ;
+    return $dateUS2FR;//01-01-2013
+    }
+	
+	function dateFR2US($date)//01/01/2013
+	{
+	$J      = substr($date,0,2);
+    $M      = substr($date,3,2);
+    $A      = substr($date,6,4);
+	$dateFR2US =  $A."-".$M."-".$J ;
+    return $dateFR2US;//2013-01-01
+	}
 	
 	function edit1home16($id) 
 	{
@@ -828,7 +877,11 @@ class inspection extends Controller {
 	$data['NAT']= $_POST['NAT'];
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
-	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];
+	$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
 	$data['PHA1']= $_POST['PHA1'];
 	$data['DIST1']= $_POST['DIST1'];
 	$data['PHA2']= $_POST['PHA2'];
@@ -844,6 +897,8 @@ class inspection extends Controller {
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->edithome($data);
 	header('location: ' . URL .$this->route. '/home16/'.$data['idstructure']);		
@@ -877,7 +932,10 @@ class inspection extends Controller {
 	$data['NAT']= $_POST['NAT'];
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
-	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
 	$data['PHA1']= $_POST['PHA1'];
 	$data['DIST1']= $_POST['DIST1'];
 	$data['PHA2']= $_POST['PHA2'];
@@ -891,8 +949,9 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
-	
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home12/'.$id);	
@@ -922,7 +981,10 @@ class inspection extends Controller {
 	$data['NAT']= $_POST['NAT'];
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
-	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
 	$data['PHA1']= $_POST['PHA1'];
 	$data['DIST1']= $_POST['DIST1'];
 	$data['PHA2']= $_POST['PHA2'];
@@ -938,6 +1000,8 @@ class inspection extends Controller {
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->edithome($data);
 	header('location: ' . URL .$this->route. '/home12/'.$data['idstructure']);	
@@ -983,13 +1047,14 @@ class inspection extends Controller {
 	$data['SAN0']= $_POST['SAN'];
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
-	
 	$data['EXTA']= $_POST['EXTA'];
 	$data['EXTB']= $_POST['EXTB'];
 	$data['EXTC']= $_POST['EXTC'];
 	$data['EXTD']= $_POST['EXTD'];
 	$data['EXTE']= $_POST['EXTE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	//echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathomex($data);
 	header('location: ' . URL .$this->route. '/home26/'.$id);	
@@ -1036,6 +1101,8 @@ class inspection extends Controller {
 	$data['EXTD']= $_POST['EXTD'];
 	$data['EXTE']= $_POST['EXTE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->edithomex($data);
 	header('location: ' . URL .$this->route. '/home26/'.$data['idstructure']);	
@@ -1077,6 +1144,8 @@ class inspection extends Controller {
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home24/'.$id);	
@@ -1107,7 +1176,11 @@ class inspection extends Controller {
 	$data['NAT']= $_POST['NAT'];
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
-	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
+	
 	$data['PHA1']= $_POST['PHA1'];$data['DIST1']= $_POST['DIST1'];$data['PHA2']= $_POST['PHA2'];$data['DIST2']= $_POST['DIST2'];$data['PHA3']= $_POST['PHA3'];$data['DIST3']= $_POST['DIST3'];
 	$data['CDS0']= $_POST['CDS'];
 	$data['SDS0']= $_POST['SDS'];
@@ -1117,6 +1190,8 @@ class inspection extends Controller {
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->creathome($data);
 	header('location: ' . URL .$this->route. '/home21/'.$id);	
@@ -1144,7 +1219,10 @@ class inspection extends Controller {
 	$data['NAT']= $_POST['NAT'];
     $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
 	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
-	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
 	$data['PHA1']= $_POST['PHA1'];
 	$data['DIST1']= $_POST['DIST1'];
 	$data['PHA2']= $_POST['PHA2'];
@@ -1160,6 +1238,8 @@ class inspection extends Controller {
 	$data['STL']= $_POST['STL'];
 	$data['STRUCTURE']= $_POST['STRUCTURE'];
 	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
 	// echo '<pre>';print_r ($data);echo '<pre>';  
 	$last_id=$this->model->edithome($data);
 	header('location: ' . URL .$this->route. '/home21/'.$data['idstructure']);
