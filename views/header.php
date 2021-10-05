@@ -263,9 +263,9 @@ echo '<div id="cssmenu">';
 //**********************************************************************************************************************************************//			
 		echo '<li class="active has-sub"><a href="'.URL.'"><span>DRH</span></a>';
 			  echo '<ul>';
-					   echo '<li class="active has-sub"><a href="'.URL.'"><span>GRH</span></a>';
+					   echo '<li class="active has-sub"><a href="'.URL.'drh/"><span>GRH</span></a>';
 								echo '<ul>';       
-										 echo '<li><a href="'.URL.'GRH/"><span>GRH</span></a></li>';
+										 echo '<li><a href="'.URL.'"><span>GRH</span></a></li>';
 										 echo '<li><a href="'.URL.'GRH"><span>GRH</span></a></li>';
 										 echo '<li><a href="'.URL.'GRH/"><span>GRH</span></a></li>';
 										 echo '<li><a href="'.URL.'GRH"><span>GRH</span></a></li>';	
@@ -273,16 +273,20 @@ echo '<div id="cssmenu">';
 						echo '</li>';
 						echo '<li class="active has-sub"><a href="'.URL.'"><span>Formation</span></a>';
 								echo '<ul>'; 
-										   // echo '<li><a href="'.URL.'maldecobl/nmaldecobl"><span>MDO</span></a></li>';
-										   // echo '<li><a href="'.URL.'mors/nmors"><span>MORS</span></a></li>';
+										   echo '<li><a href="'.URL.'Formation"><span>Formation</span></a></li>';
+										   echo '<li><a href="'.URL.'Formation"><span>Formation</span></a></li>';
+										   echo '<li><a href="'.URL.'Formation"><span>Formation</span></a></li>';
+										   echo '<li><a href="'.URL.'Formation"><span>Formation</span></a></li>';
+										   
+										   
 								echo '</ul>';
 						echo '</li>';
-						echo '<li class="active has-sub"><a href="'.URL.'"><span>***</span></a>';
-								echo '<ul>'; 
+						// echo '<li class="active has-sub"><a href="'.URL.'"><span>***</span></a>';
+								// echo '<ul>'; 
 										   // echo '<li><a href="'.URL.'scolaire/"><span>Sante Scolaire</span></a></li>';
 								
-								echo '</ul>';
-						echo '</li>';
+								// echo '</ul>';
+						// echo '</li>';
 			  echo '</ul>';
 		echo '</li>';
 //**********************************************************************************************************************************************//				  

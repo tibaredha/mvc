@@ -304,23 +304,40 @@ function dump_MySQL($serveur, $login, $password, $base, $mode)
 
 function photosmfx ($type,$id,$sexe)
 {
-$file = photosmfx."$type/".$id;  
-if (file_exists($file)) {
-   return $filename = trim($id);
-} 
-else 
-{
-	if  (trim($sexe) =='M') 
+	$file = photosmfx."$type/".$id;  
+	if (file_exists($file)) {
+	   return $filename = trim($id);
+	} 
+	else 
 	{
-	return $filename ='m.jpg';
+		if  (trim($sexe) =='M') 
+		{
+		return $filename ='m.jpg';
+		}
+		if  (trim($sexe) =='F') 
+		{
+		return $filename ='f.jpg';
+		}  
 	}
-	if  (trim($sexe) =='F') 
+}
+function photosmfy ($type,$id,$sexe)
+{
+	$file = photosmfx."$type/".$id;  
+	if (file_exists($file)) {
+	   return $filename = trim($id);
+	} 
+	else 
 	{
-	return $filename ='f.jpg';
-	}  
+		if  (trim($sexe) =='1') 
+		{
+		return $filename ='m.jpg';
+		}
+		if  (trim($sexe) =='2') 
+		{
+		return $filename ='f.jpg';
+		}  
+	}
 }
-}
-
 function lang ($lang)
 {
 	if($lang=='1') 
