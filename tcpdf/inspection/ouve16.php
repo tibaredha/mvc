@@ -40,7 +40,9 @@ $DATEORDER=$rowx->DATEORDER;
 $NUMDEM=$rowx->NUMDEM;
 $DATEDEM=$rowx->DATEDEM;
 $SPECIALITE=$rowx->SPECIALITEX;
-}
+$DATEDSC= $rowx->DATEDSC;
+$SERVICECIVILE= $rowx->SERVICECIVILE;
+} 
 
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
 while($rowy=mysql_fetch_object($requetey))
@@ -66,7 +68,7 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5," في القطاع الخاص رق
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- و بعد الإطلاع على ملف طلب "." فتح "."عيادة طبية متخصصة "."للسيد(ة) : ".$nomar.' '.$prenomar." المودع بتاريخ ".$DATEDEM,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome16."للسيد(ة) : ".$nomar.' '.$prenomar." رقم "." بتاريخ ".$DIPLOME,0,1,'R');//.' الصادرة عن جامعة '.$UNIV
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5," و الممنوحة من طرف جامعة ".$UNIV,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->servicecivile." **** "."المؤرخة في "."000-00-00",0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->servicecivile." المؤسسة ".$SERVICECIVILE." المؤرخة في ".$DATEDSC,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على شهلدة التسجيل بمجلس اخلاقيات المهنة  رقم '.$NUMORDER.'  بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء علي محضر المطابقة الخاص بالعيادة المؤرخ في '.$DATEP.' والمحرر من طرف المصالح الصحية للولاية ',0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 $pdf->propositiondecisions();

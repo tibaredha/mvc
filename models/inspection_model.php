@@ -66,7 +66,10 @@ class inspection_Model extends Model {
 			'NUMORDER'      => $data['NUMORDER'],
 			'DATEORDER'     => $this->dateFR2US($data['DATEORDER']),
 			'NUMDEM'        => $data['NUMDEM'],
-			'DATEDEM'       => $this->dateFR2US($data['DATEDEM'])	
+			'DATEDEM'       => $this->dateFR2US($data['DATEDEM']),
+			'DATEDSC'       => $this->dateFR2US($data['DATEDSC']),
+			'SERVICECIVILE' => $data['SERVICECIVILE']
+			
         ));
         // echo '<pre>';print_r ($data);echo '<pre>';
 		return $last_id = $this->db->lastInsertId();
@@ -106,7 +109,9 @@ class inspection_Model extends Model {
 			'NUMORDER'      => $data['NUMORDER'],
 			'DATEORDER'     => $this->dateFR2US($data['DATEORDER']),
 			'NUMDEM'        => $data['NUMDEM'],
-			'DATEDEM'       => $this->dateFR2US($data['DATEDEM'])
+			'DATEDEM'       => $this->dateFR2US($data['DATEDEM']),
+			'DATEDSC'       => $this->dateFR2US($data['DATEDSC']),
+			'SERVICECIVILE' => $data['SERVICECIVILE']
         );
         // echo '<pre>';print_r ($postData);echo '<pre>';
 		$this->db->update('structure', $postData, "id =" . $data['id'] . "");

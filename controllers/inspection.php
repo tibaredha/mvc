@@ -109,6 +109,8 @@ class inspection extends Controller {
 		$data['DATEORDER']     = $_POST['DATEORDER'];
 		$data['NUMDEM']        = $_POST['NUMDEM'];
 		$data['DATEDEM']       = $_POST['DATEDEM'];
+		$data['DATEDSC']         = $_POST['DATEDSC'];
+		$data['SERVICECIVILE']   = $_POST['SERVICECIVILE'];
 		// echo '<pre>';print_r ($data);echo '<pre>';  
 		$last_id=$this->model->createstructure($data);
         header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$last_id);	
@@ -161,6 +163,8 @@ class inspection extends Controller {
 		$data['DATEORDER']    = $_POST['DATEORDER'];
 		$data['NUMDEM']       = $_POST['NUMDEM'];
 		$data['DATEDEM']      = $_POST['DATEDEM'];
+		$data['DATEDSC']         = $_POST['DATEDSC'];
+		$data['SERVICECIVILE']   = $_POST['SERVICECIVILE'];
 		// echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavestructure($data);//search/0/10?o=STRUCTURE&q=$data['STRUCTURE']
 		header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$data['id']);

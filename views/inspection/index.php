@@ -29,21 +29,24 @@ view::button('inspection','');
 lang(Session::get('lang'));
 ob_start();
 view::munu('inspection'); 
-$colspan=15;				
+$colspan=16;				
 if (isset($this->userListview)) 
 {
 echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>" ;
 echo "<tr>" ;
-echo "<th style=\"width:50px;\" colspan=\"4\" >" ;
+echo "<th style=\"width:50px;\" colspan=\"5\" >" ;
 echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'cour/odm/" > Ordre de mission : </a>';
 echo "</th>" ;
 echo "<th style=\"width:50px;\"  colspan=\"15\">" ;
-echo "Releve Des structures sanitaire </th>" ;
+echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'tcpdf/inspection/releve.php?uc=" > Releve Des structures sanitaire : </a>';
+//echo "Releve Des structures sanitaire </th>" ;
 echo "</th>" ;	
 echo "<tr>" ;
 echo "<th style=\"width:10px;\">val</th>" ;
 echo "<th style=\"width:10px;\">view</th>" ;
-echo "<th style=\"width:10px;\">view</th>" ;
+echo "<th style=\"width:10px;\">Img</th>" ;
+echo "<th style=\"width:10px;\">Auth</th>" ;
+echo "<th style=\"width:10px;\">Atest</th>" ;
 echo "<th style=\"width:390px;\">Responssable</th>" ;
 echo "<th style=\"width:100px;\">Contrat Du </th>" ;
 echo "<th style=\"width:200px;\">Residence</th>" ;
@@ -66,17 +69,12 @@ echo "</tr>" ;
         echo "<tr bgcolor=\"".$bgcolor_donate."\"  onmouseover=\"this.style.backgroundColor='#9FF781';\"   onmouseout=\"this.style.backgroundColor='".$bgcolor_donate."';\"  >" ;
 		if ($value['val']==1) {?><td align="center"><a  title="désaprouver" href="<?php echo URL.'inspection/editvalstr/'.$value['id'].'/0';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
 		if ($value['val']==0) {?><td align="center"><a  title="aprouver" href="<?php echo URL.'inspection/editvalstr/'.$value['id'].'/1';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
-
 		echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'inspection/view/'.$value['id']."'\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
-	
 		$fichier = photosmfx('str',$value['id'].'.jpg',$value['SEX']) ;
 		echo "<td align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl/".$value['id']."\" ><img  src=\"".URL."public/webcam/str/".$fichier."?t=".time()."\"  width='25' height='25' border='0'></td> " ;
-		
-		echo "<td style=\"width:270px;\" align=\"left\" >
-		".strtoupper($value['NOM']).'_'.strtolower ($value['PRENOM'])."
-		<a title=\"Authentification diplome\" href=\"".URL.'tcpdf/inspection/authdiplome.php?uc='.$value['id']."\" >[*]</a>
-		</td>" ;
-		
+		echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/inspection/authdiplome.php?uc='.$value['id']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
+	    echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/inspection/attestation_frar.php?uc='.$value['id']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
+		echo "<td style=\"width:270px;\" align=\"left\" >".strtoupper($value['NOM']).'_'.strtolower ($value['PRENOM'])."</td>" ;
 		echo "<td"; if ($value['FINCONTRAT'] > date('Y-m-d')) { echo " bgcolor=\"#7BCCB5\" ";} else { echo " bgcolor=\"red\" ";}echo " style=\"width:110px;\" align=\"center\" >".strtolower (view::dateUS2FR($value['FINCONTRAT']))."</td>" ;
 		
 		echo "<td style=\"width:50px;\" align=\"left\" >".view::nbrtostring('com','IDCOM',$value['COMMUNE'],'COMMUNE')."</td>" ;

@@ -194,6 +194,7 @@ jQuery(function($){
 	   $("#dateus6").mask("99-99-9999",{placeholder:"01/01/2018"});
 	   $("#dateusx").mask("99-99-9999",{placeholder:"01/01/2018"});
 	   $("#dateusy").mask("99-99-9999",{placeholder:"01/01/2018"});
+	   $("#datesc").mask("99-99-9999",{placeholder:"01/01/2018"});
 	  
 	  
 	  $("#immat").mask("99999_999_99",{placeholder:"00000-000-00"});
