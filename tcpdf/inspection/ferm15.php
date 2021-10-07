@@ -44,18 +44,17 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction112_90,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction06_98,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction01_99,0,1,'R');$pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome15.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');$pdf->SetFont('aefurat', '', 12);//
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->ordre15.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على المقررة رقم '.$num1.' المؤرخة في '.$date1.' المتعلقة بفتح عيادة طبية لجراحة الاسنان '."للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب المعني (ة) '.'بتاريخ '.$DATED.' المتعلق بغلق عيادته (ها) الطبية لجراحة الاسنان الكائن مقرها',0,1,'R');$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adressen.'  ببلدية  '.$communen.' ولاية الجلفة',0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
+$pdf->u_diplome ($pdf->diplome15,$DIPLOME,$UNIV,$nomar,$prenomar);
+$pdf->c_order($pdf->ordre15,$NUMORDER,$DATEORDER);
+$pdf->decision_o($num1,$date1,"لجراحة الاسنان",$nomar,$prenomar);
+$pdf->demande($NUMD,$DATED,"بغلق","لجراحة الاسنان",1,$adressen,$communen);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->article1f.$nomar.' '.$prenomar.' جراح (ة) اسنان'.' الكائن مقرها',0,1,'R');
 $pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"المادة 02 :  يسري مفعول هذه المقررة ابتداء من تاريخ إمضائها",0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5," المادة 03 : يكلف كل من السادة مدير المؤسسة العمومية للصحة الجوارية و مدير صندوق الضمان الإجتماعي بتنفيذ هذه المقررة .",0,1,'R');$pdf->SetFont('aefurat', 'B', 14);
+$pdf->date_effet($pdf->article_2);
+$pdf->execution($pdf->article_3);
 $pdf->ctdecision($nomfr,$prenomfr,$DATEP);
 $pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>

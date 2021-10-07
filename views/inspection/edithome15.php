@@ -19,7 +19,8 @@ $data = array(
 				$this->home[0]['NAT']=>$this->home[0]['NAT'],
 				"Transfert"=>"1",
 				"Installation"=>"2",
-				"Ouverture"=>"3"			 
+				"Ouverture"=>"3",
+                "Fermeture"=>"4"				
 				),				
 "PROPRIETAIRE"  => $this->home[0]['PROPRIETAIRE'],
 "DEBUTCONTRAT"  => $this->dateUS2FR($this->home[0]['DEBUTCONTRAT']),

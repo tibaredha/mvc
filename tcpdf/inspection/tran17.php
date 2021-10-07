@@ -44,20 +44,18 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction112_87_m,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction06_98,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة في القطاع الخاص لمهنيي الصحة ",0,1,'R');$pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome17.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->ordre17.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على المقررة رقم '.$num1.' المؤرخة في '.$date1.' المتعلقة بفتح عيادة طبية عامة '."للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب المعني (ة) '.' بتاريخ  '.$DATED.' المتعلق بتحويل عيادته (ها)  الطبية العامة ',0,1,'R');$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'  إلى '.$adressen.'  ببلدية  '.$communen.' ولاية الجلفة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على محضر المطابقة الخاص بالعيادة المؤرخ في '.$DATEP,0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
+$pdf->u_diplome ($pdf->diplome17,$DIPLOME,$UNIV,$nomar,$prenomar);
+$pdf->c_order($pdf->ordre17,$NUMORDER,$DATEORDER);
+$pdf->decision_o($num1,$date1,"عامة",$nomar,$prenomar);
+$pdf->demande($NUMD,$DATED,"بتحويل","العامة",0,$adressen,$communen);
+$pdf->conformite($DATEP);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بتحويل عيادته (ها) الطبية العامة',0,1,'R');
-$pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,'        إلى '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->article3,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->article4,0,1,'R');$pdf->SetFont('aefurat', 'B', 14);
+$pdf->decision_a_t($nomar,$prenomar,$adressen,$communen);
+$pdf->n_transfert($pdf->article_2);
+$pdf->date_effet($pdf->article_3);
+$pdf->execution($pdf->article_4);
 $pdf->ctdecision($nomfr,$prenomfr,$DATEP);
 $pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>

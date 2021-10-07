@@ -103,9 +103,84 @@ class inspection extends TCPDF
 			$JOURS1 = $JOURS[$J-1] ;
 			$DATEPV=$JOURS1;
 			return $DATEPV;
-		}	
+		}
+
+	public $article_1 ="المادة الأولى ";
+	public $article_2 ="المادة 02 ";
+	public $article_3 ="المادة 03 ";
+	public $article_4 ="المادة 04 ";
+	public $article_5 ="المادة 05 ";
+	public $article_6 ="المادة 06 ";
+
+
+
+ 	
 	//*************************************************************************************************************//
+	function decision_o($num1,$date1,$TITRE,$nomar,$prenomar)
+	{
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على المقررة رقم '.$num1.' المؤرخة في '.$date1.' المتعلقة بفتح عيادة طبية '.$TITRE." للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');	
+	}
 	
+	function demande($NUMD,$DATED,$MOTIF,$TITRE,$a,$adressen,$communen)
+	{
+		if($a==1)
+		{
+			$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على طلب المعني (ة) رقم '.$NUMD.' المؤرخ في '.$DATED.' المتعلق '.$MOTIF.' عيادته (ها) الطبية '.$TITRE.' الكائن مقرها ',0,1,'R');$this->SetFont('aefurat', '', 13);	
+			$this->SetXY(5,$this->GetY());$this->Cell(200,5," بـ : ".$adressen.' ببلدية '.$communen.' ولاية الجلفة ',0,1,'R');$this->SetFont('aefurat', 'B', 16);
+		}
+		else 
+		{
+			$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على طلب المعني (ة) رقم '.$NUMD.' المؤرخ في '.$DATED.' المتعلق '.$MOTIF.' عيادته (ها) الطبية '.$TITRE.'',0,1,'R');$this->SetFont('aefurat', '', 13);	
+			$this->SetXY(5,$this->GetY());$this->Cell(200,5," إلى : ".$adressen.' ببلدية '.$communen.' ولاية الجلفة ',0,1,'R');$this->SetFont('aefurat', 'B', 16);
+		
+		}
+		
+	}
+	function date_effet($article)
+	{
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$article." :  يسري مفعول هذه المقررة ابتداء من تاريخ إمضائها",0,1,'R');$this->SetFont('aefurat', '', 12.5);
+	}
+	
+	function execution($article)
+	{
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$article." : يكلف كل من السادة مدير المؤسسة العمومية للصحة الجوارية و مدير صندوق الضمان الإجتماعي بتنفيذ هذه المقررة .",0,1,'R');$this->SetFont('aefurat', 'B', 14);
+	}
+	
+	function decision_a_f($article,$nomar,$prenomar,$adressen,$communen){
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$article." : تغلق العيادة الطبية للسيد(ة) ".$nomar.' '.$prenomar." طبيب (ة) عام (ة) ".' الكائن مقرها',0,1,'R');
+		$this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
+	}
+	
+	function decision_a_t($nomar,$prenomar,$adressen,$communen){
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بتحويل عيادته (ها) الطبية العامة',0,1,'R');
+        $this->SetXY(0,$this->GetY());$this->Cell(200,5,'        إلى : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
+	}
+	function decision_a_o($nomar,$prenomar,$adressen,$communen){
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بفتح عيادته (ها) الطبية العامة'.' الكائن مقرها',0,1,'R');
+        $this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
+	}
+	function decision_a_i($nomar,$prenomar,$adressen,$communen){
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بإنشاء عيادته (ها) الطبية العامة'.' الكائن مقرها',0,1,'R');
+        $this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
+	}
+	function conformite($DATEP)
+	{
+	$this->SetFont('aefurat', '', 13);
+	$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على محضر المطابقة الخاص بالعيادة المؤرخ في '.$DATEP,0,1,'R');$this->SetFont('aefurat', 'B', 16);
+	}
+	
+	function c_order($C_ORDER,$NUMORDER,$DATEORDER)
+	{
+	$this->SetXY(5,$this->GetY());$this->Cell(200,5,$C_ORDER.$NUMORDER.' المؤرخة في '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
+	}
+	function u_diplome ($U_DIPLOME,$DIPLOME,$UNIV,$nomar,$prenomar)
+	{
+	  $this->SetXY(5,$this->GetY());$this->Cell(200,5,$U_DIPLOME.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
+	}
+	function n_transfert($article)
+	{
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$article.' : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
+	}
 	
 	function entetedecision($titre,$DATEP)
 	{
@@ -147,9 +222,9 @@ class inspection extends TCPDF
 	}
 	function footdecision($nomar,$prenomar,$adresse,$commune,$DATEP,$grade)
 	{
-		$this->SetXY(5,$this->GetY()+5);
-		if($grade=="M"){$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بفتح عيادته (ها) الطبية العامة الكائن مقرها ',0,1,'R');}
-		if($grade=="D"){$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' جراح (ة) أسنان'.' بفتح عيادته (ها) الطبية لجراحة الاسنان الكائن مقرها ',0,1,'R');}
+		
+		if($grade=="M"){$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بفتح عيادته (ها) الطبية العامة الكائن مقرها ',0,1,'R');}
+		if($grade=="D"){$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' جراح (ة) أسنان'.' بفتح عيادته (ها) الطبية لجراحة الاسنان الكائن مقرها ',0,1,'R');}
 		
 		$this->SetXY(0,$this->GetY());$this->Cell(200,5,'               بـ : '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');

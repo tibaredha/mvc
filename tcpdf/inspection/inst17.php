@@ -1,7 +1,7 @@
 <?php
 $ids=$_GET["ids"]; 
 $idh=$_GET["idh"];  
-require_once('../inspection.php');
+require_once('inspection.php');
 $pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
@@ -44,15 +44,17 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction112_87_m,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction06_98,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة في القطاع الخاص لمهنيي الصحة ",0,1,'R');$pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome17.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->ordre17.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) بتاريخ '.$DATED.' المتعلق بفتح عيادة طبية عامة',0,1,'R');$pdf->SetFont('aefurat', '', 13);
-$pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,'  بـ : '.$adressen.'  ببلدية  '.$communen.' ولاية الجلفة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على محضر المطابقة الخاص بالعيادة المؤرخ في '.$DATEP,0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
+$pdf->u_diplome ($pdf->diplome17,$DIPLOME,$UNIV,$nomar,$prenomar);
+$pdf->c_order($pdf->ordre17,$NUMORDER,$DATEORDER);
+$pdf->demande($NUMD,$DATED,"بإنشاء","العامة",1,$adressen,$communen);
+$pdf->conformite($DATEP);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
-$pdf->footdecision($nomar,$prenomar,$adressen,$communen,$DATEP,"M");
+$pdf->decision_a_i($nomar,$prenomar,$adressen,$communen);
+$pdf->n_transfert($pdf->article_2);
+$pdf->date_effet($pdf->article_3);
+$pdf->execution($pdf->article_4);
 $pdf->ctdecision($nomfr,$prenomfr,$DATEP);
 $pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>

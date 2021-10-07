@@ -55,7 +55,7 @@ $NUMCOM=$rowy->NUMCOM;
 $DATECOM=$rowy->DATECOM;
 }
 //*************************************************************************************************************************//
-$pdf->entetedecisions("بفتح عيادة طبية متخصصة ",$DATEP);
+$pdf->entetedecisions("بإنشاء عيادة طبية متخصصة ",$DATEP);
 //*************************************************************************************************************************//
 if($SPECIALITE==55){	
 //$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$SPECIALITE,0,1,'R');		
@@ -69,15 +69,17 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->instruction04_2013,0,1,'R');$
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->circulaire10_2018,0,1,'R');$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->avisfavorable,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5," في القطاع الخاص رقم ".$NUMCOM." المؤرخ في ".$DATECOM,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- و بعد الإطلاع على ملف طلب "." فتح "."عيادة طبية متخصصة "."للسيد(ة) : ".$nomar.' '.$prenomar." المودع بتاريخ ".$DATEDEM,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome16."للسيد(ة) : ".$nomar.' '.$prenomar." رقم "." بتاريخ ".$DIPLOME,0,1,'R');//.' الصادرة عن جامعة '.$UNIV
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- و بعد الإطلاع على ملف طلب "." إنشاء "."عيادة طبية متخصصة "."للسيد(ة) : ".$nomar.' '.$prenomar." المودع بتاريخ ".$DATEDEM,0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome16."للسيد(ة) : ".$nomar.' '.$prenomar." رقم ** "." بتاريخ ".$DIPLOME,0,1,'R');//.' الصادرة عن جامعة '.$UNIV
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5," و الممنوحة من طرف جامعة ".$UNIV,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->servicecivile." المؤسسة ".$SERVICECIVILE." المؤرخة في ".$DATEDSC,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على شهلدة التسجيل بمجلس اخلاقيات المهنة  رقم '.$NUMORDER.'  بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء علي محضر المطابقة الخاص بالعيادة المؤرخ في '.$DATEP.' والمحرر من طرف المصالح الصحية للولاية ',0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 $pdf->propositiondecisions();
 $pdf->SetXY(5,$pdf->GetY()+3);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' طبيب اخصائ في '.$pdf->nbrtostring('mvc','specialite','idspecialite',$SPECIALITE,'specialitear') ,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,' بفتح عيادته (ها) الطبية المتخصصة  الكائن مقرها ' .' ب '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,' بإنشاء عيادته (ها) الطبية المتخصصة  الكائن مقرها ' .' ب '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
+
+
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'المادة 02 : يلتزم المستفيد من هذا الترخيص باداء المناوبة بالمؤسسات الصحية العمومية عند الحاجة و  ذلك حسب',0,1,'R');
 $pdf->SetXY(0,$pdf->GetY());$pdf->Cell(200,5,' جدول مسطر من طرف  مدير الصحة والسكان للولاية   ',0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');

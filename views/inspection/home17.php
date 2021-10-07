@@ -108,6 +108,7 @@ ob_end_flush();
 						if($value['NAT']==1){echo "Transfert";}
 						if($value['NAT']==2){echo "Instatllation";}
 						if($value['NAT']==3){echo "Ouverture";}
+						if($value['NAT']==4){echo "Fermeture";}
 						?>
 						</td>
 						<td align="center"><?php echo $value['ADRESSE'];?></td>
