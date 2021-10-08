@@ -120,6 +120,7 @@ class drh extends Controller {
 		$this->view->user = $this->model->userSinglestructure($id);
 		$this->view->render($this->route.'/view');
 	}
+	//********************************************************************************//
 	public function editstructure($id) 
 	{
         $this->view->title = 'editstructure';
@@ -168,6 +169,7 @@ class drh extends Controller {
 		$this->model->editSavestructure($data);//search/0/10?o=STRUCTURE&q=$data['STRUCTURE']
 		header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$data['id']);
 	}
+	//********************************************************************************//
 	public function editetatstr($id)
 	{
 	    $url1 = explode('/',$_GET['url']);
