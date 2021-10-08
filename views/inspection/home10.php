@@ -73,7 +73,7 @@ ob_end_flush();
 		
 		<th  colspan=4    style="width:50px;">
 		<?php
-		echo '<a title="Autres transport sanitaire"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=21'.'" > Autres transport sanitaire : '.'</a>';
+		echo '<a title="Autres centre hemodialyse"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=10'.'" > Autres centre hemodialyse : '.'</a>';
 		?>
 		</th> 
 		

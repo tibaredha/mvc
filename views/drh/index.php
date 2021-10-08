@@ -34,92 +34,86 @@ if (isset($this->userListview))
 {
 echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>" ;
 echo "<tr>" ;
-echo "<th style=\"width:50px;\" colspan=\"5\" >" ;
-echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'cour/odm/" > Ordre de mission : </a>';
-echo "</th>" ;
-echo "<th style=\"width:50px;\"  colspan=\"15\">" ;
-echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'tcpdf/inspection/releve.php?uc=" > Releve Des structures sanitaire : </a>';
-echo "</th>" ;	
+	echo "<th style=\"width:50px;\" colspan=\"5\" >" ;
+		echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'***" > *** : </a>';
+	echo "</th>" ;
+	echo "<th style=\"width:50px;\"  colspan=\"15\">" ;
+		echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'***" > **** : </a>';
+	echo "</th>" ;
+echo "</tr>" ;	
 echo "<tr>" ;
-echo "<th style=\"width:10px;\">val</th>" ;
-echo "<th style=\"width:10px;\">view</th>" ;
-echo "<th style=\"width:10px;\">ِCT</th>" ;
-echo "<th style=\"width:10px;\">FS</th>" ;
-echo "<th style=\"width:10px;\">Photos</th>" ;
-echo "<th style=\"width:10px;\">Nom_Prenom</th>" ;
-echo "<th style=\"width:390px;\">الاسم و اللقب</th>" ;
-// echo "<th style=\"width:100px;\">Contrat Du </th>" ;
-// echo "<th style=\"width:200px;\">Residence</th>" ;
-// echo "<th style=\"width:200px;\">Structure</th>" ;
-// echo "<th style=\"width:10px;\">PV</th>" ;
-// echo "<th style=\"width:10px;\">Ins</th>" ;
-// echo "<th style=\"width:10px;\">Ouv</th>" ;
-// echo "<th style=\"width:10px;\">Cha</th>" ;
-// echo "<th style=\"width:70px;\">Home</th>" ;
-// echo "<th style=\"width:70px;\">Pers</th>" ;
-// echo "<th style=\"width:70px;\">Vehi</th>" ;
-// echo "<th style=\"width:70px;\">Insp</th>" ;
-// echo "<th style=\"width:10px;\">Etat</th>" ;
-echo "<th style=\"width:10px;\">Upd</th>" ;
-echo "<th style=\"width:10px;\">Del</th>" ;
+	echo "<th style=\"width:10px;\">Photos</th>" ;
+	echo "<th style=\"width:10px;\">View</th>" ;
+	echo "<th style=\"width:10px;\">ِCT</th>" ;
+	echo "<th style=\"width:10px;\">FS</th>" ;
+	echo "<th style=\"width:10px;\">Nom_Prenom</th>" ;
+	echo "<th style=\"width:10px;\">Sitiuation</th>" ;
+	echo "<th style=\"width:390px;\">الاسم و اللقب</th>" ;
+	echo "<th style=\"width:10px;\">Upd</th>" ;
+	echo "<th style=\"width:10px;\">Del</th>" ;
 echo "</tr>" ;		
-		foreach($this->userListview as $key => $value)
-		{ 
+	foreach($this->userListview as $key => $value)
+	{
 		$bgcolor_donate = 'white';
-        echo "<tr bgcolor=\"".$bgcolor_donate."\"  onmouseover=\"this.style.backgroundColor='#9FF781';\"   onmouseout=\"this.style.backgroundColor='".$bgcolor_donate."';\"  >" ;
-		
-		echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'inspection/view/'.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
-		$fichier = photosmfy('str',$value['idp'].'.jpg',$value['Sexe']);
-		echo "<td align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl/".$value['idp']."\" ><img  src=\"".URL."public/webcam/str/".$fichier."?t=".time()."\"  width='25' height='25' border='0'></td> " ;
-		echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/drh/attestation_trav.php?uc='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
-		echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
-		$num = URL.'./public/photos/'.$value['idp'].'.jpg';
-		echo "<td><div align=\"center\">";
-		echo "<img src='$num'  width='30' height='30' border='1' alt=''/>";
-		echo "</div></td>\n" ;
-		echo "<td style=\"width:270px;\" align=\"left\" >".strtoupper($value['Nomlatin']).'_'.strtolower ($value['Prenom_Latin'])."</td>" ;
-		echo "<td style=\"width:270px;\" align=\"right\" >".$value['Nomarab'].'_'.$value['Prenom_Arabe'].' : ('.$value['pere'].")</td>" ;
-		
-		// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Personel\"    href=\"".URL.'inspection/pers/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrpers($value['idp'])." ] </td>" ;
-		// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Vehicule\"    href=\"".URL.'inspection/auto/'.$value['idp']."/"."\" ><img  src=\"".URL.'public/images/icons/auto.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrveh($value['idp'])." ] </td>" ;
-		// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Inspection\"  href=\"".URL.'inspection/insp/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['idp'])." ]</td>" ;
-        // echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Personel\"    href=\"".URL.'inspection/pers/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrpers($value['idp'])." ] </td>" ;
-		// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Vehicule\"    href=\"".URL.'inspection/auto/'.$value['idp']."/"."\" ><img  src=\"".URL.'public/images/icons/auto.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrveh($value['idp'])." ] </td>" ;
-		// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Inspection\"  href=\"".URL.'inspection/insp/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['idp'])." ]</td>" ;
-        // echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Inspection\"  href=\"".URL.'inspection/insp/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['idp'])." ]</td>" ;
-        // echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Inspection\"  href=\"".URL.'inspection/insp/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['idp'])." ]</td>" ;
-       
-	   
-	   
-	   
-		echo "<td style=\"width:50px;\" align=\"center\" ><a                  title=\"editer\"     href=\"".URL.'drh/editstructure/'.$value['idp']."\" >  <img  src=\"".URL.'public/images/icons/edit.PNG'."\"    width='30' height='30' border='0' alt='' ></a></td>" ;
-		echo "<td style=\"width:50px;\" align=\"center\" ><a class=\"delete\" title=\"supprimer\"  href=\"".URL.'dth/deletestructure/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/delete.PNG'."\"  width='30' height='30' border='0' alt='' ></a></td>" ; 
-		echo'</tr>';
-		}
-		$total_count=count($this->userListview1);
-		$total_count1=count($this->userListview);
-		if ($total_count <= 0 )
-		{
-			echo '<tr><td align="center" colspan="'.$colspan.'" ><span> No record found for structures </span></td> </tr>';
-			header('location: ' . URL . 'drh/ndrh/'.$this->userListviewq);
-			echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="'.$colspan.'" ><span>' .$total_count1.'/'.$total_count.' Record(s) found.</span></td></tr>';					
-		}
-        else
-		{		
-			echo '<tr bgcolor="#00CED1"><td align="center" colspan="'.$colspan.'" >'. view::barre_navigation ($total_count,$this->userListviewl,$this->userListviewo,$this->userListviewq,$this->userListviewp,$this->userListviewb,'drh','search').'</td></tr>';	
+		$fichier = photosmfy('drh',$value['idp'].'.jpg',$value['Sexe']);
+		echo "<tr bgcolor=\"".$bgcolor_donate."\"  onmouseover=\"this.style.backgroundColor='#9FF781';\"   onmouseout=\"this.style.backgroundColor='".$bgcolor_donate."';\"  >" ;
 			
-			$limit=$this->userListviewl;		
-			$page=$this->userListviewp;
-			if ($page <= 0){$prev_page =$this->userListviewp;}else{$prev_page = $page-$limit;}
-			$total_page = ceil($total_count/$limit); echo "<br>" ;  
-			$prev_url = URL.'drh/search/'.$prev_page.'/'.$limit.'?q='.$this->userListviewq.'&o='.$this->userListviewo.'';   
-			$next_url = URL.'drh/search/'.($page+$limit).'/'.$limit.'?q='.$this->userListviewq.'&o='.$this->userListviewo.'';    
-			echo '<tr bgcolor="#00CED1"  ><td align="center" colspan="'.$colspan.'" >';	
-			?> 
-			<?php echo '<button '; echo ($page<=0)?'disabled':'';?>                  onclick="document.location='<?php echo $prev_url; ?>'"> <?php echo ""; echo 'Previews</button>&nbsp;<span>[' .$total_count1.'/'.$total_count.' Record(s) found.]</span>'; ?>                              
-			<?php echo '<button '; echo ($page>=$total_page*$limit)?'disabled':'';?> onclick="document.location='<?php echo $next_url; ?>'"> <?php echo "Next</button>";?> 
-			<?php 
-	    }
+			echo "<td align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."drh/upl/".$value['idp']."\" ><img  src=\"".URL."public/webcam/drh/".$fichier."?t=".time()."\"  width='50' height='50' border='0'></td> " ;
+			echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'drh/view/'.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
+			echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/drh/attestation_trav.php?uc='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
+			echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
+			
+			if($value['cessation']=='')
+			{
+				echo "<td id =\"nom_prenom_fr\" >".strtoupper($value['Nomlatin']).'_'.strtolower ($value['Prenom_Latin'])."</td>" ;
+				echo "<td id =\"actif\" >في الخدمة</td>" ;
+				echo "<td id =\"nom_prenom_ar\" >".$value['Nomarab'].'_'.$value['Prenom_Arabe'].' : ('.$value['pere'].")</td>" ;
+				
+			}
+			else
+			{
+				//$value['Motif_Cessation']
+				echo "<td id =\"nom_prenom_fr_n\" >".strtoupper($value['Nomlatin']).'_'.strtolower ($value['Prenom_Latin'])."</td>" ;
+				echo "<td id =\"actif_n\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</td>" ;
+				echo "<td id =\"nom_prenom_ar_n\" >".$value['Nomarab'].'_'.$value['Prenom_Arabe'].' : ('.$value['pere'].")</td>" ;
+			}
+			
+			// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Personel\"    href=\"".URL.'inspection/pers/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrpers($value['idp'])." ] </td>" ;
+			// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Vehicule\"    href=\"".URL.'inspection/auto/'.$value['idp']."/"."\" ><img  src=\"".URL.'public/images/icons/auto.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrveh($value['idp'])." ] </td>" ;
+			// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Inspection\"  href=\"".URL.'inspection/insp/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['idp'])." ]</td>" ;
+			// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Personel\"    href=\"".URL.'inspection/pers/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrpers($value['idp'])." ] </td>" ;
+			// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Vehicule\"    href=\"".URL.'inspection/auto/'.$value['idp']."/"."\" ><img  src=\"".URL.'public/images/icons/auto.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrveh($value['idp'])." ] </td>" ;
+			// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Inspection\"  href=\"".URL.'inspection/insp/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['idp'])." ]</td>" ;
+			// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Inspection\"  href=\"".URL.'inspection/insp/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['idp'])." ]</td>" ;
+			// echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Inspection\"  href=\"".URL.'inspection/insp/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['idp'])." ]</td>" ;
+			echo "<td style=\"width:50px;\" align=\"center\" ><a                  title=\"editer\"     href=\"".URL.'drh/editstructure/'.$value['idp']."\" >  <img  src=\"".URL.'public/images/icons/edit.PNG'."\"    width='50' height='50' border='0' alt='' ></a></td>" ;
+			echo "<td style=\"width:50px;\" align=\"center\" ><a class=\"delete\" title=\"supprimer\"  href=\"".URL.'dth/deletestructure/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/delete.PNG'."\"  width='50' height='50' border='0' alt='' ></a></td>" ; 
+		echo'</tr>';
+	}
+	$total_count=count($this->userListview1);
+	$total_count1=count($this->userListview);
+	if ($total_count <= 0 )
+	{
+		echo '<tr><td align="center" colspan="'.$colspan.'" ><span> No record found for structures </span></td> </tr>';
+		header('location: ' . URL . 'drh/ndrh/'.$this->userListviewq);
+		echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="'.$colspan.'" ><span>' .$total_count1.'/'.$total_count.' Record(s) found.</span></td></tr>';					
+	}
+	else
+	{		
+		echo '<tr bgcolor="#00CED1"><td align="center" colspan="'.$colspan.'" >'. view::barre_navigation ($total_count,$this->userListviewl,$this->userListviewo,$this->userListviewq,$this->userListviewp,$this->userListviewb,'drh','search').'</td></tr>';	
+		
+		$limit=$this->userListviewl;		
+		$page=$this->userListviewp;
+		if ($page <= 0){$prev_page =$this->userListviewp;}else{$prev_page = $page-$limit;}
+		$total_page = ceil($total_count/$limit); echo "<br>" ;  
+		$prev_url = URL.'drh/search/'.$prev_page.'/'.$limit.'?q='.$this->userListviewq.'&o='.$this->userListviewo.'';   
+		$next_url = URL.'drh/search/'.($page+$limit).'/'.$limit.'?q='.$this->userListviewq.'&o='.$this->userListviewo.'';    
+		echo '<tr bgcolor="#00CED1"  ><td align="center" colspan="'.$colspan.'" >';	
+		?> 
+		<?php echo '<button '; echo ($page<=0)?'disabled':'';?>                  onclick="document.location='<?php echo $prev_url; ?>'"> <?php echo ""; echo 'Previews</button>&nbsp;<span>[' .$total_count1.'/'.$total_count.' Record(s) found.]</span>'; ?>                              
+		<?php echo '<button '; echo ($page>=$total_page*$limit)?'disabled':'';?> onclick="document.location='<?php echo $next_url; ?>'"> <?php echo "Next</button>";?> 
+		<?php 
+	}
 }
 else 
 {

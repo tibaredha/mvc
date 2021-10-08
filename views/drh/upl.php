@@ -8,7 +8,7 @@ $url1 = explode('/',$_GET['url']);
 <h1>Changer : photos</h1>
 <br /><br />
 <hr /><br />
-<form method="post" action="<?php echo URL;?>inspection/upl1/<?php  echo $url1[2];?>"  name="fileForm" id="fileForm" enctype="multipart/form-data" > 
+<form method="post" action="<?php echo URL;?>drh/upl1/<?php  echo $url1[2];?>"  name="fileForm" id="fileForm" enctype="multipart/form-data" > 
 <table align="center" border="2">
           <tr>
 		  <td align="center">

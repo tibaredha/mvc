@@ -32,13 +32,25 @@ mysql_free_result($requete);
 // }
 $pdf->AddPage();
 $pdf->SetLineWidth(0.4);
-$photos='../../public/photos/'.$ndp.'.jpg';
-if(file_exists($photos)){
-$pdf->Image($photos, $x='5', $y='5', $w=30, $h=35, $type='', $link='', $align='', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false, $hidden=false, $fitonpage=false, $alt=false, $altimgs=array());	
+$photos='../../public/webcam/drh/'.$ndp.'.jpg';
+$photosm='../../public/webcam/drh/m.jpg';
+$photosf='../../public/webcam/drh/f.jpg';
+$sex=	$result["Sexe"];
+if(file_exists($photos))
+{
+	$pdf->Image($photos, $x='5', $y='5', $w=30, $h=35, $type='', $link='', $align='', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false, $hidden=false, $fitonpage=false, $alt=false, $altimgs=array());	
 }
-else{
-	
-	
+else
+{
+	if($sex==1)
+	{
+		$pdf->Image($photosm, $x='5', $y='5', $w=30, $h=35, $type='', $link='', $align='', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false, $hidden=false, $fitonpage=false, $alt=false, $altimgs=array());		
+	}
+	else
+	{
+		$pdf->Image($photosf, $x='5', $y='5', $w=30, $h=35, $type='', $link='', $align='', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false, $hidden=false, $fitonpage=false, $alt=false, $altimgs=array());		
+		
+	}	
 }
 
 

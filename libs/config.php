@@ -301,7 +301,7 @@ function dump_MySQL($serveur, $login, $password, $base, $mode)
     echo "Sauvegarde terminée";
 	// header("Location:index.php?uc=accueil") ;
 }
-
+define('photosmfx', 'd:\\mvc/public/webcam/');
 function photosmfx ($type,$id,$sexe)
 {
 	$file = photosmfx."$type/".$id;  
@@ -320,21 +320,27 @@ function photosmfx ($type,$id,$sexe)
 		}  
 	}
 }
+
+define('photosmfy', 'd:\\wamp/www/mvc/public/webcam/');
 function photosmfy ($type,$id,$sexe)
 {
-	$file = photosmfx."$type/".$id;  
-	if (file_exists($file)) {
+	$file = photosmfy."$type/".$id;  
+	if (file_exists($file)) 
+	{
+	
 	   return $filename = trim($id);
+	   //echo "ok";
 	} 
 	else 
 	{
+		
 		if  (trim($sexe) =='1') 
 		{
-		return $filename ='m.jpg';
+			return $filename ='m.jpg';
 		}
 		if  (trim($sexe) =='2') 
 		{
-		return $filename ='f.jpg';
+			return $filename ='f.jpg';
 		}  
 	}
 }
@@ -1831,7 +1837,7 @@ define('uploadLocationpat', 'd:\\mvc/public/webcam/pat/');
 define('uploadLocationdnr', 'd:\\mvc/public/webcam/dnr/');
 define('uploadLocationrec', 'd:\\mvc/public/webcam/rec/');
 define('dump_mysql', 'd:/mvc/data/datasql/');
-define('photosmfx', 'd:\\mvc/public/webcam/');
+
 
 
 // error_reporting(0);

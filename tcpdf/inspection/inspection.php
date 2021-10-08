@@ -285,6 +285,7 @@ class inspection extends TCPDF
 		$this->SetXY(5,$this->GetY()+10);$this->Cell(100,5,' حرر بالجلفة في : ',0,1,'C');
 		$this->SetXY(5,$this->GetY()+3);$this->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
 	}
+	
 	function dossier_complemet($NUMD,$DATED,$communear,$titre,$etat)
 	{
 		$this->SetXY(25,$this->GetY()+5);$this->Cell(20,5,'الموضوع :',0,0,'R');$this->Cell(180,5,'ف / ي  طلبكم رقم '.$NUMD." المؤرخ في ".$DATED." المتعلق ".$etat." ".$titre.' ببلدية '.$communear,0,1,'R'); 
@@ -341,7 +342,95 @@ class inspection extends TCPDF
 		$this->SetXY(5,$this->GetY()+3);$this->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
 		
 	}
+	function dossierehp0($DATEP)
+	{
+		$this->AddPage();$this->SetFont('aefurat', '', 12);
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,1,'C');$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repfr,0,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->mspar,0,1,'C');$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->mspfr,0,1,'C');
+		//$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dspar,0,1,'C');$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dspfr,0,1,'C');
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->wilayaar,0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dsparp,0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dssar,0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'رقم : '.'_____'.' / م. ص. س / '.substr($DATEP,0,4),0,1,'R');$this->SetFont('aefurat', 'B', 14);
+		$this->SetXY(5,$this->GetY()+3);$this->Cell(200,5,"الوثائق المطلوبة لتكوين ملف إنشاء / فتح / تحويل / غلق ",0,1,'C');$this->SetFont('aefurat', '', 14);
+	    $this->SetXY(5,$this->GetY()+3);$this->Cell(200,5,"مؤسسة إستشفائية خاصة ",0,1,'C');$this->SetFont('aefurat', '', 12);
+	    
+		$this->SetXY(5,$this->GetY()+10);$this->Cell(25,5,"غلق مقر",1,0,'C',1,0);$this->Cell(25,5,"تحويل مقر",1,0,'C',1,0);$this->Cell(25,5,"فتح مقر",1,0,'C',1,0);$this->Cell(110,5,"الوثائق المطلوبة",1,0,'C',1,0);$this->Cell(15,5,"الرقم",1,1,'C',1,0);
+	    $this->SetXY(5,$this->GetY());$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"01",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"02",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"03",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"04",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"05",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"06",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"07",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"08",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"09",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"10",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"11",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"12",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"13",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"14",1,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"",1,0,'R');$this->Cell(15,5,"15",1,1,'C');
+		
+		// $this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"مقرر غلق مقر إن وجد",1,0,'R');$this->Cell(15,5,"16",1,1,'C');
+		// $this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"عقد ملكية أو كراء أو إمتياز أو إعارة ",1,0,'R');$this->Cell(15,5,"17",1,1,'C');
+		// $this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"مخطط المقر مؤشر عليه من قبل مكتب الدراسات و المعني",1,0,'R');$this->Cell(15,5,"18",1,1,'C');
+		// $this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"محضر المطابقة للمقر من قبل مصالح الصحة",1,0,'R');$this->Cell(15,5,"19",1,1,'C');
+		// $this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"فاتورة جهاز التعقييم  للإختصاصات الجراحية بإسم المعني",1,0,'R');$this->Cell(15,5,"20",1,1,'C');
+		// $this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"إتفاقية حرق النفايات مع مؤسسة عمومية أو خاصة",1,0,'R');$this->Cell(15,5,"21",1,1,'C');
+		// $this->SetXY(5,$this->GetY());$this->Cell(25,5,"",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(25,5,"*",1,0,'C');$this->Cell(110,5,"شهادة مطابقة العزل للأشعة بالنسبة لمالكي جهاز الأشعة ",1,0,'R');$this->Cell(15,5,"22",1,1,'C');
+	    $this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,"ملاحظة : يودع الملف لدى أمانة مديرية الصحة و السكان كل يوم ثلثاء إبتداء من الساعة الثامنة",0,1,'R',1,0);
+		$this->SetXY(5,$this->GetY()+10);$this->Cell(100,5,' حرر بالجلفة في : ',0,1,'C');
+		$this->SetXY(5,$this->GetY()+3);$this->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
+	}
+	function dossierehp1($NUMD,$DATED,$NAT,$communear,$sexe,$titre)
+	{
+		//
+		// $this->SetXY(25,$this->GetY()+10);$this->Cell(20,5,'الموضوع :',0,0,'R');
+		if ($NAT==1) {$this->dossier_complemet($NUMD,$DATED,$communear,$titre,'بتحويل'); }
+		if ($NAT==2) {$this->dossier_complemet($NUMD,$DATED,$communear,$titre,'بتنصيب');}
+		if ($NAT==3) {$this->dossier_complemet($NUMD,$DATED,$communear,$titre,'بفتح'); }
+		if ($NAT==4) {$this->dossier_complemet($NUMD,$DATED,$communear,$titre,'بغلق');}
 	
+		if ($NAT==1) {$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'تبعا لطلبكم المتعلق '.'بتحويل '.$titre. ' يشرفني ان اعلمكم بالموافقة المبدئية كما اطلب منكم تكملة ملفكم بالوثائق التالية',0,1,'R');}
+		if ($NAT==2) {$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'تبعا لطلبكم المتعلق '.'بتنصيب '.$titre. ' يشرفني ان اعلمكم بالموافقة المبدئية كما اطلب منكم تكملة ملفكم بالوثائق التالية',0,1,'R');}
+		if ($NAT==3) {$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'تبعا لطلبكم المتعلق '.'بفتح '.$titre. ' يشرفني ان اعلمكم بالموافقة المبدئية كما اطلب منكم تكملة ملفكم بالوثائق التالية',0,1,'R');}
+		if ($NAT==4) {$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'تبعا لطلبكم المتعلق '.'بغلق'.$titre. ' يشرفني ان اعلمكم بالموافقة المبدئية كما اطلب منكم تكملة ملفكم بالوثائق التالية',0,1,'R');}
+	
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'طبقا للمرسوم التنفيذي رقم 321-07 المؤرخ في 2007-10-22 المتضمن تنظيم المؤسسات الإستشفائية الخاصة و سيرها ',0,1,'R');
+		$this->SetXY(15,$this->GetY()+5);$this->Cell(100,5,'قائمة الوثائق المطلوبة في حالة الفتح',0,0,'R');                        
+		// if ($NAT==1) {$this->Cell(20,5,'التحويل',1,1,'C',1,0);}
+		// if ($NAT==2) {$this->Cell(20,5,'التنصيب',1,1,'C',1,0);} 
+		// if ($NAT==3) {$this->Cell(20,5,'الفتح',1,1,'C',1,0);}
+		// if ($NAT==4) {$this->Cell(20,5,'الغلق',1,1,'C',1,0);}
+		$this->SetXY(15,$this->GetY()+10);$this->Cell(170,5,'01 - طلب الفتح',0,0,'R');                                   $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'02 - نسخة من شهادة ميلاد صاحب المشروع أو أصحاب المشروع ',0,0,'R');                          $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'03 - مستخرج من صحيفة السوابق القضائية لصاحب المشروع أو أصحاب المشروع',0,0,'R');                              $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'04 - نسخة من شهادة جنسية صاحب أو أصحاب المشروع',0,0,'R');                                $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'05 - بطاقة تقنية وصفية للمشروع المنجز ',0,0,'R');$this->Cell(20,5,'',1,1,'C');
+		// $this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'* التخصصات الطبية ',0,1,'R');//$this->Cell(20,5,'',1,1,'C');
+	    // $this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'* الأنشطة المفصلة ',0,1,'R');//$this->Cell(20,5,'',1,1,'C');
+		// $this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'* طاقة الإستيعاب من الأسرة ',0,1,'R');//$this->Cell(20,5,'',1,1,'C');
+		// $this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'* المقرات و المساحات المخصصة لكل نشاط ',0,1,'R');//$this->Cell(20,5,'',1,1,'C');
+		// $this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'* الطاقم التقني المذكور في المادة 09 ',0,1,'R');//$this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'06 - نسخة من مقرر الترخيص بالإنجاز',0,0,'R');$this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'07 - نسخة من مقرر المطابقة ',0,0,'R');$this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'08 - تقرير الموافقة النهائية لمصالح الحماية المدنية  ',0,0,'R');$this->Cell(20,5,'',1,1,'C');
+	    $this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'09 - التقرير النهائي للمراقبة التقنية للبناء أو مكتب معتمد للخبرة في مجال البناء',0,0,'R');$this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'10 - تقرير المطابقة الخاص بالمنشآت الكهربائية تسلمه المؤسسة الوطنية للإعتماد و المراقبة التقنية ',0,0,'R');$this->Cell(20,5,'',1,1,'C');
+	    $this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'11 - تقرير المطابقة الخاصة بالمنشآت الإشعاعية التي تنبعث منها مصادر أيونية تسلمه محافظة الطاقة الذرية ',0,0,'R'); $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'12 - نسخة من الإتفاقية المبرمة مع مؤسسة عمومية أو خاصة لحرق النفايات ',0,0,'R');        $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'13 - نسخة من إتفاقية المبرمة مع متعامل نقل صحي خاص معتمد ',0,0,'R');     $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,'14 - نسخة من الإتفاقية المبرمة مع مركز حقن الدم الولائي و المتعلقة بالتموين بمنتجات الدم غير الثابتة ',0,0,'R');     $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,"15 - الملف الإداري للمدير التقني ",0,0,'R');     $this->Cell(20,5,'',1,1,'C');
+		$this->SetXY(15,$this->GetY()+1);$this->Cell(170,5,"16 - الملفات الإدارية للمستخدمين الطبيين و الشبه الطبيين ",0,0,'R');     $this->Cell(20,5,'',1,1,'C');
+		//$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,"ملاحظة : يودع الملف لدى أمانة مديرية الصحة و السكان ",0,1,'R',1,0);
+		//$this->SetXY(100,$this->GetY()+5);$this->Cell(50,5,'تقبلوا تحيـــــــــــاتنا',0,1,'R');
+		$this->setRTL($enable=false, $resetx=true);
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(100,5,' حرر بالجلفة في : ',0,1,'C');
+		$this->SetXY(5,$this->GetY()+3);$this->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
+		
+	}
 	
 	//*************************************************************************************************************//
 	function mhmts($ids,$nomar,$prenomar)

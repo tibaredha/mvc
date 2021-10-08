@@ -1,0 +1,37 @@
+﻿
+
+#nom_prenom_fr{
+    width:  500px;
+	text-align: left;
+	font-size: 20px;font-weight: bold;    	
+}
+#nom_prenom_ar{
+    width:  500px;
+	text-align: right;
+	font-size: 20px;font-weight: bold;    	
+}
+#nom_prenom_fr_n{
+    width:  500px;
+	text-align: left;
+	background-color: yellow;
+	font-size: 20px;font-weight: bold;    	
+}
+#nom_prenom_ar_n{
+    width:  500px;
+	text-align: right;
+	background-color: yellow;
+	font-size: 20px;font-weight: bold;    	
+}
+
+#actif{
+    width:  500px;
+	text-align: center;
+	
+	font-size: 20px;font-weight: bold;    	
+}
+#actif_n{
+    width:  500px;
+	text-align: center;
+	background-color: yellow;
+	font-size: 20px;font-weight: bold;    	
+}

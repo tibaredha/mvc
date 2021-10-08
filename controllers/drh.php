@@ -2,7 +2,7 @@
 class drh extends Controller {
 
     private $route  = 'drh';
-    public $uploadLocation = "D:/mvc/public/webcam/str/"; 
+    
 	function __construct() {
 	   parent::__construct();
 	}
@@ -47,7 +47,7 @@ class drh extends Controller {
 	    $this->view->userListviewo = $_GET['o']; // criter de choix
 	    $this->view->userListviewq = $_GET['q']; // key word  
 		$this->view->userListviewp =$url1[2];    // parametre 2 page                     limit 2,3
-		$this->view->userListviewl =7     ;      // parametre 3 nombre de ligne par page  limit 2,3 
+		$this->view->userListviewl =5     ;      // parametre 3 nombre de ligne par page  limit 2,3 
 	    $this->view->userListviewb =20       ;   // parametre nombre de chiffre dan la barre  navigation
 		$this->view->userListview = $this->model->userSearch($this->view->userListviewo,$this->view->userListviewq,$this->view->userListviewp,$this->view->userListviewl);
 		$this->view->userListview1= $this->model->userSearch1($this->view->userListviewo,$this->view->userListviewq); // compte total pour bare de navigation
@@ -1325,7 +1325,7 @@ class drh extends Controller {
 	$this->view->render($this->route.'/upl');    
 	}
 	
-	
+	public $uploadLocation = "d:\\wamp/www/mvc/public/webcam/drh/"; 
 	function upl1($id) 
 	{
 		$this->view->title = 'upload';
@@ -1337,15 +1337,15 @@ class drh extends Controller {
 		        $target_path = $this->uploadLocation.trim($id).".jpg";      
 				if(move_uploaded_file($_FILES['upfile']['tmp_name'], $target_path)) 
 				{	
-				$this->view->msg ='le fichier :  '.basename( $_FILES['upfile']['name']).'  a été corectement envoyer merci';
+					$this->view->msg ='le fichier :  '.basename( $_FILES['upfile']['name']).'  a été corectement envoyer merci';
 				} 
 				else
 				{
-				$this->view->msg ='il ya une erreur d\'envoie du fichier :  '.basename( $_FILES['upfile']['name']).'  veillez recomencer svp';	
+					$this->view->msg ='il ya une erreur d\'envoie du fichier :  '.basename( $_FILES['upfile']['name']).'  veillez recomencer svp';	
 				}
 			}	
 		}
-		header('location: ' . URL . $this->route.'/search/0/10?o=id&q='.$id);
+		header('location: ' . URL . $this->route.'/search/0/10?o=idp&q='.$id);
 	}
 		
 }

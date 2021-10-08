@@ -12,7 +12,8 @@
 	<link rel="stylesheet" href="<?php echo URL; ?>public/css/table.css" />
 	<link rel="stylesheet" href="<?php echo URL; ?>public/css/calendar.css" />
 	<link rel="stylesheet" href="<?php echo URL; ?>public/css/jquery-ui.css" />
-
+    <link rel="stylesheet" href="<?php echo URL; ?>public/css/drh.css?t=<?php echo time();?>"/>
+	
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/jquery.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/jquery.maskedinput.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/jquery-ui.min.js"></script>
