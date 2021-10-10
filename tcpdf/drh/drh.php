@@ -1,7 +1,7 @@
 <?php
 require('../TCPDF.php');
 //require('../../TCPDF.php'); dans le cas ou chaque dossier contient un module
-class inspection extends TCPDF
+class drh extends TCPDF
 { 
     public $db_host="localhost";
 	public $db_name="mvc"; 
@@ -105,7 +105,133 @@ class inspection extends TCPDF
 			return $DATEPV;
 		}	
 	//*************************************************************************************************************//
+	function entete_drh($y)
+	{
+		$this->SetLineWidth(0.4);$this->SetFont('aefurat', 'B', 16);
+		$this->Rect(5, 5, 200, 285 ,'D');$this->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,0,'C');
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->mspar,0,0,'C');
+		$this->SetFont('aefurat', '', 14);
+		//$this->SetXY(5,$this->GetY()+10);$this->Cell(200,5,$this->wilayaar,0,0,'R');
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->dsparp." لولاية الجلفة",0,0,'R');
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,"المؤسسة العمومية الاستشفائية عين وســـارة",0,0,'R');
+		//$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,"المديرية الفرعية للموارد البشرية",0,0,'R');
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,'رقم : .................../'.date("Y"),0,1,'R');
+	}
+	function decision_drh($y)
+	{
+		$this->Text(55,$this->GetY()+$y,"باقتراح من السيدة المديرة الفرعية للموارد البشرية ");                
+		$this->Text(90,$this->GetY()+$y,"يقـــــرر");	
+	}
+	function foot_drh($y)
+	{
+		$this->Text(5,$this->GetY()+$y,"المادة الثانية :تكـلف كل من السيدة المديرة الفرعية للموارد البشرية  و أمين الخزينة  ما بين البلديات لعين وسارة  ");
+		$this->Text(30,$this->GetY()+$y,"كل حسب اختصاصه بتنفيـذ هـذا المقرر.");
+		$this->Text(140,$this->GetY()+$y,"حرر بعين وسارة في : ");
+		$this->Text(150,$this->GetY()+$y,"  المدير");
+	}
+	function htiat($titre,$grade,$y)
+	{
+		$this->setRTL(true);
+		$this->SetFont('aefurat', '', 28);$this->SetXY(45,$this->GetY()+$y-5);$this->Cell(120,15,$titre,0,1,'C',1,1);$this->SetFont('aefurat', '', 13);
+		$this->Text(5,$this->GetY()+5,"إن مدير المؤسسة العمومية الإستشفائية بعين وسارة");
+		$this->Text(10,$this->GetY()+$y,"- بمقتضى : الأمر رقم 03-06 المؤرخ في 15 يوليو سنة 2006 المتضمن القانون الأساسي العام  للوظيفة العمومية");
+		$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم الرئاسي رقم 304-07 المؤرخ في 17 رمضان عام 1428 الموافق 29 سبتمبر سنة 2007");
+		$this->Text(5,$this->GetY()+$y,"الذي يحدد الشبكة الاستدلالية لمرتبات الموظفين و نظام دفع رواتبهم .");
+		$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 99-90 المؤرخ في أول رمضان عام 1410 الموافق 27 مارس سنة 1990");
+		$this->Text(5,$this->GetY()+$y,"المتعلق  بسلطة التعيين و التسيير الإداري ,بالنسبة للموظفين و أعوان الإدارة المركزية و الولايات");
+		$this->Text(5,$this->GetY()+$y,"و البلديات و المؤسسات العمومية ذات الطابع الإداري .");
+		$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 140-07 المؤرخ في 19 ماي سنة 2007 المتضمن إنشاء المؤسسات");
+		$this->Text(5,$this->GetY()+$y,"العمومية الإستشفائية و المؤسسات العمومية للصحة الجوارية و تنظيمها و سيرها.");
+		$uc=$this->nbrtostring("mvc","grade","idg",$grade,"ids");
+		switch($uc)
+		{
+		 case '1' ://specialiste
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 394-09  مؤرخ في 24 نوفمبر 2009 ,المتضمن القانون الأساسي");
+				$this->Text(5,$this->GetY()+$y,"الخاص بالموظفين المنتمين لأسلاك الممارسين الطبيين المختصين  في الصحة العمومية");
+				break;
+				}	   
+		case '2' ://generaliste medecin pharmacien dentiste
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم  393-09  مؤرخ في 24 نوفمبر سنة 2009 ,المتضمن القانون الأساسي");
+				$this->Text(5,$this->GetY()+$y,"الخاص بالموظفين المنتمين لأسلاك الممارسين الطبيين العامين في الصحة العمومية");
+				break;
+				}	    	
+		case '3' ://paramedicale
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى :المرسوم التنفيذي رقم 121-11 مؤرخ في 20 مارس 2011 ,يتضمن القانون الأساسي");
+				$this->Text(5,$this->GetY()+$y,"الخاص بالموظفين المنتمين لأسلاك شبه الطبيين للصحة العمومية .");
+				break;
+				}        
+		case '4' ://psycholgue
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 240-09 المؤرخ في 22 يوليو سنة 2009 ,المتضمن القانون للأساسي");
+				$this->Text(5,$this->GetY()+$y,"الخاص بالموظفين المنتمين لأسلاك النفسانيين للصحة العمومية ");
+				break;
+				}        				
+		case '5' ://sage femme
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 122-11 المؤرخ في 20 مارس سنة 2011 ,المتضمن القانون الأساسي");
+				$this->Text(5,$H2,"الخاص بالموظفات المنتميات لسلك القابلات في الصحة العمومية");
+				break;
+				}				
+		case '6' ://biologie
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 152-11 المؤرخ  في 3 ابريل سنة 2011  ,المتضمن القانون الأساسي");
+				$this->Text(5,$this->GetY()+$y,"الخاص بالموظفين المنتمين لأسلاك البيولوجيين في الصحة العمومية ");
+				break;
+				}				
+		case '7' ://annesthesiste
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 235-11 المؤرخ في 3 يوليو سنة 2011 ، المتضمن القانون الأساسي");
+				$this->Text(5,$this->GetY()+$y,"الخاص بالموظفين المنتمين لأسلاك الأعوان الطبيين في التخذير و لإنعاش للصحة العمومية");
+				break;
+				}				
+		case '8' ://corps communs
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 04-08 مؤرخ في يناير سنة 2008 المتضمن القانون الأساسي");
+				$this->Text(5,$this->GetY()+$y,"الخاص بالموظفين المنتمين للأسلاك المشتركة في المؤسسات و الإدارات العمومية ");
+				break;
+				}				
+		case '9' ://op
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 05-08 مؤرخ في 19 يناير سنة 2008 المتضمن القانون الأساسي");
+				$this->Text(5,$this->GetY()+$y,"الخاص بالموظفين المنتمين للعمال المهنيين و سائقي السيارات و الحجاب  ");
+				break;
+				}				
+		case '10' ://phisi
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 178-10 المؤرخ في 8 يوليو سنة 2010 المتضمن القانون الأساسي");
+				$this->Text(5,$this->GetY()+$y,"الخاص بالموظفين المنتمين لسلك الفيزيائيين الطبيين في الصحة العمومية ");
+				break;
+				}				
+		case '11' ://idmage
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 126-08 المؤرخ في 19 ابريل سنة 2008 المتعلق بجهاز");
+				$this->Text(5,$this->GetY()+$y,"المساعدة على الإدماج المهني ");
+				break;
+				}				
+		case '12' ://idmage
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم الرئاسي رقم 308-07 المؤرخ في 29  سبتمبر سنة 2007 المحدد لكيفيات توظيف");
+				$this->Text(5,$this->GetY()+$y,"الأعوان المتعاقدين و حقوقهم وواجباتهم و العناصرالمشكلة لرواتبهم والقواعد المتعلقة ");
+				$this->Text(5,$this->GetY()+$y,"بتسييرهم و كذا النظام التأديبي المطبق عليهم");
+				break;
+				}	
+		case '13' ://idmage
+				{
+				$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم التنفيذي رقم 161-09 المؤرخ في 02 ماي سنة 2009 ,المتضمن القانون الأساسي");
+				$this->Text(5,$this->GetY()+$y,"الخاص بالموظفين المنتمين لسلك متصرفي مصالح الصحة");
+				break;
+				}	
+		}
 	
+	}
+	
+	
+	
+	//*************************************************************************************************************//
 	
 	function entetedecision($titre,$DATEP)
 	{
@@ -357,6 +483,19 @@ class inspection extends TCPDF
 	mysql_query("SET NAMES 'UTF8' ");
 	return $cnx;
 	return $db;
+	}
+
+	function nbrtostringx($tb_name,$colonename,$colonevalue,$resultatstring) 
+	{
+		if (is_numeric($colonevalue) and $colonevalue!=='0') 
+		{ 
+			$this->mysqlconnect();
+			$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
+			$row=mysql_fetch_object($result);
+			$resultat=$row->$resultatstring;
+			return $resultat;
+		} 
+		return $resultat2='??????';
 	}
 	function dateUS2FR($date)
 	{

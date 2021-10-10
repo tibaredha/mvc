@@ -9,100 +9,91 @@ function PopupImage(img) {
 <?php 
 verifsession();	
 lang(Session::get('lang'));
+$fichier = photosmfy('drh',$this->user[0]['idp'].'.jpg',$this->user[0]['Sexe']);
 ob_start();
 $data = array(
 "Date"       => date('Y-m-j'), 
 "btn"        => 'inspection', 
 "id"         => '', 
-"butun"      => 'Inser New personnel', 
-"photos"     => 'public/images/icons/pers.PNG',
-"action"     => 'inspection/creatpers/'.$this->user[0]['id'],
+"butun"      => 'Inser New congé', 
+"photos"     => 'public/webcam/drh/'.$fichier,
+"action"     => 'drh/creatconge/'.$this->user[0]['idp'],
 
-"CASNOS"        => '0',
-"DEBUTCONTRAT"  => date('j-m-Y'),
-"FINCONTRAT"    => '31-12-'.date('Y'),
-
-"NOMAR"  => 'x' ,
-"PRENOMAR"  => 'x' ,
-"NOMFR"  => 'x' ,
-"PRENOMFR"  => 'x' ,
-	 
-"ADRESSEAR"  => 'x',
-"Categorie"  => array(      
-                        "MEDECIN-S"=>"MS",
-						"MEDECIN-G"=>"MG",
-						"PARAMEDICALE"=>"P",
-					    "TECHNICIEN DE MAINTENANCE"=>"TDM",
-						"AGENT D'HYGIÈNE"=>"ADH",
-						"AGENT DE SÉCURITÉ"=>"ADS",
-						"CHAUFFEUR"=>"C"						
-					  )
+"CAUSECONGE"  => array(      
+                        "إزدياد طفل للموظف"=>"1",
+						"زواج الموظف"=>"2",
+						"حج"=>"3",
+						"عمرة"=>"4",
+						"ختان إبن الموظف"=>"5",
+						"زواج أحد فروع الموظف"=>"6",
+						"وفاة زوج الموظف"=>"7",
+						"وفاة أحد الأصول المباشرة للموظف أو زوجه"=>"8",
+						"وفاة أحد الفروع المباشرة للموظف أو زوجه"=>"9",
+						"وفاة أحد الحواشي المباشرة للموظف أو زوجه"=>"10",
+						"علمية"=>"11",
+						"تعويضية"=>"12",
+						"سنوية"=>"13",
+						"مهنية"=>"14",
+						"مرضية"=>"15",
+						"أمومة"=>"16"	
+					  ),
+"DURECONGE"   => '0' ,
+"DEBUTCONGE"  => date('j-m-Y'),
 );
 view::button($data['btn'],'');
-echo "<h2>Nouveau personnel : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
+echo "<h2>Nouveau congé : ".strtoupper($this->user[0]['Nomlatin'])."_".$this->user[0]['Prenom_Latin']." ( ".$this->stringtostring("grade","idg",$this->user[0]['rnvgradear'],"gradear") ." ) "."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
-$x=50;$y=10;
-$this->label($x+970,$y+300,'اللقـــب');           $this->txtarid($x+690,$y+290,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date');
-$this->label($x+640,$y+300,'الاســـــــم');        $this->txtarid($x+340,$y+290,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
-$this->label($x+290,$y+300,'المهنة');             $this->combov1($x,$y+290,'Categorie',$data['Categorie'],'date');
-                                                  $this->specialite($x,$y+290+30,'SPECIALITE',"0","SPECIALITE",'classspecialite');
-
-$this->label($x+970,$y+330,'NOM');                $this->txt($x+690,$y+290+30,'PRENOMFR','PRENOMFR',"x",$data['PRENOMFR'],'date');
-$this->label($x+620,$y+330,'PRENOM');             $this->txt($x+340,$y+290+30,'NOMFR','NOMFR',"x",$data['NOMFR'],'date');
-
-
-$this->label($x,$y+370,'__________________________________________________________________________________________________________________');
-$this->label($x,$y+400,'N°_CNAS');                $this->txt($x+100,$y+390,'CASNOS',0,$data['CASNOS'],'date');
-$this->label($x+350,$y+400,'Début contrat');      $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');
-$this->label($x+700,$y+400,'Fin contrat');        $this->txts($x+100+350+350,$y+390,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus2');
-
-$this->submit($x+800,$y+450,$data['butun']);
+$x=50;$y=90;
+$this->label($x+960,$y+160,'السبب');              $this->combov1($x+700,$y+150,'CAUSECONGE',$data['CAUSECONGE'],'date');
+$this->label($x+610,$y+160,'المدة');              $this->txtarid($x+350,$y+150,'DURECONGE','DURECONGE',0,$data['DURECONGE'],'date'); 
+$this->label($x+260,$y+160,'تاريخ بداية العطلة'); $this->txts($x,$y+150,'DEBUTCONGE',0,$data['DEBUTCONGE'],'dateus1');
+$this->label($x+960,$y+190,'لمستخلف');            view::usereph($x+700,$y+180,"REMPLACANT","mvc","المستخلف","","0",""); 
+$this->submit($x+700,$y+210,$data['butun']);
 $this->f1();
-view::sautligne(15);
+view::sautligne(19);
 ob_end_flush();
-echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
+//echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 ?>
 		
 		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
 		<th  colspan=3   style="width:50px;">
 		<?php
-		
-		echo '<a title="Autres"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q='.$this->user[0]['STRUCTURE'].'" > Autres : '.$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure").'</a>';
+		echo '<a title="Autres"  href="'.URL.'drh/search/0/10?o=idp&q=" > Autres : </a>';
 		?>
 		</th> 
 		
 		<th  colspan=4    style="width:50px;">
 		<?php
-		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche personnels </a>';
+		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['idp'].'" > Fiche personnels </a>';
+		
 		?>
 		</th> 
 		
 		<th  colspan=4    style="width:50px;">
 		<?php
-		//echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
+		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['idp'].'" > Fiche personnels </a>';
+		
+		//echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['idp'].'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
 		?>
 		</th> 
-		
-		
-		
 		</tr>
 		<tr>
 		<th style="width:10px;">Photos</th>
-		<th style="width:50px;">Categorie</th>
-		<th style="width:50px;">CNAS</th>
-		<th style="width:70px;">debut contrat</th>
-		<th style="width:70px;">fin contrat</th>
-		<th style="width:70px;">الاســـــــم</th>
-		<th style="width:50px;">اللقب</th>
-		<th style="width:10px;">Autorisation</th>
-		<th style="width:10px;">Etat</th>
+		<th style="width:50px;">Cause congé</th>
+		<th style="width:50px;">Durée congé</th>
+		<th style="width:70px;">Debut congé</th>
+		<th style="width:70px;">Fin congé</th>
+		<th style="width:70px;">Remplacant</th>
+		<th style="width:50px;">Stock</th>
+		<th style="width:10px;">Demande</th>
+		<th style="width:10px;">Titre</th>
 		<th style="width:10px;">Upd </th>
 		<th style="width:10px;">Del</th>
 		</tr>
 		<?php
-		if (isset($this->userListview)) 
+		if (isset($this->userListview))
 		{		
 				foreach($this->userListview as $key => $value){ ?>
 						<tr bgcolor='WHITE' onmouseover="this.style.backgroundColor='#9FF781';" onmouseout="this.style.backgroundColor='WHITE';" >
@@ -110,32 +101,16 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		                $fichier = photosmfx('pers',$value['id'].'.jpg','M') ;
 		                echo "<td  style=\"width:10px;\"     align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl***/".$value['id']."\" ><img  src=\"".URL."public/webcam/str/".$fichier."?t=".time()."\"  width='20' height='20' border='0'></td> " ;
 		                ?>
-						<td align="center"><?php echo $value['Categorie'];?></td>
-						<td align="center"><?php echo $value['CASNOS'];?></td>
-						<td align="center"><?php echo view::dateUS2FR($value['DEBUTCONTRAT']);?></td>
-						<td align="center"><?php echo view::dateUS2FR($value['FINCONTRAT']) ;?></td>
-						
-						<td align="center"><?php echo $value['NOMAR'];?></td>
-						<td align="center"><?php echo $value['PRENOMAR'];?></td>
-						<?php 
-						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Autorisation d'exercice\" href=\"".URL.'tcpdf/inspection/auto'.$this->user[0]['STRUCTURE'].'.php?id='.$value['id']."&ids=".$value['idt']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-		                
-						
-						
-						
-						if ($value['ETAT']==0) {
-		                ?>
-						<td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetatpers/'.$value['id'].'/'.$value['idt'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
-		                <?php 
-		                }
-		                if ($value['ETAT']==1) {
-		                ?>
-						<td align="center"><a  title="activé" href="<?php echo URL.'inspection/editetatpers/'.$value['id'].'/'.$value['idt'].'/0';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
-						<?php 
-		                }
-						?>
-						<td align="center"><a title="editer" href="<?php echo URL.'inspection/editpers/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
-						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deletepers/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
+						<td align="center"><?php echo View::nbrtostring('causeconge','id',trim($value['CAUSECONGE']),'causecongear');?></td>
+						<td align="center"><?php echo $value['DURECONGE'];?></td>
+						<td align="center"><?php echo view::dateUS2FR($value['DEBUTCONGE']);?></td>
+						<td align="center"><?php echo view::dateUS2FR($value['FINCONGE']) ;?></td>
+						<td align="center"><?php echo View::nbrtostring('grh','idp',trim($value['REMPLACANT']),'Nomarab')."_".View::nbrtostring('grh','idp',trim($value['REMPLACANT']),'Prenom_Arabe');?></td>
+						<td align="center"><?php echo $value['STOCK'];?></td>
+						<?php echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"titre de conge\" href=\"".URL.'tcpdf/drh/demande_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;?>
+						<?php echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"titre de conge\" href=\"".URL.'tcpdf/drh/conge_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;?>
+						<td align="center"><a title="editer" href="<?php echo URL.'drh/editconge/'.$value['id'].'/'.$value['idc'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
+						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'drh/deleteconge/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
 						</tr>
 				<?php 
 				}
@@ -153,8 +128,8 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		}
 		else 
 		{
-		echo '<tr><td align="center" colspan="16" ><span> Click search button to start searching a vms.</span></td></tr>';
-		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="16" ><span>&nbsp;</span></td></tr>';					      
+			echo '<tr><td align="center" colspan="16" ><span> Click search button to start searching a vms.</span></td></tr>';
+			echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="16" ><span>&nbsp;</span></td></tr>';					      
 		} 
 		
 		?>

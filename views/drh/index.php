@@ -40,12 +40,12 @@ echo "<tr>" ;
 echo "</tr>" ;	
 echo "<tr>" ;
 	echo "<th style=\"width:10px;\">Photos</th>" ;
-	echo "<th style=\"width:10px;\">View</th>" ;
+	echo "<th style=\"width:10px;\">Congé</th>" ;
 	echo "<th style=\"width:10px;\">ِCT-FR</th>" ;
+	echo "<th id =\"nom_prenom_fr\">Nom_Prenom</th>" ;
+	echo "<th id =\"actif\">Sitiuation</th>" ;
+	echo "<th id =\"nom_prenom_ar\">الاسم و اللقب</th>" ;
 	echo "<th style=\"width:10px;\">CT-AR</th>" ;
-	echo "<th style=\"width:700px;\">Nom_Prenom</th>" ;
-	echo "<th style=\"width:700px;\">Sitiuation</th>" ;
-	echo "<th style=\"width:700px;\">الاسم و اللقب</th>" ;
     echo "<th style=\"width:10px;\">Dep</th>" ;
 	echo "<th style=\"width:10px;\">Upd</th>" ;
 	echo "<th style=\"width:10px;\">Del</th>" ;
@@ -57,9 +57,24 @@ echo "</tr>" ;
 		echo "<tr bgcolor=\"".$bgcolor_donate."\"  onmouseover=\"this.style.backgroundColor='#9FF781';\"   onmouseout=\"this.style.backgroundColor='".$bgcolor_donate."';\"  >" ;
 			
 			echo "<td align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."drh/upl/".$value['idp']."\" ><img  src=\"".URL."public/webcam/drh/".$fichier."?t=".time()."\"  width='50' height='50' border='0'></td> " ;
-			echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'drh/view/'.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
+			
+			if($value['cessation']=='')
+			{
+				echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'drh/conge/'.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
+			
+			}else {
+				
+				echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'drh/search/0/10?o=idp&q='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
+				
+			}
+			
+			
+			
+			
+			
+			
+			
 			echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/drh/attestation_trav_fr.php?uc='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
-			echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/drh/attestation_trav_ar.php?uc='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
 			
 			if($value['cessation']=='')
 			{
@@ -71,40 +86,33 @@ echo "</tr>" ;
 			else
 			{
 				echo "<td id =\"nom_prenom_fr_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".strtoupper($value['Nomlatin']).'_'.strtolower ($value['Prenom_Latin'])."</a></td>" ;
-				if($value['Motif_Cessation']==1)//Demission
-			    {
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+				if($value['Motif_Cessation']==1){
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/demission.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
 				}
-				if($value['Motif_Cessation']==2)//Deces
-			    {
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+				if($value['Motif_Cessation']==2){
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/deces.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
 				}
-				if($value['Motif_Cessation']==3)//Retraite
-			    {
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+				if($value['Motif_Cessation']==3){
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/retraite.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
 				}
-				if($value['Motif_Cessation']==4)//revocation
-			    {
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+				if($value['Motif_Cessation']==4){
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/revocation.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
 				}
-				if($value['Motif_Cessation']==5)//liberation
-			    {
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+				if($value['Motif_Cessation']==5){
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/liberation.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
 				}
-				if($value['Motif_Cessation']==6)//resiliation contrat
-			    {
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+				if($value['Motif_Cessation']==6){
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/resiliationcontrat.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
 				}
-				if($value['Motif_Cessation']==7)//Mutation
-			    {
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+				if($value['Motif_Cessation']==7){
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/mutation.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
 				}
-				if($value['Motif_Cessation']==8)//fin contrat
-			    {
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+				if($value['Motif_Cessation']==8){
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/fincontrat.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
 				}
 				echo "<td id =\"nom_prenom_ar_n\" ><a title=\"إستمارة\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".$value['Nomarab'].'_'.$value['Prenom_Arabe'].' : ('.$value['pere'].")</a></td>" ;
 			}
+			echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/drh/attestation_trav_ar.php?uc='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
 			echo "<td style=\"width:50px;\" align=\"center\" ><a                  title=\"Depart\"     href=\"".URL.'drh/***/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/s_loggoff.png'."\"    width='50' height='50' border='0' alt='' ></a></td>" ;
 			echo "<td style=\"width:50px;\" align=\"center\" ><a                  title=\"Editer\"     href=\"".URL.'drh/***/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/edit.PNG'."\"    width='50' height='50' border='0' alt='' ></a></td>" ;
 			echo "<td style=\"width:50px;\" align=\"center\" ><a class=\"delete\" title=\"Supprimer\"  href=\"".URL.'drh/***/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/delete.PNG'."\"  width='50' height='50' border='0' alt='' ></a></td>" ; 
@@ -154,7 +162,7 @@ else
 // View::url(700,550,URL.'inspection/search/0/10?o=STRUCTURE&q=9','9-EHP  ',3);                             View::url(1000,550,URL.'inspection/search/0/10?o=STRUCTURE&q=4','4-EH  ',3);
 // View::url(700,580,URL.'inspection/search/0/10?o=STRUCTURE&q=6','6-EPSP ',3);
 // View::url(700,610,URL.'inspection/search/0/10?o=STRUCTURE&q=11','11-CENTER DE DIAGNOSTIQUE ',3);
-// view::sautligne(10);			      
+view::sautligne(20);			      
 }				
 echo "</table>";
 ob_end_flush();

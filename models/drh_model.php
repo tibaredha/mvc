@@ -14,6 +14,10 @@ class drh_Model extends Model {
     return $dateFR2US;//2013-01-01
 	}
 	
+	public function userSinglestructure($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM grh WHERE idp = :id', array(':id' => $id));
+    }
 	
 	
 	public function userSearch($o, $q, $p, $l) {
@@ -263,23 +267,26 @@ class drh_Model extends Model {
 	   $this->db->update('auto', $postData, "id =" . $data['id'] . "");
     }
 	
-	 public function creatpersdb($data) {
+	 public function creatconge($data) {
 			$this->db->exec('SET NAMES utf8');
-			$this->db->insert('pers', array(
-			'idt'        => $data['id'],	
-			'NOMAR'      => $data['NOMAR'],
-		    'PRENOMAR'   => $data['PRENOMAR'],
-			'NOMFR'      => $data['NOMFR'],
-		    'PRENOMFR'   => $data['PRENOMFR'],
-			'Categorie'  => $data['Categorie'],
-			'CASNOS'       => $data['CASNOS'],
-			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
-			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT']),
-			'SPECIALITE'   => $data['SPECIALITE']
+			$this->db->insert('regconge', array(
+			'CAUSECONGE'      => $data['CAUSECONGE'],
+			'DURECONGE'       => $data['DURECONGE'],
+			'DEBUTCONGE'      => $this->dateFR2US($data['DEBUTCONGE']),
+			'FINCONGE'        => $data['FINCONGE'],
+			'REMPLACANT'      => $data['REMPLACANT'],
+			'IDP'             => $data['id']	
 			));
-			// echo '<pre>';print_r ($data);echo '<pre>';
+			//echo '<pre>';print_r ($data);echo '<pre>';
 			return $last_id = $this->db->lastInsertId();
 		}
+	public function congeSingleList($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM regconge WHERE idp = :id  order by DEBUTCONGE asc ', array(':id' => $id));    
+    }
+	public function deleteconge($id) {       
+        $this->db->delete('regconge', "id = '$id'");
+    }
 		
 	public function editSavespers($data) {
 	$this->db->exec('SET NAMES utf8');
@@ -322,18 +329,12 @@ class drh_Model extends Model {
     }
 	
 	
-	public function persSingleList($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM pers WHERE idt = :id  order by Categorie asc ', array(':id' => $id));    
-    }
 	
 	public function userpersSingleList($id) {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM pers WHERE id = :id  order by Categorie asc ', array(':id' => $id));    
     }
-	public function deletepers($id) {       
-        $this->db->delete('pers', "id = '$id'");
-    }
+	
 	
 	
 	public function autoSingleinspection($id) {
@@ -364,10 +365,7 @@ class drh_Model extends Model {
 	   $this->db->update('insp', $postData, "id =" . $data['id'] . "");
     }
 	
-	public function userSinglestructure($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM structure WHERE id = :id', array(':id' => $id));
-    }
+	
 	public function autoSingleinsp($id) {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM insp WHERE ids = :id  order by DATE asc ', array(':id' => $id));    

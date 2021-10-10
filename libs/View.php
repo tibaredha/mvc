@@ -65,7 +65,20 @@ class View {
 	ob_end_flush();	
 		
 	}
-	
+	function usereph($x,$y,$name,$db_name,$choisir,$class,$ve,$va) 
+	{
+	mysqlconnect();
+	echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 
+	echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+	echo"<option   value=\"0\" selected=\"selected\">".$choisir."</option>"."\n";
+    $result = mysql_query("SELECT * FROM grh order by Nomlatin  " );
+    while($data =  mysql_fetch_array($result))
+    {
+    echo '<option value="'.$data[$ve].'">'.$data["Nomlatin"].'_'.$data["Prenom_Latin"].'</option>';
+    }
+	echo '</select>'."\n"; 
+	echo "</div>";
+	}
 	function structure_sanitaire_drh($data,$titre) 
 	{
 	view::button($data['btn'],'');	
@@ -107,10 +120,34 @@ class View {
 	// $this->label($x,$y+480,'Realisation');       $this->txts($x+100,$y+470,'REALISATION',0,$data['REALISATION'],'dateus3');                      $this->label($x+700,$y+480,'N° Realisation');             $this->txt($x+800,$y+470,'NREALISATION',0,$data['NREALISATION'],'date');
 	// $this->label($x,$y+510,'Ouverture');         $this->txts($x+100,$y+500,'OUVERTURE',0,$data['OUVERTURE'],'dateus4');                          $this->label($x+700,$y+510,'N° Ouverture');               $this->txt($x+800,$y+500,'NOUVERTURE',0,$data['NOUVERTURE'],'date');
 	// $this->label($x,$y+500+23,'__________________________________________________________________________________________________________________');
-	$this->label($x+1000,$y+160,'اللقب');         
-	$this->txtarid($x+750,$y+150,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
-	$this->label($x+680,$y+160,'الاســـــــم');   
-	$this->txtarid($x+450,$y+150,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date'); 
+	
+	
+	$this->label($x+960,$y+160,'اللقب');         $this->txtarid($x+700,$y+150,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
+	$this->label($x+610,$y+160,'الاســـــــم');   $this->txtarid($x+350,$y+150,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date'); 
+	$this->label($x+260,$y+160,'لقب الزوج');     $this->txtarid($x,$y+150,'NOMJFAR','NOMJFAR',0,$data['NOMJFAR'],'date'); 
+	
+	$this->label($x+960,$y+190,'اسم الاب');       $this->txtarid($x+700,$y+180,'FILSDE','FILSDE',0,$data['FILSDE'],'date');
+	$this->label($x+610,$y+190,'اسم و لقب الاب'); $this->txtarid($x+350,$y+180,'ETDE','ETDE',0,$data['ETDE'],'date'); 
+	$this->label($x+260,$y+190,'الجنس');         $this->combov1($x,$y+180,'SEXE',$data['SEXE']);
+	
+	
+	$this->label($x+960,$y+190+30,'تاريخ الميلاد'); $this->txts($x+700,$y+180+30,'DNS',0,$data['DNS'],'dateus6');
+	$this->label($x+610,$y+190+30,'ولاية الميلاد');  $this->WILAYA($x+350,$y+180+30,'WILAYAN','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
+	$this->label($x+260,$y+190+30,'بلدية الميلاد'); $this->COMMUNE($x,$y+180+30,'COMMUNEN','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);  
+ 
+	$this->label($x+960,$y+190+30+30,'رقم عقد الميلاد');   $this->txtarid($x+700,$y+180+30+30,'NEC','NEC',0,$data['NEC'],'date');
+	$this->label($x+610,$y+190+30+30,'الحالة العائلية');  $this->combov1($x+350,$y+180+30+30,'SF',$data['SF']);
+	$this->label($x+260,$y+190+30+30,'عدد الاولاد');        $this->txtarid($x,$y+180+30+30,'NBRENF','NBRENF',0,$data['NBRENF'],'date');
+ 
+	$this->label($x+960,$y+190+30+30+30,'ولاية الإقامة');   $this->WILAYA($x+700,$y+180+30+30+30,'WILAYAR','countryr','mvc','wil',$data['WILAYAR1'],$data['WILAYAR2']);  
+	$this->label($x+610,$y+190+30+30+30,'بلدية الإقامة');  $this->COMMUNE($x+350,$y+180+30+30+30,'COMMUNER','COMMUNER',$data['COMMUNER1'],$data['COMMUNER2']);  
+	$this->label($x+260,$y+190+30+30+30,'العنوان');       $this->txtarid($x,$y+180+30+30+30,'ADRESSE','ADRESSE',0,$data['ADRESSE'],'date');
+     
+	
+ 
+ 
+	
+	
 	// $this->label($x,$y+550,'العنوان');           
 	// $this->txtarid($x+100,$y+540,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
 	$this->submit($x+1140,$y+520,$data['butun']);
@@ -479,11 +516,11 @@ class View {
 	{
 		if (is_numeric($colonevalue) and $colonevalue!=='0') 
 		{ 
-		mysqlconnect();
-		$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
-		$row=mysql_fetch_object($result);
-		$resultat=$row->$resultatstring;
-		return $resultat;
+			mysqlconnect();
+			$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
+			$row=mysql_fetch_object($result);
+			$resultat=$row->$resultatstring;
+			return $resultat;
 		} 
 	return $resultat2='??????';
 	}

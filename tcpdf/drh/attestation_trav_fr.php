@@ -1,7 +1,5 @@
 <?php 
-$ndp=$_GET["uc"];
-require_once('inspection.php');
-$pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
+$ndp=$_GET["uc"];require_once('drh.php');$pdf = new drh('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
 $pdf->SetTitle('DECISION');
@@ -17,22 +15,8 @@ $sql = "SELECT * FROM grh WHERE  idp = '".$ndp."' ";
 $requete = @mysql_query($sql) or die($sql."<br>".mysql_error()) ;
 $result = mysql_fetch_array( $requete ); 
 mysql_free_result($requete);
-
-
-// $query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";//
-// $requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
-// while($rowx=mysql_fetch_object($requetex))
-// {
-// $nomar=$rowx->NOMAR;
-// $prenomar=$rowx->PRENOMAR;
-// $nomfr=$rowx->NOM;
-// $prenomfr=$rowx->PRENOM;
-// $UNIV=$rowx->UNIV;
-// $STRUCTURE=$rowx->STRUCTURE;
-// }
 $pdf->AddPage();
 $pdf->SetLineWidth(0.4);
-
 $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
 $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->repfr,0,0,'C');
 $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->mspfr,0,0,'C');
@@ -55,7 +39,14 @@ $pdf->Text(65,130," a");
 $pdf->Text(10,130,"Né(e) le :");
 $pdf->Text(10,140,"Date premier recrutement:");
 $pdf->Text(10,160,"Est employé(e) a notre  établissement en qualité de:");
+if(trim($result["cessation"])=='y'){
+$pdf->Text(70,180,"jusqu'au : ");	
+}else{
 $pdf->Text(70,180,"jusqu'à ce jour.");
+}
+
+
+
 $pdf->Text(10,180,"Depuis  Le :");
 $pdf->Text(10,200,"En foi de quoi , la présente attestation est délivrée sur demande de ");
 $pdf->Text(10,210,"l'intéressé(e)  pour servir et valoir ce que de droit");
@@ -85,9 +76,21 @@ $date1=$J1."-".$M1."-".$A1;$pdf->Text(64,140,$date1);
 $pdf->Text(70,130,$pdf->nbrtostring("mvc","com","IDCOM",$result["Commune_Naissancear"],"COMMUNE"));
 $pdf->Text(160,130,$pdf->nbrtostring("mvc","wil","IDWIL",$result["Wilaya_Naissancear"],"WILAYAS"));
 $pdf->Text(10,170,$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradefr"));
+
+$Motif_Cessation=$pdf->nbrtostringx('motif_cessation','idcausedepart',trim($result['Motif_Cessation']),'causedepartfr');
+if(trim($result["cessation"])=='y'){
+	
+	$pdf->Text(128-12,180,"("."Date de ".$Motif_Cessation.")");
+	$A = substr($result["Date_Cessation"],0,2);
+	$M = substr($result["Date_Cessation"],3,2);
+	$J = substr($result["Date_Cessation"],6,4);
+	$Date_Cessation=$A."-".$M."-".$J;
+	$pdf->Text(102-12,180,$Date_Cessation);		
+} 
+
 if($result["rnvgradear"]==1 or $result["rnvgradear"]==3 )
 {
-	$pdf->Text(88,170," في ".$pdf->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
+	$pdf->Text(88,170," en ".$pdf->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitefr"));
 }
 $J2 = substr($result["DATEARRIVE"],8,2);
 $M2 = substr($result["DATEARRIVE"],5,2);

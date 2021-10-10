@@ -1,7 +1,5 @@
 <?php 
-$ndp=$_GET["uc"];
-require_once('inspection.php');
-$pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
+$ndp=$_GET["uc"];require_once('drh.php');$pdf = new drh('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
 $pdf->SetTitle('DECISION');
@@ -17,19 +15,6 @@ $sql = "SELECT * FROM grh WHERE  idp = '".$ndp."' ";
 $requete = @mysql_query($sql) or die($sql."<br>".mysql_error()) ;
 $result = mysql_fetch_array( $requete ); 
 mysql_free_result($requete);
-
-
-// $query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";//
-// $requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
-// while($rowx=mysql_fetch_object($requetex))
-// {
-// $nomar=$rowx->NOMAR;
-// $prenomar=$rowx->PRENOMAR;
-// $nomfr=$rowx->NOM;
-// $prenomfr=$rowx->PRENOM;
-// $UNIV=$rowx->UNIV;
-// $STRUCTURE=$rowx->STRUCTURE;
-// }
 $pdf->AddPage();
 $pdf->SetLineWidth(0.4);
 $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
@@ -56,7 +41,11 @@ $pdf->Text(5,140,"تم تعيينه (ها) بتاريخ:");
 $pdf->Text(60,160,"و"." (ت) يعمل بمؤسستنا كما يلي : ");
 $pdf->Text(10,170,"الرتبة :  ");
 $pdf->Text(10,180,"منذ :");
+if(trim($result["cessation"])=='y'){
+$pdf->Text(65,180,"إلى غاية ");	
+}else{
 $pdf->Text(65,180,"إلى غاية يومنا هذا ");
+} 
 $pdf->Text(10,200,"سلمت هذه الشهادة للمعني (ة) بناء على طلب منه (ها) لغرض ملف اداري");
 $pdf->Text(60,210,"و في حدود ما يسمح به القانون");
 $pdf->Text(128,220,"عين وسارة في :  ");
@@ -78,9 +67,19 @@ $pdf->Text(95,130,$pdf->nbrtostring("grh","com","IDCOM",$result["Commune_Naissan
 $pdf->Text(165,130,$pdf->nbrtostring("grh","wil","IDWIL",$result["Wilaya_Naissancear"],"WILAYASAR"));
 $pdf->Text(30,170,$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));
 
+$Motif_Cessation=$pdf->nbrtostringx('motif_cessation','idcausedepart',trim($result['Motif_Cessation']),'causedepartar');
+
+if(trim($result["cessation"])=='y'){
+	$pdf->Text(120,180,"("."تاريخ ال".$Motif_Cessation.")");
+	$A = substr($result["Date_Cessation"],0,2);
+	$M = substr($result["Date_Cessation"],3,2);
+	$J = substr($result["Date_Cessation"],6,4);
+	$Date_Cessation=$J."-".$M."-".$A;
+	$pdf->Text(87,180,$Date_Cessation);	
+} 
 if($result["rnvgradear"]==1 or $result["rnvgradear"]==3 )
 {
-$pdf->Text(88,170," في ".$pdf->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
+	$pdf->Text(88,170," في ".$pdf->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
 }
 $pdf->Text(26,180,$result["DATEARRIVE"]);
 $pdf->Output('trav_ar.pdf','I');

@@ -1,7 +1,5 @@
 <?php 
-$ndp=$_GET["uc"];
-require_once('inspection.php');
-$pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
+$ndp=$_GET["uc"];require_once('drh.php');$pdf = new drh('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
 $pdf->SetTitle('DECISION');
@@ -17,19 +15,6 @@ $sql = "SELECT * FROM grh WHERE  idp = '".$ndp."' ";
 $requete = @mysql_query($sql) or die($sql."<br>".mysql_error()) ;
 $result = mysql_fetch_array( $requete ); 
 mysql_free_result($requete);
-
-
-// $query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";//
-// $requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
-// while($rowx=mysql_fetch_object($requetex))
-// {
-// $nomar=$rowx->NOMAR;
-// $prenomar=$rowx->PRENOMAR;
-// $nomfr=$rowx->NOM;
-// $prenomfr=$rowx->PRENOM;
-// $UNIV=$rowx->UNIV;
-// $STRUCTURE=$rowx->STRUCTURE;
-// }
 $pdf->AddPage();
 $pdf->SetLineWidth(0.4);
 $photos='../../public/webcam/drh/'.$ndp.'.jpg';
