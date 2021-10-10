@@ -275,6 +275,8 @@ class drh_Model extends Model {
 			'DEBUTCONGE'      => $this->dateFR2US($data['DEBUTCONGE']),
 			'FINCONGE'        => $data['FINCONGE'],
 			'REMPLACANT'      => $data['REMPLACANT'],
+			'RESTETOT'        => $data['RESTETOT'],
+			'RESTEANNEE'      => $data['RESTEANNEE'],
 			'IDP'             => $data['id']	
 			));
 			//echo '<pre>';print_r ($data);echo '<pre>';
@@ -302,7 +304,9 @@ class drh_Model extends Model {
 			'DURECONGE'       => $data['DURECONGE'],
 			'DEBUTCONGE'      => $this->dateFR2US($data['DEBUTCONGE']),
 			'FINCONGE'        => $data['FINCONGE'],
-			'REMPLACANT'      => $data['REMPLACANT']
+			'REMPLACANT'      => $data['REMPLACANT'],
+			'RESTETOT'        => $data['RESTETOT'],
+			'RESTEANNEE'      => $data['RESTEANNEE']
 	   );
        //echo '<pre>';print_r ($postData);echo '<pre>';
 	   $this->db->update('regconge', $postData, "id =" . $data['id'] . "");

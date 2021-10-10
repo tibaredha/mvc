@@ -1279,6 +1279,9 @@ class drh extends Controller {
 		$data['DEBUTCONGE']  = $_POST['DEBUTCONGE'];
 		$data['FINCONGE']    = $this->datePlus($_POST['DEBUTCONGE'],$_POST['DURECONGE']);
 		$data['REMPLACANT']  = $_POST['REMPLACANT'];
+		$data['RESTETOT']    = $_POST['RESTETOT'];
+		$data['RESTEANNEE']  = $_POST['RESTEANNEE'];
+		
 		//echo '<pre>';print_r ($data);echo '<pre>';  
 		$last_id=$this->model->creatconge($data);
 		header('location: ' . URL .$this->route. '/conge/'.$id);	
@@ -1303,6 +1306,8 @@ class drh extends Controller {
 		$data['DEBUTCONGE']  = $_POST['DEBUTCONGE'];
 		$data['FINCONGE']    = $this->datePlus($_POST['DEBUTCONGE'],$_POST['DURECONGE']);
 		$data['REMPLACANT']  = $_POST['REMPLACANT'];
+		$data['RESTETOT']    = $_POST['RESTETOT'];
+		$data['RESTEANNEE']  = $_POST['RESTEANNEE'];
 		$data['IDP']         = $url1[3];
 		//echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavesconge($data);

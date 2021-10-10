@@ -39,6 +39,8 @@ $data = array(
 						"أمومة"=>"16"	
 					  ),
 "DURECONGE"   => $this->userListview[0]['DURECONGE'] ,
+"RESTETOT"    => $this->userListview[0]['RESTETOT'] ,
+"RESTEANNEE"  => $this->userListview[0]['RESTEANNEE'] ,
 "DEBUTCONGE"  => view::dateUS2FR($this->userListview[0]['DEBUTCONGE']),
 );
 view::button($data['btn'],'');
@@ -50,6 +52,8 @@ $this->label($x+960,$y+160,'السبب');              $this->combov1($x+700,$y+
 $this->label($x+610,$y+160,'المدة');              $this->txtarid($x+350,$y+150,'DURECONGE','DURECONGE',0,$data['DURECONGE'],'date'); 
 $this->label($x+260,$y+160,'تاريخ بداية العطلة'); $this->txts($x,$y+150,'DEBUTCONGE',0,$data['DEBUTCONGE'],'dateus1');//$this->userListview[0]['REMPLACANT']
 $this->label($x+960,$y+190,'لمستخلف');            view::usereph($x+700,$y+180,"REMPLACANT","","","grh",$this->userListview[0]['REMPLACANT'],View::nbrtostring('grh','idp',$this->userListview[0]['REMPLACANT'],'Nomlatin')."_".View::nbrtostring('grh','idp',$this->userListview[0]['REMPLACANT'],'Prenom_Latin')); 
+$this->label($x+610,$y+190,'الرصيد');             $this->txtarid($x+350,$y+180,'RESTETOT','RESTETOT',0,$data['RESTETOT'],'date'); 
+$this->label($x+260,$y+190,'السنة الحالية');      $this->txtarid($x,$y+180,'RESTEANNEE','RESTEANNEE',0,$data['RESTEANNEE'],'date'); 
 $this->submit($x+700,$y+210,$data['butun']);
 $this->f1();
 view::sautligne(19);

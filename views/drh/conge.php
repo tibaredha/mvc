@@ -38,7 +38,9 @@ $data = array(
 						"أمومة"=>"16"	
 					  ),
 "DURECONGE"   => '0' ,
-"DEBUTCONGE"  => date('j-m-Y'),
+"RESTETOT"    => '0' ,
+"RESTEANNEE"  => '0' ,
+"DEBUTCONGE"  => date('j-m-Y')
 );
 view::button($data['btn'],'');
 echo "<h2>Nouveau congé : ".strtoupper($this->user[0]['Nomlatin'])."_".$this->user[0]['Prenom_Latin']." ( ".$this->stringtostring("grade","idg",$this->user[0]['rnvgradear'],"gradear") ." ) "."</h2 ><hr /><br />";
@@ -49,6 +51,8 @@ $this->label($x+960,$y+160,'السبب');              $this->combov1($x+700,$y+
 $this->label($x+610,$y+160,'المدة');              $this->txtarid($x+350,$y+150,'DURECONGE','DURECONGE',0,$data['DURECONGE'],'date'); 
 $this->label($x+260,$y+160,'تاريخ بداية العطلة'); $this->txts($x,$y+150,'DEBUTCONGE',0,$data['DEBUTCONGE'],'dateus1');
 $this->label($x+960,$y+190,'لمستخلف');            view::usereph($x+700,$y+180,"REMPLACANT","","","grh","0","المستخلف"); 
+$this->label($x+610,$y+190,'الرصيد');             $this->txtarid($x+350,$y+180,'RESTETOT','RESTETOT',0,$data['RESTETOT'],'date'); 
+$this->label($x+260,$y+190,'السنة الحالية');      $this->txtarid($x,$y+180,'RESTEANNEE','RESTEANNEE',0,$data['RESTEANNEE'],'date'); 
 $this->submit($x+700,$y+210,$data['butun']);
 $this->f1();
 view::sautligne(19);
