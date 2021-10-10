@@ -1287,22 +1287,26 @@ class drh extends Controller {
 	public function editconge($id) 
 	{
 	$url1 = explode('/',$_GET['url']);
-	$this->view->title = 'nstructure'; 
-    $this->view->user = $this->model->userpersSingleList($id);
-    $this->view->userListview = $this->model->persSingleList($url1[3]);
-	$this->view->render($this->route.'/editconge');   
+	$this->view->title = 'editeconge';	
+    $this->view->user = $this->model->userSinglestructure($url1[3]);
+    $this->view->userListview = $this->model->congelist($id);
+	$this->view->render($this->route.'/editconge');
 	}
 	
     public function editSavesconge($id)
 	{
 	    $url1 = explode('/',$_GET['url']);
 		$data = array();
-		$data['NOMAR']= $_POST['NOMAR'];$data['PRENOMAR']= $_POST['PRENOMAR'];$data['Categorie']= $_POST['Categorie'];$data['id']=$id;$data['idt']= $url1[3];$data['CASNOS']= $_POST['CASNOS'];$data['DEBUTCONTRAT']=$_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
-		$data['NOMFR']= $_POST['NOMFR'];$data['PRENOMFR']= $_POST['PRENOMFR'];
-		$data['SPECIALITE']= $_POST['SPECIALITE'];
+		$data['id']          = $id;
+		$data['CAUSECONGE']  = $_POST['CAUSECONGE'];
+		$data['DURECONGE']   = $_POST['DURECONGE']; 
+		$data['DEBUTCONGE']  = $_POST['DEBUTCONGE'];
+		$data['FINCONGE']    = $this->datePlus($_POST['DEBUTCONGE'],$_POST['DURECONGE']);
+		$data['REMPLACANT']  = $_POST['REMPLACANT'];
+		$data['IDP']         = $url1[3];
 		//echo '<pre>';print_r ($data);echo '<pre>';
-		$this->model->editSavespers($data);
-		header('location: ' . URL . $this->route.'/conge/'.$data['idt'].'');
+		$this->model->editSavesconge($data);
+		header('location: ' . URL . $this->route.'/conge/'.$url1[3].'');
 	}
 
 	public function editetatpers($id)

@@ -65,16 +65,33 @@ class View {
 	ob_end_flush();	
 		
 	}
-	function usereph($x,$y,$name,$db_name,$choisir,$class,$ve,$va) 
+	
+	
+	// function WILAYA($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	// {
+	// mysqlconnect();
+	// echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";		 
+	// echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+	// echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+	// mysql_query("SET NAMES 'UTF8' ");
+	// $result = mysql_query("SELECT * FROM $tb_name order by WILAYAS" );
+	// while($data =  mysql_fetch_array($result))
+	// {
+	// echo '<option value="'.$data[0].'">'.$data[1].'</option>';
+	// }
+	// echo '</select>'."\n"; 
+	// echo "</div>";
+	// }
+	function usereph($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
 	{
 	mysqlconnect();
 	echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 
 	echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
-	echo"<option   value=\"0\" selected=\"selected\">".$choisir."</option>"."\n";
-    $result = mysql_query("SELECT * FROM grh order by Nomlatin  " );
+	echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+    $result = mysql_query("SELECT * FROM $tb_name order by Nomlatin  " );
     while($data =  mysql_fetch_array($result))
     {
-    echo '<option value="'.$data[$ve].'">'.$data["Nomlatin"].'_'.$data["Prenom_Latin"].'</option>';
+		echo '<option value="'.$data[0].'">'.$data["Nomlatin"].'_'.$data["Prenom_Latin"].'</option>';
     }
 	echo '</select>'."\n"; 
 	echo "</div>";

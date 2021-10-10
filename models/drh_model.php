@@ -284,27 +284,28 @@ class drh_Model extends Model {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM regconge WHERE idp = :id  order by DEBUTCONGE asc ', array(':id' => $id));    
     }
+	
+	
+	public function congelist($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM regconge WHERE id = :id ', array(':id' => $id));    
+    }
 	public function deleteconge($id) {       
         $this->db->delete('regconge', "id = '$id'");
     }
 		
-	public function editSavespers($data) {
+	public function editSavesconge($data) {
 	$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-			'idt'          => $data['idt'],	
-			'NOMAR'        => $data['NOMAR'],
-		    'PRENOMAR'     => $data['PRENOMAR'],
-			'NOMFR'      => $data['NOMFR'],
-		    'PRENOMFR'   => $data['PRENOMFR'],
-			'Categorie'    => $data['Categorie'],
-			'CASNOS'       => $data['CASNOS'],
-			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
-			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT']),  
-            'SPECIALITE'   => $data['SPECIALITE']
-
+		$postData = array(	
+		    'IDP'             => $data['IDP'],	
+			'CAUSECONGE'      => $data['CAUSECONGE'],
+			'DURECONGE'       => $data['DURECONGE'],
+			'DEBUTCONGE'      => $this->dateFR2US($data['DEBUTCONGE']),
+			'FINCONGE'        => $data['FINCONGE'],
+			'REMPLACANT'      => $data['REMPLACANT']
 	   );
-       echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('pers', $postData, "id =" . $data['id'] . "");
+       //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('regconge', $postData, "id =" . $data['id'] . "");
     }	
 		
 		

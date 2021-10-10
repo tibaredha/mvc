@@ -67,21 +67,13 @@ echo "</tr>" ;
 				echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'drh/search/0/10?o=idp&q='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
 				
 			}
-			
-			
-			
-			
-			
-			
-			
 			echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/drh/attestation_trav_fr.php?uc='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
 			
 			if($value['cessation']=='')
 			{
 				echo "<td id =\"nom_prenom_fr\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" > ".strtoupper($value['Nomlatin']).'_'.strtolower ($value['Prenom_Latin'])."</a></td>" ;
 				echo "<td id =\"actif\" ><a title=\"mouvement\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" > في الخدمة</a></td>" ;
-				echo "<td id =\"nom_prenom_ar\" ><a title=\"إستمارة\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".$value['Nomarab'].'_'.$value['Prenom_Arabe'].' : ('.$value['pere'].")</a></td>" ;
-				
+				echo "<td id =\"nom_prenom_ar\" ><a title=\"إستمارة\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".$value['Nomarab'].'_'.$value['Prenom_Arabe'].' : ('.$value['pere'].")</a></td>" ;	
 			}
 			else
 			{
