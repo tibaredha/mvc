@@ -35,7 +35,13 @@ $data = array(
 						"سنوية"=>"13",
 						"مهنية"=>"14",
 						"مرضية"=>"15",
-						"أمومة"=>"16"	
+						"أمومة"=>"16",
+						"غياب غير مبرر"=>"17",
+						"الإستيداع لأغراض شخصية"=>"18",
+						"الإستيداع من أجل تربية طفل يقل عمره عن 5 سنوات"=>"19",
+						"الإستيداع من أجل مرافقة الزوج"=>"20",
+						"الإستيداع من أجل مرض خطير تعرض له أحد الأصول أو الزوج أو أحد الأبناء المتكفل بهم"=>"21",
+						"الإستيداع من أجل ممارسة مهام عضو مسير لحزب سياسي"=>"22"
 					  ),
 "DURECONGE"   => '0' ,
 "RESTETOT"    => '0' ,
@@ -62,26 +68,15 @@ ob_end_flush();
 		
 		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
-		<th  colspan=3   style="width:50px;">
-		<?php
-		echo '<a title="Autres"  href="'.URL.'drh/search/0/10?o=idp&q=" > Autres : </a>';
-		?>
-		</th> 
-		
-		<th  colspan=4    style="width:50px;">
-		<?php
-		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['idp'].'" > Fiche personnels </a>';
-		
-		?>
-		</th> 
-		
-		<th  colspan=4    style="width:50px;">
-		<?php
-		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['idp'].'" > Fiche personnels </a>';
-		
-		//echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['idp'].'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
-		?>
-		</th> 
+			<th  colspan=7   style="width:50px;">
+				<?php echo '<a title="Autres"  href="'.URL.'drh/search/0/10?o=idp&q='.$this->user[0]['idp'].'" > GRH : </a>';?>
+			</th> 
+			<th  colspan=2    style="width:50px;">
+				<?php echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'tcpdf/drh/list_conge.php?idp='.$this->user[0]['idp'].'" > Fiche absence  </a>';?>
+			</th>
+			<th  colspan=3    style="width:50px;">
+				<?php echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'tcpdf/drh/list_conge.php?idp='.$this->user[0]['idp'].'" > Fiche absence  </a>';?>
+			</th>
 		</tr>
 		<tr>
 		<th style="width:10px;">Photos</th>
@@ -93,6 +88,7 @@ ob_end_flush();
 		<th style="width:50px;">Stock</th>
 		<th style="width:10px;">Demande</th>
 		<th style="width:10px;">Titre</th>
+		<th style="width:10px;">Ok</th>
 		<th style="width:10px;">Upd </th>
 		<th style="width:10px;">Del</th>
 		</tr>
@@ -104,15 +100,57 @@ ob_end_flush();
 						<?php 
 		                $fichier = photosmfy('drh',trim($value['REMPLACANT']).'.jpg',View::nbrtostring('grh','idp',trim($value['REMPLACANT']),'Sexe'));
 		                echo "<td  style=\"width:10px;\"     align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl***/".$value['id']."\" ><img  src=\"".URL."public/webcam/drh/".$fichier."?t=".time()."\"  width='20' height='20' border='0'></td> " ;
-		                ?>
-						<td align="center"><?php echo View::nbrtostring('causeconge','id',trim($value['CAUSECONGE']),'causecongear');?></td>
+						if(trim($value['CAUSECONGE'])==17){echo '<td id ="actif_nc">';	}else{echo '<td id ="actif_c" >';}echo View::nbrtostring('causeconge','id',trim($value['CAUSECONGE']),'causecongear');echo '</td>';
+						?>
 						<td align="center"><?php echo $value['DURECONGE'];?></td>
 						<td align="center"><?php echo view::dateUS2FR($value['DEBUTCONGE']);?></td>
 						<td align="center"><?php echo view::dateUS2FR($value['FINCONGE']) ;?></td>
 						<td align="center"><?php echo View::nbrtostring('grh','idp',trim($value['REMPLACANT']),'Nomarab')."_".View::nbrtostring('grh','idp',trim($value['REMPLACANT']),'Prenom_Arabe');?></td>
 						<td align="center"><?php echo $value['STOCK'];?></td>
-						<?php echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"titre de conge\" href=\"".URL.'tcpdf/drh/demande_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;?>
-						<?php echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"titre de conge\" href=\"".URL.'tcpdf/drh/conge_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;?>
+						<?php 
+						if(trim($value['CAUSECONGE'])==17)
+						{
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"questionnaire\" href=\"".URL.'tcpdf/drh/questionnaire_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"sanction\" href=\"".URL.'tcpdf/drh/conge_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
+						} 
+						elseif (trim($value['CAUSECONGE'])==18) 
+						{
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"decision mise en disponibilite \" href=\"".URL.'tcpdf/drh/questionnaire_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"reprise mise en disponibilite\" href=\"".URL.'tcpdf/drh/conge_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
+						}
+						elseif (trim($value['CAUSECONGE'])==19) 
+						{
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"decision mise en disponibilite \" href=\"".URL.'tcpdf/drh/questionnaire_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"reprise mise en disponibilite\" href=\"".URL.'tcpdf/drh/conge_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
+						}
+						elseif (trim($value['CAUSECONGE'])==20) 
+						{
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"decision mise en disponibilite \" href=\"".URL.'tcpdf/drh/questionnaire_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"reprise mise en disponibilite\" href=\"".URL.'tcpdf/drh/conge_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
+						}
+						elseif (trim($value['CAUSECONGE'])==21) 
+						{
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"decision mise en disponibilite \" href=\"".URL.'tcpdf/drh/questionnaire_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"reprise mise en disponibilite\" href=\"".URL.'tcpdf/drh/conge_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
+						}
+						elseif (trim($value['CAUSECONGE'])==22) 
+						{
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"decision mise en disponibilite \" href=\"".URL.'tcpdf/drh/questionnaire_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"reprise mise en disponibilite\" href=\"".URL.'tcpdf/drh/conge_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
+						}
+						
+						else
+						{
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"demande de conge\" href=\"".URL.'tcpdf/drh/demande_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+							echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"titre de conge\" href=\"".URL.'tcpdf/drh/conge_ar.php?idp='.$this->user[0]['idp']."&idc=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
+						}
+						?>
+						<?php if ($value['OK']==0) {?>
+						<td align="center"><a  title="confirmé le retour " href="<?php echo URL.'drh/editetatconge/'.$this->user[0]['idp'].'/'.$value['id'].'/1';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
+		                <?php }
+		                if ($value['OK']==1) { ?>
+						<td align="center"><a  title="confirmé la sortie" href="<?php echo URL.'drh/editetatconge/'.$this->user[0]['idp'].'/'.$value['id'].'/0';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
+						<?php } ?>
 						<td align="center"><a title="editer" href="<?php echo URL.'drh/editconge/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'drh/deleteconge/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
 						</tr>

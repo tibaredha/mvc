@@ -24,18 +24,6 @@ $result1 = mysql_fetch_array( $requete1 );
 mysql_free_result($requete1);
 $pdf->AddPage();$y=7;
 $pdf->entete_drh($y);
-
-// $pdf->AddPage();
-// $pdf->SetLineWidth(0.4);
-// $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
-// $pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->repar,0,0,'C');
-// $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->mspar,0,0,'C');
-// $pdf->SetFont('aefurat', '', 14);
-////$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,$pdf->wilayaar,0,0,'R');
-// $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->dsparp,0,0,'R');
-// $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المؤسسة العمومية الاستشفائية عين وسارة",0,0,'R');
-// $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المديرية الفرعية للموارد البشرية",0,0,'R');
-// $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,'رقم : ............./م . م . ب /'.date("Y"),0,1,'R');$pdf->SetFont('aefurat', '', 16);
 $pdf->setRTL(true);
 
 if($result1["CAUSECONGE"]==1){
@@ -394,6 +382,91 @@ if($result1["CAUSECONGE"]==16)
 	$pdf->SetFont('aefurat','I', 17);
 	$pdf->SetTextColor(225,0,0);		
 }
+if($result1["CAUSECONGE"]==17)
+{
+	$pdf->htiat('مقرر  خصم',$result["rnvgradear"],$y);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للرد على الإستفسارالكتابي ");
+	$pdf->decision_drh($y);
+	$pdf->Text(5,$pdf->GetY()+8,"المادة الأولى  : يخصم للسيد(ة) : ".$result["Nomarab"]." ".$result["Prenom_Arabe"]);
+	$pdf->Text(35,$pdf->GetY()+8,"بصفته (ها) : ".$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));
+	$pdf->Text(35,$pdf->GetY()+8,$result1["DURECONGE"]." يوم / ايام "." من الراتب الشهري  ");
+	$pdf->Text(35,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+    $pdf->foot_drh($y);
+	
+}
+if($result1["CAUSECONGE"]==18)
+{
+	$pdf->htiat('مقرر الإحالة على الإستيداع ',$result["rnvgradear"],$y);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للرد على الإستفسارالكتابي ");
+	$pdf->decision_drh($y);
+	$pdf->Text(5,$pdf->GetY()+8,"المادة الأولى  : يخصم للسيد(ة) : ".$result["Nomarab"]." ".$result["Prenom_Arabe"]);
+	$pdf->Text(35,$pdf->GetY()+8,"بصفته (ها) : ".$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));
+	$pdf->Text(35,$pdf->GetY()+8,$result1["DURECONGE"]." يوم / ايام "." من الراتب الشهري  ");
+	$pdf->Text(35,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+    $pdf->foot_drh($y);
+	
+}
+if($result1["CAUSECONGE"]==19)
+{
+	$pdf->htiat('مقرر الإحالة على الإستيداع ',$result["rnvgradear"],$y);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للرد على الإستفسارالكتابي ");
+	$pdf->decision_drh($y);
+	$pdf->Text(5,$pdf->GetY()+8,"المادة الأولى  : يخصم للسيد(ة) : ".$result["Nomarab"]." ".$result["Prenom_Arabe"]);
+	$pdf->Text(35,$pdf->GetY()+8,"بصفته (ها) : ".$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));
+	$pdf->Text(35,$pdf->GetY()+8,$result1["DURECONGE"]." يوم / ايام "." من الراتب الشهري  ");
+	$pdf->Text(35,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+    $pdf->foot_drh($y);
+	
+}
+if($result1["CAUSECONGE"]==20)
+{
+	$pdf->htiat('مقرر الإحالة على الإستيداع ',$result["rnvgradear"],$y);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للرد على الإستفسارالكتابي ");
+	$pdf->decision_drh($y);
+	$pdf->Text(5,$pdf->GetY()+8,"المادة الأولى  : يخصم للسيد(ة) : ".$result["Nomarab"]." ".$result["Prenom_Arabe"]);
+	$pdf->Text(35,$pdf->GetY()+8,"بصفته (ها) : ".$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));
+	$pdf->Text(35,$pdf->GetY()+8,$result1["DURECONGE"]." يوم / ايام "." من الراتب الشهري  ");
+	$pdf->Text(35,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+    $pdf->foot_drh($y);
+	
+}
+if($result1["CAUSECONGE"]==21)
+{
+	$pdf->htiat('مقرر الإحالة على الإستيداع ',$result["rnvgradear"],$y);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للرد على الإستفسارالكتابي ");
+	$pdf->decision_drh($y);
+	$pdf->Text(5,$pdf->GetY()+8,"المادة الأولى  : يخصم للسيد(ة) : ".$result["Nomarab"]." ".$result["Prenom_Arabe"]);
+	$pdf->Text(35,$pdf->GetY()+8,"بصفته (ها) : ".$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));
+	$pdf->Text(35,$pdf->GetY()+8,$result1["DURECONGE"]." يوم / ايام "." من الراتب الشهري  ");
+	$pdf->Text(35,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+    $pdf->foot_drh($y);
+	
+}
+if($result1["CAUSECONGE"]==22)
+{
+	$pdf->htiat('مقرر الإحالة على الإستيداع ',$result["rnvgradear"],$y);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+	$pdf->Text(5,$pdf->GetY()+8," نظرا : للرد على الإستفسارالكتابي ");
+	$pdf->decision_drh($y);
+	$pdf->Text(5,$pdf->GetY()+8,"المادة الأولى  : يخصم للسيد(ة) : ".$result["Nomarab"]." ".$result["Prenom_Arabe"]);
+	$pdf->Text(35,$pdf->GetY()+8,"بصفته (ها) : ".$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));
+	$pdf->Text(35,$pdf->GetY()+8,$result1["DURECONGE"]." يوم / ايام "." من الراتب الشهري  ");
+	$pdf->Text(35,$pdf->GetY()+8," نظرا : للغياب الغير المبرر لمدة ".$result1["DURECONGE"]." يوم / ايام "." من ".$result1["DEBUTCONGE"]." إلى ".$result1["FINCONGE"]);
+    $pdf->foot_drh($y);
+	
+}
 
-$pdf->Output('titre_conge_ar.pdf','I');
+
+
+
+
+
+
+$pdf->Output('titre_conge_ar_'.$result["Nomlatin"].'.pdf','I');
+//$pdf->Output('titre_conge_ar.pdf','I');
 ?>

@@ -58,8 +58,8 @@ $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->arrete110_96,0,1,'R');$pdf->S
 if($ZE==1){$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->cm03_05,0,1,'R');}$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->diplome.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->ordre.$NUMORDER.' بتاريخ '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على المقررة رقم '.$num1.' المؤرخة في '.$date1.' المتعلقة بتنصيب صيدلية '."للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' صيدلي (ة) بتاريخ '.$DATED.' المتعلق بفتح صيدلية',0,1,'R');$pdf->SetFont('aefurat', '', 13);
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على المقررة رقم '.$num.' المؤرخة في '.$date.' المتعلقة بتنصيب صيدلية '." للمعني (ة) ",0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على طلب المعني (ة) رقم '.$NUMD.' المؤرخ في '.$DATED.' المتعلق بفتح صيدلية',0,1,'R');$pdf->SetFont('aefurat', '', 13);
 $pdf->SetXY(0,$pdf->GetY());if($ZE==1){$pdf->Cell(200,5,'  بـ : '.$adressen.'  ببلدية  '.$communen.' ولاية الجلفة '.'في إطار المناطق المعزولة',0,1,'R');}else{$pdf->Cell(200,5,'  بـ : '.$adressen.'  ببلدية  '.$communen.' ولاية الجلفة',0,1,'R');}
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'- بناء على محضر المطابقة الخاص بالصيدلية المؤرخ في  '.$DATEP,0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
 //*************************************************************************************************************************//

@@ -96,6 +96,20 @@ class View {
 	echo '</select>'."\n"; 
 	echo "</div>";
 	}
+	function userservice($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	{
+	mysqlconnect();
+	echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 
+	echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+	echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+    $result = mysql_query("SELECT * FROM $tb_name order by servicear  " );
+    while($data =  mysql_fetch_array($result))
+    {
+		echo '<option value="'.$data[0].'">'.$data["servicear"].'</option>';
+    }
+	echo '</select>'."\n"; 
+	echo "</div>";
+	}
 	function structure_sanitaire_drh($data,$titre) 
 	{
 	view::button($data['btn'],'');	
@@ -716,7 +730,7 @@ class View {
 	function f0($url,$method){echo "<form class=\"form\" action=\"".$url."\" method=\"".$method."\" name=\"form1\" id=\"form1\">";}
 	function label($x,$y,$l){echo "<div class=\"label\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	echo $l;echo "</div>";}
 	function txt($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required  />";echo "</div>";}
-   function txtw($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" id=\"datejour1\"/>";echo "</div>";}
+    function txtw($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" id=\"datejour1\"/>";echo "</div>";}
 	
 	function txtron($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" readonly  />";echo "</div>";}
 	function ANOMALIE($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" id=\"ANOMALIE\"  />";echo "</div>";}

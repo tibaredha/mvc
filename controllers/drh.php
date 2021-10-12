@@ -1259,9 +1259,31 @@ class drh extends Controller {
 	header('location: ' . URL .$this->route. '/home21/'.$url1[3]);
 	}
 	
+	
+	//*********************************************************************************************************//
+	/*service*/	
+	function service($id) 
+	{
+	$this->view->title = 'nservice';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->userListview = $this->model->serviceSingleList($id);
+	$this->view->render($this->route.'/service');    
+	}
+	public function creatservice($id) 
+	{
+		$data = array();
+	    $data['SERVICEAR_A']    = $_POST['SERVICEAR_A'];
+		$data['SERVICEAR_N']    = $_POST['SERVICEAR_N'];
+		$data['DEBUTSERVICE']   = $_POST['DEBUTSERVICE']; 
+		$data['CAUSESERVICE']   = $_POST['CAUSESERVICE']; 
+		$data['idp']            = $id;
+		//echo '<pre>';print_r ($data);echo '<pre>';  
+		$last_id=$this->model->creatservice($data);
+		header('location: ' . URL .$this->route. '/service/'.$id);	
+	} 
 	//*********************************************************************************************************//
 	
-	/*personnel*/	
+	/*conge*/	
 	function conge($id) 
 	{
 	$this->view->title = 'nstructure';
@@ -1314,14 +1336,16 @@ class drh extends Controller {
 		header('location: ' . URL . $this->route.'/conge/'.$url1[3].'');
 	}
 
-	public function editetatpers($id)
+	public function editetatconge($id)
 	{
 	    $url1 = explode('/',$_GET['url']);
 		$data = array();
-		$data['id']= $id;$data['idt']= $url1[3];$data['ETAT']= $url1[4];
-		// echo '<pre>';print_r ($data);echo '<pre>';
-		$this->model->editSavesetatpers($data);
-		header('location: ' . URL . $this->route.'/pers/'.$data['idt'].'');
+		//$data['id'] = $id;
+		$data['id'] = $url1[3];
+		$data['OK'] = $url1[4];
+		//echo '<pre>';print_r ($data);echo '<pre>';
+		$this->model->editSavesetatconge($data);
+		header('location: ' . URL . $this->route.'/conge/'.$id.'');
 	}
 	
 	public function deleteconge($id)

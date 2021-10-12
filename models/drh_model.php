@@ -266,7 +266,20 @@ class drh_Model extends Model {
        echo '<pre>';print_r ($postData);echo '<pre>';
 	   $this->db->update('auto', $postData, "id =" . $data['id'] . "");
     }
-	
+	//**************************************************************//
+	public function creatservice($data) {
+			$this->db->exec('SET NAMES utf8');
+			$this->db->insert('regservice', array(
+			'SERVICEAR_A'      => $data['SERVICEAR_A'],
+			'SERVICEAR_N'      => $data['SERVICEAR_N'],
+			'DEBUTSERVICE'     => $this->dateFR2US($data['DEBUTSERVICE']),
+			'CAUSESERVICE'     => $data['CAUSESERVICE'],
+			'IDP'              => $data['idp']	
+			));
+			//echo '<pre>';print_r ($data);echo '<pre>';
+			return $last_id = $this->db->lastInsertId();
+		}
+	//**************************************************************//
 	 public function creatconge($data) {
 			$this->db->exec('SET NAMES utf8');
 			$this->db->insert('regconge', array(
@@ -286,7 +299,10 @@ class drh_Model extends Model {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM regconge WHERE idp = :id  order by DEBUTCONGE asc ', array(':id' => $id));    
     }
-	
+	public function serviceSingleList($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM regservice WHERE idp = :id  order by DEBUTSERVICE asc ', array(':id' => $id));    
+    }
 	
 	public function congelist($id) {
         $this->db->exec('SET NAMES utf8');
@@ -313,14 +329,14 @@ class drh_Model extends Model {
     }	
 		
 		
-	public function editSavesetatpers($data) {
+	public function editSavesetatconge($data) {
 		$this->db->exec('SET NAMES utf8');
 		$postData = array(		
-			'idt'        => $data['idt'],	
-		    'ETAT'       => $data['ETAT']   
+			'id'         => $data['id'],	
+		    'OK'         => $data['OK']   
         );
-       echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('pers', $postData, "id =" . $data['id'] . "");
+       //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('regconge', $postData, "id =" . $data['id'] . "");
     }
 	
 	public function homeSingleList($id) {

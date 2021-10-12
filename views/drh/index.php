@@ -72,7 +72,7 @@ echo "</tr>" ;
 			if($value['cessation']=='')
 			{
 				echo "<td id =\"nom_prenom_fr\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" > ".strtoupper($value['Nomlatin']).'_'.strtolower ($value['Prenom_Latin'])."</a></td>" ;
-				echo "<td id =\"actif\" ><a title=\"mouvement\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" > في الخدمة</a></td>" ;
+				echo "<td id =\"actif\" ><a title=\"mouvement\" href=\"".URL.'drh/service/'.$value['idp']."\" >".View::nbrtostring('servicegrh','ids',trim($value['SERVICEAR']),'servicear')." </a></td>" ;//".$value['SERVICEAR']."
 				echo "<td id =\"nom_prenom_ar\" ><a title=\"إستمارة\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".$value['Nomarab'].'_'.$value['Prenom_Arabe'].' : ('.$value['pere'].")</a></td>" ;	
 			}
 			else
