@@ -561,21 +561,24 @@ echo "<p> au";
 echo "</p>";
 
 echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
-echo "</br>";echo "</br>";echo "</br>";echo "</br>";
-
-view::combostructure(640,380,'EPH','structurebis','0','structure','class','id','structure');
-
+//echo "</br>";echo "</br>";echo "</br>";echo "</br>";
+//view::combostructure(640,380,'EPH','structurebis','0','structure','class','id','structure');
 echo "<p> ";
 echo "<select name=\"type\">";
-	echo"<option value=\"1\">Standard</option>"."\n";
-	echo"<option value=\"2\">Numerique</option>"."\n";
-	// echo"<option value=\"3\">list_global</option>"."\n";
-	// echo"<option value=\"4\">list_commune</option>"."\n";
-	// echo"<option value=\"5\">list_materiel</option>"."\n";
-	// echo"<option value=\"6\">list_anomalie</option>"."\n";
-	// echo"<option value=\"7\">list_inspection</option>"."\n";
+	echo"<option value=\"1\">list_grh_total</option>"."\n";
+	echo"<option value=\"2\">list_grh_conge</option>"."\n";
+	echo"<option value=\"3\">list_grh_service</option>"."\n";
+	
 echo "</select>";
 echo "</p> ";
+
+
+// echo "<p> ";
+// echo "<select name=\"type\">";
+	// echo"<option value=\"1\">Standard</option>"."\n";
+	// echo"<option value=\"2\">Numerique</option>"."\n";
+// echo "</select>";
+// echo "</p> ";
 
 echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
 echo "<p><input type=\"submit\" value=\"Evaluer\" /></p>";

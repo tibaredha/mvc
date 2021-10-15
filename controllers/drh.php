@@ -15,14 +15,14 @@ class drh extends Controller {
 	
 	
 	
-   //***searchdeces***/userSearchx
+   //***searchdeces***/
 	function search()
 	{
 	    $url1 = explode('/',$_GET['url']);	
 		$this->view->title = 'Search drh';
 	    $this->view->userListviewo = $_GET['o']; // criter de choix
 	    $this->view->userListviewq = $_GET['q']; // key word  
-		$this->view->userListviewp =$url1[2];    // parametre 2 page                     limit 2,3
+		$this->view->userListviewp = $url1[2];    // parametre 2 page                     limit 2,3
 		$this->view->userListviewl =5     ;      // parametre 3 nombre de ligne par page  limit 2,3 
 	    $this->view->userListviewb =20       ;   // parametre nombre de chiffre dan la barre  navigation
 		$this->view->userListview = $this->model->userSearch($this->view->userListviewo,$this->view->userListviewq,$this->view->userListviewp,$this->view->userListviewl);
@@ -354,15 +354,18 @@ class drh extends Controller {
 	function editcesation($id) 
 	{
 	$this->view->title = 'editcesation';
-	// $this->view->user = $this->model->userSinglestructure($id);
-	// $this->view->render($this->route.'/cesation');    
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->render($this->route.'/editcesation');    
 	}
+
 	/*editcesation*/	
 	function an_cesation($id) 
 	{
+	$data = array();
+	$data['id']             = $id;
 	$this->view->title = 'an_cesation';
-	// $this->view->user = $this->model->userSinglestructure($id);
-	// $this->view->render($this->route.'/cesation');    
+	$last_id=$this->model->an_cesation($data);
+    header('location: ' . URL .$this->route. '/search/0/10?o=idp&q='.$id);	
 	}
 	
 	
@@ -492,7 +495,16 @@ class drh extends Controller {
 	$this->model->deleteconge($id); 
 	header('location: ' . URL .$this->route. '/conge/'.$url1[3]);
 	}
+	//*********************************************************************************************************//
 	
+	/*admin*/	
+	function admin($id) 
+	{
+	$this->view->title = 'nstructure';
+	$this->view->user = $this->model->userSinglestructure($id);
+	//$this->view->userListview = $this->model->congeSingleList($id);
+	$this->view->render($this->route.'/admin');    
+	}
 	//**CHANGER PHOTOS**//
 	function upl() 
 	{

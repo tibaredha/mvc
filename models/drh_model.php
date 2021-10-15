@@ -22,7 +22,7 @@ class drh_Model extends Model {
 	
 	public function userSearch($o, $q, $p, $l) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select("SELECT * FROM grh where $o like '$q%' order by Nomlatin limit $p,$l  ");//Prenom_Latin,
+		return $this->db->select("SELECT * FROM grh where $o like '$q%' order by Nomlatin limit $p,$l  ");
     }
 
     public function userSearch1($o, $q) {
@@ -30,10 +30,10 @@ class drh_Model extends Model {
 		return $this->db->select("SELECT * FROM grh where $o like '$q%' order by $o ");
     }
 	
-	public function userSearchx($o, $q, $p, $l) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select("SELECT * FROM grh where $o = '$q' order by $o,PRENOM limit $p,$l  ");
-    }
+	// public function userSearchx($o, $q, $p, $l) {
+        // $this->db->exec('SET NAMES utf8');
+		// return $this->db->select("SELECT * FROM grh where $o = '$q' order by $o,PRENOM limit $p,$l  ");
+    // }
 	
 	 public function createstructure($data) {
 		
@@ -280,6 +280,18 @@ class drh_Model extends Model {
        //echo '<pre>';print_r ($postData);echo '<pre>';
 	   $this->db->update('grh', $postData, "idp =" . $data['id'] . "");
     }
+
+    public function an_cesation($data) {
+		$this->db->exec('SET NAMES utf8');
+		$postData = array(		
+            'cessation'			     =>''
+        );
+       //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('grh', $postData, "idp =" . $data['id'] . "");
+    }
+
+
+
 
 	//**************************************************************//
 	public function creatservice($data) {

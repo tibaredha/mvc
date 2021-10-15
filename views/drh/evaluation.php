@@ -2,7 +2,7 @@
 verifsession();	
 view::button('drh','');
 ?>
-<h2>Evaluation : Structures   </h2 >
+<h2>Evaluation : Drh   </h2 >
 <hr /><br />
 <?php 
 //drh(URL.'pdf/inspection/rapport.php');

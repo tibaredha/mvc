@@ -39,6 +39,7 @@ echo "<tr>" ;
 	echo "</th>" ;
 echo "</tr>" ;	
 echo "<tr>" ;
+	echo "<th style=\"width:10px;\">Admin</th>" ;
 	echo "<th style=\"width:10px;\">Photos</th>" ;
 	echo "<th style=\"width:10px;\">Congé</th>" ;
 	echo "<th style=\"width:10px;\">ِCT-FR</th>" ;
@@ -55,6 +56,7 @@ echo "</tr>" ;
 		$bgcolor_donate = 'white';
 		$fichier = photosmfy('drh',$value['idp'].'.jpg',$value['Sexe']);
 		echo "<tr bgcolor=\"".$bgcolor_donate."\"  onmouseover=\"this.style.backgroundColor='#9FF781';\"   onmouseout=\"this.style.backgroundColor='".$bgcolor_donate."';\"  >" ;
+			echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'drh/admin/'.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/s_reload.png'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
 			
 			echo "<td align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."drh/upl/".$value['idp']."\" ><img  src=\"".URL."public/webcam/drh/".$fichier."?t=".time()."\"  width='50' height='50' border='0'></td> " ;
 			
