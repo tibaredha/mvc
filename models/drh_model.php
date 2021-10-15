@@ -266,6 +266,21 @@ class drh_Model extends Model {
        echo '<pre>';print_r ($postData);echo '<pre>';
 	   $this->db->update('auto', $postData, "id =" . $data['id'] . "");
     }
+	
+	
+	//**************************************************************//
+	
+	public function editSavescesation($data) {
+		$this->db->exec('SET NAMES utf8');
+		$postData = array(		
+			'Motif_Cessation'        => $data['CAUSECESATION'],	
+		    'Date_Cessation'         => $data['DEBUTCESATION'],
+            'cessation'			     =>'y'
+        );
+       //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('grh', $postData, "idp =" . $data['id'] . "");
+    }
+
 	//**************************************************************//
 	public function creatservice($data) {
 			$this->db->exec('SET NAMES utf8');
@@ -276,9 +291,40 @@ class drh_Model extends Model {
 			'CAUSESERVICE'     => $data['CAUSESERVICE'],
 			'IDP'              => $data['idp']	
 			));
+			$postData_grh = array(
+			'SERVICEAR'        => $data['SERVICEAR_N'],
+			'SERVICEFR'        => $data['SERVICEAR_N']
+	        );
+	        $this->db->update('grh', $postData_grh, "idp =" . $data['idp'] . "");
 			//echo '<pre>';print_r ($data);echo '<pre>';
 			return $last_id = $this->db->lastInsertId();
-		}
+	}
+		
+	public function deleteservice($id) {       
+        $this->db->delete('regservice', "id = '$id'");
+    }
+	public function servicelist($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM regservice WHERE id = :id ', array(':id' => $id));    
+    }
+	public function editSavesservice($data) {
+	$this->db->exec('SET NAMES utf8');
+		$postData = array(	
+		    'SERVICEAR_A'      => $data['SERVICEAR_A'],
+			'SERVICEAR_N'      => $data['SERVICEAR_N'],
+			'DEBUTSERVICE'     => $this->dateFR2US($data['DEBUTSERVICE']),
+			'CAUSESERVICE'     => $data['CAUSESERVICE'],
+			'IDP'              => $data['IDP']
+	   );
+       //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('regservice', $postData, "id =" . $data['id'] . "");
+	   
+	   $postData_grh = array(
+			'SERVICEAR'        => $data['SERVICEAR_N'],
+			'SERVICEFR'        => $data['SERVICEAR_N']
+	   );
+	   $this->db->update('grh', $postData_grh, "idp =" . $data['IDP'] . "");
+    }	
 	//**************************************************************//
 	 public function creatconge($data) {
 			$this->db->exec('SET NAMES utf8');

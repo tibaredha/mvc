@@ -13,7 +13,7 @@ $fichier = photosmfy('drh',$this->user[0]['idp'].'.jpg',$this->user[0]['Sexe']);
 ob_start();
 $data = array(
 "Date"       => date('Y-m-j'), 
-"btn"        => 'inspection', 
+"btn"        => 'drh', 
 "id"         => '', 
 "butun"      => 'Inser New congé', 
 "photos"     => 'public/webcam/drh/'.$fichier,

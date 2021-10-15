@@ -543,6 +543,46 @@ echo "<p><input type=\"submit\" value=\"calculer\" /></p>";
 echo "</form>";
 echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
 }
+function drh($action)
+{ 
+echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+echo "<form ALIGN=\"center\" action=\"$action\" method=\"post\">";
+
+echo "<p> du";
+	echo "<select name=\"jour\">";jours();echo "</select>";
+	echo "<select name=\"mois\">";mois();echo "</select>";
+	echo "<select name=\"annee\">";annee();echo "</select>";
+echo "</p>";
+
+echo "<p> au";
+	echo "<select name=\"jour1\">";jours();echo "</select>";
+	echo "<select name=\"mois1\">";mois();echo "</select>";
+	echo "<select name=\"annee1\">";annee();echo "</select>";
+echo "</p>";
+
+echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+echo "</br>";echo "</br>";echo "</br>";echo "</br>";
+
+view::combostructure(640,380,'EPH','structurebis','0','structure','class','id','structure');
+
+echo "<p> ";
+echo "<select name=\"type\">";
+	echo"<option value=\"1\">Standard</option>"."\n";
+	echo"<option value=\"2\">Numerique</option>"."\n";
+	// echo"<option value=\"3\">list_global</option>"."\n";
+	// echo"<option value=\"4\">list_commune</option>"."\n";
+	// echo"<option value=\"5\">list_materiel</option>"."\n";
+	// echo"<option value=\"6\">list_anomalie</option>"."\n";
+	// echo"<option value=\"7\">list_inspection</option>"."\n";
+echo "</select>";
+echo "</p> ";
+
+echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+echo "<p><input type=\"submit\" value=\"Evaluer\" /></p>";
+
+echo "</form>";
+echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+}
 function inspection($action)
 { 
 echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";

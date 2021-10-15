@@ -3,7 +3,7 @@ verifsession();
 lang(Session::get('lang'));
 ob_start();
 $data = array(
-"btn"          => 'inspection', 
+"btn"          => 'drh', 
 "photos"       => 'public/images/photos/msp.jpg',
 "action"       => 'inspection/createstructure/',
 

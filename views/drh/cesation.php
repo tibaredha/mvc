@@ -15,97 +15,34 @@ $data = array(
 "Date"       => date('Y-m-j'), 
 "btn"        => 'drh', 
 "id"         => '', 
-"butun"      => 'Inser New service', 
+"butun"      => 'Inser New Cesation', 
 "photos"     => 'public/webcam/drh/'.$fichier,
-"action"     => 'drh/creatservice/'.$this->user[0]['idp'],
-"CAUSESERVICE"  => array(      
-                        "ضرورة المصلحة"=>"1",
-						"لطلب المعني"=>"2"	
+"action"     => 'drh/creatcesation/'.$this->user[0]['idp'],
+"CAUSECESATION"  => array(      
+                        "إستقالة"=>"1",
+						"وفاة"=>"2",
+						"تقاعد"=>"3",
+						"عزل"=>"4",
+						"تسريح"=>"5",
+						"فسخ عقد"=>"6",
+						"نقل"=>"7",
+						"نهاية العقد"=>"8"
 					  ),
-
-"DEBUTSERVICE"  => date('j-m-Y')
+"DEBUTCESATION"  => date('j-m-Y')
 );
 view::button($data['btn'],'');
-echo "<h2>Nouveau service : ".strtoupper($this->user[0]['Nomlatin'])."_".$this->user[0]['Prenom_Latin']." ( ".$this->stringtostring("grade","idg",$this->user[0]['rnvgradear'],"gradear") ." ) "."</h2 >";
-echo "<h2>service : ".View::nbrtostring('servicegrh','ids',trim($this->user[0]['SERVICEAR']),'servicear')."</h2 ><br />";
+echo "<h2>Cesation : ".strtoupper($this->user[0]['Nomlatin'])."_".$this->user[0]['Prenom_Latin']." ( ".$this->stringtostring("grade","idg",$this->user[0]['rnvgradear'],"gradear") ." ) "."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=90;
-$this->label($x+960,$y+160,'سبب التحويل');             $this->combov1($x+700,$y+150,'CAUSESERVICE',$data['CAUSESERVICE'],'date');    
-$this->label($x+610,$y+160,'المصلحة الجديدة');         view::userservice($x+350,$y+150,"SERVICEAR_N","","","servicegrh","0","المصلحة");      
-$this->label($x+260,$y+160,'ابتداء من');               $this->txts($x,$y+150,'DEBUTSERVICE',0,$data['DEBUTSERVICE'],'dateus1');
-$this->hide($x+260,$y+260,"SERVICEAR_A",50,$this->user[0]['SERVICEAR']);            
+$this->label($x+960,$y+160,'السبب');              $this->combov1($x+700,$y+150,'CAUSECESATION',$data['CAUSECESATION'],'date');
+$this->label($x+260,$y+160,'تاريخ بداية الذهاب'); $this->txts($x,$y+150,'DEBUTCESATION',0,$data['DEBUTCESATION'],'dateus1');
 $this->submit($x+700,$y+210,$data['butun']);
 $this->f1();
 view::sautligne(19);
 ob_end_flush();
 //echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 ?>
-		
-		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
-		<tr>
-			<th  colspan=4   style="width:50px;">
-				<?php echo '<a title="Autres"  href="'.URL.'drh/search/0/10?o=idp&q='.$this->user[0]['idp'].'" > GRH : </a>';?>
-			</th> 
-			<th  colspan=2    style="width:50px;">
-				<?php echo '<a target="_blank" title="Fiche service "  href="'.URL.'tcpdf/drh/list_service.php?idp='.$this->user[0]['idp'].'" > Fiche service  </a>';?>
-			</th>
-			<th  colspan=2    style="width:50px;">
-				<?php echo '<a target="_blank" title="Fiche service "  href="'.URL.'tcpdf/drh/list_service.php?idp='.$this->user[0]['idp'].'" > Fiche service  </a>';?>
-			</th>
-		</tr>
-		<tr>
-		<th style="width:150px;">ancien service</th>
-		<th style="width:150px;">cause transfert</th>
-		<th style="width:150px;">nouveau service</th>
-		<th style="width:150px;">Debut transfert</th>
-		
-		<th style="width:10px;">Demande</th>
-		<th style="width:10px;">Titre</th>
-		<th style="width:10px;">Upd </th>
-		<th style="width:10px;">Del</th>
-		</tr>
-		<?php
-		if (isset($this->userListview))
-		{		
-				foreach($this->userListview as $key => $value)
-				{ 
-					?>
-							<tr bgcolor='WHITE' onmouseover="this.style.backgroundColor='#9FF781';" onmouseout="this.style.backgroundColor='WHITE';" >
-							<td align="center"><?php echo View::nbrtostring('servicegrh','ids',trim($value['SERVICEAR_A']),'servicear');?></td>
-							<td align="center"><?php if ($value['CAUSESERVICE']==1){echo"ضرورة المصلحة";}else{echo"لطلب المعني";}?></td>
-							<td align="center"><?php echo View::nbrtostring('servicegrh','ids',trim($value['SERVICEAR_N']),'servicear');?></td>
-							<td align="center"><?php echo view::dateUS2FR($value['DEBUTSERVICE']);?></td>
-							<?php 
-							 echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"\" href=\"".URL.'tcpdf/drh/*.php?idp='.$this->user[0]['idp']."&ids=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-							 echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"\" href=\"".URL.'tcpdf/drh/service.php?idp='.$this->user[0]['idp']."&ids=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
-							?>
-							<td align="center"><a title="editer" href="<?php echo URL.'drh/editservice/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
-							<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'drh/deleteservice/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
-							</tr>
-					<?php 
-				}
-				$total_count=count($this->userListview);
-				if ($total_count <= 0 )
-				{
-					echo '<tr><td align="center" colspan="16" ><span> No record found for autos </span></td> </tr>';
-					echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="16" ><span>' .$total_count.'/'.$total_count.' Record(s) found.</span></td></tr>';					
-				}
-				else
-				{		
-					//echo '<tr bgcolor=""  ><td align="center" colspan="16" >'. barre_navigation ($total_count,$this->userListviewl,$this->userListviewo,$this->userListviewq,$this->userListviewp,$this->userListviewb).'</td></tr>';	
-					echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="16" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
-				}		
-		}
-		else 
-		{
-			echo '<tr><td align="center" colspan="16" ><span> Click search button to start searching a vms.</span></td></tr>';
-			echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="16" ><span>&nbsp;</span></td></tr>';					      
-		} 
-		
-		?>
-		</table><br/><br/>
-		
 		
 <script type="text/javascript">
 window.onload = function(){

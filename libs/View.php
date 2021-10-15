@@ -1126,7 +1126,14 @@ class View {
 	echo '<a href="'.URL.'cour/evaluation">Evaluation Courrier </a>'; echo '&nbsp;';
 	}
 	
+	if ($btn=='drh') 
+	{
+	echo '<a href="'.URL.'drh/">Structure</a>'; echo '&nbsp;';  
+	//echo '<a href="'.URL.'drh/inspecteur">inspection</a>'; echo '&nbsp;';
+	//echo '<a href="'.URL.'drh/ALGERIE">Sig Structures</a>'; echo '&nbsp;';
+	echo '<a href="'.URL.'drh/evaluation">Evaluation</a>'; echo '&nbsp;';  
 	
+	}
 	
 	$this->NAV();
 	echo'</div>';//
@@ -1594,16 +1601,16 @@ class View {
 			"c"   => 'drh',
 			"m"   => 'search',
 			"combo"   => array( 
-								"idp"=> 'idp',
+								//"idp"=> 'idp',
 								"Nomlatin"=> 'Nomlatin',
-								"Prenom_Latin"=> 'Prenom_Latin',
-			                    "val3"=> '*',
-								"val4"=> '*',
-								"val5"=> '*',
-								"val6"=> '*'
+								"Prenom_Latin"=> 'Prenom_Latin'
+			                    //"val3"=> '*',
+								//"val4"=> '*',
+								//"val5"=> '*',
+								//"val6"=> '*'
 							  ),
 			"submitvalue" => 'Search_drh',
-			"cb1" => 'drh',"mb1" => 'ndrh',      "tb1" => 'New_drh',       "vb1" => 'New_drh',    "icon1" => 'add.PNG',
+			"cb1" => 'drh',"mb1" => 'ndrh',       "tb1" => 'New_drh',       "vb1" => 'New_drh',    "icon1" => 'add.PNG',
 			"cb2" => 'drh',"mb2" => 'imp',        "tb2" => 'Print_cour',    "vb2" => 'Print_cour', "icon2" => 'print.PNG',
 			"cb3" => 'drh',"mb3" => '',           "tb3" => 'Graphe_cour',   "vb3" => 'graphe_cour',"icon3" => 'graph.PNG',
 			"cb4" => 'drh',"mb4" => '',           "tb4" => 'cour1',         "vb4" => 'cour',       "icon4" => 'search.PNG'

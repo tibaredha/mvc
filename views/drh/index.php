@@ -22,7 +22,7 @@ hr.new5 {border: 10px solid green;border-radius: 5px;}
 </style>
 <?php 
 verifsession();	
-view::button('inspection','');
+view::button('drh','');
 lang(Session::get('lang'));
 ob_start();
 view::munu('drh'); 
@@ -79,33 +79,42 @@ echo "</tr>" ;
 			{
 				echo "<td id =\"nom_prenom_fr_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".strtoupper($value['Nomlatin']).'_'.strtolower ($value['Prenom_Latin'])."</a></td>" ;
 				if($value['Motif_Cessation']==1){
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/demission.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/demission.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a>&ensp;(<a title=\"annulation\" href=\"".URL.'drh/an_cesation/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/back.PNG'."\"    width='25' height='25' border='0' alt='' ></a>)</td>" ;	
 				}
 				if($value['Motif_Cessation']==2){
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/deces.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/deces.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a>&ensp;(<a title=\"annulation\" href=\"".URL.'drh/an_cesation/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/back.PNG'."\"    width='25' height='25' border='0' alt='' ></a>)</td>" ;	
 				}
 				if($value['Motif_Cessation']==3){
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/retraite.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/retraite.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a>&ensp;(<a title=\"annulation\" href=\"".URL.'drh/an_cesation/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/back.PNG'."\"    width='25' height='25' border='0' alt='' ></a>)</td>" ;	
 				}
 				if($value['Motif_Cessation']==4){
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/revocation.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/revocation.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a>&ensp;(<a title=\"annulation\" href=\"".URL.'drh/an_cesation/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/back.PNG'."\"    width='25' height='25' border='0' alt='' ></a>)</td>" ;	
 				}
 				if($value['Motif_Cessation']==5){
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/liberation.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/liberation.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a>&ensp;(<a title=\"annulation\" href=\"".URL.'drh/an_cesation/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/back.PNG'."\"    width='25' height='25' border='0' alt='' ></a>)</td>" ;	
 				}
 				if($value['Motif_Cessation']==6){
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/resiliationcontrat.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/resiliationcontrat.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a>&ensp;(<a title=\"annulation\" href=\"".URL.'drh/an_cesation/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/back.PNG'."\"    width='25' height='25' border='0' alt='' ></a>)</td>" ;	
 				}
 				if($value['Motif_Cessation']==7){
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/mutation.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/mutation.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a>&ensp;(<a title=\"annulation\" href=\"".URL.'drh/an_cesation/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/back.PNG'."\"    width='25' height='25' border='0' alt='' ></a>)</td>" ;
 				}
 				if($value['Motif_Cessation']==8){
-					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/fincontrat.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a></td>" ;	
+					echo "<td id =\"actif_n\" ><a title=\"Fiche\" href=\"".URL.'tcpdf/drh/fincontrat.php?uc='.$value['idp']."\" >".View::nbrtostring('motif_cessation','idcausedepart',trim($value['Motif_Cessation']),'causedepartar')."</a>&ensp;(<a title=\"annulation\" href=\"".URL.'drh/an_cesation/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/back.PNG'."\"    width='25' height='25' border='0' alt='' ></a>)</td>" ;	
 				}
 				echo "<td id =\"nom_prenom_ar_n\" ><a title=\"إستمارة\" href=\"".URL.'tcpdf/drh/attestation_frar.php?uc='.$value['idp']."\" >".$value['Nomarab'].'_'.$value['Prenom_Arabe'].' : ('.$value['pere'].")</a></td>" ;
 			}
 			echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/drh/attestation_trav_ar.php?uc='.$value['idp']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='40' height='40' border='0' alt='' ></td>" ; 	
-			echo "<td style=\"width:50px;\" align=\"center\" ><a                  title=\"Depart\"     href=\"".URL.'drh/***/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/s_loggoff.png'."\"    width='50' height='50' border='0' alt='' ></a></td>" ;
+			
+			if($value['cessation']=='')
+			{
+				echo "<td style=\"width:50px;\" align=\"center\" ><a title=\"Depart\" href=\"".URL.'drh/cesation/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/s_loggoff.png'."\"    width='50' height='50' border='0' alt='' ></a></td>" ;
+			}else
+			{
+				echo "<td style=\"width:50px;\" align=\"center\" ><a title=\"Editer Depart\" href=\"".URL.'drh/editcesation/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/s_process.png'."\"    width='50' height='50' border='0' alt='' ></a></td>" ;	
+			}
+			
+			
 			echo "<td style=\"width:50px;\" align=\"center\" ><a                  title=\"Editer\"     href=\"".URL.'drh/***/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/edit.PNG'."\"    width='50' height='50' border='0' alt='' ></a></td>" ;
 			echo "<td style=\"width:50px;\" align=\"center\" ><a class=\"delete\" title=\"Supprimer\"  href=\"".URL.'drh/***/'.$value['idp']."\" ><img  src=\"".URL.'public/images/icons/delete.PNG'."\"  width='50' height='50' border='0' alt='' ></a></td>" ; 
 		echo'</tr>';
