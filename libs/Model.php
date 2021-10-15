@@ -7,6 +7,14 @@ class Model {
 		
 	}
 	
+	function dateFR2US($date)//01/01/2013
+	{
+	$J      = substr($date,0,2);
+    $M      = substr($date,3,2);
+    $A      = substr($date,6,4);
+	$dateFR2US =  $A."-".$M."-".$J ;
+    return $dateFR2US;//2013-01-01
+	}
 	
 	
 

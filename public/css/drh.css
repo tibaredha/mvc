@@ -47,6 +47,26 @@
 	font-size: 20px;font-weight: bold;    	
 }
 
+.field1
+{
+  position: absolute;
+  top: 230px;
+  left: 20px;
+  width:925px;
+  height:120px;
+  background-color: #FBEFEF;
+  border: 3px solid red;border-radius: 5px;
+}
+.field2
+{
+  position: absolute;
+  top: 370px;
+  left: 20px;
+  width:925px;
+  height:160px;
+  background-color: #FBEFEF;
+  border: 3px solid red;border-radius: 5px;
+}
 
 
 

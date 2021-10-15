@@ -5,21 +5,6 @@ class drh_Model extends Model {
         parent::__construct();
     }
 	
-	function dateFR2US($date)//01/01/2013
-	{
-	$J      = substr($date,0,2);
-    $M      = substr($date,3,2);
-    $A      = substr($date,6,4);
-	$dateFR2US =  $A."-".$M."-".$J ;
-    return $dateFR2US;//2013-01-01
-	}
-	
-	public function userSinglestructure($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM grh WHERE idp = :id', array(':id' => $id));
-    }
-	
-	
 	public function userSearch($o, $q, $p, $l) {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select("SELECT * FROM grh where $o like '$q%' order by Nomlatin limit $p,$l  ");
@@ -34,6 +19,138 @@ class drh_Model extends Model {
         // $this->db->exec('SET NAMES utf8');
 		// return $this->db->select("SELECT * FROM grh where $o = '$q' order by $o,PRENOM limit $p,$l  ");
     // }
+	
+	public function userSinglestructure($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM grh WHERE idp = :id', array(':id' => $id));
+    }
+	
+	//*********************************************************************************************************//
+	 public function creatconge($data) {
+			$this->db->exec('SET NAMES utf8');
+			$this->db->insert('regconge', array(
+			'CAUSECONGE'      => $data['CAUSECONGE'],
+			'DURECONGE'       => $data['DURECONGE'],
+			'DEBUTCONGE'      => $this->dateFR2US($data['DEBUTCONGE']),
+			'FINCONGE'        => $data['FINCONGE'],
+			'REMPLACANT'      => $data['REMPLACANT'],
+			'RESTETOT'        => $data['RESTETOT'],
+			'RESTEANNEE'      => $data['RESTEANNEE'],
+			'IDP'             => $data['id']	
+			));
+			//echo '<pre>';print_r ($data);echo '<pre>';
+			return $last_id = $this->db->lastInsertId();
+		}
+	public function congeSingleList($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM regconge WHERE idp = :id  order by DEBUTCONGE asc ', array(':id' => $id));    
+    }
+	public function congelist($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM regconge WHERE id = :id ', array(':id' => $id));    
+    }
+	public function editSavesconge($data) {
+	$this->db->exec('SET NAMES utf8');
+		$postData = array(	
+		    'IDP'             => $data['IDP'],	
+			'CAUSECONGE'      => $data['CAUSECONGE'],
+			'DURECONGE'       => $data['DURECONGE'],
+			'DEBUTCONGE'      => $this->dateFR2US($data['DEBUTCONGE']),
+			'FINCONGE'        => $data['FINCONGE'],
+			'REMPLACANT'      => $data['REMPLACANT'],
+			'RESTETOT'        => $data['RESTETOT'],
+			'RESTEANNEE'      => $data['RESTEANNEE']
+	   );
+       //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('regconge', $postData, "id =" . $data['id'] . "");
+    }
+	public function editSavesetatconge($data) {
+		$this->db->exec('SET NAMES utf8');
+		$postData = array(		
+			'id'         => $data['id'],	
+		    'OK'         => $data['OK']   
+        );
+       //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('regconge', $postData, "id =" . $data['id'] . "");
+    }
+	
+	public function deleteconge($id) {       
+        $this->db->delete('regconge', "id = '$id'");
+    }
+		
+		
+	//*********************************************************************************************************//
+	
+	public function serviceSingleList($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM regservice WHERE idp = :id  order by DEBUTSERVICE asc ', array(':id' => $id));    
+    }
+	public function creatservice($data) {
+			$this->db->exec('SET NAMES utf8');
+			$this->db->insert('regservice', array(
+			'SERVICEAR_A'      => $data['SERVICEAR_A'],
+			'SERVICEAR_N'      => $data['SERVICEAR_N'],
+			'DEBUTSERVICE'     => $this->dateFR2US($data['DEBUTSERVICE']),
+			'CAUSESERVICE'     => $data['CAUSESERVICE'],
+			'IDP'              => $data['idp']	
+			));
+			$postData_grh = array(
+			'SERVICEAR'        => $data['SERVICEAR_N'],
+			'SERVICEFR'        => $data['SERVICEAR_N']
+	        );
+	        $this->db->update('grh', $postData_grh, "idp =" . $data['idp'] . "");
+			//echo '<pre>';print_r ($data);echo '<pre>';
+			return $last_id = $this->db->lastInsertId();
+	}
+		
+	public function deleteservice($id) {       
+        $this->db->delete('regservice', "id = '$id'");
+    }
+	public function servicelist($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM regservice WHERE id = :id ', array(':id' => $id));    
+    }
+	public function editSavesservice($data) {
+	$this->db->exec('SET NAMES utf8');
+		$postData = array(	
+		    'SERVICEAR_A'      => $data['SERVICEAR_A'],
+			'SERVICEAR_N'      => $data['SERVICEAR_N'],
+			'DEBUTSERVICE'     => $this->dateFR2US($data['DEBUTSERVICE']),
+			'CAUSESERVICE'     => $data['CAUSESERVICE'],
+			'IDP'              => $data['IDP']
+	   );
+       //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('regservice', $postData, "id =" . $data['id'] . "");
+	   
+	   $postData_grh = array(
+			'SERVICEAR'        => $data['SERVICEAR_N'],
+			'SERVICEFR'        => $data['SERVICEAR_N']
+	   );
+	   $this->db->update('grh', $postData_grh, "idp =" . $data['IDP'] . "");
+    }	
+	
+	//*********************************************************************************************************//
+	public function editSavescesation($data) {
+		$this->db->exec('SET NAMES utf8');
+		$postData = array(		
+			'Motif_Cessation'        => $data['CAUSECESATION'],	
+		    'Date_Cessation'         => $data['DEBUTCESATION'],
+            'cessation'			     =>'y'
+        );
+       //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('grh', $postData, "idp =" . $data['id'] . "");
+    }
+
+    public function an_cesation($data) {
+		$this->db->exec('SET NAMES utf8');
+		$postData = array(		
+            'cessation'			     =>''
+        );
+       //echo '<pre>';print_r ($postData);echo '<pre>';
+	   $this->db->update('grh', $postData, "idp =" . $data['id'] . "");
+    }
+
+	//*********************************************************************************************************//
 	
 	 public function createstructure($data) {
 		
@@ -120,474 +237,9 @@ class drh_Model extends Model {
         // echo '<pre>';print_r ($postData);echo '<pre>';
 		$this->db->update('structure', $postData, "id =" . $data['id'] . "");
     }
-	public function editSavesstr($data) {
-		$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-			'id'        => $data['id'],	
-		    'ETAT'       => $data['ETAT']   
-        );
-       //echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('structure', $postData, "id =" . $data['id'] . "");
-    }
-	
-	public function editSavesval($data) {
-		$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-			'id'        => $data['id'],	
-		    'val'       => $data['val']   
-        );
-       // echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('structure', $postData, "id =" . $data['id'] . "");
-    }
-	
-	public function lstructure() {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM  structure order by commune ');
-        // return $this->db->select('SELECT * FROM don  order by id     ');order by DINS  desc limit 50
-    }
-	
-	public function deletestructure($id) {       
-        $this->db->delete('structure', "id = '$id'");   
-		$this->db->deletem("insp", "ids =".$id);
-		$this->db->deletem('inspection', "idinsp =".$id);
-		$this->db->delete('auto', "idt = '$id'");
-		$this->db->delete('pers', "idt = '$id'");
-		$this->db->delete('home', "idstructure = '$id'");
-    }
 
-    public function dnrcommune($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM com WHERE IDWIL = :id  order by COMMUNE asc ', array(':id' => $id));
-       
-    }
-
-	public function autoSingleList($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM auto WHERE idt = :id  order by Categorie asc ', array(':id' => $id));    
-    }
-	public function autoSingleList1($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM auto WHERE id = :id  order by DATE asc ', array(':id' => $id));    
-    }
-	
-	public function doubleemploi($Serie_Type,$id) {
-        $this->db->exec('SET NAMES utf8');
-		//return $this->db->select('SELECT COUNT(*) AS nbr_doublon,Type,Serie_Type,Immatri,Marque FROM auto  GROUP BY Type,Serie_Type   HAVING COUNT(*) > 1'); //   
-        return $this->db->select(" SELECT  * FROM auto WHERE Serie_Type='$Serie_Type' and  idt !=$id "); //
-	}
-		// SELECT   COUNT(*) AS nbr_doublon, champ1, champ2, champ3
-		// FROM     table
-		// GROUP BY champ1, champ2, champ3
-		// HAVING   COUNT(*) > 1
-	
-	
-	 public function creatautodb($data) 
-	 {
-		   
-			
-			$this->db->exec('SET NAMES utf8');
-			$this->db->insert('auto', array(
-			'idt'        => $data['id'],	
-			'Date'       => $this->dateFR2US($data['Date']),
-		    'WILAYA'     => $data['WILAYA'],
-		    'COMMUNE'    => $data['COMMUNE'],
-			'Categorie'  => $data['Categorie'],
-			'Type'       => $data['Type'],
-		    'Serie_Type' => $data['Serie_Type'],
-		    'Marque'     => $data['Marque'],
-		    'Immatri'    => $data['Immatri'],
-		    'Precedent'  => $data['Precedent'],
-		    'Annee'      => $data['Annee'],	  
-			'NASS'       => $data['NASS'],
-			'DUNASS'     => $this->dateFR2US($data['DUNASS']),
-			'AUNASS'     => $this->dateFR2US($data['AUNASS']),
-			'CTRL'       => $data['CTRL'],
-			'DUCTRL'     => $this->dateFR2US($data['DUCTRL']),
-			'AUCTRL'     => $this->dateFR2US($data['AUCTRL']),
-			
-			'sieges'    => $data['sieges'],
-			'ess'       => $data['ess'],
-			'die'       => $data['die'],
-			'gaz'       => $data['gaz']
-			
-			));
-			// echo '<pre>';print_r ($data);echo '<pre>';
-			//return $last_id = $this->db->lastInsertId();
-			//verification des doublons 
-			$doub = $this->db->prepare("SELECT * FROM auto WHERE Serie_Type = :Serie_Type ");
-			$doub->execute(array( ':Serie_Type' => $data['Serie_Type']	));
-			$data1 = $doub->fetch();	
-			$count = $doub->rowCount();
-			if (isset($count) and $count > 0) 
-			{
-				return $data['Serie_Type'];  
-			}	
-		}
-	public function deleteauto($id) {       
-        $this->db->delete('auto', "id = '$id'");
-    }
-	
-	public function editSavesauto($data) {
-		$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-			'idt'        => $data['idt'],	
-		    'Date'       => $this->dateFR2US($data['Date']),
-		    'WILAYA'     => $data['WILAYA'],
-		    'COMMUNE'    => $data['COMMUNE'],
-			'Categorie'  => $data['Categorie'],
-			'Type'       => $data['Type'],
-		    'Serie_Type' => $data['Serie_Type'],
-		    'Marque'     => $data['Marque'],
-		    'Immatri'    => $data['Immatri'],
-		    'Precedent'  => $data['Precedent'],
-		    'Annee'      => $data['Annee'],	 
-			'NASS'       => $data['NASS'],
-			'DUNASS'     => $this->dateFR2US($data['DUNASS']),
-			'AUNASS'     => $this->dateFR2US($data['AUNASS']),
-			'CTRL'       => $data['CTRL'],
-			'DUCTRL'     => $this->dateFR2US($data['DUCTRL']),
-			'AUCTRL'     => $this->dateFR2US($data['AUCTRL']),
-
-            'sieges'    => $data['sieges'],
-			'ess'       => $data['ess'],
-			'die'       => $data['die'],
-			'gaz'       => $data['gaz']
-	
-        );
-       // echo '<pre>';print_r ($postData);echo '<pre>';
-		$this->db->update('auto', $postData, "id =" . $data['id'] . "");
-    }
-	public function editSavesetat($data) {
-		$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-			'idt'        => $data['idt'],	
-		    'ETAT'       => $data['ETAT']   
-        );
-       echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('auto', $postData, "id =" . $data['id'] . "");
-    }
-	
-	
-	//**************************************************************//
-	
-	public function editSavescesation($data) {
-		$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-			'Motif_Cessation'        => $data['CAUSECESATION'],	
-		    'Date_Cessation'         => $data['DEBUTCESATION'],
-            'cessation'			     =>'y'
-        );
-       //echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('grh', $postData, "idp =" . $data['id'] . "");
-    }
-
-    public function an_cesation($data) {
-		$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-            'cessation'			     =>''
-        );
-       //echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('grh', $postData, "idp =" . $data['id'] . "");
-    }
-
-
-
-
-	//**************************************************************//
-	public function creatservice($data) {
-			$this->db->exec('SET NAMES utf8');
-			$this->db->insert('regservice', array(
-			'SERVICEAR_A'      => $data['SERVICEAR_A'],
-			'SERVICEAR_N'      => $data['SERVICEAR_N'],
-			'DEBUTSERVICE'     => $this->dateFR2US($data['DEBUTSERVICE']),
-			'CAUSESERVICE'     => $data['CAUSESERVICE'],
-			'IDP'              => $data['idp']	
-			));
-			$postData_grh = array(
-			'SERVICEAR'        => $data['SERVICEAR_N'],
-			'SERVICEFR'        => $data['SERVICEAR_N']
-	        );
-	        $this->db->update('grh', $postData_grh, "idp =" . $data['idp'] . "");
-			//echo '<pre>';print_r ($data);echo '<pre>';
-			return $last_id = $this->db->lastInsertId();
-	}
-		
-	public function deleteservice($id) {       
-        $this->db->delete('regservice', "id = '$id'");
-    }
-	public function servicelist($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM regservice WHERE id = :id ', array(':id' => $id));    
-    }
-	public function editSavesservice($data) {
-	$this->db->exec('SET NAMES utf8');
-		$postData = array(	
-		    'SERVICEAR_A'      => $data['SERVICEAR_A'],
-			'SERVICEAR_N'      => $data['SERVICEAR_N'],
-			'DEBUTSERVICE'     => $this->dateFR2US($data['DEBUTSERVICE']),
-			'CAUSESERVICE'     => $data['CAUSESERVICE'],
-			'IDP'              => $data['IDP']
-	   );
-       //echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('regservice', $postData, "id =" . $data['id'] . "");
-	   
-	   $postData_grh = array(
-			'SERVICEAR'        => $data['SERVICEAR_N'],
-			'SERVICEFR'        => $data['SERVICEAR_N']
-	   );
-	   $this->db->update('grh', $postData_grh, "idp =" . $data['IDP'] . "");
-    }	
-	//**************************************************************//
-	 public function creatconge($data) {
-			$this->db->exec('SET NAMES utf8');
-			$this->db->insert('regconge', array(
-			'CAUSECONGE'      => $data['CAUSECONGE'],
-			'DURECONGE'       => $data['DURECONGE'],
-			'DEBUTCONGE'      => $this->dateFR2US($data['DEBUTCONGE']),
-			'FINCONGE'        => $data['FINCONGE'],
-			'REMPLACANT'      => $data['REMPLACANT'],
-			'RESTETOT'        => $data['RESTETOT'],
-			'RESTEANNEE'      => $data['RESTEANNEE'],
-			'IDP'             => $data['id']	
-			));
-			//echo '<pre>';print_r ($data);echo '<pre>';
-			return $last_id = $this->db->lastInsertId();
-		}
-	public function congeSingleList($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM regconge WHERE idp = :id  order by DEBUTCONGE asc ', array(':id' => $id));    
-    }
-	public function serviceSingleList($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM regservice WHERE idp = :id  order by DEBUTSERVICE asc ', array(':id' => $id));    
-    }
-	
-	public function congelist($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM regconge WHERE id = :id ', array(':id' => $id));    
-    }
-	public function deleteconge($id) {       
-        $this->db->delete('regconge', "id = '$id'");
-    }
-		
-	public function editSavesconge($data) {
-	$this->db->exec('SET NAMES utf8');
-		$postData = array(	
-		    'IDP'             => $data['IDP'],	
-			'CAUSECONGE'      => $data['CAUSECONGE'],
-			'DURECONGE'       => $data['DURECONGE'],
-			'DEBUTCONGE'      => $this->dateFR2US($data['DEBUTCONGE']),
-			'FINCONGE'        => $data['FINCONGE'],
-			'REMPLACANT'      => $data['REMPLACANT'],
-			'RESTETOT'        => $data['RESTETOT'],
-			'RESTEANNEE'      => $data['RESTEANNEE']
-	   );
-       //echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('regconge', $postData, "id =" . $data['id'] . "");
-    }	
-		
-		
-	public function editSavesetatconge($data) {
-		$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-			'id'         => $data['id'],	
-		    'OK'         => $data['OK']   
-        );
-       //echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('regconge', $postData, "id =" . $data['id'] . "");
-    }
-	
-	public function homeSingleList($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM home WHERE idstructure = :id  order by idstructure asc ', array(':id' => $id));    
-    }
-	
-	public function userhomeSingleList($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM home WHERE id = :id  order by id asc ', array(':id' => $id));
-    }
 	
 	
 	
-	public function userpersSingleList($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM pers WHERE id = :id  order by Categorie asc ', array(':id' => $id));    
-    }
-	
-	
-	
-	public function autoSingleinspection($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM inspection WHERE ids = :id  order by DATE asc ', array(':id' => $id));    
-    }
-	
-	//***inspection ***//
-	public function Listview() {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM insp order by DATE asc ');    
-    }
-	
-	public function userSingleinspecteur($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM insp WHERE id = :id', array(':id' => $id));
-    }
-	
-	public function editinspecteurx($data) {
-		$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-			'DATE'        => dateFR2US($data['DATE']),
-			'REF'        => $data['REF'],
-			'PJ'        => $data['PJ'],
-		    'Commanditaire'       => $data['Commanditaire']   
-        );
-      // echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('insp', $postData, "id =" . $data['id'] . "");
-    }
-	
-	
-	public function autoSingleinsp($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM insp WHERE ids = :id  order by DATE asc ', array(':id' => $id));    
-    }
-	 public function createinsp($data) {
-		
-		$this->db->exec('SET NAMES utf8');
-		$this->db->insert('insp', array(
-			'DATE'       => $this->dateFR2US($data['DATE']),
-            'REF'        => $data['REF'],
-			'PJ'         => $data['PJ'],
-			'ids'        => $data['id'],
-			'STRUCTURE'  => $data['STRUCTURE'],'Commanditaire'  => $data['Commanditaire']
-
-			
-        ));
-        echo '<pre>';print_r ($data);echo '<pre>';
-		return $last_id = $this->db->lastInsertId();
-    }
-	
-	public function userSingleinsp($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM insp WHERE id = :id', array(':id' => $id));
-    }
-	
-	 public function createanomalie($data) {
-		
-		$this->db->exec('SET NAMES utf8');
-		$this->db->insert('inspection', array(
-			'DATE'       => $data['DATE'],
-            'ANOMALIE'   => $data['ANOMALIE'],
-            'ids'        => $data['ids'],
-		    'idinsp'     => $data['id'],
-			'STRUCTURE'  => $data['STRUCTURE'] 
-        ));
-        echo '<pre>';print_r ($data);echo '<pre>';
-		return $last_id = $this->db->lastInsertId();
-    }
-	
-	public function listeanomalie($id) {
-        $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM inspection WHERE idinsp = :id  order by DATE asc ', array(':id' => $id));    
-    }
-		
-	public function editSavesAnomalieetat($data) {
-		$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-			'ids'        => $data['ids'],	
-		    'ETAT'       => $data['ETAT']   
-        );
-       echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('inspection', $postData, "id =" . $data['id'] . "");
-    }
-	
-	public function deleteAnomalies($id) {       
-        $this->db->delete('inspection', "id = '$id'");
-    }
-	public function deleteInspection($id) {    //delete inspection + anomalie       
-		$this->db->delete('insp', "id = '$id'");
-		$this->db->deletem('inspection', "idinsp =".$id);	
-    }
-	
-	
-	public function editSavesMesurePrise($data) {
-		$this->db->exec('SET NAMES utf8');
-		$postData = array(		
-			 'MP'        => $data['MP']	    
-        );
-       //echo '<pre>';print_r ($postData);echo '<pre>';
-	   $this->db->update('insp', $postData, "id =" . $data['id'] . "");
-    }
-
-	public function creathome($data) {
-			$this->db->exec('SET NAMES utf8');
-			$this->db->insert('home', array('idstructure'=> $data['id'],'DATEP'=> $this->dateFR2US($data['DATEP']),'NAT'=> $data['NAT'],'WILAYA'=>$data['WILAYA'],'COMMUNE'=>$data['COMMUNE'],'ADRESSE'=>$data['ADRESSE'],'ADRESSEAR'=>$data['ADRESSEAR'],'NUMD'=> $data['NUMD'],'DATED'=> $this->dateFR2US($data['DATED']),'PROPRIETAIRE'=> $data['PROPRIETAIRE'],'DEBUTCONTRAT'=> $this->dateFR2US($data['DEBUTCONTRAT']),'FINCONTRAT'=> $this->dateFR2US($data['FINCONTRAT']),'PHA1'=> $data['PHA1'],'DIST1'=> $data['DIST1'],'PHA2'=> $data['PHA2'],'DIST2'=> $data['DIST2'],'PHA3'=> $data['PHA3'],'DIST3'=> $data['DIST3'],'CDS0'=> $data['CDS0'],'SDS0'=> $data['SDS0'],'SAH0'=> $data['SAH0'],'SAF0'=> $data['SAF0'],'SAN0'=> $data['SAN0'], 'STL'=> $data['STL'] , 'ZE'=> $data['ZE'] ,'NUMCOM'=> $data['NUMCOM'] ,'DATECOM'=> $this->dateFR2US($data['DATECOM'])  ));
-			// echo '<pre>';print_r ($data);echo '<pre>';
-			$postData = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
-			// echo '<pre>';print_r ($postData);echo '<pre>';  
-			$this->db->update('structure', $postData, "id =" . $data['id'] . ""); 
-			$this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
-			return $last_id = $this->db->lastinsertid();
-	}
-	
-	public function edithome($data) {
-			$this->db->exec('SET NAMES utf8');
-			$postData = array('DATEP'=> $this->dateFR2US($data['DATEP']),'NAT'=> $data['NAT'],'WILAYA'=>$data['WILAYA'],'COMMUNE'=>$data['COMMUNE'],'ADRESSE'=>$data['ADRESSE'],'ADRESSEAR'=>$data['ADRESSEAR'],'NUMD'=> $data['NUMD'],'DATED'=> $this->dateFR2US($data['DATED']),'PROPRIETAIRE'=> $data['PROPRIETAIRE'],'DEBUTCONTRAT'=> $this->dateFR2US($data['DEBUTCONTRAT']),'FINCONTRAT'=> $this->dateFR2US($data['FINCONTRAT']),'PHA1'=> $data['PHA1'],'DIST1'=> $data['DIST1'],'PHA2'=> $data['PHA2'],'DIST2'=> $data['DIST2'],'PHA3'=> $data['PHA3'],'DIST3'=> $data['DIST3'],'CDS0'=> $data['CDS0'],'SDS0'=> $data['SDS0'],'SAH0'=> $data['SAH0'],'SAF0'=> $data['SAF0'],'SAN0'=> $data['SAN0'], 'STL'=> $data['STL'], 'ZE'=> $data['ZE'] , 'groupe'=> $data['groupe'], 'PHA4'=> $data['PHA4'] ,'NUMCOM'=> $data['NUMCOM'] ,'DATECOM'=> $this->dateFR2US($data['DATECOM']));
-			$this->db->update('home', $postData, "id =" . $data['id'] . "");	
-	        $postData1 = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
-			$this->db->update('structure', $postData1, "id =" . $data['idstructure'] . ""); 
-			$this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
-			return $last_id = $this->db->lastinsertid();
-	}
-	
-	public function creathomex($data) {
-			$this->db->exec('SET NAMES utf8');
-			$this->db->insert('home', 
-			array(
-			'idstructure'=> $data['id'],
-			'DATEP'=> $this->dateFR2US($data['DATEP']),
-			'NAT'=> $data['NAT'],
-			'WILAYA'=>$data['WILAYA'],
-			'COMMUNE'=>$data['COMMUNE'],
-			'ADRESSE'=>$data['ADRESSE'],
-			'ADRESSEAR'=>$data['ADRESSEAR'],
-			'NUMD'=> $data['NUMD'],
-			'DATED'=> $this->dateFR2US($data['DATED']),
-			'PROPRIETAIRE'=> $data['PROPRIETAIRE'],
-			'DEBUTCONTRAT'=> $this->dateFR2US($data['DEBUTCONTRAT']),
-			'FINCONTRAT'=> $this->dateFR2US($data['FINCONTRAT']),
-			'PHA1'=> $data['PHA1'],'DIST1'=> $data['DIST1'],
-			'PHA2'=> $data['PHA2'],'DIST2'=> $data['DIST2'],
-			'PHA3'=> $data['PHA3'],'DIST3'=> $data['DIST3'],
-			'CDS0'=> $data['CDS0'],'SDS0'=> $data['SDS0'],
-			'SAH0'=> $data['SAH0'],'SAF0'=> $data['SAF0'],
-			'SAN0'=> $data['SAN0'],'STL'=> $data['STL'],
-			'EXTA'=> $data['EXTA'],'EXTB'=> $data['EXTB'],
-			'EXTC'=> $data['EXTC'],'EXTD'=> $data['EXTD'],
-            'EXTE'=> $data['EXTE']
-			));
-			//echo '<pre>';print_r ($data);echo '<pre>';
-			$postData = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
-			// echo '<pre>';print_r ($postData);echo '<pre>';  
-			$this->db->update('structure', $postData, "id =" . $data['id'] . ""); 
-			$this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
-			return $last_id = $this->db->lastinsertid();
-	}
-	
-	public function edithomex($data) {
-			$this->db->exec('SET NAMES utf8');
-			$postData = array('DATEP'=> $this->dateFR2US($data['DATEP']),'NAT'=> $data['NAT'],'WILAYA'=>$data['WILAYA'],'COMMUNE'=>$data['COMMUNE'],'ADRESSE'=>$data['ADRESSE'],'ADRESSEAR'=>$data['ADRESSEAR'],'NUMD'=> $data['NUMD'],'DATED'=> $this->dateFR2US($data['DATED']),'PROPRIETAIRE'=> $data['PROPRIETAIRE'],'DEBUTCONTRAT'=> $this->dateFR2US($data['DEBUTCONTRAT']),'FINCONTRAT'=> $this->dateFR2US($data['FINCONTRAT']),'PHA1'=> $data['PHA1'],'DIST1'=> $data['DIST1'],'PHA2'=> $data['PHA2'],'DIST2'=> $data['DIST2'],'PHA3'=> $data['PHA3'],'DIST3'=> $data['DIST3'],'CDS0'=> $data['CDS0'],'SDS0'=> $data['SDS0'],'SAH0'=> $data['SAH0'],'SAF0'=> $data['SAF0'],'SAN0'=> $data['SAN0'],
-			'STL'=> $data['STL'],
-			'EXTA'=> $data['EXTA'],'EXTB'=> $data['EXTB'],
-			'EXTC'=> $data['EXTC'],'EXTD'=> $data['EXTD'],
-            'EXTE'=> $data['EXTE']
-			);
-			$this->db->update('home', $postData, "id =" . $data['id'] . "");	
-	        $postData1 = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
-			$this->db->update('structure', $postData1, "id =" . $data['idstructure'] . ""); 
-			// $this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
-			return $last_id = $this->db->lastinsertid();
-	}
-	public function deletehome($id) {       
-        $this->db->delete('home', "id = '$id'");
-    }	
 				
 }
