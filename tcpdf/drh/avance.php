@@ -26,14 +26,111 @@ mysql_free_result($requetea);
 $pdf->AddPage();$y=7;
 $pdf->entete_drh($y);
 $pdf->htiat('مقرر ترقية فى الدرجة',$result["rnvgradear"],$y);
+$uc=$pdf->nbrtostring("mvc","grade","idg",$result["rnvgradear"],"ids");
+$GRADE=$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear");
+switch($uc) //$resulta['NPV']$resulta['DATEPV']$resulta['ANNEEPV']
+{
+ case '1' ://specialiste
+		{
+
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}	   
+case '2' ://generaliste medecin pharmacien dentiste
+		{
+
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."  المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "."  ".$resulta['ANNEEPV']."  "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}	    	
+case '3' ://paramedicale
+		{
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."  المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}        
+case '4' ://psycholgue
+		{
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."  المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}        				
+case '5' ://sage femme
+		{
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."  المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}				
+case '6' ://biologie
+		{
+        $pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}				
+case '7' ://annesthesiste
+		{
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."  المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}				
+case '8' ://corps communs
+		{
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}				
+case '9' ://op
+		{
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."  المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}				
+case '10' ://phisi
+		{
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}				
+case '11' ://idmage
+		{
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."  المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}				
+case '12' ://idmage
+		{
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(15,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}	
+case '13' ://idmage
+		{
+		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."  المتضمن المصادقة على جدول الترقية ");
+		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']." "."الخاصة برتبة"." ".$GRADE.".");
+		break;
+		}	
+}
+
+
+
+
+
+
+
+
 $pdf->decision_drh($y);
+
+$A4 = $resulta['ANNEEPV']-substr($resulta["DATEDEFFET"],0,4);
+$M4 = 12-substr($resulta["DATEDEFFET"],5,2);
+$J4 = 31-substr($resulta["DATEDEFFET"],8,2);
 
 $pdf->Text(5,$pdf->GetY()+10,"المادة الأولى : (ت) يرقى  السيد (ة) : ");$pdf->SetTextColor(225,0,0);$pdf->Text(65,$pdf->GetY(),$result["Nomarab"]." ".$result["Prenom_Arabe"]);$pdf->SetTextColor(0,0,0);
 $pdf->Text(35,$pdf->GetY()+10,"الرتبة : ");                           $pdf->SetTextColor(225,0,0);$pdf->Text(48,$pdf->GetY(),$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));$pdf->SetTextColor(0,0,0);
 $pdf->SetFont('aefurat','I', 14);$pdf->SetTextColor(225,0,0);$pdf->SetTextColor(0,0,0);
-$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(25,8,'المدة',1,0,'C');$pdf->Cell(16,8,'الصنف',1,0,'C');$pdf->Cell(16,8,'الدرجة',1,0,'C');$pdf->Cell(40,8,'الرقم الاستدلالى',1,0,'C');$pdf->Cell(30,8,'تاريخ النفاذ',1,0,'C');$pdf->Cell(68,8,'الاقدمية المتبقية'.'  '."".'12/31',1,1,'C');
-$pdf->SetXY(5,$pdf->GetY());   $pdf->Cell(25,8,$resulta["DUREE"],1,0,'C');$pdf->Cell(16,8,$resulta["CATEGORIE"],1,0,'C');$pdf->Cell(16,8,$resulta["ECHELON"],1,0,'C');$pdf->Cell(40,8,'الرقم الاستدلالى',1,0,'C');$pdf->Cell(30,8,$resulta["DATEDEFFET"],1,0,'C');$pdf->Cell(22.66,8,'',1,0,'C');$pdf->Cell(22.66,8,'',1,0,'C');$pdf->Cell(22.66,8,'',1,1,'C');
-
+$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(25,8,'المدة',1,0,'C');$pdf->Cell(16,8,'الصنف',1,0,'C');$pdf->Cell(16,8,'الدرجة',1,0,'C');$pdf->Cell(40,8,'الرقم الاستدلالى',1,0,'C');$pdf->Cell(30,8,'تاريخ النفاذ',1,0,'C');$pdf->Cell(68,8,'الاقدمية المتبقية'.'  '.$resulta['ANNEEPV'].'/12/31',1,1,'C');
+$pdf->SetXY(5,$pdf->GetY());if($resulta['DUREE']==1){$pdf->Cell(25,8,"الدنيا",1,0,'C');}elseif($resulta['DUREE']==2){$pdf->Cell(25,8,"المتوسطة",1,0,'C');}elseif($resulta['DUREE']==3){$pdf->Cell(25,8,"الطويلة",1,0,'C');}
+$pdf->Cell(16,8,$resulta["CATEGORIE"],1,0,'C');$pdf->Cell(16,8,$resulta["ECHELON"],1,0,'C');$pdf->Cell(40,8,$resulta["INDICE"],1,0,'C');$pdf->Cell(30,8,$resulta["DATEDEFFET"],1,0,'C');$pdf->Cell(22.66,8,$A4." سنة ",1,0,'C');$pdf->Cell(22.66,8,$M4." شهر ",1,0,'C');$pdf->Cell(22.66,8,$J4." يوم ",1,1,'C');
 $pdf->SetTextColor(0,0,0);
 $pdf->Text(5,$pdf->GetY()+4,"المادة الثانية : تكلف السيدة المديرة الفرعية للموارد البشرية و أمين خزينة المؤسسة العمومية ");
 $pdf->Text(25,$pdf->GetY()+8," الإستشفائية بعين وسارة بتنفيذ هذا المقرر.");

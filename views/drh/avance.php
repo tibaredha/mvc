@@ -21,14 +21,41 @@ $data = array(
 
 "NPV"        => '0' ,
 "DATEPV"     => date('j-m-Y'),
-"ANNEEPV"    => '0' ,
+"ANNEEPV"    => date('Y') ,
 
 "DUREE"      => array(      
-                        "الدنيا"=>"1",
+                        $this->user[0]['DUREE']=>$this->user[0]['DUREE'],
+						"الدنيا"=>"1",
 						"المتوسطة"=>"2",
 						"الطويلة"=>"3"),
-"CATEGORIE"	 => '0' ,
-"ECHELON"	 => '0' ,				  
+"CATEGORIE"	 => array(      
+                        $this->user[0]['CATEGORIE']=>$this->user[0]['CATEGORIE'],
+						"9"=>"9",
+						"10"=>"10",
+						"11"=>"11",
+						"12"=>"12",
+						"13"=>"13",
+						"14"=>"14",
+						"15"=>"15",
+						"16"=>"16",
+						"17"=>"17"
+						),	
+"ECHELON"	 => array(      
+                        $this->user[0]['ECHELON']+1=>$this->user[0]['ECHELON']+1,
+						"0"=>"0",
+						"1"=>"1",
+						"2"=>"2",
+						"3"=>"3",
+						"4"=>"4",
+						"5"=>"5",
+						"6"=>"6",
+						"7"=>"7",
+						"8"=>"8",
+						"9"=>"9",
+						"10"=>"10",
+						"11"=>"11",
+						"12"=>"12"
+						),				  
 
 "RESTE"		 => '0' ,
 "DATEDEFFET" => date('j-m-Y'),
@@ -47,8 +74,10 @@ $this->label($x+610,$y+160,'تاريخ المحضر');           $this->txts($x+
 $this->label($x+260,$y+160,'السنة');                  $this->txtarid($x,$y+150,'ANNEEPV','ANNEEPV',0,$data['ANNEEPV'],'date');
 
 $this->label($x+960,$y+190,'المدة');                  $this->combov1($x+700,$y+180,'DUREE',$data['DUREE'],'date');           
-$this->label($x+610,$y+190,'الصنف');                  $this->txtarid($x+350,$y+180,'CATEGORIE','CATEGORIE',0,$data['CATEGORIE'],'date');            
-$this->label($x+260,$y+190,'الدرجة');                 $this->txtarid($x,$y+180,'ECHELON','ECHELON',0,$data['ECHELON'],'date');          
+$this->label($x+610,$y+190,'الصنف');                  $this->combov1($x+350,$y+180,'CATEGORIE',$data['CATEGORIE'],'date'); 
+           
+$this->label($x+260,$y+190,'الدرجة');                 $this->combov1($x,$y+180,'ECHELON',$data['ECHELON'],'date'); 
+         
 
 
 $this->label($x+960,$y+190+30,'الاقدمية المتبقية');    $this->txtarid($x+700,$y+180+30,'RESTE','RESTE',0,$data['RESTE'],'date');                     
@@ -59,6 +88,7 @@ $this->label($x+960,$y+190+60,'رقم المقرر');          $this->txtarid($x
 $this->label($x+260,$y+190+60,'تاريخ المقرر');        $this->txts($x,$y+180+60,'DATEDECISION',0,$data['DATEDECISION'],'dateus3');
 
 //view::usereph($x+700,$y+180,"REMPLACANT","","","grh","0","المستخلف"); 
+$this->hide(595,$x+90,'INDICEB',20,"i"); 
 
 $this->submit($x+700,$y+210+60,$data['butun']);
 $this->f1();
@@ -69,14 +99,14 @@ ob_end_flush();
 		
 		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
-			<th  colspan=8   style="width:50px;">
+			<th  colspan=11   style="width:50px;">
 				<?php echo '<a title="Autres"  href="'.URL.'drh/search/0/10?o=idp&q='.$this->user[0]['idp'].'" > GRH : </a>';?>
 			</th> 
 			<th  colspan=2    style="width:50px;">
-				<?php echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'tcpdf/drh/list_conge.php?idp='.$this->user[0]['idp'].'" > Fiche avance  </a>';?>
+				<?php echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'tcpdf/drh/list_avance.php?idp='.$this->user[0]['idp'].'" > Fiche avance  </a>';?>
 			</th>
 			<th  colspan=2    style="width:50px;">
-				<?php echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'tcpdf/drh/list_conge.php?idp='.$this->user[0]['idp'].'" > Fiche avance  </a>';?>
+				<?php echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'tcpdf/drh/list_avance.php?idp='.$this->user[0]['idp'].'" > Fiche avance  </a>';?>
 			</th>
 		</tr>
 		<tr>
@@ -88,7 +118,12 @@ ob_end_flush();
 		<th style="width:70px;">ECHELON</th>
 		<th style="width:50px;">RESTE</th>
 		<th style="width:10px;">DATEDEFFET</th>		
-		<th style="width:10px;">Demande</th>
+		
+		<th style="width:10px;">indice_b</th>		
+		<th style="width:10px;">indice_e</th>		
+		<th style="width:10px;">indice_t</th>		
+		
+		<th style="width:10px;">Notation</th>
 		<th style="width:10px;">titre</th>
 		<th style="width:10px;">Upd </th>
 		<th style="width:10px;">Del</th>
@@ -106,11 +141,16 @@ ob_end_flush();
 						<td align="center"><?php echo $value['NPV'];?></td>
 						<td align="center"><?php echo view::dateUS2FR($value['DATEPV']);?></td>
 						<td align="center"><?php echo $value['ANNEEPV'];?></td>
-						<td align="center"><?php echo $value['DUREE'];?></td>
+						<td align="center"><?php if($value['DUREE']==1){echo "الدنيا";}elseif($value['DUREE']==2){echo "المتوسطة";}elseif($value['DUREE']==3){echo "الطويلة";}?></td>
 						<td align="center"><?php echo $value['CATEGORIE'];?></td>
 						<td align="center"><?php echo $value['ECHELON'];?></td>
 						<td align="center"><?php echo $value['RESTE'];?></td>
 						<td align="center"><?php echo view::dateUS2FR($value['DATEDEFFET']);?></td>
+						
+						<td align="center"><?php echo $value['INDICEBV'];?></td>
+						<td align="center"><?php echo $value['INDICEE'];?></td>
+						<td align="center"><?php echo $value['INDICE'];?></td>
+						
 						<?php 
 						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"demande de conge\" href=\"".URL.'tcpdf/drh/notation.php?uc='.$this->user[0]['idp']."&ida=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
 					    echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"decision avancement\" href=\"".URL.'tcpdf/drh/avance.php?idp='.$this->user[0]['idp']."&ida=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	

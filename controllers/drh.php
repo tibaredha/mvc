@@ -85,9 +85,17 @@ class drh extends Controller {
 		$data['DATEDEFFET']  = $_POST['DATEDEFFET'];
 		$data['NDECISION']   = $_POST['NDECISION'];
 		$data['DATEDECISION']= $_POST['DATEDECISION'];
-		//echo '<pre>';print_r ($data);echo '<pre>';  
-	    $last_id=$this->model->creatavance($data);
-		header('location: ' . URL .$this->route. '/avance/'.$id);	
+		$data['INDICEB']     = $_POST['INDICEB'];
+		if($_POST['ECHELON']>12)
+		{
+			header('location: ' . URL .$this->route. '/avance/'.$id);}
+		else 
+		{
+			//echo '<pre>';print_r ($data);echo '<pre>';  
+			$last_id=$this->model->creatavance($data);
+			header('location: ' . URL .$this->route. '/avance/'.$id);		
+		}
+		
 	} 
 	//*********************************************************************************************************//
 	/*conge*/	

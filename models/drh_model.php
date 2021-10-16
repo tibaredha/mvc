@@ -25,19 +25,17 @@ class drh_Model extends Model {
 		return $this->db->select('SELECT * FROM grh WHERE idp = :id', array(':id' => $id));
     }
 	
-	
-	
-	
 	//*********************************************************************************************************//
 	//avanceSingleList
 	public function avanceSingleList($id) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM regavance WHERE IDP = :id  order by DATEDECISION asc ', array(':id' => $id));    
+		return $this->db->select('SELECT * FROM regavance WHERE IDP = :id  order by id desc ', array(':id' => $id));    
     }
 	public function deleteavance($id) {       
         $this->db->delete('regavance', "id = '$id'");
     }
 	public function creatavance($data) {
+			
 			$this->db->exec('SET NAMES utf8');
 			$this->db->insert('regavance', array(
 			'NPV'             => $data['NPV'],
@@ -50,8 +48,28 @@ class drh_Model extends Model {
 			'DATEDEFFET'      => $this->dateFR2US($data['DATEDEFFET']),
 			'NDECISION'       => $data['NDECISION'],
 			'DATEDECISION'    => $this->dateFR2US($data['DATEDECISION']),
-			'IDP'             => $data['IDP']	
+			'INDICEBV'        => $this->gs($data['CATEGORIE'],$data['INDICEB']),
+			'INDICEE'         => $this->gs($data['CATEGORIE'],$data['ECHELON']),
+			'INDICE'          => $this->gs($data['CATEGORIE'],$data['INDICEB'])+$this->gs($data['CATEGORIE'],$data['ECHELON']),
+			'IDP'             => $data['IDP']
+			
 			));
+			$postData_grh = array(
+            'NPV'             => $data['NPV'],
+			'DATEPV'          => $this->dateFR2US($data['DATEPV']),
+			'ANNEEPV'         => $data['ANNEEPV'],
+			'DUREE'           => $data['DUREE'],
+			'CATEGORIE'       => $data['CATEGORIE'],
+			'ECHELON'         => $data['ECHELON'],
+			// 'RESTE'           => $data['RESTE'],
+			'DATEDEFFET'      => $this->dateFR2US($data['DATEDEFFET']),
+			'NDECISION'       => $data['NDECISION'],
+			'DATEDECISION'    => $this->dateFR2US($data['DATEDECISION']),
+			'INDICEBV'        => $this->gs($data['CATEGORIE'],$data['INDICEB']),
+			'INDICEE'         => $this->gs($data['CATEGORIE'],$data['ECHELON']),
+			'INDICE'          => $this->gs($data['CATEGORIE'],$data['INDICEB'])+$this->gs($data['CATEGORIE'],$data['ECHELON'])
+	        );
+	        $this->db->update('grh', $postData_grh, "idp =" . $data['IDP'] . "");
 			//echo '<pre>';print_r ($data);echo '<pre>';
 			return $last_id = $this->db->lastInsertId();
 		}
