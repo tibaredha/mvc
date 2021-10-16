@@ -44,7 +44,6 @@ class drh_Model extends Model {
 			'DUREE'           => $data['DUREE'],
 			'CATEGORIE'       => $data['CATEGORIE'],
 			'ECHELON'         => $data['ECHELON'],
-			'RESTE'           => $data['RESTE'],
 			'DATEDEFFET'      => $this->dateFR2US($data['DATEDEFFET']),
 			'NDECISION'       => $data['NDECISION'],
 			'DATEDECISION'    => $this->dateFR2US($data['DATEDECISION']),
@@ -52,7 +51,6 @@ class drh_Model extends Model {
 			'INDICEE'         => $this->gs($data['CATEGORIE'],$data['ECHELON']),
 			'INDICE'          => $this->gs($data['CATEGORIE'],$data['INDICEB'])+$this->gs($data['CATEGORIE'],$data['ECHELON']),
 			'IDP'             => $data['IDP']
-			
 			));
 			$postData_grh = array(
             'NPV'             => $data['NPV'],
@@ -61,13 +59,14 @@ class drh_Model extends Model {
 			'DUREE'           => $data['DUREE'],
 			'CATEGORIE'       => $data['CATEGORIE'],
 			'ECHELON'         => $data['ECHELON'],
-			// 'RESTE'           => $data['RESTE'],
 			'DATEDEFFET'      => $this->dateFR2US($data['DATEDEFFET']),
 			'NDECISION'       => $data['NDECISION'],
 			'DATEDECISION'    => $this->dateFR2US($data['DATEDECISION']),
 			'INDICEBV'        => $this->gs($data['CATEGORIE'],$data['INDICEB']),
 			'INDICEE'         => $this->gs($data['CATEGORIE'],$data['ECHELON']),
-			'INDICE'          => $this->gs($data['CATEGORIE'],$data['INDICEB'])+$this->gs($data['CATEGORIE'],$data['ECHELON'])
+			'INDICE'          => $this->gs($data['CATEGORIE'],$data['INDICEB'])+$this->gs($data['CATEGORIE'],$data['ECHELON']),
+			'PREVISION'       => $this->datePlus($this->dateFR2US($data['DATEDEFFET']),912),
+			'RELIQUAT'        => "0000"."-"."00"."-"."00"
 	        );
 	        $this->db->update('grh', $postData_grh, "idp =" . $data['IDP'] . "");
 			//echo '<pre>';print_r ($data);echo '<pre>';

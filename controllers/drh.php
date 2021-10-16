@@ -81,7 +81,6 @@ class drh extends Controller {
 		$data['DUREE']       = $_POST['DUREE'];
 		$data['CATEGORIE']   = $_POST['CATEGORIE'];
 		$data['ECHELON']     = $_POST['ECHELON'];
-		$data['RESTE']       = $_POST['RESTE'];
 		$data['DATEDEFFET']  = $_POST['DATEDEFFET'];
 		$data['NDECISION']   = $_POST['NDECISION'];
 		$data['DATEDECISION']= $_POST['DATEDECISION'];

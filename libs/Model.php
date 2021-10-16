@@ -15,8 +15,14 @@ class Model {
 		$dateFR2US =  $A."-".$M."-".$J ;
 		return $dateFR2US;//2013-01-01
 	}
-	
-	function gs($h,$v) 
+	function datePlus($dateDo,$nbrJours)
+	{
+		$timeStamp = strtotime($dateDo); 
+		$timeStamp += 24 * 60 * 60 * $nbrJours;
+		$newDate = date("Y-m-d", $timeStamp);
+		return  $newDate;
+	}
+		function gs($h,$v) 
 	{ 
 		$gs = array(); 
 
