@@ -56,7 +56,39 @@ class drh extends Controller {
 		}
 		header('location: ' . URL . $this->route.'/search/0/10?o=idp&q='.$id);
 	}
-	
+	//*********************************************************************************************************//
+	/*avance*/	
+	function avance($id) 
+	{
+	$this->view->title = 'avance';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->userListview = $this->model->avanceSingleList($id);
+	$this->view->render($this->route.'/avance');    
+	}
+	public function deleteavance($id)
+	{
+	$url1 = explode('/',$_GET['url']);	
+	$this->model->deleteavance($id); 
+	header('location: ' . URL .$this->route. '/avance/'.$url1[3]);
+	}
+	public function creatavance($id) 
+	{
+		$data = array();
+		$data['IDP']          = $id;
+		$data['NPV']         = $_POST['NPV'];
+		$data['DATEPV']      = $_POST['DATEPV']; 
+		$data['ANNEEPV']     = $_POST['ANNEEPV'];
+		$data['DUREE']       = $_POST['DUREE'];
+		$data['CATEGORIE']   = $_POST['CATEGORIE'];
+		$data['ECHELON']     = $_POST['ECHELON'];
+		$data['RESTE']       = $_POST['RESTE'];
+		$data['DATEDEFFET']  = $_POST['DATEDEFFET'];
+		$data['NDECISION']   = $_POST['NDECISION'];
+		$data['DATEDECISION']= $_POST['DATEDECISION'];
+		//echo '<pre>';print_r ($data);echo '<pre>';  
+	    $last_id=$this->model->creatavance($data);
+		header('location: ' . URL .$this->route. '/avance/'.$id);	
+	} 
 	//*********************************************************************************************************//
 	/*conge*/	
 	function conge($id) 

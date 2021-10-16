@@ -33,6 +33,8 @@ View::url(50,260+30,URL.'tcpdf/drh/attestation_trav_ar.php?uc='.$this->user[0]['
 
 View::url(50,290+30,URL.'tcpdf/drh/attestation_trav_ar.php?uc='.$this->user[0]['idp'],'4- DRT',3);
 
+View::url(50,290+30+60,URL.'drh/avance/'.$this->user[0]['idp'],'4- avancement',3);
+
 
 view::sautligne(19);
 ob_end_flush();
