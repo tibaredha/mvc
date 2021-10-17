@@ -24,6 +24,35 @@ class drh_Model extends Model {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM grh WHERE idp = :id', array(':id' => $id));
     }
+	//*********************************************************************************************************//
+	//gradeSingleList
+	public function gradeSingleList($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM reggrade WHERE IDP = :id  order by id desc ', array(':id' => $id));    
+    }
+	public function creatgrade($data) {
+			
+			$this->db->exec('SET NAMES utf8');
+			$this->db->insert('reggrade', array(
+			'A_grade'          => $data['A_grade'],
+		    'D_grade'          => $this->dateFR2US($data['D_grade']),
+			'N_grade'          => $data['N_grade'],
+			'CATEGORIE'        => $data['CATEGORIE'],
+			'ECHELON'          => $data['ECHELON'],
+			'IDP'              => $data['IDP']
+			));
+			$postData_grh = array(
+			'rnvgradear'      => $data['N_grade'],
+			'CATEGORIE'       => $data['CATEGORIE'],
+			'ECHELON'         => $data['ECHELON']
+	        );
+	        $this->db->update('grh', $postData_grh, "idp =" . $data['IDP'] . "");
+			// echo '<pre>';print_r ($data);echo '<pre>';
+			return $last_id = $this->db->lastInsertId();
+		}
+	public function deletegrade($id) {       
+        $this->db->delete('reggrade', "id = '$id'");
+    }
 	
 	//*********************************************************************************************************//
 	//avanceSingleList

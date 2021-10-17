@@ -57,6 +57,37 @@ class drh extends Controller {
 		header('location: ' . URL . $this->route.'/search/0/10?o=idp&q='.$id);
 	}
 	//*********************************************************************************************************//
+	/*grade*/	
+	function grade($id) 
+	{
+	$this->view->title = 'avance';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->userListview = $this->model->gradeSingleList($id);
+	$this->view->render($this->route.'/grade');    
+	}
+	public function creatgrade($id) 
+	{
+		$data = array();
+		$data['IDP']         = $id;
+		$data['A_grade']     = $_POST['A_grade'];
+		$data['D_grade']     = $_POST['D_grade']; 
+		$data['N_grade']     = $_POST['N_grade'];
+		$data['CATEGORIE']   = $_POST['CATEGORIE'];
+		$data['ECHELON']     = $_POST['ECHELON'];
+		$last_id=$this->model->creatgrade($data);
+		//echo '<pre>';print_r ($data);echo '<pre>'; 
+		header('location: ' . URL .$this->route. '/grade/'.$id);
+		
+	} 
+	public function deletegrade($id)
+	{
+		$url1 = explode('/',$_GET['url']);	
+		$this->model->deletegrade($id); 
+		header('location: ' . URL .$this->route. '/grade/'.$url1[3]);
+	}
+	
+	
+	//*********************************************************************************************************//
 	/*avance*/	
 	function avance($id) 
 	{

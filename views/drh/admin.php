@@ -36,13 +36,14 @@ View::url(50,290+30,URL.'tcpdf/drh/attestation_trav_ar.php?uc='.$this->user[0]['
 View::url(50,380,URL.'drh/avance/'.$this->user[0]['idp'],'5- PV installation',3);
 View::url(50,410,URL.'drh/avance/'.$this->user[0]['idp'],'6- Nomination',3);
 View::url(50,440,URL.'tcpdf/drh/indemnite.php?uc='.$this->user[0]['idp'],'7- Indemnite',3);
-	View::url(250,440,URL.'drh/avance/'.$this->user[0]['idp'],'7- Contagion',3);
-	View::url(450,440,URL.'drh/avance/'.$this->user[0]['idp'],'7- Activite complementaire',3);
+	//View::url(250,440,URL.'drh/avance/'.$this->user[0]['idp'],'7- Contagion',3);
+	//View::url(450,440,URL.'drh/avance/'.$this->user[0]['idp'],'7- Activite complementaire',3);
 	
 View::url(50,470,URL.'drh/avance/'.$this->user[0]['idp'],'8- Titularisation',3);
-View::url(50,500,URL.'drh/avance/'.$this->user[0]['idp'],'9- Promotion grade',3);
-View::url(50,530,URL.'drh/avance/'.$this->user[0]['idp'],'10- Avancement échelon',3);
-View::url(50,560,URL.'drh/avance/'.$this->user[0]['idp'],'11- Poste superieur',3);
+View::url(50,500,URL.'drh/grade/'.$this->user[0]['idp'],'9- Promotion grade',3);
+
+View::url(250,380,URL.'drh/avance/'.$this->user[0]['idp'],'10- Avancement échelon',3);
+View::url(250,410,URL.'drh/avance/'.$this->user[0]['idp'],'11- Poste superieur',3);
 view::sautligne(19);
 ob_end_flush();
 ?>

@@ -16,7 +16,22 @@ class View {
 			require 'views/footer.php';	
 		}
 	}
-	
+
+	function combograde($x,$y,$name,$class,$tb_name,$value,$selected) 
+		{
+		mysqlconnect();
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+		$result = mysql_query("SELECT * FROM $tb_name order by gradear  " );
+		while($data =  mysql_fetch_array($result))
+		{
+			echo '<option value="'.$data[0].'">'.$data["gradear"].'</option>';
+		}
+		echo '</select>'."\n"; 
+		echo "</div>";
+		}
+
 	function structure_sanitaire($data,$titre) 
 	{
 	view::button($data['btn'],'');	
