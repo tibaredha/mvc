@@ -35,7 +35,7 @@ View::url(50,290+30,URL.'tcpdf/drh/attestation_trav_ar.php?uc='.$this->user[0]['
 
 View::url(50,380,URL.'drh/avance/'.$this->user[0]['idp'],'5- PV installation',3);
 View::url(50,410,URL.'drh/avance/'.$this->user[0]['idp'],'6- Nomination',3);
-View::url(50,440,URL.'drh/avance/'.$this->user[0]['idp'],'7- Indemnite',3);
+View::url(50,440,URL.'tcpdf/drh/indemnite.php?uc='.$this->user[0]['idp'],'7- Indemnite',3);
 	View::url(250,440,URL.'drh/avance/'.$this->user[0]['idp'],'7- Contagion',3);
 	View::url(450,440,URL.'drh/avance/'.$this->user[0]['idp'],'7- Activite complementaire',3);
 	

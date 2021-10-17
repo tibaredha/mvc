@@ -6,7 +6,7 @@ $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
 $pdf->SetTitle('DECISION');
 $pdf->SetSubject('PROTOCOLE');
-$pdf->SetFillColor(230);    //fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
+$pdf->SetFillColor(250);    //fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
 $pdf->SetTextColor(0,0,0);  //text noire 0   //text BLEU 180 
 $pdf->setPrintHeader(false);
 $pdf->setPrintFooter(false);
@@ -32,25 +32,23 @@ $pdf->SetFont('aefurat', '', 14);
 //$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,$pdf->wilayaar,0,0,'R');
 $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->dsparp." لولاية الجلفة",0,0,'R');
 $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المؤسسة العمومية الاستشفائية عين وســـارة",0,0,'R');
-//$pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المديرية الفرعية للموارد البشرية",0,0,'R');
+$pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المديرية الفرعية للموارد البشرية",0,0,'R');
 $datexy=substr($resulta["DATEDECISION"],0,4);
 $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,'رقم : '.$resulta["NDECISION"].' / '.$datexy,0,1,'R');
 //$pdf->entete_drh($y);
 $pdf->htiat('مقرر ترقية فى الدرجة',$result["rnvgradear"],$y);
 $uc=$pdf->nbrtostring("mvc","grade","idg",$result["rnvgradear"],"ids");
 $GRADE=$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear");
-switch($uc) //$resulta['NPV']$resulta['DATEPV']$resulta['ANNEEPV']
+switch($uc)
 {
  case '1' ://specialiste
 		{
-
 		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."المتضمن المصادقة على جدول الترقية ");
 		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "." ".$resulta['ANNEEPV']."الخاصة برتبة"." ".$GRADE.".");
 		break;
 		}	   
 case '2' ://generaliste medecin pharmacien dentiste
 		{
-
 		$pdf->Text(5,$pdf->GetY()+8," بموجب :المحضر رقم ".$resulta['NPV']." المؤرخ في  ".$resulta['DATEPV']."  المتضمن المصادقة على جدول الترقية ");
 		$pdf->Text(25,$pdf->GetY()+8," في الدرجات لسنة "."  ".$resulta['ANNEEPV']."  "."الخاصة برتبة"." ".$GRADE.".");
 		break;
@@ -122,22 +120,20 @@ case '13' ://idmage
 		break;
 		}	
 }
-
-
-
-
-
-
-
-
 $pdf->decision_drh($y);
-
 $A4 = $resulta['ANNEEPV']-substr($resulta["DATEDEFFET"],0,4);
 $M4 = 12-substr($resulta["DATEDEFFET"],5,2);
 $J4 = 31-substr($resulta["DATEDEFFET"],8,2);
-
 $pdf->Text(5,$pdf->GetY()+10,"المادة الأولى : (ت) يرقى  السيد (ة) : ");$pdf->SetTextColor(225,0,0);$pdf->Text(65,$pdf->GetY(),$result["Nomarab"]." ".$result["Prenom_Arabe"]);$pdf->SetTextColor(0,0,0);
-$pdf->Text(35,$pdf->GetY()+10,"الرتبة : ");                           $pdf->SetTextColor(225,0,0);$pdf->Text(48,$pdf->GetY(),$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));$pdf->SetTextColor(0,0,0);
+$pdf->Text(35,$pdf->GetY()+10,"الرتبة : ");                           
+if($result["rnvgradear"]==1 or $result["rnvgradear"]==3 )
+{
+	$pdf->SetTextColor(225,0,0);$pdf->Text(48,$pdf->GetY(),$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear")." في ".$pdf->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));$pdf->SetTextColor(0,0,0);
+}
+else
+{
+	$pdf->SetTextColor(225,0,0);$pdf->Text(48,$pdf->GetY(),$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));$pdf->SetTextColor(0,0,0);
+}
 $pdf->SetFont('aefurat','I', 14);$pdf->SetTextColor(225,0,0);$pdf->SetTextColor(0,0,0);
 $pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(25,8,'المدة',1,0,'C');$pdf->Cell(21,8,'الصنف',1,0,'C');$pdf->Cell(16,8,'الدرجة',1,0,'C');$pdf->Cell(40,8,'الرقم الاستدلالى',1,0,'C');$pdf->Cell(30,8,'تاريخ النفاذ',1,0,'C');$pdf->Cell(68,8,'الاقدمية المتبقية'.'  '.$resulta['ANNEEPV'].'/12/31',1,1,'C');
 $pdf->SetXY(5,$pdf->GetY());if($resulta['DUREE']==1){$pdf->Cell(25,8,"الدنيا",1,0,'C');}elseif($resulta['DUREE']==2){$pdf->Cell(25,8,"المتوسطة",1,0,'C');}elseif($resulta['DUREE']==3){$pdf->Cell(25,8,"الطويلة",1,0,'C');}
@@ -149,10 +145,6 @@ elseif($resulta["CATEGORIE"]=="hc5"){$pdf->Cell(21,8,"ق . ف . 5",1,0,'C');}
 elseif($resulta["CATEGORIE"]=="hc6"){$pdf->Cell(21,8,"ق . ف . 6",1,0,'C');}
 elseif($resulta["CATEGORIE"]=="hc7"){$pdf->Cell(21,8,"ق . ف . 7",1,0,'C');}
 else {$pdf->Cell(21,8,$resulta["CATEGORIE"],1,0,'C');}
-
-//$pdf->Cell(16,8,$resulta["CATEGORIE"],1,0,'C');
-
-
 $pdf->Cell(16,8,$resulta["ECHELON"],1,0,'C');
 $pdf->Cell(40,8,$resulta["INDICE"],1,0,'C');
 $pdf->Cell(30,8,$resulta["DATEDEFFET"],1,0,'C');
@@ -164,11 +156,5 @@ $pdf->Text(5,$pdf->GetY()+4,"المادة الثانية : تكلف السيدة
 $pdf->Text(25,$pdf->GetY()+8," الإستشفائية بعين وسارة بتنفيذ هذا المقرر.");
 $pdf->Text(140,$pdf->GetY()+8," عين وسارة في : ".$resulta["DATEDECISION"]);
 $pdf->Text(150,$pdf->GetY()+8," المدير");
-
-// if($result["rnvgradear"]==1 or $result["rnvgradear"]==3 )
-// {
-	// $pdf->Text(88,170," في ".$pdf->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
-// }
-
 $pdf->Output('trav_ar.pdf','I');
 ?>
