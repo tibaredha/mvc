@@ -33,12 +33,24 @@ $pdf->SetFont('aefurat', '', 20);
 $pdf->SetXY(70,35);$pdf->Cell(65,15,'بطاقة التنقيط'." لسنة  ". $date1,0,1,'C');
 $pdf->SetFont('aefurat', '', 11);
 $pdf->Rect(5, 54, 200, 105,"d");$pdf->Line(5 ,95 ,205 ,95 ); $pdf->Line(100,54,100,159 ); 
-$pdf->Text(5,55," الاسم :");                 $pdf->Text(110,55,"الرتبة :  ");
-$pdf->Text(5,60," اللقب :");                $pdf->Text(110,60,"الدرجة :");
-$pdf->Text(5,65,"المولود (ة) بتاريخ :");    $pdf->Text(110,65," تاريخ اخر ترقية  فى الدرجات :");
-$pdf->Text(5,70," الحالة العائلية :");      $pdf->Text(110,70," تاريخ تمكن المعنى بالأمر الحصول ");
-$pdf->Text(5,75," الشهادات و  المؤهلات");    $pdf->Text(110,75," على الدرجة الموالية (المدة الدنيا):");
-$pdf->Text(45,80," العلامة :");
+$pdf->Text(5,55," الاسم : ");               $pdf->SetTextColor(225,0,0);$pdf->Text(17,55,$result["Prenom_Arabe"]);$pdf->SetTextColor(0,0,0);                                                                              $pdf->Text(110,55,"الرتبة : ");                               
+
+$pdf->SetTextColor(225,0,0);
+if($result["rnvgradear"]==1 or $result["rnvgradear"]==3 )
+{
+	$pdf->Text(121,55,$pdf->nbrtostring("mvc","grade","idg",$result["rnvgradear"],"gradear")." في ".$pdf->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
+}
+else 
+{
+	$pdf->Text(121,55,$pdf->nbrtostring("mvc","grade","idg",$result["rnvgradear"],"gradear"));	
+}
+$pdf->SetTextColor(0,0,0);
+
+$pdf->Text(5,60," اللقب : ");              $pdf->SetTextColor(225,0,0);$pdf->Text(17,60,$result["Nomarab"]);$pdf->SetTextColor(0,0,0);                                                                                   $pdf->Text(110,60,"الدرجة : ");                               $pdf->SetTextColor(225,0,0);$pdf->Text(123,60,$result["ECHELON"]);$pdf->SetTextColor(0,0,0);
+$pdf->Text(5,65,"المولود (ة) بتاريخ : ");  $pdf->SetTextColor(225,0,0);$pdf->Text(33,65,$result["Date_Naissance"]);$pdf->SetTextColor(0,0,0);                                                                            $pdf->Text(110,65," تاريخ اخر ترقية  فى الدرجات : ");         $pdf->SetTextColor(225,0,0);$pdf->Text(155,65,$result["DATEDEFFET"]);$pdf->SetTextColor(0,0,0);
+$pdf->Text(5,70," الحالة العائلية : ");    $pdf->SetTextColor(225,0,0);$pdf->Text(28,70,$pdf->nbrtostring("mvc","sf","id",$result["Situation_familliale"],"sf_ar"));$pdf->SetTextColor(0,0,0);                           $pdf->Text(110,70," تاريخ تمكن المعنى بالأمر الحصول ");
+$pdf->Text(5,75," الشهادات و  المؤهلات : *** ");                                                                                                                                                                          $pdf->Text(110,75," على الدرجة الموالية (المدة الدنيا) : ");  $pdf->SetTextColor(225,0,0);$pdf->Text(160,75,$result["PREVISION"]);$pdf->SetTextColor(0,0,0);
+$pdf->Text(45,80," العلامة : 20 / ______");
 //*************************************************************************************************//
 $pdf->Text(5,95,"مكان مخصص للمعني بالأمر لكي يقدم ملاحظاته ");
 $pdf->Text(5,100," أو بطلب إستفسارات و يستطيع أيضا أن يعطي ");
@@ -72,61 +84,7 @@ $pdf->Text(5,235," الرئيس");$pdf->Text(100,235," الكاتب");
 $pdf->Text(5,240," -----------------------------------------------------------------------------------------------------------------------------------------------------------");
 $pdf->Text(5,245," اجابة السلطة المرخص لها بالتنقيط المطلوب منها إعادة النظر في هذا التنقيط. ");
 $pdf->Text(170,255," الإمضاء");
+ 
 
-
-
-
-
-// $pdf->Text(5,110," يشهد السيـد مديـرالمؤسسة العمومية الاستشفائية بعين وسارة بأن السيد(ة):");
-// $pdf->Text(5,120," الاسم :");
-// $pdf->Text(100,120," اللقب :");
-// $pdf->Text(5,130,"المولود (ة) بتاريخ : ");
-// $pdf->Text(82,130," بـ");
-// $pdf->Text(150,130," ولاية ");
-// $pdf->Text(5,140,"تم تعيينه (ها) بتاريخ:");
-// $pdf->Text(60,160,"و"." (ت) يعمل بمؤسستنا كما يلي : ");
-// $pdf->Text(10,170,"الرتبة :  ");
-// $pdf->Text(10,180,"منذ :");
-// if(trim($result["cessation"])=='y'){
-// $pdf->Text(65,180,"إلى غاية ");	
-// }else{
-// $pdf->Text(65,180,"إلى غاية يومنا هذا ");
-// } 
-// $pdf->Text(10,200,"سلمت هذه الشهادة للمعني (ة) بناء على طلب منه (ها) لغرض ملف اداري");
-// $pdf->Text(60,210,"و في حدود ما يسمح به القانون");
-// $pdf->Text(128,220,"عين وسارة في :  ");
-// $pdf->Text(150,230," المدير");
-// $pdf->SetFont('aefurat', '', 12);
-// $pdf->Text(5,240," حررت من طرف :");//
-//$pdf->Text(6,245," السيد(ة):".$_SESSION["USER"]);//
-//$pdf->Code39(172,252,$ndp,1,5);
-// $pdf->SetFont('aefurat', '', 28);
-// $date=date("Y-m-d");
-// $pdf->SetTextColor(225,0,0);
-// $pdf->SetFont('aefurat','I', 19);
-// $pdf->Text(165,220,$date);
-// $pdf->Text(120,120,$result["Nomarab"]);
-// $pdf->Text(25,120,$result["Prenom_Arabe"]);
-// $pdf->Text(50,130,$result["Date_Naissance"]);
-// $pdf->Text(54,140,$result["Date_Premier_Recrutement"]);
-// $pdf->Text(95,130,$pdf->nbrtostring("grh","com","IDCOM",$result["Commune_Naissancear"],"communear"));
-// $pdf->Text(165,130,$pdf->nbrtostring("grh","wil","IDWIL",$result["Wilaya_Naissancear"],"WILAYASAR"));
-// $pdf->Text(30,170,$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear"));
-
-// $Motif_Cessation=$pdf->nbrtostringx('motif_cessation','idcausedepart',trim($result['Motif_Cessation']),'causedepartar');
-
-// if(trim($result["cessation"])=='y'){
-	// $pdf->Text(120,180,"("."تاريخ ال".$Motif_Cessation.")");
-	// $A = substr($result["Date_Cessation"],0,2);
-	// $M = substr($result["Date_Cessation"],3,2);
-	// $J = substr($result["Date_Cessation"],6,4);
-	// $Date_Cessation=$J."-".$M."-".$A;
-	// $pdf->Text(87,180,$Date_Cessation);	
-// } 
-// if($result["rnvgradear"]==1 or $result["rnvgradear"]==3 )
-// {
-	// $pdf->Text(88,170," في ".$pdf->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
-// }
-// $pdf->Text(26,180,$result["DATEARRIVE"]);
-$pdf->Output('trav_ar.pdf','I');
+$pdf->Output('notation.pdf','I');
 ?>
