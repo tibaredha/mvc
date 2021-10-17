@@ -18,7 +18,14 @@ $data = array(
 "butun"      => 'Inser New grade', 
 "photos"     => 'public/webcam/drh/'.$fichier,
 "action"     => 'drh/creatgrade/'.$this->user[0]['idp'],
-"NPV"        => '0' ,
+"MODE"	 => array(      
+                
+						"على أساس الشهادة"=>"1",
+						"بعد تكوين متخصص "=>"2",
+						"عن طريق إمتحان مهني "=>"3",
+						"عن طريق فحص مهني "=>"4",
+						"على سبيل الإختيار عن طريق التسجيل  في قائمة التأهيل "=>"5"
+						),
 "D_grade"     => date('j-m-Y'),
 "ANNEEPV"    => date('Y') ,
 "N_grade"      => array(      
@@ -74,13 +81,19 @@ $data = array(
 "DATEDECISION" => date('j-m-Y')
 );
 view::button($data['btn'],'');
-echo "<h2>Nouveau grade : ".strtoupper($this->user[0]['Nomlatin'])."_".$this->user[0]['Prenom_Latin']." ( ".$this->stringtostring("grade","idg",$this->user[0]['rnvgradear'],"gradear") ." ) "."</h2 ><hr /><br />";
+echo "<h2>Nouvelle promotion dans le  grade : ".strtoupper($this->user[0]['Nomlatin'])."_".$this->user[0]['Prenom_Latin']." ( ".$this->stringtostring("grade","idg",$this->user[0]['rnvgradear'],"gradear") ." ) "."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=90;            
 $this->label($x+960,$y+160,'تاريخ');                  $this->txts($x+700,$y+150,'D_grade',0,$data['D_grade'],'dateus1');
+$this->label($x+610,$y+160,'النمط');                       $this->combov1($x+350,$y+150,'MODE',$data['MODE'],'date'); 
+
+
+
 $this->label($x+960,$y+190,'الرتبة');                 $this->combograde($x+700,$y+180,'N_grade','data','grade',$this->user[0]['rnvgradear'],$this->stringtostring("grade","idg",$this->user[0]['rnvgradear'],"gradear"));                                                                                        
 $this->label($x+610,$y+190,'الصنف');                  $this->combov1($x+350,$y+180,'CATEGORIE',$data['CATEGORIE'],'date'); 
+
+
 $this->label($x+260,$y+190,'الدرجة');                 $this->combov1($x,$y+180,'ECHELON',$data['ECHELON'],'date'); 
 $this->hide(595,$x+90,'A_grade',20,$this->user[0]['rnvgradear']);                                                            
 $this->submit($x+700,$y+210+60,$data['butun']);
@@ -133,8 +146,8 @@ ob_end_flush();
 				<td align="center"><?php echo view::dateUS2FR($value['D_grade']);?></td>
 				
 				<?php 
-					echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"demande de conge\" href=\"".URL.'tcpdf/drh/notation.php?uc='.$this->user[0]['idp']."&ida=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-					echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"decision avancement\" href=\"".URL.'tcpdf/drh/avance.php?idp='.$this->user[0]['idp']."&ida=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
+					echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"****\" href=\"".URL.'tcpdf/drh/notation.php?uc='.$this->user[0]['idp']."&ida=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+					echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"decision promotion\" href=\"".URL.'tcpdf/drh/avance.php?idp='.$this->user[0]['idp']."&ida=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
 				?>
 				<td align="center"><a title="editer" href="<?php echo URL.'drh/editavance/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 				<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'drh/deletegrade/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
