@@ -41,16 +41,19 @@ switch($uc)
 		{
 		$pdf->Text(5,$pdf->GetY()+8," بمقتضى : المرسوم التنفيذي رقم 394-09  مؤرخ في 24 نوفمبر 2009 ,المتضمن القانون الأساسي   ");
         $pdf->Text(25,$pdf->GetY()+8,"الخاص بالموظفين المنتمين لأسلاك الممارسين الطبيين المختصين  في الصحة العمومية");
+		$pdf->Text(5,$pdf->GetY()+8," بمقتضى  المرسوم التنفيذي رقم 199-11 مؤرخ في 12 جمادي عام 1430 الموافق 24 مايو سنة 2011 " );
 		$pdf->Text(21,$pdf->GetY()+8,"المؤسس للنظام التعويضي للموظفين المنتمين للأسلاك الممارسين المتخصصين في الصحة العمومية" );
-		$pdf->Text(5,$pdf->GetY()+8,"نظرا لتعيين السيد (ة ) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );
+		
+		if($result["rnvgradear"]==1){$pdf->Text(5,$pdf->GetY()+8,"نظرا لتعيين السيد (ة ) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );}
+		elseif($result["rnvgradear"]==3){$pdf->Text(5,$pdf->GetY()+8,"نظرا لترقية السيد (ة) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );}//corespond a la date de la 1ere promotion grade  a revoire avec registre grade  
+		elseif($result["rnvgradear"]==4){$pdf->Text(5,$pdf->GetY()+8,"نظرا لترقية السيد (ة) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );}//corespond a la date de la 1ere promotion grade
+		
 		break;
 		}	   
 case '2' ://generaliste medecin pharmacien dentiste
 		{
 		$pdf->Text(5,$pdf->GetY()+8," بمقتضى : المرسوم التنفيذي رقم  393-09  مؤرخ في 24 نوفمبر سنة 2009 ,المتضمن القانون الأساسي   ");
         $pdf->Text(25,$pdf->GetY()+8,"الخاص بالموظفين المنتمين لأسلاك الممارسين الطبيين العامين في الصحة العمومية");
-		//$pdf->Text(5,$pdf->GetY()+8," بمقتضى  المرسوم التنفيذي رقم 199-11 مؤرخ في 12 جمادي عام 1430 الموافق 24 مايو سنة 2011 " );
-		//$pdf->Text(21,$pdf->GetY()+8,"المؤسس للنظام التعويضي للموظفين المنتمين للأسلاك الممارسين المتخصصين في الصحة العمومية" );
 		$pdf->Text(5,$pdf->GetY()+8,"نظرا لتعيين السيد (ة ) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );
 		break;
 		}	    	
@@ -147,7 +150,7 @@ case '13' ://idmage
 $pdf->SetFont('aefurat', '', 18);
 $pdf->Text(90,$pdf->GetY()+8,"يقـــــرر");$pdf->SetFont('aefurat', '', 16);
 $pdf->Text(5,$pdf->GetY()+8,"المادة الأولى  : (ت) يستفيد السيد (ة)  ".$result["Nomarab"]." ".$result["Prenom_Arabe"]);
-if($result["rnvgradear"]==1 or $result["rnvgradear"]==3 )
+if($result["rnvgradear"]==1 or $result["rnvgradear"]==3 or $result["rnvgradear"]==4 )
 {
 	$pdf->Text(35,$pdf->GetY()+8,"بصفته (ها) ".$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear")." في ".$pdf->nbrtostring("grh","specialite","idspecialite",$result["FILIERE"],"specialitear"));
 }
@@ -163,8 +166,21 @@ switch($uc)
 {
  case '1' ://specialiste
 		{
-		$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(30,8,'تعويض الإلزام',1,0,'C');$pdf->Cell(30,8,'تعويض التوثيق',1,0,'C');$pdf->Cell(30,8,'تعويض التأهيل',1,0,'C');$pdf->Cell(32,8,'تعويض التأطير ',1,0,'C');$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');$pdf->Cell(48,8,'ملاحظة',1,0,'C');
-        $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(30,8,'30%',1,0,'C');$pdf->Cell(30,8,'8000 دج',1,0,'C');$pdf->Cell(30,8,'35%',1,0,'C');$pdf->Cell(32,8,'35% ',1,0,'C');$pdf->Cell(30,8,"",1,0,'C');$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->SetXY(5,$pdf->GetY()+10);
+		$pdf->Cell(30,8,'تعويض الإلزام',1,0,'C');$pdf->Cell(30,8,'تعويض التأهيل',1,0,'C');$pdf->Cell(30,8,'تعويض التوثيق',1,0,'C');$pdf->Cell(32,8,'تعويض التأطير ',1,0,'C');
+		
+		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
+		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+        $pdf->SetXY(5,$pdf->GetY()+8);
+		
+		if($result["rnvgradear"]==1)    {$pdf->Cell(30,8,'30%',1,0,'C');$pdf->Cell(30,8,'35%',1,0,'C');$pdf->Cell(30,8,'8000'.' دج',1,0,'C');$pdf->Cell(32,8,'35%',1,0,'C');}
+		elseif($result["rnvgradear"]==3){$pdf->Cell(30,8,'40%',1,0,'C');$pdf->Cell(30,8,'40%',1,0,'C');$pdf->Cell(30,8,'10000'.' دج',1,0,'C');$pdf->Cell(32,8,'40%',1,0,'C');}
+		elseif($result["rnvgradear"]==4){$pdf->Cell(30,8,'45%',1,0,'C');$pdf->Cell(30,8,'50%',1,0,'C');$pdf->Cell(30,8,'12000'.' دج',1,0,'C');$pdf->Cell(32,8,'50%',1,0,'C');}
+		
+		
+		
+		$pdf->Cell(30,8,$result["Date_Premier_Recrutement"],1,0,'C');
+		$pdf->Cell(48,8,"",1,0,'C');
 
 		break;
 		}	   
