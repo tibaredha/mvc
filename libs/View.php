@@ -17,13 +17,13 @@ class View {
 		}
 	}
 
-	function combograde($x,$y,$name,$class,$tb_name,$value,$selected) 
+	function combograde($x,$y,$name,$class,$tb_name,$value,$selected,$ids) 
 		{
 		mysqlconnect();
 		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 
 		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
 		echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
-		$result = mysql_query("SELECT * FROM $tb_name order by gradear  " );
+		$result = mysql_query("SELECT * FROM $tb_name where ids = $ids  order by gradear  " );
 		while($data =  mysql_fetch_array($result))
 		{
 			echo '<option value="'.$data[0].'">'.$data["gradear"].'</option>';
