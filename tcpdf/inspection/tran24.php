@@ -5,7 +5,7 @@ require_once('inspection.php');
 $pdf = new inspection('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('tiba redha');
-$pdf->SetTitle('ouverture_medecin');
+$pdf->SetTitle('transfer_medecin');
 $pdf->SetSubject('PROTOCOLE');
 $pdf->SetFillColor(230);    //fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
 $pdf->SetTextColor(0,0,0);  //text noire 0   //text BLEU 180 
@@ -36,22 +36,23 @@ $DATEP=$rowy->DATEP;
 $adressen=$rowy->ADRESSEAR;$communen=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'communear');$wilayan=$rowy->WILAYA;
 }
 //*************************************************************************************************************************//
-$pdf->entetedecision("مقررة ترخيص بفتح قاعة شبه طبية للعلاجات العامة",$DATEP);
+$pdf->entetedecision(" مقررة ترخيص بتحويل قاعة شبه طبية لفحص النساء الحوامل",$DATEP);
 //*************************************************************************************************************************//
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->loi18_11,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 177 المؤرخة في 1987/04/11 المتعلقة بكيفيات التنصيب و الممارسة في القطاع الخاص ",0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"  للمساعدين الطبيين",0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 1766 المؤرخة في 1987/10/11 المتعلقة بمدونة الاعمال المهنية و التجهيزات",0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"  للتقنين السامين و التقنين في العلاجات الشبه طبية",0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 1765 المؤرخة في 1987/10/11 المتعلقة  بمدونة الاعمال المهنية و التجهيزات",0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"  للتقنيات الساميات و التقنيات قي علاجات التوليد (عيادات الفحص)",0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة في القطاع الخاص لمهنيي الصحة ",0,1,'R');$pdf->SetFont('aefurat', '', 12);
 $pdf->u_diplome_pm ($pdf->diplome24,$DIPLOME,$UNIV,$nomar,$prenomar);
-$pdf->demande_pm($NUMD,$DATED,"بفتح","للعلاجات العامة",1,$adressen,$communen);
+$pdf->decision_o_pm($num1,$date1,"لفحص النساء الحوامل",$nomar,$prenomar);
+$pdf->demande_pm($NUMD,$DATED,"بتحويل","لفحص النساء الحوامل",0,$adressen,$communen);
 $pdf->conformite_pm($DATEP);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
-$pdf->decision_a_o_pm($nomar,$prenomar,$adressen,$communen,' تقني ');
+$pdf->decision_a_t_pm($nomar,$prenomar,$adressen,$communen);
 $pdf->n_transfert_pm($pdf->article_2);
 $pdf->date_effet($pdf->article_3);
 $pdf->execution($pdf->article_4);

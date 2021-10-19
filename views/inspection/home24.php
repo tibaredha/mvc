@@ -22,12 +22,22 @@ $data = array(
 				),				
 "PROPRIETAIRE"  => 'x',
 "DEBUTCONTRAT"  => '00-00-0000',
-"FINCONTRAT"    => '00-00-0000'								
+"DATECOM"       => "00-00-0000",
+//"FINCONTRAT"    => $this->dateUS2FR($this->home[0]['FINCONTRAT']),
+"FINCONTRAT"    => array(
+				"00m"=>"0",
+				"06m"=>"180",
+				"12m"=>"365",//1a
+				"18m"=>"545",//1.5a
+				"24m"=>"730",//2a
+				"30m"=>"910",//2.5a
+				"36m"=>"1095"//3a
+				)								
 );
 view::button($data['btn'],'');
 echo "<h2>PV de conformite du local de : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
-View::photosurl(1170,230,URL.$data['photos']);
+View::photosurl(1170,210,URL.$data['photos']);
 $x=50;$y=10;
 //$this->txts($x+100,$y+240,'DATE',0,$data['DATE'],'dateus');
 $this->label($x,$y+220,'Wilaya');                $this->WILAYA($x+150,$y+210,'WILAYA','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
@@ -52,9 +62,17 @@ $this->label($x+400,$y+500,'3em sagefemme');   $this->combopharmacien($x+520,$y+
 
 $this->label($x+800,$y+300,'Propriétaire');      $this->txtarid($x+880,$y+290,'PROPRIETAIRE','PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
 $this->label($x+800,$y+340,'Début contrat');     $this->txts($x+880,$y+330,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus2');
-$this->label($x+800,$y+380,'Fin contrat');       $this->txts($x+880,$y+370,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus3');
+$this->label($x+800,$y+380,'Fin contrat');       
+
+$this->combov1($x+880,$y+370,'FINCONTRAT',$data['FINCONTRAT']); 
+$this->label(450,550,'Num commission');$this->txt(570,540,'NUMCOM',0,"00");
+$this->label(850,550,'Date commission '); $this->txts(930,540,'DATECOM',0,$data['DATECOM'],'dateus3'); 
+
+
+
+
 $this->hide(100,100,"STRUCTURE","",$this->user[0]['STRUCTURE']);
-$this->submit($x+880,$y+540,$data['butun']);
+$this->submit($x+1140,$y+520,$data['butun']);
 $this->f1();
 view::sautligne(22);
 ob_end_flush();
@@ -101,7 +119,7 @@ ob_end_flush();
 						if($value['NAT']==3){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/ouve24.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						?>
 						
-						<td align="center"><a title="editer" href="<?php echo URL.'inspection/edithome24/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
+						<td align="center"><a title="editer" href="<?php echo URL.'inspection/edithome24/'.$value['idstructure'].'/'.$value['id'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deletehome24/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
 						</tr>
 				<?php 

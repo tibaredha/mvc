@@ -44,7 +44,7 @@ class inspection extends TCPDF
 	public $diplome15 = "- بناء على شهادة النجاح في جراحة الاسنان بتاريخ ";
 	public $diplome16 = "- و بعد الإطلاع على الشهادة (المؤقتة) للدراسات الطبية المتخصصة ";
 	public $diplome20 = "- و بعد الإطلاع على الشهادة النجاح ";
-	
+	public $diplome24 = "- بناء على شهادة النجاح بتاريخ ";
 	public $ordre = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة للصيدلة رقم ";
 	//*dentiste*//
 	public $instruction112_90   = "- بمقتضى التعليمة الوزارية للصحة رقم 112 المؤرخة في 1987/03/02 المتعلقة بأحكام تنصيب جراحو الأسنان ";
@@ -121,18 +121,36 @@ class inspection extends TCPDF
 	{
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على المقررة رقم '.$num1.' المؤرخة في '.$date1.' المتعلقة بفتح عيادة طبية '.$TITRE." للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');	
 	}
-	
+	function decision_o_pm($num1,$date1,$TITRE,$nomar,$prenomar)
+	{
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على المقررة رقم '.$num1.' المؤرخة في '.$date1.' المتعلقة بفتح قاعة شبه طبية '.$TITRE." للمعني (ة) ",0,1,'R');	
+	}
 	function demande($NUMD,$DATED,$MOTIF,$TITRE,$a,$adressen,$communen)
 	{
 		if($a==1)
 		{
 			$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على طلب المعني (ة) رقم '.$NUMD.' المؤرخ في '.$DATED.' المتعلق '.$MOTIF.' عيادته (ها) الطبية '.$TITRE.' الكائن مقرها ',0,1,'R');$this->SetFont('aefurat', '', 13);	
-			$this->SetXY(5,$this->GetY());$this->Cell(200,5," بـ : ".$adressen.' ببلدية '.$communen.' ولاية الجلفة ',0,1,'R');$this->SetFont('aefurat', 'B', 16);
+			$this->SetXY(5,$this->GetY());$this->Cell(200,5,"  بـ : ".$adressen.' ببلدية '.$communen.' ولاية الجلفة ',0,1,'R');$this->SetFont('aefurat', 'B', 16);
 		}
 		else 
 		{
 			$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على طلب المعني (ة) رقم '.$NUMD.' المؤرخ في '.$DATED.' المتعلق '.$MOTIF.' عيادته (ها) الطبية '.$TITRE.'',0,1,'R');$this->SetFont('aefurat', '', 13);	
-			$this->SetXY(5,$this->GetY());$this->Cell(200,5," إلى : ".$adressen.' ببلدية '.$communen.' ولاية الجلفة ',0,1,'R');$this->SetFont('aefurat', 'B', 16);
+			$this->SetXY(5,$this->GetY());$this->Cell(200,5,"  إلى : ".$adressen.' ببلدية '.$communen.' ولاية الجلفة ',0,1,'R');$this->SetFont('aefurat', 'B', 16);
+		
+		}
+		
+	}
+	function demande_pm($NUMD,$DATED,$MOTIF,$TITRE,$a,$adressen,$communen)
+	{
+		if($a==1)
+		{
+			$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على طلب المعني (ة) رقم '.$NUMD.' المؤرخ في '.$DATED.' المتعلق '.$MOTIF.' قاعته (ها) الشبه طبية '.$TITRE.' الكائن مقرها ',0,1,'R');$this->SetFont('aefurat', '', 13);	
+			$this->SetXY(5,$this->GetY());$this->Cell(200,5,"  بـ : ".$adressen.' ببلدية '.$communen.' ولاية الجلفة ',0,1,'R');$this->SetFont('aefurat', 'B', 16);
+		}
+		else 
+		{
+			$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على طلب المعني (ة) رقم '.$NUMD.' المؤرخ في '.$DATED.' المتعلق '.$MOTIF.' قاعته (ها) الشبه طبية '.$TITRE.'',0,1,'R');$this->SetFont('aefurat', '', 13);	
+			$this->SetXY(5,$this->GetY());$this->Cell(200,5,"  إلى : ".$adressen.' ببلدية '.$communen.' ولاية الجلفة ',0,1,'R');$this->SetFont('aefurat', 'B', 16);
 		
 		}
 		
@@ -156,8 +174,16 @@ class inspection extends TCPDF
 		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بتحويل عيادته (ها) الطبية العامة',0,1,'R');
         $this->SetXY(0,$this->GetY());$this->Cell(200,5,'        إلى : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
 	}
+	function decision_a_t_pm($nomar,$prenomar,$adressen,$communen){
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' بصفته (ها) '.' قابلة '.' بتحويل قاعته (ها) الشبه طبية',0,1,'R');
+        $this->SetXY(0,$this->GetY());$this->Cell(200,5,'        إلى : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
+	}
 	function decision_a_o($nomar,$prenomar,$adressen,$communen){
 		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بفتح عيادته (ها) الطبية العامة'.' الكائن مقرها',0,1,'R');
+        $this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
+	}
+	function decision_a_o_pm($nomar,$prenomar,$adressen,$communen,$fonction){
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' بصفته (ها) '.$fonction.' بفتح قاعته (ها) الشبه طبية '.' الكائن مقرها',0,1,'R');
         $this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
 	}
 	function decision_a_i($nomar,$prenomar,$adressen,$communen){
@@ -169,20 +195,33 @@ class inspection extends TCPDF
 	$this->SetFont('aefurat', '', 13);
 	$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على محضر المطابقة الخاص بالعيادة المؤرخ في '.$DATEP,0,1,'R');$this->SetFont('aefurat', 'B', 16);
 	}
+	function conformite_pm($DATEP)
+	{
+	$this->SetFont('aefurat', '', 13);
+	$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على محضر المطابقة الخاص بالقاعة الشبه طبية المؤرخ في '.$DATEP,0,1,'R');$this->SetFont('aefurat', 'B', 16);
+	}
 	
 	function c_order($C_ORDER,$NUMORDER,$DATEORDER)
 	{
 	$this->SetXY(5,$this->GetY());$this->Cell(200,5,$C_ORDER.$NUMORDER.' المؤرخة في '.$DATEORDER.' للمعنى (ة)  ',0,1,'R');
 	}
+	
 	function u_diplome ($U_DIPLOME,$DIPLOME,$UNIV,$nomar,$prenomar)
 	{
 	  $this->SetXY(5,$this->GetY());$this->Cell(200,5,$U_DIPLOME.$DIPLOME.' الصادرة عن جامعة '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
+	}
+	function u_diplome_pm ($U_DIPLOME,$DIPLOME,$UNIV,$nomar,$prenomar)
+	{
+	  $this->SetXY(5,$this->GetY());$this->Cell(200,5,$U_DIPLOME.$DIPLOME.' الصادرة عن مدرسة التكوين الشبه الطبي '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
 	}
 	function n_transfert($article)
 	{
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$article.' : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
 	}
-	
+	function n_transfert_pm($article)
+	{
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$article.' : لايمكن تحويل اي مقر للقاعة الشبه طبية دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');
+	}
 	function entetedecision($titre,$DATEP)
 	{
 		$this->Rect(5, 5, 200, 285 ,'D');$this->Rect(5-1, 5-1, 200+2, 285+2 ,'D');

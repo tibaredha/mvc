@@ -1346,6 +1346,54 @@ class inspection extends Controller {
 	$this->model->deletehome($id); 
 	header('location: ' . URL .$this->route. '/home24/'.$url1[3]);
 	}
+	
+	function edithome24($id) 
+	{
+	$url1 = explode('/',$_GET['url']);
+	$this->view->title = 'edithome';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->home = $this->model->userhomeSingleList( $url1[3]);
+	// $this->view->userListview = $this->model->homeSingleList($id);
+	$this->view->render($this->route.'/edithome24');
+	}
+	function edit1home24($id) 
+	{
+	$this->view->title = 'edithome';
+	// $this->view->user = $this->model->userSinglestructure($id);
+	// $this->view->userListview = $this->model->homeSingleList($id);
+    $data = array();
+	$data['id']= $id;
+	$data['idstructure']= $_POST['idstructure'];;
+	$data['DATEP']= $_POST['DATEP'];
+	$data['NAT']= $_POST['NAT'];
+    $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
+	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	$nbrJours=$_POST['FINCONTRAT'];
+	$data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
+	$data['PHA1']= $_POST['PHA1'];
+	$data['DIST1']= $_POST['DIST1'];
+	$data['PHA2']= $_POST['PHA2'];
+	$data['DIST2']= $_POST['DIST2'];
+	$data['PHA3']= $_POST['PHA3'];
+	$data['DIST3']= $_POST['DIST3'];
+	if(isset($_POST['groupe'])){$data['groupe']= 1;$data['PHA4']= $_POST['PHA4'];}else{$data['groupe']= 0;$data['PHA4']= 0;}
+	$data['CDS0']= $_POST['CDS'];
+	$data['SDS0']= $_POST['SDS'];
+	$data['SAH0']= $_POST['SAH'];
+	$data['SAF0']= $_POST['SAF'];
+	$data['SAN0']= $_POST['SAN'];
+	$data['STL']= $_POST['STL'];
+	$data['STRUCTURE']= $_POST['STRUCTURE'];
+	if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	$data['NUMCOM']= $_POST['NUMCOM'];
+	$data['DATECOM']= $_POST['DATECOM'];
+	// echo '<pre>';print_r ($data);echo '<pre>';  
+	$last_id=$this->model->edithome($data);
+	header('location: ' . URL .$this->route. '/home24/'.$data['idstructure']);		
+	}
+	
 	//**************************//
 	function home21($id) 
 	{
