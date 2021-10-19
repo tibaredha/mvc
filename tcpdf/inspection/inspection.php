@@ -174,8 +174,8 @@ class inspection extends TCPDF
 		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بتحويل عيادته (ها) الطبية العامة',0,1,'R');
         $this->SetXY(0,$this->GetY());$this->Cell(200,5,'        إلى : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
 	}
-	function decision_a_t_pm($nomar,$prenomar,$adressen,$communen){
-		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' بصفته (ها) '.' قابلة '.' بتحويل قاعته (ها) الشبه طبية',0,1,'R');
+	function decision_a_t_pm($nomar,$prenomar,$adressen,$communen,$fonction){
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' بصفته (ها) '.$fonction.' بتحويل قاعته (ها) الشبه طبية',0,1,'R');
         $this->SetXY(0,$this->GetY());$this->Cell(200,5,'        إلى : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
 	}
 	function decision_a_o($nomar,$prenomar,$adressen,$communen){

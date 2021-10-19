@@ -36,23 +36,23 @@ $DATEP=$rowy->DATEP;
 $adressen=$rowy->ADRESSEAR;$communen=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'communear');$wilayan=$rowy->WILAYA;
 }
 //*************************************************************************************************************************//
-$pdf->entetedecision(" مقررة ترخيص بتحويل قاعة شبه طبية لفحص النساء الحوامل",$DATEP);
+$pdf->entetedecision(" مقررة ترخيص بتحويل قاعة شبه طبية للعلاجات العامة",$DATEP);
 //*************************************************************************************************************************//
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->loi18_11,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 177 المؤرخة في 1987/04/11 المتعلقة بكيفيات التنصيب و الممارسة في القطاع الخاص ",0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"  للمساعدين الطبيين",0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 1765 المؤرخة في 1987/10/11 المتعلقة  بمدونة الاعمال المهنية و التجهيزات",0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"  للتقنيات الساميات و التقنيات قي علاجات التوليد (عيادات الفحص)",0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 1766 المؤرخة في 1987/10/11 المتعلقة بمدونة الاعمال المهنية و التجهيزات",0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"  للتقنين السامين و التقنين في العلاجات الشبه طبية",0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة في القطاع الخاص لمهنيي الصحة ",0,1,'R');$pdf->SetFont('aefurat', '', 12);
 $pdf->u_diplome_pm ($pdf->diplome24,$DIPLOME,$UNIV,$nomar,$prenomar);
-$pdf->decision_o_pm($num1,$date1,"لفحص النساء الحوامل",$nomar,$prenomar);
-$pdf->demande_pm($NUMD,$DATED,"بتحويل","لفحص النساء الحوامل",0,$adressen,$communen);
+$pdf->decision_o_pm($num1,$date1,"للعلاجات العامة",$nomar,$prenomar);
+$pdf->demande_pm($NUMD,$DATED,"بفتح","للعلاجات العامة",1,$adressen,$communen);
 $pdf->conformite_pm($DATEP);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
-$pdf->decision_a_t_pm($nomar,$prenomar,$adressen,$communen,'قابلة');
+$pdf->decision_a_t_pm($nomar,$prenomar,$adressen,$communen,'تقني');
 $pdf->n_transfert_pm($pdf->article_2);
 $pdf->date_effet($pdf->article_3);
 $pdf->execution($pdf->article_4);
