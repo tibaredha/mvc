@@ -194,7 +194,7 @@ case '13' ://
 		}	
 }
 $pdf->SetFont('aefurat', '', 18);
-$pdf->Text(90,$pdf->GetY()+8,"يقـــــرر");$pdf->SetFont('aefurat', '', 16);
+$pdf->Text(90,$pdf->GetY()+8,"يقـــــرر");$pdf->SetFont('aefurat', '', 14);
 $pdf->Text(5,$pdf->GetY()+8,"المادة الأولى  : (ت) يستفيد السيد (ة)  ".$result["Nomarab"]." ".$result["Prenom_Arabe"]);
 if($result1["N_grade"]==1 or $result1["N_grade"]==3 or $result1["N_grade"]==4 )
 {
@@ -206,7 +206,7 @@ else
 }
 $pdf->Text(35,$pdf->GetY()+8,"من التعويضات التالية : ");
 //**********************************************//
-$pdf->SetFont('aefurat','I', 15);$pdf->SetTextColor(225,0,0);$pdf->SetTextColor(0,0,0);
+$pdf->SetFont('aefurat','I', 14);$pdf->SetTextColor(225,0,0);$pdf->SetTextColor(0,0,0);
 
 switch($uc)
 {
@@ -230,7 +230,7 @@ switch($uc)
 		elseif($result1["N_grade"]==3){$pdf->Cell(30,8,$result1["D_grade"],1,0,'C');}  
 		elseif($result1["N_grade"]==4){$pdf->Cell(30,8,$result1["D_grade"],1,0,'C');}
 		
-		$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
 		}	   
@@ -253,22 +253,46 @@ case '2' ://generaliste medecin pharmacien dentiste
 		elseif($result1["N_grade"]==7 or $result1["N_grade"]==10 or $result1["N_grade"]==13){$pdf->Cell(31,8,$result1["D_grade"],1,0,'C');}
 		
 		
-		$pdf->Cell(40,8,"",1,0,'C');
+		$pdf->Cell(40,8,"***",1,0,'C');
 		
 
 		break;
 		}	    	
 case '3' ://paramedicale
 		{
-		$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(48,8,'',1,0,'C');
-        $pdf->SetXY(5,$pdf->GetY()+8); $pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,"",1,0,'C');$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->SetXY(5,$pdf->GetY()+10);
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
+		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+        $pdf->SetXY(5,$pdf->GetY()+8); 
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
 		}        
 case '4' ://psycholgue
 		{
-		$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(48,8,'',1,0,'C');
-        $pdf->SetXY(5,$pdf->GetY()+8); $pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,"",1,0,'C');$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->SetXY(5,$pdf->GetY()+10);
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
+		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+        $pdf->SetXY(5,$pdf->GetY()+8); 
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
 		}        				
@@ -286,27 +310,63 @@ case '5' ://sage femme
 		$pdf->Cell(30,8,'',1,0,'C');
 		$pdf->Cell(32,8,'',1,0,'C');
 		$pdf->Cell(30,8,"",1,0,'C');
-		$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 		break;
 		}				
 case '6' ://biologie
 		{
-		$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(48,8,'',1,0,'C');
-        $pdf->SetXY(5,$pdf->GetY()+8); $pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,"",1,0,'C');$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->SetXY(5,$pdf->GetY()+10);
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
+		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+        $pdf->SetXY(5,$pdf->GetY()+8); 
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
 		}				
 case '7' ://annesthesiste
 		{
-		$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(48,8,'',1,0,'C');
-        $pdf->SetXY(5,$pdf->GetY()+8); $pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,"",1,0,'C');$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->SetXY(5,$pdf->GetY()+10);
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
+		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+        $pdf->SetXY(5,$pdf->GetY()+8); 
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
 		}				
 case '8' ://corps communs
 		{
-		$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(48,8,'',1,0,'C');
-        $pdf->SetXY(5,$pdf->GetY()+8); $pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,"",1,0,'C');$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->SetXY(5,$pdf->GetY()+10);
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
+		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+        $pdf->SetXY(5,$pdf->GetY()+8); 
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
 		}				
@@ -324,28 +384,64 @@ case '9' ://op
 		$pdf->Cell(30,8,'',1,0,'C');
 		$pdf->Cell(32,8,'',1,0,'C');
 		$pdf->Cell(30,8,"",1,0,'C');
-		$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
 		}				
 case '10' ://phisi
 		{
-		$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(48,8,'',1,0,'C');
-        $pdf->SetXY(5,$pdf->GetY()+8); $pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,"",1,0,'C');$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->SetXY(5,$pdf->GetY()+10);
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
+		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+        $pdf->SetXY(5,$pdf->GetY()+8); 
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
 		}				
 case '11' ://idmage
 		{
-		$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(48,8,'',1,0,'C');
-        $pdf->SetXY(5,$pdf->GetY()+8); $pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,"",1,0,'C');$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->SetXY(5,$pdf->GetY()+10);
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
+		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+        $pdf->SetXY(5,$pdf->GetY()+8); 
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
 		}				
 case '12' ://idmage
 		{
-		$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(48,8,'',1,0,'C');
-        $pdf->SetXY(5,$pdf->GetY()+8); $pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(30,8,'',1,0,'C');$pdf->Cell(32,8,'',1,0,'C');$pdf->Cell(30,8,"",1,0,'C');$pdf->Cell(48,8,"",1,0,'C');
+		$pdf->SetXY(5,$pdf->GetY()+10);
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
+		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+        $pdf->SetXY(5,$pdf->GetY()+8);
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(30,8,'',1,0,'C');
+		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(30,8,"",1,0,'C');
+		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
 		}	
@@ -365,7 +461,7 @@ case '13' ://ميمي
 		elseif($result1["N_grade"]==160){$pdf->Cell(31,8,$result1["D_grade"],1,0,'C');}
 		elseif($result1["N_grade"]==161){$pdf->Cell(31,8,$result1["D_grade"],1,0,'C');}
 		
-		$pdf->Cell(40,8,'',1,0,'C');
+		$pdf->Cell(40,8,'***',1,0,'C');
 		break;
 		}	
 }
@@ -374,7 +470,5 @@ $pdf->Text(5,$pdf->GetY()+13,"المادة الثانية :تكلف السيدة
 $pdf->Text(25,$pdf->GetY()+8,"الإستشفائية بعين وسارة بتنفيذ هذا المقرر.");
 $pdf->Text(140,$pdf->GetY()+8," عين وسارة في :  ");
 $pdf->Text(150,$pdf->GetY()+8,"  المدير");
-$pdf->SetFont('aefurat','I', 17);
-$pdf->SetTextColor(225,0,0);
 $pdf->Output('indemnite_ar.pdf','I');
 ?>

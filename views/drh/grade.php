@@ -100,7 +100,7 @@ ob_end_flush();
 <table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 	<tr>
 		<th  colspan=5 style="width:50px;"><?php echo '<a title="Autres"  href="'.URL.'drh/search/0/10?o=idp&q='.$this->user[0]['idp'].'" > GRH : </a>';?></th> 
-		<th  colspan=2  style="width:50px;"><?php echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'tcpdf/drh/list_avance.php?idp='.$this->user[0]['idp'].'" > Fiche avance  </a>';?></th>
+		<th  colspan=3  style="width:50px;"><?php echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'tcpdf/drh/list_avance.php?idp='.$this->user[0]['idp'].'" > Fiche avance  </a>';?></th>
 		<th  colspan=2  style="width:50px;"><?php echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'tcpdf/drh/list_avance.php?idp='.$this->user[0]['idp'].'" > Fiche avance  </a>';?></th>
 	</tr>
 	<tr>
@@ -109,9 +109,10 @@ ob_end_flush();
 		<th style="width:70px;">CATEGORIE</th>
 		<th style="width:70px;">ECHELON</th>
 		<th style="width:10px;">DATEDEFFET</th>		
-		
+		<th style="width:10px;">CONTAGION</th>
+		<th style="width:10px;">INDEMNITE_S</th>
 		<th style="width:10px;">DECISION</th>
-		<th style="width:10px;">INDEMNITE</th>
+		
 		<th style="width:10px;">Upd </th>
 		<th style="width:10px;">Del</th>
 	</tr>
@@ -141,10 +142,9 @@ ob_end_flush();
 				<td align="center"><?php echo view::dateUS2FR($value['D_grade']);?></td>
 				
 				<?php 
-					echo "<td style=\"width:10px;\" align=\"center\" ><a title=\decision promotion\" href=\"".URL.'tcpdf/drh/notation.php?uc='.$this->user[0]['idp']."&ida=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-					echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Indemnite\" href=\"".URL.'tcpdf/drh/indemnite.php?uc='.$this->user[0]['idp']."&idg=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
-				
-				
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Contagion\"         href=\"".URL.'tcpdf/drh/contagion.php?uc='.$this->user[0]['idp']."&idg=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;		
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Indemnite\"         href=\"".URL.'tcpdf/drh/indemnite.php?uc='.$this->user[0]['idp']."&idg=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\decision promotion\" href=\"".URL.'tcpdf/drh/notation.php?uc='.$this->user[0]['idp']."&ida=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
 				?>
 				<td align="center"><a title="editer" href="<?php echo URL.'drh/editavance/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 				<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'drh/deletegrade/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
