@@ -25,11 +25,11 @@ mysql_free_result($requete1);
 $pdf->AddPage();
 $pdf->SetLineWidth(0.4);
 $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,$pdf->repar,0,0,'C');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,0,'C');
 $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->mspar,0,0,'C');
 $pdf->SetFont('aefurat', '', 14);
-$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,$pdf->wilayaar,0,0,'R');
-$pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->dsparp,0,0,'R');
+//$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,$pdf->wilayaar,0,0,'R');
+$pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->dsparp." لولاية الجلفة ",0,0,'R');
 $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المؤسسة العمومية الاستشفائية عين وسارة",0,0,'R');
 $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المديرية الفرعية للموارد البشرية",0,0,'R');
 $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,'رقم : ............./م . م . ب /'.date("Y"),0,1,'R');$pdf->SetFont('aefurat', '', 16);
@@ -92,16 +92,26 @@ case '4' ://psycholgue
 		$pdf->Text(5,$pdf->GetY()+8,"بمقتضى : المرسوم التنفيذي رقم 166-11 المؤرخ في 20 جمادي الأولى عام 1432 الموافق 24 أبريل سنة 2011 " );
 		$pdf->Text(21,$pdf->GetY()+8," المؤسس للنظام التعويضي للموظفين المنتمين لأسلاك النفسانيين للصحة العمومية المتمم ." );
 		
+		$pdf->Text(5,$pdf->GetY()+8,"بمقتضى : المرسوم التنفيذي رقم 374-11 المؤرخ في 28 ذي القعدة عام 1432 الموافق 26 أكتوبر سنة 2011 " );
+		$pdf->Text(21,$pdf->GetY()+8,"المتعلق بتعويض التأهيل و تعويض التوثيق التربوي الممنوحين لبعض الموظفين المنتمين للقطاعات المكونة " );
+		
+		   if($result1["N_grade"]==14 or $result1["N_grade"]==17 ){$pdf->Text(5,$pdf->GetY()+8,"نظرا لتعيين السيد (ة ) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );}
+		   elseif($result1["N_grade"]==15 or $result1["N_grade"]==16 or $result1["N_grade"]==18 or $result1["N_grade"]==19){$pdf->Text(5,$pdf->GetY()+8,"نظرا لترقية السيد (ة) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result1["D_grade"] );}  
+	    
+		
 		break;
 		}        				
 case '5' ://sage femme
 		{
 		$pdf->Text(5,$pdf->GetY()+8," بمقتضى : المرسوم التنفيذي رقم 122-11 المؤرخ في 20 مارس سنة 2011 ,المتضمن القانون الأساسي  ");
         $pdf->Text(25,$pdf->GetY()+8,"الخاص بالموظفات المنتميات لسلك القابلات في الصحة العمومية");
-		
 		$pdf->Text(5,$pdf->GetY()+8,"بمقتضى : المرسوم التنفيذي رقم 201-11 المؤرخ في 21 جمادي الثانية عام 1432 الموافق 24 ماي سنة 2011 " );
 		$pdf->Text(21,$pdf->GetY()+8,"المؤسس للنظام التعويضي للموظفات المنتميات لسلك القابلات في الصحة العمومية " );
+		if($result1["N_grade"]==20 ){$pdf->Text(5,$pdf->GetY()+8,"نظرا لتعيين السيد (ة ) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );}
+		if($result1["N_grade"]==21 or $result1["N_grade"]==23 or $result1["N_grade"]==24){$pdf->Text(5,$pdf->GetY()+8,"نظرا لترقية السيد (ة) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result1["D_grade"] );}
 		
+		//if($result1["N_grade"]==22 ){$pdf->Text(5,$pdf->GetY()+8,"نظرا لتعيين السيد (ة ) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );}
+		if($result1["N_grade"]==22 ){$pdf->Text(5,$pdf->GetY()+8,"نظرا لترقية السيد (ة) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );}
 		break;
 		}				
 case '6' ://biologie
@@ -111,6 +121,9 @@ case '6' ://biologie
 		
 		$pdf->Text(5,$pdf->GetY()+8,"بمقتضى : المرسوم التنفيذي رقم 255-11 المؤرخ في 12 شعبان عام 1432 الموافق 14 يوليو سنة 2011 " );
 		$pdf->Text(21,$pdf->GetY()+8,"المؤسس للنظام التعويضي للموظفين المنتمين لأسلاك البيولوجيين في الصحة العمومية " );
+		
+		if($result1["N_grade"]==30){$pdf->Text(5,$pdf->GetY()+8,"نظرا لتعيين السيد (ة ) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );}
+		elseif($result1["N_grade"]==31 or $result1["N_grade"]==32 or $result1["N_grade"]==33 or $result1["N_grade"]==34){$pdf->Text(5,$pdf->GetY()+8,"نظرا لترقية السيد (ة) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result1["D_grade"] );}  
 		
 		break;
 		}				
@@ -123,9 +136,8 @@ case '7' ://annesthesiste
 		$pdf->Text(21,$pdf->GetY()+8,"المؤسس للنظام التعويضي للموظفين المنتمين لأسلاك الأعوان الطبيين في التخدير و الإنعاش " );
 		$pdf->Text(21,$pdf->GetY()+8," للصحة العمومية المتمم ." );
 		
-		if($result1["N_grade"]==1){$pdf->Text(5,$pdf->GetY()+8,"نظرا لتعيين السيد (ة ) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );}
-		elseif($result1["N_grade"]==3){$pdf->Text(5,$pdf->GetY()+8,"نظرا لترقية السيد (ة) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result1["D_grade"] );}  
-		elseif($result1["N_grade"]==4){$pdf->Text(5,$pdf->GetY()+8,"نظرا لترقية السيد (ة) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result1["D_grade"] );}
+		if($result1["N_grade"]==25){$pdf->Text(5,$pdf->GetY()+8,"نظرا لتعيين السيد (ة ) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result["Date_Premier_Recrutement"] );}
+		elseif($result1["N_grade"]==26 or $result1["N_grade"]==27 or $result1["N_grade"]==28){$pdf->Text(5,$pdf->GetY()+8,"نظرا لترقية السيد (ة) ".$result["Nomarab"]." ".$result["Prenom_Arabe"]." بتاريخ : ".$result1["D_grade"] );}  
 		
 		break;
 		}				
@@ -213,10 +225,10 @@ switch($uc)
  case '1' ://specialiste
 		{
 		$pdf->SetXY(5,$pdf->GetY()+10);
-		$pdf->Cell(30,8,'تعويض الإلزام',1,0,'C');
-		$pdf->Cell(30,8,'تعويض التأهيل',1,0,'C');
-		$pdf->Cell(30,8,'تعويض التوثيق',1,0,'C');
-		$pdf->Cell(32,8,'تعويض التأطير ',1,0,'C');
+		$pdf->Cell(30,8,'الإلزام',1,0,'C');
+		$pdf->Cell(30,8,'التأهيل',1,0,'C');
+		$pdf->Cell(30,8,'التوثيق',1,0,'C');
+		$pdf->Cell(32,8,'التأطير',1,0,'C');
 		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
 		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
         $pdf->SetXY(5,$pdf->GetY()+8);
@@ -237,9 +249,9 @@ switch($uc)
 case '2' ://generaliste medecin pharmacien dentiste
 		{
         $pdf->SetXY(5,$pdf->GetY()+10);
-		$pdf->Cell(35,8,'تعويض التأهيل',1,0,'C');
-		$pdf->Cell(35,8,'تعويض التوثيق',1,0,'C');
-		$pdf->Cell(59,8,'تعويض دعم نشاطات الصحة ',1,0,'C');
+		$pdf->Cell(35,8,'التأهيل',1,0,'C');
+		$pdf->Cell(35,8,'التوثيق',1,0,'C');
+		$pdf->Cell(59,8,'دعم نشاطات الصحة',1,0,'C');
 		$pdf->Cell(31,8,'تاريخ الإستفادة',1,0,'C');
 		$pdf->Cell(40,8,'ملاحظة',1,0,'C');
         $pdf->SetXY(5,$pdf->GetY()+8); 
@@ -280,54 +292,64 @@ case '3' ://paramedicale
 case '4' ://psycholgue
 		{
 		$pdf->SetXY(5,$pdf->GetY()+10);
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(58,8,'المتابعة و الدعم النفسيين',1,0,'C');
+		$pdf->Cell(28,8,'التأهيل',1,0,'C');
+		$pdf->Cell(28,8,'التوثيق',1,0,'C');
+		$pdf->Cell(56,8,'الخدمة الإلزامية النوعية',1,0,'C');
 		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
-		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+		// $pdf->Cell(48,8,'ملاحظة',1,0,'C');
         $pdf->SetXY(5,$pdf->GetY()+8); 
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(32,8,'',1,0,'C');
-		$pdf->Cell(30,8,"",1,0,'C');
-		$pdf->Cell(48,8,"***",1,0,'C');
-
+		
+		$ind1=$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND1");
+		if($result1["ECHELON"]==0){$pdf->Cell(30,8,"الدرجة ".$result1["ECHELON"],1,0,'C');$pdf->Cell(28,8,($ind1*0).'% ',1,0,'C');}
+		elseif($result1["ECHELON"]==1  or $result1["ECHELON"]==2 ) {$pdf->Cell(30,8,"الدرجة ".$result1["ECHELON"],1,0,'C');$pdf->Cell(28,8,($ind1*1).'% ',1,0,'C');}
+		elseif($result1["ECHELON"]==3  or $result1["ECHELON"]==4 ) {$pdf->Cell(30,8,"الدرجة ".$result1["ECHELON"],1,0,'C');$pdf->Cell(28,8,($ind1*2).'% ',1,0,'C');}
+		elseif($result1["ECHELON"]==5  or $result1["ECHELON"]==6 ) {$pdf->Cell(30,8,"الدرجة ".$result1["ECHELON"],1,0,'C');$pdf->Cell(28,8,($ind1*3).'% ',1,0,'C');}
+		elseif($result1["ECHELON"]==7  or $result1["ECHELON"]==8 ) {$pdf->Cell(30,8,"الدرجة ".$result1["ECHELON"],1,0,'C');$pdf->Cell(28,8,($ind1*4).'% ',1,0,'C');}
+		elseif($result1["ECHELON"]==9  or $result1["ECHELON"]==10 ){$pdf->Cell(30,8,"الدرجة ".$result1["ECHELON"],1,0,'C');$pdf->Cell(28,8,($ind1*5).'% ',1,0,'C');}
+		elseif($result1["ECHELON"]==11 or $result1["ECHELON"]==12 ){$pdf->Cell(30,8,"الدرجة ".$result1["ECHELON"],1,0,'C');$pdf->Cell(28,8,($ind1*6).'% ',1,0,'C');}
+		$pdf->Cell(28,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND2").'%',1,0,'C');
+		$pdf->Cell(28,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND3").'دج',1,0,'C');
+		$pdf->Cell(56,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND4").'%',1,0,'C');
+		
+		    if($result1["N_grade"]==14 or $result1["N_grade"]==17 ){$pdf->Cell(30,8,$result["Date_Premier_Recrutement"],1,0,'C');}
+		elseif($result1["N_grade"]==15 or $result1["N_grade"]==16 or $result1["N_grade"]==18 or $result1["N_grade"]==19){$pdf->Cell(30,8,$result1["D_grade"],1,0,'C');}  
+		
 		break;
 		}        				
 case '5' ://sage femme
 		{
 		$pdf->SetXY(5,$pdf->GetY()+10);
-		$pdf->Cell(30,8,'تعويض الإلزام لعلاجات التوليد و الصحة الإنجابية ',1,0,'C');
-		$pdf->Cell(30,8,'تعويض دعم صحة الأم و الطفل ',1,0,'C');
-		$pdf->Cell(30,8,'تعويض التقنية ',1,0,'C');
-        $pdf->Cell(31,8,'تاريخ الإستفادة',1,0,'C');
-		$pdf->Cell(40,8,'ملاحظة',1,0,'C');
+		$pdf->Cell(75,8,'الإلزام لعلاجات التوليد و الصحة الإنجابية',1,0,'C');
+		$pdf->Cell(40,8,'دعم صحة الأم و الطفل',1,0,'C');
+		$pdf->Cell(20,8,'التقنية',1,0,'C');
+		$pdf->Cell(28,8,'تاريخ الإستفادة',1,0,'C');
+		$pdf->Cell(37,8,'ملاحظة',1,0,'C');
         $pdf->SetXY(5,$pdf->GetY()+8); 
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(32,8,'',1,0,'C');
-		$pdf->Cell(30,8,"",1,0,'C');
-		$pdf->Cell(48,8,"***",1,0,'C');
+		$pdf->Cell(75,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND1").'%',1,0,'C');
+		$pdf->Cell(40,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND2").'%',1,0,'C');
+		$pdf->Cell(20,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND3").'%',1,0,'C');
+		
+		if($result1["N_grade"]==20 or $result1["N_grade"]==22){$pdf->Cell(28,8,$result["Date_Premier_Recrutement"],1,0,'C');}
+		elseif($result1["N_grade"]==21 or $result1["N_grade"]==23 or $result1["N_grade"]==24){$pdf->Cell(28,8,$result1["D_grade"],1,0,'C');}
+		$pdf->Cell(37,8,'***',1,0,'C');
 		break;
+		
 		}				
 case '6' ://biologie
 		{
 		$pdf->SetXY(5,$pdf->GetY()+10);
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(92,8,'دعم النشاطات الصحية',1,0,'C');
+		$pdf->Cell(30,8,'التقنية ',1,0,'C');
 		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
 		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
         $pdf->SetXY(5,$pdf->GetY()+8); 
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(32,8,'',1,0,'C');
-		$pdf->Cell(30,8,"",1,0,'C');
+		$pdf->Cell(92,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND1").'%',1,0,'C');
+		$pdf->Cell(30,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND2").'%',1,0,'C');
+		
+		if($result1["N_grade"]==30 ){$pdf->Cell(30,8,$result["Date_Premier_Recrutement"],1,0,'C');}
+		elseif($result1["N_grade"]==31 or $result1["N_grade"]==32 or $result1["N_grade"]==33 or $result1["N_grade"]==34){$pdf->Cell(30,8,$result1["D_grade"],1,0,'C');}
+		
 		$pdf->Cell(48,8,"***",1,0,'C');
 
 		break;
@@ -335,19 +357,21 @@ case '6' ://biologie
 case '7' ://annesthesiste
 		{
 		$pdf->SetXY(5,$pdf->GetY()+10);
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(32,8,'',1,0,'C');
+		$pdf->Cell(68,8,'الإلزام في نشاطات التخدير و الإنعاش ',1,0,'C');
+		$pdf->Cell(15,8,'التقنية ',1,0,'C');
+		$pdf->Cell(58,8,'دعم نشاطات التخدير و الإنعاش ',1,0,'C');
 		$pdf->Cell(30,8,'تاريخ الإستفادة',1,0,'C');
-		$pdf->Cell(48,8,'ملاحظة',1,0,'C');
+		$pdf->Cell(29,8,'ملاحظة',1,0,'C');
         $pdf->SetXY(5,$pdf->GetY()+8); 
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(30,8,'',1,0,'C');
-		$pdf->Cell(32,8,'',1,0,'C');
-		$pdf->Cell(30,8,"",1,0,'C');
-		$pdf->Cell(48,8,"***",1,0,'C');
+		$pdf->Cell(68,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND1").'%',1,0,'C');
+		$pdf->Cell(15,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND2").'%',1,0,'C');
+		$pdf->Cell(58,8,$pdf->nbrtostring("mvc","grade","idg",$result1["N_grade"],"IND3").'%',1,0,'C');
+		
+		
+		if($result1["N_grade"]==25 ){$pdf->Cell(30,8,$result["Date_Premier_Recrutement"],1,0,'C');}
+    elseif($result1["N_grade"]==26 or $result1["N_grade"]==27 or $result1["N_grade"]==28){$pdf->Cell(30,8,$result1["D_grade"],1,0,'C');}
+		
+		$pdf->Cell(29,8,"***",1,0,'C');
 
 		break;
 		}				
@@ -373,9 +397,9 @@ case '8' ://corps communs
 case '9' ://op
 		{
 		$pdf->SetXY(5,$pdf->GetY()+10);
-		$pdf->Cell(30,8,'تعويض الضرر',1,0,'C');
-		$pdf->Cell(30,8,'التعويض الجزافي عن الخدمة ',1,0,'C');
-		$pdf->Cell(30,8,'تعويض دعم نشاطات الإدارة ',1,0,'C');
+		$pdf->Cell(30,8,'الضرر',1,0,'C');
+		$pdf->Cell(30,8,'الجزافي عن الخدمة',1,0,'C');
+		$pdf->Cell(30,8,'دعم نشاطات الإدارة',1,0,'C');
         $pdf->Cell(31,8,'تاريخ الإستفادة',1,0,'C');
 		$pdf->Cell(40,8,'ملاحظة',1,0,'C');
         $pdf->SetXY(5,$pdf->GetY()+8); 
@@ -448,8 +472,8 @@ case '12' ://idmage
 case '13' ://ميمي
 		{
 		$pdf->SetXY(5,$pdf->GetY()+10);
-		$pdf->Cell(74,8,'تعويض مصالح الدعم لنشاطات الصحة ',1,0,'C');
-		$pdf->Cell(55,8,'تعويض تسيير مصالح الصحة ',1,0,'C');
+		$pdf->Cell(74,8,'مصالح الدعم لنشاطات الصحة',1,0,'C');
+		$pdf->Cell(55,8,'تسيير مصالح الصحة',1,0,'C');
 		$pdf->Cell(31,8,'تاريخ الإستفادة',1,0,'C');
 		$pdf->Cell(40,8,'ملاحظة',1,0,'C');
         $pdf->SetXY(5,$pdf->GetY()+8); 
