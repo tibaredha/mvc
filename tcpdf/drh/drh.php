@@ -26,6 +26,10 @@ class drh extends TCPDF
 	public $loi85_05 = "- بمقتضى القانون 05-85 المؤرخ في 1985/02/16 المتعلق بحماية الصحة و ترقيتها المعدل و المتمم .";
 	public $loi18_11 = "- بمقتضى القانون رقم 11-18 المؤرخ في 2018/07/02 المتعلق بالصحة المعدل و المتمم.";
 	
+	public $dsp_17   = "مـديريــــــة الصحة و السكان  لولاية الجلفة ";
+	public $eph_ao   = "المؤسسة العمومية الاستشفائية عين وســـارة";
+	public $sdrh_ao  = "المديرية الفرعية للموارد البشرية";
+	
 	public $loi12_07 = "- بمقتضى القانون 07-12 المؤرخ في 21 فبراير 2012 المتعلق بالولاية";
 	
 	
@@ -105,43 +109,68 @@ class drh extends TCPDF
 			return $DATEPV;
 		}	
 	//*************************************************************************************************************//
+	function ENTETEDRH($titre,$num,$annee) 
+	{
+		$this->SetLineWidth(0.4);
+		$this->Rect(5, 5, 200, 285 ,'D');$this->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,0,'C');
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->mspar,0,0,'C');
+		$this->SetFont('aefurat', '', 14);
+		//$this->SetXY(5,$this->GetY()+10);$this->Cell(200,5,$this->wilayaar,0,0,'R');
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->dsp_17,0,0,'R');  
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->eph_ao ,0,0,'R');    
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->sdrh_ao,0,0,'R');         
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,'رقم : '.$num.' / م . م . ب / '.$annee,0,1,'R');$this->SetFont('aefurat', '', 16);
+		$this->setRTL(true);$this->SetFont('aefurat', '', 28);
+		$this->SetXY(6,$this->GetY()+5);$this->Cell(198,15,$titre,0,1,'C',1,1);
+		$this->SetFont('aefurat', '', 14);
+	
+	}
 	function BASEIRGF($BASEIRG) 
 	{
 
-			if ($BASEIRG > 15000 and $BASEIRG <= 22500){$IRG=round(($BASEIRG-15000)*0.2,0);return $IRG;}
-			elseif ($BASEIRG > 22500 and $BASEIRG <= 28750){$IRG=round(((($BASEIRG-22500)*0.12)+1500),0);return $IRG;}
-			elseif ($BASEIRG > 28750 and $BASEIRG <= 30000){$IRG=round(((($BASEIRG-28750)*0.2)+2250),0);return $IRG;}
-			elseif ($BASEIRG > 30000 and $BASEIRG <= 120000){$IRG=round(((($BASEIRG-30000)*0.3)+2500),0);return $IRG;}
-		    else{return $IRG=0;}
+			    if ($BASEIRG > 15000.00  and $BASEIRG <= 22500.00) {$IRG=round((($BASEIRG-15000)*0.2),0);return $IRG;}
+			elseif ($BASEIRG > 22500.00  and $BASEIRG <= 28750.00) {$IRG=round(((($BASEIRG-22500)*0.12)+1500),0);return $IRG;}
+			elseif ($BASEIRG > 28750.00  and $BASEIRG <= 30000.00) {$IRG=round(((($BASEIRG-28750)*0.2)+2250),0);return $IRG;}
+			elseif ($BASEIRG > 30000.00  and $BASEIRG <= 120000.00){$IRG=round(((($BASEIRG-30000)*0.3)+2500),0);return $IRG;}
+		    elseif ($BASEIRG > 120000.00 and $BASEIRG <= 150000.00){$IRG=round(((($BASEIRG-30000)*0.3)+2500),0);return $IRG;} // a revoire manque tranche sup a 120000
+		    
+			else{return $IRG=00;}
+			
+			// return $BASEIRG ;
 		}
 	
-	function titre1($uc,$CNASAT,$ccp,$JOURS,$NOMAR,$PRENOMAR,$DATNSC,$SF,$GRADE,$cat,$ech,$ENFS)
+	function titre1($idgrade,$CNASAT,$CCP,$JOURS,$NOMAR,$PRENOMAR,$DATNSC,$SF,$CAT,$ECH,$ENFS)
     {
-        $this->SetFont('aefurat', '', 12);
-		$this->SetXY(5,$this->GetY()+8);$this->Cell(100,8,'رقم الضمان الاجتماعي : '.$CNASAT,1,0,'R');$this->Cell(100,8,'رقم الحساب الجارى : '.$ccp,1,1,'R');
-		$this->SetXY(5,$this->GetY());$this->Cell(100,8,'لشهر : '.date("Y-m"),1,0,'R');$this->Cell(100,8,'عدد ايام العمل : '.$JOURS,1,1,'R');
+		$this->SetFont('aefurat', '', 12);
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(50,8,'لشهر : '.date("Y-m"),1,0,'R');
+		$this->Cell(50,8,'عدد ايام العمل : '.$JOURS,1,0,'R');
+		$this->Cell(45,8,'ض أ : '.$CNASAT,1,0,'R');
+		$this->Cell(55,8,'ح ج : '.$CCP,1,1,'R');
+		
 		$this->SetXY(5,$this->GetY());
 		$this->Cell(100,8,'اللقب و الاسم : '.$NOMAR."  ".$PRENOMAR,1,0,'R');
 		$this->Cell(45,8,'تاريخ الميلاد : '.$DATNSC,1,0,'R');
 		$this->Cell(20,8,'م عالي : ',1,0,'R');
 		$this->Cell(35,8,'الحالة العائلية : '.$this->nbrtostring('mvc','sf','id',$SF,'sf_ar'),1,1,'R');
-        $this->SetXY(5,$this->GetY());
-		$this->Cell(100,8,'الرتبة : '.$GRADE,1,0,'R');
-		$this->Cell(23,8,'الصنف : '.$cat,1,0,'R');
-		$this->Cell(22,8,'الدرجة : '.$ech,1,0,'R');
+        
+		$this->SetXY(5,$this->GetY());
+		$this->Cell(100,8,'الرتبة : '.$this->nbrtostring("mvc","grade","idg",$idgrade,"gradear"),1,0,'R');
+		$this->Cell(23,8,'الصنف : '.$CAT,1,0,'R');
+		$this->Cell(22,8,'الدرجة : '.$ECH,1,0,'R');
 		$this->Cell(20,8,'***',1,0,'C');
 		$this->Cell(35,8,'عدد الاولاد : '.$ENFS,1,1,'R');
-        $this->SetXY(5,$this->GetY());$this->Cell(60,8,'التعويضات والمنح',1,0,'C',1,1);$this->Cell(40,8,'المبلغ',1,1,'C',1,1);
+        $this->SetXY(10,$this->GetY()+5);$this->Cell(50,8,'التعويضات والمنح',1,0,'C',1,1);$this->Cell(40,8,'المبلغ',1,1,'C',1,1);
 		
-		$sb=($this->gs($cat,"i")*45);   
-		$iep=$this->gs($cat,$ech)*45; 
-		$IFC=$this->gs($cat,"ifc");
+		$sb=($this->gs($CAT,"i")*45);   
+		$iep=$this->gs($CAT,$ECH)*45; 
+		$ifc=$this->gs($CAT,"ifc");
 		
-		$this->SetXY(5,$this->GetY());$this->Cell(60,8,'الاجر القاعدى',1,0,'R');        $this->Cell(40,8,$sb,1,1,'C');
-		$this->SetXY(5,$this->GetY());$this->Cell(60,8,'تعويض الخبرة المهنية',1,0,'R');$this->Cell(40,8,$iep,1,1,'C');
-		$this->SetXY(5,$this->GetY());$this->Cell(60,8,'منحة جزافية تعويضية',1,0,'R'); $this->Cell(40,8,$IFC,1,1,'C');
-		$this->SetXY(5,$this->GetY());$this->Cell(60,8,'زيادة استدلالية منصب عالى',1,0,'R'); $this->Cell(40,8,"0",1,1,'C');
-		
+		$this->SetXY(10,$this->GetY()+5);$this->Cell(50,8,'الاجر القاعدى',1,0,'R');             $this->Cell(40,8,$sb,1,1,'C');
+		$this->SetXY(10,$this->GetY());$this->Cell(50,8,'تعويض الخبرة المهنية',1,0,'R');       $this->Cell(40,8,$iep,1,1,'C');
+		$this->SetXY(10,$this->GetY());$this->Cell(50,8,'منحة جزافية تعويضية',1,0,'R');        $this->Cell(40,8,$ifc,1,1,'C');
+		$this->SetXY(10,$this->GetY()+5);$this->Cell(50,8,'زيادة استدلالية منصب عالى',1,0,'R'); $this->Cell(40,8,"0",1,1,'C');
+		$uc=$this->nbrtostring("mvc","grade","idg",$idgrade,"ids");
 		switch($uc)
 		{
 		case '1' ://specialiste ok
@@ -153,44 +182,35 @@ class drh extends TCPDF
 				{
 					
 					$PAPM=00;
-					$IQUA=(($sb+$iep)*45)/100;
-					$IDOC=4000;
-					$ISAS=(($sb+$iep)*45)/100;
-					
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'علاوة تحسين الخدمات الطبية',1,0,'R'); $this->Cell(40,8,$PAPM,1,1,'C');
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'تعويض  التأهيل',1,0,'R');            $this->Cell(40,8,$IQUA,1,1,'C');
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'تعويض التوثيق',1,0,'R');             $this->Cell(40,8,$IDOC,1,1,'C');
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'تعويض دعم  نشاطات الصحة',1,0,'R');   $this->Cell(40,8,$ISAS,1,1,'C');
-					
-					$CONT=00;
-					$INT=2000;
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'التعويض عن العدوى',1,0,'R');         $this->Cell(40,8,$CONT,1,1,'C');
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'منحة الانتفاع',1,0,'R');              $this->Cell(40,8,$INT,1,1,'C');
-					//*************************************************//
-					$SBRUT=$sb+$iep+$INT+$IDOC+$ISAS+$IQUA+$IFC;
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'الراتب الخام',1,0,'R',1,1);          $this->Cell(40,8,$SBRUT,1,1,'C',1,1);
+					$IQUA=(($sb+$iep)*$this->nbrtostring("mvc","grade","idg",$idgrade,"IND1"))/100;
+					$IDOC=$this->nbrtostring("mvc","grade","idg",$idgrade,"IND2");
+					$ISAS=(($sb+$iep)*$this->nbrtostring("mvc","grade","idg",$idgrade,"IND3"))/100;
+					$CONT=500;
+					$INT=0;
+					$SBRUT=$sb+$iep+$INT+$IDOC+$ISAS+$IQUA+$ifc;
 					if ($sb > 15000){$ALLOCF=300;}else{$ALLOCF=900;}
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'منح عائلية',1,0,'R');              $this->Cell(40,8,$ALLOCF,1,1,'C');
-					//*************************************************//
-					$TOTAL=$SBRUT+($ALLOCF*$ENFS);
-			        $this->SetXY(5,$this->GetY());$this->Cell(60,8,'المجموع',1,0,'R',1,1);             $this->Cell(40,8,round($TOTAL,2),1,1,'C',1,1);
-					//*************************************************//
+					$ALLOCFT=$ALLOCF*$ENFS;
+					$TOTAL=$SBRUT+$ALLOCFT;
 					$RSS=($SBRUT*9)/100;
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'الضمان الاجتماعى',1,0,'R',1,1);     $this->Cell(40,8,round($RSS,2),1,1,'C',1,1);
-					
 					$BASEIRG=$SBRUT-$RSS;
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'اساس خاضع للضريبة',1,0,'R',1,1);       $this->Cell(40,8,round($BASEIRG,0),1,1,'C',1,1);
-					$BASEIRGX=gettype($BASEIRG);//$this->BASEIRGF($BASEIRG)
-					//$BASEIRGX=100;
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'اقتطاع الضرائب على الاجر',1,0,'R',1,1); $this->Cell(40,8,$BASEIRGX,1,1,'C',1,1);
-
+					$BASEIRGX=$this->BASEIRGF($BASEIRG);
 					$IRGRSS=$RSS+$BASEIRGX;
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'الضمان الاجتماعى',1,0,'R',1,1); $this->Cell(40,8,$RSS,1,1,'C',1,1);
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'اقتطاع الضرائب على الاجر',1,0,'R',1,1); $this->Cell(40,8,$BASEIRGX,1,1,'C',1,1);
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'مجموع الاقتطاعات',1,0,'R',1,1); $this->Cell(40,8,$IRGRSS,1,1,'C',1,1);
-
 					$NET=$TOTAL-$IRGRSS;
-					$this->SetXY(5,$this->GetY());$this->Cell(60,8,'الصافى للدفع',1,0,'R',1,1); $this->Cell(40,8,round($NET,2),1,1,'C',1,1);
+					
+					//$this->SetXY(5,$this->GetY());$this->Cell(60,8,'علاوة تحسين الخدمات الطبية',1,0,'R'); $this->Cell(40,8,$PAPM,1,1,'C');
+					$this->SetXY(10,$this->GetY()+5);$this->Cell(50,8,'تعويض  التأهيل',1,0,'R');            $this->Cell(40,8,$IQUA,1,1,'C');
+					$this->SetXY(10,$this->GetY());$this->Cell(50,8,'تعويض التوثيق',1,0,'R');               $this->Cell(40,8,$IDOC,1,1,'C');
+					$this->SetXY(10,$this->GetY());$this->Cell(50,8,'تعويض دعم  نشاطات الصحة',1,0,'R');     $this->Cell(40,8,$ISAS,1,1,'C');
+					
+					$this->SetXY(10,$this->GetY()+5);$this->Cell(50,8,'التعويض عن العدوى',1,0,'R');         $this->Cell(40,8,$CONT,1,0,'C');              $this->Cell(10,8,'',0,0,'R');$this->Cell(50,8,'اساس خاضع للضريبة*',1,0,'R',1,1);       $this->Cell(40,8,round($BASEIRG,0),1,1,'C',1,1);
+					$this->SetXY(10,$this->GetY());$this->Cell(50,8,'منحة الانتفاع',1,0,'R');                $this->Cell(40,8,$INT,1,0,'C');               $this->Cell(10,8,'',0,0,'R');$this->Cell(50,8,'اقتطاع الضرائب على الاجر',1,0,'R',1,1);  $this->Cell(40,8,$BASEIRGX,1,1,'C',1,1);
+					$this->SetXY(10,$this->GetY()+5);$this->Cell(50,8,'الراتب الخام',1,0,'R',1,1);          $this->Cell(40,8,$SBRUT,1,0,'C',1,1);         $this->Cell(10,8,'',0,0,'R');$this->Cell(50,8,'الضمان الاجتماعى',1,0,'R',1,1);          $this->Cell(40,8,round($RSS,2),1,1,'C',1,1);
+					$this->SetXY(10,$this->GetY());$this->Cell(50,8,'منح عائلية',1,0,'R');                  $this->Cell(40,8,$ALLOCFT,1,0,'C');            $this->Cell(10,8,'',0,0,'R');$this->Cell(50,8,'مجموع الاقتطاعات',1,0,'R',1,1);          $this->Cell(40,8,$IRGRSS,1,1,'C',1,1);
+			        $this->SetXY(10,$this->GetY()+5);$this->Cell(50,8,'المجموع',1,0,'R',1,1);               $this->Cell(40,8,round($TOTAL,2),1,0,'C',1,1);$this->Cell(10,8,'',0,0,'R');$this->Cell(50,8,'الصافى للدفع',1,0,'R',1,1);             $this->Cell(40,8,round($NET,2),1,1,'C',1,1);
+
+					
+					
+					   
 
 				break;
 				}	    	
@@ -290,7 +310,9 @@ class drh extends TCPDF
 	function htiat($titre,$grade,$y)
 	{
 		$this->setRTL(true);
-		$this->SetFont('aefurat', '', 28);$this->SetXY(45,$this->GetY()+$y-5);$this->Cell(120,15,$titre,0,1,'C',1,1);$this->SetFont('aefurat', '', 13);
+		//$this->SetFont('aefurat', '', 28);$this->SetXY(45,$this->GetY()+$y-5);$this->Cell(120,15,$titre,0,1,'C',1,1);
+		
+		$this->SetFont('aefurat', '', 13);
 		$this->Text(5,$this->GetY()+5,"إن مدير المؤسسة العمومية الإستشفائية بعين وسارة");
 		$this->Text(10,$this->GetY()+$y,"- بمقتضى : الأمر رقم 03-06 المؤرخ في 15 يوليو سنة 2006 المتضمن القانون الأساسي العام  للوظيفة العمومية");
 		$this->Text(10,$this->GetY()+$y,"- و بمقتضى : المرسوم الرئاسي رقم 304-07 المؤرخ في 17 رمضان عام 1428 الموافق 29 سبتمبر سنة 2007");

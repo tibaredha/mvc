@@ -24,19 +24,23 @@ $resulta = mysql_fetch_array( $requetea );
 mysql_free_result($requetea);
 
 $pdf->AddPage();$y=7;
-$pdf->SetLineWidth(0.4);$pdf->SetFont('aefurat', 'B', 16);
-$pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,0,'C');
-$pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->mspar,0,0,'C');
-$pdf->SetFont('aefurat', '', 14);
-//$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,$pdf->wilayaar,0,0,'R');
-$pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->dsparp." لولاية الجلفة",0,0,'R');
-$pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المؤسسة العمومية الاستشفائية عين وســـارة",0,0,'R');
-$pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المديرية الفرعية للموارد البشرية",0,0,'R');
 $datexy=substr($resulta["DATEDECISION"],0,4);
-$pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,'رقم : '.$resulta["NDECISION"].' / '.$datexy,0,1,'R');
-//$pdf->entete_drh($y);
-$pdf->htiat('مقرر ترقية فى الدرجة',$result["rnvgradear"],$y);
+$pdf->ENTETEDRH('مقرر ترقية فى الدرجة',$resulta["NDECISION"],$datexy); 
+
+
+// $pdf->SetLineWidth(0.4);$pdf->SetFont('aefurat', 'B', 16);
+// $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
+// $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,0,'C');
+// $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->mspar,0,0,'C');
+// $pdf->SetFont('aefurat', '', 14);
+
+// $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,$pdf->dsparp." لولاية الجلفة",0,0,'R');
+// $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المؤسسة العمومية الاستشفائية عين وســـارة",0,0,'R');
+// $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,"المديرية الفرعية للموارد البشرية",0,0,'R');
+// 
+// $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,'رقم : '.$resulta["NDECISION"].' / '.$datexy,0,1,'R');
+// $pdf->entete_drh($y);
+$pdf->htiat('',$result["rnvgradear"],$y);
 $uc=$pdf->nbrtostring("mvc","grade","idg",$result["rnvgradear"],"ids");
 $GRADE=$pdf->nbrtostring("grh","grade","idg",$result["rnvgradear"],"gradear");
 switch($uc)

@@ -61,7 +61,7 @@ $data = array(
 						"hc7"=>"hc7"
 						),	
 "ECHELON"	 => array(      
-                        $this->user[0]['ECHELON']+1=>$this->user[0]['ECHELON']+1,
+                        $this->user[0]['ECHELON']=>$this->user[0]['ECHELON'],
 						"0"=>"0",
 						"1"=>"1",
 						"2"=>"2",
