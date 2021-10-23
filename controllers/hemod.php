@@ -64,17 +64,17 @@ class hemod extends Controller {
 		$data['HVB']       = $_POST['HVB'];
 		$data['HVC']       = $_POST['HVC'];
 		$data['HIV']       = $_POST['HIV'];
-		$data['TPHA']       = $_POST['TPHA'];
-		$data['CAUSE']     = $_POST['CAUSE'];
-		$data['COMOR']     = $_POST['COMOR'];
-		$data['DPD']       = $_POST['DPD'];
-		$data['POIDS']     = $_POST['POIDS'];
-		$data['NSS']       = $_POST['NSS'];
-		$data['ASSURE']    = $_POST['ASSURE'];
-		$data['REGION']    = $_POST['REGION'];
-		$data['WILAYA']    = $_POST['WILAYA'];
-		$data['STRUCTURE'] = $_POST['STRUCTURE'];
-		$data['login']     = $_POST['login'];
+		$data['TPHA']        = $_POST['TPHA'];
+		$data['CAUSE']       = $_POST['CAUSE'];
+		$data['COMOR']       = $_POST['COMOR'];
+		$data['DPD']         = $_POST['DPD'];
+		$data['POIDS']       = $_POST['POIDS'];
+		$data['NSS']         = $_POST['NSS'];
+		$data['ASSURE']      = $_POST['ASSURE'];
+		$data['REGION']      = $_POST['REGION'];
+		$data['WILAYA']      = $_POST['WILAYA'];
+		$data['STRUCTURE']   = $_POST['STRUCTURE'];
+		$data['login']       = $_POST['login'];
 		
 		$data['GROUPE']      = $_POST['GROUPE'];
 		$data['JOURS']       = $_POST['JOURS'];
@@ -86,10 +86,10 @@ class hemod extends Controller {
 		$data['NCP']         = $_POST['NCP'];
 		$data['ADRESSENSS']  = $_POST['ADRESSENSS'];
 		$data['APP']         = $_POST['APP'];
-		$data['TRANS']     = $_POST['TRANS'];
-		$this->model->create($data);
-		header('location: ' . URL .$this->route.'/'.$last_id);
-		// echo '<pre>';print_r ($data);echo '<pre>';
+		$data['TRANS']       = $_POST['TRANS'];
+		// $this->model->create($data);
+		// header('location: ' . URL .$this->route.'/'.$last_id);
+		echo '<pre>';print_r ($data);echo '<pre>';
 	}
 	function imp() 
 	{

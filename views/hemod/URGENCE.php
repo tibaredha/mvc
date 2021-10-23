@@ -7,7 +7,7 @@ function PopupImage(img) {
 </script>
 <?php 
 verifsession();ob_start();
-view::lang(Session::get('lang'),'C:\wamp\www\mvc\views\hemod\langan.php');  
+view::lang(Session::get('lang'),'D:\wamp\www\mvc\views\hemod\langan.php');  
 view::button('hemod','');
 view::munu('hemod'); 
 $colspan=13;

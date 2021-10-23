@@ -5,6 +5,17 @@ class inspection_Model extends Model {
         parent::__construct();
     }
 	
+	function dateFR2US($date)//01/01/2013
+	{
+	$J      = substr($date,0,2);
+    $M      = substr($date,3,2);
+    $A      = substr($date,6,4);
+	$dateFR2US =  $A."-".$M."-".$J ;
+    return $dateFR2US;//2013-01-01
+	}
+	
+	
+	
 	public function userSearch($o, $q, $p, $l) {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select("SELECT * FROM structure where $o like '$q%' order by NOM,PRENOM limit $p,$l  ");
@@ -55,7 +66,10 @@ class inspection_Model extends Model {
 			'NUMORDER'      => $data['NUMORDER'],
 			'DATEORDER'     => $this->dateFR2US($data['DATEORDER']),
 			'NUMDEM'        => $data['NUMDEM'],
-			'DATEDEM'       => $this->dateFR2US($data['DATEDEM'])	
+			'DATEDEM'       => $this->dateFR2US($data['DATEDEM']),
+			'DATEDSC'       => $this->dateFR2US($data['DATEDSC']),
+			'SERVICECIVILE' => $data['SERVICECIVILE']
+			
         ));
         // echo '<pre>';print_r ($data);echo '<pre>';
 		return $last_id = $this->db->lastInsertId();
@@ -95,7 +109,9 @@ class inspection_Model extends Model {
 			'NUMORDER'      => $data['NUMORDER'],
 			'DATEORDER'     => $this->dateFR2US($data['DATEORDER']),
 			'NUMDEM'        => $data['NUMDEM'],
-			'DATEDEM'       => $this->dateFR2US($data['DATEDEM'])
+			'DATEDEM'       => $this->dateFR2US($data['DATEDEM']),
+			'DATEDSC'       => $this->dateFR2US($data['DATEDSC']),
+			'SERVICECIVILE' => $data['SERVICECIVILE']
         );
         // echo '<pre>';print_r ($postData);echo '<pre>';
 		$this->db->update('structure', $postData, "id =" . $data['id'] . "");
@@ -149,15 +165,22 @@ class inspection_Model extends Model {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM auto WHERE id = :id  order by DATE asc ', array(':id' => $id));    
     }
-	function dateFR2US($date)//01/01/2013
-	{
-	$J      = substr($date,0,2);
-    $M      = substr($date,3,2);
-    $A      = substr($date,6,4);
-	$dateFR2US =  $A."-".$M."-".$J ;
-    return $dateFR2US;//2013-01-01
+	
+	public function doubleemploi($Serie_Type,$id) {
+        $this->db->exec('SET NAMES utf8');
+		//return $this->db->select('SELECT COUNT(*) AS nbr_doublon,Type,Serie_Type,Immatri,Marque FROM auto  GROUP BY Type,Serie_Type   HAVING COUNT(*) > 1'); //   
+        return $this->db->select(" SELECT  * FROM auto WHERE Serie_Type='$Serie_Type' and  idt !=$id "); //
 	}
-	 public function creatautodb($data) {
+		// SELECT   COUNT(*) AS nbr_doublon, champ1, champ2, champ3
+		// FROM     table
+		// GROUP BY champ1, champ2, champ3
+		// HAVING   COUNT(*) > 1
+	
+	
+	 public function creatautodb($data) 
+	 {
+		   
+			
 			$this->db->exec('SET NAMES utf8');
 			$this->db->insert('auto', array(
 			'idt'        => $data['id'],	
@@ -176,10 +199,25 @@ class inspection_Model extends Model {
 			'AUNASS'     => $this->dateFR2US($data['AUNASS']),
 			'CTRL'       => $data['CTRL'],
 			'DUCTRL'     => $this->dateFR2US($data['DUCTRL']),
-			'AUCTRL'     => $this->dateFR2US($data['AUCTRL'])
+			'AUCTRL'     => $this->dateFR2US($data['AUCTRL']),
+			
+			'sieges'    => $data['sieges'],
+			'ess'       => $data['ess'],
+			'die'       => $data['die'],
+			'gaz'       => $data['gaz']
+			
 			));
-			//echo '<pre>';print_r ($data);echo '<pre>';
-			return $last_id = $this->db->lastInsertId();
+			// echo '<pre>';print_r ($data);echo '<pre>';
+			//return $last_id = $this->db->lastInsertId();
+			//verification des doublons 
+			$doub = $this->db->prepare("SELECT * FROM auto WHERE Serie_Type = :Serie_Type ");
+			$doub->execute(array( ':Serie_Type' => $data['Serie_Type']	));
+			$data1 = $doub->fetch();	
+			$count = $doub->rowCount();
+			if (isset($count) and $count > 0) 
+			{
+				return $data['Serie_Type'];  
+			}	
 		}
 	public function deleteauto($id) {       
         $this->db->delete('auto', "id = '$id'");
@@ -204,7 +242,13 @@ class inspection_Model extends Model {
 			'AUNASS'     => $this->dateFR2US($data['AUNASS']),
 			'CTRL'       => $data['CTRL'],
 			'DUCTRL'     => $this->dateFR2US($data['DUCTRL']),
-			'AUCTRL'     => $this->dateFR2US($data['AUCTRL'])	
+			'AUCTRL'     => $this->dateFR2US($data['AUCTRL']),
+
+            'sieges'    => $data['sieges'],
+			'ess'       => $data['ess'],
+			'die'       => $data['die'],
+			'gaz'       => $data['gaz']
+	
         );
        // echo '<pre>';print_r ($postData);echo '<pre>';
 		$this->db->update('auto', $postData, "id =" . $data['id'] . "");
@@ -225,10 +269,13 @@ class inspection_Model extends Model {
 			'idt'        => $data['id'],	
 			'NOMAR'      => $data['NOMAR'],
 		    'PRENOMAR'   => $data['PRENOMAR'],
+			'NOMFR'      => $data['NOMFR'],
+		    'PRENOMFR'   => $data['PRENOMFR'],
 			'Categorie'  => $data['Categorie'],
 			'CASNOS'       => $data['CASNOS'],
 			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
-			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT'])
+			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT']),
+			'SPECIALITE'   => $data['SPECIALITE']
 			));
 			// echo '<pre>';print_r ($data);echo '<pre>';
 			return $last_id = $this->db->lastInsertId();
@@ -240,11 +287,15 @@ class inspection_Model extends Model {
 			'idt'          => $data['idt'],	
 			'NOMAR'        => $data['NOMAR'],
 		    'PRENOMAR'     => $data['PRENOMAR'],
+			'NOMFR'      => $data['NOMFR'],
+		    'PRENOMFR'   => $data['PRENOMFR'],
 			'Categorie'    => $data['Categorie'],
 			'CASNOS'       => $data['CASNOS'],
 			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
-			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT'])  
-        );
+			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT']),  
+            'SPECIALITE'   => $data['SPECIALITE']
+
+	   );
        echo '<pre>';print_r ($postData);echo '<pre>';
 	   $this->db->update('pers', $postData, "id =" . $data['id'] . "");
     }	
@@ -391,7 +442,7 @@ class inspection_Model extends Model {
 
 	public function creathome($data) {
 			$this->db->exec('SET NAMES utf8');
-			$this->db->insert('home', array('idstructure'=> $data['id'],'DATEP'=> $this->dateFR2US($data['DATEP']),'NAT'=> $data['NAT'],'WILAYA'=>$data['WILAYA'],'COMMUNE'=>$data['COMMUNE'],'ADRESSE'=>$data['ADRESSE'],'ADRESSEAR'=>$data['ADRESSEAR'],'NUMD'=> $data['NUMD'],'DATED'=> $this->dateFR2US($data['DATED']),'PROPRIETAIRE'=> $data['PROPRIETAIRE'],'DEBUTCONTRAT'=> $this->dateFR2US($data['DEBUTCONTRAT']),'FINCONTRAT'=> $this->dateFR2US($data['FINCONTRAT']),'PHA1'=> $data['PHA1'],'DIST1'=> $data['DIST1'],'PHA2'=> $data['PHA2'],'DIST2'=> $data['DIST2'],'PHA3'=> $data['PHA3'],'DIST3'=> $data['DIST3'],'CDS0'=> $data['CDS0'],'SDS0'=> $data['SDS0'],'SAH0'=> $data['SAH0'],'SAF0'=> $data['SAF0'],'SAN0'=> $data['SAN0'], 'STL'=> $data['STL']));
+			$this->db->insert('home', array('idstructure'=> $data['id'],'DATEP'=> $this->dateFR2US($data['DATEP']),'NAT'=> $data['NAT'],'WILAYA'=>$data['WILAYA'],'COMMUNE'=>$data['COMMUNE'],'ADRESSE'=>$data['ADRESSE'],'ADRESSEAR'=>$data['ADRESSEAR'],'NUMD'=> $data['NUMD'],'DATED'=> $this->dateFR2US($data['DATED']),'PROPRIETAIRE'=> $data['PROPRIETAIRE'],'DEBUTCONTRAT'=> $this->dateFR2US($data['DEBUTCONTRAT']),'FINCONTRAT'=> $this->dateFR2US($data['FINCONTRAT']),'PHA1'=> $data['PHA1'],'DIST1'=> $data['DIST1'],'PHA2'=> $data['PHA2'],'DIST2'=> $data['DIST2'],'PHA3'=> $data['PHA3'],'DIST3'=> $data['DIST3'],'CDS0'=> $data['CDS0'],'SDS0'=> $data['SDS0'],'SAH0'=> $data['SAH0'],'SAF0'=> $data['SAF0'],'SAN0'=> $data['SAN0'], 'STL'=> $data['STL'] , 'ZE'=> $data['ZE'] ,'NUMCOM'=> $data['NUMCOM'] ,'DATECOM'=> $this->dateFR2US($data['DATECOM'])  ));
 			// echo '<pre>';print_r ($data);echo '<pre>';
 			$postData = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
 			// echo '<pre>';print_r ($postData);echo '<pre>';  
@@ -402,11 +453,11 @@ class inspection_Model extends Model {
 	
 	public function edithome($data) {
 			$this->db->exec('SET NAMES utf8');
-			$postData = array('DATEP'=> $this->dateFR2US($data['DATEP']),'NAT'=> $data['NAT'],'WILAYA'=>$data['WILAYA'],'COMMUNE'=>$data['COMMUNE'],'ADRESSE'=>$data['ADRESSE'],'ADRESSEAR'=>$data['ADRESSEAR'],'NUMD'=> $data['NUMD'],'DATED'=> $this->dateFR2US($data['DATED']),'PROPRIETAIRE'=> $data['PROPRIETAIRE'],'DEBUTCONTRAT'=> $this->dateFR2US($data['DEBUTCONTRAT']),'FINCONTRAT'=> $this->dateFR2US($data['FINCONTRAT']),'PHA1'=> $data['PHA1'],'DIST1'=> $data['DIST1'],'PHA2'=> $data['PHA2'],'DIST2'=> $data['DIST2'],'PHA3'=> $data['PHA3'],'DIST3'=> $data['DIST3'],'CDS0'=> $data['CDS0'],'SDS0'=> $data['SDS0'],'SAH0'=> $data['SAH0'],'SAF0'=> $data['SAF0'],'SAN0'=> $data['SAN0'], 'STL'=> $data['STL']);
+			$postData = array('DATEP'=> $this->dateFR2US($data['DATEP']),'NAT'=> $data['NAT'],'WILAYA'=>$data['WILAYA'],'COMMUNE'=>$data['COMMUNE'],'ADRESSE'=>$data['ADRESSE'],'ADRESSEAR'=>$data['ADRESSEAR'],'NUMD'=> $data['NUMD'],'DATED'=> $this->dateFR2US($data['DATED']),'PROPRIETAIRE'=> $data['PROPRIETAIRE'],'DEBUTCONTRAT'=> $this->dateFR2US($data['DEBUTCONTRAT']),'FINCONTRAT'=> $this->dateFR2US($data['FINCONTRAT']),'PHA1'=> $data['PHA1'],'DIST1'=> $data['DIST1'],'PHA2'=> $data['PHA2'],'DIST2'=> $data['DIST2'],'PHA3'=> $data['PHA3'],'DIST3'=> $data['DIST3'],'CDS0'=> $data['CDS0'],'SDS0'=> $data['SDS0'],'SAH0'=> $data['SAH0'],'SAF0'=> $data['SAF0'],'SAN0'=> $data['SAN0'], 'STL'=> $data['STL'], 'ZE'=> $data['ZE'] , 'groupe'=> $data['groupe'], 'PHA4'=> $data['PHA4'] ,'NUMCOM'=> $data['NUMCOM'] ,'DATECOM'=> $this->dateFR2US($data['DATECOM']));
 			$this->db->update('home', $postData, "id =" . $data['id'] . "");	
 	        $postData1 = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
 			$this->db->update('structure', $postData1, "id =" . $data['idstructure'] . ""); 
-			// $this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
+			$this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
 			return $last_id = $this->db->lastinsertid();
 	}
 	

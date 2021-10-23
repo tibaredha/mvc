@@ -117,10 +117,10 @@ view::button('don',$this->user[0]['id']);
 	    <script type="text/javascript" src="<?php echo URL; ?>public/webcam/webcam.js"></script
 		-->
 		<script language="JavaScript">
-		webcam.set_api_url( "<?php echo URL; ?>public/webcam/test.php?uc=<?php echo $this->user[0]['id'];?>" );
+		webcam.set_api_url( "<?php echo URL; ?>public/webcam/dnr/test.php?uc=<?php echo $this->user[0]['id'];?>" );
 		webcam.set_quality( 90 );                                                       // JPEG quality (1 - 100)
-		webcam.set_shutter_sound( true,'<?php echo URL; ?>public/webcam/shutter.mp3' ); // play shutter click sound
-	    webcam.set_swf_url( '<?php echo URL; ?>public/webcam/webcam.swf' );
+		webcam.set_shutter_sound( true,'<?php echo URL; ?>public/webcam/dnr/shutter.mp3' ); // play shutter click sound
+	    webcam.set_swf_url( '<?php echo URL; ?>public/webcam/dnr/webcam.swf' );
 		</script>
 		
 		<!-- Next, write the movie to the page at 320x240 -->

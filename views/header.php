@@ -12,7 +12,8 @@
 	<link rel="stylesheet" href="<?php echo URL; ?>public/css/table.css" />
 	<link rel="stylesheet" href="<?php echo URL; ?>public/css/calendar.css" />
 	<link rel="stylesheet" href="<?php echo URL; ?>public/css/jquery-ui.css" />
-
+    <link rel="stylesheet" href="<?php echo URL; ?>public/css/drh.css?t=<?php echo time();?>"/>
+	
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/jquery.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/jquery.maskedinput.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/jquery-ui.min.js"></script>
@@ -22,7 +23,7 @@
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/function.js"></script>
 	
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/calendar_db.js"></script>
-    <script type="text/javascript" src="<?php echo URL; ?>public/webcam/webcam.js"></script>
+    <script type="text/javascript" src="<?php echo URL; ?>public/webcam/dnr/webcam.js"></script>
 	
 	<?php 
     if (isset($this->js)) 
@@ -263,26 +264,30 @@ echo '<div id="cssmenu">';
 //**********************************************************************************************************************************************//			
 		echo '<li class="active has-sub"><a href="'.URL.'"><span>DRH</span></a>';
 			  echo '<ul>';
-					   echo '<li class="active has-sub"><a href="'.URL.'"><span>***</span></a>';
+					   echo '<li class="active has-sub"><a href="'.URL.'drh/"><span>GRH</span></a>';
 								echo '<ul>';       
-										 // echo '<li><a href="'.URL.'pointdeau/"><span>Point D eau</span></a></li>';
-										 // echo '<li><a href="'.URL.'deces"><span>Deces Hospitalier</span></a></li>';
-										 // echo '<li><a href="'.URL.'Bordereau/"><span>Bordereau NM</span></a></li>';
-										 // echo '<li><a href="'.URL.'mnpe"><span>MNPE</span></a></li>';	
+										 echo '<li><a href="'.URL.'"><span>GRH</span></a></li>';
+										 echo '<li><a href="'.URL.'GRH"><span>GRH</span></a></li>';
+										 echo '<li><a href="'.URL.'GRH/"><span>GRH</span></a></li>';
+										 echo '<li><a href="'.URL.'GRH"><span>GRH</span></a></li>';	
 								echo '</ul>';
 						echo '</li>';
-						echo '<li class="active has-sub"><a href="'.URL.'"><span>***</span></a>';
+						echo '<li class="active has-sub"><a href="'.URL.'"><span>Formation</span></a>';
 								echo '<ul>'; 
-										   // echo '<li><a href="'.URL.'maldecobl/nmaldecobl"><span>MDO</span></a></li>';
-										   // echo '<li><a href="'.URL.'mors/nmors"><span>MORS</span></a></li>';
+										   echo '<li><a href="'.URL.'Formation"><span>Formation</span></a></li>';
+										   echo '<li><a href="'.URL.'Formation"><span>Formation</span></a></li>';
+										   echo '<li><a href="'.URL.'Formation"><span>Formation</span></a></li>';
+										   echo '<li><a href="'.URL.'Formation"><span>Formation</span></a></li>';
+										   
+										   
 								echo '</ul>';
 						echo '</li>';
-						echo '<li class="active has-sub"><a href="'.URL.'"><span>***</span></a>';
-								echo '<ul>'; 
+						// echo '<li class="active has-sub"><a href="'.URL.'"><span>***</span></a>';
+								// echo '<ul>'; 
 										   // echo '<li><a href="'.URL.'scolaire/"><span>Sante Scolaire</span></a></li>';
 								
-								echo '</ul>';
-						echo '</li>';
+								// echo '</ul>';
+						// echo '</li>';
 			  echo '</ul>';
 		echo '</li>';
 //**********************************************************************************************************************************************//				  
@@ -315,8 +320,10 @@ echo '<div id="cssmenu">';
 			
 			echo '</ul>';
 		echo '</li>';
-		echo '<li class="last"><a href="https://www.facebook.com/"><img src="'.URL.'public/images/icons/fb.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
-	    echo '<li class="last"><a href="https://twitter.com/"><img src="'.URL.'public/images/icons/tw.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
+		echo '<li class="last"><a href="'.URL.'inspection/"><img src="'.URL.'public/images/icons/SS.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
+	    echo '<li class="last"><a href="https://www.facebook.com/"><img src="'.URL.'public/images/icons/fb.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
+	    
+		echo '<li class="last"><a href="https://twitter.com/"><img src="'.URL.'public/images/icons/tw.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
 	    echo '<li class="last"><a href="https://www.youtube.com/"><img src="'.URL.'public/images/icons/yt.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
 		echo '<li class="last"><a href="https://www.facebook.com/"><img src="'.URL.'public/images/icons/rss.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 
 		echo '<li class="last"><a href="https://www.facebook.com/"><img src="'.URL.'public/images/icons/linkedin.png'.'" width=\'20\' height=\'20\' border=\'0\' alt=\'\'/></a></li>'; 

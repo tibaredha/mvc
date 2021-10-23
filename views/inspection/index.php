@@ -13,27 +13,40 @@ heightStyle: "content"
 });
 });
 </script>
+<style>
+hr.new1 {border-top: 10px solid red; width:100px  }
+hr.new2 {border-top: 1px dashed red;}
+hr.new3 {border-top: 1px dotted red;}
+hr.new4 {border: 1px solid red;}
+hr.new5 {border: 10px solid green;border-radius: 5px;}
+</style>
+
+
+
 <?php 
 verifsession();	
 view::button('inspection','');
 lang(Session::get('lang'));
 ob_start();
 view::munu('inspection'); 
-$colspan=15;				
+$colspan=16;				
 if (isset($this->userListview)) 
 {
 echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>" ;
 echo "<tr>" ;
-echo "<th style=\"width:50px;\" colspan=\"4\" >" ;
+echo "<th style=\"width:50px;\" colspan=\"5\" >" ;
 echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'cour/odm/" > Ordre de mission : </a>';
 echo "</th>" ;
 echo "<th style=\"width:50px;\"  colspan=\"15\">" ;
-echo "Releve Des structures sanitaire </th>" ;
+echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'tcpdf/inspection/releve.php?uc=" > Releve Des structures sanitaire : </a>';
+//echo "Releve Des structures sanitaire </th>" ;
 echo "</th>" ;	
 echo "<tr>" ;
 echo "<th style=\"width:10px;\">val</th>" ;
 echo "<th style=\"width:10px;\">view</th>" ;
-echo "<th style=\"width:10px;\">view</th>" ;
+echo "<th style=\"width:10px;\">Img</th>" ;
+echo "<th style=\"width:10px;\">Auth</th>" ;
+echo "<th style=\"width:10px;\">Atest</th>" ;
 echo "<th style=\"width:390px;\">Responssable</th>" ;
 echo "<th style=\"width:100px;\">Contrat Du </th>" ;
 echo "<th style=\"width:200px;\">Residence</th>" ;
@@ -56,19 +69,25 @@ echo "</tr>" ;
         echo "<tr bgcolor=\"".$bgcolor_donate."\"  onmouseover=\"this.style.backgroundColor='#9FF781';\"   onmouseout=\"this.style.backgroundColor='".$bgcolor_donate."';\"  >" ;
 		if ($value['val']==1) {?><td align="center"><a  title="désaprouver" href="<?php echo URL.'inspection/editvalstr/'.$value['id'].'/0';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
 		if ($value['val']==0) {?><td align="center"><a  title="aprouver" href="<?php echo URL.'inspection/editvalstr/'.$value['id'].'/1';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
-
 		echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'inspection/view/'.$value['id']."'\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
-	
 		$fichier = photosmfx('str',$value['id'].'.jpg',$value['SEX']) ;
 		echo "<td align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl/".$value['id']."\" ><img  src=\"".URL."public/webcam/str/".$fichier."?t=".time()."\"  width='25' height='25' border='0'></td> " ;
-		
+		echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/inspection/authdiplome.php?uc='.$value['id']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
+	    echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/inspection/attestation_frar.php?uc='.$value['id']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
 		echo "<td style=\"width:270px;\" align=\"left\" >".strtoupper($value['NOM']).'_'.strtolower ($value['PRENOM'])."</td>" ;
-		
 		echo "<td"; if ($value['FINCONTRAT'] > date('Y-m-d')) { echo " bgcolor=\"#7BCCB5\" ";} else { echo " bgcolor=\"red\" ";}echo " style=\"width:110px;\" align=\"center\" >".strtolower (view::dateUS2FR($value['FINCONTRAT']))."</td>" ;
 		
 		echo "<td style=\"width:50px;\" align=\"left\" >".view::nbrtostring('com','IDCOM',$value['COMMUNE'],'COMMUNE')."</td>" ;
 		
 		switch ($value['STRUCTURE']) {
+		case 20://CABINET DE SOINS
+		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SAMB.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite21/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+			    // echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_modification\" href=\"".URL.'tcpdf/inspection/decisionm.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"           href=\"".URL.'inspection/home20/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
+				break;
 		case 21://transport
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SAMB.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite21/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
@@ -171,7 +190,14 @@ echo "</tr>" ;
 				//echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"             href=\"".URL.'inspection/home25/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
 				break;
-		
+		case 9://EHP
+		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='25' border='0' alt='' ></td>" ;
+				//echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				//echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				//echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				//echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"             href=\"".URL.'inspection/home9/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
+				break;
 		
 		default:
 		echo "<td style=\"width:50px;\" align=\"left\" >".view::stringtostring('structurebis','id',$value['STRUCTURE'],'structure') ."</td>" ;
@@ -184,7 +210,7 @@ echo "</tr>" ;
 		
 		
 		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Personel\"    href=\"".URL.'inspection/pers/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/pers.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrpers($value['id'])." ] </td>" ;
-		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Vehicule\"    href=\"".URL.'inspection/auto/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/auto.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrveh($value['id'])." ] </td>" ;
+		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Vehicule\"    href=\"".URL.'inspection/auto/'.$value['id']."/"."\" ><img  src=\"".URL.'public/images/icons/auto.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrveh($value['id'])." ] </td>" ;
 		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"editer Inspection\"  href=\"".URL.'inspection/insp/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/search.PNG'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrano($value['id'])." ]</td>" ;
        
 		if ($value['ETAT']==0) {?><td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetatstr/'.$value['id'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	<?php }
@@ -222,22 +248,24 @@ echo "</tr>" ;
 }
 else 
 {
-view::sautligne(15);
+view::sautligne(15);//View::hr(700,260);//View::hr(700,450);
 view::graphemoisdeces(30,220,'structure Par Mois Arret Au  : ','','structure','DATE','',date("Y"),'',"");	
 View::url(700,220,URL.'inspection/search/0/10?o=STRUCTURE&q=26','26-entreprise de distribution de produit pharmaceutique',3);
-View::url(700,250,URL.'inspection/search/0/10?o=STRUCTURE&q=12','12-officine pharmaceutique',3);View::url(1000,250,URL.'inspection/search/0/10?o=STRUCTURE&q=13','13-laboratoire',3);
+View::url(700,250,URL.'inspection/search/0/10?o=STRUCTURE&q=12','12-officine pharmaceutique',3);         View::url(1000,250,URL.'inspection/search/0/10?o=STRUCTURE&q=13','13-laboratoire',3);
 
 View::url(700,280,URL.'inspection/search/0/10?o=STRUCTURE&q=15','15-chirurugien dentiste generaliste',3);View::url(1000,280,URL.'inspection/search/0/10?o=STRUCTURE&q=14','14-chirurugien dentiste specialiste',3);
-View::url(700,310,URL.'inspection/search/0/10?o=STRUCTURE&q=17','17-medecin generaliste ',3);View::url(1000,310,URL.'inspection/search/0/10?o=STRUCTURE&q=16','16-medecin specialiste ',3);
-View::url(700,340,URL.'inspection/search/0/10?o=STRUCTURE&q=21','21-transport sanitaire ',3);View::url(1000,340,URL.'inspection/search/0/10?o=STRUCTURE&q=10','10-centre dhemodialyse ',3);
-View::url(700,370,URL.'inspection/search/0/10?o=STRUCTURE&q=23','23-OPTICIEN ',3);View::url(1000,370,URL.'inspection/search/0/10?o=STRUCTURE&q=24','24-sage femme ',3);
-View::url(700,370+30,URL.'inspection/search/0/10?o=STRUCTURE&q=19','19-psychologue ',3);View::url(1000,370+30,URL.'inspection/search/0/10?o=STRUCTURE&q=25','25-kinesitherapie  ',3);
+View::url(700,310,URL.'inspection/search/0/10?o=STRUCTURE&q=17','17-medecin generaliste ',3);            View::url(1000,310,URL.'inspection/search/0/10?o=STRUCTURE&q=16','16-medecin specialiste ',3);
+View::url(700,340,URL.'inspection/search/0/10?o=STRUCTURE&q=21','21-transport sanitaire ',3);            View::url(1000,340,URL.'inspection/search/0/10?o=STRUCTURE&q=10','10-centre dhemodialyse ',3);
+View::url(700,370,URL.'inspection/search/0/10?o=STRUCTURE&q=23','23-OPTICIEN ',3);                       View::url(1000,370,URL.'inspection/search/0/10?o=STRUCTURE&q=24','24-sage femme ',3);
+View::url(700,400,URL.'inspection/search/0/10?o=STRUCTURE&q=19','19-psychologue ',3);                    View::url(1000,400,URL.'inspection/search/0/10?o=STRUCTURE&q=25','25-kinesitherapie  ',3);
+View::url(700,430,URL.'inspection/search/0/10?o=STRUCTURE&q=20','20-cabinet de soins ',3);                    View::url(1000,400,URL.'inspection/search/0/10?o=STRUCTURE&q=25','25-kinesitherapie  ',3);
 
-View::url(700,460,URL.'inspection/search/0/10?o=STRUCTURE&q=7','7-Polyclinique',3);View::url(1000,460,URL.'inspection/search/0/10?o=STRUCTURE&q=22','22-UDS',3);
+View::url(700,460,URL.'inspection/search/0/10?o=STRUCTURE&q=7','7-Polyclinique',3);                      View::url(1000,460,URL.'inspection/search/0/10?o=STRUCTURE&q=22','22-UDS',3);
 View::url(700,490,URL.'inspection/search/0/10?o=STRUCTURE&q=8','8-Salle de soins  ',3);
-View::url(700,490+30,URL.'inspection/search/0/10?o=STRUCTURE&q=3','3-EPH ',3);View::url(1000,490+30,URL.'inspection/search/0/10?o=STRUCTURE&q=5','5-EHS ',3);
-View::url(700,490+60,URL.'inspection/search/0/10?o=STRUCTURE&q=9','9-EHP  ',3);View::url(1000,490+60,URL.'inspection/search/0/10?o=STRUCTURE&q=4','4-EH  ',3);
-View::url(700,490+90,URL.'inspection/search/0/10?o=STRUCTURE&q=6','6-EPSP ',3);
+View::url(700,520,URL.'inspection/search/0/10?o=STRUCTURE&q=3','3-EPH ',3);                              View::url(1000,520,URL.'inspection/search/0/10?o=STRUCTURE&q=5','5-EHS ',3);
+View::url(700,550,URL.'inspection/search/0/10?o=STRUCTURE&q=9','9-EHP  ',3);                             View::url(1000,550,URL.'inspection/search/0/10?o=STRUCTURE&q=4','4-EH  ',3);
+View::url(700,580,URL.'inspection/search/0/10?o=STRUCTURE&q=6','6-EPSP ',3);
+View::url(700,610,URL.'inspection/search/0/10?o=STRUCTURE&q=11','11-CENTER DE DIAGNOSTIQUE ',3);
 view::sautligne(10);			      
 }				
 echo "</table>";

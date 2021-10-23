@@ -894,7 +894,7 @@ class INSPECTION1 extends PDF_Invoice
     $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE",0,0,'C',0,0);
     $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"DIRECTION DE LA SANTE ET DE LA POPULATION DE LA WILAYA DE DJELFA",0,0,'C',0,0);
 	
-	$this->SetXY(05,$this->GetY()+15);$this->cell(100,5,"N°: ......... /DSP/ ".date ('Y'),0,0,'L',0,0);$this->SetXY(150,$this->GetY());$this->cell(60,5,"DJELFA LE : ".date ('d-m-Y'),0,0,'C',0,0);
+	$this->SetXY(05,$this->GetY()+15);$this->cell(100,5,"N°: ......... /DSP/ ".date ('Y'),0,0,'L',0,0);$this->SetXY(150,$this->GetY());$this->cell(60,5,"Djelfa le : ".date ('d-m-Y'),0,0,'C',0,0);
 	
 	
 	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"LE DIRECTEUR DE LA SANTE ET DE LA POPULATION ",0,0,'C',0,0);
@@ -903,8 +903,8 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"MINISTERE DE LA SANTE DE LA POPULATION ET DE LA REFORME HOSPITALIERE ",0,0,'C',0,0);
 	
 	
-	$this->SetXY(05,$this->GetY()+15);$this->cell(200,5,"OBJET : A/S  INSPECTION DES ETABLISSEMENTS PUBLICS ET PRIVES",0,0,'L',0,0);
-	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"REF : ENVOI DU 07/01/2019 ",0,0,'L',0,0);
+	$this->SetXY(05,$this->GetY()+15);$this->cell(200,5,"OBJET : A/S  bilan d'activité des praticiens medicaux inspecteurs de santé publique ",0,0,'L',0,0);
+	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"REF : ENVOI N° 586 DU 24-12-2020 ",0,0,'L',0,0);
 	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"PJ : CANEVAS",0,0,'L',0,0);
 	
 	$this->SetXY(25,$this->GetY()+15);$this->cell(200,5,"Suite à votre envoi cité en référence, j'ai l'honneur de vous transmettre le bilan des inspections  ",0,0,'L',0,0);
@@ -931,7 +931,7 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(05,$this->GetY()+5);$this->cell(200,5,"> Wilaya : ",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(20,$this->GetY());$this->cell(200,5,"DJELFA ",0,0,'L',0,0);$this->SetTextColor(0,0,0);
 	$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,"> Nombre total de praticiens inspecteurs : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(71,$this->GetY());$this->cell(200,5,"1",0,0,'L',0,0);$this->SetTextColor(0,0,0);
     $this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs en poste à la DSP : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(91,$this->GetY());$this->cell(200,5,"0",0,0,'L',0,0);$this->SetTextColor(0,0,0);
-	$this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs ayant désistés du poste de praticien médical inspecteur de santé publique : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(164,$this->GetY());$this->cell(200,5,"0",0,0,'L',0,0);$this->SetTextColor(0,0,0);
+	$this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs ayant désistés du poste de praticien médical inspecteur de santé publique : I____I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(180,$this->GetY());$this->cell(200,5,"0",0,0,'L',0,0);$this->SetTextColor(0,0,0);
 	$this->SetXY(6,$this->GetY()+5);$this->cell(200,5,"* Nombre de praticiens inspecteurs admis en cette qualité ,n'ayant pas signés de PV d'installation ,mais exercent en cette qualité : I__I",0,0,'L',0,0);$this->SetTextColor(225,0,0);$this->SetXY(205,$this->GetY());$this->cell(200,5,"1",0,0,'L',0,0);$this->SetTextColor(0,0,0);
 	
 	
@@ -3011,9 +3011,25 @@ class INSPECTION1 extends PDF_Invoice
 	
 	
 	
+	function inspectionpardate($datejour1,$datejour2,$id) 
+	{
+	$this->mysqlconnect();
+	$sql = " select * from insp where  (DATE BETWEEN '$datejour1' AND '$datejour2') and STRUCTURE  $id ";
+	$requete = @mysql_query($sql) or die($sql."<br>".mysql_error());
+	$OP=mysql_num_rows($requete);
+	mysql_free_result($requete);
+	return $OP;
+	}
 	
-	
-	
+	function totalstructure($id) 
+	{
+	$this->mysqlconnect();
+	$sql = " select * from structure where  STRUCTURE  $id and ETAT = 0 ";
+	$requete = @mysql_query($sql) or die($sql."<br>".mysql_error());
+	$OP=mysql_num_rows($requete);
+	mysql_free_result($requete);
+	return $OP;
+	}
 	
 	
 	
