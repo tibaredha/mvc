@@ -214,7 +214,7 @@ class inspection extends TCPDF
 	}
 	function u_diplome_pm ($U_DIPLOME,$DIPLOME,$UNIV,$nomar,$prenomar)
 	{
-	  $this->SetXY(5,$this->GetY());$this->Cell(200,5,$U_DIPLOME.$DIPLOME.' الصادرة عن مدرسة التكوين الشبه الطبي '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
+	  $this->SetXY(5,$this->GetY());$this->Cell(200,5,$U_DIPLOME.$DIPLOME.' الصادرة عن معهد التكوين الشبه الطبي '.$UNIV." الخاصة بالسيد (ة) : ".$nomar." ".$prenomar,0,1,'R');
 	}
 	function n_transfert($article)
 	{

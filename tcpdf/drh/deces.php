@@ -16,7 +16,7 @@ $result = mysql_fetch_array( $requete );
 mysql_free_result($requete);
 $pdf->AddPage();$y=7;
 $pdf->entete_drh($y);
-$pdf->htiat('مقرر وفاة ',$result["rnvgradear"],$y);
+$pdf->htiat($result["rnvgradear"],$y);
 //****************************************************************//
 $pdf->Text(5,$pdf->GetY()+$y," بناء :  على المقرر رقم ");$pdf->Text(54,$pdf->GetY()," المؤرخ في  ");$pdf->Text(100,$pdf->GetY(),"المتضمن تثبيت  السيد : ");
 $pdf->Text(15,$pdf->GetY()+$y," في رتبة: ");$pdf->Text(130,$pdf->GetY()," ابتداء من:");	

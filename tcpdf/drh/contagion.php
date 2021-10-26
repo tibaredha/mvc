@@ -1,15 +1,6 @@
 <?php 
 $ndp=$_GET["uc"];$idg=$_GET["idg"];require_once('drh.php');$pdf = new drh('P', 'mm', 'A4', true, 'UTF-8', false);
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('tiba redha');
-$pdf->SetTitle('DECISION');
-$pdf->SetSubject('PROTOCOLE');
-$pdf->SetFillColor(250);    //fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
-$pdf->SetTextColor(0,0,0);  //text noire 0   //text BLEU 180 
-$pdf->setPrintHeader(false);
-$pdf->setPrintFooter(false);
-$pdf->SetFont('aefurat', 'B', 16);
-$pdf->SetDisplayMode('fullpage','single');//mode d affichage 
+
 $pdf-> mysqlconnect(); 
 $sql = "SELECT * FROM grh WHERE  idp = '".$ndp."' "; 
 $requete = @mysql_query($sql) or die($sql."<br>".mysql_error()) ;
@@ -22,7 +13,6 @@ $requete1 = @mysql_query($sql1) or die($sql1."<br>".mysql_error()) ;
 $result1 = mysql_fetch_array( $requete1 ); 
 mysql_free_result($requete1);
 
-$pdf->AddPage();
 $pdf->ENTETEDRH('مقـرر التعويض عن خطر العدوى'," _____",date("Y")); 
 $pdf->SetXY(15,$pdf->GetY()+8);$pdf->Cell(180,8,"إن مدير المؤسسة العمومية الإستشفائية بعين وسارة  ",0,1,'C');
 $pdf->Text(5,$pdf->GetY()+8,"بمقتضى : الأمر رقم 03-06 المؤرخ في 15 يوليو سنة 2006 المتضمن القانون الأساسي العام  ");

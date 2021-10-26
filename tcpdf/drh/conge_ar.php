@@ -1,17 +1,6 @@
 <?php 
-$ndp=$_GET["idp"];
-$idc=$_GET["idc"];
-require_once('drh.php');$pdf = new drh('P', 'mm', 'A4', true, 'UTF-8', false);
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('tiba redha');
-$pdf->SetTitle('DECISION');
-$pdf->SetSubject('PROTOCOLE');
-$pdf->SetFillColor(230);    //fond gris il faut ajouter au cell un autre parametre pour qui accepte la coloration
-$pdf->SetTextColor(0,0,0);  //text noire 0   //text BLEU 180 
-$pdf->setPrintHeader(false);
-$pdf->setPrintFooter(false);
-$pdf->SetFont('aefurat', 'B', 16);
-$pdf->SetDisplayMode('fullpage','single');//mode d affichage 
+$ndp=$_GET["idp"];$idc=$_GET["idc"];require_once('drh.php');$pdf = new drh('P', 'mm', 'A4', true, 'UTF-8', false);
+
 $pdf-> mysqlconnect(); 
 $sql = "SELECT * FROM grh WHERE  idp = '".$ndp."' "; 
 $requete = @mysql_query($sql) or die($sql."<br>".mysql_error()) ;
@@ -22,7 +11,8 @@ $sql1 = "SELECT * FROM regconge WHERE  id = '".$idc."' ";
 $requete1 = @mysql_query($sql1) or die($sql1."<br>".mysql_error()) ;
 $result1 = mysql_fetch_array( $requete1 ); 
 mysql_free_result($requete1);
-$pdf->AddPage();$y=7;
+
+$y=7;
 $pdf->entete_drh($y);
 $pdf->setRTL(true);
 
@@ -460,12 +450,6 @@ if($result1["CAUSECONGE"]==22)
     $pdf->foot_drh($y);
 	
 }
-
-
-
-
-
-
 
 $pdf->Output('titre_conge_ar_'.$result["Nomlatin"].'.pdf','I');
 //$pdf->Output('titre_conge_ar.pdf','I');
