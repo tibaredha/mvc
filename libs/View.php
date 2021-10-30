@@ -16,6 +16,200 @@ class View {
 			require 'views/footer.php';	
 		}
 	}
+
+	function combograde($x,$y,$name,$class,$tb_name,$value,$selected,$ids) 
+		{
+		mysqlconnect();
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+		$result = mysql_query("SELECT * FROM $tb_name where ids = $ids  order by gradear  " );
+		while($data =  mysql_fetch_array($result))
+		{
+			echo '<option value="'.$data[0].'">'.$data["gradear"].'</option>';
+		}
+		echo '</select>'."\n"; 
+		echo "</div>";
+		}
+
+	function structure_sanitaire($data,$titre) 
+	{
+	view::button($data['btn'],'');	
+	echo "<h2>$titre</h2 ><br />";
+	$this->f0(URL.$data['action'],'post');
+	View::photosurl(1170,210,URL.$data['photos']);
+	$x=50;$y=60;
+	$this->label($x,$y+160,'Nature');            $this->combov1($x+100,$y+150,'NATURE',$data['NATURE']);
+	$this->label($x+350,$y+160,'Instalation');   $this->txts($x+450,$y+150,'DATE',0,$data['DATE'],'dateus');  
+	$this->label($x,$y+190,'Nom');               $this->txt($x+100,$y+180,'NOM',0,$data['NOM'],'date');                                          
+	$this->label($x+350,$y+190,'Prenom');        $this->txt($x+450,$y+180,'PRENOM',0,$data['PRENOM'],'date');                                             
+	$this->label($x+700,$y+190,'Sexe');          $this->combov1($x+800,$y+180,'SEXE',$data['SEXE']);
+	$this->label($x,$y+220,'Naissance');         $this->txts($x+100,$y+210,'DNS',0,$data['DNS'],'dateus6');
+	$this->label($x+350,$y+220,'Wilaya');        $this->WILAYA($x+450,$y+210,'WILAYAN','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
+	$this->label($x+700,$y+220,'Commune');       $this->COMMUNE($x+800,$y+210,'COMMUNEN','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);          
+	$this->label($x,$y+230,'__________________________________________________________________________________________________________________');
+	$this->label($x,$y+260,'Type');              $this->combostructure($x+100,$y+250,'STRUCTURE','structurebis',$data['STRUCTURE1'],$data['STRUCTURE2'],'class','id','structure');
+	$this->label($x+350,$y+260,'Spécialite');    $this->specialite($x+450,$y+250,'SPECIALITE',$data['specialite1'],$data['specialite2'],'classspecialite');
+	$this->label($x,$y+290,'Date diplome');      $this->txts($x+100,$y+280,'DIPLOME',0,	$data['DIPLOME'],'dateus44');
+	$this->label($x,$y+290+30,'Universite');     $this->UNIVERSITE($x+100,$y+280+30,'UNIV','univ','mvc','wil',$data['UNIV0'],$data['UNIV1']); 
+	$this->label($x+350,$y+290,'Order N ');      $this->txt($x+450,$y+280,'NUMORDER',0,$data['NUMORDER'],'date');
+	$this->label($x+350,$y+320,'Date order');    $this->txts($x+450,$y+280+30,'DATEORDER',0,$data['DATEORDER'],'dateusx');  
+	$this->label($x+700,$y+290,'Démission N');   $this->txt($x+800,$y+280,'NUMDEM',0,$data['NUMDEM'],'date');
+	$this->label($x+700,$y+320,'Date Démission');$this->txts($x+800,$y+280+30,'DATEDEM',0,$data['DATEDEM'],'dateusy');  
+	$this->label($x,$y+350,'Date service');      $this->txts($x+100,$y+280+60,'DATEDSC',0,$data['DATEDSC'],'datesc');  
+	$this->label($x+350,$y+350,'Etablissement'); $this->SERVICECIVILE($x+450,$y+280+60,'SERVICECIVILE','univ','mvc','str_sc',$data['SERVICECIVILE0'],$data['SERVICECIVILE1']); 
+	$y=90;                                        //SERVICECIVILE ($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	$this->label($x,$y+340,'__________________________________________________________________________________________________________________');
+	$this->label($x,$y+370,'Wilaya');            $this->WILAYA($x+100,$y+360,'WILAYAR','countryr','mvc','wil',$data['WILAYAR1'],$data['WILAYAR2']);
+	$this->label($x+350,$y+370,'Commune');       $this->COMMUNE($x+100+350,$y+360,'COMMUNER','COMMUNER',$data['COMMUNER1'],$data['COMMUNER2']);            
+	$this->label($x+700,$y+370,'Adresse');       $this->txt($x+800,$y+360,'ADRESSE',0,$data['ADRESSE'],'date');
+	$this->label($x,$y+400,'Propriétaire');      $this->txt($x+100,$y+390,'PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');                        
+	$this->label($x+350,$y+400,'Début contrat'); $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');                            
+	$this->label($x+700,$y+400,'Fin contrat');  $this->txts($x+800,$y+390,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus2');
+	$this->label($x,$y+430,'Mobile');            $this->txts($x+100,$y+420,'Mobile',0,$data['Mobile'],'port');
+	$this->label($x+350,$y+430,'Fixe');          $this->txts($x+450,$y+420,'Fixe',0,$data['Fixe'],'phone');
+	$this->label($x+700,$y+430,'E-mail');        $this->txt($x+800,$y+420,'Email',0,  $data['Email'],'date');
+	$this->label($x,$y+437+15,'__________________________________________________________________________________________________________________');
+	$this->label($x,$y+480,'Realisation');       $this->txts($x+100,$y+470,'REALISATION',0,$data['REALISATION'],'dateus3');                      $this->label($x+700,$y+480,'N° Realisation');             $this->txt($x+800,$y+470,'NREALISATION',0,$data['NREALISATION'],'date');
+	$this->label($x,$y+510,'Ouverture');         $this->txts($x+100,$y+500,'OUVERTURE',0,$data['OUVERTURE'],'dateus4');                          $this->label($x+700,$y+510,'N° Ouverture');               $this->txt($x+800,$y+500,'NOUVERTURE',0,$data['NOUVERTURE'],'date');
+	$this->label($x,$y+500+23,'__________________________________________________________________________________________________________________');
+	$this->label($x+700,$y+550,'اللقب');         $this->txtarid($x+800,$y+540,'NOMAR','NOMAR',0,$data['NOMAR'],'date');$this->label($x+350,$y+550,'الاســـــــم');   $this->txtarid($x+450,$y+540,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date'); $this->label($x,$y+550,'العنوان');           $this->txtarid($x+100,$y+540,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
+	$this->submit($x+1140,$y+520,$data['butun']);
+	$this->f1();
+	view::sautligne(19);
+	ob_end_flush();	
+		
+	}
+	
+	
+	// function WILAYA($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	// {
+	// mysqlconnect();
+	// echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";		 
+	// echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+	// echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+	// mysql_query("SET NAMES 'UTF8' ");
+	// $result = mysql_query("SELECT * FROM $tb_name order by WILAYAS" );
+	// while($data =  mysql_fetch_array($result))
+	// {
+	// echo '<option value="'.$data[0].'">'.$data[1].'</option>';
+	// }
+	// echo '</select>'."\n"; 
+	// echo "</div>";
+	// }
+	function usereph($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	{
+	mysqlconnect();
+	echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 
+	echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+	echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+    $result = mysql_query("SELECT * FROM $tb_name order by Nomlatin  " );
+    while($data =  mysql_fetch_array($result))
+    {
+		echo '<option value="'.$data[0].'">'.$data["Nomlatin"].'_'.$data["Prenom_Latin"].'</option>';
+    }
+	echo '</select>'."\n"; 
+	echo "</div>";
+	}
+	function userservice($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	{
+	mysqlconnect();
+	echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 
+	echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+	echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+    $result = mysql_query("SELECT * FROM $tb_name order by servicear  " );
+    while($data =  mysql_fetch_array($result))
+    {
+		echo '<option value="'.$data[0].'">'.$data["servicear"].'</option>';
+    }
+	echo '</select>'."\n"; 
+	echo "</div>";
+	}
+	function structure_sanitaire_drh($data,$titre) 
+	{
+	view::button($data['btn'],'');	
+	echo "<h2>$titre</h2 ><br />";
+	$this->f0(URL.$data['action'],'post');
+	View::photosurl(1170,210,URL.$data['photos']);
+	$x=50;$y=60;
+	// $this->label($x,$y+160,'Nature');            $this->combov1($x+100,$y+150,'NATURE',$data['NATURE']);
+	// $this->label($x+350,$y+160,'Instalation');   $this->txts($x+450,$y+150,'DATE',0,$data['DATE'],'dateus');  
+	// $this->label($x,$y+190,'Nom');               $this->txt($x+100,$y+180,'NOM',0,$data['NOM'],'date');                                          
+	// $this->label($x+350,$y+190,'Prenom');        $this->txt($x+450,$y+180,'PRENOM',0,$data['PRENOM'],'date');                                             
+	// $this->label($x+700,$y+190,'Sexe');          $this->combov1($x+800,$y+180,'SEXE',$data['SEXE']);
+	// $this->label($x,$y+220,'Naissance');         $this->txts($x+100,$y+210,'DNS',0,$data['DNS'],'dateus6');
+	// $this->label($x+350,$y+220,'Wilaya');        $this->WILAYA($x+450,$y+210,'WILAYAN','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
+	// $this->label($x+700,$y+220,'Commune');       $this->COMMUNE($x+800,$y+210,'COMMUNEN','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);          
+	// $this->label($x,$y+230,'__________________________________________________________________________________________________________________');
+	// $this->label($x,$y+260,'Type');              $this->combostructure($x+100,$y+250,'STRUCTURE','structurebis',$data['STRUCTURE1'],$data['STRUCTURE2'],'class','id','structure');
+	// $this->label($x+350,$y+260,'Spécialite');    $this->specialite($x+450,$y+250,'SPECIALITE',$data['specialite1'],$data['specialite2'],'classspecialite');
+	// $this->label($x,$y+290,'Date diplome');      $this->txts($x+100,$y+280,'DIPLOME',0,	$data['DIPLOME'],'dateus44');
+	// $this->label($x,$y+290+30,'Universite');     $this->UNIVERSITE($x+100,$y+280+30,'UNIV','univ','mvc','wil',$data['UNIV0'],$data['UNIV1']); 
+	// $this->label($x+350,$y+290,'Order N ');      $this->txt($x+450,$y+280,'NUMORDER',0,$data['NUMORDER'],'date');
+	// $this->label($x+350,$y+320,'Date order');    $this->txts($x+450,$y+280+30,'DATEORDER',0,$data['DATEORDER'],'dateusx');  
+	// $this->label($x+700,$y+290,'Démission N');   $this->txt($x+800,$y+280,'NUMDEM',0,$data['NUMDEM'],'date');
+	// $this->label($x+700,$y+320,'Date Démission');$this->txts($x+800,$y+280+30,'DATEDEM',0,$data['DATEDEM'],'dateusy');  
+	// $this->label($x,$y+350,'Date service');      $this->txts($x+100,$y+280+60,'DATEDSC',0,$data['DATEDSC'],'datesc');  
+	// $this->label($x+350,$y+350,'Etablissement'); $this->SERVICECIVILE($x+450,$y+280+60,'SERVICECIVILE','univ','mvc','str_sc',$data['SERVICECIVILE0'],$data['SERVICECIVILE1']); 
+	// $y=90;                                        //SERVICECIVILE ($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	// $this->label($x,$y+340,'__________________________________________________________________________________________________________________');
+	// $this->label($x,$y+370,'Wilaya');            $this->WILAYA($x+100,$y+360,'WILAYAR','countryr','mvc','wil',$data['WILAYAR1'],$data['WILAYAR2']);
+	// $this->label($x+350,$y+370,'Commune');       $this->COMMUNE($x+100+350,$y+360,'COMMUNER','COMMUNER',$data['COMMUNER1'],$data['COMMUNER2']);            
+	// $this->label($x+700,$y+370,'Adresse');       $this->txt($x+800,$y+360,'ADRESSE',0,$data['ADRESSE'],'date');
+	// $this->label($x,$y+400,'Propriétaire');      $this->txt($x+100,$y+390,'PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');                        
+	// $this->label($x+350,$y+400,'Début contrat'); $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');                            
+	// $this->label($x+700,$y+400,'Fin contrat');  $this->txts($x+800,$y+390,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus2');
+	// $this->label($x,$y+430,'Mobile');            $this->txts($x+100,$y+420,'Mobile',0,$data['Mobile'],'port');
+	// $this->label($x+350,$y+430,'Fixe');          $this->txts($x+450,$y+420,'Fixe',0,$data['Fixe'],'phone');
+	// $this->label($x+700,$y+430,'E-mail');        $this->txt($x+800,$y+420,'Email',0,  $data['Email'],'date');
+	// $this->label($x,$y+437+15,'__________________________________________________________________________________________________________________');
+	// $this->label($x,$y+480,'Realisation');       $this->txts($x+100,$y+470,'REALISATION',0,$data['REALISATION'],'dateus3');                      $this->label($x+700,$y+480,'N° Realisation');             $this->txt($x+800,$y+470,'NREALISATION',0,$data['NREALISATION'],'date');
+	// $this->label($x,$y+510,'Ouverture');         $this->txts($x+100,$y+500,'OUVERTURE',0,$data['OUVERTURE'],'dateus4');                          $this->label($x+700,$y+510,'N° Ouverture');               $this->txt($x+800,$y+500,'NOUVERTURE',0,$data['NOUVERTURE'],'date');
+	// $this->label($x,$y+500+23,'__________________________________________________________________________________________________________________');
+	
+	
+	$this->label($x+960,$y+160,'اللقب');         $this->txtarid($x+700,$y+150,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
+	$this->label($x+610,$y+160,'الاســـــــم');   $this->txtarid($x+350,$y+150,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date'); 
+	$this->label($x+260,$y+160,'لقب الزوج');     $this->txtarid($x,$y+150,'NOMJFAR','NOMJFAR',0,$data['NOMJFAR'],'date'); 
+	
+	$this->label($x+960,$y+190,'اسم الاب');       $this->txtarid($x+700,$y+180,'FILSDE','FILSDE',0,$data['FILSDE'],'date');
+	$this->label($x+610,$y+190,'اسم و لقب الاب'); $this->txtarid($x+350,$y+180,'ETDE','ETDE',0,$data['ETDE'],'date'); 
+	$this->label($x+260,$y+190,'الجنس');         $this->combov1($x,$y+180,'SEXE',$data['SEXE']);
+	
+	
+	$this->label($x+960,$y+190+30,'تاريخ الميلاد'); $this->txts($x+700,$y+180+30,'DNS',0,$data['DNS'],'dateus6');
+	$this->label($x+610,$y+190+30,'ولاية الميلاد');  $this->WILAYA($x+350,$y+180+30,'WILAYAN','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
+	$this->label($x+260,$y+190+30,'بلدية الميلاد'); $this->COMMUNE($x,$y+180+30,'COMMUNEN','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);  
+ 
+	$this->label($x+960,$y+190+30+30,'رقم عقد الميلاد');   $this->txtarid($x+700,$y+180+30+30,'NEC','NEC',0,$data['NEC'],'date');
+	$this->label($x+610,$y+190+30+30,'الحالة العائلية');  $this->combov1($x+350,$y+180+30+30,'SF',$data['SF']);
+	$this->label($x+260,$y+190+30+30,'عدد الاولاد');        $this->txtarid($x,$y+180+30+30,'NBRENF','NBRENF',0,$data['NBRENF'],'date');
+ 
+	$this->label($x+960,$y+190+30+30+30,'ولاية الإقامة');   $this->WILAYA($x+700,$y+180+30+30+30,'WILAYAR','countryr','mvc','wil',$data['WILAYAR1'],$data['WILAYAR2']);  
+	$this->label($x+610,$y+190+30+30+30,'بلدية الإقامة');  $this->COMMUNE($x+350,$y+180+30+30+30,'COMMUNER','COMMUNER',$data['COMMUNER1'],$data['COMMUNER2']);  
+	$this->label($x+260,$y+190+30+30+30,'العنوان');       $this->txtarid($x,$y+180+30+30+30,'ADRESSE','ADRESSE',0,$data['ADRESSE'],'date');
+     
+	
+ 
+ 
+	
+	
+	// $this->label($x,$y+550,'العنوان');           
+	// $this->txtarid($x+100,$y+540,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
+	$this->submit($x+1140,$y+520,$data['butun']);
+	$this->f1();
+	view::sautligne(19);
+	ob_end_flush();	
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	function lastid($tbl) 
 	{
@@ -273,6 +467,21 @@ class View {
 		echo '</select>'."\n"; echo "</div>";
 	}
 	
+	function combopharmacieng($x,$y,$name,$value,$choisir,$class,$str) 
+	{
+		mysqlconnect(); 
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+		echo"<option   value=\"".$value."\" selected=\"selected\">".$choisir."</option>"."\n";
+		$result = mysql_query("SELECT * FROM structure where STRUCTURE = $str  order by NOM" );
+		while($data =  mysql_fetch_array($result))
+		{
+		echo '<option value="'.$data["id"].'">'.$data["NOM"].'_'.$data["PRENOM"].'</option>';
+		}
+		echo '</select>'."\n"; echo "</div>";
+	}
+	
+	
 	function combostructure($x,$y,$name,$tb_name,$value,$choisir,$class,$ve,$va) 
 	{
 		mysqlconnect(); 
@@ -353,11 +562,11 @@ class View {
 	{
 		if (is_numeric($colonevalue) and $colonevalue!=='0') 
 		{ 
-		mysqlconnect();
-		$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
-		$row=mysql_fetch_object($result);
-		$resultat=$row->$resultatstring;
-		return $resultat;
+			mysqlconnect();
+			$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
+			$row=mysql_fetch_object($result);
+			$resultat=$row->$resultatstring;
+			return $resultat;
 		} 
 	return $resultat2='??????';
 	}
@@ -380,18 +589,32 @@ class View {
 	{
 	mysqlconnect();
 	echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";		 
-	echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
-	echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
-	mysql_query("SET NAMES 'UTF8' ");
-	$result = mysql_query("SELECT * FROM $tb_name order by WILAYAS" );
-	while($data =  mysql_fetch_array($result))
-	{
-	echo '<option value="'.$data[2].'">'.$data[1].'</option>';
-	}
-	echo '</select>'."\n"; 
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+			echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+			mysql_query("SET NAMES 'UTF8' ");
+			$result = mysql_query("SELECT * FROM $tb_name order by WILAYAS" );
+			while($data =  mysql_fetch_array($result))
+			{
+			echo '<option value="'.$data[2].'">'.$data[1].'</option>';
+			}
+		echo '</select>'."\n"; 
 	echo "</div>";
 	}
-	
+	function SERVICECIVILE ($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	{
+	mysqlconnect();
+	echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";		 
+		echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+			echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+			mysql_query("SET NAMES 'UTF8' ");
+			$result = mysql_query("SELECT * FROM $tb_name order by structure" );
+			while($data =  mysql_fetch_array($result))
+			{
+			echo '<option value="'.$data[4].'">'.$data[1].'</option>';
+			}
+		echo '</select>'."\n"; 
+	echo "</div>";
+	}
 	function WILAYA($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
 	{
 	mysqlconnect();
@@ -513,11 +736,17 @@ class View {
 	$dateFR2US =  $A."-".$M."-".$J ;
     return $dateFR2US;//2013-01-01
 	}
-    function hr(){echo "<hr/>";}
+    function hr($x,$y){
+		echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";
+		echo '<hr class="new1">';
+		echo "</div>";
+		}
     function h($h,$x,$y,$txt){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 echo "<h".$h." >".$txt."</h".$h.">";echo "</div>";}
 	function f0($url,$method){echo "<form class=\"form\" action=\"".$url."\" method=\"".$method."\" name=\"form1\" id=\"form1\">";}
 	function label($x,$y,$l){echo "<div class=\"label\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	echo $l;echo "</div>";}
 	function txt($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required  />";echo "</div>";}
+    function txtw($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" id=\"datejour1\"/>";echo "</div>";}
+	
 	function txtron($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" readonly  />";echo "</div>";}
 	function ANOMALIE($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" id=\"ANOMALIE\"  />";echo "</div>";}
 	function txtjss($x,$y,$name,$size,$value,$cal){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"  onblur=\"$cal\"   />";echo "</div>";}
@@ -531,8 +760,7 @@ class View {
 	
 	function txtautofocus($x,$y,$name,$size,$value){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" required autofocus />";echo "</div>";}
 	function txts($x,$y,$name,$size,$value,$param){echo "<div class=\"data\" style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input style=\"text-align:center;\"   type=\"text\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\"  id=\"".$param."\"   required />";echo "</div>";}
-	
-	
+	function verif($id,$val) {if ($id == $val){return 'checked';}}
 	function hide($x,$y,$name,$size,$value){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	  echo " <input type=\"hidden\" name=\"".$name."\" size=\"".$size."\" value=\"".$value."\" />";echo "</div>";}
 	function sautligne($x){for ($i=1; $i<=$x; $i++){echo "<br />";}}
 	function submit($x,$y,$value){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	 echo " <input type=\"submit\" name=\"VALIDER\" id=\"VALIDER\" style=\"color: red\" value=\" ".$value."\" />";echo "</div>";}
@@ -544,6 +772,8 @@ class View {
 	function ques1 ($nom,$ques,$yes,$no){echo'<tr>'; echo'<td>'.$ques.'</td>';echo'<td style="text-align:center;"><input type="radio" name="'.$nom.'" value="1" '.$yes.' /></td>';echo'<td style="text-align:center;"><input type="radio" name="'.$nom.'" value="0" '.$no.' /></td>';echo'</tr>';}
 	function chekbox($x,$y,$nom){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";	  echo " <input id=\"CHECK\"    type=\"checkbox\" name=\"$nom\"  />";echo "</div>";}
 	function chekboxed($x,$y,$nom){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">"; echo " <input id=\"CHECK\"    type=\"checkbox\" name=\"$nom\" checked=\"checked\" />";echo "</div>";}
+	function chekboxvx($x,$y,$nom,$vx){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">"; echo "<input id=\"CHECK\"   type=\"checkbox\" name=\"$nom\" $vx >";echo "</div>";}
+	
 	function radio($x,$y,$nom,$val){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"radio\" name=\"$nom\" value=\"$val\"  />";echo "</div>";}
 	function radioed($x,$y,$nom,$val){echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";echo " <input type=\"radio\" name=\"$nom\" value=\"$val\" checked=\"checked\"    />";echo "</div>";}
 
@@ -911,7 +1141,14 @@ class View {
 	echo '<a href="'.URL.'cour/evaluation">Evaluation Courrier </a>'; echo '&nbsp;';
 	}
 	
+	if ($btn=='drh') 
+	{
+	echo '<a href="'.URL.'drh/">Structure</a>'; echo '&nbsp;';  
+	//echo '<a href="'.URL.'drh/inspecteur">inspection</a>'; echo '&nbsp;';
+	//echo '<a href="'.URL.'drh/ALGERIE">Sig Structures</a>'; echo '&nbsp;';
+	echo '<a href="'.URL.'drh/evaluation">Evaluation</a>'; echo '&nbsp;';  
 	
+	}
 	
 	$this->NAV();
 	echo'</div>';//
@@ -1373,24 +1610,45 @@ class View {
 			);
 			$this->smunuf($data);		
 		}
-		
+		if ($menu=='drh')
+		{
+			$data = array(
+			"c"   => 'drh',
+			"m"   => 'search',
+			"combo"   => array( 
+								//"idp"=> 'idp',
+								"Nomlatin"=> 'Nomlatin',
+								"Prenom_Latin"=> 'Prenom_Latin'
+			                    //"val3"=> '*',
+								//"val4"=> '*',
+								//"val5"=> '*',
+								//"val6"=> '*'
+							  ),
+			"submitvalue" => 'Search_drh',
+			"cb1" => 'drh',"mb1" => 'ndrh',       "tb1" => 'New_drh',       "vb1" => 'New_drh',    "icon1" => 'add.PNG',
+			"cb2" => 'drh',"mb2" => 'imp',        "tb2" => 'Print_cour',    "vb2" => 'Print_cour', "icon2" => 'print.PNG',
+			"cb3" => 'drh',"mb3" => '',           "tb3" => 'Graphe_cour',   "vb3" => 'graphe_cour',"icon3" => 'graph.PNG',
+			"cb4" => 'drh',"mb4" => '',           "tb4" => 'cour1',         "vb4" => 'cour',       "icon4" => 'search.PNG'
+			);
+			$this->smunuf($data);		
+		}
 		
 	echo "</table>" ;
 	}
 	function lang ($lang,$route)
     {
-	if($lang=='1') 
-	{
-	include $route;	
-	}
-	if($lang=='2') 
-	{
-	 include $route;	
-	}
-	if($lang=='3') 
-	{
-	include $route;	
-	}
+		if($lang=='1') 
+		{
+		include $route;	
+		}
+		if($lang=='2') 
+		{
+		 include $route;	
+		}
+		if($lang=='3') 
+		{
+		include $route;	
+		}
     }
 	
 	
@@ -1892,8 +2150,8 @@ echo "</table>\n";
 	$this->label($data['x']+720,$data['y']+310,'NSS');                  $this->txt($data['x']+800,$data['y']+300,'NSS',0,$data['NSS']);
 	$this->label($data['x'],$data['y']+360,'Groupe');                   $this->combovsex($data['x']+60,$data['y']+350,'GROUPE',array($data['GROUPE'],"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
 	$this->label($data['x']+155,$data['y']+360,'Jours');                $this->combovsex($data['x']+190,$data['y']+350,'JOURS',array($data['JOURS'],"SLM","DMJ"));
-	$this->label($data['x']+350,$data['y']+360,'Branchement');          $this->combovsex($data['x']+430,$data['y']+350,'BRANCHEMENT',array($data['BRANCHEMENT'],"1","2","3","4","5","6"));
-	$this->label($data['x']+530,$data['y']+360,'Gen');                  $this->combovsex($data['x']+560,$data['y']+350,'APP',array($data['APP'],"1","2","3","4","5","6","7","8","9","10"));
+	$this->label($data['x']+350,$data['y']+360,'Branchement');          $this->combovsex($data['x']+430,$data['y']+350,'BRANCHEMENT',array($data['BRANCHEMENT'],"1","2","3"));
+	$this->label($data['x']+530,$data['y']+360,'Gen');                  $this->combovsex($data['x']+560,$data['y']+350,'APP',array($data['APP'],"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"));
 	$this->label($data['x']+720,$data['y']+360,'Forfait');              $this->forfait($data['x']+800,$data['y']+350,'FORFAIT','mvc','forfait',$data['FORFAIT0'],$data['FORFAIT1']);
 	
 	$this->label($data['x']+785+300,$data['y']+360,'Transport');  $this->combovsex($data['x']+840+400,$data['y']+350,'TRANS',array($data['TRANS'],"VSL","ACB"));

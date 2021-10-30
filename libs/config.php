@@ -301,26 +301,49 @@ function dump_MySQL($serveur, $login, $password, $base, $mode)
     echo "Sauvegarde terminée";
 	// header("Location:index.php?uc=accueil") ;
 }
-
+define('photosmfx', 'd:\\mvc/public/webcam/');
 function photosmfx ($type,$id,$sexe)
 {
-$file = photosmfx."$type/".$id;  
-if (file_exists($file)) {
-   return $filename = trim($id);
-} 
-else 
-{
-	if  (trim($sexe) =='M') 
+	$file = photosmfx."$type/".$id;  
+	if (file_exists($file)) {
+	   return $filename = trim($id);
+	} 
+	else 
 	{
-	return $filename ='m.jpg';
+		if  (trim($sexe) =='M') 
+		{
+		return $filename ='m.jpg';
+		}
+		if  (trim($sexe) =='F') 
+		{
+		return $filename ='f.jpg';
+		}  
 	}
-	if  (trim($sexe) =='F') 
-	{
-	return $filename ='f.jpg';
-	}  
-}
 }
 
+define('photosmfy', 'd:\\wamp/www/mvc/public/webcam/');
+function photosmfy ($type,$id,$sexe)
+{
+	$file = photosmfy."$type/".$id;  
+	if (file_exists($file)) 
+	{
+	
+	   return $filename = trim($id);
+	   //echo "ok";
+	} 
+	else 
+	{
+		
+		if  (trim($sexe) =='1') 
+		{
+			return $filename ='m.jpg';
+		}
+		if  (trim($sexe) =='2') 
+		{
+			return $filename ='f.jpg';
+		}  
+	}
+}
 function lang ($lang)
 {
 	if($lang=='1') 
@@ -387,7 +410,7 @@ echo "<option value=\"12\">12</option><br />";
 }
 function annee()
 {
-for ($i=1960; $i<=2020; $i++) 
+for ($i=1960; $i<=2030; $i++) 
 { 
 echo "<option value=\"$i\">". $i."</option><br />"; 
 }  
@@ -520,78 +543,86 @@ echo "<p><input type=\"submit\" value=\"calculer\" /></p>";
 echo "</form>";
 echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
 }
+function drh($action)
+{ 
+echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+echo "<form ALIGN=\"center\" action=\"$action\" method=\"post\">";
+
+echo "<p> du";
+	echo "<select name=\"jour\">";jours();echo "</select>";
+	echo "<select name=\"mois\">";mois();echo "</select>";
+	echo "<select name=\"annee\">";annee();echo "</select>";
+echo "</p>";
+
+echo "<p> au";
+	echo "<select name=\"jour1\">";jours();echo "</select>";
+	echo "<select name=\"mois1\">";mois();echo "</select>";
+	echo "<select name=\"annee1\">";annee();echo "</select>";
+echo "</p>";
+
+echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+//echo "</br>";echo "</br>";echo "</br>";echo "</br>";
+//view::combostructure(640,380,'EPH','structurebis','0','structure','class','id','structure');
+echo "<p> ";
+echo "<select name=\"type\">";
+	echo"<option value=\"1\">list_grh_total</option>"."\n";
+	echo"<option value=\"2\">list_grh_conge</option>"."\n";
+	echo"<option value=\"3\">list_grh_service</option>"."\n";
+	
+echo "</select>";
+echo "</p> ";
+
+
+// echo "<p> ";
+// echo "<select name=\"type\">";
+	// echo"<option value=\"1\">Standard</option>"."\n";
+	// echo"<option value=\"2\">Numerique</option>"."\n";
+// echo "</select>";
+// echo "</p> ";
+
+echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+echo "<p><input type=\"submit\" value=\"Evaluer\" /></p>";
+
+echo "</form>";
+echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+}
 function inspection($action)
 { 
 echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
 echo "<form ALIGN=\"center\" action=\"$action\" method=\"post\">";
+
 echo "<p> du";
-echo "<select name=\"jour\">";
-jours();
-echo "</select>";
-echo "<select name=\"mois\">";
-mois();
-echo "</select>";
-echo "<select name=\"annee\">";
-annee();
-echo "</select>";
+	echo "<select name=\"jour\">";jours();echo "</select>";
+	echo "<select name=\"mois\">";mois();echo "</select>";
+	echo "<select name=\"annee\">";annee();echo "</select>";
 echo "</p>";
+
 echo "<p> au";
-echo "<select name=\"jour1\">";
-jours();
-echo "</select>";
-echo "<select name=\"mois1\">";
-mois();
-echo "</select>";
-echo "<select name=\"annee1\">";
-annee();
-echo "</select>";
+	echo "<select name=\"jour1\">";jours();echo "</select>";
+	echo "<select name=\"mois1\">";mois();echo "</select>";
+	echo "<select name=\"annee1\">";annee();echo "</select>";
 echo "</p>";
+
 echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
 echo "</br>";echo "</br>";echo "</br>";echo "</br>";
+
+view::combostructure(640,380,'EPH','structurebis','0','structure','class','id','structure');
+
 echo "<p> ";
 echo "<select name=\"type\">";
-echo"<option value=\"1\">sig_commune</option>"."\n";
-echo"<option value=\"2\">demo_commne</option>"."\n";
-echo"<option value=\"3\">list_global</option>"."\n";
-echo"<option value=\"4\">list_commune</option>"."\n";
-echo"<option value=\"5\">list_materiel</option>"."\n";
-echo"<option value=\"6\">list_anomalie</option>"."\n";
-echo"<option value=\"7\">list_inspection</option>"."\n";
-
+	echo"<option value=\"1\">Standard</option>"."\n";
+	echo"<option value=\"2\">Numerique</option>"."\n";
+	// echo"<option value=\"3\">list_global</option>"."\n";
+	// echo"<option value=\"4\">list_commune</option>"."\n";
+	// echo"<option value=\"5\">list_materiel</option>"."\n";
+	// echo"<option value=\"6\">list_anomalie</option>"."\n";
+	// echo"<option value=\"7\">list_inspection</option>"."\n";
 echo "</select>";
 echo "</p> ";
-$x=200;$y=140;
-view::combostructure($x+440,$y+240,'EPH','structurebis','0','structure','class','id','structure');
-// echo "<p> ";
-// echo "<select name=\"EPH\">";
-// echo"<option value=\"1\">EHU  </option>"."\n";
-// echo"<option value=\"2\">CHU  </option>"."\n";
-// echo"<option value=\"3\">EPH  </option>"."\n";
-// echo"<option value=\"4\">EH  </option>"."\n";
-// echo"<option value=\"5\">EHS  </option>"."\n";
-// echo"<option value=\"6\">EPSP  </option>"."\n";
-// echo"<option value=\"7\">Polyclinique  </option>"."\n";
-// echo"<option value=\"8\">Salle de soins  </option>"."\n";
-// echo"<option value=\"9\">EHP  </option>"."\n";
-// echo"<option value=\"10\">centre d hemodialyse  </option>"."\n";
-// echo"<option value=\"11\">centre de diagnostic  </option>"."\n";
-// echo"<option value=\"12\">officine pharmaceutique  </option>"."\n";
-// echo"<option value=\"13\">laboratoire  </option>"."\n";
-// echo"<option value=\"14\">chirurugien dentiste specialiste  </option>"."\n";
-// echo"<option value=\"15\">chirurugien dentiste generaliste  </option>"."\n";
-// echo"<option value=\"16\">medecin specialiste  </option>"."\n";
-// echo"<option value=\"17\">medecin generaliste  </option>"."\n";
-// echo"<option value=\"18\">sagefemme  </option>"."\n";
-// echo"<option value=\"19\">psychologue  </option>"."\n";
-// echo"<option value=\"20\">cabinet de soins  </option>"."\n";
-// echo"<option value=\"21\">transport sanitairee  </option>"."\n";
-// echo"<option value=\"22\">UDS</option>"."\n";
-// echo"<option value=\"23\">OPTICIEN</option>"."\n";
-// echo"<option value=\"0\">structure </option>"."\n";
-// echo "</select>";
-// echo "</p> ";
+
 echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
-echo "<p><input type=\"submit\" value=\"calculer\" /></p>";
+echo "<p><input type=\"submit\" value=\"Evaluer\" /></p>";
+
 echo "</form>";
 echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
 }
@@ -1849,7 +1880,7 @@ define('uploadLocationpat', 'd:\\mvc/public/webcam/pat/');
 define('uploadLocationdnr', 'd:\\mvc/public/webcam/dnr/');
 define('uploadLocationrec', 'd:\\mvc/public/webcam/rec/');
 define('dump_mysql', 'd:/mvc/data/datasql/');
-define('photosmfx', 'd:\\mvc/public/webcam/');
+
 
 
 // error_reporting(0);
