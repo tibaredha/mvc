@@ -51,7 +51,7 @@ $pdf->conformite_pm($DATEP);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
-$pdf->decision_a_o_pm($nomar,$prenomar,$adressen,$communen,' تقني ');
+$pdf->decision_a_o_pm($nomar,$prenomar,$adressen,$communen,'ممرض');
 $pdf->n_transfert_pm($pdf->article_2);
 $pdf->date_effet($pdf->article_3);
 $pdf->execution($pdf->article_4);

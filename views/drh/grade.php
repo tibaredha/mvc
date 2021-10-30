@@ -146,7 +146,7 @@ ob_end_flush();
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Indemnite\"         href=\"".URL.'tcpdf/drh/indemnite.php?uc='.$this->user[0]['idp']."&idg=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
 				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Paie\"              href=\"".URL.'tcpdf/drh/paie.php?uc='.$this->user[0]['idp']."&idg=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;	
 				
-				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\decision promotion\" href=\"".URL.'tcpdf/drh/notation.php?uc='.$this->user[0]['idp']."&ida=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
+				echo "<td style=\"width:10px;\" align=\"center\" ><a title=\decision promotion\" href=\"".URL.'tcpdf/drh/grade.php?uc='.$this->user[0]['idp']."&idg=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
 				?>
 				<td align="center"><a title="editer" href="<?php echo URL.'drh/editavance/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
 				<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'drh/deletegrade/'.$value['id'].'/'.$this->user[0]['idp'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	

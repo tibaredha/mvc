@@ -109,23 +109,7 @@ class drh extends TCPDF
 			return $DATEPV;
 		}	
 	//*************************************************************************************************************//
-	function ENTETEDRH($titre,$num,$annee) 
-	{
-		$this->SetLineWidth(0.4);
-		$this->Rect(5, 5, 200, 285 ,'D');$this->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
-		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,0,'C');
-		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->mspar,0,0,'C');
-		$this->SetFont('aefurat', '', 14);
-		//$this->SetXY(5,$this->GetY()+10);$this->Cell(200,5,$this->wilayaar,0,0,'R');
-		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->dsp_17,0,0,'R');  
-		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->eph_ao ,0,0,'R');    
-		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->sdrh_ao,0,0,'R');         
-		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,'رقم : '.$num.' / م . م . ب / '.$annee,0,1,'R');$this->SetFont('aefurat', '', 16);
-		$this->setRTL(true);$this->SetFont('aefurat', '', 28);
-		$this->SetXY(6,$this->GetY()+5);$this->Cell(198,15,$titre,0,1,'C',1,1);
-		$this->SetFont('aefurat', '', 14);
 	
-	}
 	function BASEIRGF($BASEIRG) 
 	{
 
@@ -289,11 +273,37 @@ class drh extends TCPDF
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,0,'C');
 		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->mspar,0,0,'C');
 		$this->SetFont('aefurat', '', 14);
-		//$this->SetXY(5,$this->GetY()+10);$this->Cell(200,5,$this->wilayaar,0,0,'R');
 		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->dsparp." لولاية الجلفة",0,0,'R');
 		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,"المؤسسة العمومية الاستشفائية عين وســـارة",0,0,'R');
-		//$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,"المديرية الفرعية للموارد البشرية",0,0,'R');
 		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,'رقم : .................../'.date("Y"),0,1,'R');
+	}
+	function ENTETEDRH($titre,$num,$annee) 
+	{
+		$this->SetCreator(PDF_CREATOR);
+		$this->SetAuthor('tiba redha');
+		$this->SetTitle('DECISION');
+		$this->SetSubject('PROTOCOLE');
+		$this->SetFillColor(250);    
+		$this->SetTextColor(0,0,0);  
+		$this->setPrintHeader(false);
+		$this->setPrintFooter(false);
+		$this->SetFont('aefurat', 'B', 16);
+		$this->SetDisplayMode('fullpage','single');
+		$this->SetLineWidth(0.4);
+		$this->AddPage();
+		$this->Rect(5, 5, 200, 285 ,'D');$this->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,0,'C');
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->mspar,0,0,'C');
+		$this->SetFont('aefurat', '', 14);
+		//$this->SetXY(5,$this->GetY()+10);$this->Cell(200,5,$this->wilayaar,0,0,'R');
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->dsp_17,0,0,'R');  
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->eph_ao ,0,0,'R');    
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,$this->sdrh_ao,0,0,'R');         
+		$this->SetXY(5,$this->GetY()+8);$this->Cell(200,5,'رقم : '.$num.' / م . م . ب / '.$annee,0,1,'R');$this->SetFont('aefurat', '', 16);
+		$this->setRTL(true);$this->SetFont('aefurat', '', 28);
+		$this->SetXY(6,$this->GetY()+5);$this->Cell(20,15,"",0,0,'C');$this->Cell(158,15,$titre,0,0,'C',1,1);$this->Cell(20,15,"",0,1,'C');
+		$this->SetFont('aefurat', '', 14);
+	
 	}
 	function decision_drh($y)
 	{
@@ -307,11 +317,9 @@ class drh extends TCPDF
 		$this->Text(140,$this->GetY()+$y,"حرر بعين وسارة في : ");
 		$this->Text(150,$this->GetY()+$y,"  المدير");
 	}
-	function htiat($titre,$grade,$y)
+	function htiat($grade,$y)
 	{
 		$this->setRTL(true);
-		//$this->SetFont('aefurat', '', 28);$this->SetXY(45,$this->GetY()+$y-5);$this->Cell(120,15,$titre,0,1,'C',1,1);
-		
 		$this->SetFont('aefurat', '', 13);
 		$this->Text(5,$this->GetY()+5,"إن مدير المؤسسة العمومية الإستشفائية بعين وسارة");
 		$this->Text(10,$this->GetY()+$y,"- بمقتضى : الأمر رقم 03-06 المؤرخ في 15 يوليو سنة 2006 المتضمن القانون الأساسي العام  للوظيفة العمومية");
