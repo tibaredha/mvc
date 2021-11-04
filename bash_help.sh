@@ -93,3 +93,53 @@ apache2ctl -t -D DUMP_MODULES
 apt-get install mysql-server mysql-client mysql-common
 apt-get install phpmyadmin
 apt-get install proftpd
+
+
+
+# Utilisez les commandes suivantes pour activer, désactiver le serveur:
+
+# /etc/init.d/apache start
+# /etc/init.d/apache stop
+
+# Pour relire le fichier de configuration alors qu'apache est déjà lancé, utilisez :
+
+# /etc/init.d/apache reload
+
+# Pour activer et desactiver un module, utilisez :
+
+# a2enmod nomModule
+
+# a2dismod nomModule
+
+# nomModule est le nom d'un module présent dans /etc/apaches2/mods-available
+
+# Pour activer et desactiver un site WEB, utilisez
+
+# a2ensite nomSite
+# a2dissite nomSite
+
+# nomSite est le nom d'un fichier de configuration du site présent dans /etc/apaches2/sites-available
+
+# Pensez dans tous les cas à consulter les journaux afin de détecter les dysfonctionnements.
+
+
+
+
+# ssh-keygen -t rsa
+# Enter file in which to save the key (/home/james/.ssh/id_rsa):
+# Enter passphrase (empty for no passphrase):
+# Enter same passphrase again:
+# ssh-copy-id utilisateur@ipduserveur
+# The authenticity of host 'Server's IP address' can't be established. RSA key fingerprint is ... Are you sure you want to continue connecting (yes/no)?
+# Warning: Permanently added 'SERVER IP' (RSA) to the list of known hosts. utilisateur@ipduserveur's password:
+# ssh 'utilisateur@ipduserveur’
+
+
+
+
+
+
+
+
+
+
