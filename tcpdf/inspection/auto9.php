@@ -75,6 +75,8 @@ while($rowp=mysql_fetch_object($requetep))
 	$pdf->SetXY(5,$pdf->GetY()+$y);
 	if ($rowp->Categorie=='MS'){$pdf->Cell(200,5,$travail.'طبيب أخصائي '.$etablissement,0,1,'C');}
 	if ($rowp->Categorie=='MG'){$pdf->Cell(200,5,$travail.'طبيب عام '.$etablissement,0,1,'C');}
+	if ($rowp->Categorie=='PG'){$pdf->Cell(200,5,$travail.'صيدلي '.$etablissement,0,1,'C');}
+	
 	if ($rowp->Categorie=='P'){$pdf->Cell(200,5,$travail.'عون شبه طبي '.$etablissement,0,1,'C');}
 	if ($rowp->Categorie=='TDM'){$pdf->Cell(200,5,$travail.'تقني في الصيانة '.$etablissement,0,1,'C');}
 	if ($rowp->Categorie=='ADH'){$pdf->Cell(200,5,$travail.'عون نظافة '.$etablissement,0,1,'C');}
@@ -87,10 +89,14 @@ while($rowp=mysql_fetch_object($requetep))
 	$eta1=$etax." نايل )";
 	$eta2=$etax." المروج)";
 	$eta3=$etax." نائلة )";
+	$eta4=$etax." كوثر )";
 	
 	if (trim($nom) =='LAHRECH'){$clinique=$eta1;}
 	if (trim($nom) =='KHALDI'){$clinique=$eta2;}
 	if (trim($nom) =='BAFA'){$clinique=$eta3;}
+	if (trim($nom) =='SENAI'){$clinique=$eta4;}
+	
+	
 	$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$clinique,0,1,'C');
 	
 	
@@ -116,15 +122,13 @@ while($rowp=mysql_fetch_object($requetep))
 	
 	if ($rowp->Categorie=='MS'){$pdf->SetXY(0,$pdf->GetY()+$y);$pdf->Cell(200,5,"أخصائي في : ".$pdf->nbrtostring('mvc','specialite','idspecialite',$rowp->SPECIALITE,'specialitear'),0,1,'R');}	
 	else {$pdf->SetXY(0,$pdf->GetY()+$y);$pdf->Cell(200,5,"",0,1,'R');}
-	
 	$pdf->SetFont('aefurat', '', 16);
-    
-	
 	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'باقتراح من السيد رئيس مصلحة الهياكل و النشاط الصحي ',0,1,'C');
 	$pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');$pdf->SetFont('aefurat', '', 13);
 	$pdf->SetXY(5,$pdf->GetY()+$y);
 	if ($rowp->Categorie=='MS'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.' طبيب أخصائي '.' بالعمل '.$etablissement ,0,1,'R');}
 	if ($rowp->Categorie=='MG'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.' طبيب عام '.' بالعمل '.$etablissement ,0,1,'R');}
+	if ($rowp->Categorie=='PG'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.' صيدلي '.' بالعمل '.$etablissement ,0,1,'R');}
 	if ($rowp->Categorie=='P'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.' عون شبه طبي '.' بالعمل '.$etablissement ,0,1,'R');}
 	if ($rowp->Categorie=='TDM'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.'***  '.' بالعمل '.$etablissement ,0,1,'R');}
 	if ($rowp->Categorie=='ADH'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.'***  '.' بالعمل '.$etablissement ,0,1,'R');}

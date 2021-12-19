@@ -31,6 +31,7 @@ $data = array(
 "Categorie"  => array(      
                         "MEDECIN-S"=>"MS",
 						"MEDECIN-G"=>"MG",
+						"PHARMACIEN-G"=>"PG",
 						"PARAMEDICALE"=>"P",
 					    "TECHNICIEN DE MAINTENANCE"=>"TDM",
 						"AGENT D'HYGIÈNE"=>"ADH",
