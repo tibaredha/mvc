@@ -42,7 +42,8 @@ $data = array(
 						"KIA"=>"KIA",
 						"NISSANE"=>"NISSANE",
 						"PEUGEOT"=>"PEUGEOT",
-						"RENAULT"=>"RENAULT"
+						"RENAULT"=>"RENAULT",
+						"MERCEDES"=>"MERCEDES"
 					  ),					  
 					  
 "Immatri"  => $this->user[0]['Immatri'],
