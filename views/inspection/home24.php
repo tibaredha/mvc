@@ -18,7 +18,8 @@ $data = array(
 "NAT"        => array( 
 				"Transfert"=>"1",
 				"Installation"=>"2",
-				"Ouverture"=>"3"			 
+				"Ouverture"=>"3",
+				"Fermeture"=>"4"
 				),				
 "PROPRIETAIRE"  => 'x',
 "DEBUTCONTRAT"  => '00-00-0000',
@@ -108,6 +109,8 @@ ob_end_flush();
 						if($value['NAT']==1){echo "Transfert";}
 						if($value['NAT']==2){echo "Instatllation";}
 						if($value['NAT']==3){echo "Ouverture";}
+						if($value['NAT']==4){echo "Fermeture";}
+						
 						?>
 						</td>
 						<td align="center"><?php echo $value['ADRESSE'];?></td>
@@ -117,6 +120,8 @@ ob_end_flush();
 	                    if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/tran24.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						if($value['NAT']==2){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/inst24.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
 						if($value['NAT']==3){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/ouve24.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+						if($value['NAT']==4){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_fermeture\"    href=\"".URL.'tcpdf/inspection/ferm24.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+						
 						?>
 						
 						<td align="center"><a title="editer" href="<?php echo URL.'inspection/edithome24/'.$value['idstructure'].'/'.$value['id'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>

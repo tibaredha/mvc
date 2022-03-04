@@ -36,6 +36,7 @@ $data = array(
 						"CITROËN"=>"CITROËN",
 						"CHEVROLET"=>"CHEVROLET",
 						"DACIA"=>"DACIA",
+						"FOTON"=>"FOTON",
 						"HYUNDAI"=>"HYUNDAI",
 						"JINBEI"=>"JINBEI",
 						"JMC"=>"JMC",

@@ -33,6 +33,8 @@ $data = array(
 						"MEDECIN-G"=>"MG",
 						"PHARMACIEN-G"=>"PG",
 						"PARAMEDICALE"=>"P",
+						"PARAMEDICALE-SF"=>"SF",
+						"PARAMEDICALE-AMAR"=>"AMAR",
 					    "TECHNICIEN DE MAINTENANCE"=>"TDM",
 						"AGENT D'HYGIÈNE"=>"ADH",
 						"AGENT DE SÉCURITÉ"=>"ADS",
@@ -69,14 +71,13 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		<tr>
 		<th  colspan=3   style="width:50px;">
 		<?php
-		
 		echo '<a title="Autres"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q='.$this->user[0]['STRUCTURE'].'" > Autres : '.$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure").'</a>';
 		?>
 		</th> 
 		
 		<th  colspan=4    style="width:50px;">
 		<?php
-		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche personnels </a>';
+		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/personnels.php?uc='.$this->user[0]['id'].'" > Fiche personnels </a>';
 		?>
 		</th> 
 		

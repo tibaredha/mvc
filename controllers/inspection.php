@@ -100,6 +100,8 @@ class inspection extends Controller {
 		$data['NREALISATION'] = $_POST['NREALISATION'];
 		$data['OUVERTURE']    = $_POST['OUVERTURE'];
 		$data['NOUVERTURE']   = $_POST['NOUVERTURE'];
+		$data['NFERMETURE']    = $_POST['NFERMETURE'];
+		$data['FERMETURE']    = $_POST['FERMETURE'];
 		$data['Mobile']       = $_POST['Mobile'];
 		$data['Fixe']         = $_POST['Fixe'];
 		$data['Email']        = $_POST['Email'];
@@ -154,6 +156,8 @@ class inspection extends Controller {
 		$data['NREALISATION'] = $_POST['NREALISATION'];
 		$data['OUVERTURE']    = $_POST['OUVERTURE'];
 		$data['NOUVERTURE']   = $_POST['NOUVERTURE'];
+		$data['NFERMETURE']    = $_POST['NFERMETURE'];
+		$data['FERMETURE']    = $_POST['FERMETURE'];
 		$data['Mobile']       = $_POST['Mobile'];
 		$data['Fixe']         = $_POST['Fixe'];
 		$data['Email']        = $_POST['Email'];
@@ -358,7 +362,10 @@ class inspection extends Controller {
 	$this->view->title = 'nstructure';
 	$this->view->user = $this->model->userSinglestructure($id);
 	$this->view->userListview = $this->model->autoSingleList($id);
-	$this->view->doubleemploi = $this->model->doubleemploi($url1[3],$id);
+	if(isset($url1[3])){
+	$this->view->doubleemploi = $this->model->doubleemploi($url1[3],$id);	
+	}
+	
 	$this->view->render($this->route.'/auto');    
 	}
 	public function creatauto($id) 

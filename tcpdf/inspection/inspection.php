@@ -188,6 +188,14 @@ class inspection extends TCPDF
 		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' بصفته (ها) '.$fonction.' بفتح قاعته (ها) الشبه طبية '.' الكائن مقرها',0,1,'R');
         $this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
 	}
+	function decision_a_f_pm($article,$nomar,$prenomar,$adressen,$communen,$grade){
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$article." : تغلق القاعة الشبه طبية للسيد (ة) ".$nomar.' '.$prenomar.$grade.' الكائن مقرها',0,1,'R');
+		$this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
+	}
+	
+	
+	
+	
 	function decision_a_i($nomar,$prenomar,$adressen,$communen){
 		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بإنشاء عيادته (ها) الطبية العامة'.' الكائن مقرها',0,1,'R');
         $this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');

@@ -2,7 +2,7 @@
 verifsession();	
 lang(Session::get('lang'));
 ob_start();
-$fichier = photosmfx('str',$this->user[0]['id'].'.jpg',$this->user[0]['SEX']) ;
+$fichier = photosmfy('str',$this->user[0]['id'].'.jpg',$this->user[0]['SEX']) ;
 $data = array(
 "btn"          => 'inspection', 
 "photos"       => 'public/webcam/str/'.$fichier."?t=".time(),
@@ -37,6 +37,8 @@ $data = array(
 "NREALISATION" => $this->user[0]['NREALISATION'],
 "OUVERTURE"    => view::dateUS2FR($this->user[0]['OUVERTURE']),
 "NOUVERTURE"   => $this->user[0]['NOUVERTURE'],
+"FERMETURE"    => $this->user[0]['FERMETURE'],
+"NFERMETURE"   => $this->user[0]['NFERMETURE'],
 "NOMAR"        => $this->user[0]['NOMAR'] ,
 "PRENOMAR"     => $this->user[0]['PRENOMAR'] ,					  
 "ADRESSEAR"    => $this->user[0]['ADRESSEAR'],

@@ -42,12 +42,13 @@ echo '<a target="_blank" title="fiche Inspection"  href="'.URL.'tcpdf/inspection
 //echo "Releve Des structures sanitaire </th>" ;
 echo "</th>" ;	
 echo "<tr>" ;
-echo "<th style=\"width:10px;\">val</th>" ;
-echo "<th style=\"width:10px;\">view</th>" ;
+echo "<th style=\"width:10px;\">Val</th>" ;
+echo "<th style=\"width:10px;\">View</th>" ;
 echo "<th style=\"width:10px;\">Img</th>" ;
 echo "<th style=\"width:10px;\">Auth</th>" ;
 echo "<th style=\"width:10px;\">Atest</th>" ;
 echo "<th style=\"width:390px;\">Responssable</th>" ;
+echo "<th style=\"width:10px;\">Dos</th>" ;
 echo "<th style=\"width:100px;\">Contrat Du </th>" ;
 echo "<th style=\"width:200px;\">Residence</th>" ;
 echo "<th style=\"width:200px;\">Structure</th>" ;
@@ -75,8 +76,9 @@ echo "</tr>" ;
 		echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/inspection/authdiplome.php?uc='.$value['id']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
 	    echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/inspection/attestation_frar.php?uc='.$value['id']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
 		echo "<td style=\"width:270px;\" align=\"left\" >".strtoupper($value['NOM']).'_'.strtolower ($value['PRENOM'])."</td>" ;
-		echo "<td"; if ($value['FINCONTRAT'] > date('Y-m-d')) { echo " bgcolor=\"#7BCCB5\" ";} else { echo " bgcolor=\"red\" ";}echo " style=\"width:110px;\" align=\"center\" >".strtolower (view::dateUS2FR($value['FINCONTRAT']))."</td>" ;
+		echo "<td style=\"width:5px;\" align=\"center\" ><button onclick=\"document.location='".URL.'tcpdf/inspection/doss.php?uc='.$value['id']."'\" ><img  src=\"".URL.'public/images/icons/cvc.jpg'."\"  width='16' height='16' border='0' alt='' ></td>" ; 	
 		
+		echo "<td"; if ($value['FINCONTRAT'] > date('Y-m-d')) { echo " bgcolor=\"#7BCCB5\" ";} else { echo " bgcolor=\"red\" ";}echo " style=\"width:110px;\" align=\"center\" >".strtolower (view::dateUS2FR($value['FINCONTRAT']))."</td>" ;
 		echo "<td style=\"width:50px;\" align=\"left\" >".view::nbrtostring('com','IDCOM',$value['COMMUNE'],'COMMUNE')."</td>" ;
 		
 		switch ($value['STRUCTURE']) {

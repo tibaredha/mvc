@@ -50,8 +50,11 @@ class View {
 	$this->label($x,$y+230,'__________________________________________________________________________________________________________________');
 	$this->label($x,$y+260,'Type');              $this->combostructure($x+100,$y+250,'STRUCTURE','structurebis',$data['STRUCTURE1'],$data['STRUCTURE2'],'class','id','structure');
 	$this->label($x+350,$y+260,'Spécialite');    $this->specialite($x+450,$y+250,'SPECIALITE',$data['specialite1'],$data['specialite2'],'classspecialite');
-	$this->label($x,$y+290,'Date diplome');      $this->txts($x+100,$y+280,'DIPLOME',0,	$data['DIPLOME'],'dateus44');
-	$this->label($x,$y+290+30,'Universite');     $this->UNIVERSITE($x+100,$y+280+30,'UNIV','univ','mvc','wil',$data['UNIV0'],$data['UNIV1']); 
+	
+	$this->label($x,$y+290,'Universite');           $this->UNIVERSITE($x+100,$y+280,'UNIV','univ','mvc','wil',$data['UNIV0'],$data['UNIV1']); 
+	$this->label($x,$y+290+30,'Date diplome');      $this->txts($x+100,$y+280+30,'DIPLOME',0,	$data['DIPLOME'],'dateus44');
+	
+	
 	$this->label($x+350,$y+290,'Order N ');      $this->txt($x+450,$y+280,'NUMORDER',0,$data['NUMORDER'],'date');
 	$this->label($x+350,$y+320,'Date order');    $this->txts($x+450,$y+280+30,'DATEORDER',0,$data['DATEORDER'],'dateusx');  
 	$this->label($x+700,$y+290,'Démission N');   $this->txt($x+800,$y+280,'NUMDEM',0,$data['NUMDEM'],'date');
@@ -70,8 +73,17 @@ class View {
 	$this->label($x+350,$y+430,'Fixe');          $this->txts($x+450,$y+420,'Fixe',0,$data['Fixe'],'phone');
 	$this->label($x+700,$y+430,'E-mail');        $this->txt($x+800,$y+420,'Email',0,  $data['Email'],'date');
 	$this->label($x,$y+437+15,'__________________________________________________________________________________________________________________');
-	$this->label($x,$y+480,'Realisation');       $this->txts($x+100,$y+470,'REALISATION',0,$data['REALISATION'],'dateus3');                      $this->label($x+700,$y+480,'N° Realisation');             $this->txt($x+800,$y+470,'NREALISATION',0,$data['NREALISATION'],'date');
-	$this->label($x,$y+510,'Ouverture');         $this->txts($x+100,$y+500,'OUVERTURE',0,$data['OUVERTURE'],'dateus4');                          $this->label($x+700,$y+510,'N° Ouverture');               $this->txt($x+800,$y+500,'NOUVERTURE',0,$data['NOUVERTURE'],'date');
+	
+	
+	$this->label($x,$y+480,'N° Realisation');   $this->txt($x+100,$y+470,'NREALISATION',0,$data['NREALISATION'],'date');
+	$this->label($x,$y+510,'Realisation');      $this->txts($x+100,$y+500,'REALISATION',0,$data['REALISATION'],'dateus3');                      
+	
+	$this->label($x+350,$y+480,'N° Ouverture'); $this->txt($x+450,$y+470,'NOUVERTURE',0,$data['NOUVERTURE'],'date');
+	$this->label($x+350,$y+510,'Ouverture');    $this->txts($x+450,$y+500,'OUVERTURE',0,$data['OUVERTURE'],'dateus4');                         
+	
+	$this->label($x+700,$y+480,'N° Fermeture'); $this->txt($x+800,$y+470,'NFERMETURE',0,$data['NFERMETURE'],'date');
+	$this->label($x+700,$y+510,'Fermeture');    $this->txts($x+800,$y+500,'FERMETURE',0,$data['FERMETURE'],'dateus5');                      
+
 	$this->label($x,$y+500+23,'__________________________________________________________________________________________________________________');
 	$this->label($x+700,$y+550,'اللقب');         $this->txtarid($x+800,$y+540,'NOMAR','NOMAR',0,$data['NOMAR'],'date');$this->label($x+350,$y+550,'الاســـــــم');   $this->txtarid($x+450,$y+540,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date'); $this->label($x,$y+550,'العنوان');           $this->txtarid($x+100,$y+540,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
 	$this->submit($x+1140,$y+520,$data['butun']);
