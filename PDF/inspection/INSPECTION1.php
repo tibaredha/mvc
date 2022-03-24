@@ -10,7 +10,7 @@ class INSPECTION1 extends PDF_Invoice
 	 public $utf8 = "" ;
 	 public $repfr="République algérienne démocratique et populaire";
 	 public $mspfr="Ministère de la santé";
-	 public $dspfr="Direction de la santé et de la population de la wilaya de ";
+	 public $dspfr="Direction de la santé et de la population de la wilaya de Djelfa ";
 	 public $insp="Inspection Sante Publique";
 	 
 	 //*************poure mettre le celle en verticale 	
@@ -109,8 +109,8 @@ class INSPECTION1 extends PDF_Invoice
     $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,$this->mspfr,0,0,'C',0,0);
     $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,$this->dspfr,0,0,'C',0,0);
     $this->SetXY(05,$this->GetY()+5);$this->cell(150,5,$this->insp,0,0,'L',0,0);$this->cell(45,5," Le : ".date ('d-m-Y'),0,0,'R',0,0);
-    $this->SetXY(05,$this->GetY()+5);$this->cell(100,5,"N°: _________  / ".date ('Y'),0,0,'L',0,0);
-	$this->SetXY(05,$this->GetY()+5); $this->cell(200,5,$titre.$EPH1,0,0,'C',0,0);
+    $this->SetXY(05,$this->GetY()+5);$this->cell(100,5,"N°: _____________  / ".date ('Y'),0,0,'L',0,0);
+	$this->SetXY(05,$this->GetY()+10); $this->cell(200,5,$titre.$EPH1,0,0,'C',0,0);
     $this->SetXY(05,$this->GetY()+5); $this->cell(200,5,'Du :  '.$this->dateUS2FR($datejour1).'  Au :  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
 	}
 	function entetel($datejour1,$datejour2,$titre,$EPH1)
@@ -121,7 +121,7 @@ class INSPECTION1 extends PDF_Invoice
     $this->SetXY(05,10);$this->cell(290,5,$this->mspfr,0,0,'C',0,0);
     $this->SetXY(05,15);$this->cell(290,5,$this->dspfr,0,0,'C',0,0);
     $this->SetXY(05,20);$this->cell(100,5,$this->insp,0,0,'L',0,0);$this->cell(60,5,"LE : ".date ('d-m-Y'),0,0,'C',0,0);
-    $this->SetXY(05,25);$this->cell(100,5,"N°: _________  / ".date ('Y'),0,0,'L',0,0);
+    $this->SetXY(05,25);$this->cell(100,5,"N°: _____________  / ".date ('Y'),0,0,'L',0,0);
 	$this->SetXY(05,25);$this->cell(290,5,$titre.$EPH1,0,0,'C',0,0);
     $this->SetXY(05,29);$this->cell(290,5,'Du :  '.$this->dateUS2FR($datejour1).'  Au :  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
 	}
@@ -131,43 +131,45 @@ class INSPECTION1 extends PDF_Invoice
     $this->SetXY(160,$this->GetY()+5);$this->cell(50,10,"Dr R.TIBA ",0,0,'L',0);	
 	}
 	
+	//********************************************************************************************************************************************//
 	function BORDEREAU($titre,$datejour1,$datejour2,$EPH1,$STRUCTURED) 
 	{
-	$this->SetXY(5,10);$this->cell(200,5,$this->repfr,0,0,'C',1,0);
-	$this->SetXY(5,20);$this->cell(200,5,$this->mspfr,0,0,'C',1,0);
-	$this->SetXY(5,30);$this->cell(200,5,$this->dspfr.'Djelfa',0,0,'C',1,0);
+		$this->SetXY(5,$this->GetY());$this->cell(200,5,$this->repfr,0,0,'C',1,0);
+		$this->SetXY(5,$this->GetY()+5);$this->cell(200,5,$this->mspfr,0,0,'C',1,0);
+		$this->SetXY(5,$this->GetY()+5);$this->cell(200,5,$this->dspfr.'Djelfa',0,0,'C',1,0);
 
-	$this->SetXY(155,45);$this->cell(50,5,"Le : ".date('d-m-Y'),0,0,'L',0,0);
-	$this->SetXY(5,45);$this->cell(100,5,"N°............... / ".date('Y'),0,0,'L',0,0);
-	$this->SetXY(40,55);$this->cell(150,5,"A",0,0,'C',0,0);
-	$this->SetXY(40,65);$this->cell(150,5,"Monsieur le Directeur de la sante et de la population de la wilaya de ".$this->nbrtostring("wil","IDWIL",$this->nbrtostring("structure","id",$STRUCTURED,"idwil"),"WILAYAS"),0,0,'C',0,0);
-	$this->SetXY(5,85);$this->cell(200,10,$titre ,0,0,'C',1,0);
-	$this->RoundedRect(5,108, 15, 130, 2, $style = '');
-	$this->RoundedRect(20,108, 105, 130, 2, $style = '');
-	$this->RoundedRect(20+105,108, 15, 130, 2, $style = '');
-	$this->RoundedRect(20+105+15,108, 65, 130, 2, $style = '');
-	$this->SetXY(5,108);$this->cell(15,10,"N°" ,1,0,'C',1,0);
-	$this->SetXY(5+15,108);$this->cell(105,10,"DESIGNATION" ,1,0,'C',1,0);
-	$this->SetXY(5+15+105,108);$this->cell(15,10,"NBR" ,1,0,'C',1,0);
-	$this->SetXY(5+30+105,108);$this->cell(65,10,"OBSERVATION" ,1,0,'C',1,0);
-	$this->SetXY(5+15,128);$this->cell(105,10,"Veuillez trouver ci-joint" ,0,0,'C',0,0);
-	$this->SetXY(5,148);$this->cell(15,10,"1" ,0,0,'C',0,0);
-	$this->SetXY(5+15,148);$this->cell(105,10,"Repartition Geographique" ,0,0,'L',0,0);
-	// $this->SetXY(5+15+105,148);$this->cell(15,10,$this->valeurmois('deceshosp','DINS',$datejour1,$datejour2,$EPH1),0,0,'C',0,0);
-	// $this->SetXY(5+30+105,148);$this->cell(65,10,html_entity_decode(utf8_decode("" )),0,0,'C',0,0);
-	$this->SetXY(5,158);$this->cell(15,10,"2",0,0,'C',0,0);
-	$this->SetXY(5+15,158);$this->cell(105,10,"Repartition par communes de residence" ,0,0,'L',0,0);
-	$this->SetXY(5+15+105,158);$this->cell(15,10,html_entity_decode(utf8_decode("01" )),0,0,'C',0,0);
-	// $this->SetXY(5+30+105,158);$this->cell(65,10,html_entity_decode(utf8_decode("Rapport" )),0,0,'C',0,0);
-    $this->SetXY(5,168);$this->cell(15,10,"3" ,0,0,'C',0,0);
-	$this->SetXY(5+15,168);$this->cell(105,10,"liste nominative" ,0,0,'L',0,0);
-	$this->SetXY(5+15+105,168);$this->cell(15,10,"01" ,0,0,'C',0,0);
-	//$this->SetXY(5+30+105,168);$this->cell(65,10,"Repartition par commune ",0,0,'C',0,0);
-	$this->SetXY(5,178);$this->cell(15,10,"4",0,0,'C',0,0);
-	$this->SetXY(5+15,178);$this->cell(105,10,"Repartition par commune des anomalies" ,0,0,'L',0,0);
-	$this->SetXY(5+15+105,178);$this->cell(15,10,html_entity_decode(utf8_decode("01" )),0,0,'C',0,0);
-	$this->SetXY(5+30+105,178);$this->cell(65,10,html_entity_decode(utf8_decode("Du ".$this->dateUS2FR($datejour1)." Au ".$this->dateUS2FR($datejour2) )),0,0,'C',0,0);
-	$this->SetXY(5+30+105,250);$this->cell(40,10,html_entity_decode(utf8_decode("Le Directeur" )),0,0,'L',0,0);
+		$this->SetXY(155,45);$this->cell(50,5,"Le : ".date('d-m-Y'),0,0,'L',0,0);
+		$this->SetXY(5,45);$this->cell(100,5,"N°............... / ".date('Y'),0,0,'L',0,0);
+		
+		$this->SetXY(40,55);$this->cell(150,5,"A",0,0,'C',0,0);
+		$this->SetXY(40,65);$this->cell(150,5,"Monsieur le Directeur de la sante et de la population de la wilaya de Djelfa ",0,0,'C',0,0);
+		$this->SetXY(5,85);$this->cell(200,10,$titre ,0,0,'C',1,0);
+		$this->RoundedRect(5,108, 15, 130, 2, $style = '');
+		$this->RoundedRect(20,108, 105, 130, 2, $style = '');
+		$this->RoundedRect(20+105,108, 15, 130, 2, $style = '');
+		$this->RoundedRect(20+105+15,108, 65, 130, 2, $style = '');
+		$this->SetXY(5,108);$this->cell(15,10,"N°" ,1,0,'C',1,0);
+		$this->SetXY(5+15,108);$this->cell(105,10,"DESIGNATION" ,1,0,'C',1,0);
+		$this->SetXY(5+15+105,108);$this->cell(15,10,"NBR" ,1,0,'C',1,0);
+		$this->SetXY(5+30+105,108);$this->cell(65,10,"OBSERVATION" ,1,0,'C',1,0);
+		$this->SetXY(5+15,128);$this->cell(105,10,"Veuillez trouver ci-joint" ,0,0,'C',0,0);
+		$this->SetXY(5,148);$this->cell(15,10,"1" ,0,0,'C',0,0);
+		$this->SetXY(5+15,148);$this->cell(105,10,"Repartition Geographique" ,0,0,'L',0,0);
+		// $this->SetXY(5+15+105,148);$this->cell(15,10,$this->valeurmois('deceshosp','DINS',$datejour1,$datejour2,$EPH1),0,0,'C',0,0);
+		// $this->SetXY(5+30+105,148);$this->cell(65,10,html_entity_decode(utf8_decode("" )),0,0,'C',0,0);
+		$this->SetXY(5,158);$this->cell(15,10,"2",0,0,'C',0,0);
+		$this->SetXY(5+15,158);$this->cell(105,10,"Repartition par communes de residence" ,0,0,'L',0,0);
+		$this->SetXY(5+15+105,158);$this->cell(15,10,html_entity_decode(utf8_decode("01" )),0,0,'C',0,0);
+		// $this->SetXY(5+30+105,158);$this->cell(65,10,html_entity_decode(utf8_decode("Rapport" )),0,0,'C',0,0);
+		$this->SetXY(5,168);$this->cell(15,10,"3" ,0,0,'C',0,0);
+		$this->SetXY(5+15,168);$this->cell(105,10,"liste nominative" ,0,0,'L',0,0);
+		$this->SetXY(5+15+105,168);$this->cell(15,10,"01" ,0,0,'C',0,0);
+		//$this->SetXY(5+30+105,168);$this->cell(65,10,"Repartition par commune ",0,0,'C',0,0);
+		$this->SetXY(5,178);$this->cell(15,10,"4",0,0,'C',0,0);
+		$this->SetXY(5+15,178);$this->cell(105,10,"Repartition par commune des anomalies" ,0,0,'L',0,0);
+		$this->SetXY(5+15+105,178);$this->cell(15,10,html_entity_decode(utf8_decode("01" )),0,0,'C',0,0);
+		$this->SetXY(5+30+105,178);$this->cell(65,10,html_entity_decode(utf8_decode("Du ".$this->dateUS2FR($datejour1)." Au ".$this->dateUS2FR($datejour2) )),0,0,'C',0,0);
+		$this->SetXY(5+30+105,250);$this->cell(40,10,html_entity_decode(utf8_decode("Le Directeur" )),0,0,'L',0,0);
 	}
 	
     //*************************************//
@@ -212,6 +214,38 @@ class INSPECTION1 extends PDF_Invoice
 		$this->cell(50,10,"Durée d'exercice",1,0,'C',1,0);
 		$this->mysqlconnect();
 		$query = "SELECT * from structure where STRUCTURE $EPH and ETAT=1 ORDER BY NOM"; 
+		$res=mysql_query($query);
+		$tot=mysql_num_rows($res);
+		$this->SetXY(5,$this->GetY()+10); 
+		$x=0;
+		while($row=mysql_fetch_object($res))
+		{
+			$this->cell(10,5,$x=$x+1,1,0,'C',0);
+			$this->cell(55,5,strtoupper($row->NOM).'_'.ucwords(strtolower($row->PRENOM)),1,0,'L',0,0);
+            $this->cell(10,5,$row->SEX,1,0,'C',0);
+			$this->cell(25,5,$this->nbrtostring('com','IDCOM',$row->COMMUNE,'COMMUNE'),1,0,'L',0,0);
+			$this->cell(25,5,$this->dateUS2FR($row->DATE),1,0,'C',0);
+			$this->cell(25,5,$this->dateUS2FR($row->FERMETURE),1,0,'C',0);
+			$this->cell(50,5,substr($row->FERMETURE,0,4)-substr($row->DATE,0,4),1,0,'C',0);
+			
+			$this->SetXY(5,$this->GetY()+5);  
+		}
+		$this->cell(200,10,"Total : ".$tot,1,0,'C',1,0);
+		$this->pied();
+	}
+	//*************************************//
+	function listenominativenc($EPH,$ETAT,$val)
+	{
+		$this->SetXY(005,$this->GetY()+10);
+		$this->cell(10,10,"N°",1,0,'C',1,0);
+		$this->cell(55,10,"Nom_Prenom",1,0,'C',1,0);
+		$this->cell(10,10,"Sexe",1,0,'C',1,0);
+		$this->cell(25,10,"Commune",1,0,'C',1,0);
+		$this->cell(25,10,"Date Ouverture",1,0,'C',1,0);
+		$this->cell(25,10,"Date Fermeture",1,0,'C',1,0);
+		$this->cell(50,10,"Durée d'exercice",1,0,'C',1,0);
+		$this->mysqlconnect();
+		$query = "SELECT * from structure where STRUCTURE $EPH and ETAT=$ETAT and val=$val ORDER BY NOM"; 
 		$res=mysql_query($query);
 		$tot=mysql_num_rows($res);
 		$this->SetXY(5,$this->GetY()+10); 
@@ -322,6 +356,99 @@ class INSPECTION1 extends PDF_Invoice
 	}
 	//*************************************//
 	
+	function listenominativetelemail($EPH)
+	{
+		$this->SetXY(005,$this->GetY()+10);
+		$this->cell(10,10,"N°",1,0,'C',1,0);
+		$this->cell(55,10,"Nom_Prenom",1,0,'C',1,0);
+		$this->cell(10,10,"Sexe",1,0,'C',1,0);
+		$this->cell(25,10,"Commune",1,0,'C',1,0);
+		$this->cell(30,10,"mobile",1,0,'C',1,0);
+		$this->cell(30,10,"fixe",1,0,'C',1,0);
+		$this->cell(40,10,"Email",1,0,'C',1,0);
+		$this->mysqlconnect();
+		$query = "SELECT * from structure where STRUCTURE $EPH and ETAT=0 ORDER BY NOM"; 
+		$res=mysql_query($query);
+		$tot=mysql_num_rows($res);
+		$this->SetXY(5,$this->GetY()+10); 
+		$x=0;
+		while($row=mysql_fetch_object($res))
+		{
+			$this->cell(10,5,$x=$x+1,1,0,'C',0);
+			$this->cell(55,5,strtoupper($row->NOM).'_'.ucwords(strtolower($row->PRENOM)),1,0,'L',0,0);
+            $this->cell(10,5,$row->SEX,1,0,'C',0);
+			$this->cell(25,5,$this->nbrtostring('com','IDCOM',$row->COMMUNE,'COMMUNE'),1,0,'L',0,0);
+			$this->cell(30,5,$row->Mobile,1,0,'C',0,0);
+			$this->cell(30,5,$row->Fixe,1,0,'C',0,0);
+			$this->cell(40,5,$row->Email,1,0,'C',0,0);
+			$this->SetXY(5,$this->GetY()+5);  
+		}
+		$this->cell(200,10,"Total : ".$tot,1,0,'C',1,0);
+		$this->pied();
+	}
+	//*************************************//
+	function repartionparcommune($EPH)
+	{
+		$this->mysqlconnect();
+		$query = "SELECT * from com where IDWIL='17000' and yes='1'  ORDER BY COMMUNE"; 
+		$res=mysql_query($query);
+		$tot=mysql_num_rows($res);
+		$this->SetXY(5,55); 
+		while($row=mysql_fetch_object($res))
+		{
+			$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
+			if ($row->p2018 <= 4500){$nc=round($row->p2018/4500);} else{$nc=round($row->p2018/5000);} 
+			$this->cell(53,5,"Population : ".$row->p2018.' NC = '.$nc,1,0,'L',1,0);
+			$this->SetXY(5,$this->GetY()+5);
+			$this->cell(35,5,'Nom',1,0,'L',1,0);
+			$this->cell(25,5,'Prenom',1,0,'L',1,0);
+			$this->cell(10,5,'Sexe',1,0,'C',1,0);
+			$this->cell(59,5,'Adresse',1,0,'L',1,0);
+			$this->cell(30,5,'Mobile',1,0,'C',1,0);
+			$this->cell(41,5,'Specialité',1,0,'C',1,0);
+			//$this->cell(18,5,'Fonc',1,0,'C',1,0);
+			//$this->cell(17,5,'Deci',1,0,'C',1,0);
+			$query1 = "SELECT * from structure where  STRUCTURE $EPH  and COMMUNE=$row->IDCOM and ETAT=0 ORDER BY NOM"; 
+			$res1=mysql_query($query1);
+			$tot2=mysql_num_rows($res1);
+			$this->SetXY(5,$this->GetY()+5); 
+			if ($tot2 > 0) {
+			 while($row1=mysql_fetch_object($res1))
+				{
+				$this->cell(35,5,$row1->NOM,1,0,'L',0);
+				$this->cell(25,5,$row1->PRENOM,1,0,'L',0);
+				$this->cell(10,5,$row1->SEX,1,0,'C',0);$this->SetFont('Arial','B',7);
+				$this->cell(59,5,$row1->ADRESSE,1,0,'L',0);$this->SetFont('Arial','B',9);
+				$this->cell(30,5,$row1->Mobile,1,0,'C',0);$this->SetFont('Arial','B',8);
+				$this->cell(41,5,$this->nbrtostring('specialite','idspecialite',$row1->SPECIALITEX,'specialitefr'),1,0,'L',0);
+				$this->SetXY(5,$this->GetY()+5); $this->SetFont('Arial','B',9); 
+				}
+			} 
+			else 
+			{
+			$this->cell(200,5,'Néant',1,0,'C',0);
+			$this->SetXY(5,$this->GetY()+5);
+			}   
+				$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
+				if ($tot2>0) 
+				{
+					$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )"." -- 01 Pharmacien  pour  ".round($row->p2018/$tot2).' Hab',1,0,'L',1,0);
+				} 
+				else 
+				{
+					$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )",1,0,'L',1,0);
+				}
+				$DNC=$nc - $tot2;
+				if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
+				$this->cell(53,5," DNC = ".$DNC,1,0,'L',1,0);
+				$this->SetFillColor(200);
+		$this->SetXY(5,$this->GetY()+10);  
+		}
+		$this->pied();
+    }
+	
+	
+	//*************************************//
 	function anomalies($EPH)
     {
 	$this->mysqlconnect();
@@ -378,6 +505,8 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(5,$this->GetY()+10);  
 	}
 	}
+	
+	
 	
 	function NBRSPECIALISTE($ETAT,$SPECIALITEX) 
 	{
@@ -437,7 +566,7 @@ class INSPECTION1 extends PDF_Invoice
 	$query = "SELECT * from specialite ORDER BY specialitefr"; 
 	$res=mysql_query($query);
 	$tot=mysql_num_rows($res);
-	$this->SetXY(5,40); 
+	$this->SetXY(5,55); 
 	$x=0;
 	while($row=mysql_fetch_object($res))
 	{
@@ -469,6 +598,7 @@ class INSPECTION1 extends PDF_Invoice
 		}
 	$this->SetXY(5,$this->GetY()+5); 
 	}
+	$this->pied();
 	}
 	
 	
@@ -593,66 +723,68 @@ class INSPECTION1 extends PDF_Invoice
 	$this->SetXY(5,$this->GetY()+10);  
 	}
     }
+	
 	function medecing($EPH)
 	{
-	$this->mysqlconnect();
-	$query = "SELECT * from com where IDWIL='17000' and yes='1'  ORDER BY COMMUNE"; 
-	$res=mysql_query($query);
-	$tot=mysql_num_rows($res);
-	$this->SetXY(5,40); 
-	while($row=mysql_fetch_object($res))
-	{
-		$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
-		if ($row->p2018 <= 4500){$nc=round($row->p2018/4500);} else{$nc=round($row->p2018/5000);} 
-	    $this->cell(53,5,"Population : ".$row->p2018.' NC = '.$nc,1,0,'L',1,0);
-		$this->SetXY(5,$this->GetY()+5);
-		$this->cell(25,5,'Nom',1,0,'L',1,0);
-		$this->cell(35,5,'Prenom',1,0,'L',1,0);
-		$this->cell(10,5,'Sexe',1,0,'C',1,0);
-		$this->cell(59,5,'Adresse',1,0,'L',1,0);
-		$this->cell(18,5,'Date',1,0,'C',1,0);
-		$this->cell(18,5,'Labo',1,0,'C',1,0);
-		$this->cell(18,5,'Fonc',1,0,'C',1,0);
-		$this->cell(17,5,'Deci',1,0,'C',1,0);
-		$query1 = "SELECT * from structure where  STRUCTURE $EPH  and COMMUNE=$row->IDCOM and ETAT=0 ORDER BY NOM"; 
-		$res1=mysql_query($query1);
-		$tot2=mysql_num_rows($res1);
-		$this->SetXY(5,$this->GetY()+5); 
-		if ($tot2 > 0) {
-		 while($row1=mysql_fetch_object($res1))
-			{
-			$this->cell(25,5,$row1->NOM,1,0,'L',0);
-			$this->cell(35,5,$row1->PRENOM,1,0,'L',0);
-			$this->cell(10,5,$row1->SEX,1,0,'C',0);$this->SetFont('Arial','B',7);
-			$this->cell(59,5,$row1->ADRESSE,1,0,'L',0);$this->SetFont('Arial','B',9);
-			$this->cell(18,5,$this->dateUS2FR($row1->DATE),1,0,'C',0);
-			$this->cell(18,5,'',1,0,'C',0);
-			$this->cell(18,5,'',1,0,'C',0);
-			$this->cell(17,5,'',1,0,'C',0);
-			$this->SetXY(5,$this->GetY()+5);  
-			}
-		} 
-		else 
+		$this->mysqlconnect();
+		$query = "SELECT * from com where IDWIL='17000' and yes='1'  ORDER BY COMMUNE"; 
+		$res=mysql_query($query);
+		$tot=mysql_num_rows($res);
+		$this->SetXY(5,40); 
+		while($row=mysql_fetch_object($res))
 		{
-		$this->cell(200,5,'Néant',1,0,'C',0);
-		$this->SetXY(5,$this->GetY()+5);
-		}   
-			$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
-	        if ($tot2>0) 
-			{
-			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )"." -- 01 Pharmacien  pour  ".round($row->p2018/$tot2).' Hab',1,0,'L',1,0);
+			$this->cell(147,5,"Commune : ".$row->COMMUNE,1,0,'L',1,0);
+			if ($row->p2018 <= 4500){$nc=round($row->p2018/4500);} else{$nc=round($row->p2018/5000);} 
+			$this->cell(53,5,"Population : ".$row->p2018.' NC = '.$nc,1,0,'L',1,0);
+			$this->SetXY(5,$this->GetY()+5);
+			$this->cell(25,5,'Nom',1,0,'L',1,0);
+			$this->cell(35,5,'Prenom',1,0,'L',1,0);
+			$this->cell(10,5,'Sexe',1,0,'C',1,0);
+			$this->cell(59,5,'Adresse',1,0,'L',1,0);
+			$this->cell(18,5,'Date',1,0,'C',1,0);
+			$this->cell(18,5,'Labo',1,0,'C',1,0);
+			$this->cell(18,5,'Fonc',1,0,'C',1,0);
+			$this->cell(17,5,'Deci',1,0,'C',1,0);
+			$query1 = "SELECT * from structure where  STRUCTURE $EPH  and COMMUNE=$row->IDCOM and ETAT=0 ORDER BY NOM"; 
+			$res1=mysql_query($query1);
+			$tot2=mysql_num_rows($res1);
+			$this->SetXY(5,$this->GetY()+5); 
+			if ($tot2 > 0) {
+			 while($row1=mysql_fetch_object($res1))
+				{
+				$this->cell(25,5,$row1->NOM,1,0,'L',0);
+				$this->cell(35,5,$row1->PRENOM,1,0,'L',0);
+				$this->cell(10,5,$row1->SEX,1,0,'C',0);$this->SetFont('Arial','B',7);
+				$this->cell(59,5,$row1->ADRESSE,1,0,'L',0);$this->SetFont('Arial','B',9);
+				$this->cell(18,5,$this->dateUS2FR($row1->DATE),1,0,'C',0);
+				$this->cell(18,5,'',1,0,'C',0);
+				$this->cell(18,5,'',1,0,'C',0);
+				$this->cell(17,5,'',1,0,'C',0);
+				$this->SetXY(5,$this->GetY()+5);  
+				}
 			} 
 			else 
 			{
-			$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )",1,0,'L',1,0);
-			}
-			$DNC=$nc - $tot2;
-			if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
-			$this->cell(53,5," DNC = ".$DNC,1,0,'L',1,0);
-			$this->SetFillColor(200);
-	$this->SetXY(5,$this->GetY()+10);  
-	}
+			$this->cell(200,5,'Néant',1,0,'C',0);
+			$this->SetXY(5,$this->GetY()+5);
+			}   
+				$this->cell(60,5,"Total commune ".$row->COMMUNE." : ".$tot2,1,0,'L',1,0);
+				if ($tot2>0) 
+				{
+					$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )"." -- 01 Pharmacien  pour  ".round($row->p2018/$tot2).' Hab',1,0,'L',1,0);
+				} 
+				else 
+				{
+					$this->cell(87,5," Tx = ".round(($tot2*10000)/$row->p2018)." ( 10.000 Hab )",1,0,'L',1,0);
+				}
+				$DNC=$nc - $tot2;
+				if($DNC>=0){$this->SetFillColor(73,255,51);} else{$this->SetFillColor(255,50,50);}
+				$this->cell(53,5," DNC = ".$DNC,1,0,'L',1,0);
+				$this->SetFillColor(200);
+		$this->SetXY(5,$this->GetY()+10);  
+		}
     }
+	
 	function pharmacie($EPH)
 	{
 	$this->mysqlconnect();
@@ -1671,7 +1803,7 @@ class INSPECTION1 extends PDF_Invoice
 	function tblparcommune($dnrdon,$datejour1,$datejour2,$STRUCTURED) 
 	{    
 		$this->SetFont('Times', 'B', 10);
-		$h=35;
+		$h=55;
 		$this->SetXY(8,$h);$this->cell(10,5,"N°",1,0,'C',1,0);
 		$this->cell(25,5,"Commune",1,0,'C',1,0);
 	    $this->cell(20,5,"Superficie",1,0,'C',1,0);

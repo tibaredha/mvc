@@ -80,6 +80,7 @@ while($rowp=mysql_fetch_object($requetep))
 	if ($rowp->Categorie=='P'){$pdf->Cell(200,5,$travail.'عون شبه طبي '.$etablissement,0,1,'C');}
 	if ($rowp->Categorie=='SF'){$pdf->Cell(200,5,$travail.'قابلة '.$etablissement,0,1,'C');}
 	if ($rowp->Categorie=='AMAR'){$pdf->Cell(200,5,$travail.'عون طبي في التخدير و الإنعاش '.$etablissement,0,1,'C');}
+	if ($rowp->Categorie=='LABO'){$pdf->Cell(200,5,$travail.' مخبري '.$etablissement,0,1,'C');}
 	
 	
 	
@@ -140,6 +141,7 @@ while($rowp=mysql_fetch_object($requetep))
 	if ($rowp->Categorie=='P'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.' عون شبه طبي '.' بالعمل '.$etablissement ,0,1,'R');}
 	if ($rowp->Categorie=='SF'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.' قابلة '.' بالعمل '.$etablissement ,0,1,'R');}
 	if ($rowp->Categorie=='AMAR'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.' عون طبي في التخدير و الإنعاش '.' بالعمل '.$etablissement ,0,1,'R');}
+	if ($rowp->Categorie=='LABO'){$pdf->Cell(200,5,$pdf->article1.$rowp->PRENOMAR.' '.$rowp->NOMAR.' مخبري '.' بالعمل '.$etablissement ,0,1,'R');}
 	
 	
 	

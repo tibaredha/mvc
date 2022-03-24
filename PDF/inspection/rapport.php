@@ -55,66 +55,106 @@ $pdf->SetFillColor(200);//fond gris il faut ajouter au cell un autre parametre p
 $pdf->SetTextColor(0,0,0);//text noire
 $pdf->SetFont('Times', 'B', 10);
 
-if ($_POST['type']=='0') 
-{
+//************************************************* DEBUT MAJ *************************************************************************************//
+
+if ($_POST['type']=='0') {
 	$pdf->AddPage('p','A4');
+	//$pdf->entete($datejour1,$datejour2,'Liste nominative (Ouverture) : ',$EPH1);
     $pdf->BORDEREAU("",$datejour1,$datejour2,$EPH1,"");
 }
 
 if ($_POST['type']=='1') {
 	$pdf->AddPage('p','A4');
-	$pdf->entete($datejour1,$datejour2,'Liste nominative : ',$EPH1);
-	$pdf->listenominative($EPH);
-	
-	
-	// 	
-}
-if ($_POST['type']=='2') {
-	$pdf->AddPage('p','A4');
-	$pdf->entete($datejour1,$datejour2,'Repartition par communes de residence : ',$EPH1);
-	$pdf->tblparcommune('Structure',$datejour1,$datejour2,$EPH) ;	
-}
-if ($_POST['type']=='3') {
-	// $pdf->AddPage('p','A4');
-	// $pdf->entete($datejour1,$datejour2,'Repartition Geographique : ',$EPH1);
-	// $pdf->djelfa($pdf->datasig($datejour1,$datejour2,$EPH,33),20,128,3.7,'commune');//commune//dairas 		
-}
-if ($_POST['type']=='4') {
-	$pdf->AddPage('p','A4');
-	$pdf->entete($datejour1,$datejour2,"Conseil de l'ordre : ",$EPH1);
-	$pdf->conseildelordre($EPH);
-	
-}
-if ($_POST['type']=='5') {
-	$pdf->AddPage('p','A4');
-	$pdf->entete($datejour1,$datejour2,'Repartition par commune des anomalies : ',$EPH1);
-	$pdf->anomalies($EPH);
-	
-}
-if ($_POST['type']=='6') { //retraite
-	$pdf->AddPage('p','A4');
-	$pdf->entete($datejour1,$datejour2,"Retraite : ",$EPH1);
-	$pdf->retraite($EPH);
-	
-	
-}
-if ($_POST['type']=='7') {
-	$pdf->AddPage('p','A4');
-	$pdf->entete($datejour1,$datejour2,'Liste nominative Fermeture : ',$EPH1);
-	$pdf->listenominativef($EPH);
-	
-}
-if ($_POST['type']=='8') {
-	
-}
-if ($_POST['type']=='9') {
-	
-}
-if ($_POST['type']=='10') {
-	
+	$pdf->entete($datejour1,$datejour2,'Liste nominative (Ouverture) : ',$EPH1);
+	$pdf->listenominative($EPH);	
 }
 
-if ($_POST['type']=='11') 
+if ($_POST['type']=='2') {
+	$pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,'Liste nominative (Fermeture) : ',$EPH1);
+	$pdf->listenominativef($EPH);
+}
+
+if ($_POST['type']=='3') {
+    $pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,'Liste nominative (Ouverture : Non conforme) : ',$EPH1);
+	$pdf->listenominativenc($EPH,0,0);		
+}
+
+if ($_POST['type']=='4') {
+	$pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,'Liste nominative (fermeture : Non conforme) : ',$EPH1);
+	$pdf->listenominativenc($EPH,1,0);
+	
+}
+if ($_POST['type']=='5') { //retraite
+	$pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,"La mise à la retraite : ",$EPH1);
+	$pdf->retraite($EPH);	
+}
+
+
+if ($_POST['type']=='6') {
+	$pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,"Etat inscription au Conseil de l'ordre regional (Blida) : ",$EPH1);
+	$pdf->conseildelordre($EPH);
+}
+
+if ($_POST['type']=='7') {
+    $pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,"Annuaire téléphonique / Email : ",$EPH1);
+	$pdf->listenominativetelemail($EPH);		
+}
+
+if ($_POST['type']=='8') {
+	$pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,'Repartition par commune (liste nominative) : ',$EPH1);
+	$pdf->repartionparcommune($EPH);
+	if ($_POST['EPH']=='16') //medecin specialiste 
+	{
+		$pdf->AddPage('p','A4');
+		$pdf->entete($datejour1,$datejour2,'Repartition par spécialite (liste nominative) : ',$EPH1);
+		$pdf->medecinspecialiste($EPH);
+	}	
+}
+
+if ($_POST['type']=='9') {
+	
+	$pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,'Repartition par communes (etat numerique): ',$EPH1);
+	$pdf->tblparcommune('Structure',$datejour1,$datejour2,$EPH) ;
+}
+
+if ($_POST['type']=='10') {
+    
+
+    $pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,'SIG COMMUNE : ',$EPH1);
+	$pdf->djelfa($pdf->datasig($datejour1,$datejour2,$EPH,33),20,128,3.7,'commune');//commune//dairas 	
+
+	$pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,'SIG DAIRAS : ',$EPH1);
+	$pdf->djelfa($pdf->datasig($datejour1,$datejour2,$EPH,33),20,128,3.7,'dairas');//commune//dairas 	
+}
+
+if ($_POST['type']=='11') {
+	
+    $pdf->AddPage('p','A4');
+	$pdf->entete($datejour1,$datejour2,'Repartition par commune des anomalies (etat numerique) : ',$EPH1);
+	$pdf->anomalies($EPH);
+}
+
+if ($_POST['type']=='12') {
+	
+    $pdf->AddPage('L','A4');
+	$pdf->entetel($datejour1,$datejour2,"Repartition par date d'inspection/anomalie constatée  : ",$EPH1);
+	$pdf->repartanomx($datejour1,$datejour2,$EPH);
+}
+//************************************************* FIN MAJ *************************************************************************************//
+
+
+
+if ($_POST['type']=='13') 
 {
 	//**********************************************en fonction de la structure *****************************************************************//
 	if ($_POST['EPH']=='16') //medecin specialiste 
@@ -122,6 +162,7 @@ if ($_POST['type']=='11')
 		$pdf->AddPage('L','A4');
 		$pdf->entete($datejour1,$datejour2,'liste nominative  : ',$EPH1);
 		$pdf->l_medecinspecialiste($EPH);
+		
 		$pdf->AddPage('p','A4');
 		$pdf->entete($datejour1,$datejour2,'Repartition par spécialite : ',$EPH1);
 		$pdf->medecinspecialiste($EPH);
@@ -207,7 +248,7 @@ if ($_POST['type']=='11')
 
 //***********************************************************************************************************************************//
 
-if ($_POST['type']=='12') 
+if ($_POST['type']=='14') 
 {
 	if ($_POST['EPH']=='0') //structure 
 	{  

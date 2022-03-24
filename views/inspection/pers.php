@@ -35,6 +35,7 @@ $data = array(
 						"PARAMEDICALE"=>"P",
 						"PARAMEDICALE-SF"=>"SF",
 						"PARAMEDICALE-AMAR"=>"AMAR",
+						"PARAMEDICALE-LABO"=>"LABO",
 					    "TECHNICIEN DE MAINTENANCE"=>"TDM",
 						"AGENT D'HYGIÈNE"=>"ADH",
 						"AGENT DE SÉCURITÉ"=>"ADS",
