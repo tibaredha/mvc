@@ -29,7 +29,7 @@ view::button('inspection','');
 lang(Session::get('lang'));
 ob_start();
 view::munu('inspection'); 
-$colspan=16;				
+$colspan=17;				
 if (isset($this->userListview)) 
 {
 echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>" ;
@@ -139,6 +139,17 @@ echo "</tr>" ;
 			    //echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/decision_18_c.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"           href=\"".URL.'inspection/home19/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
 				break;
+		
+		case 27://ORTOPHONISTE
+		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				//echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				//echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_18_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				//echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_ouverture\"    href=\"".URL.'tcpdf/inspection/decision_18.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+			    //echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/decision_18_c.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"           href=\"".URL.'inspection/home27/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
+				break;
+		
+		
 		case 12://pharmacie OK 
 		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/PHA.JPG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"           href=\"".URL.'inspection/home12/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
@@ -207,7 +218,7 @@ echo "</tr>" ;
 		//echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 		//echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Fiche\"         href=\"".URL.'tcpdf/inspection/***.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/print.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 		//echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Fiche\"         href=\"".URL.'tcpdf/inspection/***.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/print.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
-		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"             href=\"".URL.'inspection/home25/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
+		echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"             href=\"".URL.'inspection/home00/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
 		}
 		
 		
@@ -259,9 +270,8 @@ View::url(700,280,URL.'inspection/search/0/10?o=STRUCTURE&q=15','15-chirurugien 
 View::url(700,310,URL.'inspection/search/0/10?o=STRUCTURE&q=17','17-medecin generaliste ',3);            View::url(1000,310,URL.'inspection/search/0/10?o=STRUCTURE&q=16','16-medecin specialiste ',3);
 View::url(700,340,URL.'inspection/search/0/10?o=STRUCTURE&q=21','21-transport sanitaire ',3);            View::url(1000,340,URL.'inspection/search/0/10?o=STRUCTURE&q=10','10-centre dhemodialyse ',3);
 View::url(700,370,URL.'inspection/search/0/10?o=STRUCTURE&q=23','23-OPTICIEN ',3);                       View::url(1000,370,URL.'inspection/search/0/10?o=STRUCTURE&q=24','24-sage femme ',3);
-View::url(700,400,URL.'inspection/search/0/10?o=STRUCTURE&q=19','19-psychologue ',3);                    View::url(1000,400,URL.'inspection/search/0/10?o=STRUCTURE&q=25','25-kinesitherapie  ',3);
-View::url(700,430,URL.'inspection/search/0/10?o=STRUCTURE&q=20','20-cabinet de soins ',3);                    View::url(1000,400,URL.'inspection/search/0/10?o=STRUCTURE&q=25','25-kinesitherapie  ',3);
-
+View::url(700,400,URL.'inspection/search/0/10?o=STRUCTURE&q=19','19-psychologue clinicien',3);           View::url(1000,400,URL.'inspection/search/0/10?o=STRUCTURE&q=27','27-orthophoniste',3);           
+View::url(700,430,URL.'inspection/search/0/10?o=STRUCTURE&q=20','20-cabinet de soins ',3);               View::url(1000,430,URL.'inspection/search/0/10?o=STRUCTURE&q=25','25-kinesitherapie  ',3);     
 View::url(700,460,URL.'inspection/search/0/10?o=STRUCTURE&q=7','7-Polyclinique',3);                      View::url(1000,460,URL.'inspection/search/0/10?o=STRUCTURE&q=22','22-UDS',3);
 View::url(700,490,URL.'inspection/search/0/10?o=STRUCTURE&q=8','8-Salle de soins  ',3);
 View::url(700,520,URL.'inspection/search/0/10?o=STRUCTURE&q=3','3-EPH ',3);                              View::url(1000,520,URL.'inspection/search/0/10?o=STRUCTURE&q=5','5-EHS ',3);

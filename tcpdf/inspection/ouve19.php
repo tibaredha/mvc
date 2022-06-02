@@ -36,25 +36,24 @@ $DATEP=$rowy->DATEP;
 $adressen=$rowy->ADRESSEAR;$communen=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'communear');$wilayan=$rowy->WILAYA;
 }
 //*************************************************************************************************************************//
-$pdf->entetedecision("مقررة ترخيص بفتح قاعة شبه طبية للعلاجات العامة",$DATEP);
+$pdf->entetedecision("مقررة ترخيص بفتح عيادة شبه طبية في علم النفس العيادي",$DATEP);
 //*************************************************************************************************************************//
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->loi18_11,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 177 المؤرخة في 1987/04/11 المتعلقة بكيفيات التنصيب و الممارسة في القطاع الخاص ",0,1,'R');
 $pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"  للمساعدين الطبيين",0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 1766 المؤرخة في 1987/10/11 المتعلقة بمدونة الاعمال المهنية و التجهيزات",0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"  للتقنين السامين و التقنين في العلاجات الشبه طبية",0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة في القطاع الخاص لمهنيي الصحة ",0,1,'R');$pdf->SetFont('aefurat', '', 12);
-
-
-$pdf->u_diplome_pm ($pdf->diplome24,$DIPLOME,$UNIV,$nomar,$prenomar);
-$pdf->demande_pm($NUMD,$DATED,"بفتح","للعلاجات العامة",1,$adressen,$communen);
-$pdf->conformite_pm($DATEP);
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 098 المؤرخة في 1987/03/15 المتعلقة بكيفيات التنصيب و الممارسة في القطاع الخاص",0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"  للمتحصلين عل شهادة علم النفس العيادي والارطفونيا",0,1,'R');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"- بمقتضى التعليمة الوزارية رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة في القطاع الخاص لمهنيي الصحة ",0,1,'R');$pdf->SetFont('aefurat', '', 11.5);
+$pdf->u_diplome ($pdf->diplome19,$DIPLOME,$UNIV,$nomar,$prenomar);
+$pdf->demande_pm($NUMD,$DATED,"بفتح","في علم النفس العيادي",1,$adressen,$communen);
+$pdf->conformite($DATEP);
 //*************************************************************************************************************************//
 $pdf->propositiondecision();
 //*************************************************************************************************************************//
-$pdf->decision_a_o_pm($nomar,$prenomar,$adressen,$communen,'ممرض');
-$pdf->n_transfert_pm($pdf->article_2);
+
+$pdf->decision_a_o_pm($nomar,$prenomar,$adressen,$communen,'نفساني');
+$pdf->n_transfert($pdf->article_2);
 $pdf->date_effet($pdf->article_3);
 $pdf->execution($pdf->article_4);
 $pdf->ctdecision($nomfr,$prenomfr,$DATEP);

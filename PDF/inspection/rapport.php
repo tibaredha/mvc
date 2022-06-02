@@ -41,7 +41,8 @@ if ($_POST['EPH']=='15') {$EPH1='cabinet chirurugien dentiste generaliste';$EPH=
 if ($_POST['EPH']=='16') {$EPH1='cabinet medecin specialiste';$EPH="=16";}
 if ($_POST['EPH']=='17') {$EPH1='cabinet medecin generaliste';$EPH="=17";}
 if ($_POST['EPH']=='18') {$EPH1='cabinet sagefemme';$EPH="=18";}
-if ($_POST['EPH']=='19') {$EPH1='cabinet psychologue';$EPH="=19";}
+if ($_POST['EPH']=='19') {$EPH1='cabinet psychologue clinicien';$EPH="=19";}
+if ($_POST['EPH']=='27') {$EPH1='cabinet psychologue orthophoniste';$EPH="=27";}
 if ($_POST['EPH']=='20') {$EPH1='cabinet de soins ';$EPH="=20";}
 if ($_POST['EPH']=='21') {$EPH1='transport sanitairee ';$EPH="=21";}
 if ($_POST['EPH']=='22') {$EPH1='UDS';$EPH="=22";}
