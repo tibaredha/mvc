@@ -328,7 +328,7 @@ class inspection_Model extends Model {
 	
 	public function persSingleList($id) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM pers WHERE idt = :id  order by Categorie asc ', array(':id' => $id));    
+		return $this->db->select('SELECT * FROM pers WHERE idt = :id  order by PRENOMFR asc ', array(':id' => $id));    
     }
 	
 	public function userpersSingleList($id) {

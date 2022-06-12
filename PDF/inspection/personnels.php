@@ -36,7 +36,7 @@ $pdf->SetXY(05,$h+10);
 $pdf->mysqlconnect();
 $pdf->SetFont('Arial', '',9, '', true);
 mysql_query("SET NAMES 'UTF8' ");
-$query = "SELECT * FROM pers where idt=$idt ORDER BY NOMFR ";//      
+$query = "SELECT * FROM pers where idt=$idt ORDER BY PRENOMFR ";//      
 $resultat=mysql_query($query);
 $totalmbr1=mysql_num_rows($resultat);
 $x=0;
@@ -44,8 +44,8 @@ while($row=mysql_fetch_object($resultat))
 {
 $pdf->SetFillColor(200 );
 $pdf->cell(10,5,$x=$x+1,1,0,'C',0);
-$pdf->cell(45,5,$row->NOMFR,1,0,'L',0);
 $pdf->cell(45,5,$row->PRENOMFR,1,0,'L',0);
+$pdf->cell(45,5,$row->NOMFR,1,0,'L',0);
 $pdf->cell(30,5,$row->Categorie,1,0,'C',0);
 $pdf->cell(45,5,$pdf->nbrtostring("specialite","idspecialite",$row->SPECIALITE,"specialitefr"),1,0,'L',0);
 $pdf->cell(30,5,$row->CASNOS,1,0,'C',0);

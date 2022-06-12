@@ -22,12 +22,12 @@ $data = array(
 "DEBUTCONTRAT"  => date('j-m-Y'),
 "FINCONTRAT"    => '31-12-'.date('Y'),
 
-"NOMAR"  => 'x' ,
-"PRENOMAR"  => 'x' ,
-"NOMFR"  => 'x' ,
-"PRENOMFR"  => 'x' ,
+"NOMAR"     => '' ,
+"PRENOMAR"  => '' ,
+"NOMFR"     => '' ,
+"PRENOMFR"  => '' ,
 	 
-"ADRESSEAR"  => 'x',
+"ADRESSEAR"  => '',
 "Categorie"  => array(      
                         "MEDECIN-S"=>"MS",
 						"MEDECIN-G"=>"MG",
@@ -40,22 +40,26 @@ $data = array(
 						"AGENT D'HYGIÈNE"=>"ADH",
 						"AGENT DE SÉCURITÉ"=>"ADS",
 						"CHAUFFEUR"=>"C"						
-					  )
+					  ),
+"TEMPS"  => array(      
+                        "PLEIN-TEMPS"=>"MS",
+						"TEMPS-PARTIEL"=>"MG"						
+					  )					  
+					  
 );
 view::button($data['btn'],'');
 echo "<h2>Nouveau personnel : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
-$this->label($x+970,$y+300,'اللقـــب');           $this->txtarid($x+690,$y+290,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date');
-$this->label($x+640,$y+300,'الاســـــــم');        $this->txtarid($x+340,$y+290,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
-$this->label($x+290,$y+300,'المهنة');             $this->combov1($x,$y+290,'Categorie',$data['Categorie'],'date');
-                                                  $this->specialite($x,$y+290+30,'SPECIALITE',"0","SPECIALITE",'classspecialite');
 
-$this->label($x+970,$y+330,'NOM');                $this->txt($x+690,$y+290+30,'PRENOMFR','PRENOMFR',"x",$data['PRENOMFR'],'date');
-$this->label($x+620,$y+330,'PRENOM');             $this->txt($x+340,$y+290+30,'NOMFR','NOMFR',"x",$data['NOMFR'],'date');
-
-
+$this->label($x,$y+270,'TEMPS');                  $this->combov1($x+100,$y+260,'TEMPS',$data['TEMPS'],'date');
+$this->label($x,$y+300,'FONCTION');               $this->combov1($x+100,$y+290,'Categorie',$data['Categorie'],'date');
+                                                  $this->specialite($x+100,$y+290+30,'SPECIALITE',"0","SPECIALITE",'classspecialite');
+$this->label($x+350,$y+300,'NOM');                $this->txt($x+450,$y+290,'PRENOMFR','PRENOMFR',"",$data['PRENOMFR'],'date');
+$this->label($x+350,$y+330,'PRENOM');             $this->txt($x+450,$y+290+30,'NOMFR','NOMFR',"",$data['NOMFR'],'date');
+$this->label($x+980,$y+300,'اللقـــب');           $this->txtarid($x+720,$y+290,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date');
+$this->label($x+970,$y+330,'الاســـــــم');        $this->txtarid($x+720,$y+290+30,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
 $this->label($x,$y+370,'__________________________________________________________________________________________________________________');
 $this->label($x,$y+400,'N°_CNAS');                $this->txt($x+100,$y+390,'CASNOS',0,$data['CASNOS'],'date');
 $this->label($x+350,$y+400,'Début contrat');      $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');
@@ -93,12 +97,12 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		</tr>
 		<tr>
 		<th style="width:10px;">Photos</th>
+		<th style="width:50px;">اللقب</th>
+		<th style="width:70px;">الاســـــــم</th>
 		<th style="width:50px;">Categorie</th>
 		<th style="width:50px;">CNAS</th>
 		<th style="width:70px;">debut contrat</th>
 		<th style="width:70px;">fin contrat</th>
-		<th style="width:70px;">الاســـــــم</th>
-		<th style="width:50px;">اللقب</th>
 		<th style="width:10px;">Autorisation</th>
 		<th style="width:10px;">Etat</th>
 		<th style="width:10px;">Upd </th>
@@ -113,13 +117,15 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		                $fichier = photosmfx('pers',$value['id'].'.jpg','M') ;
 		                echo "<td  style=\"width:10px;\"     align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl***/".$value['id']."\" ><img  src=\"".URL."public/webcam/str/".$fichier."?t=".time()."\"  width='20' height='20' border='0'></td> " ;
 		                ?>
+						<td align="LEFT"><?php echo $value['PRENOMFR'];?></td>
+						<td align="LEFT"><?php echo $value['NOMFR'];?></td>
+						
 						<td align="center"><?php echo $value['Categorie'];?></td>
 						<td align="center"><?php echo $value['CASNOS'];?></td>
 						<td align="center"><?php echo view::dateUS2FR($value['DEBUTCONTRAT']);?></td>
 						<td align="center"><?php echo view::dateUS2FR($value['FINCONTRAT']) ;?></td>
 						
-						<td align="center"><?php echo $value['NOMAR'];?></td>
-						<td align="center"><?php echo $value['PRENOMAR'];?></td>
+						
 						<?php 
 						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Autorisation d'exercice\" href=\"".URL.'tcpdf/inspection/auto'.$this->user[0]['STRUCTURE'].'.php?id='.$value['id']."&ids=".$value['idt']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
 		                

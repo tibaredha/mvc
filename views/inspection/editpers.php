@@ -39,20 +39,26 @@ $data = array(
 						"AGENT D'HYGIÈNE"=>"ADH",
 						"AGENT DE SÉCURITÉ"=>"ADS",
 						"CHAUFFEUR"=>"C"						
-					  )
+					  ),
+"TEMPS"  => array(      
+                        "PLEIN-TEMPS"=>"MS",
+						"TEMPS-PARTIEL"=>"MG"						
+					  )					  
 );
 view::button($data['btn'],'');
 echo "<h2> edite personnel : ".strtoupper($this->user[0]['NOMAR'])."_".$this->user[0]['PRENOMAR']." </h2 ><hr /><br />";
 $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
-$this->label($x+970,$y+300,'اللقـــب');           $this->txtarid($x+690,$y+290,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date');
-$this->label($x+640,$y+300,'الاســـــــم');        $this->txtarid($x+340,$y+290,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
-$this->label($x+290,$y+300,'المهنة');             $this->combov1($x,$y+290,'Categorie',$data['Categorie'],'date');
-                                                  $this->specialite($x,$y+290+30,'SPECIALITE',$this->user[0]['SPECIALITE'],$this->user[0]['SPECIALITE'],'classspecialite');    
 
-$this->label($x+970,$y+330,'NOM');                $this->txt($x+690,$y+290+30,'PRENOMFR',"x",$data['PRENOMFR'],'date');
-$this->label($x+620,$y+330,'PRENOM');             $this->txt($x+340,$y+290+30,'NOMFR',"x",$data['NOMFR'],'date');
+$this->label($x,$y+270,'TEMPS');                  $this->combov1($x+100,$y+260,'TEMPS',$data['TEMPS'],'date');
+$this->label($x,$y+300,'FONCTION');               $this->combov1($x+100,$y+290,'Categorie',$data['Categorie'],'date');
+                                                  $this->specialite($x+100,$y+290+30,'SPECIALITE',$this->user[0]['SPECIALITE'],$this->user[0]['SPECIALITE'],'classspecialite');
+$this->label($x+350,$y+300,'NOM');                $this->txt($x+450,$y+290,'PRENOMFR','PRENOMFR',$this->user[0]['PRENOMFR'],$data['PRENOMFR'],'date');
+$this->label($x+350,$y+330,'PRENOM');             $this->txt($x+450,$y+290+30,'NOMFR','NOMFR',$this->user[0]['NOMFR'],$data['NOMFR'],'date');
+$this->label($x+980,$y+300,'اللقـــب');           $this->txtarid($x+720,$y+290,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date');
+$this->label($x+970,$y+330,'الاســـــــم');        $this->txtarid($x+720,$y+290+30,'NOMAR','NOMAR',0,$data['NOMAR'],'date');
+
 $this->label($x,$y+370,'__________________________________________________________________________________________________________________');
 $this->label($x,$y+400,'N°_Casnos');              $this->txt($x+100,$y+390,'CASNOS',0,$data['CASNOS'],'date');
 $this->label($x+350,$y+400,'Début contrat');      $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$this->dateUS2FR($data['DEBUTCONTRAT']),'dateus1');
