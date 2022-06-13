@@ -42,8 +42,8 @@ $data = array(
 						"CHAUFFEUR"=>"C"						
 					  ),
 "TEMPS"  => array(      
-                        "PLEIN-TEMPS"=>"MS",
-						"TEMPS-PARTIEL"=>"MG"						
+                        "PLEIN-TEMPS"=>"0",
+						"TEMPS-PARTIEL"=>"1"						
 					  )					  
 					  
 );
@@ -97,10 +97,10 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		</tr>
 		<tr>
 		<th style="width:10px;">Photos</th>
-		<th style="width:50px;">اللقب</th>
-		<th style="width:70px;">الاســـــــم</th>
+		<th style="width:50px;">Nom</th>
+		<th style="width:70px;">Prenom</th>
 		<th style="width:50px;">Categorie</th>
-		<th style="width:50px;">CNAS</th>
+		<th style="width:50px;">Specialite</th>
 		<th style="width:70px;">debut contrat</th>
 		<th style="width:70px;">fin contrat</th>
 		<th style="width:10px;">Autorisation</th>
@@ -121,17 +121,32 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 						<td align="LEFT"><?php echo $value['NOMFR'];?></td>
 						
 						<td align="center"><?php echo $value['Categorie'];?></td>
-						<td align="center"><?php echo $value['CASNOS'];?></td>
+						<td align="center"><?php 
+						
+						//echo $value['CASNOS'];
+						echo view::nbrtostring('specialite','idspecialite',$value['SPECIALITE'],'specialitefr')
+						
+						?></td>
 						<td align="center"><?php echo view::dateUS2FR($value['DEBUTCONTRAT']);?></td>
-						<td align="center"><?php echo view::dateUS2FR($value['FINCONTRAT']) ;?></td>
 						
 						
-						<?php 
+						
+						<?php
+						
+$today = date("Y-m-d");
+$expire = $value['FINCONTRAT']; //from database
+
+$today_time = strtotime($today);
+$expire_time = strtotime($expire);
+
+if ($expire_time < $today_time) 
+{ echo'<td align="center" bgcolor="#FF0000" >';}
+else {	echo'<td align="center" bgcolor="#32CD32">';}
+echo view::dateUS2FR($value['FINCONTRAT']) ;
+echo "</td>";
+
+						
 						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Autorisation d'exercice\" href=\"".URL.'tcpdf/inspection/auto'.$this->user[0]['STRUCTURE'].'.php?id='.$value['id']."&ids=".$value['idt']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
-		                
-						
-						
-						
 						if ($value['ETAT']==0) {
 		                ?>
 						<td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetatpers/'.$value['id'].'/'.$value['idt'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
