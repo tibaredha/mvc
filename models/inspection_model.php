@@ -279,7 +279,8 @@ class inspection_Model extends Model {
 			'CASNOS'       => $data['CASNOS'],
 			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
 			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT']),
-			'SPECIALITE'   => $data['SPECIALITE']
+			'SPECIALITE'   => $data['SPECIALITE'],
+			'TP'           => $data['TP']
 			));
 			// echo '<pre>';print_r ($data);echo '<pre>';
 			return $last_id = $this->db->lastInsertId();
@@ -297,7 +298,8 @@ class inspection_Model extends Model {
 			'CASNOS'       => $data['CASNOS'],
 			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
 			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT']),  
-            'SPECIALITE'   => $data['SPECIALITE']
+            'SPECIALITE'   => $data['SPECIALITE'],
+			'TP'           => $data['TP']
 
 	   );
        echo '<pre>';print_r ($postData);echo '<pre>';

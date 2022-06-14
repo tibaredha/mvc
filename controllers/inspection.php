@@ -1615,7 +1615,7 @@ class inspection extends Controller {
 		$data['NOMAR']= $_POST['NOMAR'];$data['PRENOMAR']= $_POST['PRENOMAR']; $data['Categorie']= $_POST['Categorie'];$data['id']= $id;$data['CASNOS']= $_POST['CASNOS'];$data['DEBUTCONTRAT'] = $_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
 		$data['NOMFR']= $_POST['NOMFR'];$data['PRENOMFR']= $_POST['PRENOMFR'];
 		$data['SPECIALITE']= $_POST['SPECIALITE'];
-		
+		$data['TP']= $_POST['TP'];
 		// echo '<pre>';print_r ($data);echo '<pre>';  
 		$last_id=$this->model->creatpersdb($data);
 		header('location: ' . URL .$this->route. '/pers/'.$id);	
@@ -1636,7 +1636,7 @@ class inspection extends Controller {
 		$data = array();
 		$data['NOMAR']= $_POST['NOMAR'];$data['PRENOMAR']= $_POST['PRENOMAR'];$data['Categorie']= $_POST['Categorie'];$data['id']=$id;$data['idt']= $url1[3];$data['CASNOS']= $_POST['CASNOS'];$data['DEBUTCONTRAT']=$_POST['DEBUTCONTRAT'];$data['FINCONTRAT']= $_POST['FINCONTRAT'];
 		$data['NOMFR']= $_POST['NOMFR'];$data['PRENOMFR']= $_POST['PRENOMFR'];
-		$data['SPECIALITE']= $_POST['SPECIALITE'];
+		$data['SPECIALITE']= $_POST['SPECIALITE'];$data['TP']= $_POST['TP'];
 		//echo '<pre>';print_r ($data);echo '<pre>';
 		$this->model->editSavespers($data);
 		header('location: ' . URL . $this->route.'/pers/'.$data['idt'].'');

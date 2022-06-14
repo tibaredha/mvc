@@ -24,9 +24,10 @@ $h=50;
 $pdf->SetFillColor(200 );
 $pdf->SetXY(05,$h);
 $pdf->cell(10,10,"N°",1,0,1,'C',0);
-$pdf->cell(45,10,"NOMFR",1,0,'C',1,0);
-$pdf->cell(45,10,"PRENOMFR",1,0,'C',1,0);
-$pdf->cell(30,10,"Categorie",1,0,'C',1,0);
+$pdf->cell(40,10,"NOMFR",1,0,'C',1,0);
+$pdf->cell(40,10,"PRENOMFR",1,0,'C',1,0);
+$pdf->cell(20,10,"TEMPS",1,0,'C',1,0);
+$pdf->cell(20,10,"Categorie",1,0,'C',1,0);
 $pdf->cell(45,10,"SPECIALITE",1,0,'C',1,0);
 $pdf->cell(30,10,"CASNOS",1,0,'C',1,0);
 $pdf->cell(35,10,"DEBUTCONTRAT",1,0,'C',1,0);
@@ -44,9 +45,10 @@ while($row=mysql_fetch_object($resultat))
 {
 $pdf->SetFillColor(200 );
 $pdf->cell(10,5,$x=$x+1,1,0,'C',0);
-$pdf->cell(45,5,$row->PRENOMFR,1,0,'L',0);
-$pdf->cell(45,5,$row->NOMFR,1,0,'L',0);
-$pdf->cell(30,5,$row->Categorie,1,0,'C',0);
+$pdf->cell(40,5,$row->PRENOMFR,1,0,'L',0);
+$pdf->cell(40,5,$row->NOMFR,1,0,'L',0);
+if ($row->TP== 0){$pdf->cell(20,5,"plein",1,0,'C',0);}else {$pdf->cell(20,5,"partiel",1,0,'C',0);}
+$pdf->cell(20,5,$row->Categorie,1,0,'C',0);
 $pdf->cell(45,5,$pdf->nbrtostring("specialite","idspecialite",$row->SPECIALITE,"specialitefr"),1,0,'L',0);
 $pdf->cell(30,5,$row->CASNOS,1,0,'C',0);
 $pdf->cell(35,5,$pdf->dateUS2FR($row->DEBUTCONTRAT),1,0,'C',0);

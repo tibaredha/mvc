@@ -41,8 +41,8 @@ $data = array(
 						"AGENT DE SÉCURITÉ"=>"ADS",
 						"CHAUFFEUR"=>"C"						
 					  ),
-"TEMPS"  => array(      
-                        "PLEIN-TEMPS"=>"0",
+"TP"  => array(      
+                        "TEMPS-PLEIN"=>"0",
 						"TEMPS-PARTIEL"=>"1"						
 					  )					  
 					  
@@ -53,7 +53,7 @@ $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
 
-$this->label($x,$y+270,'TEMPS');                  $this->combov1($x+100,$y+260,'TEMPS',$data['TEMPS'],'date');
+$this->label($x,$y+270,'TEMPS');                  $this->combov1($x+100,$y+260,'TP',$data['TP'],'date');
 $this->label($x,$y+300,'FONCTION');               $this->combov1($x+100,$y+290,'Categorie',$data['Categorie'],'date');
                                                   $this->specialite($x+100,$y+290+30,'SPECIALITE',"0","SPECIALITE",'classspecialite');
 $this->label($x+350,$y+300,'NOM');                $this->txt($x+450,$y+290,'PRENOMFR','PRENOMFR',"",$data['PRENOMFR'],'date');
@@ -80,7 +80,7 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		?>
 		</th> 
 		
-		<th  colspan=4    style="width:50px;">
+		<th  colspan=5    style="width:50px;">
 		<?php
 		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/personnels.php?uc='.$this->user[0]['id'].'" > Fiche personnels </a>';
 		?>
@@ -99,6 +99,7 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 		<th style="width:10px;">Photos</th>
 		<th style="width:50px;">Nom</th>
 		<th style="width:70px;">Prenom</th>
+		<th style="width:50px;">Temps</th>
 		<th style="width:50px;">Categorie</th>
 		<th style="width:50px;">Specialite</th>
 		<th style="width:70px;">debut contrat</th>
@@ -120,6 +121,17 @@ echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->u
 						<td align="LEFT"><?php echo $value['PRENOMFR'];?></td>
 						<td align="LEFT"><?php echo $value['NOMFR'];?></td>
 						
+						<?php 
+						if ($value['TP']== 0){
+							echo '<td align="center" bgcolor="#32CD32">';
+							echo "plein";
+						}
+						else {
+							echo '<td align="center">';
+							echo "partiel";
+						}
+						?>
+						</td>
 						<td align="center"><?php echo $value['Categorie'];?></td>
 						<td align="center"><?php 
 						

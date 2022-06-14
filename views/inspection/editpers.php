@@ -40,9 +40,10 @@ $data = array(
 						"AGENT DE SÉCURITÉ"=>"ADS",
 						"CHAUFFEUR"=>"C"						
 					  ),
-"TEMPS"  => array(      
-                        "PLEIN-TEMPS"=>"MS",
-						"TEMPS-PARTIEL"=>"MG"						
+"TP"  => array(      
+                        $this->user[0]['TP']=>$this->user[0]['TP'],
+                        "TEMPS-PLEIN"=>"0",
+						"TEMPS-PARTIEL"=>"1"
 					  )					  
 );
 view::button($data['btn'],'');
@@ -51,7 +52,7 @@ $this->f0(URL.$data['action'],'post');
 View::photosurl(1170,230,URL.$data['photos']);
 $x=50;$y=10;
 
-$this->label($x,$y+270,'TEMPS');                  $this->combov1($x+100,$y+260,'TEMPS',$data['TEMPS'],'date');
+$this->label($x,$y+270,'TEMPS');                  $this->combov1($x+100,$y+260,'TP',$data['TP'],'date');
 $this->label($x,$y+300,'FONCTION');               $this->combov1($x+100,$y+290,'Categorie',$data['Categorie'],'date');
                                                   $this->specialite($x+100,$y+290+30,'SPECIALITE',$this->user[0]['SPECIALITE'],$this->user[0]['SPECIALITE'],'classspecialite');
 $this->label($x+350,$y+300,'NOM');                $this->txt($x+450,$y+290,'PRENOMFR','PRENOMFR',$this->user[0]['PRENOMFR'],$data['PRENOMFR'],'date');
