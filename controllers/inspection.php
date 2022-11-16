@@ -344,16 +344,7 @@ class inspection extends Controller {
 		// echo '<pre>';print_r ($data);echo '<pre>';  
 		$last_id=$this->model->createinspection($data);
 		header('location: ' . URL .$this->route. '/inspection/'.$id);	
-	} 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	} 	
 /*auto trasporteu*/	
 	
 	function auto($id) 
@@ -362,6 +353,9 @@ class inspection extends Controller {
 	$this->view->title = 'nstructure';
 	$this->view->user = $this->model->userSinglestructure($id);
 	$this->view->userListview = $this->model->autoSingleList($id);
+	$this->view->userListview2 = $this->model->autoSingleList2($id);
+	
+	
 	if(isset($url1[3])){
 	$this->view->doubleemploi = $this->model->doubleemploi($url1[3],$id);	
 	}
@@ -1606,6 +1600,8 @@ class inspection extends Controller {
 	$this->view->title = 'nstructure';
 	$this->view->user = $this->model->userSinglestructure($id);
 	$this->view->userListview = $this->model->persSingleList($id);
+	$this->view->userListview2 = $this->model->persSingleList2($id);
+	
 	$this->view->render($this->route.'/pers');    
 	}
 	

@@ -67,10 +67,20 @@ $this->label($x+700,$y+400,'Fin contrat');        $this->txts($x+100+350+350,$y+
 
 $this->submit($x+800,$y+450,$data['butun']);
 $this->f1();
-view::sautligne(15);
+view::sautligne(20);
 ob_end_flush();
-echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
 ?>
+
+<div class="tabbed_area">  
+	<ul class="tabs">  
+		<li><a href="javascript:tabSwitch('tab_1', 'content_1');" id="tab_1" class="active">List personnels en service</a></li>  
+		<li><a href="javascript:tabSwitch('tab_2', 'content_2');" id="tab_2">List personnels hors service</a></li> 
+		<li><a href="javascript:tabSwitch('tab_3', 'content_3');" id="tab_3">List personnels en double emploi</a></li> 	
+	</ul>    
+	<div id="content_1" class="content"> 
+	<?php 
+	echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
+	?>
 		
 		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
@@ -196,6 +206,176 @@ echo "</td>";
 		?>
 		</table><br/><br/>
 		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</div>
+
+	<div id="content_2" class="content">
+		<?php 
+	echo "<h2>List des personnels : ".strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 ><hr /><br />";
+	?>
+		
+		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
+		<tr>
+		<th  colspan=3   style="width:50px;">
+		<?php
+		echo '<a title="Autres"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q='.$this->user[0]['STRUCTURE'].'" > Autres : '.$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure").'</a>';
+		?>
+		</th> 
+		
+		<th  colspan=5    style="width:50px;">
+		<?php
+		echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/personnels.php?uc='.$this->user[0]['id'].'" > Fiche personnels </a>';
+		?>
+		</th> 
+		
+		<th  colspan=4    style="width:50px;">
+		<?php
+		//echo '<a target="_blank" title="Fiche personnels "  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche personnels de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';
+		?>
+		</th> 
+		
+		
+		
+		</tr>
+		<tr>
+		<th style="width:10px;">Photos</th>
+		<th style="width:50px;">Nom</th>
+		<th style="width:70px;">Prenom</th>
+		<th style="width:50px;">Temps</th>
+		<th style="width:50px;">Categorie</th>
+		<th style="width:50px;">Specialite</th>
+		<th style="width:70px;">debut contrat</th>
+		<th style="width:70px;">fin contrat</th>
+		<th style="width:10px;">Autorisation</th>
+		<th style="width:10px;">Etat</th>
+		<th style="width:10px;">Upd </th>
+		<th style="width:10px;">Del</th>
+		</tr>
+		<?php
+		if (isset($this->userListview2)) 
+		{		
+				foreach($this->userListview2 as $key => $value){ ?>
+						<tr bgcolor='WHITE' onmouseover="this.style.backgroundColor='#9FF781';" onmouseout="this.style.backgroundColor='WHITE';" >
+						<?php 
+		                $fichier = photosmfx('pers',$value['id'].'.jpg','M') ;
+		                echo "<td  style=\"width:10px;\"     align=\"center\"><a title=\"Modifier Photos\" href=\"".URL."inspection/upl***/".$value['id']."\" ><img  src=\"".URL."public/webcam/str/".$fichier."?t=".time()."\"  width='20' height='20' border='0'></td> " ;
+		                ?>
+						<td align="LEFT"><?php echo $value['PRENOMFR'];?></td>
+						<td align="LEFT"><?php echo $value['NOMFR'];?></td>
+						
+						<?php 
+						if ($value['TP']== 0){
+							echo '<td align="center" bgcolor="#32CD32">';
+							echo "plein";
+						}
+						else {
+							echo '<td align="center">';
+							echo "partiel";
+						}
+						?>
+						</td>
+						<td align="center"><?php echo $value['Categorie'];?></td>
+						<td align="center"><?php 
+						
+						//echo $value['CASNOS'];
+						echo view::nbrtostring('specialite','idspecialite',$value['SPECIALITE'],'specialitefr')
+						
+						?></td>
+						<td align="center"><?php echo view::dateUS2FR($value['DEBUTCONTRAT']);?></td>
+						
+						
+						
+						<?php
+						
+$today = date("Y-m-d");
+$expire = $value['FINCONTRAT']; //from database
+
+$today_time = strtotime($today);
+$expire_time = strtotime($expire);
+
+if ($expire_time < $today_time) 
+{ echo'<td align="center" bgcolor="#FF0000" >';}
+else {	echo'<td align="center" bgcolor="#32CD32">';}
+echo view::dateUS2FR($value['FINCONTRAT']) ;
+echo "</td>";
+
+						
+						echo "<td style=\"width:10px;\" align=\"center\" >
+						
+						<a title=\"Autorisation d'exercice\"  >
+						<img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' >
+						
+						
+						</a>  </td>" ;
+						if ($value['ETAT']==0) {
+		                ?>
+						<td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetatpers/'.$value['id'].'/'.$value['idt'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
+		                <?php 
+		                }
+		                if ($value['ETAT']==1) {
+		                ?>
+						<td align="center"><a  title="activé" href="<?php echo URL.'inspection/editetatpers/'.$value['id'].'/'.$value['idt'].'/0';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
+						<?php 
+		                }
+						?>
+						<td align="center"><a title="editer" href="<?php echo URL.'inspection/editpers/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
+						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deletepers/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
+						</tr>
+				<?php 
+				}
+				$total_count=count($this->userListview2);
+				if ($total_count <= 0 )
+				{
+				echo '<tr><td align="center" colspan="16" ><span> No record found for autos </span></td> </tr>';
+				echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="16" ><span>' .$total_count.'/'.$total_count.' Record(s) found.</span></td></tr>';					
+				}
+				else
+				{		
+				//echo '<tr bgcolor=""  ><td align="center" colspan="16" >'. barre_navigation ($total_count,$this->userListviewl,$this->userListviewo,$this->userListviewq,$this->userListviewp,$this->userListviewb).'</td></tr>';	
+			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="16" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
+				}		
+		}
+		else 
+		{
+		echo '<tr><td align="center" colspan="16" ><span> Click search button to start searching a vms.</span></td></tr>';
+		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="16" ><span>&nbsp;</span></td></tr>';					      
+		} 
+		
+		?>
+		</table><br/><br/>
+		
+	
+	
+	
+	</div>
+	<div id="content_3" class="content"> 
+    </div>
+	</div> 
+
+
+
+
+
+
 		
 	<script type="text/javascript">
   window.onload = function(){

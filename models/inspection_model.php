@@ -163,8 +163,13 @@ class inspection_Model extends Model {
 
 	public function autoSingleList($id) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM auto WHERE idt = :id  order by Categorie asc ', array(':id' => $id));    
+		return $this->db->select('SELECT * FROM auto WHERE idt = :id  and ETAT = 0    order by Categorie asc ', array(':id' => $id));    
     }
+	public function autoSingleList2($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM auto WHERE idt = :id  and ETAT = 1    order by Categorie asc ', array(':id' => $id));    
+    }
+	
 	public function autoSingleList1($id) {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM auto WHERE id = :id  order by DATE asc ', array(':id' => $id));    
@@ -330,8 +335,14 @@ class inspection_Model extends Model {
 	
 	public function persSingleList($id) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM pers WHERE idt = :id  order by PRENOMFR asc ', array(':id' => $id));    
+		return $this->db->select('SELECT * FROM pers WHERE idt = :id and ETAT = 0 order by PRENOMFR asc ', array(':id' => $id));    
     }
+	
+	public function persSingleList2($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM pers WHERE idt = :id and ETAT = 1 order by PRENOMFR asc ', array(':id' => $id));    
+    }
+	
 	
 	public function userpersSingleList($id) {
         $this->db->exec('SET NAMES utf8');
