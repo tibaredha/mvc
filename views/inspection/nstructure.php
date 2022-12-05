@@ -20,8 +20,14 @@ $data = array(
 "NUMORDER"     => '170',"DATEORDER"    => date('d-m-Y'),
 "NUMDEM"       => '0',"DATEDEM"      => date('d-m-Y'),
 "DATEDSC"       => date('d-m-Y'),
+
+
+"WSC0"=> '17000',
+"WSC1"=> 'DJELFA',
+
 "SERVICECIVILE0"=> '1',
 "SERVICECIVILE1"=> 'EPH DJELFA',
+
 "WILAYAR1"     => '17000' ,"WILAYAR2"     => 'DJELFA',
 "COMMUNER1"    => '924' ,"COMMUNER2"    => 'Ain-oussera',
 "ADRESSE"      => 'x',
@@ -43,6 +49,7 @@ $data = array(
 "butun"        => 'Inser New Structure' 
 );
 view::structure_sanitaire($data,"Ajouter Structure Sanitaire");
+//required placeholder="xxxxxxx" autofocus onkeyup="javascript:this.value=this.value.toUpperCase();"
 ?>
 <script type="text/javascript">
 

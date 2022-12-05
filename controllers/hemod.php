@@ -39,13 +39,15 @@ class hemod extends Controller {
 	public function create() 
 	{
 		$data = array();
-		$data['DINS']      = $_POST['DINS'];
-		$data['HINS']      = $_POST['HINS'];
+		//$data['DINS']      = $_POST['DINS'];
+		//$data['HINS']      = $_POST['HINS'];
 		$data['NOM']       = $_POST['NOM'];
 		$data['PRENOM']    = $_POST['PRENOM'];
 		$data['FILSDE']    = $_POST['FILSDE'];
 		$data['ETDE']      = $_POST['ETDE'];
+		
 		$data['SEXE']      = $_POST['SEXE'];
+		
 		$data['DATENS']    = $_POST['DATENS'];
 		$data['WILAYAN']   = $_POST['WILAYAN'];
 		$data['COMMUNEN']  = $_POST['COMMUNEN'];
@@ -53,6 +55,8 @@ class hemod extends Controller {
 		$data['COMMUNER']  = $_POST['COMMUNER'];
 		$data['ADRESSE']   = $_POST['ADRESSE'];
 		$data['TEL']       = $_POST['TEL'];
+		
+		
 		$data['GRABO']     = $_POST['GRABO'];
 		$data['GRRH']      = $_POST['GRRH'];
 		$data['CRH2']      = $_POST['CRH2'];
@@ -87,9 +91,9 @@ class hemod extends Controller {
 		$data['ADRESSENSS']  = $_POST['ADRESSENSS'];
 		$data['APP']         = $_POST['APP'];
 		$data['TRANS']       = $_POST['TRANS'];
-		// $this->model->create($data);
-		// header('location: ' . URL .$this->route.'/'.$last_id);
-		echo '<pre>';print_r ($data);echo '<pre>';
+		$this->model->create($data);
+		header('location: ' . URL .$this->route.'/view/'.$last_id);
+		// echo '<pre>';print_r ($data);echo '<pre>';
 	}
 	function imp() 
 	{

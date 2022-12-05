@@ -17,7 +17,7 @@ $pdf->SetXY(05,15);$pdf->cell(285,5,$pdf->dspfr,1,0,'C',1,0);
 $pdf->Text(240,25," LE : ".date('d-m-Y'));
 $pdf->Text(05,30,"INSPECTION SANTE PUBLIQUE");
 $pdf->Text(05,35,"N ... /".date('Y'));
-$pdf->Text(60,35,"Fiche personnels en service : ".$pdf->nbrtostring('structure','id',$idt,'NOM').'_'.$pdf->nbrtostring('structure','id',$idt,'PRENOM') );
+$pdf->Text(60,35,"Fiche personnels hors service : ".$pdf->nbrtostring('structure','id',$idt,'NOM').'_'.$pdf->nbrtostring('structure','id',$idt,'PRENOM') );
 $pdf->Text(60,40,"Du  ".date("d-m-Y"));
 
 $h=50;
@@ -37,7 +37,7 @@ $pdf->SetXY(05,$h+10);
 $pdf->mysqlconnect();
 $pdf->SetFont('Arial', '',9, '', true);
 mysql_query("SET NAMES 'UTF8' ");
-$query = "SELECT * FROM pers where  idt=$idt and ETAT=0 ORDER BY PRENOMFR ";//      
+$query = "SELECT * FROM pers where  idt=$idt and ETAT=1 ORDER BY PRENOMFR ";//      
 $resultat=mysql_query($query);
 $totalmbr1=mysql_num_rows($resultat);
 $x=0;

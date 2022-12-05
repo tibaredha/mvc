@@ -70,6 +70,7 @@ class inspection_Model extends Model {
 			'NUMDEM'        => $data['NUMDEM'],
 			'DATEDEM'       => $this->dateFR2US($data['DATEDEM']),
 			'DATEDSC'       => $this->dateFR2US($data['DATEDSC']),
+			'WSC'           => $data['WSC'],
 			'SERVICECIVILE' => $data['SERVICECIVILE']
 			
         ));
@@ -115,6 +116,7 @@ class inspection_Model extends Model {
 			'NUMDEM'        => $data['NUMDEM'],
 			'DATEDEM'       => $this->dateFR2US($data['DATEDEM']),
 			'DATEDSC'       => $this->dateFR2US($data['DATEDSC']),
+			'WSC'           => $data['WSC'],
 			'SERVICECIVILE' => $data['SERVICECIVILE']
         );
         // echo '<pre>';print_r ($postData);echo '<pre>';

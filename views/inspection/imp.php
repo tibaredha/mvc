@@ -21,34 +21,39 @@ echo "<div class=\"mydiv\" style=\" position:absolute;left:".$x."px;top:".$y."px
 	<label>Ascdesc</label><?php combov1('ascdesc',array("croissant"=>"asc","décroissant"=>"desc"));    ?><br />
 	<label>MFT</label><?php     combov1('SEXE',array("Tous Masculin et Feminin"=>"IS NOT NULL","Masculin"=>"='M'","Feminin"=>"='F'"));?><br />
 	<label>Structure</label>
-	<?php 
-	combov1('STRUCTURED',array(
-	                    "Tous Structure"=>"IS NOT NULL",
-	                    "EHU"=>"='1'",
-					    "CHU"=>"='2'",
-						"EPH"=>"='3'",
-						"EH"=>"='4'",
-						"EHS"=>"='5'",
-						"EPSP"=>"='6'",
-						"Polyclinique"=>"='7'",
-						"Salle de soins"=>"='8'",
-						"EHP"=>"='9'",
-						"centre d hemodialyse"=>"='10'",
-						"centre de diagnostic"=>"='11'",
-						"officine pharmaceutique"=>"='12'",
-						"laboratoire"=>"='13'",
-						"cabinet chirurugien dentiste specialiste"=>"='14'",
-						"cabinet chirurugien dentiste generaliste"=>"='15'",
-						"cabinet medecin specialiste"=>"='16'",
-						"cabinet medecin generaliste"=>"='17'",
-						"cabinet sagefemme"=>"='18'", 
-						"cabinet psychologue"=>"='19'", 
-						"cabinet de soins "=>"='20'", 
-						"transport sanitairee"=>"='21'" 
-	                    ));  
-$x=550;$y=-300;	
+	<?php
+
+   
+	
+	// combov1('STRUCTURED',array(
+	                    // "Tous Structure"=>"IS NOT NULL",
+	                    // "EHU"=>"='1'",
+					    // "CHU"=>"='2'",
+						// "EPH"=>"='3'",
+						// "EH"=>"='4'",
+						// "EHS"=>"='5'",
+						// "EPSP"=>"='6'",
+						// "Polyclinique"=>"='7'",
+						// "Salle de soins"=>"='8'",
+						// "EHP"=>"='9'",
+						// "centre d hemodialyse"=>"='10'",
+						// "centre de diagnostic"=>"='11'",
+						// "officine pharmaceutique"=>"='12'",
+						// "laboratoire"=>"='13'",
+						// "cabinet chirurugien dentiste specialiste"=>"='14'",
+						// "cabinet chirurugien dentiste generaliste"=>"='15'",
+						// "cabinet medecine dentaire "=>"='28'",
+						// "cabinet medecin specialiste"=>"='16'",
+						// "cabinet medecin generaliste"=>"='17'",
+						// "cabinet sage_femme"=>"='24'", 
+						// "cabinet psychologue"=>"='19'", 
+						// "cabinet de soins "=>"='20'", 
+						// "transport sanitairee"=>"='21'" 
+	                    // ));  
+$x=550;$y=-300;	 
+view::combostructure($x-300,$y+340+50,'STRUCTURED','structurebis','1','Structure','class','id','structure');
 $this->label($x,$y+310,'Wilaya');            $this->WILAYA($x+100,$y+300,'WILAYA','country','mvc','wil','','wilaya');
-$this->label($x,$y+340,'Commune');       $this->COMMUNE($x+100,$y+330,'COMMUNE','COMMUNEN','','commune');
+$this->label($x,$y+340,'Commune');           $this->COMMUNE($x+100,$y+330,'COMMUNE','COMMUNEN','','commune');
 	?>
 	<br />
 	<label>Nbrlimit</label><?php combov1('nbrlimit',array("Limiter A 10"=>"10","Limiter A 20"=>"20","Limiter A 30"=>"30","Limiter A 40"=>"40","Limiter A 50"=>"50","Limiter A 60"=>"60","Limiter A 70"=>"70","Limiter A 80"=>"80","Limiter A 90"=>"90","Limiter A 100"=>"100","Limiter A 1000"=>"1000","Limiter A 10000"=>"10000"));?><br />

@@ -108,9 +108,12 @@ echo "</tr>" ;
 				break;
 		case 15://dentiste generaliste 	ok 	
 				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SDEN.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
-				
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"           href=\"".URL.'inspection/home15/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
 				break;
+		case 28://MEDECINE DENTAIRE ok 	
+				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SDEN.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"           href=\"".URL.'inspection/home28/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
+				break;		
 		case 16://medecin  specialiste 		
 				echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='16' border='0' alt='' ></td>" ;
 				// echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"PV de conformite\"      href=\"".URL.'inspection/conformite16/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;
@@ -262,22 +265,25 @@ echo "</tr>" ;
 else 
 {
 view::sautligne(15);//View::hr(700,260);//View::hr(700,450);
-view::graphemoisdeces(30,220,'structure Par Mois Arret Au  : ','','structure','DATE','',date("Y"),'',"");	
-View::url(700,220,URL.'inspection/search/0/10?o=STRUCTURE&q=26','26-entreprise de distribution de produit pharmaceutique',3);
-View::url(700,250,URL.'inspection/search/0/10?o=STRUCTURE&q=12','12-officine pharmaceutique',3);         View::url(1000,250,URL.'inspection/search/0/10?o=STRUCTURE&q=13','13-laboratoire',3);
+view::graphemoisdeces(30,220+50,'structure Par Mois Arret Au  : ','','structure','DATE','',date("Y"),'',"");	
 
-View::url(700,280,URL.'inspection/search/0/10?o=STRUCTURE&q=15','15-chirurugien dentiste generaliste',3);View::url(1000,280,URL.'inspection/search/0/10?o=STRUCTURE&q=14','14-chirurugien dentiste specialiste',3);
-View::url(700,310,URL.'inspection/search/0/10?o=STRUCTURE&q=17','17-medecin generaliste ',3);            View::url(1000,310,URL.'inspection/search/0/10?o=STRUCTURE&q=16','16-medecin specialiste ',3);
-View::url(700,340,URL.'inspection/search/0/10?o=STRUCTURE&q=21','21-transport sanitaire ',3);            View::url(1000,340,URL.'inspection/search/0/10?o=STRUCTURE&q=10','10-centre dhemodialyse ',3);
-View::url(700,370,URL.'inspection/search/0/10?o=STRUCTURE&q=23','23-OPTICIEN ',3);                       View::url(1000,370,URL.'inspection/search/0/10?o=STRUCTURE&q=24','24-sage femme ',3);
-View::url(700,400,URL.'inspection/search/0/10?o=STRUCTURE&q=19','19-psychologue clinicien',3);           View::url(1000,400,URL.'inspection/search/0/10?o=STRUCTURE&q=27','27-orthophoniste',3);           
-View::url(700,430,URL.'inspection/search/0/10?o=STRUCTURE&q=20','20-cabinet de soins ',3);               View::url(1000,430,URL.'inspection/search/0/10?o=STRUCTURE&q=25','25-kinesitherapie  ',3);     
-View::url(700,460,URL.'inspection/search/0/10?o=STRUCTURE&q=7','7-Polyclinique',3);                      View::url(1000,460,URL.'inspection/search/0/10?o=STRUCTURE&q=22','22-UDS',3);
-View::url(700,490,URL.'inspection/search/0/10?o=STRUCTURE&q=8','8-Salle de soins  ',3);
-View::url(700,520,URL.'inspection/search/0/10?o=STRUCTURE&q=3','3-EPH ',3);                              View::url(1000,520,URL.'inspection/search/0/10?o=STRUCTURE&q=5','5-EHS ',3);
-View::url(700,550,URL.'inspection/search/0/10?o=STRUCTURE&q=9','9-EHP  ',3);                             View::url(1000,550,URL.'inspection/search/0/10?o=STRUCTURE&q=4','4-EH  ',3);
-View::url(700,580,URL.'inspection/search/0/10?o=STRUCTURE&q=6','6-EPSP ',3);
-View::url(700,610,URL.'inspection/search/0/10?o=STRUCTURE&q=11','11-CENTER DE DIAGNOSTIQUE ',3);
+View::url(700,250,URL.'inspection/search/0/10?o=STRUCTURE&q=12','12-officine pharmaceutique',3);         View::url(1000,250,URL.'inspection/search/0/10?o=STRUCTURE&q=26','26-entreprise de distribution de produit pharmaceutique',3);
+View::url(700,280,URL.'inspection/search/0/10?o=STRUCTURE&q=15','15-chirurugien dentiste G',3);          View::url(1000,280,URL.'inspection/search/0/10?o=STRUCTURE&q=28','28-medecine dentaire',3);    View::url(1200,280,URL.'inspection/search/0/10?o=STRUCTURE&q=14','14-chirurugien dentiste S',3);
+View::url(700,310,URL.'inspection/search/0/10?o=STRUCTURE&q=17','17-medecin G ',3);                      View::url(1000,310,URL.'inspection/search/0/10?o=STRUCTURE&q=16','16-medecin S ',3);           View::url(1200,310,URL.'inspection/search/0/10?o=STRUCTURE&q=13','13-medecin S laboratoire',3);
+View::url(700,340,URL.'inspection/search/0/10?o=STRUCTURE&q=11','11-center de diagnostique ',3);         View::url(1000,340,URL.'inspection/search/0/10?o=STRUCTURE&q=10','10-centre dhemodialyse ',3); View::url(1200,340,URL.'inspection/search/0/10?o=STRUCTURE&q=9','9-EHP  ',3); 
+
+View::url(700,370+30,URL.'inspection/search/0/10?o=STRUCTURE&q=20','20-cabinet de soins-generaux ',3);   View::url(1000,370+30,URL.'inspection/search/0/10?o=STRUCTURE&q=24','24-sage femme ',3);
+View::url(700,400+30,URL.'inspection/search/0/10?o=STRUCTURE&q=19','19-Psychologue clinicien',3);        View::url(1000,400+30,URL.'inspection/search/0/10?o=STRUCTURE&q=27','27-psychologue orthophoniste',3);           
+View::url(700,430+30,URL.'inspection/search/0/10?o=STRUCTURE&q=23','23-Opticien ',3);                    View::url(1000,430+30,URL.'inspection/search/0/10?o=STRUCTURE&q=25','25-kinesitherapie  ',3);     
+View::url(700,460+30,URL.'inspection/search/0/10?o=STRUCTURE&q=18','18-Prothese dentaire ',3);           View::url(1000,460+30,URL.'inspection/search/0/10?o=STRUCTURE&q=21','21-transport sanitaire ',3);                      
+             
+
+View::url(700,490+30+30,URL.'inspection/search/0/10?o=STRUCTURE&q=8','8-Salle de soins  ',3);             View::url(1000,490+30+30,URL.'inspection/search/0/10?o=STRUCTURE&q=7','7-Polyclinique',3); 
+View::url(700,520+30+30,URL.'inspection/search/0/10?o=STRUCTURE&q=3','3-EPH ',3);                         View::url(1000,520+30+30,URL.'inspection/search/0/10?o=STRUCTURE&q=5','5-EHS ',3);    View::url(1200,520+60,URL.'inspection/search/0/10?o=STRUCTURE&q=4','4-EH  ',3);
+View::url(700,580+30,URL.'inspection/search/0/10?o=STRUCTURE&q=6','6-EPSP ',3);                           View::url(1000,580+30,URL.'inspection/search/0/10?o=STRUCTURE&q=22','22-UDS',3);
+
+
+//
 view::sautligne(10);			      
 }				
 echo "</table>";

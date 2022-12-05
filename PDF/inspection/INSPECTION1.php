@@ -8,8 +8,8 @@ class INSPECTION1 extends PDF_Invoice
      public $db_user="root";
      public $db_pass="";
 	 public $utf8 = "" ;
-	 public $repfr="République algérienne démocratique et populaire";
-	 public $mspfr="Ministère de la santé";
+	 public $repfr="Republique algerienne democratique et populaire";
+	 public $mspfr="Ministere de la sante";
 	 public $dspfr="Direction de la santé et de la population de la wilaya de Djelfa ";
 	 public $insp="Inspection Sante Publique";
 	 
@@ -1800,6 +1800,15 @@ class INSPECTION1 extends PDF_Invoice
 	return $OP;
 	}
 	}
+	function valeurmoisdecesP($NATURE,$SRS,$TBL,$COLONE1,$COLONE2,$DATEJOUR1,$DATEJOUR2,$VALEUR2,$STR,$STRUCTURED) 
+	{
+	$this->mysqlconnect();
+	$sql = " select * from $TBL where  ($COLONE2='$VALEUR2') and (STRUCTURE $STRUCTURED) AND NATURE=$NATURE and ETAT='0'";
+	$requete = @mysql_query($sql) or die($sql."<br>".mysql_error());
+	$OP=mysql_num_rows($requete);
+	mysql_free_result($requete);
+	return $OP;
+	}
 	function tblparcommune($dnrdon,$datejour1,$datejour2,$STRUCTURED) 
 	{    
 		$this->SetFont('Times', 'B', 10);
@@ -1811,8 +1820,10 @@ class INSPECTION1 extends PDF_Invoice
 		$this->cell(20,5,"P2016",1,0,'C',1,0);
 		$this->cell(20,5,"P2017",1,0,'C',1,0);
 		$this->cell(20,5,"P2018",1,0,'C',1,0);
-		$this->cell(20,5,"P2019",1,0,'C',1,0);
-		$this->cell(20,5,$dnrdon,1,0,'C',1,0);
+		//$this->cell(20,5,$dnrdon,1,0,'C',1,0);
+		$this->cell(10,5,"PUB",1,0,'C',1,0);
+		$this->cell(10,5,"PRI",1,0,'C',1,0);
+		$this->cell(10,5,"TOT",1,0,'C',1,0);
 		$this->cell(20,5,"Tx 10.000",1,0,'C',1,0);
 		$this->SetXY(8,$h+5);
 		$IDWIL=17000;
@@ -1833,8 +1844,9 @@ class INSPECTION1 extends PDF_Invoice
 			$this->cell(20,5,trim($row->p2016),1,0,'C',0);
 			$this->cell(20,5,trim($row->p2017),1,0,'C',0);
 			$this->cell(20,5,trim($row->p2018),1,0,'C',0);
-			$this->cell(20,5,trim($row->p2019),1,0,'C',0);
-			$this->cell(20,5,$this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED),1,0,'C',0);
+			$this->cell(10,5,$this->valeurmoisdecesP(1,'','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED),1,0,'C',0);
+			$this->cell(10,5,$this->valeurmoisdecesP(2,'','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED),1,0,'C',0);
+			$this->cell(10,5,$this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED),1,0,'C',0);
 			$this->cell(20,5,round(($this->valeurmoisdeces('','structure','DATE','COMMUNE',$datejour1,$datejour2,trim($row->IDCOM),'',$STRUCTURED)*10000)/$row->p2018,3),1,0,'C',0);
 			$this->SetXY(8,$this->GetY()+5); 
 		}
@@ -1855,7 +1867,7 @@ class INSPECTION1 extends PDF_Invoice
 		$rs1 = mysql_fetch_assoc($query11);
 		$this->cell(20,5,round($rs1['total1'],2),1,0,'C',1,0);	  
 		$this->cell(20,5,"",1,0,'C',1,0);	  
-		$this->cell(20,5,$this->valeurmoisdecest('','structure','DATE','COMMUNE',$datejour1,$datejour2,'','',$STRUCTURED),1,0,'C',1,0);	  
+		$this->cell(10,5,$this->valeurmoisdecest('','structure','DATE','COMMUNE',$datejour1,$datejour2,'','',$STRUCTURED),1,0,'C',1,0);	  
 		$this->cell(20,5,round(($this->valeurmoisdecest('','structure','DATE','COMMUNE',$datejour1,$datejour2,'','',$STRUCTURED)*10000)/round($rs1['total1'],3),3),1,0,'C',1,0);	  
 	}
 	function mdocomm($DATEJOUR1,$DATEJOUR2,$COMMUNER,$STRUCTURED,$MDO) 

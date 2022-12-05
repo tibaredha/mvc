@@ -55,12 +55,19 @@ class View {
 	$this->label($x,$y+290+30,'Date diplome');      $this->txts($x+100,$y+280+30,'DIPLOME',0,	$data['DIPLOME'],'dateus44');
 	
 	
-	$this->label($x+350,$y+290,'Order N ');      $this->txt($x+450,$y+280,'NUMORDER',0,$data['NUMORDER'],'date');
-	$this->label($x+350,$y+320,'Date order');    $this->txts($x+450,$y+280+30,'DATEORDER',0,$data['DATEORDER'],'dateusx');  
-	$this->label($x+700,$y+290,'Démission N');   $this->txt($x+800,$y+280,'NUMDEM',0,$data['NUMDEM'],'date');
-	$this->label($x+700,$y+320,'Date Démission');$this->txts($x+800,$y+280+30,'DATEDEM',0,$data['DATEDEM'],'dateusy');  
-	$this->label($x,$y+350,'Date service');      $this->txts($x+100,$y+280+60,'DATEDSC',0,$data['DATEDSC'],'datesc');  
-	$this->label($x+350,$y+350,'Etablissement'); $this->SERVICECIVILE($x+450,$y+280+60,'SERVICECIVILE','univ','mvc','str_sc',$data['SERVICECIVILE0'],$data['SERVICECIVILE1']); 
+	$this->label($x+350,$y+290,'Order N ');        $this->txt($x+450,$y+280,'NUMORDER',0,$data['NUMORDER'],'date');
+	$this->label($x+350,$y+320,'Date order');      $this->txts($x+450,$y+280+30,'DATEORDER',0,$data['DATEORDER'],'dateusx');  
+	$this->label($x+700,$y+290,'Démission N');     $this->txt($x+800,$y+280,'NUMDEM',0,$data['NUMDEM'],'date');
+	$this->label($x+700,$y+320,'Date Démission');  $this->txts($x+800,$y+280+30,'DATEDEM',0,$data['DATEDEM'],'dateusy');  
+	$this->label($x,$y+350,'Date service');        $this->txts($x+100,$y+280+60,'DATEDSC',0,$data['DATEDSC'],'datesc');  
+	
+	$this->label($x+350,$y+350,'Wilya ser-civil'); 
+	$this->WILAYA($x+450,$y+340,'WSC','WSC','mvc','wil',$data['WSC0'],$data['WSC1']);
+	 
+	
+	$this->label($x+700,$y+350,'Etab ser-civil'); 
+	$this->COMMUNE($x+800,$y+340,'SERVICECIVILE','ETABSC',$data['SERVICECIVILE0'],$data['SERVICECIVILE1']); 
+	
 	$y=90;                                        //SERVICECIVILE ($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
 	$this->label($x,$y+340,'__________________________________________________________________________________________________________________');
 	$this->label($x,$y+370,'Wilaya');            $this->WILAYA($x+100,$y+360,'WILAYAR','countryr','mvc','wil',$data['WILAYAR1'],$data['WILAYAR2']);
@@ -93,6 +100,30 @@ class View {
 		
 	}
 	
+	
+	// function WILAYA($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	// {
+	// mysqlconnect();
+	// echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";		 
+	// echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+	// echo"<option value=\"".$value."\"  selected=\"selected\">".$selected."</option>"."\n";
+	// mysql_query("SET NAMES 'UTF8' ");
+	// $result = mysql_query("SELECT * FROM $tb_name order by WILAYAS" );
+	// while($data =  mysql_fetch_array($result))
+	// {
+	// echo '<option value="'.$data[0].'">'.$data[1].'</option>';
+	// }
+	// echo '</select>'."\n"; 
+	// echo "</div>";
+	// }
+	// function COMMUNE($x,$y,$name,$class,$value,$selected) 
+	// {
+	// echo "<div style=\" position:absolute;left:".$x."px;top:".$y."px;\">";		 
+	// echo "<select size=1 class=\"".$class."\" name=\"".$name."\">"."\n";
+	// echo"<option value=\"".$value."\" selected=\"selected\">".$selected."</option>"."\n";
+	// echo '</select>'."\n";
+	// echo "</div>";
+	// }
 	
 	// function WILAYA($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
 	// {

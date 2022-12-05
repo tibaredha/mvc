@@ -48,7 +48,7 @@ else
 $commune="IS NOT NULL";
 }
 mysql_query("SET NAMES 'UTF8' ");
-$query = "SELECT val,STRUCTURE,DATE,SEX,COMMUNE,UPPER(NOM) as NOM,PRENOM,ADRESSE,DNS,SPECIALITEX,round((DATEDIFF(CURDATE(),DNS )/365),1) AS years FROM structure where STRUCTURE $STRUCTURED AND SEX $SEXE  and commune $commune order by TRIM($ordre) $ascdesc limit $nbrlimit  ";  
+$query = "SELECT val,STRUCTURE,DATE,SEX,COMMUNE,UPPER(NOM) as NOM,PRENOM,ADRESSE,DNS,SPECIALITEX,round((DATEDIFF(CURDATE(),DNS )/365),1) AS years FROM structure where STRUCTURE = $STRUCTURED AND SEX $SEXE  and commune $commune order by TRIM($ordre) $ascdesc limit $nbrlimit  ";  
 $resultat=mysql_query($query);
 $totalmbr1=mysql_num_rows($resultat);
 while($row=mysql_fetch_object($resultat))

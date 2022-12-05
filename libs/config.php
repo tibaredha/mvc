@@ -771,9 +771,15 @@ function evaluation_inspection($action)
 		echo "</p>";
 
 		echo "<p> au";
-			echo "<select name=\"jour1\">";jours();echo "</select>";
-			echo "<select name=\"mois1\">";mois();echo "</select>";
-			echo "<select name=\"annee1\">";annee();echo "</select>";
+			echo "<select name=\"jour1\">";//jours();
+			echo '<option value="'.date('d').'">'.date('d').'</option><br />';
+			echo "</select>";
+			echo "<select name=\"mois1\">";//mois();
+			echo '<option value="'.date('m').'">'.date('m').'</option><br />';
+			echo "</select>";
+			echo "<select name=\"annee1\">";//annee();
+			echo '<option value="'.date('Y').'">'.date('Y').'</option><br />';
+			echo "</select>";
 		echo "</p>";
 
 		echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";

@@ -36,6 +36,9 @@ $NUMORDER=$rowx->NUMORDER;
 $DATEORDER=$rowx->DATEORDER;
 $NUMDEM=$rowx->NUMDEM;
 $DATEDEM=$rowx->DATEDEM;
+$DATEDSC= $rowx->DATEDSC;
+$SERVICECIVILE= $rowx->SERVICECIVILE;
+$SPECIALITE=$rowx->SPECIALITEX;
 }
 
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );//
@@ -62,11 +65,36 @@ $adressear=$rowy->ADRESSEAR;
 $idcommune=$rowy->COMMUNE;
 $commune=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'COMMUNE');
 $communear=$pdf->nbrtostring('mvc','comar','IDCOM',$rowy->COMMUNE,'communear');
-$wilaya=$pdf->nbrtostring('mvc','wil','IDWIL',$rowy->WILAYA,'WILAYAS');;
+$wilaya=$pdf->nbrtostring('mvc','wil','IDWIL',$rowy->WILAYA,'WILAYAS');
+
 }
 $pdf-> mysqlconnect();$query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";$requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 while($rowx=mysql_fetch_object($requetex))
 {
+	
+	$pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
+	$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
+	$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
+	$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dspfr,0,1,'C');
+	$pdf->SetFont('aefurat', '', 12);
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Service des structures sanitaires",0,1,'L');
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Bureau de regularistion et d'évaluation des structures publiques et privés",0,1,'L');
+	$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(100,5,"N ° ........................./DSP ",0,0,'L');$pdf->Cell(100,5,"Djelfa le ......................... ",0,1,'R');
+	$pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,"LE DIRECTEUR DE LA SANTÉ ET DE LA POPULATION DE LA WILAYA DE DJELFA",0,1,'C');
+	$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"A",0,1,'C');
+	$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"Mr ".$nom." ".$prenom." : PRATICIEN SPÉCIALISTE EN ".$pdf->nbrtostring('mvc','specialite','idspecialite',$rowx->SPECIALITEX,'specialitefr'),0,1,'C');
+	
+	$pdf->SetXY(5,$pdf->GetY()+15);$pdf->Cell(200,5,"OBJET : A/S votre demande d'ouverture d'un cabinet médical spécialisé",0,1,'L');
+	$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"RÉFERNCE :  Votre demande N° ".$NUMD." du ".$pdf->dateUS2FR($DATED),0,1,'L');
+	
+	$pdf->SetXY(15,$pdf->GetY()+15);$pdf->Cell(190,5,"Suite a la réunion de la commision local chargée de l'instalation, transfert et fermeture a titre privés",0,1,'L');
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"des praticiens spécialistes et suite a votre demande N°".$NUMD." du ".$pdf->dateUS2FR($DATED),0,1,'L');
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"j'ai l'honneur  de vous donner un avis favorable au niveau de la commune de : ".$commune,0,1,'L');
+	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"a cet effet ,je vous demande de bien vouloire compléter votre dossier d 'ouverture dans un delais d'une année  ",0,1,'L');
+	
+	$pdf->SetXY(145,$pdf->GetY()+25);$pdf->Cell(20,5,"LE DIRECTEUR DE LA SANTÉ ",0,1,'R');
+	
+	
 	$pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
 	$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
 	$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
@@ -106,7 +134,7 @@ while($rowx=mysql_fetch_object($requetex))
 	}
 
 	$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(40,5,"",0,0,'R');$pdf->Cell(40,5,"ACCOMPLI",0,0,'L');$pdf->Cell(10,5,"",1,0,'L');                      $pdf->SetXY(110,$pdf->GetY());$pdf->Cell(40,5,"",0,0,'R');$pdf->Cell(40,5,"ACCOMPLI",0,0,'L');$pdf->Cell(10,5,"X",1,1,'C');
-	$pdf->SetXY(5,$pdf->GetY()+2);$pdf->Cell(40,5,"SERVICE NATIONAL",0,0,'C');$pdf->Cell(40,5,"NON ACCOMPLI",0,0,'L');$pdf->Cell(10,5,"",1,0,'L');  $pdf->SetXY(110,$pdf->GetY());$pdf->Cell(40,5,"CERVICE CIVIL",0,0,'C');$pdf->Cell(40,5,"NON ACCOMPLI",0,0,'L');$pdf->Cell(10,5,"",1,1,'L');
+	$pdf->SetXY(5,$pdf->GetY()+2);$pdf->Cell(40,5,"SERVICE NATIONAL",0,0,'C');$pdf->Cell(40,5,"NON ACCOMPLI",0,0,'L');$pdf->Cell(10,5,"",1,0,'L');  $pdf->SetXY(110,$pdf->GetY());$pdf->Cell(40,5,"SERVICE CIVIL",0,0,'C');$pdf->Cell(40,5,"NON ACCOMPLI",0,0,'L');$pdf->Cell(10,5,"",1,1,'L');
 	$pdf->SetXY(5,$pdf->GetY()+2);$pdf->Cell(40,5,"",0,0,'R');$pdf->Cell(40,5,"EXEMPTE",0,0,'L');$pdf->Cell(10,5,"",1,0,'L');                       $pdf->SetXY(110,$pdf->GetY());$pdf->Cell(40,5,"",0,0,'R');$pdf->Cell(40,5,"EXEMPTE",0,0,'L');$pdf->Cell(10,5,"",1,1,'L');
 	$pdf->SetXY(110,$pdf->GetY()+5);$pdf->Cell(90,5,"LIEU D'ACCOMPLISSEMENT DU SERVICE CIVIL :",0,0,'C');
 	$pdf->SetXY(110,$pdf->GetY()+5);$pdf->Cell(90,5,"......................................................................................",0,0,'C');
@@ -249,5 +277,8 @@ $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,' السيـــــــــد (
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,$adressear. ' بلدية : '.$communear ,0,1,'C');
 $pdf->SetXY(85,$pdf->GetY()+2);$pdf->Cell(120,5,'Tel : '.$Mobile ,0,1,'C');
 $pdf->dossierm($NUMD,$DATED,$NAT,$communear,$sexe,"عيادة طبية متخصصة");
+
+
+
 $pdf->Output($nomfr.'_'.$prenomfr.'.pdf','I');
 ?>
