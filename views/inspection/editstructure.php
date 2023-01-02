@@ -44,7 +44,7 @@ $data = array(
 "ADRESSEAR"    => $this->user[0]['ADRESSEAR'],
 "butun"        => 'Edite  Structure' 	
 );
-view::structure_sanitaire($data,"Modifier Structure Sanitaire : ".$data['NOM'].'_'.$data['PRENOM']);
+Inspectionx::structure_sanitaire($data,"Modifier Structure Sanitaire : ".$data['NOM'].'_'.$data['PRENOM']);
 ?>
 
 <script type="text/javascript">

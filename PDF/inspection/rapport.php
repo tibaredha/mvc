@@ -299,8 +299,63 @@ if ($_POST['type']=='14')
 	// $pdf->enteteinspectionp($datejour1,$datejour2,'BILAN ANNUEL << CHIFFRE >> DES INSPECTIONS EFFECTUÉES PAR LES PRATICIENS INSPECTEURS',$EPH);$pdf->pied();
 	// }
 }
-
-
+//****************liste de garde
+if ($_POST['type']=='15') 
+{
+	if ($_POST['EPH']=='12') //pharmacie 
+	{
+		$pdf->AddPage('p','A4');
+		$pdf->entete($datejour1,$datejour2,'liste de garde  par commune : ',$EPH1);
+		// $pdf->pharmacie($EPH);
+		// $pdf->AddPage('L','A4');
+		// $pdf->entetel($datejour1,$datejour2,"Repartition par date d'inspection/anomalie constatée  : ",$EPH1);
+		// $pdf->repartanomx($datejour1,$datejour2,$EPH);
+		$an=2023;
+		$mois=01;
+		$jour = date("d");
+		$debut = mktime(0,0,0,$mois,1,$an);    
+		$premJour = date("w" , $debut );    //1er jour dans la grille 
+		$nbJours  = date("t" , $debut);      //nb de jours dans le mois
+		$numero_semaine=date("W");          //nbr de semaine 
+		$jour_semaine=date("w",mktime(0,0,0,$mois,1,$an)); // Jour de la semaine au format numê³©que 0 (pour dimanche) à ¶ (pour samedi)
+		$nbEmptyCells = ($premJour + 6)%7;
+		
+		$h=7;
+		$pdf->SetXY(8,$pdf->GetY()+$h); 
+		$pdf->cell(30,$h,"date",1,0,'C',1,0);
+		$pdf->cell(40,$h,"1er pharmacien",1,0,'C',1,0);
+		$pdf->cell(40,$h,"2eme pharmacien",1,0,'C',1,0);
+		$pdf->cell(40,$h,"3eme pharmacien",1,0,'C',1,0);
+		$pdf->cell(40,$h,"observation",1,0,'C',1,0);	
+		
+		
+		for ($i=1;$i<=$nbJours;$i++) 
+		{
+			//$pdf->SetXY(8,$pdf->GetY()+$h); 
+			//$pdf->cell(30,$h,$pdf->dateUS2FR($pdf->datePlus("00-".$mois."-".$an,$i)),1,0,'C',1,0);
+			// $pdf->cell(40,$h,"",1,0,'C',0,0);
+			// $pdf->cell(40,$h,"",1,0,'C',0,0);
+			// $pdf->cell(40,$h,"",1,0,'C',0,0);
+			// $pdf->cell(40,$h,"",1,0,'C',0,0);		
+		}
+		$pdf->mysqlconnect();
+		$query = "SELECT * from structure where STRUCTURE=12 and COMMUNEN=916 and ETAT=0 ORDER BY NOM"; 
+		$res=mysql_query($query);
+		$tot=mysql_num_rows($res);
+		$pdf->SetXY(8,$pdf->GetY()+$h); 
+		$x=0;
+		while($row=mysql_fetch_object($res))
+		{
+			$pdf->cell(30,5,$pdf->dateUS2FR($pdf->datePlus("00-".$mois."-".$an,$x=$x+1)),1,0,'C',0);
+			$pdf->cell(60,5,strtoupper($row->NOM).'_'.ucwords(strtolower($row->PRENOM)),1,0,'L',0,0);
+			$pdf->SetXY(8,$pdf->GetY()+5);  
+		}
+		
+	}
+	
+	
+	
+}
 //**********************************************en fonction de la structure *****************************************************************//	
 // 
 $pdf->Output();

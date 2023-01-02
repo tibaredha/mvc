@@ -19,22 +19,18 @@ $query_listex = "SELECT * FROM structure WHERE id  ='$ids' ";//
 $requetex = mysql_query( $query_listex ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 while($rowx=mysql_fetch_object($requetex))
 {
-$pdf->AddPage();$pdf->SetFont('aefurat', '', 12);
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dspar,0,1,'C');$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,$pdf->dspfr,0,1,'C');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'Inspection santé publique',0,1,'L');$pdf->SetXY(155,$pdf->GetY()-5);$pdf->Cell(50,5,'مفتشية الصــــحة العموميـة',0,1,'R');
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"N° : ___________ /".date('Y'),0,1,'L');//$pdf->SetXY(155,$pdf->GetY()-5);$pdf->Cell(50,5,'الرقم : ___________/'.date('Y'),0,1,'R');
-$pdf->SetFont('aefurat', '', 15);
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,"Procés Verbal de Conformité d'un établissement hospitalier privé. ",0,1,'C');
-$pdf->SetFont('aefurat', '', 10);$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"REF : Arrête N°00/MSP/MIN du 00 xx 0000 ",0,1,'C');$pdf->SetFont('aefurat', '', 12);
+	
+	$pdf->entetepvc("D'UN ÉTABLISSEMENT HOSPITALIER PRIVÉ","Arrête N°00/MSP/MIN du 00 xx 0000");
+
 //Circulaire N°04/MSP/DSS/SDCC du 26 avril 1998  
 // A/S Exercice à titre privé de la médecine au sein des cliniques et autres
 // structures privées de santé dans un cadre associatif.
 
 $nomfr=$rowx->NOM;
 $prenomfr=$rowx->PRENOM;
-$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"Promoteur Mr : ".strtoupper($rowx->NOM).'_'.strtolower ($rowx->PRENOM),0,1,'C');$pdf->SetFont('aefurat', '', 12);
+//$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,"Promoteur Mr : ".strtoupper($rowx->NOM).'_'.strtolower ($rowx->PRENOM),0,1,'C');$pdf->SetFont('aefurat', '', 12);
+
+
 $query_listey = "SELECT * FROM home WHERE id  ='$idh' ";$requetey = mysql_query( $query_listey ) or die( "ERREUR MYSQL numéro: ".mysql_errno()."<br>Type de cette erreur: ".mysql_error()."<br>\n" );
 while($rowy=mysql_fetch_object($requetey))
 {

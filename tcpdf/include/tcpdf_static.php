@@ -109,6 +109,7 @@ class TCPDF_STATIC {
 	/**
 	 * Array of page formats
 	 * measures are calculated in this way: (inches * 72) or (millimeters * 72 / 25.4)
+	 * exemple : A4 = 210x297 = 210x72/25.4 = 595.276    
 	 * @public static
 	 */
 	public static $page_formats = array(

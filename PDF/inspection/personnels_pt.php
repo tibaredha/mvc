@@ -17,7 +17,7 @@ $pdf->SetXY(05,15);$pdf->cell(285,5,$pdf->dspfr,1,0,'C',1,0);
 $pdf->Text(240,25," LE : ".date('d-m-Y'));
 $pdf->Text(05,30,"INSPECTION SANTE PUBLIQUE");
 $pdf->Text(05,35,"N ... /".date('Y'));
-$pdf->Text(60,35,"Fiche personnels en service : ".$pdf->nbrtostring('structure','id',$idt,'NOM').'_'.$pdf->nbrtostring('structure','id',$idt,'PRENOM') );
+$pdf->Text(60,35,"Fiche personnels en service plein temps : ".$pdf->nbrtostring('structure','id',$idt,'NOM').'_'.$pdf->nbrtostring('structure','id',$idt,'PRENOM') );
 $pdf->Text(60,40,"Du  ".date("d-m-Y"));
 
 $h=50;
@@ -26,18 +26,18 @@ $pdf->SetXY(05,$h);
 $pdf->cell(10,10,"N°",1,0,1,'C',0);
 $pdf->cell(40,10,"NOMFR",1,0,'C',1,0);
 $pdf->cell(40,10,"PRENOMFR",1,0,'C',1,0);
-$pdf->cell(20,10,"TEMPS",1,0,'C',1,0);
 $pdf->cell(20,10,"Categorie",1,0,'C',1,0);
 $pdf->cell(45,10,"SPECIALITE",1,0,'C',1,0);
-$pdf->cell(30,10,"CASNOS",1,0,'C',1,0);
+$pdf->cell(60,10,"N° CNAS/CASNOS",1,0,'C',1,0);
 $pdf->cell(35,10,"DEBUTCONTRAT",1,0,'C',1,0);
 $pdf->cell(35,10,"FINCONTRAT",1,0,'C',1,0);
-$pdf->cell(10,10,"ETAT",1,0,'C',1,0);
+//$pdf->cell(10,10,"ETAT",1,0,'C',1,0);
 $pdf->SetXY(05,$h+10); 
 $pdf->mysqlconnect();
 $pdf->SetFont('Arial', '',9, '', true);
 mysql_query("SET NAMES 'UTF8' ");
-$query = "SELECT * FROM pers where  idt=$idt and ETAT=0 ORDER BY PRENOMFR ";//      
+
+$query = 'SELECT * FROM pers where idt='.$idt.' and ETAT=0 and TP = 0 ORDER BY PRENOMFR ';      
 $resultat=mysql_query($query);
 $totalmbr1=mysql_num_rows($resultat);
 $x=0;
@@ -47,19 +47,19 @@ $pdf->SetFillColor(200 );
 $pdf->cell(10,5,$x=$x+1,1,0,'C',0);
 $pdf->cell(40,5,$row->PRENOMFR,1,0,'L',0);
 $pdf->cell(40,5,$row->NOMFR,1,0,'L',0);
-if ($row->TP== 0){$pdf->cell(20,5,"plein",1,0,'C',0);}else {$pdf->cell(20,5,"partiel",1,0,'C',0);}
+//if ($row->TP== 0){$pdf->cell(20,5,"plein",1,0,'C',0);}else {$pdf->cell(20,5,"partiel",1,0,'C',0);}
 $pdf->cell(20,5,$row->Categorie,1,0,'C',0);
 $pdf->cell(45,5,$pdf->nbrtostring("specialite","idspecialite",$row->SPECIALITE,"specialitefr"),1,0,'L',0);
-$pdf->cell(30,5,$row->CASNOS,1,0,'C',0);
+$pdf->cell(60,5,$row->CASNOS,1,0,'C',0);
 $pdf->cell(35,5,$pdf->dateUS2FR($row->DEBUTCONTRAT),1,0,'C',0);
 $pdf->cell(35,5,$pdf->dateUS2FR($row->FINCONTRAT),1,0,'C',0);
-if($row->ETAT==0){
-$pdf->cell(10,5,"ok",1,0,'C',0); 	
-}
-else{
-$pdf->SetFillColor(200 );	
-$pdf->cell(10,5,"***",1,0,'C',1,0); 	
-}
+// if($row->ETAT==0){
+// $pdf->cell(10,5,"ok",1,0,'C',0); 	
+// }
+// else{
+// $pdf->SetFillColor(200 );	
+// $pdf->cell(10,5,"***",1,0,'C',1,0); 	
+// }
 $pdf->SetXY(5,$pdf->GetY()+5); 
 }
 $pdf->SetFillColor(200);

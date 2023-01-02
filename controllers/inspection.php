@@ -3,6 +3,7 @@ class inspection extends Controller {
 
     private $route  = 'inspection';
     public $uploadLocation = "D:/mvc/public/webcam/str/"; 
+	
 	function __construct() {
 	   parent::__construct();
 	}
@@ -38,6 +39,18 @@ class inspection extends Controller {
 		$this->model->editinspecteurx($data);
 		header('location: ' . URL . $this->route.'/inspecteur/');
 	}
+	
+	public function deleteinspecteur($id)
+	{
+		
+	//echo $id;	
+		
+	$this->model->deleteinspecteur($id); 
+	header('location: ' . URL .$this->route. '/inspecteur');	
+		
+	}
+	
+	
 	
    //***searchdeces***/userSearchx
 	function search()
@@ -1725,7 +1738,8 @@ class inspection extends Controller {
 	{
 	$this->view->title = 'nstructure';
 	$this->view->user = $this->model->userSinglestructure($id);
-	$this->view->userListview = $this->model->persSingleList($id);
+	$this->view->userListview  = $this->model->persSingleList($id);
+	$this->view->userListview1  = $this->model->persSingleList1($id);
 	$this->view->userListview2 = $this->model->persSingleList2($id);
 	
 	$this->view->render($this->route.'/pers');    

@@ -1,5 +1,11 @@
 <?php
 class View {
+	
+	public $db_host='localhost';
+	public $db_name='mvc';   
+	public $db_user='root';
+	public $db_pass="";
+	public $utf8 = "" ;
 
 	function __construct() {
 		//echo 'this is the view';
@@ -16,6 +22,36 @@ class View {
 			require 'views/footer.php';	
 		}
 	}
+	//*************************************************************************************************//
+    public function mysqliconnect()
+	{
+		
+		$cnx = mysqli_connect($this->db_host,$this->db_user,$this->db_pass)or die ('I cannot connect to the database because: ' . mysql_error());
+		$db  = mysqli_select_db($cnx,$this->db_name) ;
+		mysqli_query($cnx,"SET NAMES 'UTF8' ");
+		return $db;
+	}
+	
+	
+	
+	
+	//******************************************* Insepction ******************************************//
+	function afi1()
+	{
+		echo "tibaredhaddddddd1";
+		//echo $this->db_hostx;
+	}
+	
+	
+	//*************************************************************************************************//
+	
+	
+	
+	
+	
+	//******************************************* ********** ******************************************//
+	//*************************************************************************************************//
+	
 
 	function combograde($x,$y,$name,$class,$tb_name,$value,$selected,$ids) 
 		{
@@ -32,73 +68,72 @@ class View {
 		echo "</div>";
 		}
 
-	function structure_sanitaire($data,$titre) 
-	{
-	view::button($data['btn'],'');	
-	echo "<h2>$titre</h2 ><br />";
-	$this->f0(URL.$data['action'],'post');
-	View::photosurl(1170,210,URL.$data['photos']);
-	$x=50;$y=60;
-	$this->label($x,$y+160,'Nature');            $this->combov1($x+100,$y+150,'NATURE',$data['NATURE']);
-	$this->label($x+350,$y+160,'Instalation');   $this->txts($x+450,$y+150,'DATE',0,$data['DATE'],'dateus');  
-	$this->label($x,$y+190,'Nom');               $this->txt($x+100,$y+180,'NOM',0,$data['NOM'],'date');                                          
-	$this->label($x+350,$y+190,'Prenom');        $this->txt($x+450,$y+180,'PRENOM',0,$data['PRENOM'],'date');                                             
-	$this->label($x+700,$y+190,'Sexe');          $this->combov1($x+800,$y+180,'SEXE',$data['SEXE']);
-	$this->label($x,$y+220,'Naissance');         $this->txts($x+100,$y+210,'DNS',0,$data['DNS'],'dateus6');
-	$this->label($x+350,$y+220,'Wilaya');        $this->WILAYA($x+450,$y+210,'WILAYAN','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
-	$this->label($x+700,$y+220,'Commune');       $this->COMMUNE($x+800,$y+210,'COMMUNEN','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);          
-	$this->label($x,$y+230,'__________________________________________________________________________________________________________________');
-	$this->label($x,$y+260,'Type');              $this->combostructure($x+100,$y+250,'STRUCTURE','structurebis',$data['STRUCTURE1'],$data['STRUCTURE2'],'class','id','structure');
-	$this->label($x+350,$y+260,'Spécialite');    $this->specialite($x+450,$y+250,'SPECIALITE',$data['specialite1'],$data['specialite2'],'classspecialite');
+	// function structure_sanitaire($data,$titre) 
+	// {
+	// view::button($data['btn'],'');	
+	// echo "<h2>$titre</h2 ><br />";
+	// $this->f0(URL.$data['action'],'post');
+	// View::photosurl(1170,210,URL.$data['photos']);
+	// $x=50;$y=60;
+	// $this->label($x,$y+160,'Nature');            $this->combov1($x+100,$y+150,'NATURE',$data['NATURE']);
+	// $this->label($x+350,$y+160,'Instalation');   $this->txts($x+450,$y+150,'DATE',0,$data['DATE'],'dateus');  
+	// $this->label($x,$y+190,'Nom');               $this->txt($x+100,$y+180,'NOM',0,$data['NOM'],'date');                                          
+	// $this->label($x+350,$y+190,'Prenom');        $this->txt($x+450,$y+180,'PRENOM',0,$data['PRENOM'],'date');                                             
+	// $this->label($x+700,$y+190,'Sexe');          $this->combov1($x+800,$y+180,'SEXE',$data['SEXE']);
+	// $this->label($x,$y+220,'Naissance');         $this->txts($x+100,$y+210,'DNS',0,$data['DNS'],'dateus6');
+	// $this->label($x+350,$y+220,'Wilaya');        $this->WILAYA($x+450,$y+210,'WILAYAN','country','mvc','wil',$data['WILAYAN1'],$data['WILAYAN2']);
+	// $this->label($x+700,$y+220,'Commune');       $this->COMMUNE($x+800,$y+210,'COMMUNEN','COMMUNEN',$data['COMMUNEN1'],$data['COMMUNEN2']);          
+	// $this->label($x,$y+230,'__________________________________________________________________________________________________________________');
+	// $this->label($x,$y+260,'Type');              $this->combostructure($x+100,$y+250,'STRUCTURE','structurebis',$data['STRUCTURE1'],$data['STRUCTURE2'],'class','id','structure');
+	// $this->label($x+350,$y+260,'Spécialite');    $this->specialite($x+450,$y+250,'SPECIALITE',$data['specialite1'],$data['specialite2'],'classspecialite');
 	
-	$this->label($x,$y+290,'Universite');           $this->UNIVERSITE($x+100,$y+280,'UNIV','univ','mvc','wil',$data['UNIV0'],$data['UNIV1']); 
-	$this->label($x,$y+290+30,'Date diplome');      $this->txts($x+100,$y+280+30,'DIPLOME',0,	$data['DIPLOME'],'dateus44');
+	// $this->label($x,$y+290,'Universite');           $this->UNIVERSITE($x+100,$y+280,'UNIV','univ','mvc','wil',$data['UNIV0'],$data['UNIV1']); 
+	// $this->label($x,$y+290+30,'Date diplome');      $this->txts($x+100,$y+280+30,'DIPLOME',0,	$data['DIPLOME'],'dateus44');
 	
 	
-	$this->label($x+350,$y+290,'Order N ');        $this->txt($x+450,$y+280,'NUMORDER',0,$data['NUMORDER'],'date');
-	$this->label($x+350,$y+320,'Date order');      $this->txts($x+450,$y+280+30,'DATEORDER',0,$data['DATEORDER'],'dateusx');  
-	$this->label($x+700,$y+290,'Démission N');     $this->txt($x+800,$y+280,'NUMDEM',0,$data['NUMDEM'],'date');
-	$this->label($x+700,$y+320,'Date Démission');  $this->txts($x+800,$y+280+30,'DATEDEM',0,$data['DATEDEM'],'dateusy');  
-	$this->label($x,$y+350,'Date service');        $this->txts($x+100,$y+280+60,'DATEDSC',0,$data['DATEDSC'],'datesc');  
+	// $this->label($x+350,$y+290,'Order N ');        $this->txt($x+450,$y+280,'NUMORDER',0,$data['NUMORDER'],'date');
+	// $this->label($x+350,$y+320,'Date order');      $this->txts($x+450,$y+280+30,'DATEORDER',0,$data['DATEORDER'],'dateusx');  
+	// $this->label($x+700,$y+290,'Démission N');     $this->txt($x+800,$y+280,'NUMDEM',0,$data['NUMDEM'],'date');
+	// $this->label($x+700,$y+320,'Date Démission');  $this->txts($x+800,$y+280+30,'DATEDEM',0,$data['DATEDEM'],'dateusy');  
+	// $this->label($x,$y+350,'Date service');        $this->txts($x+100,$y+280+60,'DATEDSC',0,$data['DATEDSC'],'datesc');  
 	
-	$this->label($x+350,$y+350,'Wilya ser-civil'); 
-	$this->WILAYA($x+450,$y+340,'WSC','WSC','mvc','wil',$data['WSC0'],$data['WSC1']);
+	// $this->label($x+350,$y+350,'Wilya ser-civil'); 
+	// $this->WILAYA($x+450,$y+340,'WSC','WSC','mvc','wil',$data['WSC0'],$data['WSC1']);
 	 
 	
-	$this->label($x+700,$y+350,'Etab ser-civil'); 
-	$this->COMMUNE($x+800,$y+340,'SERVICECIVILE','ETABSC',$data['SERVICECIVILE0'],$data['SERVICECIVILE1']); 
+	// $this->label($x+700,$y+350,'Etab ser-civil'); 
+	// $this->COMMUNE($x+800,$y+340,'SERVICECIVILE','ETABSC',$data['SERVICECIVILE0'],$data['SERVICECIVILE1']); 
 	
-	$y=90;                                        //SERVICECIVILE ($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
-	$this->label($x,$y+340,'__________________________________________________________________________________________________________________');
-	$this->label($x,$y+370,'Wilaya');            $this->WILAYA($x+100,$y+360,'WILAYAR','countryr','mvc','wil',$data['WILAYAR1'],$data['WILAYAR2']);
-	$this->label($x+350,$y+370,'Commune');       $this->COMMUNE($x+100+350,$y+360,'COMMUNER','COMMUNER',$data['COMMUNER1'],$data['COMMUNER2']);            
-	$this->label($x+700,$y+370,'Adresse');       $this->txt($x+800,$y+360,'ADRESSE',0,$data['ADRESSE'],'date');
-	$this->label($x,$y+400,'Propriétaire');      $this->txt($x+100,$y+390,'PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');                        
-	$this->label($x+350,$y+400,'Début contrat'); $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');                            
-	$this->label($x+700,$y+400,'Fin contrat');  $this->txts($x+800,$y+390,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus2');
-	$this->label($x,$y+430,'Mobile');            $this->txts($x+100,$y+420,'Mobile',0,$data['Mobile'],'port');
-	$this->label($x+350,$y+430,'Fixe');          $this->txts($x+450,$y+420,'Fixe',0,$data['Fixe'],'phone');
-	$this->label($x+700,$y+430,'E-mail');        $this->txt($x+800,$y+420,'Email',0,  $data['Email'],'date');
-	$this->label($x,$y+437+15,'__________________________________________________________________________________________________________________');
+	// $y=90;                                        //SERVICECIVILE ($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
+	// $this->label($x,$y+340,'__________________________________________________________________________________________________________________');
+	// $this->label($x,$y+370,'Wilaya');            $this->WILAYA($x+100,$y+360,'WILAYAR','countryr','mvc','wil',$data['WILAYAR1'],$data['WILAYAR2']);
+	// $this->label($x+350,$y+370,'Commune');       $this->COMMUNE($x+100+350,$y+360,'COMMUNER','COMMUNER',$data['COMMUNER1'],$data['COMMUNER2']);            
+	// $this->label($x+700,$y+370,'Adresse');       $this->txt($x+800,$y+360,'ADRESSE',0,$data['ADRESSE'],'date');
+	// $this->label($x,$y+400,'Propriétaire');      $this->txt($x+100,$y+390,'PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');                        
+	// $this->label($x+350,$y+400,'Début contrat'); $this->txts($x+450,$y+390,'DEBUTCONTRAT',0,$data['DEBUTCONTRAT'],'dateus1');                            
+	// $this->label($x+700,$y+400,'Fin contrat');  $this->txts($x+800,$y+390,'FINCONTRAT',0,$data['FINCONTRAT'],'dateus2');
+	// $this->label($x,$y+430,'Mobile');            $this->txts($x+100,$y+420,'Mobile',0,$data['Mobile'],'port');
+	// $this->label($x+350,$y+430,'Fixe');          $this->txts($x+450,$y+420,'Fixe',0,$data['Fixe'],'phone');
+	// $this->label($x+700,$y+430,'E-mail');        $this->txt($x+800,$y+420,'Email',0,  $data['Email'],'date');
+	// $this->label($x,$y+437+15,'__________________________________________________________________________________________________________________');
 	
 	
-	$this->label($x,$y+480,'N° Realisation');   $this->txt($x+100,$y+470,'NREALISATION',0,$data['NREALISATION'],'date');
-	$this->label($x,$y+510,'Realisation');      $this->txts($x+100,$y+500,'REALISATION',0,$data['REALISATION'],'dateus3');                      
+	// $this->label($x,$y+480,'N° Realisation');   $this->txt($x+100,$y+470,'NREALISATION',0,$data['NREALISATION'],'date');
+	// $this->label($x,$y+510,'Realisation');      $this->txts($x+100,$y+500,'REALISATION',0,$data['REALISATION'],'dateus3');                      
 	
-	$this->label($x+350,$y+480,'N° Ouverture'); $this->txt($x+450,$y+470,'NOUVERTURE',0,$data['NOUVERTURE'],'date');
-	$this->label($x+350,$y+510,'Ouverture');    $this->txts($x+450,$y+500,'OUVERTURE',0,$data['OUVERTURE'],'dateus4');                         
+	// $this->label($x+350,$y+480,'N° Ouverture'); $this->txt($x+450,$y+470,'NOUVERTURE',0,$data['NOUVERTURE'],'date');
+	// $this->label($x+350,$y+510,'Ouverture');    $this->txts($x+450,$y+500,'OUVERTURE',0,$data['OUVERTURE'],'dateus4');                         
 	
-	$this->label($x+700,$y+480,'N° Fermeture'); $this->txt($x+800,$y+470,'NFERMETURE',0,$data['NFERMETURE'],'date');
-	$this->label($x+700,$y+510,'Fermeture');    $this->txts($x+800,$y+500,'FERMETURE',0,$data['FERMETURE'],'dateus5');                      
+	// $this->label($x+700,$y+480,'N° Fermeture'); $this->txt($x+800,$y+470,'NFERMETURE',0,$data['NFERMETURE'],'date');
+	// $this->label($x+700,$y+510,'Fermeture');    $this->txts($x+800,$y+500,'FERMETURE',0,$data['FERMETURE'],'dateus5');                      
 
-	$this->label($x,$y+500+23,'__________________________________________________________________________________________________________________');
-	$this->label($x+700,$y+550,'اللقب');         $this->txtarid($x+800,$y+540,'NOMAR','NOMAR',0,$data['NOMAR'],'date');$this->label($x+350,$y+550,'الاســـــــم');   $this->txtarid($x+450,$y+540,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date'); $this->label($x,$y+550,'العنوان');           $this->txtarid($x+100,$y+540,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
-	$this->submit($x+1140,$y+520,$data['butun']);
-	$this->f1();
-	view::sautligne(19);
-	ob_end_flush();	
-		
-	}
+	// $this->label($x,$y+500+23,'__________________________________________________________________________________________________________________');
+	// $this->label($x+700,$y+550,'اللقب');         $this->txtarid($x+800,$y+540,'NOMAR','NOMAR',0,$data['NOMAR'],'date');$this->label($x+350,$y+550,'الاســـــــم');   $this->txtarid($x+450,$y+540,'PRENOMAR','PRENOMAR',0,$data['PRENOMAR'],'date'); $this->label($x,$y+550,'العنوان');           $this->txtarid($x+100,$y+540,'ADRESSEAR','ADRESSEAR',0,$data['ADRESSEAR'],'date');
+	// $this->submit($x+1140,$y+520,$data['butun']);
+	// $this->f1();
+	// view::sautligne(19);
+	// ob_end_flush();		
+	// }
 	
 	
 	// function WILAYA($x,$y,$name,$class,$db_name,$tb_name,$value,$selected) 
@@ -3595,104 +3630,104 @@ echo "</table>\n";
  
 function barre_navigation ($nb_total,$nb_affichage_par_page,$o,$q,$p,$nb_liens_dans_la_barre,$c,$m)//$c= controleure ,$m=methode
 {
-$barre = '';
-// 1 on recherche l'URL courante munie de ses param鵲e auxquels on ajoute le param鵲e'debut' qui jouera le role du premier ꭩment de notre LIMIT
-$query = URL.$c.'/'.$m.'/'.$p.'/'.$nb_affichage_par_page.'?q='.$q.'&o='.$o.'';	 
-// on calcul le num곯 de la page active
-$page_active = floor(($p/$nb_affichage_par_page)+1);
-// on calcul le nombre de pages total que va prendre notre affichage
-$nb_pages_total = ceil($nb_total/$nb_affichage_par_page);
-// la fonction ceil arrondie au nbr sup
-// on calcul le premier numero de la barre qui va s'afficher, ainsi que le dernier($cpt_deb et $cpt_fin) 
-// exemple : 2 3 4 5 6 7 8 9 10 11 << $cpt_deb = 2 et $cpt_fin = 11
-	if ($nb_liens_dans_la_barre%2==0) 
-	{
-		$cpt_deb1 = $page_active - ($nb_liens_dans_la_barre/2)+1;
-		$cpt_fin1 = $page_active + ($nb_liens_dans_la_barre/2);
-	}
-	else 
-	{
-		$cpt_deb1 = $page_active - floor(($nb_liens_dans_la_barre/2));
-		$cpt_fin1 = $page_active + floor(($nb_liens_dans_la_barre/2));
-	}
-	
-	if ($cpt_deb1 <= 1) 
-	{
-		$cpt_deb = 1;
-		$cpt_fin = $nb_liens_dans_la_barre;
-	}
-	elseif ($cpt_deb1>1 && $cpt_fin1<$nb_pages_total) 
-	{
-		$cpt_deb = $cpt_deb1;
-		$cpt_fin = $cpt_fin1;
-	}
-	else 
-	{
-		$cpt_deb = ($nb_pages_total-$nb_liens_dans_la_barre)+1;
-		$cpt_fin = $nb_pages_total;
-	}
-	
-	if ($nb_pages_total <= $nb_liens_dans_la_barre) {
-	$cpt_deb=1;
-	$cpt_fin=$nb_pages_total;
-	}
-	// si le premier num곯 qui s'affiche est diff곥nt de 1, on affiche << qui sera unlien vers la premiere page
-	if ($cpt_deb != 1) 
-	{
-		$cible = URL.$c.'/'.$m.'/'.(0).'/'.$nb_affichage_par_page.'?q='.$q.'&o='.$o.''; 
-		$lien = '<A HREF="'.$cible.'">&lt;&lt;</A>&nbsp;&nbsp;';
-	}
-	else 
-	{
-	$lien='';
-	}
-	
-	$barre .= $lien;
-
-	// on affiche tous les liens de notre barre, tout en v곩fiant de ne pas mettre delien pour la page active
-
-	for ($cpt = $cpt_deb; $cpt <= $cpt_fin; $cpt++) 
-	{
-		if ($cpt == $page_active) 
+	$barre = '';
+	// 1 on recherche l'URL courante munie de ses param auxquels on ajoute le parame'debut' qui jouera le role du premier ment de notre LIMIT
+	$query = URL.$c.'/'.$m.'/'.$p.'/'.$nb_affichage_par_page.'?q='.$q.'&o='.$o.'';	 
+	// on calcul le num곯 de la page active
+	$page_active = floor(($p/$nb_affichage_par_page)+1);
+	// on calcul le nombre de pages total que va prendre notre affichage
+	$nb_pages_total = ceil($nb_total/$nb_affichage_par_page);
+	// la fonction ceil arrondie au nbr sup
+	// on calcul le premier numero de la barre qui va s'afficher, ainsi que le dernier($cpt_deb et $cpt_fin) 
+	// exemple : 2 3 4 5 6 7 8 9 10 11 << $cpt_deb = 2 et $cpt_fin = 11
+		if ($nb_liens_dans_la_barre%2==0) 
 		{
-			if ($cpt == $nb_pages_total) {
-			$barre .= $cpt;
-			}
-			else {
-			$barre .= $cpt.'&nbsp;-&nbsp;';
-			}
+			$cpt_deb1 = $page_active - ($nb_liens_dans_la_barre/2)+1;
+			$cpt_fin1 = $page_active + ($nb_liens_dans_la_barre/2);
 		}
 		else 
 		{
-			if ($cpt == $cpt_fin) {
-			$barre .= "<A HREF='".URL.$c.'/'.$m.'/'.(($cpt-1)*$nb_affichage_par_page).'/'.$nb_affichage_par_page.'?q='.$q.'&o='.$o.'';  
-			$barre .= "'>".'['.$cpt.']'."</A>";
+			$cpt_deb1 = $page_active - floor(($nb_liens_dans_la_barre/2));
+			$cpt_fin1 = $page_active + floor(($nb_liens_dans_la_barre/2));
+		}
+		
+		if ($cpt_deb1 <= 1) 
+		{
+			$cpt_deb = 1;
+			$cpt_fin = $nb_liens_dans_la_barre;
+		}
+		elseif ($cpt_deb1>1 && $cpt_fin1<$nb_pages_total) 
+		{
+			$cpt_deb = $cpt_deb1;
+			$cpt_fin = $cpt_fin1;
+		}
+		else 
+		{
+			$cpt_deb = ($nb_pages_total-$nb_liens_dans_la_barre)+1;
+			$cpt_fin = $nb_pages_total;
+		}
+		
+		if ($nb_pages_total <= $nb_liens_dans_la_barre) {
+		$cpt_deb=1;
+		$cpt_fin=$nb_pages_total;
+		}
+		// si le premier num곯 qui s'affiche est diff곥nt de 1, on affiche << qui sera unlien vers la premiere page
+		if ($cpt_deb != 1) 
+		{
+			$cible = URL.$c.'/'.$m.'/'.(0).'/'.$nb_affichage_par_page.'?q='.$q.'&o='.$o.''; 
+			$lien = '<A HREF="'.$cible.'">&lt;&lt;</A>&nbsp;&nbsp;';
+		}
+		else 
+		{
+		$lien='';
+		}
+		
+		$barre .= $lien;
+
+		// on affiche tous les liens de notre barre, tout en v곩fiant de ne pas mettre delien pour la page active
+
+		for ($cpt = $cpt_deb; $cpt <= $cpt_fin; $cpt++) 
+		{
+			if ($cpt == $page_active) 
+			{
+				if ($cpt == $nb_pages_total) {
+				$barre .= $cpt;
+				}
+				else {
+				$barre .= $cpt.'&nbsp;-&nbsp;';
+				}
 			}
-			else {
-			$barre .= "<A HREF='".URL.$c.'/'.$m.'/'.(($cpt-1)*$nb_affichage_par_page).'/'.$nb_affichage_par_page.'?q='.$q.'&o='.$o.'';  
-			$barre .= "'>".'['.$cpt.']'."</A>&nbsp;-&nbsp;";
+			else 
+			{
+				if ($cpt == $cpt_fin) {
+				$barre .= "<A HREF='".URL.$c.'/'.$m.'/'.(($cpt-1)*$nb_affichage_par_page).'/'.$nb_affichage_par_page.'?q='.$q.'&o='.$o.'';  
+				$barre .= "'>".'['.$cpt.']'."</A>";
+				}
+				else {
+				$barre .= "<A HREF='".URL.$c.'/'.$m.'/'.(($cpt-1)*$nb_affichage_par_page).'/'.$nb_affichage_par_page.'?q='.$q.'&o='.$o.'';  
+				$barre .= "'>".'['.$cpt.']'."</A>&nbsp;-&nbsp;";
+				}
 			}
 		}
-	}
 
-    $fin = ($nb_total - ($nb_total % $nb_affichage_par_page));
-	if (($nb_total % $nb_affichage_par_page) == 0) 
-	{
-	$fin = $fin - $nb_affichage_par_page;
-	}
-   // si $cpt_fin ne vaut pas la derni鳥 page de la barre de navigation, on afficheun >> qui sera un lien vers la derni鳥 page de navigation
+		$fin = ($nb_total - ($nb_total % $nb_affichage_par_page));
+		if (($nb_total % $nb_affichage_par_page) == 0) 
+		{
+		$fin = $fin - $nb_affichage_par_page;
+		}
+	   // si $cpt_fin ne vaut pas la derni鳥 page de la barre de navigation, on afficheun >> qui sera un lien vers la derni鳥 page de navigation
 
-	if ($cpt_fin != $nb_pages_total) 
-	{
-	$cible = URL.$c.'/'.$m.'/'.$fin.'/'.$nb_affichage_par_page.'?q='.$q.'&o='.$o.''; 
-	$lien = '&nbsp;&nbsp;<A HREF="'.$cible.'">&gt;&gt;</A>';
-	}
-	else {
-	$lien='';
-	}
+		if ($cpt_fin != $nb_pages_total) 
+		{
+		$cible = URL.$c.'/'.$m.'/'.$fin.'/'.$nb_affichage_par_page.'?q='.$q.'&o='.$o.''; 
+		$lien = '&nbsp;&nbsp;<A HREF="'.$cible.'">&gt;&gt;</A>';
+		}
+		else {
+		$lien='';
+		}
 
-	$barre .= $lien;
+		$barre .= $lien;
 
-	return $barre;
-}   	
+		return $barre;
+	}   	
 }

@@ -23,7 +23,7 @@ hr.new5 {border: 10px solid green;border-radius: 5px;}
 
 
 
-<?php 
+<?php
 verifsession();	
 view::button('inspection','');
 lang(Session::get('lang'));

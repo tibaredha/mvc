@@ -128,6 +128,42 @@ class inspection extends TCPDF
 
  	
 	//*************************************************************************************************************//
+	function entetepvc($titre,$ref)
+	{
+		$this->AddPage();$this->SetFont('aefurat', '', 12);
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,1,'C');$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repfr,0,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->mspar,0,1,'C');$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->mspfr,0,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dspar,0,1,'C');$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dspfr,0,1,'C');
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'Inspection santé publique',0,1,'L');//$this->SetXY(155,$this->GetY()-5);$this->Cell(50,5,'مفتشية الصــــحة العموميـة',0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,"N° : ________ /ISP/".date('Y'),0,1,'L');//$this->SetXY(155,$this->GetY()-5);$this->Cell(50,5,'الرقم : _____/ م ص ع /'.date('Y'),0,1,'R');
+		$this->SetFont('aefurat', '', 14);
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,"PROCÉS VERBAL DE CONFORMITÉ ".$titre,0,1,'C');$this->SetFont('aefurat', '', 12);
+		$this->SetFont('aefurat', '', 10);$this->SetXY(5,$this->GetY());$this->Cell(200,5,"REF : ".$ref,0,1,'C');$this->SetFont('aefurat', '', 12);
+
+
+	}
+	
+	
+	
+	//*************************************************************************************************************//
+	
+	
+	function directeuruniv($UNIV)
+	{
+		 $this->SetXY(16,$this->GetY()+8);$this->Cell(100,5,"السيد عميد كلية الطب ",0,1,'C',0,1);
+	     $this->SetXY(16,$this->GetY());$this->Cell(100,5,"جامعة ".$UNIV,0,1,'C',0,1);
+	}
+	function directeurunivx($UNIV)
+	{
+		 $this->SetXY(16,$this->GetY()+8);$this->Cell(100,5,"السيد عميد كلية ",0,1,'C',0,1);
+	     $this->SetXY(16,$this->GetY());$this->Cell(100,5,"جامعة ".$UNIV,0,1,'C',0,1);
+	}
+	function directeurep($UNIV)
+	{
+		 $this->SetXY(16,$this->GetY()+8);$this->Cell(100,5,"السيد مدير معهد التكوين الشبه الطبي",0,1,'C',0,1);
+	     $this->SetXY(16,$this->GetY());$this->Cell(100,5,"ولاية ".$UNIV,0,1,'C',0,1);
+	}
+
 	function decision_o($num1,$date1,$TITRE,$nomar,$prenomar)
 	{
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على المقررة رقم '.$num1.' المؤرخة في '.$date1.' المتعلقة بفتح عيادة طبية '.$TITRE." للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');	

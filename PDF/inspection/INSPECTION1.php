@@ -13,6 +13,8 @@ class INSPECTION1 extends PDF_Invoice
 	 public $dspfr="Direction de la santé et de la population de la wilaya de Djelfa ";
 	 public $insp="Inspection Sante Publique";
 	 
+	 
+	
 	 //*************poure mettre le celle en verticale 	
 	var $angle=0;
 
@@ -88,6 +90,14 @@ class INSPECTION1 extends PDF_Invoice
 	$dateFR2US =  $A."-".$M."-".$J ;
     return $dateFR2US;//2013-01-01
 	}
+	 // la fonction marche bien 
+	function datePlus($dateDo,$nbrJours)
+	{$timeStamp = strtotime($dateDo); 
+	$timeStamp += 24 * 60 * 60 * $nbrJours;
+	$newDate = date("Y-m-d", $timeStamp);
+	return  $newDate;
+	}
+	 
 	function nbrtostring($tb_name,$colonename,$colonevalue,$resultatstring) 
 	{
 	if (is_numeric($colonevalue) and $colonevalue!=='0') 

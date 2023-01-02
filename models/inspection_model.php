@@ -337,8 +337,14 @@ class inspection_Model extends Model {
 	
 	public function persSingleList($id) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM pers WHERE idt = :id and ETAT = 0 order by PRENOMFR asc ', array(':id' => $id));    
+		return $this->db->select('SELECT * FROM pers WHERE idt = :id and ETAT = 0 and TP=0 order by PRENOMFR asc ', array(':id' => $id));    
     }
+	
+	public function persSingleList1($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM pers WHERE idt = :id and ETAT = 0 and TP=1 order by PRENOMFR asc ', array(':id' => $id));    
+    }
+	
 	
 	public function persSingleList2($id) {
         $this->db->exec('SET NAMES utf8');
@@ -364,6 +370,10 @@ class inspection_Model extends Model {
 	public function Listview() {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM insp order by DATE asc ');    
+    }
+	
+	public function deleteinspecteur($id) {       
+        $this->db->delete('insp', "id = '$id'");
     }
 	
 	public function userSingleinspecteur($id) {
@@ -399,11 +409,9 @@ class inspection_Model extends Model {
             'REF'        => $data['REF'],
 			'PJ'         => $data['PJ'],
 			'ids'        => $data['id'],
-			'STRUCTURE'  => $data['STRUCTURE'],'Commanditaire'  => $data['Commanditaire']
-
-			
+			'STRUCTURE'  => $data['STRUCTURE'],'Commanditaire'  => $data['Commanditaire']	
         ));
-        echo '<pre>';print_r ($data);echo '<pre>';
+        //echo '<pre>';print_r ($data);echo '<pre>';
 		return $last_id = $this->db->lastInsertId();
     }
 	

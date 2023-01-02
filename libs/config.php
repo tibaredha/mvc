@@ -804,6 +804,8 @@ function evaluation_inspection($action)
 			echo"<option value=\"12\">Repartition par date d'inspection/anomalie constatee</option>"."\n";
 			echo"<option value=\"13\">13</option>"."\n";
 			echo"<option value=\"14\">14</option>"."\n";
+			echo"<option value=\"15\">liste de garde</option>"."\n";
+			
 			
 		echo "</select>";
 		echo "</p> ";
