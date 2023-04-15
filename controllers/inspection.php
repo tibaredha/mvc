@@ -1731,6 +1731,101 @@ class inspection extends Controller {
 	header('location: ' . URL .$this->route. '/home19/'.$data['idstructure']);		
 	}
 	
+	//************************************EPSP*********************************************************************//
+	
+	function home6($id) 
+	{
+	$this->view->title = 'home6';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->userListview = $this->model->homeepspSingleList($id);
+	$this->view->render($this->route.'/home6');
+	}
+	
+	function creathome6($id) 
+	{
+	$this->view->title = 'home';
+	$this->view->user = $this->model->userSinglestructure($id);
+	$this->view->userListview = $this->model->homeepspSingleList($id);
+    $data = array();
+	$data['id']= $id;
+	$data['DATEP'] = $_POST['DATEP'];
+	$data['NAT'] = $_POST['NAT'];
+    $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
+	$data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
+	$data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];
+	// if(isset($_POST['groupe'])){$data['groupe']= 1;$data['PHA4']= $_POST['PHA4'];}else{$data['groupe']= 0;$data['PHA4']= 0;}
+	if(isset($_POST['MG'])){$data['MG']= 1;}else{$data['MG']= 0;}
+	if(isset($_POST['SD'])){$data['SD']= 1;}else{$data['SD']= 0;}
+	if(isset($_POST['CG'])){$data['CG']= 1;}else{$data['CG']= 0;}
+	if(isset($_POST['MI'])){$data['MI']= 1;}else{$data['MI']= 0;}
+	if(isset($_POST['OB'])){$data['OB']= 1;}else{$data['OB']= 0;}
+	if(isset($_POST['PE'])){$data['PE']= 1;}else{$data['PE']= 0;}
+	if(isset($_POST['SP'])){$data['SP']= 1;}else{$data['SP']= 0;}
+	if(isset($_POST['UMC'])){$data['UMC']= 1;}else{$data['UMC']= 0;}
+	if(isset($_POST['LA'])){$data['LA']= 1;}else{$data['LA']= 0;}
+	if(isset($_POST['RA'])){$data['RA']= 1;}else{$data['RA']= 0;}
+	if(isset($_POST['PH'])){$data['PH']= 1;}else{$data['PH']= 0;}
+	if(isset($_POST['MA'])){$data['MA']= 1;}else{$data['MA']= 0;}
+	echo '<pre>';print_r ($data);echo '<pre>';  
+    $last_id=$this->model->createpsp($data);
+	header('location: ' . URL .$this->route. '/home6/'.$id);	
+	}
+	
+	public function deletehome6($id)
+	{
+	$url1 = explode('/',$_GET['url']);	
+	$this->model->deletehomeepsp($id); 
+	header('location: ' . URL .$this->route. '/home6/'.$url1[3]);
+	}
+	
+	function edithome6($id) 
+	{
+	$url1 = explode('/',$_GET['url']);
+	$this->view->title = 'edithome';
+	//$this->view->user = $this->model->userSinglestructure($id);
+	//$this->view->home = $this->model->userhomeSingleList( $url1[3]);
+	// $this->view->userListview = $this->model->homeSingleList($id);
+	$this->view->render($this->route.'/edithome6');
+	}
+	
+	function edit1home6($id) 
+	{
+	$this->view->title = 'edithome';
+	// $this->view->user = $this->model->userSinglestructure($id);
+	// $this->view->userListview = $this->model->homeSingleList($id);
+    // $data = array();
+	// $data['id']= $id;
+	// $data['idstructure']= $_POST['idstructure'];;
+	// $data['DATEP']= $_POST['DATEP'];
+	// $data['NAT']= $_POST['NAT'];
+    // $data['WILAYA']= $_POST['WILAYA'];$data['COMMUNE']= $_POST['COMMUNE'];$data['ADRESSE']= $_POST['ADRESSE'];$data['ADRESSEAR']= $_POST['ADRESSEAR'];
+	// $data['NUMD']= $_POST['NUMD'];$data['DATED']= $_POST['DATED'];
+	// $data['PROPRIETAIRE']= $_POST['PROPRIETAIRE'];$data['DEBUTCONTRAT']= $_POST['DEBUTCONTRAT'];
+	//$data['FINCONTRAT']= $_POST['FINCONTRAT'];
+	// $nbrJours=$_POST['FINCONTRAT'];
+	// $data['FINCONTRAT']= $this->dateUS2FR($this->datePlus($this->dateFR2US($_POST['DEBUTCONTRAT']),$nbrJours));
+	// $data['PHA1']= $_POST['PHA1'];
+	// $data['DIST1']= $_POST['DIST1'];
+	// $data['PHA2']= $_POST['PHA2'];
+	// $data['DIST2']= $_POST['DIST2'];
+	// $data['PHA3']= $_POST['PHA3'];
+	// $data['DIST3']= $_POST['DIST3'];
+	// if(isset($_POST['groupe'])){$data['groupe']= 1;$data['PHA4']= $_POST['PHA4'];}else{$data['groupe']= 0;$data['PHA4']= 0;}
+	// $data['CDS0']= $_POST['CDS'];
+	// $data['SDS0']= $_POST['SDS'];
+	// $data['SAH0']= $_POST['SAH'];
+	// $data['SAF0']= $_POST['SAF'];
+	// $data['SAN0']= $_POST['SAN'];
+	// $data['STL']= $_POST['STL'];
+	// $data['STRUCTURE']= $_POST['STRUCTURE'];
+	// if (isset($_POST['ZE'])){$data['ZE']='1';}else{$data['ZE']='';}
+	// $data['NUMCOM']= $_POST['NUMCOM'];
+	// $data['DATECOM']= $_POST['DATECOM'];
+	// echo '<pre>';print_r ($data);echo '<pre>';  
+	//$last_id=$this->model->edithome($data);
+	header('location: ' . URL .$this->route. '/home6/'.$data['idstructure']);		
+	}
+	
 	//*********************************************************************************************************//
 	
 	/*personnel*/	

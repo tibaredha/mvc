@@ -214,7 +214,14 @@ echo "</tr>" ;
 				//echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
 				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"             href=\"".URL.'inspection/home9/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrhome($value['id'])." ] </td>" ;
 				break;
-		
+		case 6://EPSP
+		        echo "<td style=\"width:10px;\" align=\"center\" ><img  src=\"".URL.'public/images/icons/SMED.PNG'."\"  width='30' height='25' border='0' alt='' ></td>" ;
+				//echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				//echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/decision_12_i.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				//echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				//echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"pv conformite\"     href=\"".URL.'tcpdf/inspection/pvconf.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;
+				echo "<td style=\"width:70px;\" align=\"center\" ><a title=\"Editer Home\"             href=\"".URL.'inspection/home6/'.$value['id']."\" ><img  src=\"".URL.'public/images/icons/b_home.png'."\"  width='16' height='16' border='0' alt='' ></a> [ ".view::nbrepsp_p($value['id'])." ] </td>" ;
+				break;
 		default:
 		echo "<td style=\"width:50px;\" align=\"left\" >".view::stringtostring('structurebis','id',$value['STRUCTURE'],'structure') ."</td>" ;
 		//echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision\"      href=\"".URL.'tcpdf/inspection/***.php?uc='.$value['id']."\" ><img  src=\"".URL.'public/images/icons/print.PNG'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;

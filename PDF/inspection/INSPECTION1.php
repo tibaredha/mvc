@@ -181,7 +181,223 @@ class INSPECTION1 extends PDF_Invoice
 		$this->SetXY(5+30+105,178);$this->cell(65,10,html_entity_decode(utf8_decode("Du ".$this->dateUS2FR($datejour1)." Au ".$this->dateUS2FR($datejour2) )),0,0,'C',0,0);
 		$this->SetXY(5+30+105,250);$this->cell(40,10,html_entity_decode(utf8_decode("Le Directeur" )),0,0,'L',0,0);
 	}
+	//*************************************//
+	function nbrps($COMMUNE,$NAT)
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT * FROM epsp where COMMUNE=$COMMUNE and NAT=$NAT";
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	return $totalmbr1;
+	}
+	function nbrps1($idstructure,$NAT)//
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT * FROM epsp where idstructure=$idstructure and NAT=$NAT"; 
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	return $totalmbr1;
+	}
+	//*************************************//
 	
+	function nbrpsmat($COMMUNE,$NAT)
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT * FROM epsp where COMMUNE=$COMMUNE and MA=$NAT";
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	return $totalmbr1;
+	}
+	function nbrps1mat($idstructure,$NAT)//
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT * FROM epsp where idstructure=$idstructure and MA=$NAT"; 
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	return $totalmbr1;
+	}
+	//***********************************//
+	//*************************************//
+	function nbrpst($COMMUNE,$NAT)
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT * FROM epsp where COMMUNE=$COMMUNE and NAT=$NAT";
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	return $totalmbr1;
+	}
+	function nbrps1t($NAT)//
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT * FROM epsp where NAT=$NAT"; 
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	return $totalmbr1;
+	}
+	function nbrps1tma($NAT)//
+	{
+	$this->mysqlconnect();
+	mysql_query("SET NAMES 'UTF8' ");
+	$query = "SELECT * FROM epsp where MA=$NAT"; 
+	$resultat=mysql_query($query);
+	$totalmbr1=mysql_num_rows($resultat);
+	return $totalmbr1;
+	}
+	//***********************************//
+	function structurebase1($datejour1,$datejour2,$EPH,$EPH1)
+	{
+	$this->AddPage('P','A4');
+		$this->entete($datejour1,$datejour2,'Liste nominative structrure de base par : Commune ',"");
+		$h=50;
+		$this->SetFillColor(200 );
+		$this->mysqlconnect();
+		$querys = "SELECT * from com where IDWIL=17000 and yes=1 ORDER BY COMMUNE"; 
+		$ress=mysql_query($querys);
+		$tot=mysql_num_rows($ress);
+		$this->SetXY(5,$this->GetY()+15); 
+		$x=0;
+		while($rows=mysql_fetch_object($ress))
+		{
+					$this->cell(70+25+35,5,"Commune : ".strtoupper($rows->COMMUNE),1,0,'L',1,0);
+					$this->cell(30,5,"Sup(Km2) : ".$rows->SUPER,1,0,'C',1,0);
+					$this->cell(35,5,"Pop(Hbt) : ".$rows->p2018,1,0,'C',1,0);
+					
+					$this->SetXY(05,$this->GetY()+5);
+					$this->cell(10,10,"N°",1,0,1,'C',0);
+					$this->cell(30,10,"Dénomination",1,0,'C',1,0);
+					$this->cell(30,10,"Commune",1,0,'C',1,0);
+					$this->cell(30,10,"Nature",1,0,'C',1,0);
+					$this->cell(10,10,"N°",1,0,'C',1,0);
+					$this->cell(20,10,"Date Arrete",1,0,'C',1,0);
+					$this->cell(30,10,"maternité",1,0,'C',1,0);
+					$this->cell(35,10,"observation",1,0,'C',1,0);
+					$this->SetXY(05,$this->GetY()+10); 
+					$query = 'SELECT * FROM epsp where COMMUNE ='.$rows->IDCOM.' order by ADRESSE';      
+					$resultat=mysql_query($query);
+					$totalmbr1=mysql_num_rows($resultat);
+					$x1=0;
+					while($row=mysql_fetch_object($resultat))
+					{
+					$this->SetFillColor(200 );
+					$this->cell(10,5,$x1=$x1+1,1,0,'C',0);
+					$this->cell(30,5,$row->ADRESSE,1,0,'L',0);
+					$this->cell(30,5,$this->nbrtostring("com","IDCOM",$row->COMMUNE,"COMMUNE"),1,0,'L',0);
+					if ($row->NAT	== 1){$this->cell(30,5,"Polyclinique",1,0,'C',0);}else {$this->cell(30,5,"salle de soins",1,0,'C',0);}
+					$this->cell(10,5,$row->NUMD,1,0,'C',0);
+					$this->cell(20,5,$this->dateUS2FR($row->DATED),1,0,'C',0);
+					if ($row->MA	== 1){$this->cell(30,5,"Oui",1,0,'C',0);}else {$this->cell(30,5,"***",1,0,'C',0);}
+					$this->cell(35,5,"***",1,0,'C',0);
+					$this->SetXY(5,$this->GetY()+5); 
+					}
+					$this->SetFillColor(200);
+					$this->SetXY(5,$this->GetY());$this->cell(40,05,"Total",1,0,1,'C',0);	  
+					$this->SetXY(45,$this->GetY());
+					$this->cell(60,05,$totalmbr1." structures",1,0,1,'C',0);
+					$this->cell(30,05,"Polyclinique : ".$this->nbrps($rows->IDCOM,1),1,0,1,'C',0);
+					$this->cell(30,05,"Maternité int : ".$this->nbrpsmat($rows->IDCOM,1),1,0,1,'C',0);
+					$this->cell(35,05,"Salle de soins : ".$this->nbrps($rows->IDCOM,2),1,1,1,'C',0);
+			$this->SetXY(5,$this->GetY()+10);  
+		}
+		$this->pied();	
+	}
+	
+	//*************************************//
+	function structurebase($datejour1,$datejour2,$EPH,$EPH1)
+	{
+	$this->AddPage('P','A4');
+		$this->entete($datejour1,$datejour2,'Liste nominative structrures de base par : ',$EPH1);	
+		
+		$h=50;
+		$this->SetFillColor(200 );
+		$this->mysqlconnect();
+		$querys = "SELECT * from structure where STRUCTURE $EPH and ETAT=0 ORDER BY NOM"; 
+		$ress=mysql_query($querys);
+		$tot=mysql_num_rows($ress);
+		$this->SetXY(5,$this->GetY()+15); 
+		$x=0;
+		while($rows=mysql_fetch_object($ress))
+		{
+					//$this->AddPage('p','A4');
+					$this->cell(70+125,5,strtoupper($rows->NOM).'_'.ucwords(strtolower($rows->PRENOM)),1,0,'L',1,0);
+					$this->SetXY(05,$this->GetY()+5);
+					$this->cell(10,10,"N°",1,0,1,'C',0);
+					$this->cell(30,10,"Dénomination",1,0,'C',1,0);
+					$this->cell(30,10,"Commune",1,0,'C',1,0);
+					$this->cell(30,10,"Nature",1,0,'C',1,0);
+					$this->cell(10,10,"N°",1,0,'C',1,0);
+					$this->cell(20,10,"Date Arrete",1,0,'C',1,0);
+					$this->cell(30,10,"maternité",1,0,'C',1,0);
+					$this->cell(35,10,"observation",1,0,'C',1,0);
+					$this->SetXY(05,$this->GetY()+10); 
+					$query = 'SELECT * FROM epsp where idstructure ='.$rows->id.' order by ADRESSE';      
+					$resultat=mysql_query($query);
+					$totalmbr1=mysql_num_rows($resultat);
+					$x1=0;
+					while($row=mysql_fetch_object($resultat))
+					{
+						$this->SetFillColor(200 );
+						$this->cell(10,5,$x1=$x1+1,1,0,'C',0);
+						$this->cell(30,5,$row->ADRESSE,1,0,'L',0);
+						$this->cell(30,5,$this->nbrtostring("com","IDCOM",$row->COMMUNE,"COMMUNE"),1,0,'L',0);
+						if ($row->NAT	== 1){$this->cell(30,5,"Polyclinique",1,0,'C',0);}else {$this->cell(30,5,"salle de soins",1,0,'C',0);}
+						$this->cell(10,5,$row->NUMD,1,0,'C',0);
+						$this->cell(20,5,$this->dateUS2FR($row->DATED),1,0,'C',0);
+						if ($row->MA	== 1){$this->cell(30,5,"Oui",1,0,'C',0);}else {$this->cell(30,5,"***",1,0,'C',0);}
+						$this->cell(35,5,"***",1,0,'C',0);
+						$this->SetXY(5,$this->GetY()+5); 
+					}
+					$this->SetFillColor(200);
+					$this->SetXY(5,$this->GetY());$this->cell(40,05,"Total",1,0,1,'C',0);
+                    $this->cell(60,05,$totalmbr1." structures",1,0,1,'C',0);	
+					$this->cell(30,05,"Polyclinique : ".$this->nbrps1($rows->id,1),1,0,1,'C',0);
+					$this->cell(30,05,"Maternité int : ".$this->nbrps1mat($rows->id,1),1,0,1,'C',0);
+					$this->cell(35,05,"Salle de soins : ".$this->nbrps1($rows->id,2),1,1,1,'C',0);
+			$this->SetXY(5,$this->GetY()+10);  
+		}
+		$this->pied();
+	}
+	
+	function structurebase0($datejour1,$datejour2,$EPH,$EPH1)
+	{
+	    $this->AddPage('P','A4');
+		$this->entete($datejour1,$datejour2,'Liste nominative structrures de base par : ',$EPH1);	
+		
+		$this->SetXY(005,$this->GetY()+10);
+		$this->cell(10,10,"N°",1,0,'C',1,0);
+		$this->cell(55,10,"Nom_Prenom",1,0,'C',1,0);
+		$this->cell(35,10,"Commune",1,0,'C',1,0);
+		$this->cell(30,10,"Polyclinique",1,0,'C',1,0);
+		$this->cell(30,10,"maternité",1,0,'C',1,0);
+		$this->cell(35,10,"salle desoins",1,0,'C',1,0);
+		$this->mysqlconnect();
+		$query = "SELECT * from structure where STRUCTURE $EPH and ETAT=0 ORDER BY NOM"; 
+		$res=mysql_query($query);
+		$tot=mysql_num_rows($res);
+		$this->SetXY(5,$this->GetY()+10); 
+		$x=0;
+		while($row=mysql_fetch_object($res))
+		{
+			$this->cell(10,5,$x=$x+1,1,0,'C',0);
+			$this->cell(55,5,strtoupper($row->NOM).'_'.ucwords(strtolower($row->PRENOM)),1,0,'L',0,0);
+			$this->cell(35,5,$this->nbrtostring('com','IDCOM',$row->COMMUNE,'COMMUNE'),1,0,'L',0,0);
+			$this->cell(30,5,$this->nbrps1($row->id,1),1,0,'C',0);
+			$this->cell(30,5,$this->nbrps1mat($row->id,1),1,0,'C',0);
+			$this->cell(35,5,$this->nbrps1($row->id,2),1,0,'C',0);
+			$this->SetXY(5,$this->GetY()+5);  
+		}
+		$this->SetXY(5,$this->GetY());$this->cell(40,05,"Total",1,0,1,'C',0);
+		$this->cell(60,05,$tot." structures",1,0,1,'C',0);
+		$this->cell(30,05,"Polyclinique : ".$this->nbrps1t(1),1,0,1,'C',0);
+		$this->cell(30,05,"Maternité int : ".$this->nbrps1tma(1),1,0,1,'C',0);
+		$this->cell(35,05,"Salle de soins : ".$this->nbrps1t(2),1,1,1,'C',0);
+		$this->pied(); 					
+	}
     //*************************************//
 	function listenominative($EPH)
 	{

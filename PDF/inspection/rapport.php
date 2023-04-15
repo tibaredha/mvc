@@ -65,9 +65,18 @@ if ($_POST['type']=='0') {
 }
 
 if ($_POST['type']=='1') {
-	$pdf->AddPage('p','A4');
-	$pdf->entete($datejour1,$datejour2,'Liste nominative (Ouverture) : ',$EPH1);
-	$pdf->listenominative($EPH);	
+	
+    if($EPH1=="EPSP"){
+		$pdf->structurebase0($datejour1,$datejour2,$EPH,$EPH1);
+		$pdf->structurebase($datejour1,$datejour2,$EPH,$EPH1);
+		$pdf->structurebase1($datejour1,$datejour2,$EPH,$EPH1);
+	} else
+	{
+		$pdf->AddPage('p','A4');
+	    $pdf->entete($datejour1,$datejour2,'Liste nominative  : ',$EPH1);
+		$pdf->listenominative($EPH);
+	}
+	
 }
 
 if ($_POST['type']=='2') {

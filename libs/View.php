@@ -360,6 +360,17 @@ class View {
 	return $OP;
 	}
 	
+	function nbrepsp_p($idt) 
+	{
+	mysqlconnect();
+	$sql = " select * from  epsp where idstructure=$idt  ";
+	$requete = @mysql_query($sql) or die($sql."<br>".mysql_error());
+	$OP=mysql_num_rows($requete);
+	mysql_free_result($requete);
+	return $OP;
+	}
+	
+	
 	function decescomm($COMMUNER,$DATEJOUR1,$DATEJOUR2,$STRUCTURED) 
 	{
 	mysqlconnect();
