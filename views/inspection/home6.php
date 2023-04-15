@@ -34,12 +34,12 @@ $this->label($x,$y+260,'Date inscription ');     $this->txts($x+150,$y+250,'DATE
 $this->label($x,$y+300,'Arrete N ');             $this->txt($x+150,$y+290,'NUMD',0,"000");                     $this->label($x+400,$y+300,'Date Arrete');         $this->txts($x+520,$y+290,'DATED',0,"14-02-2011",'dateus1');
 $this->label($x+800,$y+300,'chef struct');       $this->txtarid($x+880,$y+290,'PROPRIETAIRE','PROPRIETAIRE',0,$data['PROPRIETAIRE'],'date');
 
-$this->label($x,$y+340,"Medecine generale");     $this->chekbox($x+155,$y+335,"MG");
+$this->label($x,$y+340,"Médecine générale");     $this->chekbox($x+155,$y+335,"MG");
 $this->label($x,$y+340+30,"Soins dentaires");    $this->chekbox($x+155,$y+335+30,"SD");
-$this->label($x,$y+340+60,"Chirurgie generale"); $this->chekbox($x+155,$y+335+60,"CG");
-$this->label($x,$y+340+90,"Medecine interne");   $this->chekbox($x+155,$y+335+90,"MI");
+$this->label($x,$y+340+60,"Chirurgie générale"); $this->chekbox($x+155,$y+335+60,"CG");
+$this->label($x,$y+340+90,"Médecine interne");   $this->chekbox($x+155,$y+335+90,"MI");
 $this->label($x,$y+340+120,"Obstetrique");       $this->chekbox($x+155,$y+335+120,"OB");
-$this->label($x,$y+340+150,"Pediatrie");         $this->chekbox($x+155,$y+335+150,"PE");
+$this->label($x,$y+340+150,"Pédiatrie");         $this->chekbox($x+155,$y+335+150,"PE");
 
 $this->label($x+400,$y+340,"Laboratoire");      $this->chekbox($x+520,$y+335,"LA");
 $this->label($x+400,$y+340+30,"Radiologie");     $this->chekbox($x+520,$y+335+30,"RA");

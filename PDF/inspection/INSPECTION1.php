@@ -2,20 +2,23 @@
 require('../invoice.php');
 class INSPECTION1 extends PDF_Invoice
 { 
+    //********************************************************************************************************************************************//
 	 public $nomprenom ="tibaredha";
 	 public $db_host="localhost";
 	 public $db_name="mvc"; //probleme avec base de donnes  il faut change  gpts avec mvc   
      public $db_user="root";
      public $db_pass="";
 	 public $utf8 = "" ;
-	 public $repfr="Republique algerienne democratique et populaire";
-	 public $mspfr="Ministere de la sante";
-	 public $dspfr="Direction de la santé et de la population de la wilaya de Djelfa ";
-	 public $insp="Inspection Sante Publique";
-	 
+	 public $repfr="République algérienne démocratique et populaire";
+	 public $mspfr="Ministère de la santé";
+	 public $wilaya="Djelfa";
+	 public $dspfr="Direction de la santé et de la population de la wilaya de";
+	 public $insp="Inspection Santé Publique";
+	 public $inspecteur="Dr R.TIBA";
 	 
 	
-	 //*************poure mettre le celle en verticale 	
+	//********************************************************************************************************************************************//
+	//poure mettre le celle en verticale 	
 	var $angle=0;
 
 	function Rotate($angle,$x=-1,$y=-1)
@@ -62,91 +65,101 @@ class INSPECTION1 extends PDF_Invoice
 		$this->Image($file,$x,$y,$w,$h);
 		$this->Rotate(0);
 	}
-	//************************************************************//	
+	//********************************************************************************************************************************************//
 	function mysqlconnect()
 	{
-	$this->db_host;
-	$this->db_name;
-	$this->db_user;
-	$this->db_pass;
-    $cnx = mysql_connect($this->db_host,$this->db_user,$this->db_pass)or die ('I cannot connect to the database because: ' . mysql_error());
-    $db  = mysql_select_db($this->db_name,$cnx) ;
-	mysql_query("SET NAMES 'UTF8' ");
-	return $db;
+		$this->db_host;
+		$this->db_name;
+		$this->db_user;
+		$this->db_pass;
+		$cnx = mysql_connect($this->db_host,$this->db_user,$this->db_pass)or die ('I cannot connect to the database because: ' . mysql_error());
+		$db  = mysql_select_db($this->db_name,$cnx) ;
+		mysql_query("SET NAMES 'UTF8' ");
+		return $db;
 	}
 	function dateUS2FR($date)//2013-01-01
     {
-	$J      = substr($date,8,2);
-    $M      = substr($date,5,2);
-    $A      = substr($date,0,4);
-	$dateUS2FR =  $J."-".$M."-".$A ;
-    return $dateUS2FR;//01-01-2013
+		$J      = substr($date,8,2);
+		$M      = substr($date,5,2);
+		$A      = substr($date,0,4);
+		$dateUS2FR =  $J."-".$M."-".$A ;
+		return $dateUS2FR;//01-01-2013
     }	
 	function dateFR2US($date)//01/01/2013
 	{
-	$J      = substr($date,0,2);
-    $M      = substr($date,3,2);
-    $A      = substr($date,6,4);
-	$dateFR2US =  $A."-".$M."-".$J ;
-    return $dateFR2US;//2013-01-01
+		$J      = substr($date,0,2);
+		$M      = substr($date,3,2);
+		$A      = substr($date,6,4);
+		$dateFR2US =  $A."-".$M."-".$J ;
+		return $dateFR2US;//2013-01-01
 	}
-	 // la fonction marche bien 
-	function datePlus($dateDo,$nbrJours)
-	{$timeStamp = strtotime($dateDo); 
-	$timeStamp += 24 * 60 * 60 * $nbrJours;
-	$newDate = date("Y-m-d", $timeStamp);
-	return  $newDate;
+	 
+	function datePlus($dateDo,$nbrJours)// la fonction marche bien 
+	{
+		$timeStamp = strtotime($dateDo); 
+		$timeStamp += 24 * 60 * 60 * $nbrJours;
+		$newDate = date("Y-m-d", $timeStamp);
+		return  $newDate;
 	}
 	 
 	function nbrtostring($tb_name,$colonename,$colonevalue,$resultatstring) 
 	{
-	if (is_numeric($colonevalue) and $colonevalue!=='0') 
-	{ 
-	$this->mysqlconnect();
-    $result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
-    $row=mysql_fetch_object($result);
-	$resultat=$row->$resultatstring;
-	return $resultat;
-	} 
-	return $resultat2='-------';
+		if (is_numeric($colonevalue) and $colonevalue!=='0') 
+		{ 
+			$this->mysqlconnect();
+			$result = mysql_query("SELECT * FROM $tb_name where $colonename=$colonevalue" );
+			$row=mysql_fetch_object($result);
+			$resultat=$row->$resultatstring;
+			return $resultat;
+		} 
+		return $resultat2='-------';
 	}
-	//************************************************************//	
+	//********************************************************************************************************************************************//
 	function entete($datejour1,$datejour2,$titre,$EPH1)
 	{
-	$this->SetDisplayMode('fullpage','single');//mode d affichage 
-    $this->SetFont('Arial','B',9);
-	$this->SetXY(05,$this->GetY()); $this->cell(200,5,$this->repfr,0,0,'C',0,0);
-    $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,$this->mspfr,0,0,'C',0,0);
-    $this->SetXY(05,$this->GetY()+5);$this->cell(200,5,$this->dspfr,0,0,'C',0,0);
-    $this->SetXY(05,$this->GetY()+5);$this->cell(150,5,$this->insp,0,0,'L',0,0);$this->cell(45,5," Le : ".date ('d-m-Y'),0,0,'R',0,0);
-    $this->SetXY(05,$this->GetY()+5);$this->cell(100,5,"N°: _____________  / ".date ('Y'),0,0,'L',0,0);
-	$this->SetXY(05,$this->GetY()+10); $this->cell(200,5,$titre.$EPH1,0,0,'C',0,0);
-    $this->SetXY(05,$this->GetY()+5); $this->cell(200,5,'Du :  '.$this->dateUS2FR($datejour1).'  Au :  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
+		$this->SetDisplayMode('fullpage','single'); 
+		$this->SetFont('Arial','B',9);
+		$this->SetXY(05,$this->GetY()-5); $this->cell(200,5,$this->repfr,0,0,'C',0,0);
+		$this->SetXY(05,$this->GetY()+5); $this->cell(200,5,$this->mspfr,0,0,'C',0,0);
+		$this->SetXY(05,$this->GetY()+5); $this->cell(200,5,$this->dspfr." ".$this->wilaya,0,0,'C',0,0);
+		$this->SetXY(05,$this->GetY()+5); $this->cell(150,5,$this->insp,0,0,'L',0,0);$this->cell(45,5," Le : ".date ('d-m-Y'),0,0,'R',0,0);
+		$this->SetXY(05,$this->GetY()+5); $this->cell(100,5,"N°: _________  /I.S.P/".date ('Y'),0,0,'L',0,0);
+		$this->SetXY(05,$this->GetY()+10);$this->cell(200,5,$titre.$EPH1,0,0,'C',0,0);
+		$this->SetXY(05,$this->GetY()+5); $this->cell(200,5,'Du :  '.$this->dateUS2FR($datejour1).'  Au :  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
 	}
 	function entetel($datejour1,$datejour2,$titre,$EPH1)
 	{
-	$this->SetDisplayMode('fullpage','single');
-    $this->SetFont('Arial','B',9);
-	$this->SetXY(05,5); $this->cell(290,5,$this->repfr,0,0,'C',0,0);
-    $this->SetXY(05,10);$this->cell(290,5,$this->mspfr,0,0,'C',0,0);
-    $this->SetXY(05,15);$this->cell(290,5,$this->dspfr,0,0,'C',0,0);
-    $this->SetXY(05,20);$this->cell(100,5,$this->insp,0,0,'L',0,0);$this->cell(60,5,"LE : ".date ('d-m-Y'),0,0,'C',0,0);
-    $this->SetXY(05,25);$this->cell(100,5,"N°: _____________  / ".date ('Y'),0,0,'L',0,0);
-	$this->SetXY(05,25);$this->cell(290,5,$titre.$EPH1,0,0,'C',0,0);
-    $this->SetXY(05,29);$this->cell(290,5,'Du :  '.$this->dateUS2FR($datejour1).'  Au :  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
+		$this->SetDisplayMode('fullpage','single');
+		$this->SetFont('Arial','B',9);
+		$this->SetXY(05,5); $this->cell(290,5,$this->repfr,0,0,'C',0,0);
+		$this->SetXY(05,10);$this->cell(290,5,$this->mspfr,0,0,'C',0,0);
+		$this->SetXY(05,15);$this->cell(290,5,$this->dspfr." ".$this->wilaya,0,0,'C',0,0);
+		$this->SetXY(05,20);$this->cell(100,5,$this->insp,0,0,'L',0,0);$this->cell(60,5,"LE : ".date ('d-m-Y'),0,0,'C',0,0);
+		$this->SetXY(05,25);$this->cell(100,5,"N°: _________  /I.S.P/".date ('Y'),0,0,'L',0,0);
+		$this->SetXY(05,25);$this->cell(290,5,$titre.$EPH1,0,0,'C',0,0);
+		$this->SetXY(05,29);$this->cell(290,5,'Du :  '.$this->dateUS2FR($datejour1).'  Au :  '.$this->dateUS2FR($datejour2),0,0,'C',0,0);
 	}
 	function pied()
 	{
-	$this->SetXY(150,$this->GetY()+10);$this->cell(50,10,"Le Praticien Inspecteur",0,0,'L',0);
-    $this->SetXY(160,$this->GetY()+5);$this->cell(50,10,"Dr R.TIBA ",0,0,'L',0);	
+		$this->SetXY(150,$this->GetY()+10);$this->cell(50,10,"Le Praticien Inspecteur",0,0,'L',0);
+		$this->SetXY(160,$this->GetY()+5);$this->cell(50,10,$this->inspecteur,0,0,'L',0);	
 	}
-	
+	function Footer()
+	{
+		$this->SetFont('Arial','I',8);
+		$this->SetY(-15);
+		//$this->cell(88,5,"_______________________________________________________",0,0,'C',0,0);
+		$this->Cell(0,5,' Page '.$this->PageNo().'/{nb}',0,0,'C',0,0);
+		//$this->cell(88,5,"_______________________________________________________",0,0,'C',0,0);
+	}
 	//********************************************************************************************************************************************//
+	
+	
 	function BORDEREAU($titre,$datejour1,$datejour2,$EPH1,$STRUCTURED) 
 	{
 		$this->SetXY(5,$this->GetY());$this->cell(200,5,$this->repfr,0,0,'C',1,0);
 		$this->SetXY(5,$this->GetY()+5);$this->cell(200,5,$this->mspfr,0,0,'C',1,0);
-		$this->SetXY(5,$this->GetY()+5);$this->cell(200,5,$this->dspfr.'Djelfa',0,0,'C',1,0);
+		$this->SetXY(5,$this->GetY()+5);$this->cell(200,5,$this->dspfr." ".$this->wilaya,0,0,'C',1,0);
 
 		$this->SetXY(155,45);$this->cell(50,5,"Le : ".date('d-m-Y'),0,0,'L',0,0);
 		$this->SetXY(5,45);$this->cell(100,5,"N°............... / ".date('Y'),0,0,'L',0,0);
@@ -1919,50 +1932,9 @@ class INSPECTION1 extends PDF_Invoice
 	$this->cell(12,5,$valt2+$valt4+$valt6+$valt8+$valt10+$valt12+$valt14+$valt16,1,0,'C',1,0);
 	$this->cell(12,5,$valt1+$valt3+$valt5+$valt7+$valt9+$valt11+$valt13+$valt15+$valt2+$valt4+$valt6+$valt8+$valt10+$valt12+$valt14+$valt16,1,0,'C',1,0);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	//*************************************************partie non prise en compte jusqua ce jours **************************************************************//
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	function stringtostring($tb_name,$colonename,$colonevalue,$resultatstring) 
 	{

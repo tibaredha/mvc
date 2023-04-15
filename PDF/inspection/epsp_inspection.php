@@ -148,44 +148,97 @@ while($row=mysql_fetch_object($resultat))
 // $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"mesures prises",0,0,'L',0,0); 
 
 //*********************************//
-$pdf->SetFont('Arial','U',10);$pdf->SetXY(05,$pdf->GetY()+10);$pdf->cell(50,5,"IV- personnels :",0,0,'L',0,0);$pdf->SetFont('Arial','',10);
-$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il un tableau du service pour l'ensemble du personnel affecté dans l'unité ?",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetFont('Arial','U',10);$pdf->SetXY(05,$pdf->GetY()+10);$pdf->cell(50,5,"IV- personnels :",0,0,'L',0,0);$pdf->SetFont('Arial','',10);
+// $pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il un tableau du service pour l'ensemble du personnel affecté dans l'unité ?",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
 
-$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*effectif reel  des personnels /____ /",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Médecins généralistes /___/",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Chirurgiens dentistes généraliste /___/",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Médecins specialistes /___/",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"specialites : ",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Pramedicaux : AS /___/   IB/___/   IDE/___/",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Agent de services : Femmes de ménages /___/ gardiens /___/",0,0,'L',0,0);
+// $pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*effectif reel  des personnels /____ /",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Médecins généralistes /___/",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Chirurgiens dentistes généraliste /___/",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Médecins specialistes /___/",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"specialites : ",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Pramedicaux : AS /___/   IB/___/   IDE/___/",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Agent de services : Femmes de ménages /___/ gardiens /___/",0,0,'L',0,0);
 
-$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*quels sont les horaires de travail ?",0,0,'L',0,0);
-$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il un registre de pointage et d'absenteisme ?",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*quels sont les horaires de travail ?",0,0,'L',0,0);
+// $pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il un registre de pointage et d'absenteisme ?",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
 
-$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*le personnel porte t-il la tenue reglementaire pendant le travail ?",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"tenue complete  Oui /___/  Non /___ /",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"blouse sans pantalon et sans calot Oui /___/  Non /___ /",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"la tenue est elle propre Oui /___/  Non /___ /",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"existe t-il une blanchisserie Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*le personnel porte t-il la tenue reglementaire pendant le travail ?",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"tenue complete  Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"blouse sans pantalon et sans calot Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"la tenue est elle propre Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"existe t-il une blanchisserie Oui /___/  Non /___ /",0,0,'L',0,0);
 
-$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*le personnel est t-il stable ?",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*le personnel est t-il stable ?",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
 
-$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*les agents sont-ils identifiés (blouse ou grade) ?",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*les agents sont-ils identifiés (blouse ou grade) ?",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
 
-$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il des badges pour le personnel ?",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"en carton Oui /___/  Non /___ /",0,0,'L',0,0);
-$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"plastifiés Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il des badges pour le personnel ?",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"en carton Oui /___/  Non /___ /",0,0,'L',0,0);
+// $pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"plastifiés Oui /___/  Non /___ /",0,0,'L',0,0);
 
 
 
 //*********************************//
 $pdf->SetFont('Arial','U',10);$pdf->SetXY(05,$pdf->GetY()+10);$pdf->cell(50,5,"V- organisation et fonctionnement :",0,0,'L',0,0);$pdf->SetFont('Arial','',10);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*Y'a t-il un agent assurant l'ordre et l'accueil  ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*le fonctionnement de l'unité couvre t-il toute la semaine sans interruption ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*dans la négativité comment la continuité des soins est elle assurée ?",0,0,'L',0,0);
+$pdf->SetXY(17,$pdf->GetY()+5);$pdf->cell(50,5,"notamment les injections et les panssements le week-end et jours fériés  ?",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*Y'a t-il une ambulance pour le transfert des urgences ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Oui /___/  Non /___ /",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*Si non comment est assuré le transfert ?",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il des moyens de communcations?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"Telephone /___/  Fax /___ / Véhicule de service /___ /",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il un registre de doleance porté a la connaissance du public ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"  /___/  Fax /___ / Véhicule de service /___ /",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il un registre de consultation ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"  /___/  Fax /___ / Véhicule de service /___ /",0,0,'L',0,0);
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il un registre de soins ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"  /___/  Fax /___ / Véhicule de service /___ /",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il un registre d'inspection ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"  /___/  Fax /___ / Véhicule de service /___ /",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il un programme d'activité pour le personnels médicale ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"  /___/  Fax /___ / Véhicule de service /___ /",0,0,'L',0,0);
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il des lits d'observations ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"  /___/  Fax /___ / Véhicule de service /___ /",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il des portes mantaux ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"  /___/  Fax /___ / Véhicule de service /___ /",0,0,'L',0,0);
+
+
+$pdf->SetXY(15,$pdf->GetY()+5);$pdf->cell(50,5,"*existe t-il un necessaire pour les consultations médicales ?",0,0,'L',0,0);
+$pdf->SetXY(40,$pdf->GetY()+5);$pdf->cell(50,5,"  /___/  Fax /___ / Véhicule de service /___ /",0,0,'L',0,0);
 
 //*********************************//
 $pdf->SetFont('Arial','U',10);$pdf->SetXY(05,$pdf->GetY()+10);$pdf->cell(50,5,"VI- activités medicales :",0,0,'L',0,0);$pdf->SetFont('Arial','B',10);
