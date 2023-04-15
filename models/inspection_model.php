@@ -565,21 +565,54 @@ class inspection_Model extends Model {
 			'RA'=> $data['RA'],
 			'PH'=> $data['PH'],
 			'MA'=> $data['MA']
-			));
-			echo '<pre>';print_r ($data);echo '<pre>';
-			// $postData = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
-			////echo '<pre>';print_r ($postData);echo '<pre>';  
-			// $this->db->update('structure', $postData, "id =" . $data['id'] . ""); 
-			// $this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
-			// return $last_id = $this->db->lastinsertid();
+			));	
 	}
 
     public function homeepspSingleList($id) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM epsp WHERE idstructure = :id  order by idstructure asc ', array(':id' => $id));    
+		return $this->db->select('SELECT * FROM epsp WHERE idstructure = :id  order by ADRESSE asc ', array(':id' => $id));    
+    }
+	
+	public function userhomeSingleList0($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM epsp WHERE id = :id  order by id asc ', array(':id' => $id));
     }
 	
 	public function deletehomeepsp($id) {       
         $this->db->delete('epsp', "id = '$id'");
-    }			
+    }
+
+	public function edithomeepsp($data) {
+			$this->db->exec('SET NAMES utf8');
+			$postData = array(
+			'id'=> $data['id'],
+			'DATEP'=> $this->dateFR2US($data['DATEP']),
+			'NAT'=> $data['NAT'],
+			'WILAYA'=>$data['WILAYA'],
+			'COMMUNE'=>$data['COMMUNE'],
+			'ADRESSE'=>$data['ADRESSE'],
+			'ADRESSEAR'=>$data['ADRESSEAR'],
+			'NUMD'=> $data['NUMD'],
+			'DATED'=> $this->dateFR2US($data['DATED']),
+			'PROPRIETAIRE'=> $data['PROPRIETAIRE'],
+			'MG'=> $data['MG'],
+			'SD'=> $data['SD'],
+			'CG'=> $data['CG'],
+			'MI'=> $data['MI'],
+			'OB'=> $data['OB'],
+			'PE'=> $data['PE'],
+			'SP'=> $data['SP'],
+			'UMC'=> $data['UMC'],
+			'LA'=> $data['LA'],
+			'RA'=> $data['RA'],
+			'PH'=> $data['PH'],
+			'MA'=> $data['MA']
+			);
+			$this->db->update('epsp', $postData, "id =" . $data['id'] . "");	
+	        // $postData1 = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
+			// $this->db->update('structure', $postData1, "id =" . $data['idstructure'] . ""); 
+			// $this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
+			// return $last_id = $this->db->lastinsertid();
+			echo '<pre>';print_r ($postData);echo '<pre>'; 
+	}
 }

@@ -45,6 +45,9 @@ $this->label($x+400,$y+340,"Laboratoire");      $this->chekbox($x+520,$y+335,"LA
 $this->label($x+400,$y+340+30,"Radiologie");     $this->chekbox($x+520,$y+335+30,"RA");
 $this->label($x+400,$y+340+60,"Pharmacie");     $this->chekbox($x+520,$y+335+60,"PH");
 
+
+
+
 $this->label($x+800,$y+340,"Soins Para ");      $this->chekbox($x+885,$y+335,"SP");
 $this->label($x+800,$y+340+30,"UMC");           $this->chekbox($x+885,$y+335+30,"UMC");   $this->label($x+800+150,$y+340+30,"LITS UMC");           $this->chekbox($x+885+150,$y+335+30,"litsUMC");
 $this->label($x+800,$y+340+60,"Maternité");     $this->chekbox($x+885,$y+335+60,"MA");    $this->label($x+800+150,$y+340+60,"lits Maternité");     $this->chekbox($x+885+150,$y+335+60,"litsMA");
@@ -58,23 +61,22 @@ ob_end_flush();
 ?>
 <table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
-		<th  colspan=6  style="width:50px;"><?php echo '<a title="Autres EPSP"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=6'.'" > Autres EPSP : '.'</a>';echo " /__ /";   echo '<a title="Arrete"  href="'.URL.'pdf/inspection/arrete/'.$this->user[0]['id'].'.pdf" > Arrete consistance physique : '.'</a>';  ?></th>
+		<th  colspan=9  style="width:50px;"><?php echo '<a title="Autres EPSP"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=6'.'" > Autres EPSP : '.'</a>';echo " /__ /";   echo '<a title="Arrete"  href="'.URL.'pdf/inspection/arrete/'.$this->user[0]['id'].'.pdf" > Arrete consistance physique : '.'</a>';  ?></th>
         <th  colspan=5  style="width:50px;"><?php echo '<a target="_blank" title="Fiche structure"  href="'.URL.'pdf/inspection/epsp.php?uc='.$this->user[0]['id'].'" > Fiche structure de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';?></th> 
 		</tr>
 		<tr>
-		<th style="width:100px;">Adresse</th>
-		<th style="width:100px;">Commune</th>
+		<th style="width:100px;">Dénomination</th>
+		<th style="width:100px;">Commune D'implantation</th>
 		<th style="width:20px;">Nature</th>
-		<th style="width:20px;">Maternité</th>
-		<th style="width:10px;">Arrete N</th>
-		<th style="width:10px;">Date Arrete</th>
-		
-		
-		
+		<th style="width:10px;">Lab</th>
+		<th style="width:10px;">Rad</th>
+		<th style="width:10px;">Pha</th>
+		<th style="width:10px;">Mat</th>
+		<th style="width:10px;">N°</th>
+		<th style="width:10px;">Date</th>
 		<th style="width:10px;">ins</th>
 		<th style="width:10px;">nor</th>
 		<th style="width:10px;">***</th>
-		
 		<th style="width:10px;">UPD </th>
 		<th style="width:10px;">DEL</th>
 		</tr>
@@ -90,6 +92,24 @@ ob_end_flush();
 						<?php 
 						if($value['NAT']==1){echo "Polyclinique";}
 						if($value['NAT']==2){echo "salle de soins";}
+						?>
+						</td>
+						<td align="center">
+						<?php 
+						if($value['LA']==1){echo "Oui";}
+						if($value['LA']==0){echo "***";}
+						?>
+						</td>
+						<td align="center">
+						<?php 
+						if($value['RA']==1){echo "Oui";}
+						if($value['RA']==0){echo "***";}
+						?>
+						</td>
+						<td align="center">
+						<?php 
+						if($value['PH']==1){echo "Oui";}
+						if($value['PH']==0){echo "***";}
 						?>
 						</td>
 						<td align="center">
@@ -124,13 +144,13 @@ ob_end_flush();
 				else
 				{		
 				//echo '<tr bgcolor=""  ><td align="center" colspan="8" >'. barre_navigation ($total_count,$this->userListviewl,$this->userListviewo,$this->userListviewq,$this->userListviewp,$this->userListviewb).'</td></tr>';	
-			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="11" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
+			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="14" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
 				}		
 		}
 		else 
 		{
 		echo '<tr><td align="center" colspan="8" ><span> Click search button to start searching a vms.</span></td></tr>';
-		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="11" ><span>&nbsp;</span></td></tr>';					      
+		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="14" ><span>&nbsp;</span></td></tr>';					      
 		} 
 		
 		?>
