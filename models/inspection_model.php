@@ -570,9 +570,12 @@ class inspection_Model extends Model {
 
     public function homeepspSingleList($id) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM epsp WHERE idstructure = :id  order by ADRESSE asc ', array(':id' => $id));    
+		return $this->db->select('SELECT * FROM epsp WHERE idstructure = :id and NAT=1 order by ADRESSE asc ', array(':id' => $id));    
     }
-	
+	 public function homeepspSingleLists($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM epsp WHERE idstructure = :id and NAT=2 order by ADRESSE asc ', array(':id' => $id));    
+    }
 	public function userhomeSingleList0($id) {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM epsp WHERE id = :id  order by id asc ', array(':id' => $id));

@@ -6,7 +6,7 @@ $data = array(
 "Date"       => date('j-m-Y'), 
 "btn"        => 'inspection', 
 "id"         => '', 
-"butun"      => 'Ajouter conformite + inspection', 
+"butun"      => 'Ajouter structure de base', 
 "photos"     => 'public/images/icons/pers.PNG',
 "action"     => 'inspection/creathome6/'.$this->user[0]['id'],
 "WILAYAN1"   => $this->user[0]['WILAYA'] ,
@@ -59,7 +59,15 @@ view::sautligne(22);
 ob_end_flush();
 
 ?>
-<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
+
+<div class="tabbed_area">  
+	<ul class="tabs">  
+		<li><a href="javascript:tabSwitch('tab_1', 'content_1');" id="tab_1" class="active">Polyclinique</a></li>  
+		<li><a href="javascript:tabSwitch('tab_2', 'content_2');" id="tab_2">Salle de soins</a></li> 
+		<li><a href="javascript:tabSwitch('tab_3', 'content_3');" id="tab_3">Autres</a></li> 	
+	</ul>    
+	<div id="content_1" class="content"> 
+	<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
 		<th  colspan=9  style="width:50px;"><?php echo '<a title="Autres EPSP"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=6'.'" > Autres EPSP : '.'</a>';echo " /__ /";   echo '<a title="Arrete"  href="'.URL.'pdf/inspection/arrete/'.$this->user[0]['id'].'.pdf" > Arrete consistance physique : '.'</a>';  ?></th>
         <th  colspan=5  style="width:50px;"><?php echo '<a target="_blank" title="Fiche structure"  href="'.URL.'pdf/inspection/epsp.php?uc='.$this->user[0]['id'].'" > Fiche structure de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';?></th> 
@@ -89,9 +97,10 @@ ob_end_flush();
 						<td align="left"><?php echo $value['ADRESSE'];?></td>
 						<td align="left"><?php echo View::nbrtostring('com','IDCOM',$value['COMMUNE'],'COMMUNE');?></td>
 						<td align="center">
-						<?php 
-						if($value['NAT']==1){echo "Polyclinique";}
-						if($value['NAT']==2){echo "salle de soins";}
+						<?php
+                        echo $value['ADRESSEAR'];						
+						//if($value['NAT']==1){echo "Polyclinique";}
+						//if($value['NAT']==2){echo "salle de soins";}
 						?>
 						</td>
 						<td align="center">
@@ -155,6 +164,115 @@ ob_end_flush();
 		
 		?>
 		</table>
+	</div>
+	
+	
+	<div id="content_2" class="content">
+	<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
+		<tr>
+		<th  colspan=9  style="width:50px;"><?php echo '<a title="Autres EPSP"  href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=6'.'" > Autres EPSP : '.'</a>';echo " /__ /";   echo '<a title="Arrete"  href="'.URL.'pdf/inspection/arrete/'.$this->user[0]['id'].'.pdf" > Arrete consistance physique : '.'</a>';  ?></th>
+        <th  colspan=5  style="width:50px;"><?php echo '<a target="_blank" title="Fiche structure"  href="'.URL.'pdf/inspection/epsp.php?uc='.$this->user[0]['id'].'" > Fiche structure de : '.strtoupper($this->user[0]['NOM'])."_".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) ".'</a>';?></th> 
+		</tr>
+		<tr>
+		<th style="width:100px;">Dénomination</th>
+		<th style="width:100px;">Commune D'implantation</th>
+		<th style="width:20px;">Nature</th>
+		<th style="width:10px;">Lab</th>
+		<th style="width:10px;">Rad</th>
+		<th style="width:10px;">Pha</th>
+		<th style="width:10px;">Mat</th>
+		<th style="width:10px;">N°</th>
+		<th style="width:10px;">Date</th>
+		<th style="width:10px;">ins</th>
+		<th style="width:10px;">nor</th>
+		<th style="width:10px;">***</th>
+		<th style="width:10px;">UPD </th>
+		<th style="width:10px;">DEL</th>
+		</tr>
+		<?php
+		if (isset($this->userListviews)) 
+		{		
+				foreach($this->userListviews as $key => $value){ ?>
+						<tr bgcolor='WHITE' onmouseover="this.style.backgroundColor='#9FF781';" onmouseout="this.style.backgroundColor='WHITE';" >
+						
+						<td align="left"><?php echo $value['ADRESSE'];?></td>
+						<td align="left"><?php echo View::nbrtostring('com','IDCOM',$value['COMMUNE'],'COMMUNE');?></td>
+						<td align="center">
+						<?php 
+						echo $value['ADRESSEAR'];						
+						//if($value['NAT']==1){echo "Polyclinique";}
+						//if($value['NAT']==2){echo "salle de soins";}
+						?>
+						</td>
+						<td align="center">
+						<?php 
+						if($value['LA']==1){echo "Oui";}
+						if($value['LA']==0){echo "***";}
+						?>
+						</td>
+						<td align="center">
+						<?php 
+						if($value['RA']==1){echo "Oui";}
+						if($value['RA']==0){echo "***";}
+						?>
+						</td>
+						<td align="center">
+						<?php 
+						if($value['PH']==1){echo "Oui";}
+						if($value['PH']==0){echo "***";}
+						?>
+						</td>
+						<td align="center">
+						<?php 
+						if($value['MA']==1){echo "Oui";}
+						if($value['MA']==0){echo "***";}
+						?>
+						</td>
+						<td align="center"><?php echo $value['NUMD'];?></td>
+						<td align="center"><?php echo view::dateUS2FR($value['DATED']);?></td>
+						
+						
+						<?php 
+						echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"inspection\"            href=\"".URL.'pdf/inspection/epsp_inspection.php?uc='.$this->user[0]['id']."&id=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a>  </td>" ;  
+						if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"circulaire\"   href=\"".URL.'pdf/inspection/po.pdf'.""."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+						if($value['NAT']==2){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"circulaire\"   href=\"".URL.'pdf/inspection/ss.pdf'.""."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+						if($value['NAT']==1){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_changement\"   href=\"".URL.'tcpdf/inspection/tran15.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+						if($value['NAT']==2){echo "<td style=\"width:10px;\" align=\"center\" ><a title=\"Decision_installation\" href=\"".URL.'tcpdf/inspection/inst15.php?ids='.$this->user[0]['id']."&idh=".$value['id']."\" ><img  src=\"".URL.'public/images/icons/document-pdf.png'."\"  width='16' height='16' border='0' alt='' ></a></td>" ;}
+						?>
+						
+						<td align="center"><a title="editer" href="<?php echo URL.'inspection/edithome6/'.$value['idstructure'].'/'.$value['id'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
+						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deletehome6/'.$value['id'].'/'.$value['idstructure'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
+						</tr>
+				<?php 
+				}
+				$total_count=count($this->userListviews);
+				if ($total_count <= 0 )
+				{
+				echo '<tr><td align="center" colspan="9" ><span> No record found for autos </span></td> </tr>';
+				echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="8" ><span>' .$total_count.'/'.$total_count.' Record(s) found.</span></td></tr>';					
+				}
+				else
+				{		
+				//echo '<tr bgcolor=""  ><td align="center" colspan="8" >'. barre_navigation ($total_count,$this->userListviewl,$this->userListviewo,$this->userListviewq,$this->userListviewp,$this->userListviewb).'</td></tr>';	
+			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="14" ><span>' .$total_count.' Record(s) found.</span></td></tr>';					
+				}		
+		}
+		else 
+		{
+		echo '<tr><td align="center" colspan="8" ><span> Click search button to start searching a vms.</span></td></tr>';
+		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="14" ><span>&nbsp;</span></td></tr>';					      
+		} 
+		
+		?>
+		</table>
+	</div>
+	<div id="content_3" class="content">
+
+	</div>
+</div>
+
+
+
 
 
 <br/><br/>		

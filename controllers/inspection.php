@@ -1738,6 +1738,7 @@ class inspection extends Controller {
 	$this->view->title = 'home6';
 	$this->view->user = $this->model->userSinglestructure($id);
 	$this->view->userListview = $this->model->homeepspSingleList($id);
+	$this->view->userListviews = $this->model->homeepspSingleLists($id);
 	$this->view->render($this->route.'/home6');
 	}
 	
