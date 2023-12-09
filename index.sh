@@ -242,7 +242,7 @@ release_start()
 	read -p "Do you want to add release_start ? (y/n)" answer
 	case $answer in
 		y)
-			read -p 'donner nom release : ' msgf
+			read -p 'donner nom release : Vx.x.x ' msgf
 			git flow release start $msgf
 		;;
 		n)
@@ -260,7 +260,7 @@ release_finish()
 	read -p "Do you want to add release_finish ? (y/n)" answer
 	case $answer in
 		y)
-			read -p 'donner nom release : ' msgf
+			read -p 'donner nom release : Vx.x.x ' msgf
 			git flow release finish $msgf
 		;;
 		n)
