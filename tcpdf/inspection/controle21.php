@@ -32,7 +32,7 @@ $telphone=strval($rowx->Mobile);
 $pdf->AddPage();
 $pdf->SetLineWidth(0.4);
 $pdf->Rect(5, 5, 200, 285 ,'D');$pdf->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
-$pdf->SetXY(5,$pdf->GetY()+5);$pdf->Cell(200,5,'الجمـهوريـــة الجزائرية الديمقراطية الشعبية',0,0,'C');
+$pdf->SetXY(5,$pdf->GetY());$pdf->Cell(200,5,'الجمـهوريـــة الجزائرية الديمقراطية الشعبية',0,0,'C');
 $pdf->SetXY(5,$pdf->GetY()+8);$pdf->Cell(200,5,'وزارة الصحة و السكان وإصلاح المستشفيات',0,0,'C');
 $pdf->SetFont('aefurat', '', 14);
 $pdf->SetXY(5,$pdf->GetY()+10);$pdf->Cell(200,5,'ولايــــــــة الجلفـــــــــة',0,0,'R');

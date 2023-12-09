@@ -58,7 +58,9 @@ class inspection_Model extends Model {
 			'NREALISATION'  => $data['NREALISATION'],
 			'OUVERTURE'     => $this->dateFR2US($data['OUVERTURE']),
 			'NOUVERTURE'    => $data['NOUVERTURE'],
-            'Mobile'        => $data['Mobile'],
+			'FERMETURE'     => $this->dateFR2US($data['FERMETURE']),
+			'NFERMETURE'    => $data['NFERMETURE'],
+			'Mobile'        => $data['Mobile'],
             'Fixe'          => $data['Fixe'],
 			'Email'         => $data['Email'],
             'DIPLOME'       => $this->dateFR2US($data['DIPLOME']),
@@ -68,6 +70,7 @@ class inspection_Model extends Model {
 			'NUMDEM'        => $data['NUMDEM'],
 			'DATEDEM'       => $this->dateFR2US($data['DATEDEM']),
 			'DATEDSC'       => $this->dateFR2US($data['DATEDSC']),
+			'WSC'           => $data['WSC'],
 			'SERVICECIVILE' => $data['SERVICECIVILE']
 			
         ));
@@ -101,7 +104,9 @@ class inspection_Model extends Model {
 			'NREALISATION'  => $data['NREALISATION'],
 			'OUVERTURE'     => $this->dateFR2US($data['OUVERTURE']),
 			'NOUVERTURE'    => $data['NOUVERTURE'],
-            'Mobile'        => $data['Mobile'],
+			'FERMETURE'     => $this->dateFR2US($data['FERMETURE']),
+			'NFERMETURE'    => $data['NFERMETURE'],
+			'Mobile'        => $data['Mobile'],
             'Fixe'          => $data['Fixe'],
 			'Email'         => $data['Email'],
             'DIPLOME'       => $this->dateFR2US($data['DIPLOME']),
@@ -111,6 +116,7 @@ class inspection_Model extends Model {
 			'NUMDEM'        => $data['NUMDEM'],
 			'DATEDEM'       => $this->dateFR2US($data['DATEDEM']),
 			'DATEDSC'       => $this->dateFR2US($data['DATEDSC']),
+			'WSC'           => $data['WSC'],
 			'SERVICECIVILE' => $data['SERVICECIVILE']
         );
         // echo '<pre>';print_r ($postData);echo '<pre>';
@@ -159,8 +165,13 @@ class inspection_Model extends Model {
 
 	public function autoSingleList($id) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM auto WHERE idt = :id  order by Categorie asc ', array(':id' => $id));    
+		return $this->db->select('SELECT * FROM auto WHERE idt = :id  and ETAT = 0    order by Categorie asc ', array(':id' => $id));    
     }
+	public function autoSingleList2($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM auto WHERE idt = :id  and ETAT = 1    order by Categorie asc ', array(':id' => $id));    
+    }
+	
 	public function autoSingleList1($id) {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM auto WHERE id = :id  order by DATE asc ', array(':id' => $id));    
@@ -275,7 +286,8 @@ class inspection_Model extends Model {
 			'CASNOS'       => $data['CASNOS'],
 			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
 			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT']),
-			'SPECIALITE'   => $data['SPECIALITE']
+			'SPECIALITE'   => $data['SPECIALITE'],
+			'TP'           => $data['TP']
 			));
 			// echo '<pre>';print_r ($data);echo '<pre>';
 			return $last_id = $this->db->lastInsertId();
@@ -293,7 +305,8 @@ class inspection_Model extends Model {
 			'CASNOS'       => $data['CASNOS'],
 			'DEBUTCONTRAT' => $this->dateFR2US($data['DEBUTCONTRAT']),
 			'FINCONTRAT'   => $this->dateFR2US($data['FINCONTRAT']),  
-            'SPECIALITE'   => $data['SPECIALITE']
+            'SPECIALITE'   => $data['SPECIALITE'],
+			'TP'           => $data['TP']
 
 	   );
        echo '<pre>';print_r ($postData);echo '<pre>';
@@ -324,8 +337,20 @@ class inspection_Model extends Model {
 	
 	public function persSingleList($id) {
         $this->db->exec('SET NAMES utf8');
-		return $this->db->select('SELECT * FROM pers WHERE idt = :id  order by Categorie asc ', array(':id' => $id));    
+		return $this->db->select('SELECT * FROM pers WHERE idt = :id and ETAT = 0 and TP=0 order by PRENOMFR asc ', array(':id' => $id));    
     }
+	
+	public function persSingleList1($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM pers WHERE idt = :id and ETAT = 0 and TP=1 order by PRENOMFR asc ', array(':id' => $id));    
+    }
+	
+	
+	public function persSingleList2($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM pers WHERE idt = :id and ETAT = 1 order by PRENOMFR asc ', array(':id' => $id));    
+    }
+	
 	
 	public function userpersSingleList($id) {
         $this->db->exec('SET NAMES utf8');
@@ -345,6 +370,10 @@ class inspection_Model extends Model {
 	public function Listview() {
         $this->db->exec('SET NAMES utf8');
 		return $this->db->select('SELECT * FROM insp order by DATE asc ');    
+    }
+	
+	public function deleteinspecteur($id) {       
+        $this->db->delete('insp', "id = '$id'");
     }
 	
 	public function userSingleinspecteur($id) {
@@ -380,11 +409,9 @@ class inspection_Model extends Model {
             'REF'        => $data['REF'],
 			'PJ'         => $data['PJ'],
 			'ids'        => $data['id'],
-			'STRUCTURE'  => $data['STRUCTURE'],'Commanditaire'  => $data['Commanditaire']
-
-			
+			'STRUCTURE'  => $data['STRUCTURE'],'Commanditaire'  => $data['Commanditaire']	
         ));
-        echo '<pre>';print_r ($data);echo '<pre>';
+        //echo '<pre>';print_r ($data);echo '<pre>';
 		return $last_id = $this->db->lastInsertId();
     }
 	
@@ -511,6 +538,84 @@ class inspection_Model extends Model {
 	}
 	public function deletehome($id) {       
         $this->db->delete('home', "id = '$id'");
-    }	
-				
+    }
+//************************************************************//
+    public function createpsp($data) {
+			$this->db->exec('SET NAMES utf8');
+			$this->db->insert('epsp', array(
+			'idstructure'=> $data['id'],
+			'DATEP'=> $this->dateFR2US($data['DATEP']),
+			'NAT'=> $data['NAT'],
+			'WILAYA'=>$data['WILAYA'],
+			'COMMUNE'=>$data['COMMUNE'],
+			'ADRESSE'=>$data['ADRESSE'],
+			'ADRESSEAR'=>$data['ADRESSEAR'],
+			'NUMD'=> $data['NUMD'],
+			'DATED'=> $this->dateFR2US($data['DATED']),
+			'PROPRIETAIRE'=> $data['PROPRIETAIRE'],
+			'MG'=> $data['MG'],
+			'SD'=> $data['SD'],
+			'CG'=> $data['CG'],
+			'MI'=> $data['MI'],
+			'OB'=> $data['OB'],
+			'PE'=> $data['PE'],
+			'SP'=> $data['SP'],
+			'UMC'=> $data['UMC'],
+			'LA'=> $data['LA'],
+			'RA'=> $data['RA'],
+			'PH'=> $data['PH'],
+			'MA'=> $data['MA']
+			));	
+	}
+
+    public function homeepspSingleList($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM epsp WHERE idstructure = :id and NAT=1 order by ADRESSE asc ', array(':id' => $id));    
+    }
+	 public function homeepspSingleLists($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM epsp WHERE idstructure = :id and NAT=2 order by ADRESSE asc ', array(':id' => $id));    
+    }
+	public function userhomeSingleList0($id) {
+        $this->db->exec('SET NAMES utf8');
+		return $this->db->select('SELECT * FROM epsp WHERE id = :id  order by id asc ', array(':id' => $id));
+    }
+	
+	public function deletehomeepsp($id) {       
+        $this->db->delete('epsp', "id = '$id'");
+    }
+
+	public function edithomeepsp($data) {
+			$this->db->exec('SET NAMES utf8');
+			$postData = array(
+			'id'=> $data['id'],
+			'DATEP'=> $this->dateFR2US($data['DATEP']),
+			'NAT'=> $data['NAT'],
+			'WILAYA'=>$data['WILAYA'],
+			'COMMUNE'=>$data['COMMUNE'],
+			'ADRESSE'=>$data['ADRESSE'],
+			'ADRESSEAR'=>$data['ADRESSEAR'],
+			'NUMD'=> $data['NUMD'],
+			'DATED'=> $this->dateFR2US($data['DATED']),
+			'PROPRIETAIRE'=> $data['PROPRIETAIRE'],
+			'MG'=> $data['MG'],
+			'SD'=> $data['SD'],
+			'CG'=> $data['CG'],
+			'MI'=> $data['MI'],
+			'OB'=> $data['OB'],
+			'PE'=> $data['PE'],
+			'SP'=> $data['SP'],
+			'UMC'=> $data['UMC'],
+			'LA'=> $data['LA'],
+			'RA'=> $data['RA'],
+			'PH'=> $data['PH'],
+			'MA'=> $data['MA']
+			);
+			$this->db->update('epsp', $postData, "id =" . $data['id'] . "");	
+	        // $postData1 = array('WILAYA'=> $data['WILAYA'],'COMMUNE'=> $data['COMMUNE'],'ADRESSE'=> $data['ADRESSE'],'ADRESSEAR'=> $data['ADRESSEAR']);
+			// $this->db->update('structure', $postData1, "id =" . $data['idstructure'] . ""); 
+			// $this->db->insert('insp', array('DATE' => $this->dateFR2US($data['DATEP']),'ids' => $data['id'],'STRUCTURE' => $data['STRUCTURE'],'Commanditaire' => "DSP"	));  
+			// return $last_id = $this->db->lastinsertid();
+			echo '<pre>';print_r ($postData);echo '<pre>'; 
+	}
 }

@@ -43,6 +43,8 @@ class inspection extends TCPDF
 	public $pvconformite = "- بناء على محضر المطابقة الخاص بالمحل  للصيدلية المؤرخ في ";
 	public $diplome = "- بناء على شهادة النجاح في الصيدلة بتاريخ ";
 	public $diplome17 = "- بناء على شهادة النجاح في الطب العام بتاريخ  ";
+	public $diplome19 = "- بناء على شهادة النجاح في علم النفس العيادي  بتاريخ ";
+	public $diplome28 = "- بناء على شهادة النجاح في طب الاسنان بتاريخ ";
 	public $diplome15 = "- بناء على شهادة النجاح في جراحة الاسنان بتاريخ ";
 	public $diplome16 = "- و بعد الإطلاع على الشهادة (المؤقتة) للدراسات الطبية المتخصصة ";
 	public $diplome20 = "- و بعد الإطلاع على الشهادة النجاح ";
@@ -54,6 +56,7 @@ class inspection extends TCPDF
 	public $instruction06_98 = "- بمقتضى التعليمة الوزارية رقم 06 المؤرخة في 1998/06/28 المتعلقة بتشغيل الشبه الطبيين في الهياكل الصحية الخاصة";
 	
 	public $instruction01_99 = "- بمقتضى التعليمة الوزارية للصحة رقم 01 المؤرخة في 1999/01/20 المتعلقة بالممارسة الحرة لمهن الصحة ";
+	public $ordre28 = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة لطب الاسنان رقم  ";
 	public $ordre15 = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة لجراحة الأسنان رقم  ";
 	public $ordre17 = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة للطب العام رقم  ";
 	
@@ -69,12 +72,18 @@ class inspection extends TCPDF
 	
 	public $instruction04_2013 = "- بمقتضى التعليمة الوزارية رقم 04 المؤرخة في 2013/07/22 المتعلقة بكيفيات فتح  تحويل غلق  عيادات الفحص و العلاج ";
 	public $instruction10_2018 = "- بمقتضى التعليمة الوزارية رقم 10 المؤرخة في 2018/06/09 المتعلقة بتنصيب الممارسين الاخصائين الخواص";
+	public $instruction61_12_4_2021 = "- بمقتضى التعليمة الوزارية رقم 61 المؤرخة في 2021/04/12 المتعلقة بمعالجة طلبات الفتح و التحويل وغلق المنشات لممارسة النشاط";
+	public $instruction61_12_4_2021_bis = "الحر للأطباء الأخصائيين";
+	
+	
+	
 	//public $avisfavorable="- وبعد الاطلاع على راي الموافقة الصادر عن اللجنة المركزية المكلفة بدراسة طلبات تنصيب الممارسين الاخصائين";
 	public $avisfavorable="- وبعد الاطلاع على راي الموافقة الصادر عن اللجنة الولائية المكلفة بدراسة طلبات تنصيب الممارسين الاخصائين";
 	public $servicecivile ="- وبعد الاطلاع على شهادة الابراء من التزمات الخدمة المدنية الصادرة عن ";
 	public $diplome160 = "- بناء على الشهادة المؤقتة للدراسات الطبية المتخصصة بتاريخ  ";
 	public $diplome161 = "- بناء على شهادة النجاح في الدراسات الطبية المتخصصة بتاريخ  ";
-	public $ordre16 = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة لللاطباء الاخصائين رقم  ";
+	public $ordre16 = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة للأطباء الأخصائيين رقم ";
+	//public $ordre16 = "- بناء على شهادة التسجيل بمجلس اخلاقيات المهنة لللاطباء الاخصائين رقم  ";
 	public $circulaire10_2018 = "- بمقتضى التعليمة الوزارية رقم 10 / و .ص. س .ا . م / ا ع المؤرخة في 09 جوان 2018 و المتعلقة بتنصيب الممارسين الاخصائيين الخواص";
 	
 	public $decision39_98 = "- بمقتضى القرار رقم 39  و. ص. س المؤرخ في 1998/09/15 الخاص بتنظيم النقل الصحي . ";
@@ -89,7 +98,7 @@ class inspection extends TCPDF
 	function ANNEEFR($DATEINS) {
 			$A      = substr($DATEINS,6,2); 
 			$ANNEE  = array("treize","quatorze","quinze","seize","dix-sept","dix-huit ","dix-neuf","vingt","vingt et un ","vingt et deux","vingt -trois");
-			$ANNEE1 =  $ANNEE[ $A - 12] ;
+			$ANNEE1 =  $ANNEE[ $A - 11] ;
 			$DATEPV=$ANNEE1;
 			return $DATEPV;
 		}
@@ -119,6 +128,42 @@ class inspection extends TCPDF
 
  	
 	//*************************************************************************************************************//
+	function entetepvc($titre,$ref)
+	{
+		$this->AddPage();$this->SetFont('aefurat', '', 12);
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,1,'C');$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repfr,0,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->mspar,0,1,'C');$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->mspfr,0,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dspar,0,1,'C');$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->dspfr,0,1,'C');
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,'Inspection santé publique',0,1,'L');//$this->SetXY(155,$this->GetY()-5);$this->Cell(50,5,'مفتشية الصــــحة العموميـة',0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,"N° : ________ /ISP/".date('Y'),0,1,'L');//$this->SetXY(155,$this->GetY()-5);$this->Cell(50,5,'الرقم : _____/ م ص ع /'.date('Y'),0,1,'R');
+		$this->SetFont('aefurat', '', 14);
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,"PROCÉS VERBAL DE CONFORMITÉ ".$titre,0,1,'C');$this->SetFont('aefurat', '', 12);
+		$this->SetFont('aefurat', '', 10);$this->SetXY(5,$this->GetY());$this->Cell(200,5,"REF : ".$ref,0,1,'C');$this->SetFont('aefurat', '', 12);
+
+
+	}
+	
+	
+	
+	//*************************************************************************************************************//
+	
+	
+	function directeuruniv($UNIV)
+	{
+		 $this->SetXY(16,$this->GetY()+8);$this->Cell(100,5,"السيد عميد كلية الطب ",0,1,'C',0,1);
+	     $this->SetXY(16,$this->GetY());$this->Cell(100,5,"جامعة ".$UNIV,0,1,'C',0,1);
+	}
+	function directeurunivx($UNIV)
+	{
+		 $this->SetXY(16,$this->GetY()+8);$this->Cell(100,5,"السيد عميد كلية ",0,1,'C',0,1);
+	     $this->SetXY(16,$this->GetY());$this->Cell(100,5,"جامعة ".$UNIV,0,1,'C',0,1);
+	}
+	function directeurep($UNIV)
+	{
+		 $this->SetXY(16,$this->GetY()+8);$this->Cell(100,5,"السيد مدير معهد التكوين الشبه الطبي",0,1,'C',0,1);
+	     $this->SetXY(16,$this->GetY());$this->Cell(100,5,"ولاية ".$UNIV,0,1,'C',0,1);
+	}
+
 	function decision_o($num1,$date1,$TITRE,$nomar,$prenomar)
 	{
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'- بناء على المقررة رقم '.$num1.' المؤرخة في '.$date1.' المتعلقة بفتح عيادة طبية '.$TITRE." للسيد(ة) ".$nomar." ".$prenomar,0,1,'R');	
@@ -188,6 +233,14 @@ class inspection extends TCPDF
 		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' بصفته (ها) '.$fonction.' بفتح قاعته (ها) الشبه طبية '.' الكائن مقرها',0,1,'R');
         $this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
 	}
+	function decision_a_f_pm($article,$nomar,$prenomar,$adressen,$communen,$grade){
+		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$article." : تغلق القاعة الشبه طبية للسيد (ة) ".$nomar.' '.$prenomar.$grade.' الكائن مقرها',0,1,'R');
+		$this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
+	}
+	
+	
+	
+	
 	function decision_a_i($nomar,$prenomar,$adressen,$communen){
 		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بإنشاء عيادته (ها) الطبية العامة'.' الكائن مقرها',0,1,'R');
         $this->SetXY(0,$this->GetY());$this->Cell(200,5,'           بـ : '.$adressen.' بلدية '.$communen.' ولاية الجلفة',0,1,'R');
@@ -236,16 +289,17 @@ class inspection extends TCPDF
 		$this->SetXY(5,$this->GetY()+3);$this->Cell(200,5,$titre,0,1,'C');$this->SetFont('aefurat', '', 16);
 		$this->SetXY(100,$this->GetY()+5);$this->Cell(100,5,$this->ledspar,0,1,'C');$this->SetFont('aefurat', '', 12);	
 	}
-	function entetedecisions($titre,$DATEP)
+	function entetedecisions($titre,$DATEP,$SPECIALITE)
 	{
 		$this->Rect(5, 5, 200, 285 ,'D');$this->Rect(5-1, 5-1, 200+2, 285+2 ,'D');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->repar,0,1,'C');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->mspar,0,1,'C');$this->SetFont('aefurat', '', 14);
 		$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,"مديرية الصحة و السكان لولاية الجلفة",0,1,'R');
-		$this->SetXY(5,$this->GetY());$this->Cell(200,5,"=======================================================================",0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5,"________________________________________________________________________________",0,1,'C');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,"المقرر رقم: "." ________ "."/ م . ص . س / ".substr($DATEP,0,4)." /"."المؤرخ في "." ___________________ ",0,1,'C');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5," المتضمن الترخيص ".$titre,0,1,'C');
-		$this->SetXY(5,$this->GetY());$this->Cell(200,5,"=======================================================================",0,1,'R');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,5," - ".$this->nbrtostring('mvc','specialite','idspecialite',$SPECIALITE,'specialitear')." - ",0,1,'C');
+		$this->SetXY(5,$this->GetY());$this->Cell(200,0,"________________________________________________________________________________",0,1,'C');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,$this->ledspar,0,1,'R');$this->SetFont('aefurat', '', 12);	
 		
 	}
@@ -267,6 +321,7 @@ class inspection extends TCPDF
 		
 		if($grade=="M"){$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) عام (ة) '.' بفتح عيادته (ها) الطبية العامة الكائن مقرها ',0,1,'R');}
 		if($grade=="D"){$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' جراح (ة) أسنان'.' بفتح عيادته (ها) الطبية لجراحة الاسنان الكائن مقرها ',0,1,'R');}
+		if($grade=="MD"){$this->SetXY(5,$this->GetY()+5);$this->Cell(200,5,$this->article1.$nomar.' '.$prenomar.' طبيب (ة) أسنان'.' بفتح عيادته (ها) الطبية لطب الاسنان الكائن مقرها ',0,1,'R');}
 		
 		$this->SetXY(0,$this->GetY());$this->Cell(200,5,'               بـ : '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
 		$this->SetXY(5,$this->GetY());$this->Cell(200,5,'المادة 02 : لايمكن تحويل اي مقر  للعيادة دون استشارة مصالح مديرية الصحة و السكان',0,1,'R');

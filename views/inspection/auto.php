@@ -36,13 +36,15 @@ $data = array(
 						"CITROËN"=>"CITROËN",
 						"CHEVROLET"=>"CHEVROLET",
 						"DACIA"=>"DACIA",
+						"FOTON"=>"FOTON",
 						"HYUNDAI"=>"HYUNDAI",
 						"JINBEI"=>"JINBEI",
 						"JMC"=>"JMC",
 						"KIA"=>"KIA",
 						"NISSANE"=>"NISSANE",
 						"PEUGEOT"=>"PEUGEOT",
-						"RENAULT"=>"RENAULT"						
+						"RENAULT"=>"RENAULT",
+						"MERCEDES"=>"MERCEDES"						
 					  ),
 "Immatri"  => '0' ,
 "Precedent"  => '0' ,					  
@@ -91,47 +93,64 @@ $this->f1();
 view::sautligne(17);
 echo "<br/><br/><hr/>";
 
-echo "<h2>List des véhicules appartenant à Mr : ".strtoupper($this->user[0]['NOM'])."_ ".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 >";
 ?>
-		
+<div class="tabbed_area">  
+	<ul class="tabs">  
+		<li><a href="javascript:tabSwitch('tab_1', 'content_1');" id="tab_1" class="active">List des véhicules en circulation</a></li>  
+		<li><a href="javascript:tabSwitch('tab_2', 'content_2');" id="tab_2">List des véhicules hors service</a></li> 
+		<li><a href="javascript:tabSwitch('tab_3', 'content_3');" id="tab_3">List des véhicules en double emploi</a></li> 	
+	</ul>    
+	<div id="content_1" class="content"> 
+		<?php 
+		echo "<h2>List des véhicules appartenant à Mr : ".strtoupper($this->user[0]['NOM'])."_ ".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 >";
+		?>	
 		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
 		<tr>
 		<th  colspan=5  style="width:50px;"><?php echo '<a title="Autres transport sanitaire"       href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=21'.'" > Autres transport sanitaire : '.'</a>';?></th> 
 		<th  colspan=5  style="width:50px;"><?php echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche vehicules </a>';?></th> 
-		<th  colspan=6  style="width:50px;"><?php echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'tcpdf/inspection/controle21.php?ids='.$this->user[0]['id'].'&idh=108'.'" > Controle vehicules</a>';?></th> 
+		<th  colspan=4  style="width:50px;"><?php echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'tcpdf/inspection/controle21.php?ids='.$this->user[0]['id'].'&idh=108'.'" > Controle vehicules</a>';?></th> 
 		</tr>
 		<tr>
-		<th style="width:70px;">WILAYA</th><th style="width:70px;">COMMUNE</th><th style="width:50px;">Categorie</th><th style="width:70px;">Type</th><th style="width:50px;">Serie_Type</th><th style="width:50px;">Marque</th><th style="width:80px;">Immatri</th><th style="width:80px;">Precedent</th><th style="width:50px;">Annee</th><th style="width:70px;">ASS</th><th style="width:70px;">CTRL</th><th style="width:40px;">ETAT</th><th style="width:30px;">PVC </th><th style="width:30px;">Update </th><th style="width:30px;">Delete</th><th style="width:30px;">Chk</th>
+		<th style="width:70px;">WILAYA</th><th style="width:70px;">COMMUNE</th><th style="width:50px;">Categorie</th><th style="width:70px;">Type</th><th style="width:50px;">Serie_Type</th><th style="width:50px;">Marque</th><th style="width:80px;">Immatri</th><th style="width:80px;">Precedent</th><th style="width:50px;">Annee</th>
+		<th style="width:40px;">ETAT</th><th style="width:30px;">PVC </th><th style="width:30px;">Update </th><th style="width:30px;">Delete</th><th style="width:30px;">Chk</th>
 		</tr>
 		
 		<form action="<?php echo URL.'tcpdf/inspection/auth21.php?ids='.$this->user[0]['id'].'&idh=108'; ?>  " method="post"> 
 
-		<?php
+		<?php  // <th style="width:70px;">ASS</th><th style="width:70px;">CTRL</th>
 		if (isset($this->userListview)) 
 		{		
 				foreach($this->userListview as $key => $value){ ?>
 						<tr bgcolor='WHITE' onmouseover="this.style.backgroundColor='#9FF781';" onmouseout="this.style.backgroundColor='WHITE';" >
-						<td align="center"><?php echo View::nbrtostring('wil','IDWIL',$value['WILAYA'],'WILAYAS');?></td>
-						<td align="center"><?php echo View::nbrtostring('com','IDCOM',$value['COMMUNE'],'COMMUNE');?></td>
-						<td align="center"><?php echo $value['Categorie'];?></td>
-						<td align="center"><?php echo $value['Type'];?></td>
-						<td align="center"><?php echo $value['Serie_Type'];?></td>
-						<td align="center"><?php echo $value['Marque'];?></td>
-						<td align="center"><?php echo $value['Immatri'];?></td>
-						<td align="center"><?php echo $value['Precedent'];?></td>
-					    <td align="center"><?php echo $value['Annee'];?></td>
-						<td align="center"><?php echo $value['AUNASS'];?></td>
-						<td align="center"><?php echo $value['AUCTRL'];?></td>
-						
-						<?php if ($value['ETAT']==0) { ?>
-						<td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetat/'.$value['id'].'/'.$value['idt'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
-		                <?php } if ($value['ETAT']==1) { ?>
-					    <td align="center"><a  title="activé" href="<?php echo URL.'inspection/editetat/'.$value['id'].'/'.$value['idt'].'/0';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
-						<?php } ?>
-						<td align="center"><a title="PV de conformité" target="_blank" href="<?php echo URL.'tcpdf/inspection/pvconfv.php?uc='.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/document-pdf.png';?>' width='16' height='16' border='0' alt=''/></a></td>
-						<td align="center"><a title="editer" href="<?php echo URL.'inspection/editauto/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
-						<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deleteauto/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
-						<td align="center"><input type="checkbox" name="chkl[ ]" value="<?php echo $value['id'];?>"></td>
+							<?php 
+							echo '<td align="center">'; echo View::nbrtostring('wil','IDWIL',$value['WILAYA'],'WILAYAS'); echo '</td>'; 
+							echo '<td align="center">'; echo View::nbrtostring('com','IDCOM',$value['COMMUNE'],'COMMUNE');echo '</td>'; 
+							echo '<td align="center">'; echo $value['Categorie'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Type'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Serie_Type'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Marque'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Immatri'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Precedent'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Annee'];echo '</td>'; 
+							//echo '<td align="center">'; echo $value['AUNASS'];echo '</td>'; 
+							//echo '<td align="center">'; echo $value['AUCTRL'];echo '</td>'; 
+							if ($value['ETAT']==0) 
+							{ 
+								?>
+								<td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetat/'.$value['id'].'/'.$value['idt'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
+								<?php 	
+							} 
+							if ($value['ETAT']==1) 
+							{ 
+								?>
+								<td align="center"><a  title="activé" href="<?php echo URL.'inspection/editetat/'.$value['id'].'/'.$value['idt'].'/0';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
+								<?php 
+							} 
+							?>
+							<td align="center"><a title="PV de conformité" target="_blank" href="<?php echo URL.'tcpdf/inspection/pvconfv.php?uc='.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/document-pdf.png';?>' width='16' height='16' border='0' alt=''/></a></td>
+							<td align="center"><a title="editer" href="<?php echo URL.'inspection/editauto/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
+							<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deleteauto/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
+							<td align="center"><input type="checkbox" name="chkl[ ]" value="<?php echo $value['id'];?>"></td>
 						</tr>
 				<?php 
 				}
@@ -143,7 +162,7 @@ echo "<h2>List des véhicules appartenant à Mr : ".strtoupper($this->user[0]['N
 				}
 				else
 				{		
-			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="15" ><span>' .$total_count.' Record(s) found.</span></td>';					
+			    echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="13" ><span>' .$total_count.' Record(s) found.</span></td>';					
 				echo '<td align="center"   colspan="1" ><span> <input type="submit" name="Submitx" value="Submit"> </span></td></tr>';					
 				}		
 		}
@@ -154,48 +173,138 @@ echo "<h2>List des véhicules appartenant à Mr : ".strtoupper($this->user[0]['N
 		} 
 		echo "</table>";
 		echo "</form> <br/><br/>";
+        ?>
 
-echo "<h2>List des véhicules en double emploi avec Mr : ".strtoupper($this->user[0]['NOM'])."_ ".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 >";
-echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>";
-echo "<tr>";
-$url1 = explode('/',$_GET['url']);
-if (isset($url1[3]) and  $url1[3] !="") 
-{	
-	echo '<th colspan=6  style="width:50px;">Alerte : risque de doublon '.$url1[3];echo "</th>";			
-	echo "<tr>";
-	echo '<th style="width:70px;">Type</th><th style="width:50px;">Serie_Type</th><th style="width:80px;">Immatri</th><th style="width:50px;">Marque</th><th style="width:80px;">Proprietaire</th><th style="width:80px;">Statut</th>';
-	echo "</tr>";
-	if (isset($this->doubleemploi)) 
-	{	
-		foreach($this->doubleemploi as $key => $value)
+
+
+
+	</div>
+
+	<div id="content_2" class="content"> 
+	<?php 
+		echo "<h2>List des véhicules appartenant à Mr : ".strtoupper($this->user[0]['NOM'])."_ ".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 >";
+		?>	
+		<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>
+		<tr>
+		<th  colspan=5  style="width:50px;"><?php echo '<a title="Autres transport sanitaire"       href="'.URL.'inspection/search/0/10?o=STRUCTURE&q=21'.'" > Autres transport sanitaire : '.'</a>';?></th> 
+		<th  colspan=5  style="width:50px;"><?php echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'pdf/inspection/vehicule.php?uc='.$this->user[0]['id'].'" > Fiche vehicules </a>';?></th> 
+		<th  colspan=4  style="width:50px;"><?php echo '<a target="_blank" title="Fiche vehicules"  href="'.URL.'tcpdf/inspection/controle21.php?ids='.$this->user[0]['id'].'&idh=108'.'" > Controle vehicules</a>';?></th> 
+		</tr>
+		<tr>
+		<th style="width:70px;">WILAYA</th><th style="width:70px;">COMMUNE</th><th style="width:50px;">Categorie</th><th style="width:70px;">Type</th><th style="width:50px;">Serie_Type</th><th style="width:50px;">Marque</th><th style="width:80px;">Immatri</th><th style="width:80px;">Precedent</th><th style="width:50px;">Annee</th>
+		<th style="width:40px;">ETAT</th><th style="width:30px;">PVC </th><th style="width:30px;">Update </th><th style="width:30px;">Delete</th><th style="width:30px;">Chk</th>
+		</tr>
+		
+		<form action="<?php echo URL.'tcpdf/inspection/auth21.php?ids='.$this->user[0]['id'].'&idh=108'; ?>  " method="post"> 
+
+		<?php  // <th style="width:70px;">ASS</th><th style="width:70px;">CTRL</th>
+		if (isset($this->userListview2)) 
+		{		
+				foreach($this->userListview2 as $key => $value){ ?>
+						<tr bgcolor='WHITE' onmouseover="this.style.backgroundColor='#9FF781';" onmouseout="this.style.backgroundColor='WHITE';" >
+							<?php 
+							echo '<td align="center">'; echo View::nbrtostring('wil','IDWIL',$value['WILAYA'],'WILAYAS'); echo '</td>'; 
+							echo '<td align="center">'; echo View::nbrtostring('com','IDCOM',$value['COMMUNE'],'COMMUNE');echo '</td>'; 
+							echo '<td align="center">'; echo $value['Categorie'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Type'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Serie_Type'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Marque'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Immatri'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Precedent'];echo '</td>'; 
+							echo '<td align="center">'; echo $value['Annee'];echo '</td>'; 
+							//echo '<td align="center">'; echo $value['AUNASS'];echo '</td>'; 
+							//echo '<td align="center">'; echo $value['AUCTRL'];echo '</td>'; 
+							if ($value['ETAT']==0) 
+							{ 
+								?>
+								<td align="center"><a  title="désactivé" href="<?php echo URL.'inspection/editetat/'.$value['id'].'/'.$value['idt'].'/1';?>"><img src="<?php echo URL.'public/images/icons/ok.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
+								<?php 	
+							} 
+							if ($value['ETAT']==1) 
+							{ 
+								?>
+								<td align="center"><a  title="activé" href="<?php echo URL.'inspection/editetat/'.$value['id'].'/'.$value['idt'].'/0';?>"><img src="<?php echo URL.'public/images/icons/non.jpg';?>" width='16' height='16' border='0' alt=''/></a></td>	
+								<?php 
+							} 
+							?>
+							<td align="center"><a title="PV de conformité" target="_blank" href="<?php echo URL.'tcpdf/inspection/pvconfv.php?uc='.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/document-pdf.png';?>' width='16' height='16' border='0' alt=''/></a></td>
+							<td align="center"><a title="editer" href="<?php echo URL.'inspection/editauto/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/edit.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>
+							<td align="center"><a class="delete" title="supprimer" href="<?php echo URL.'inspection/deleteauto/'.$value['id'].'/'.$value['idt'];?>"><img src='<?php echo URL.'public/images/icons/delete.PNG';?>' width='16' height='16' border='0' alt=''/></a></td>	
+							<td align="center"><input type="checkbox" name="chkl[ ]" value="<?php echo $value['id'];?>"></td>
+						</tr>
+				<?php 
+				}
+				$total_count=count($this->userListview2);
+				if ($total_count <= 0 )
+				{
+					echo '<tr><td align="center" colspan="16" ><span> No record found for autos </span></td> </tr>';
+					echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="16" ><span>' .$total_count.'/'.$total_count.' Record(s) found.</span></td></tr>';					
+				}
+				else
+				{		
+					echo '<tr bgcolor="#00CED1"  ><td align="left"   colspan="13" ><span>' .$total_count.' Record(s) found.</span></td>';					
+					echo '<td align="center"   colspan="1" ><span> <input type="submit" name="Submitx" value="Submit"> </span></td></tr>';					
+				}		
+		}
+		else 
 		{
-			echo "<tr bgcolor='WHITE' onmouseover=\"this.style.backgroundColor='#9FF781';\" onmouseout=\"this.style.backgroundColor='WHITE';\" >";
-			echo "<td>".$value['Type']."</td>";
-			echo "<td>".$value['Serie_Type']."</td>";
-			echo "<td>".$value['Immatri']."</td>";
-			echo "<td>".$value['Marque']."</td>";
-			echo "<td>".$this->stringtostring("structure","id",$value['idt'],"NOM").'_'.$this->stringtostring("structure","id",$value['idt'],"PRENOM")."</td>";
-			if($this->stringtostring("structure","id",$value['idt'],"ETAT")==0)
+		echo '<tr><td align="center" colspan="16" ><span> Click search button to start searching a ....</span></td></tr>';
+		echo '<tr bgcolor="#00CED1"  ><td align="center"  colspan="16" ><span>&nbsp;</span></td></tr>';					      
+		} 
+		echo "</table>";
+		echo "</form> <br/><br/>";
+        ?>
+	</div>
+	<div id="content_3" class="content"> 
+	<?php
+	echo "<h2>List des véhicules en double emploi avec Mr : ".strtoupper($this->user[0]['NOM'])."_ ".$this->user[0]['PRENOM']." ( ".$this->stringtostring("structurebis","id",$this->user[0]['STRUCTURE'],"structure") ." ) "."</h2 >";
+	echo "<table  width='100%' border='1' cellpadding='5' cellspacing='1' align='center'>";
+	echo "<tr>";
+	$url1 = explode('/',$_GET['url']);
+	if (isset($url1[3]) and  $url1[3] !="") 
+	{	
+		echo '<th colspan=6  style="width:50px;">Alerte : risque de doublon '.$url1[3];echo "</th>";			
+		echo "<tr>";
+		echo '<th style="width:70px;">Type</th><th style="width:50px;">Serie_Type</th><th style="width:80px;">Immatri</th><th style="width:50px;">Marque</th><th style="width:80px;">Proprietaire</th><th style="width:80px;">Statut</th>';
+		echo "</tr>";
+		if (isset($this->doubleemploi)) 
+		{	
+			foreach($this->doubleemploi as $key => $value)
 			{
-				echo "<td>Actif</td>";	
-			}
-			else
-			{
-				echo "<td>Non actif</td>";	
-			}
-			echo '</tr>';
-		}	
-	}
-	echo "</tr>";
+				echo "<tr bgcolor='WHITE' onmouseover=\"this.style.backgroundColor='#9FF781';\" onmouseout=\"this.style.backgroundColor='WHITE';\" >";
+				echo "<td>".$value['Type']."</td>";
+				echo "<td>".$value['Serie_Type']."</td>";
+				echo "<td>".$value['Immatri']."</td>";
+				echo "<td>".$value['Marque']."</td>";
+				echo "<td>".$this->stringtostring("structure","id",$value['idt'],"NOM").'_'.$this->stringtostring("structure","id",$value['idt'],"PRENOM")."</td>";
+				if($this->stringtostring("structure","id",$value['idt'],"ETAT")==0)
+				{
+					echo "<td>Actif</td>";	
+				}
+				else
+				{
+					echo "<td>Non actif</td>";	
+				}
+				echo '</tr>';
+			}	
+		}
+		echo "</tr>";
 
-} 
-else
-{	
-	echo '<th colspan=5  style="width:50px;">Alerte : aucun risque de doublon ';echo "</th>";			
-} 
-echo "</table>";
-ob_end_flush();
-?>
+	} 
+	else
+	{	
+		echo '<th colspan=5  style="width:50px;">Alerte : aucun risque de doublon ';echo "</th>";			
+	} 
+	echo "</table>";
+	ob_end_flush();
+	?>	
+		</div>
+	</div> 
+
+
+		
+
+
 
 
 		

@@ -47,7 +47,7 @@ else
 $pdf->SetXY(90,$pdf->GetY());$pdf->Cell(100,5,' Madame / Monsieur : '.$nom."_".$prenom,0,1,'L');
 $pdf->SetXY(10,$pdf->GetY()+5);$pdf->Cell(100,5,'OBJET :  Mise en demeure ( avec accusé de réception )',0,1,'L');
 $pdf->SetXY(10,$pdf->GetY());$pdf->Cell(100,5,'REF : -Inspection du '.$pdf->dateUS2FR($rowy->DATE).' : local de Mme/Mr '.$nom."_".$prenom,0,1,'L');
-$pdf->SetXY(21,$pdf->GetY());$pdf->Cell(100,5,"-l'instruction N° 02 du 04/04/2021 relative à la pratique d'analyses médicales dans les officines",0,1,'L');
+//$pdf->SetXY(21,$pdf->GetY());$pdf->Cell(100,5,"-l'instruction N° 02 du 04/04/2021 relative à la pratique d'analyses médicales dans les officines",0,1,'L');
 $pdf->SetXY(40,$pdf->GetY()+5);$pdf->Cell(100,5,'Madame, Monsieur, ',0,1,'L');
 $pdf->SetXY(20,$pdf->GetY()+5);$pdf->Cell(100,5,"Nous constatons avec regret les anomalies suivantes lors de l'inspection du  ".$pdf->dateUS2FR($rowy->DATE),0,1,'L');
 $pdf->SetXY(20,$pdf->GetY());$pdf->Cell(100,5,'au niveau de votre local : '.$pdf->nbrtostring('mvc','structurebis','id',$pdf->nbrtostring('mvc','structure','id',$rowy->ids,'STRUCTURE'),'structure')." Commune de ".$pdf->nbrtostring('mvc','com','IDCOM',$pdf->nbrtostring('mvc','structure','id',$rowy->ids,'COMMUNE'),'COMMUNE'),0,1,'L');

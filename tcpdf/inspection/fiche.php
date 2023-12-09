@@ -26,7 +26,7 @@ $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->repar,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->repfr,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->mspar,0,1,'C');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->mspfr,0,1,'C');
-$y=10;$pdf->SetFont('aefurat', '', 16);
+$y=10;$pdf->SetFont('aefurat', '', 12);
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'Fiche de renseignements',0,1,'C');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(50,5,"Nom : ".$rowx->NOM,0,0,'L');$pdf->SetXY($pdf->GetX()+25,$pdf->GetY());$pdf->Cell(50,5,"Prénom : ".$rowx->PRENOM,0,0,'L');$pdf->SetXY($pdf->GetX()+25,$pdf->GetY());$pdf->Cell(50,5,"Sexe :",0,0,'L');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(50,5,"Fils de :",0,0,'L');$pdf->SetXY($pdf->GetX()+25,$pdf->GetY());$pdf->Cell(50,5,"Et De :",0,0,'L');$pdf->SetXY($pdf->GetX()+25,$pdf->GetY());$pdf->Cell(50,5,"NEC :",0,0,'L');
@@ -39,36 +39,6 @@ $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(50,5,"Diplôme :",0,0,'L');$pdf->SetXY
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(50,5,"Numéro  d'inscription au tableau de l'ordre   :",0,0,'L');
 $pdf->SetXY(5,$pdf->GetY()+$y+5);$pdf->Cell(50,5,"Bail de location ou acte de propriété",0,0,'L');
 $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(50,5,"Propriétaire :",0,0,'L');$pdf->SetXY($pdf->GetX()+25,$pdf->GetY());$pdf->Cell(50,5,"Début contrat :",0,0,'L');$pdf->SetXY($pdf->GetX()+25,$pdf->GetY());$pdf->Cell(50,5,"Fin contrat :",0,0,'L');
-
 }
-//
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->dsparp,0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->dssar,0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'رقم : '.'_____'.' /م. ص. س / '.substr($pdf->dateUS2FR($_POST["DATEDEC"]),0,4),0,1,'R');$pdf->SetFont('aefurat', '', 16);
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'مقــــرر تحويل صيدلــــــية',0,1,'C');$pdf->SetFont('aefurat', '', 16);
-// $pdf->SetXY(100,$pdf->GetY()+$y);$pdf->Cell(100,5,$pdf->ledspar,0,1,'C');$pdf->SetFont('aefurat', '', 13);
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->loi85_05,0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->decret97_261,0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete52_95,0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete58_95,0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete67_96,0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->arrete110_96,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->cm03_05,0,1,'R');$pdf->SetFont('aefurat', '', 13);
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->diplome.$pdf->dateUS2FR($_POST["DATED"]).' الصادرة عن جامعة '.$_POST["UNIV"].' تخص السيد (ة) '.$nomar.' '.$prenomar.'',0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->ordre.$_POST["NUMORDER"].' بتاريخ '.$pdf->dateUS2FR($_POST["DATEO"]).' للمعنى (ة)  ',0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على مقرر الفتح رفم  '.$_POST["NUMOUVERTURE"].' المؤرخ ب  '.$pdf->dateUS2FR($_POST["DATEOUV"]).' الصادر عن م. ص. س  بالجلفة '.''.' تخص السيد (ة) '.$nomar.' '.$prenomar.'',0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'- بناء على طلب السيد (ة) '.$nomar.' '.$prenomar.' صيدلي (ة)  بتاريخ '.$pdf->dateUS2FR($_POST["DATEDEM"]).' المتعلق بتحويل صيدليته (ها)  الى  بلدية '.$commune,0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->pvconformite.$pdf->dateUS2FR($_POST["DATECONF"]),0,1,'R');$pdf->SetFont('aefurat', 'B', 16);
-// /*************************************************************************************************************************/
-// $pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(200,5,$pdf->proposition,0,1,'C');$pdf->SetFont('aefurat', 'U', 16);
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,'يقــــــــــرر ',0,1,'C');$pdf->SetFont('aefurat', '', 13);
-// /*************************************************************************************************************************/
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article1.$nomar.' '.$prenomar.' صيدلي (ة) '.' بتحويل   صيدليته (ها)  الى العنوان التالي  ',0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,' ب '.$adresse.' بلدية '.$commune.' ولاية الجلفة',0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article2,0,1,'R');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article3,0,1,'R');$pdf->SetFont('aefurat', '', 12.5);
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(200,5,$pdf->article4,0,1,'R');$pdf->SetFont('aefurat', 'B', 14);
-// $pdf->SetXY(5,$pdf->GetY()+$y+1);$pdf->Cell(100,5,'الجلفة في : '.$pdf->dateUS2FR($_POST["DATEDEC"]),0,1,'C');
-// $pdf->SetXY(5,$pdf->GetY()+$y);$pdf->Cell(100,5,'مدير الصحة و السكان ',0,1,'C');
 $pdf->Output();
 ?>

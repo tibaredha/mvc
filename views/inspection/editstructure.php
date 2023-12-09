@@ -2,7 +2,7 @@
 verifsession();	
 lang(Session::get('lang'));
 ob_start();
-$fichier = photosmfx('str',$this->user[0]['id'].'.jpg',$this->user[0]['SEX']) ;
+$fichier = photosmfy('str',$this->user[0]['id'].'.jpg',$this->user[0]['SEX']) ;
 $data = array(
 "btn"          => 'inspection', 
 "photos"       => 'public/webcam/str/'.$fichier."?t=".time(),
@@ -21,9 +21,9 @@ $data = array(
 "DIPLOME"      => view::dateUS2FR($this->user[0]['DIPLOME']),"UNIV0" => $this->user[0]['UNIV'],"UNIV1" => $this->user[0]['UNIV'],
 "NUMORDER"     => $this->user[0]['NUMORDER'],"DATEORDER" => view::dateUS2FR($this->user[0]['DATEORDER']),
 "NUMDEM"       => $this->user[0]['NUMDEM'],"DATEDEM" => view::dateUS2FR($this->user[0]['DATEDEM']),
-"DATEDSC"       => view::dateUS2FR($this->user[0]['DATEDSC']),
-"SERVICECIVILE0"=> $this->user[0]['SERVICECIVILE'],
-"SERVICECIVILE1"=> $this->user[0]['SERVICECIVILE'],
+"DATEDSC"      => view::dateUS2FR($this->user[0]['DATEDSC']),
+"WSC0"         => $this->user[0]['WSC'],"WSC1"         => View::nbrtostring('wil','IDWIL',$this->user[0]['WSC'],'WILAYAS'),
+"SERVICECIVILE0"=> $this->user[0]['SERVICECIVILE'],"SERVICECIVILE1"=> $this->user[0]['SERVICECIVILE'],
 "WILAYAR1"     => $this->user[0]['WILAYA'] ,"WILAYAR2"  => View::nbrtostring('wil','IDWIL',$this->user[0]['WILAYA'],'WILAYAS'),
 "COMMUNER1"    => $this->user[0]['COMMUNE'] ,"COMMUNER2" => View::nbrtostring('com','IDCOM',$this->user[0]['COMMUNE'],'COMMUNE'),
 "ADRESSE"      => $this->user[0]['ADRESSE'],
@@ -37,12 +37,14 @@ $data = array(
 "NREALISATION" => $this->user[0]['NREALISATION'],
 "OUVERTURE"    => view::dateUS2FR($this->user[0]['OUVERTURE']),
 "NOUVERTURE"   => $this->user[0]['NOUVERTURE'],
+"FERMETURE"    => $this->user[0]['FERMETURE'],
+"NFERMETURE"   => $this->user[0]['NFERMETURE'],
 "NOMAR"        => $this->user[0]['NOMAR'] ,
 "PRENOMAR"     => $this->user[0]['PRENOMAR'] ,					  
 "ADRESSEAR"    => $this->user[0]['ADRESSEAR'],
 "butun"        => 'Edite  Structure' 	
 );
-view::structure_sanitaire($data,"Modifier Structure Sanitaire : ".$data['NOM'].'_'.$data['PRENOM']);
+Inspectionx::structure_sanitaire($data,"Modifier Structure Sanitaire : ".$data['NOM'].'_'.$data['PRENOM']);
 ?>
 
 <script type="text/javascript">

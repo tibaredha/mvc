@@ -320,7 +320,7 @@ function photosmfx ($type,$id,$sexe)
 		}  
 	}
 }
-
+// fonction qui marche bie 
 define('photosmfy', 'd:\\wamp/www/mvc/public/webcam/');
 function photosmfy ($type,$id,$sexe)
 {
@@ -410,10 +410,10 @@ echo "<option value=\"12\">12</option><br />";
 }
 function annee()
 {
-for ($i=1960; $i<=2030; $i++) 
-{ 
-echo "<option value=\"$i\">". $i."</option><br />"; 
-}  
+	for ($i=1960; $i<=2030; $i++) 
+	{ 
+		echo "<option value=\"$i\">". $i."</option><br />"; 
+	}  
 }
 function heurs()
 {
@@ -586,46 +586,58 @@ echo "<p><input type=\"submit\" value=\"Evaluer\" /></p>";
 echo "</form>";
 echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
 }
+
 function inspection($action)
 { 
-echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
-echo "<form ALIGN=\"center\" action=\"$action\" method=\"post\">";
+	echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+	echo "<form ALIGN=\"center\" action=\"$action\" method=\"post\">";
 
-echo "<p> du";
-	echo "<select name=\"jour\">";jours();echo "</select>";
-	echo "<select name=\"mois\">";mois();echo "</select>";
-	echo "<select name=\"annee\">";annee();echo "</select>";
-echo "</p>";
+		echo "<p> du";
+			echo "<select name=\"jour\">";jours();echo "</select>";
+			echo "<select name=\"mois\">";mois();echo "</select>";
+			echo "<select name=\"annee\">";annee();echo "</select>";
+		echo "</p>";
 
-echo "<p> au";
-	echo "<select name=\"jour1\">";jours();echo "</select>";
-	echo "<select name=\"mois1\">";mois();echo "</select>";
-	echo "<select name=\"annee1\">";annee();echo "</select>";
-echo "</p>";
+		echo "<p> au";
+			echo "<select name=\"jour1\">";jours();echo "</select>";
+			echo "<select name=\"mois1\">";mois();echo "</select>";
+			echo "<select name=\"annee1\">";annee();echo "</select>";
+		echo "</p>";
 
-echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
-echo "</br>";echo "</br>";echo "</br>";echo "</br>";
+		echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+		echo "</br>";echo "</br>";echo "</br>";echo "</br>";
 
-view::combostructure(640,380,'EPH','structurebis','0','structure','class','id','structure');
+		view::combostructure(640,380,'EPH','structurebis','0','structure','class','id','structure');
 
-echo "<p> ";
-echo "<select name=\"type\">";
-	echo"<option value=\"1\">Standard</option>"."\n";
-	echo"<option value=\"2\">Numerique</option>"."\n";
-	// echo"<option value=\"3\">list_global</option>"."\n";
-	// echo"<option value=\"4\">list_commune</option>"."\n";
-	// echo"<option value=\"5\">list_materiel</option>"."\n";
-	// echo"<option value=\"6\">list_anomalie</option>"."\n";
-	// echo"<option value=\"7\">list_inspection</option>"."\n";
-echo "</select>";
-echo "</p> ";
+		echo "<p> ";
+		echo "<select name=\"type\">";
+			echo"<option value=\"1\">Standard</option>"."\n";
+			echo"<option value=\"2\">Numerique</option>"."\n";
+			echo"<option value=\"3\">list_global</option>"."\n";
+			// echo"<option value=\"4\">list_commune</option>"."\n";
+			// echo"<option value=\"5\">list_materiel</option>"."\n";
+			// echo"<option value=\"6\">list_anomalie</option>"."\n";
+			// echo"<option value=\"7\">list_inspection</option>"."\n";
+		echo "</select>";
+		echo "</p> ";
 
-echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
-echo "<p><input type=\"submit\" value=\"Evaluer\" /></p>";
+		echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+		echo "<p><input type=\"submit\" value=\"Evaluer\" /></p>";
 
-echo "</form>";
-echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+	echo "</form>";
+	echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
 }
+
+
+
+
+
+
+
+
+
+
+
 
 function rds($action)
 { 
@@ -747,7 +759,62 @@ echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
 
 
 
+function evaluation_inspection($action)
+{ 
+	echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+	echo "<form ALIGN=\"center\" action=\"$action\" method=\"post\">";
 
+		echo "<p> du";
+			echo "<select name=\"jour\">";jours();echo "</select>";
+			echo "<select name=\"mois\">";mois();echo "</select>";
+			echo "<select name=\"annee\">";annee();echo "</select>";
+		echo "</p>";
+
+		echo "<p> au";
+			echo "<select name=\"jour1\">";//jours();
+			echo '<option value="'.date('d').'">'.date('d').'</option><br />';
+			echo "</select>";
+			echo "<select name=\"mois1\">";//mois();
+			echo '<option value="'.date('m').'">'.date('m').'</option><br />';
+			echo "</select>";
+			echo "<select name=\"annee1\">";//annee();
+			echo '<option value="'.date('Y').'">'.date('Y').'</option><br />';
+			echo "</select>";
+		echo "</p>";
+
+		echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+		echo "</br>";echo "</br>";echo "</br>";echo "</br>";
+
+		view::combostructure(640,370,'EPH','structurebis','0','structure','class','id','structure');
+
+		echo "<p> ";
+		echo "<select name=\"type\">";
+			echo"<option value=\"0\">Bordereau</option>"."\n";
+			echo"<option value=\"1\">Liste nominative (Ouverture)</option>"."\n";
+			echo"<option value=\"2\">Liste nominative (Fermeture)</option>"."\n";
+			echo"<option value=\"3\">Liste nominative (Ouverture : Non conforme)</option>"."\n";
+			echo"<option value=\"4\">Liste nominative (Fermeture : Non conforme)</option>"."\n";
+			echo"<option value=\"5\">La mise a la retraite</option>"."\n";
+			echo"<option value=\"6\">Etat inscription au Conseil de l'ordre</option>"."\n";
+			echo"<option value=\"7\">Annuaire Tel-Email</option>"."\n";
+			echo"<option value=\"8\">Repartition par commune (liste nominative)</option>"."\n";
+			echo"<option value=\"9\">Repartition par communes (etat numerique)</option>"."\n";
+		    echo"<option value=\"10\">Repartition Geographique :</option>"."\n";		
+			echo"<option value=\"11\">Repartition par commune des anomalies</option>"."\n";
+			echo"<option value=\"12\">Repartition par date d'inspection/anomalie constatee</option>"."\n";
+			echo"<option value=\"13\">13</option>"."\n";
+			echo"<option value=\"14\">14</option>"."\n";
+			echo"<option value=\"15\">liste de garde</option>"."\n";
+			
+			
+		echo "</select>";
+		echo "</p> ";
+		echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+		echo "<p><input type=\"submit\" value=\"Evaluer\" /></p>";
+
+	echo "</form>";
+	echo "<hr size=8 width=\"700\" COLOR=\"#C0C0C0\">";
+}
 
 
 

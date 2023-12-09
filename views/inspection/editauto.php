@@ -36,13 +36,15 @@ $data = array(
 						"CITROËN"=>"CITROËN",
 						"CHEVROLET"=>"CHEVROLET",
 						"DACIA"=>"DACIA",
+						"FOTON"=>"FOTON",
 						"HYUNDAI"=>"HYUNDAI",
 						"JINBEI"=>"JINBEI",
 						"JMC"=>"JMC",
 						"KIA"=>"KIA",
 						"NISSANE"=>"NISSANE",
 						"PEUGEOT"=>"PEUGEOT",
-						"RENAULT"=>"RENAULT"
+						"RENAULT"=>"RENAULT",
+						"MERCEDES"=>"MERCEDES"
 					  ),					  
 					  
 "Immatri"  => $this->user[0]['Immatri'],

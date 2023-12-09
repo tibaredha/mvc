@@ -339,6 +339,44 @@ $(document).ready(function()
 
 		});
 });
+
+$(document).ready(function()
+{
+		$(".WSC").change(function()
+		{
+			var id=$(this).val();
+			var dataString = 'id='+ id;
+
+			$.ajax
+			({
+				type: "POST",
+				url: "/mvc//public/js/AJAXWSC.PHP",
+				data: dataString,
+				cache: false,
+				success: function(html)
+						{
+						$(".ETABSC").html(html);
+						} 
+			});
+
+		});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //**//
 
 //metode avec jquery

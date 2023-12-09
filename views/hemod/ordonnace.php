@@ -23,7 +23,7 @@ verifsession();
 view::button('hemow',$this->user[0]['id']);
 View::h('2',25,180,'hemod : Ordonnace [ '.$this->user[0]['NOM']."_".$this->user[0]['PRENOM']." ]");
 View::sautligne(2);
-View::hr();
+//View::hr();
 View::f0(URL.'hemod/ajouterArticle/','post');
 View::label(25,400-30-100,'Designation Produit');       View::medicament(215,390-130,'libelleProduit','mvc','pha');//View::txt(215,390,'libelleProduit',0,'');
 

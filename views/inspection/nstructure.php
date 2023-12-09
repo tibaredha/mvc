@@ -2,9 +2,10 @@
 verifsession();	
 lang(Session::get('lang'));
 ob_start();
+$fichier='msp.jpg';
 $data = array(
 "btn"          => 'inspection', 
-"photos"       => 'public/images/photos/msp.jpg',
+"photos"       => 'public/images/photos/'.$fichier."?t=".time(),
 "action"       => 'inspection/createstructure/',
 "NATURE"       => array( "PRIVEE"=>"2" ,"PUBLIC"=>"1" ),  
 "DATE"         => date('d-m-Y'), 
@@ -17,13 +18,11 @@ $data = array(
 "STRUCTURE1"   => '1'     ,"STRUCTURE2"   => 'Structure',
 "specialite1"  => '0'     ,"specialite2"  => 'Spécialite',
 "DIPLOME"      => date('d-m-Y'),"UNIV0"        => "الجزائر","UNIV1"        => "الجزائر",
-"NUMORDER"     => '0',"DATEORDER"    => date('d-m-Y'),
+"NUMORDER"     => '170',"DATEORDER"    => date('d-m-Y'),
 "NUMDEM"       => '0',"DATEDEM"      => date('d-m-Y'),
-
 "DATEDSC"       => date('d-m-Y'),
-"SERVICECIVILE0"=> '1',
-"SERVICECIVILE1"=> 'EPH DJELFA',
-
+"WSC0"=> '17000',"WSC1"=> 'DJELFA',
+"SERVICECIVILE0"=> '1',"SERVICECIVILE1"=> 'EPH DJELFA',
 "WILAYAR1"     => '17000' ,"WILAYAR2"     => 'DJELFA',
 "COMMUNER1"    => '924' ,"COMMUNER2"    => 'Ain-oussera',
 "ADRESSE"      => 'x',
@@ -37,12 +36,17 @@ $data = array(
 "NREALISATION" => '0',
 "OUVERTURE"    => date('d-m-Y'),
 "NOUVERTURE"   => '0',
+"FERMETURE"    => date('d-m-Y'),
+"NFERMETURE"   => '0',
 "NOMAR"        => '' ,
 "PRENOMAR"     => '' ,						  
 "ADRESSEAR"    => '',
 "butun"        => 'Inser New Structure' 
 );
-view::structure_sanitaire($data,"Ajouter Structure Sanitaire");
+
+//view::structure_sanitaire($data,"Ajouter Structure Sanitaire");
+Inspectionx::structure_sanitaire($data,"Ajouter Structure Sanitaire");
+//required placeholder="xxxxxxx" autofocus onkeyup="javascript:this.value=this.value.toUpperCase();"
 ?>
 <script type="text/javascript">
 

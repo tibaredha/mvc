@@ -71,7 +71,7 @@ class Authentification_Model extends Model {
 			Session::set('lang',$data['lang']);
 			Session::set('login',$data['login']);
 			Session::set('loggedIn', true);
-			header('location: ../cour/');
+			header('location: ../inspection/');
 			// header('location: ../Bordereau/NBordereau/');
 			//header('location: ../dnr/');
 		} else {

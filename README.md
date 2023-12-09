@@ -1,12 +1,39 @@
-# mvc
-#start release 
-#finsh release
-#appuyer sur i et inserer le message
-#appuyer sur echap 
-#inserer :wq
-#refaire la procedure 
+# framework
+
+framework
+
+![Alt Text](tiba.jpg)
 
 
+### Prerequisites
 
-git push --all  =create toutes les brache au niveau serveur y compris la branche develop
-git push origin --delete develop = pour supprimer la brache créer 
+Make sure to have the following libraries installed in your PHP environment:
+
+- Html5
+- Css3
+- Js 
+- Jquery
+- Apache 2.2.11
+- PHP 5.3.1
+- Mysql 5.1.36
+
+
+framework
+
+## Run
+
+```
+index.php
+```
+## Youtube Video explanation (French only)
+
+
+![Alt Text](tiba.jpg)
+
+## Authors
+
+* **TIBA Redha** - *Lead Data Scientist* 
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details

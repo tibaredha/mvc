@@ -73,7 +73,7 @@ while($rowp=mysql_fetch_object($requetep))
 	if ($rowp->Categorie=='C'){$pdf->Cell(200,5,$travail.'سائق مركبة '.$etablissement,0,1,'C');}
 	
 	$eta1="( انفال الهناء )";
-	$eta2="(  )";
+	$eta2="( بن سالم دياليز )";
 	$eta3="(  )";
 	
 	if (trim($nom) =='ghanem'){$clinique=$eta1;}
