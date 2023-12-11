@@ -22,6 +22,13 @@ jobs:
       
     - name: add github repository
       run: echo " the ${{ github.repository }} repository has been cloned to the runer"
+      
+    - name: is ready
+      run: echo "the workflow is now ready to test your code on the runer "
+      
+    - name: list files in repository
+      run: |
+        ls ${{ github.workspace }}
 
     #- name: Validate composer.json and composer.lock
       #run: composer validate --strict
