@@ -1,5 +1,7 @@
 name: PHP Composer
 
+run-name: ${{ github.actor }} is testing out github action
+
 on:
   push:
     branches: [ "master" ]
@@ -19,7 +21,23 @@ jobs:
     
     - name: run echo 
       run: echo "tibaredha"
+      
+    - name: add github repository
+      run: echo " the ${{ github.repository }} repository has been cloned to the runer"
+      
+    - name: is ready
+      run: echo "the workflow is now ready to test your code on the runer "
+      
+    - name: list files in repository
+      run: |
+        ls ${{ github.workspace }}
 
+    - name: job status
+      run: echo "this jobs status is ${{ job.status }}"
+      
+      
+      
+      
     #- name: Validate composer.json and composer.lock
       #run: composer validate --strict
 
