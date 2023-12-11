@@ -1,5 +1,7 @@
 name: PHP Composer
 
+run-name: ${{ github.actor }} is testing out github action
+
 on:
   push:
     branches: [ "master" ]
