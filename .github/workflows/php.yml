@@ -30,6 +30,12 @@ jobs:
       run: |
         ls ${{ github.workspace }}
 
+    - name: job status
+      run: echo "this jobs status is ${{ job.status }}"
+      
+      
+      
+      
     #- name: Validate composer.json and composer.lock
       #run: composer validate --strict
 
