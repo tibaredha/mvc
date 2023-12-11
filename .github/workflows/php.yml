@@ -16,6 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: run echo 
+        run: echo "tibaredha"
 
     #- name: Validate composer.json and composer.lock
       #run: composer validate --strict
