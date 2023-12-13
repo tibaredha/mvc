@@ -12,6 +12,17 @@ v0.0.2
 
 ![Alt Text](tiba.jpg)
 
+Ce que le projet fait
+Pourquoi le projet est utile
+Prise en main du projet par les utilisateurs
+Où les utilisateurs peuvent obtenir de l’aide sur votre projet
+Qui maintient et contribue au projet
+
+### Si vous placez votre fichier README dans 
+- le répertoire .github caché, 
+- racine ou 
+- docs de votre référentiel, 
+### GitHub reconnaît et présente automatiquement votre fichier README pour les visiteurs du référentiel.
 
 ### Prerequisites
 
