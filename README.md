@@ -3,7 +3,8 @@
 
 <p align="left">
   <a href="https://github.com/tibaredha/mvc/edit/master/README.md"> <img alt="Static Badge" src="https://img.shields.io/badge/tiba-redha-green"></a>
- 
+  <a href="https://github.com/tibaredha/mvc/edit/master/README.md"><img alt="GitHub release (with filter)" src="https://img.shields.io/github/v/release/tibaredha/mvc"></a>
+ <a href="https://github.com/tibaredha/mvc/edit/master/README.md"><img alt="GitHub tag (with filter)" src="https://img.shields.io/github/v/tag/tibaredha/mvc"></a>
 </p>
 
 mvc
